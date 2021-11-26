@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052"
+   height="1052"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="LogoKhitomer-02-07-2013.svg"
+   inkscape:export-filename="/home/cristian/Dropbox/Proyecto Digital World/Iconos e Imagenes/LogosKhitomer/LogoKhitomer-02-07-2013_192px.png"
+   inkscape:export-xdpi="16.755571"
+   inkscape:export-ydpi="16.755571">
+  <title
+     id="title3030">logoKhitomer</title>
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DotL"
+       style="overflow:visible">
+      <path
+         id="path3870"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(7.4, 1)" />
+    </marker>
+    <marker
+       inkscape:stockid="Tail"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Tail"
+       style="overflow:visible">
+      <g
+         id="g3845"
+         transform="scale(-1.2)">
+        <path
+           id="path3847"
+           d="M -3.8048674,-3.9585227 L 0.54352094,0"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+        <path
+           id="path3849"
+           d="M -1.2866832,-3.9585227 L 3.0617053,0"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+        <path
+           id="path3851"
+           d="M 1.3053582,-3.9585227 L 5.6537466,0"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+        <path
+           id="path3853"
+           d="M -3.8048674,4.1775838 L 0.54352094,0.21974226"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+        <path
+           id="path3855"
+           d="M -1.2866832,4.1775838 L 3.0617053,0.21974226"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+        <path
+           id="path3857"
+           d="M 1.3053582,4.1775838 L 5.6537466,0.21974226"
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:round" />
+      </g>
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3809"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL-4"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3870-9"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL-43"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3870-7"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3870-3"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL-5"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3870-5"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL-7"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3870-2"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)" />
+    </marker>
+    <filter
+       inkscape:collect="always"
+       id="filter5093">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="10.802149"
+         id="feGaussianBlur5095" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5105">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.0761222"
+         id="feGaussianBlur5107" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5117">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.298383"
+         id="feGaussianBlur5119" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="145.1666"
+     inkscape:cy="573.52464"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1551"
+     inkscape:window-height="876"
+     inkscape:window-x="49"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>logoKhitomer</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Cristian Montano</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:date>02/07/2013</dc:date>
+        <cc:license
+           rdf:resource="CC BY-SA 3.0" />
+        <dc:language>es-ES</dc:language>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Dreamsder - Cristian Montano</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Dreamsder - Cristian Montano</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>khitomer</rdf:li>
+            <rdf:li>facturación</rdf:li>
+            <rdf:li>logo</rdf:li>
+            <rdf:li>dreamsder</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>Logo del sistema de facturación Khitomer</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-0.36218262)">
+    <g
+       id="g5282">
+      <g
+         id="g4930">
+        <text
+           xml:space="preserve"
+           style="font-size:319.51736449999998513px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;font-family:Sans"
+           x="240.00647"
+           y="882.2757"
+           id="text4919"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4921"
+             x="240.00647"
+             y="882.2757"
+             style="font-size:1150.26245117000007667px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#666666">K</tspan></text>
+      </g>
+      <rect
+         y="598.64185"
+         x="355.14261"
+         height="283.63284"
+         width="111.20957"
+         id="rect4923"
+         style="opacity:0.69999999999999996;fill:#ff6600;stroke-width:10.30000019000000044;stroke-linejoin:miter;stroke-miterlimit:2.40000010000000019;stroke-dasharray:none;stroke-dashoffset:0" />
+      <rect
+         y="45.821415"
+         x="355.14456"
+         height="10.853019"
+         width="111.20895"
+         id="rect4934"
+         style="opacity:0.7;fill:#ff6600;stroke-width:10.30000019;stroke-linejoin:miter;stroke-miterlimit:2.4000001;stroke-dasharray:none;stroke-dashoffset:0" />
+      <rect
+         transform="matrix(1,0,-0.6798525,0.73334888,0,0)"
+         y="62.696266"
+         x="914.90497"
+         height="12.929251"
+         width="134.68982"
+         id="rect4934-5"
+         style="opacity:0.7;fill:#ff6600;stroke-width:10.30000019;stroke-linejoin:miter;stroke-miterlimit:2.4000001;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+    <g
+       id="g5152">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3007"
+         d="M 79.150441,111.73357 C 56.494511,1381.5394 603.94455,959.11593 603.94455,959.11593"
+         style="opacity:0.29999999999999999;fill:none;stroke:#000000;stroke-width:12.71016788000000020;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.40000010000000019;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#DotL);filter:url(#filter5093)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3007-1"
+         d="M 155.68607,235.26291 C 136.33092,1320.0687 604.02209,959.18877 604.02209,959.18877"
+         style="opacity:0.50000000000000000;fill:none;stroke:#000000;stroke-width:10.85840321000000053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.40000010000000019;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#DotL);filter:url(#filter5105)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3007-1-2"
+         d="m 224.82362,348.5301 c -16.33906,915.7592 378.47121,611.11553 378.47121,611.11553"
+         style="opacity:0.69999999999999996;fill:none;stroke:#000000;stroke-width:9.16632461999999926;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.40000010000000019;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#DotL);filter:url(#filter5117)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3007-1-2-4"
+         d="m 407.26569,641.0069 c -8.48371,475.4864 196.51225,317.30728 196.51225,317.30728"
+         style="fill:none;stroke:#000000;stroke-width:4.75939798000000014;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2.40000010000000019;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#DotL);opacity:1;" />
+    </g>
+  </g>
+</svg>

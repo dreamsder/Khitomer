@@ -1,0 +1,95 @@
+*{
+
+margin:0px;
+padding:0px;
+background:#e6e6e6;
+
+}
+
+
+header,section,footer,aside,nav,article,figure,figcaption,hgroup{
+
+display:block;
+
+}
+
+body{
+
+text-align:center;
+background:#F6F6F6;
+
+}
+
+header{
+
+text-shadow: rgb(150,150,150) 3px 3px 5px;
+background:#e6e6e6;
+border:0px;
+padding:8px;
+border-bottom:2px solid #999999;
+font:bold 20px arial,sans-serif,verdana,ubuntu;
+
+}
+
+footer{
+
+background:#e6e6e6;
+border:0px;
+padding:30px;
+border-top:2px solid #999999;
+
+}
+
+section{
+
+background:#e6e6e6;
+
+
+}
+
+
+
+table{
+width:800px;
+margin:20px auto;
+border-left:3px solid #999999;
+border-right:3px solid #999999;
+border-top:3px solid #999999;
+border-bottom:3px solid #999999;
+border-radius:5px;
+box-shadow: rgb(150,150,150) 3px 3px;
+font-style: normal;
+border-collapse:separate;
+background:#e6e6e6;
+
+}
+
+thead th{
+font:bold 13px arial,sans-serif,verdana,ubuntu;
+padding:5px 5px 5px 5px;
+color:#fff;
+text-transform:uppercase;
+background-color:#222;
+box-shadow:0px -1px 4px #000;
+
+
+}
+
+tfoot th{
+font: bold 13px arial,sans-serif,verdana,ubuntu;
+padding:0px 5px 0px 5px;
+color:#fff;
+background-color:#db4d4d;
+box-shadow:0px -1px 4px #000;
+
+
+}
+tbody th{
+/*text-align:right;*/
+padding:4px;
+color:#333;
+text-shadow:1px 1px 1px #ccc;
+background-color:#f9f9f9;
+
+}
+

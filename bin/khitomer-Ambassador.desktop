@@ -1,0 +1,23 @@
+[Desktop Entry]
+Version=1.1.0
+Terminal=false
+Icon=/opt/Khitomer/icono.png
+Type=Application
+Categories=Office;
+Exec=Khitomer
+MimeType=
+Name=Khitomer - Sistema de facturación
+GenericName=Sistema de facturación
+GenericName[en]=Billing system
+GenericName[es]=Sistema de facturación
+Comment=Make invoices, manage your stock, customers and suppliers.
+Comment[en]=Make invoices, manage your stock, customers and suppliers.
+Comment[es]=Realice facturas, controle stock, clientes y proveedores.
+InitialPreference=5
+X-Ayatana-Desktop-Shortcuts=New
+[New Shortcut Group]
+Name=Abrir Khitomer
+Name[en]=Open Khitomer
+Name[es]=Abrir Khitomer
+Exec=Khitomer
+TargetEnvironment=Unity

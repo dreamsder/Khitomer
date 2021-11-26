@@ -1,0 +1,23 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Icon=/opt/Khitomer/icono.ico
+Type=Application
+Categories=Office;
+Exec=ConfiguradorQML
+MimeType=
+Name=Configurador de Khitomer
+GenericName=Configurador de Khitomer
+GenericName[en]=Khitomer configuration
+GenericName[es]=Configurador de Khitomer
+Comment=
+Comment[en]=
+Comment[es]=
+InitialPreference=5
+X-Ayatana-Desktop-Shortcuts=New
+[New Shortcut Group]
+Name=Abrir Configurador
+Name[en]=Open Configurador
+Name[es]=Abrir Configurador
+Exec=ConfiguradorQML
+TargetEnvironment=Unity

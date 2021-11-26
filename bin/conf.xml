@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CONFIGURACION>
+    <ACCESO term="Acceso al sistema">
+        <usuario>khitomer</usuario>
+        <clave>khitomer</clave>
+        <base>khitomer</base>
+        <host>localhost</host>
+        <puerto>3306</puerto>
+    </ACCESO>
+</CONFIGURACION>

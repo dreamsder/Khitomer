@@ -1,0 +1,13 @@
+idPromociones
+idTipoPromocion
+habilitada
+fecha
+fechaDesde
+fechaHasta
+diasSemana
+nombrePromocion
+HTMLPromocion
+urlImagen
+urlImagen2
+ejecutaSiempre
+codigoTipoCliente

@@ -1,0 +1,38 @@
+Instalación de Khitomer:
+
+NOTA: Este proceso de instalación es transitorio hasta que se generen los paquetes auto instalables.
+
+1 - Como root, crear el directorio /opt/Khitomer
+
+2 - Como root mover todos los archivos del directorio bin, al directorio /opt/Khitomer, para que quede de la siguiente manera:
+/opt/Khitomer/Khitomer
+/opt/Khitomer/conf.xml
+etc.
+
+3 - Instalar el motor de base de datos MySql en el servidor correspondiente. El mismo debe tener IP fija.
+
+4 - Cargar los permisos al motor de la base de datos con el archivo "creacionUsuarioMysqlKhitomer.sql":
+	mysql -u root < creacionUsuarioMysqlKhitomer.sql
+
+5 - Crear la base de datos, pasandole el archivo "dumpingBaseKhitomer.sql" a la base de datos:
+	mysql -u khitomer -pkhitomer < dumpingBaseKhitomer.sql
+
+6 - Modificar con un editor de texto el archivo conf.xml y cambiar localhost por la direccion IP del servidor donde esta el motor Mysql.
+
+7 - Darle permisos de ejecucion a Khitomer:
+	chmod +x /opt/Khitomer/Khitomer
+
+8 - Ejecutar la aplicación y utilizar como usuario "admin" y contraseña "admin":
+	./Khitomer
+
+
+
+Opcional:
+
+Para que la aplicación aparezca en el menú del sistema, copiar el archivo "khitomer-Ambassador.desktop" al directorio "/usr/share/applications/"
+
+Luego armar un link simbolico en el directorio "/usr/bin/":
+	ln -sf /usr/bin/Khitomer /opt/Khitomer/Khitomer
+
+
+Listo!

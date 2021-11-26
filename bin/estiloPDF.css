@@ -1,0 +1,49 @@
+table {
+width:800px;
+margin:20px auto;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", verdana, lucida, helvetica, sans-serif;
+	font-size: 0.4em;
+	margin: 9;
+	padding: 0;
+}
+caption {
+	font-size: 4em;
+	font-stretch: condensed;
+	font-weight: bold;
+	padding-bottom: 3px;
+	text-align: left;
+	text-transform: uppercase;
+}
+th, td {
+	border-bottom: 1px solid #666;
+	border-top: 1px solid #666;
+	padding: 2px;
+	vertical-align: 2px;
+}
+th {
+	text-align: left;
+	text-transform: uppercase;
+}
+tbody {
+	padding:0px 5px 0px 5px;
+}
+
+thead th{
+font:bold 12px arial,sans-serif,verdana,ubuntu;
+padding:0px 5px 0px 5px;
+color:#fff;
+text-transform:uppercase;
+background-color:#c6c6c6;
+
+}
+
+tfoot th{
+font: bold 12px arial,sans-serif,verdana,ubuntu;
+padding:0px 5px 0px 5px;
+color:#fff;
+background-color:#c6c6c6;
+
+}
+
+
