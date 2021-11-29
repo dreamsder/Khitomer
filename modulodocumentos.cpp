@@ -4228,19 +4228,19 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
                 QString DatoTipoDeTraslado=",\"TipoDeTraslado\":"+TipoTrasladoRemito+"";
 
 
-                if(Comprobante=="Venta contado"){
+                if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito"){
+                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta"){
+                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
-                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta"){
+                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
@@ -4249,79 +4249,23 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
                 }
 
 
-                /*
-                if(tipoDocumentoCFE=="Venta contado"){
-
-                    caeTipoDocumentoCFEDescripcionV="e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketContado");
-
-                }else if(tipoDocumentoCFE=="Venta credito"){
-
-                    caeTipoDocumentoCFEDescripcionV="e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketCredito");
-
-                }else if(tipoDocumentoCFE=="Devolucion venta"){
-
-                    caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketNotaCredito");
-
-                }else if(tipoDocumentoCFE=="Nota credito venta"){
-
-                    caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketNotaCredito");
-
-                }else{
-                    return "-7"; //Error en tipo documento CFE en khitomer.TipoDocumento
-                }
-
-
-                //Verifico si es cliente con RUT
-                if(tipoDocumento=="2"){
-                    //Si es rut no puede ser otro documento
-                    _Documento_identidad="";
-
-                    if(tipoDocumentoCFE=="Venta contado"){
-
-                        caeTipoDocumentoCFEDescripcionV="e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaContado");
-
-                    }else if(tipoDocumentoCFE=="Venta credito"){
-
-                        caeTipoDocumentoCFEDescripcionV="e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaCredito");
-
-                    }else if(tipoDocumentoCFE=="Devolucion venta"){
-
-                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaNotaCredito");
-
-                    }else if(tipoDocumentoCFE=="Nota credito venta"){
-
-                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaNotaCredito");
-
-                    }else{
-
-                 */
-
-
 
 
                   if(TipoDocumento=="2"){
 
-                      if(Comprobante=="Venta contado"){
+                      if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito"){
+                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta"){
+                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
-                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta"){
+                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
