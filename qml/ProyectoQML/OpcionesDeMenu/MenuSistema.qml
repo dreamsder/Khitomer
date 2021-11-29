@@ -264,7 +264,7 @@ Rectangle {
         /// 1.16.19 :Se agregan 2 reportes a pedido de Cynthia de DigitalWorld: Ventas web entre fechas, y Ventas entre fechas por artículo y vendedor.
         ///         :Se agrega filtro para documentos web en Mantenimiento de Documentos.
         /// 1.16.20 :Se agrega soporte para clientes con credito. Si el cliente tiene marcada el combobox Puede hcaer documentos credito, podra facturar tipos de documentos credito, sino, sera solo contado.
-        /// 1.16.21 :Se agrega soporte para imix Nube y facturas con iva excento.
+        /// 1.16.21 :Se agrega soporte para imix Nube y facturas con iva excento. Se agrega Tabla TipoDocumentoImix para tener a mano los tipos de envios segun documento.
 
 
         Text {

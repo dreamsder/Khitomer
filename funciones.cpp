@@ -1850,6 +1850,13 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
                 }
             }else{_iterador=false; return false;}
             break;
+        case 384:
+            if(impactoCambioEnBD("CREATE TABLE TipoDocumentoImix (nombreTipoDocumentoImix varchar(100) NULL);","384")){
+                if(!impactoCambioEnBD("INSERT INTO TipoDocumentoImix VALUES ('Venta contado'),('Venta crédito exenta'),('Venta contado exenta'),('Dev venta exenta'),('NC venta exenta'),('Venta crédito'),('Devolución venta'),('Nota crédito venta');","385")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
 
 
 
