@@ -222,7 +222,7 @@ public:
 
     Q_INVOKABLE void buscarDocumentos(QString , QString);
 
-    Q_INVOKABLE int guardarDocumentos(QString , QString, QString, QString, QString , QString, QString, QString, QString, QString , QString, QString , QString, QString, QString , QString , QString , QString, QString , QString , QString , int , QString, QString, QString, QString, QString) const;
+    Q_INVOKABLE int guardarDocumentos(QString , QString, QString, QString,QString, QString , QString, QString, QString, QString, QString , QString, QString , QString, QString, QString , QString , QString , QString, QString , QString , QString , int , QString, QString, QString, QString, QString) const;
 
     Q_INVOKABLE bool guardarLineaDocumento(QString) const;
 
@@ -312,6 +312,7 @@ public:
     Q_INVOKABLE QString retornatotalIva2Documento(QString , QString, QString _serieDocumento) const;
     Q_INVOKABLE QString retornatotalIva3Documento(QString , QString, QString _serieDocumento) const;
     Q_INVOKABLE QString retornaobservacionesDocumento(QString , QString, QString _serieDocumento) const;
+    Q_INVOKABLE QString retornacomentariosDocumento(QString , QString, QString _serieDocumento) const;
 
     Q_INVOKABLE QString retornaonumeroCuentaBancariaDocumento(QString , QString, QString _serieDocumento) const;
     Q_INVOKABLE QString retornaocodigoBancoDocumento(QString , QString, QString _serieDocumento) const;

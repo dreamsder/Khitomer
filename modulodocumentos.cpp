@@ -1112,7 +1112,7 @@ int ModuloDocumentos::guardarDocumentos(QString _codigoDocumento,QString _codigo
                                         QString _totalIva1,
                                         QString _totalIva2,
                                         QString _totalIva3,
-                                        QString _cotizacionMoneda,QString _observaciones,
+                                        QString _cotizacionMoneda,QString _observaciones,QString _comentarios,
                                         QString _numeroCuentaBancaria,int _codigoBancoCuentaBancaria,
                                         QString _montoDescuentoTotal, QString _precioSubTotalSinDescuento,
                                         QString _formaDePago,
@@ -1186,7 +1186,7 @@ int ModuloDocumentos::guardarDocumentos(QString _codigoDocumento,QString _codigo
                         }else if(query.value(1).toString()=="P"){
                             if(funcion.mensajeAdvertencia("El documento ya existe guardado en estado pendiente.\nDesea guardarlo como finalizado?\n\nPresione [ Sí ] para confirmar.")){
 
-                                if(query.exec("update Documentos set codigoEstadoDocumento='A',  codigoMonedaDocumento='"+_codigoMonedaDocumento+"',fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', fechaEmisionDocumento='"+_fechaEmisionDocumento+"',usuarioUltimaModificacion='"+_usuarioAlta+"',precioTotalVenta='"+_precioTotalVenta+"',precioSubTotalVenta='"+_precioSubTotalVenta+"',precioSubTotalVentaSinDescuento='"+_precioSubTotalSinDescuento+"'     ,precioIvaVenta='"+_precioIvaVenta+"',codigoLiquidacion='"+_codigoLiquidacion+"',codigoVendedorComisiona='"+_codigoVendedorComisiona+"', codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"', totalIva1='"+_totalIva1+"', totalIva2='"+_totalIva2+"', totalIva3='"+_totalIva3+"',cotizacionMoneda='"+_cotizacionMoneda+"',observaciones='"+_observaciones+"',numeroCuentaBancaria='"+_numeroCuentaBancaria+"',codigoBanco='"+QString::number(_codigoBancoCuentaBancaria)+"', montoDescuentoTotal='"+_montoDescuentoTotal+"',tieneDescuentoAlTotal='"+_tieneDescuentoAlTotal+"',saldoClienteCuentaCorriente='"+_precioTotalVenta+"',formaDePago='"+_formaDePago+"',porcentajeDescuentoAlTotal='"+_porcentajeDescuentoAlTotal+"',saldoClientePagoContado='"+_saldoClientePagoContado+"',esDocumentoCFE='"+esUnDocumentoDeCFE+"'          where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"' ")){
+                                if(query.exec("update Documentos set codigoEstadoDocumento='A',  codigoMonedaDocumento='"+_codigoMonedaDocumento+"',fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', fechaEmisionDocumento='"+_fechaEmisionDocumento+"',usuarioUltimaModificacion='"+_usuarioAlta+"',precioTotalVenta='"+_precioTotalVenta+"',precioSubTotalVenta='"+_precioSubTotalVenta+"',precioSubTotalVentaSinDescuento='"+_precioSubTotalSinDescuento+"'     ,precioIvaVenta='"+_precioIvaVenta+"',codigoLiquidacion='"+_codigoLiquidacion+"',codigoVendedorComisiona='"+_codigoVendedorComisiona+"', codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"', totalIva1='"+_totalIva1+"', totalIva2='"+_totalIva2+"', totalIva3='"+_totalIva3+"',cotizacionMoneda='"+_cotizacionMoneda+"',observaciones='"+_observaciones+"',comentarios='"+_comentarios+"',numeroCuentaBancaria='"+_numeroCuentaBancaria+"',codigoBanco='"+QString::number(_codigoBancoCuentaBancaria)+"', montoDescuentoTotal='"+_montoDescuentoTotal+"',tieneDescuentoAlTotal='"+_tieneDescuentoAlTotal+"',saldoClienteCuentaCorriente='"+_precioTotalVenta+"',formaDePago='"+_formaDePago+"',porcentajeDescuentoAlTotal='"+_porcentajeDescuentoAlTotal+"',saldoClientePagoContado='"+_saldoClientePagoContado+"',esDocumentoCFE='"+esUnDocumentoDeCFE+"'          where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"' ")){
                                     return 1;
                                 }else{
                                     funcion.mensajeAdvertencia(query.lastError().text());
@@ -1201,7 +1201,7 @@ int ModuloDocumentos::guardarDocumentos(QString _codigoDocumento,QString _codigo
                         }
                     }else{return -4;}
                 }else{
-                    if(query.exec("insert INTO Documentos (codigoDocumento, codigoTipoDocumento, serieDocumento, codigoEstadoDocumento, codigoCliente, tipoCliente, codigoMonedaDocumento, fechaEmisionDocumento, precioTotalVenta,precioSubTotalVenta, precioIvaVenta, codigoLiquidacion, codigoVendedorComisiona, usuarioAlta,codigoVendedorLiquidacion,totalIva1,totalIva2,totalIva3,cotizacionMoneda,observaciones,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,tieneDescuentoAlTotal,precioSubTotalVentaSinDescuento,saldoClienteCuentaCorriente,formaDePago,porcentajeDescuentoAlTotal,saldoClientePagoContado,esDocumentoCFE,documentoEnviadoPorMail) values('"+_codigoDocumento+"','"+_codigoTipoDocumento+"','"+_serieDocumento+"','A','"+_codigoCliente+"','"+_tipoCliente+"','"+_codigoMonedaDocumento+"','"+_fechaEmisionDocumento+"','"+_precioTotalVenta+"','"+_precioSubTotalVenta+"','"+_precioIvaVenta+"','"+_codigoLiquidacion+"','"+_codigoVendedorComisiona+"','"+_usuarioAlta+"','"+_codigoVendedorLiquidacion+"','"+_totalIva1+"','"+_totalIva2+"','"+_totalIva3+"','"+_cotizacionMoneda+"','"+_observaciones+"','"+_numeroCuentaBancaria+"','"+QString::number(_codigoBancoCuentaBancaria)+"','"+_montoDescuentoTotal+"','"+_tieneDescuentoAlTotal+"','"+_precioSubTotalSinDescuento+"','"+_precioTotalVenta+"','"+_formaDePago+"','"+_porcentajeDescuentoAlTotal+"','"+_saldoClientePagoContado+"','"+esUnDocumentoDeCFE+"',0 )")){
+                    if(query.exec("insert INTO Documentos (codigoDocumento, codigoTipoDocumento, serieDocumento, codigoEstadoDocumento, codigoCliente, tipoCliente, codigoMonedaDocumento, fechaEmisionDocumento, precioTotalVenta,precioSubTotalVenta, precioIvaVenta, codigoLiquidacion, codigoVendedorComisiona, usuarioAlta,codigoVendedorLiquidacion,totalIva1,totalIva2,totalIva3,cotizacionMoneda,observaciones,comentarios,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,tieneDescuentoAlTotal,precioSubTotalVentaSinDescuento,saldoClienteCuentaCorriente,formaDePago,porcentajeDescuentoAlTotal,saldoClientePagoContado,esDocumentoCFE,documentoEnviadoPorMail) values('"+_codigoDocumento+"','"+_codigoTipoDocumento+"','"+_serieDocumento+"','A','"+_codigoCliente+"','"+_tipoCliente+"','"+_codigoMonedaDocumento+"','"+_fechaEmisionDocumento+"','"+_precioTotalVenta+"','"+_precioSubTotalVenta+"','"+_precioIvaVenta+"','"+_codigoLiquidacion+"','"+_codigoVendedorComisiona+"','"+_usuarioAlta+"','"+_codigoVendedorLiquidacion+"','"+_totalIva1+"','"+_totalIva2+"','"+_totalIva3+"','"+_cotizacionMoneda+"','"+_observaciones+"','"+_comentarios+"','"+_numeroCuentaBancaria+"','"+QString::number(_codigoBancoCuentaBancaria)+"','"+_montoDescuentoTotal+"','"+_tieneDescuentoAlTotal+"','"+_precioSubTotalSinDescuento+"','"+_precioTotalVenta+"','"+_formaDePago+"','"+_porcentajeDescuentoAlTotal+"','"+_saldoClientePagoContado+"','"+esUnDocumentoDeCFE+"',0 )")){
                         return 1;
                     }else{
                         funcion.mensajeAdvertencia(query.lastError().text());
@@ -1229,7 +1229,7 @@ int ModuloDocumentos::guardarDocumentos(QString _codigoDocumento,QString _codigo
                         }else if(query.value(1).toString()=="P"){
                             if(funcion.mensajeAdvertencia("El documento ya existe guardado en estado pendiente.\nDesea actualizarlo?\n\nPresione [ Sí ] para confirmar.")){
 
-                                if(query.exec("update Documentos set codigoMonedaDocumento='"+_codigoMonedaDocumento+"',fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', fechaEmisionDocumento='"+_fechaEmisionDocumento+"',usuarioUltimaModificacion='"+_usuarioAlta+"',precioTotalVenta='"+_precioTotalVenta+"',precioSubTotalVenta='"+_precioSubTotalVenta+"',precioSubTotalVentaSinDescuento='"+_precioSubTotalSinDescuento+"'  ,precioIvaVenta='"+_precioIvaVenta+"',codigoLiquidacion='"+_codigoLiquidacion+"',codigoVendedorComisiona='"+_codigoVendedorComisiona+"',codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"', totalIva1='"+_totalIva1+"', totalIva2='"+_totalIva2+"', totalIva3='"+_totalIva3+"',cotizacionMoneda='"+_cotizacionMoneda+"',observaciones='"+_observaciones+"',numeroCuentaBancaria='"+_numeroCuentaBancaria+"',codigoBanco='"+QString::number(_codigoBancoCuentaBancaria)+"', montoDescuentoTotal="+_montoDescuentoTotal+",tieneDescuentoAlTotal='"+_tieneDescuentoAlTotal+"',saldoClienteCuentaCorriente='"+_precioTotalVenta+"',formaDePago='"+_formaDePago+"',porcentajeDescuentoAlTotal='"+_porcentajeDescuentoAlTotal+"',saldoClientePagoContado='"+_saldoClientePagoContado+"'    where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+                                if(query.exec("update Documentos set codigoMonedaDocumento='"+_codigoMonedaDocumento+"',fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', fechaEmisionDocumento='"+_fechaEmisionDocumento+"',usuarioUltimaModificacion='"+_usuarioAlta+"',precioTotalVenta='"+_precioTotalVenta+"',precioSubTotalVenta='"+_precioSubTotalVenta+"',precioSubTotalVentaSinDescuento='"+_precioSubTotalSinDescuento+"'  ,precioIvaVenta='"+_precioIvaVenta+"',codigoLiquidacion='"+_codigoLiquidacion+"',codigoVendedorComisiona='"+_codigoVendedorComisiona+"',codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"', totalIva1='"+_totalIva1+"', totalIva2='"+_totalIva2+"', totalIva3='"+_totalIva3+"',cotizacionMoneda='"+_cotizacionMoneda+"',observaciones='"+_observaciones+"',comentarios='"+_comentarios+"',numeroCuentaBancaria='"+_numeroCuentaBancaria+"',codigoBanco='"+QString::number(_codigoBancoCuentaBancaria)+"', montoDescuentoTotal="+_montoDescuentoTotal+",tieneDescuentoAlTotal='"+_tieneDescuentoAlTotal+"',saldoClienteCuentaCorriente='"+_precioTotalVenta+"',formaDePago='"+_formaDePago+"',porcentajeDescuentoAlTotal='"+_porcentajeDescuentoAlTotal+"',saldoClientePagoContado='"+_saldoClientePagoContado+"'    where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
                                     return 1;
                                 }else{
                                     funcion.mensajeAdvertencia(query.lastError().text());
@@ -1245,7 +1245,7 @@ int ModuloDocumentos::guardarDocumentos(QString _codigoDocumento,QString _codigo
                     }else{return -4;}
                 }else{
 
-                    if(query.exec("insert INTO Documentos (codigoDocumento, codigoTipoDocumento, serieDocumento, codigoEstadoDocumento, codigoCliente, tipoCliente, codigoMonedaDocumento, fechaEmisionDocumento, precioTotalVenta,precioSubTotalVenta, precioIvaVenta, codigoLiquidacion, codigoVendedorComisiona, usuarioAlta,codigoVendedorLiquidacion,totalIva1,totalIva2,totalIva3,cotizacionMoneda,observaciones,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,tieneDescuentoAlTotal,precioSubTotalVentaSinDescuento,saldoClienteCuentaCorriente,formaDePago,porcentajeDescuentoAlTotal,saldoClientePagoContado,esDocumentoCFE,documentoEnviadoPorMail) values('"+_codigoDocumento+"','"+_codigoTipoDocumento+"','"+_serieDocumento+"','P','"+_codigoCliente+"','"+_tipoCliente+"','"+_codigoMonedaDocumento+"','"+_fechaEmisionDocumento+"','"+_precioTotalVenta+"','"+_precioSubTotalVenta+"','"+_precioIvaVenta+"','"+_codigoLiquidacion+"','"+_codigoVendedorComisiona+"','"+_usuarioAlta+"','"+_codigoVendedorLiquidacion+"','"+_totalIva1+"','"+_totalIva2+"','"+_totalIva3+"','"+_cotizacionMoneda+"','"+_observaciones+"','"+_numeroCuentaBancaria+"','"+QString::number(_codigoBancoCuentaBancaria)+"','"+_montoDescuentoTotal+"','"+_tieneDescuentoAlTotal+"','"+_precioSubTotalSinDescuento+"','"+_precioTotalVenta+"','"+_formaDePago+"','"+_porcentajeDescuentoAlTotal+"','"+_saldoClientePagoContado+"','"+esUnDocumentoDeCFE+"',0    )")){
+                    if(query.exec("insert INTO Documentos (codigoDocumento, codigoTipoDocumento, serieDocumento, codigoEstadoDocumento, codigoCliente, tipoCliente, codigoMonedaDocumento, fechaEmisionDocumento, precioTotalVenta,precioSubTotalVenta, precioIvaVenta, codigoLiquidacion, codigoVendedorComisiona, usuarioAlta,codigoVendedorLiquidacion,totalIva1,totalIva2,totalIva3,cotizacionMoneda,observaciones,comentarios,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,tieneDescuentoAlTotal,precioSubTotalVentaSinDescuento,saldoClienteCuentaCorriente,formaDePago,porcentajeDescuentoAlTotal,saldoClientePagoContado,esDocumentoCFE,documentoEnviadoPorMail) values('"+_codigoDocumento+"','"+_codigoTipoDocumento+"','"+_serieDocumento+"','P','"+_codigoCliente+"','"+_tipoCliente+"','"+_codigoMonedaDocumento+"','"+_fechaEmisionDocumento+"','"+_precioTotalVenta+"','"+_precioSubTotalVenta+"','"+_precioIvaVenta+"','"+_codigoLiquidacion+"','"+_codigoVendedorComisiona+"','"+_usuarioAlta+"','"+_codigoVendedorLiquidacion+"','"+_totalIva1+"','"+_totalIva2+"','"+_totalIva3+"','"+_cotizacionMoneda+"','"+_observaciones+"','"+_comentarios+"','"+_numeroCuentaBancaria+"','"+QString::number(_codigoBancoCuentaBancaria)+"','"+_montoDescuentoTotal+"','"+_tieneDescuentoAlTotal+"','"+_precioSubTotalSinDescuento+"','"+_precioTotalVenta+"','"+_formaDePago+"','"+_porcentajeDescuentoAlTotal+"','"+_saldoClientePagoContado+"','"+esUnDocumentoDeCFE+"',0    )")){
                         return 1;
                     }else{
                         funcion.mensajeAdvertencia(query.lastError().text());
@@ -2094,6 +2094,9 @@ QString ModuloDocumentos::retornatotalIva3Documento(QString _codigoDocumento,QSt
 
 QString ModuloDocumentos::retornaobservacionesDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento) const{    bool conexion=true;    if(!Database::connect().isOpen()){        if(!Database::connect().open()){            qDebug() << "No conecto";            conexion=false;        }    }    if(conexion){        QSqlQuery query(Database::connect());
         if(query.exec("select DOC.observaciones from Documentos DOC  where DOC.codigoDocumento='"+_codigoDocumento+"'  and DOC.codigoTipoDocumento='"+_codigoTipoDocumento+"' and DOC.serieDocumento='"+_serieDocumento+"'")) {            if(query.first()){                if(query.value(0).toString()!=""){                    return query.value(0).toString();                }else{                    return  "";                }            }else{return "Error BD";}        }else{            return "Error SQL";        }    }else{        return "Error BD";    }}
+
+QString ModuloDocumentos::retornacomentariosDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento) const{    bool conexion=true;    if(!Database::connect().isOpen()){        if(!Database::connect().open()){            qDebug() << "No conecto";            conexion=false;        }    }    if(conexion){        QSqlQuery query(Database::connect());
+        if(query.exec("select DOC.comentarios from Documentos DOC  where DOC.codigoDocumento='"+_codigoDocumento+"'  and DOC.codigoTipoDocumento='"+_codigoTipoDocumento+"' and DOC.serieDocumento='"+_serieDocumento+"'")) {            if(query.first()){                if(query.value(0).toString()!=""){                    return query.value(0).toString();                }else{                    return  "";                }            }else{return "Error BD";}        }else{            return "Error SQL";        }    }else{        return "Error BD";    }}
 
 QString ModuloDocumentos::retornaonumeroCuentaBancariaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento) const{    bool conexion=true;    if(!Database::connect().isOpen()){        if(!Database::connect().open()){            qDebug() << "No conecto";            conexion=false;        }    }    if(conexion){        QSqlQuery query(Database::connect());
         if(query.exec("select DOC.numeroCuentaBancaria from Documentos DOC  where DOC.codigoDocumento='"+_codigoDocumento+"'  and DOC.codigoTipoDocumento='"+_codigoTipoDocumento+"' and DOC.serieDocumento='"+_serieDocumento+"'")) {            if(query.first()){                if(query.value(0).toString()!=""){                    return query.value(0).toString();                }else{                    return  "";                }            }else{return "Error BD";}        }else{            return "Error SQL";        }    }else{        return "Error BD";    }}
@@ -4228,19 +4231,19 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
                 QString DatoTipoDeTraslado=",\"TipoDeTraslado\":"+TipoTrasladoRemito+"";
 
 
-                if(Comprobante=="Venta contado"){
+                if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito"){
+                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta"){
+                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
-                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta"){
+                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
@@ -4249,79 +4252,23 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
                 }
 
 
-                /*
-                if(tipoDocumentoCFE=="Venta contado"){
-
-                    caeTipoDocumentoCFEDescripcionV="e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketContado");
-
-                }else if(tipoDocumentoCFE=="Venta credito"){
-
-                    caeTipoDocumentoCFEDescripcionV="e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketCredito");
-
-                }else if(tipoDocumentoCFE=="Devolucion venta"){
-
-                    caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketNotaCredito");
-
-                }else if(tipoDocumentoCFE=="Nota credito venta"){
-
-                    caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
-                    tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-ticketNotaCredito");
-
-                }else{
-                    return "-7"; //Error en tipo documento CFE en khitomer.TipoDocumento
-                }
-
-
-                //Verifico si es cliente con RUT
-                if(tipoDocumento=="2"){
-                    //Si es rut no puede ser otro documento
-                    _Documento_identidad="";
-
-                    if(tipoDocumentoCFE=="Venta contado"){
-
-                        caeTipoDocumentoCFEDescripcionV="e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaContado");
-
-                    }else if(tipoDocumentoCFE=="Venta credito"){
-
-                        caeTipoDocumentoCFEDescripcionV="e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaCredito");
-
-                    }else if(tipoDocumentoCFE=="Devolucion venta"){
-
-                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaNotaCredito");
-
-                    }else if(tipoDocumentoCFE=="Nota credito venta"){
-
-                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
-                        tipoDeCFEAEnviarDynamiaV=func_CFE_ParametrosGenerales.retornaValor("urlE-facturaNotaCredito");
-
-                    }else{
-
-                 */
-
-
 
 
                   if(TipoDocumento=="2"){
 
-                      if(Comprobante=="Venta contado"){
+                      if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito"){
+                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta"){
+                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
-                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta"){
+                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 

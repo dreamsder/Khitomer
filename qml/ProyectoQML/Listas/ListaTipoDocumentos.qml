@@ -199,6 +199,12 @@ Rectangle{
             }else{
                 chbUtilizaObservaciones.setActivo(true)
             }
+            if(utilizaComentarios==0){
+                chbUtilizaComentarios.setActivo(false)
+            }else{
+                chbUtilizaComentarios.setActivo(true)
+            }
+
 
             cbxModoAfectaCuentaBancaria.codigoValorSeleccion=afectaCuentaBancaria
             if(afectaCuentaBancaria=="0"){

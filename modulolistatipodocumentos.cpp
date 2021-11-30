@@ -84,6 +84,8 @@ ModuloListaTipoDocumentos::ModuloListaTipoDocumentos(QObject *parent)
     roles[imprimeObservacionesEnTicketRole] = "imprimeObservacionesEnTicket";
 
 
+    roles[utilizaComentariosRole] = "utilizaComentarios";
+
 
 
     setRoleNames(roles);
@@ -138,7 +140,8 @@ TipoDocumentos::TipoDocumentos(
         const QString &utilizaSeteoDePreciosEnListasDePrecioPorArticulo,
         const QString &noPermiteFacturarConStockPrevistoCero,
         const QString &imprimeEnFormatoTicket,
-        const QString &imprimeObservacionesEnTicket
+        const QString &imprimeObservacionesEnTicket,
+        const QString &utilizaComentarios
 
 
 
@@ -188,7 +191,8 @@ TipoDocumentos::TipoDocumentos(
       m_utilizaSeteoDePreciosEnListasDePrecioPorArticulo(utilizaSeteoDePreciosEnListasDePrecioPorArticulo),
       m_noPermiteFacturarConStockPrevistoCero(noPermiteFacturarConStockPrevistoCero),
       m_imprimeEnFormatoTicket(imprimeEnFormatoTicket),
-      m_imprimeObservacionesEnTicket(imprimeObservacionesEnTicket)
+      m_imprimeObservacionesEnTicket(imprimeObservacionesEnTicket),
+      m_utilizaComentarios(utilizaComentarios)
 
 
 
@@ -243,7 +247,7 @@ QString TipoDocumentos::noPermiteFacturarConStockPrevistoCero() const{ return m_
 
 QString TipoDocumentos::imprimeEnFormatoTicket() const{ return m_imprimeEnFormatoTicket;}
 QString TipoDocumentos::imprimeObservacionesEnTicket() const{ return m_imprimeObservacionesEnTicket;}
-
+QString TipoDocumentos::utilizaComentarios() const{ return m_utilizaComentarios;}
 
 
 void ModuloListaTipoDocumentos::agregarTipoDocumentos(const TipoDocumentos &monedas)
@@ -358,7 +362,9 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentos(QString campo, QString dato
                                                                      q.value(rec.indexOf("utilizaSeteoDePreciosEnListasDePrecioPorArticulo")).toString(),
                                                                      q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                      q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
-                                                                     q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString()
+                                                                     q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
+                                                                     q.value(rec.indexOf("utilizaComentarios")).toString()
+
 
 
 
@@ -436,7 +442,8 @@ void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QStr
                                                                                  q.value(rec.indexOf("utilizaSeteoDePreciosEnListasDePrecioPorArticulo")).toString(),
                                                                                  q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                                  q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
-                                                                                 q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString()
+                                                                                 q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
+                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString()
 
 
 
@@ -719,7 +726,7 @@ QVariant ModuloListaTipoDocumentos::data(const QModelIndex & index, int role) co
     else if (role == imprimeEnFormatoTicketRole){  return tipoDocumentos.imprimeEnFormatoTicket();}
 
     else if (role == imprimeObservacionesEnTicketRole){  return tipoDocumentos.imprimeObservacionesEnTicket();}
-
+    else if (role == utilizaComentariosRole){  return tipoDocumentos.utilizaComentarios();}
 
     return QVariant();
 }
@@ -850,6 +857,7 @@ int ModuloListaTipoDocumentos::insertarTipoDocumento(
         QString _codigoModeloImpresion,
         QString _cantidadCopias,
         QString _utilizaObservaciones,
+        QString _utilizaComentarios,
         QString _afectaCuentaBancaria,
         QString _utilizaCuentaBancaria,
         QString _utilizaPagoChequeDiferido,
@@ -905,7 +913,7 @@ int ModuloListaTipoDocumentos::insertarTipoDocumento(
 
                 if(query.value(0).toString()!=""){
 
-                    if(query.exec("update TipoDocumento set  descripcionTipoDocumento='"+_descripcionTipoDocumento+"',utilizaArticulos='"+_utilizaArticulos+"',utilizaCodigoBarrasADemanda='"+_utilizaCodigoBarrasADemanda+"',utilizaTotales='"+_utilizaTotales+"',utilizaMediosDePago='"+_utilizaMediosDePago+"',utilizaFechaPrecio='"+_utilizaFechaPrecio+"',utilizaFechaDocumento='"+_utilizaFechaDocumento+"',utilizaNumeroDocumento='"+_utilizaNumeroDocumento+"',utilizaSerieDocumento='"+_utilizaSerieDocumento+"',serieDocumento='"+_serieDocumento+"',utilizaVendedor='"+_utilizaVendedor+"',utilizaCliente='"+_utilizaCliente+"',utilizaTipoCliente='"+_utilizaTipoCliente+"',utilizaSoloProveedores='"+_utilizaSoloProveedores+"',afectaCuentaCorriente='"+_afectaCuentaCorriente+"',afectaCuentaCorrienteMercaderia='"+_afectaCuentaCorrienteMercaderia+"',afectaStock='"+_afectaStock+"',afectaTotales='"+_afectaTotales+"',utilizaCantidades='"+_utilizaCantidades+"',utilizaPrecioManual='"+_utilizaPrecioManual+"',utilizaDescuentoTotal='"+_utilizaDescuentoTotal+"',emiteEnImpresora='"+_emiteEnImpresora+"',codigoModeloImpresion='"+_codigoModeloImpresion+"',cantidadCopias='"+_cantidadCopias+"',utilizaObservaciones='"+_utilizaObservaciones+"',afectaCuentaBancaria='"+_afectaCuentaBancaria+"',utilizaCuentaBancaria='"+_utilizaCuentaBancaria+"',utilizaPagoChequeDiferido='"+_utilizaPagoChequeDiferido+"',utilizaSoloMediosDePagoCheque='"+_utilizaSoloMediosDePagoCheque+"',esDocumentoDeVenta='"+_esDocumentoDeVenta+"',descripcionTipoDocumentoImpresora='"+_descripcionTipoDocumentoImpresora+"',utilizaArticulosInactivos='"+_utilizaArticulosInactivos+"' ,utilizaRedondeoEnTotal='"+_utilizaRedondeoEnTotal+"'  ,utilizaPrecioManualEnMonedaReferencia='"+_utilizaPrecioManualEnMonedaReferencia+"'   ,descripcionCodigoBarrasADemanda='"+_descripcionCodigoBarrasADemanda+"'  ,utilizaListaPrecioManual='"+_utilizaListaPrecioManual+"',utilizaFormasDePago='"+_utilizaFormasDePago+"',noAfectaIva='"+_noAfectaIva+"',utilizaSeteoDePreciosEnListasDePrecioPorArticulo='"+_utilizaSeteoDePreciosEnListasDePrecioPorArticulo+"' ,noPermiteFacturarConStockPrevistoCero='"+_noPermiteFacturarConStockPrevistoCero+"' ,imprimeEnFormatoTicket='"+_imprimeEnFormatoTicket+"',imprimeObservacionesEnTicket='"+_imprimeObservacionesEnTicket+"'               where codigoTipoDocumento='"+_codigoTipoDocumento+"'    ")){
+                    if(query.exec("update TipoDocumento set  descripcionTipoDocumento='"+_descripcionTipoDocumento+"',utilizaArticulos='"+_utilizaArticulos+"',utilizaCodigoBarrasADemanda='"+_utilizaCodigoBarrasADemanda+"',utilizaTotales='"+_utilizaTotales+"',utilizaMediosDePago='"+_utilizaMediosDePago+"',utilizaFechaPrecio='"+_utilizaFechaPrecio+"',utilizaFechaDocumento='"+_utilizaFechaDocumento+"',utilizaNumeroDocumento='"+_utilizaNumeroDocumento+"',utilizaSerieDocumento='"+_utilizaSerieDocumento+"',serieDocumento='"+_serieDocumento+"',utilizaVendedor='"+_utilizaVendedor+"',utilizaCliente='"+_utilizaCliente+"',utilizaTipoCliente='"+_utilizaTipoCliente+"',utilizaSoloProveedores='"+_utilizaSoloProveedores+"',afectaCuentaCorriente='"+_afectaCuentaCorriente+"',afectaCuentaCorrienteMercaderia='"+_afectaCuentaCorrienteMercaderia+"',afectaStock='"+_afectaStock+"',afectaTotales='"+_afectaTotales+"',utilizaCantidades='"+_utilizaCantidades+"',utilizaPrecioManual='"+_utilizaPrecioManual+"',utilizaDescuentoTotal='"+_utilizaDescuentoTotal+"',emiteEnImpresora='"+_emiteEnImpresora+"',codigoModeloImpresion='"+_codigoModeloImpresion+"',cantidadCopias='"+_cantidadCopias+"',utilizaObservaciones='"+_utilizaObservaciones+"',utilizaComentarios='"+_utilizaComentarios+"',afectaCuentaBancaria='"+_afectaCuentaBancaria+"',utilizaCuentaBancaria='"+_utilizaCuentaBancaria+"',utilizaPagoChequeDiferido='"+_utilizaPagoChequeDiferido+"',utilizaSoloMediosDePagoCheque='"+_utilizaSoloMediosDePagoCheque+"',esDocumentoDeVenta='"+_esDocumentoDeVenta+"',descripcionTipoDocumentoImpresora='"+_descripcionTipoDocumentoImpresora+"',utilizaArticulosInactivos='"+_utilizaArticulosInactivos+"' ,utilizaRedondeoEnTotal='"+_utilizaRedondeoEnTotal+"'  ,utilizaPrecioManualEnMonedaReferencia='"+_utilizaPrecioManualEnMonedaReferencia+"'   ,descripcionCodigoBarrasADemanda='"+_descripcionCodigoBarrasADemanda+"'  ,utilizaListaPrecioManual='"+_utilizaListaPrecioManual+"',utilizaFormasDePago='"+_utilizaFormasDePago+"',noAfectaIva='"+_noAfectaIva+"',utilizaSeteoDePreciosEnListasDePrecioPorArticulo='"+_utilizaSeteoDePreciosEnListasDePrecioPorArticulo+"' ,noPermiteFacturarConStockPrevistoCero='"+_noPermiteFacturarConStockPrevistoCero+"' ,imprimeEnFormatoTicket='"+_imprimeEnFormatoTicket+"',imprimeObservacionesEnTicket='"+_imprimeObservacionesEnTicket+"'               where codigoTipoDocumento='"+_codigoTipoDocumento+"'    ")){
 
                         return 2;
 
@@ -916,7 +924,7 @@ int ModuloListaTipoDocumentos::insertarTipoDocumento(
                     return -4;
                 }
             }else{
-                if(query.exec("insert INTO TipoDocumento (codigoTipoDocumento,descripcionTipoDocumento,utilizaArticulos,utilizaCodigoBarrasADemanda,utilizaTotales,utilizaMediosDePago,utilizaFechaPrecio,utilizaFechaDocumento,utilizaNumeroDocumento,utilizaSerieDocumento,serieDocumento,utilizaVendedor,utilizaCliente,utilizaTipoCliente,utilizaSoloProveedores,afectaCuentaCorriente,afectaCuentaCorrienteMercaderia,afectaStock,afectaTotales,utilizaCantidades,utilizaPrecioManual,utilizaDescuentoTotal,emiteEnImpresora,codigoModeloImpresion,cantidadCopias,utilizaObservaciones,afectaCuentaBancaria,utilizaCuentaBancaria,utilizaPagoChequeDiferido,utilizaSoloMediosDePagoCheque,esDocumentoDeVenta,descripcionTipoDocumentoImpresora,utilizaArticulosInactivos,utilizaRedondeoEnTotal,utilizaPrecioManualEnMonedaReferencia,descripcionCodigoBarrasADemanda,utilizaListaPrecioManual,utilizaFormasDePago,noAfectaIva,utilizaSeteoDePreciosEnListasDePrecioPorArticulo,noPermiteFacturarConStockPrevistoCero,imprimeEnFormatoTicket,imprimeObservacionesEnTicket) values('"+_codigoTipoDocumento+"','"+_descripcionTipoDocumento+"','"+_utilizaArticulos+"','"+_utilizaCodigoBarrasADemanda+"','"+_utilizaTotales+"','"+_utilizaMediosDePago+"','"+_utilizaFechaPrecio+"','"+_utilizaFechaDocumento+"','"+_utilizaNumeroDocumento+"','"+_utilizaSerieDocumento+"','"+_serieDocumento+"','"+_utilizaVendedor+"','"+_utilizaCliente+"','"+_utilizaTipoCliente+"','"+_utilizaSoloProveedores+"','"+_afectaCuentaCorriente+"','"+_afectaCuentaCorrienteMercaderia+"','"+_afectaStock+"','"+_afectaTotales+"','"+_utilizaCantidades+"','"+_utilizaPrecioManual+"','"+_utilizaDescuentoTotal+"','"+_emiteEnImpresora+"','"+_codigoModeloImpresion+"','"+_cantidadCopias+"','"+_utilizaObservaciones+"','"+_afectaCuentaBancaria+"','"+_utilizaCuentaBancaria+"','"+_utilizaPagoChequeDiferido+"','"+_utilizaSoloMediosDePagoCheque+"','"+_esDocumentoDeVenta+"','"+_descripcionTipoDocumentoImpresora+"','"+_utilizaArticulosInactivos+"'   ,'"+_utilizaRedondeoEnTotal+"' ,'"+_utilizaPrecioManualEnMonedaReferencia+"','"+_descripcionCodigoBarrasADemanda+"','"+_utilizaListaPrecioManual+"','"+_utilizaFormasDePago+"','"+_noAfectaIva+"','"+_utilizaSeteoDePreciosEnListasDePrecioPorArticulo+"','"+_noPermiteFacturarConStockPrevistoCero+"','"+_imprimeEnFormatoTicket+"','"+_imprimeObservacionesEnTicket+"')")){
+                if(query.exec("insert INTO TipoDocumento (codigoTipoDocumento,descripcionTipoDocumento,utilizaArticulos,utilizaCodigoBarrasADemanda,utilizaTotales,utilizaMediosDePago,utilizaFechaPrecio,utilizaFechaDocumento,utilizaNumeroDocumento,utilizaSerieDocumento,serieDocumento,utilizaVendedor,utilizaCliente,utilizaTipoCliente,utilizaSoloProveedores,afectaCuentaCorriente,afectaCuentaCorrienteMercaderia,afectaStock,afectaTotales,utilizaCantidades,utilizaPrecioManual,utilizaDescuentoTotal,emiteEnImpresora,codigoModeloImpresion,cantidadCopias,utilizaObservaciones,utilizaComentarios,afectaCuentaBancaria,utilizaCuentaBancaria,utilizaPagoChequeDiferido,utilizaSoloMediosDePagoCheque,esDocumentoDeVenta,descripcionTipoDocumentoImpresora,utilizaArticulosInactivos,utilizaRedondeoEnTotal,utilizaPrecioManualEnMonedaReferencia,descripcionCodigoBarrasADemanda,utilizaListaPrecioManual,utilizaFormasDePago,noAfectaIva,utilizaSeteoDePreciosEnListasDePrecioPorArticulo,noPermiteFacturarConStockPrevistoCero,imprimeEnFormatoTicket,imprimeObservacionesEnTicket) values('"+_codigoTipoDocumento+"','"+_descripcionTipoDocumento+"','"+_utilizaArticulos+"','"+_utilizaCodigoBarrasADemanda+"','"+_utilizaTotales+"','"+_utilizaMediosDePago+"','"+_utilizaFechaPrecio+"','"+_utilizaFechaDocumento+"','"+_utilizaNumeroDocumento+"','"+_utilizaSerieDocumento+"','"+_serieDocumento+"','"+_utilizaVendedor+"','"+_utilizaCliente+"','"+_utilizaTipoCliente+"','"+_utilizaSoloProveedores+"','"+_afectaCuentaCorriente+"','"+_afectaCuentaCorrienteMercaderia+"','"+_afectaStock+"','"+_afectaTotales+"','"+_utilizaCantidades+"','"+_utilizaPrecioManual+"','"+_utilizaDescuentoTotal+"','"+_emiteEnImpresora+"','"+_codigoModeloImpresion+"','"+_cantidadCopias+"','"+_utilizaObservaciones+"','"+_utilizaComentarios+"','"+_afectaCuentaBancaria+"','"+_utilizaCuentaBancaria+"','"+_utilizaPagoChequeDiferido+"','"+_utilizaSoloMediosDePagoCheque+"','"+_esDocumentoDeVenta+"','"+_descripcionTipoDocumentoImpresora+"','"+_utilizaArticulosInactivos+"'   ,'"+_utilizaRedondeoEnTotal+"' ,'"+_utilizaPrecioManualEnMonedaReferencia+"','"+_descripcionCodigoBarrasADemanda+"','"+_utilizaListaPrecioManual+"','"+_utilizaFormasDePago+"','"+_noAfectaIva+"','"+_utilizaSeteoDePreciosEnListasDePrecioPorArticulo+"','"+_noPermiteFacturarConStockPrevistoCero+"','"+_imprimeEnFormatoTicket+"','"+_imprimeObservacionesEnTicket+"')")){
 
                     insertarTipoDocumentoPerfil(_codigoTipoDocumento,"1");
 
@@ -1096,7 +1104,8 @@ bool ModuloListaTipoDocumentos::permiteDevolucionTipoDocumento(QString _codigoTi
                                                                                  q.value(rec.indexOf("utilizaSeteoDePreciosEnListasDePrecioPorArticulo")).toString(),
                                                                                  q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                                  q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
-                                                                                 q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString()
+                                                                                 q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
+                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString()
 
 
 

@@ -41,6 +41,7 @@ Rectangle {
 
         chbEsDocumentoDeVenta.setActivo(false)
         chbUtilizaObservaciones.setActivo(false)
+        chbUtilizaComentarios.setActivo(false)
         chbUtilizaVendedorParaComisionar.setActivo(false)
         chbIngredoDeSerieManual.setActivo(false)
         chbIngredoDeNumeroDeDocumentoManual.setActivo(false)
@@ -182,6 +183,7 @@ Rectangle {
                 var _cbxListaModelosDeImpresion=cbxListaModelosDeImpresion.codigoValorSeleccion
                 var _cbxCantidadCopiasTipoDocumento=cbxCantidadCopiasTipoDocumento.codigoValorSeleccion
                 var _chbUtilizaObservaciones=0
+                var _chbUtilizaComentarios=0
                 var _cbxModoAfectaCuentaBancaria=cbxModoAfectaCuentaBancaria.codigoValorSeleccion
                 var _chbUtilizaCuentasBancarias=0
                 var _chbPermitechequesEnCajaParaPagoAProveedores=0
@@ -222,6 +224,9 @@ Rectangle {
                 if(chbUtilizaDescuentosAlTotalTipoDocumentos.chekActivo){   _chbUtilizaDescuentosAlTotalTipoDocumentos    =1}
                 if(chbEmitenEnImpresoras.chekActivo){   _chbEmitenEnImpresoras    =1}
                 if(chbUtilizaObservaciones.chekActivo){   _chbUtilizaObservaciones  =1}
+                if(chbUtilizaComentarios.chekActivo){   _chbUtilizaComentarios  =1}
+
+
                 if(chbUtilizaCuentasBancarias.chekActivo){    _chbUtilizaCuentasBancarias    =1}
                 if(chbPermitechequesEnCajaParaPagoAProveedores.chekActivo){   _chbPermitechequesEnCajaParaPagoAProveedores    =1}
                 if(chbUtilizaSoloMedioPagoCheque.chekActivo){   _chbUtilizaSoloMedioPagoCheque    =1}
@@ -269,6 +274,7 @@ Rectangle {
                             _cbxListaModelosDeImpresion,
                             _cbxCantidadCopiasTipoDocumento,
                             _chbUtilizaObservaciones,
+                            _chbUtilizaComentarios,
                             _cbxModoAfectaCuentaBancaria,
                             _chbUtilizaCuentasBancarias,
                             _chbPermitechequesEnCajaParaPagoAProveedores,
@@ -688,6 +694,12 @@ Rectangle {
                         CheckBox {
                             id: chbEmiteObservacionesEnImpresorasTicket
                             textoValor: qsTr("Imprime observaciones en ticket")
+                        }
+
+                        CheckBox {
+                            id: chbUtilizaComentarios
+                            tamanioLetra: 12
+                            textoValor: qsTr("Utiliza comentarios")
                         }
 
                         CheckBox {
