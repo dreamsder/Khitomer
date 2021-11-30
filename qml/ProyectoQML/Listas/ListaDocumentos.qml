@@ -113,7 +113,10 @@ Rectangle{
 
 
 
-                                                            "","")
+                                                            "","",
+                                                            modeloDocumentos.retornacomentariosDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)
+
+                                                            )
 
 
 

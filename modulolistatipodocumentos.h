@@ -75,7 +75,8 @@ public:
 
                                const QString &noPermiteFacturarConStockPrevistoCero,
                                const QString &imprimeEnFormatoTicket,
-                               const QString &imprimeObservacionesEnTicket
+                               const QString &imprimeObservacionesEnTicket,
+                               const QString &utilizaComentarios
 
                                );
 
@@ -130,7 +131,7 @@ public:
 
     QString imprimeObservacionesEnTicket()const;
 
-
+    QString utilizaComentarios() const;
 
 
 
@@ -188,6 +189,7 @@ private:
     QString m_imprimeEnFormatoTicket;
 
     QString m_imprimeObservacionesEnTicket;
+    QString m_utilizaComentarios;
 
 };
 
@@ -241,7 +243,8 @@ public:
         utilizaSeteoDePreciosEnListasDePrecioPorArticuloRole,
         noPermiteFacturarConStockPrevistoCeroRole,
         imprimeEnFormatoTicketRole,
-        imprimeObservacionesEnTicketRole
+        imprimeObservacionesEnTicketRole,
+        utilizaComentariosRole
 
 
 
@@ -284,6 +287,7 @@ public:
 
 
     Q_INVOKABLE int insertarTipoDocumento(QString ,
+            QString ,
             QString ,
             QString ,
             QString ,

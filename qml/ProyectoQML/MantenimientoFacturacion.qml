@@ -460,6 +460,7 @@ Rectangle {
         txtCantidadArticulosFacturacion.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCantidades")
         txtPrecioItemManualFacturacion.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaPrecioManual")
 
+        txtComentariosFactura.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaComentarios")
         txtObservacionesFactura.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaObservaciones")
 
         txtCodigoDeBarrasADemanda.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCodigoBarrasADemanda")
@@ -548,7 +549,7 @@ Rectangle {
     /////
     ///// Carga la factura pendiente o en otro estado a la que se le da dobe clic en las liquidaciones/caja
     ///// Lista: ListaDocumentosEnLiquidaciones.qml
-    function cargarFactura(numeroFactura, tipoDocumento, estadoDocumento,tipoCliente,codigoCliente,serieDocumento, codigoVendedorComision,codigoLiquidacion, codigoVendedorLiquidacion,fechaPrecio,fechaEmision,monedaDocumento,precioIvaVenta,precioSubTotalVenta,precioTotalVenta,totalIva1,totalIva2,totalIva3,observacion,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,formaDePago,porcentajeDescuentoAlTotal,indicadorDeNuevoDocumento,tipoDocumentoDevolucion){
+    function cargarFactura(numeroFactura, tipoDocumento, estadoDocumento,tipoCliente,codigoCliente,serieDocumento, codigoVendedorComision,codigoLiquidacion, codigoVendedorLiquidacion,fechaPrecio,fechaEmision,monedaDocumento,precioIvaVenta,precioSubTotalVenta,precioTotalVenta,totalIva1,totalIva2,totalIva3,observacion,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,formaDePago,porcentajeDescuentoAlTotal,indicadorDeNuevoDocumento,tipoDocumentoDevolucion,comentarios){
 
         cuadroListaDocumentosNuevo.visible=false;
         lblNumeroDocumentoyCFE.text=""
@@ -608,6 +609,7 @@ Rectangle {
 
         lblRazonSocialCliente.text="Facturar a: "+modeloClientes.retornaDescripcionDeCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion);
 
+        txtComentariosFactura.textoInputBox=comentarios
         txtObservacionesFactura.textoInputBox=observacion
 
         var cantidadLineasDocumento=modeloDocumentosEnLiquidaciones.retornaCantidadLineasDocumento(numeroFactura,tipoDocumento, serieDocumento);
@@ -899,6 +901,9 @@ Rectangle {
             txtObservacionesFactura.enable=true
             txtObservacionesFactura.enabled=true
 
+            txtComentariosFactura.enable=true
+            txtComentariosFactura.enabled=true
+
             txtCantidadArticulosFacturacion.enable=true
             txtCantidadArticulosFacturacion.enabled=true
 
@@ -1025,6 +1030,9 @@ Rectangle {
             txtObservacionesFactura.enable=true
             txtObservacionesFactura.enabled=true
 
+            txtComentariosFactura.enable=true
+            txtComentariosFactura.enabled=true
+
             txtCantidadArticulosFacturacion.enable=false
             txtCantidadArticulosFacturacion.enabled=false
 
@@ -1122,6 +1130,9 @@ Rectangle {
 
             txtObservacionesFactura.enable=true
             txtObservacionesFactura.enabled=true
+
+            txtComentariosFactura.enable=true
+            txtComentariosFactura.enabled=true
 
             txtCantidadArticulosFacturacion.enable=false
             txtCantidadArticulosFacturacion.enabled=false
@@ -1264,6 +1275,7 @@ Rectangle {
         txtVendedorDeFactura.textoComboBox=""
         txtPrecioItemManualFacturacion.textoInputBox=""
         txtObservacionesFactura.textoInputBox=""
+        txtComentariosFactura.textoInputBox=""
 
         txtFechaDocumentoFacturacion.textoInputBox=funcionesmysql.fechaDeHoy()
         txtFechaPrecioFacturacion.textoInputBox=funcionesmysql.fechaDeHoy()
@@ -1324,6 +1336,9 @@ Rectangle {
 
         txtObservacionesFactura.enable=true
         txtObservacionesFactura.enabled=true
+
+        txtComentariosFactura.enable=true
+        txtComentariosFactura.enabled=true
 
         txtCodigoDeBarrasADemanda.enable=true
         txtCodigoDeBarrasADemanda.enabled=true
@@ -5309,6 +5324,19 @@ Rectangle {
                 cursor_Visible: false
                 visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaObservaciones")
             }
+            TextInputSimple {
+                id: txtComentariosFactura
+                x: 65
+                y: 200
+                enFocoSeleccionarTodo: false
+                textoInputBox: ""
+                botonBuscarTextoVisible: false
+                textoDeFondo: "Comentarios internos"
+                largoMaximo: 80
+                textoTitulo: "Comentarios:"
+                cursor_Visible: false
+                visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaComentarios")
+            }
 
             ComboBoxListaPrecios {
                 id: cbxListaPrecioManualFijadaPorUsuario
@@ -6024,7 +6052,7 @@ Rectangle {
                                                                                              txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                              txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotalMedioDePago.retornaTotal(),etiquetaTotalMedioDePago.retornaSubTotal(),
                                                                                              etiquetaTotalMedioDePago.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                              cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                              etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
 
@@ -6033,7 +6061,7 @@ Rectangle {
                                                                                              txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                              txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
                                                                                              etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                              cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                              etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
                             }
@@ -6049,7 +6077,7 @@ Rectangle {
                                                                                          txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                          txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotalMedioDePago.retornaTotal(),etiquetaTotalMedioDePago.retornaSubTotal(),
                                                                                          etiquetaTotalMedioDePago.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                          cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                          etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
 
@@ -6060,7 +6088,7 @@ Rectangle {
                                                                                          txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                          txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
                                                                                          etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                          cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                          etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
                         }
@@ -6514,7 +6542,7 @@ Rectangle {
                                                                                      txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                      txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
                                                                                      etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                      cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                      etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
 
@@ -6527,7 +6555,7 @@ Rectangle {
                                                                                      txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                      txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotalMedioDePago.retornaTotal(),etiquetaTotalMedioDePago.retornaSubTotal(),
                                                                                      etiquetaTotalMedioDePago.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                      cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                      etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
 
@@ -6539,7 +6567,7 @@ Rectangle {
                                                                                      txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
                                                                                      txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
                                                                                      etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
-                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),
+                                                                                     "PENDIENTE",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
                                                                                      cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
                                                                                      etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
                     }
@@ -7964,7 +7992,8 @@ Rectangle {
                           "",modeloDocumentos.retornaonumeroCuentaBancariaDocumento(_numeroDocumento,_codigoTipoDocumentoOriginal,_serieDocumento),
                           modeloDocumentos.retornaocodigoBancoDocumento(_numeroDocumento,_codigoTipoDocumentoOriginal,_serieDocumento),
                           modeloDocumentos.retornaMontoDescuentoTotalDocumento(_numeroDocumento,_codigoTipoDocumentoOriginal,_serieDocumento),
-                          "",modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(_numeroDocumento,_codigoTipoDocumentoOriginal,_serieDocumento),"NUEVO",_codigoTipoDocumentoSeleccionadoParaDevolucion
+                          "",modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(_numeroDocumento,_codigoTipoDocumentoOriginal,_serieDocumento),"NUEVO",_codigoTipoDocumentoSeleccionadoParaDevolucion,
+                          ""
                           )
         }
     }

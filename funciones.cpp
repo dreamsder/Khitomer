@@ -1857,8 +1857,16 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
                 }
             }else{_iterador=false; return false;}
             break;
-
-
+        case 385:
+            if(!impactoCambioEnBD("ALTER TABLE TipoDocumento ADD utilizaComentarios char(1) DEFAULT '0' NOT NULL;","386")){
+                _iterador=false; return false;
+            }
+            break;
+        case 386:
+            if(!impactoCambioEnBD("ALTER TABLE `Documentos` ADD COLUMN `comentarios` varchar(100) NULL  AFTER `observaciones`;","387")){
+                _iterador=false; return false;
+            }
+            break;
 
         //
         //

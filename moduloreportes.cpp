@@ -590,7 +590,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
             //Los campos en el resultado de la grafica deben ser, value(0) descripcion, values(1) monto o cantidad a mostrar, value(2) simbolo moenda, o sino va vacio; value(3) cantidad de registros.
             //Aca averiguamos la totalidad de registros, para saber cuando es el 100%, así calcular el resto de los porcentajes.
-            if(query.exec(_consultaSqlGraficas)) {
+            if(query.exec("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;"+_consultaSqlGraficas)) {
                 if(query.first()){
                     query.previous();
                     while(query.next()){
@@ -626,7 +626,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
             query.clear();
             bool _primerRegistro=true;
-            if(query.exec(_consultaSqlGraficas)) {
+            if(query.exec("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;"+_consultaSqlGraficas)) {
                 if(query.first()){
                     query.previous();
 
@@ -684,7 +684,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
             query.clear();
 
-            if(query.exec(_consultaSqlCabezal.trimmed())){
+            if(query.exec("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;"+_consultaSqlCabezal.trimmed())){
                 query.next();
 
 

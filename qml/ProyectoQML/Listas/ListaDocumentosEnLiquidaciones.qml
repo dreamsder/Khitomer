@@ -112,7 +112,9 @@ Rectangle{
                                                        modeloDocumentos.retornaFormaDePagoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
                                                        modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
 
-                                                       "","")
+                                                       "","",
+                                                       modeloDocumentos.retornacomentariosDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)
+                                                       )
 
 
                 }else{

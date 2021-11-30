@@ -121,8 +121,8 @@ mostrarMantenimientos(0,"derecha")
                                                    ,modeloDocumentos.retornaMontoDescuentoTotalDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
                                                    ,modeloDocumentos.retornaFormaDePagoDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
                                                    ,modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,"",""
-
+                                                   ,"","",
+                                                    modeloDocumentos.retornacomentariosDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
                                                    )
 
             }
