@@ -31,6 +31,9 @@ Rectangle {
     color: "#14ffffff"
     radius: 1
 
+    property alias source: imageTextMenu.source
+
+
     Keys.onEscapePressed: {
 
         rectPrincipalAparecerYIn.stop()
@@ -311,9 +314,9 @@ Rectangle {
         id:rectPrincipalAparecerYIn
         target: rectPrincipalListaMenu
         property: "y"
-        from:39
-        to: 48
-        duration: 200
+        from:20
+        to: 30
+        duration: 150
     }
 
     Text {
@@ -321,7 +324,7 @@ Rectangle {
         x: 20
         y: 10
         color: "#fdfdfd"
-        text: qsTr("Administración")
+        text: qsTr("A")
         font.family: "Arial"
         smooth: true
         font.bold: true
@@ -330,14 +333,23 @@ Rectangle {
         font.pixelSize: 12
     }
 
+    Image {
+        id: imageTextMenu
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        smooth: true
+        asynchronous: true
+        source: ""
+    }
+
     Rectangle {
         id: rectPrincipalListaMenu
         x: 0
-        y: 39
+        y: 20
         color: "#eceeee"
         radius: 6
-        width: 1150
-        height: 650
+        width: 1160
+        height: 670
         smooth: true
         border.color: "#a8a0a0"
 
@@ -486,9 +498,9 @@ Rectangle {
                 }
             }
 
-            Rectangle {
+            /*Rectangle {
                 id: rectangle3
-                x: 23
+                x: 0//23
                 y: -12
                 width: 25
                 height: 25
@@ -496,9 +508,9 @@ Rectangle {
                 smooth: true
                 anchors.top: parent.top
                 anchors.topMargin: -12
-                rotation: 45
+                rotation: 20
                 z: 1
-            }
+            }*/
 
             ListView {
                 id: listview1
@@ -769,7 +781,7 @@ Rectangle {
             }
         }
 
-        Rectangle {
+        /*Rectangle {
             id: rectSombra
             x: -5
             y: 5
@@ -783,7 +795,7 @@ Rectangle {
             anchors.bottomMargin: -5
             z: -6
             anchors.leftMargin: -5
-        }
+        }*/
         visible: false
         border.width: 1
         z: 2002

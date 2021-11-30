@@ -1019,12 +1019,12 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: -20
         anchors.top: parent.top
-        anchors.topMargin: 50
+        anchors.topMargin: 10
         opacity: 1
         anchors.left: parent.left
         anchors.leftMargin: 45
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 50
+        anchors.bottomMargin: 40
         enabled: false
 
 
@@ -1156,7 +1156,7 @@ Rectangle {
         Row {
             id: rowMenusDelSistema
             x: 0
-            y: -40
+            y: 0
             height: 30
             anchors.leftMargin: (navegador.width*-1)-40
             anchors.right: parent.right
@@ -1164,7 +1164,7 @@ Rectangle {
             anchors.left: navegador.right
             z: 1
             anchors.top: parent.top
-            anchors.topMargin: -40
+            anchors.topMargin: 0
             spacing: 20
 
             onZChanged: {
@@ -1175,9 +1175,11 @@ Rectangle {
             MenuLista {
                 id: menulista1
                 z: 1
-                textoBoton: qsTr("Administración")
+                textoBoton: qsTr("    ")
+                source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Notebook.png"
                 visible: menulista1.enabled
                 onClic: {
+                    etUsuario.z=0
                     btnLateralBusquedas.z=0
                     rowMenusDelSistema.z=1
                     etUsuario.cerrarComboBox()
@@ -1499,8 +1501,8 @@ Rectangle {
                             tagCuentaCorriente.visible=mantenimientoCuentasCorriente.enabled
 
                             mantenimientoPromociones.enabled= false// modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarPromociones")
-                            tagPromociones.enabled=mantenimientoPromociones.enabled
-                            tagPromociones.visible=mantenimientoPromociones.enabled
+                            //tagPromociones.enabled=mantenimientoPromociones.enabled
+                            //tagPromociones.visible=mantenimientoPromociones.enabled
 
 
 
@@ -1757,7 +1759,7 @@ Rectangle {
 
     Row {
         id: rowTagsInferior
-        spacing: 10
+        spacing: 8
         anchors.top: navegador.bottom
         anchors.topMargin: 10
         anchors.bottom: parent.bottom
@@ -1765,7 +1767,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 10
         anchors.left: parent.left
-        anchors.leftMargin: 65
+        anchors.leftMargin: 45
 
         Tag {
             id: tagLiquidaciones
@@ -1866,16 +1868,52 @@ Rectangle {
             }
         }
 
+        Tag {
+            id: tagCuentaCorriente
+            texto: qsTr("Cuentas corrientes")
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CuentasCorrientes.png"
+            toolTip: ""
+            _gradietMedioIndicador: "#4c6bb5"
+            indicadorColor: "#880000"
+            opacidadPorDefecto: mantenimientoCuentasCorriente.visible ? "1" : "0.3"
+
+            onClic: {
+
+                mostrarMantenimientos(6,"derecha")
+
+            }
+        }
+
+
     }
 
-    EtiquetaUsuario {
+   /* EtiquetaUsuario {
         id: etUsuario
-        x: 742
+        //x: 742
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.top: parent.top
         anchors.topMargin: 10
         z: 1
+    }*/
+
+
+    EtiquetaUsuario {
+        id: etUsuario
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 85
+        anchors.left: parent.left
+        anchors.leftMargin: -35
+        z: 1
+        onClic: {
+            if(visibleComboBox){
+                etUsuario.z=1
+            }else{
+                etUsuario.z=0
+            }
+
+
+         }
     }
 
 
@@ -2021,7 +2059,7 @@ Rectangle {
         }
     }
 
-    Row {
+   /* Row {
         id: rowTagsSuperior
         anchors.bottomMargin: 10
         anchors.right: parent.right
@@ -2068,7 +2106,7 @@ Rectangle {
         anchors.topMargin: 15
         anchors.bottom: navegador.top
         anchors.top: parent.top
-    }
+    }*/
 
 
 

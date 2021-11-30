@@ -25,15 +25,18 @@ import QtQuick 1.1
 Rectangle {
     id: rectPrincipalEtiqueUsuario
     width: txtNombreUsuarioLogueado.implicitWidth+20
-    height: 30
+    height: 25
     color: "#00000000"
     smooth: true
+    rotation: -90
     Keys.onEscapePressed: {
         rectPrincipalComboBoxAparecerYIn.stop()
         rectPrincipalComboBox.visible=false
     }
 
 
+    property bool visibleComboBox: false
+    signal clic
 
     function setearUsuario(usuario){
         txtNombreUsuarioLogueado.text=usuario;
@@ -75,16 +78,16 @@ Rectangle {
             radius: 2
             z: 1
             smooth: true
-            anchors.rightMargin: 3
-            anchors.leftMargin: 3
-            anchors.bottomMargin: 3
-            anchors.topMargin: 3
+            anchors.rightMargin: 2
+            anchors.leftMargin: 2
+            anchors.bottomMargin: 2
+            anchors.topMargin: 2
             anchors.fill: parent
 
             Text {
                 id: txtNombreUsuarioLogueado
-                x: 44
-                y: 9
+               // x: 44
+               // y: 9
                 color: "#ffffff"
                 text: qsTr("Cristian Montano")
                 font.family: "Arial"
@@ -106,15 +109,19 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         if(!rectPrincipalComboBox.visible){
+                            visibleComboBox=true
                             rectPrincipalComboBox.visible=true
                             rectPrincipalComboBoxAparecerYIn.start();
                             txtContraseniaDeUsuarioActual.textoInputBox=""
                             txtContraseniaDeUsuarioNueva.textoInputBox=""
                             txtContraseniaDeUsuarioReingreso.textoInputBox=""
                             txtContraseniaDeUsuarioActual.tomarElFoco()
+
                         }else{
+                            visibleComboBox=false
                             rectPrincipalComboBox.visible=false
                         }
+                        clic()
                     }
                 }
         }
@@ -151,27 +158,18 @@ Rectangle {
         id: rectPrincipalComboBox
         x: 0
         y: 30
+        rotation: 90
         width: 300
         height: 242
         color: "#eceeee"
         radius: 3
-        smooth: true
         border.color: "#a8a0a0"
-        Rectangle {
-            id: rectSombra
-            x: -5
-            y: -34
-            color: "#1e646262"
-            radius: 6
-            smooth: true
-            anchors.fill: parent
-            anchors.topMargin: 5
-            visible: true
-            anchors.rightMargin: -5
-            anchors.bottomMargin: -5
-            z: -4
-            anchors.leftMargin: -5
-        }
+        anchors.rightMargin: -250
+        visible: false
+        border.width: 1
+        z: 2000
+        anchors.right: parent.right
+
 
         MouseArea {
             id: mouse_area4
@@ -197,7 +195,7 @@ Rectangle {
                 }
             }
 
-            Rectangle {
+           /* Rectangle {
                 id: rectangle3
                 x: 194
                 y: -6
@@ -210,7 +208,7 @@ Rectangle {
                 anchors.topMargin: -6
                 rotation: 45
                 z: 1
-            }
+            }*/
 
             Rectangle {
                 id: rectLineaSuperior
@@ -351,11 +349,7 @@ Rectangle {
                 font.pixelSize: 12
             }
         }
-        anchors.rightMargin: 0
-        visible: false
-        border.width: 1
-        z: 2000
-        anchors.right: parent.right
+
     }
     PropertyAnimation{
         id:rectPrincipalComboBoxAparecerYIn

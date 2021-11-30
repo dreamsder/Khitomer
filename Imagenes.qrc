@@ -74,5 +74,6 @@
         <file>qml/ProyectoQML/Imagenes/FlechaFinal.png</file>
         <file>qml/ProyectoQML/Imagenes/MantenimientoPromociones.png</file>
         <file>qml/ProyectoQML/Imagenes/LogoKhitomerCFE-20-03-2018_128pxNavidad.png</file>
+        <file>qml/ProyectoQML/Imagenes/Notebook.png</file>
     </qresource>
 </RCC>

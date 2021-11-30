@@ -3,7 +3,7 @@ import QtQuick 1.1
 Rectangle {
     id: rectTagPrincipal
     width: txtTextoTag.implicitWidth+50
-    height: 25
+    height: 20
     color: "#00000000"
     opacity: opacidadPorDefecto
 
@@ -20,8 +20,8 @@ Rectangle {
 
     Image {
         id: imageTag
-        width: 25
-        height: 25
+        width: 20
+        height: 20
         smooth: true
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -48,7 +48,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         smooth: true
-        font.pixelSize: 17
+        font.pixelSize: 12
     }
 
     MouseArea {
