@@ -30,7 +30,7 @@ Rectangle {
     color: "#00000000"
     radius: 5
     opacity: 1
-    smooth: true
+    //
 
     signal clic
     property alias texto: txtBotonCargarDato.text
@@ -59,7 +59,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         opacity: 0.500
-        smooth: true
+        //
         fillMode: Image.PreserveAspectFit
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Suma.png"
     }
@@ -75,7 +75,7 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.top: parent.top
         anchors.topMargin: 0
-        smooth: true
+        //
         font.bold: true
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter

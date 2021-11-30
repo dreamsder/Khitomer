@@ -43,7 +43,7 @@ Rectangle{
         id:txtItemArticulo
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -65,7 +65,7 @@ Rectangle{
         id:txtPrecioArticulo
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -136,7 +136,7 @@ Rectangle{
         color: "#212121"
         text: modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(itemCodigoAgregado))
         font.family: "Arial"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -165,7 +165,7 @@ Rectangle{
                 "#00ffffff"
             }
         }
-        smooth: true
+        //
         radius: 20
         clip: true
         border.width: 0
@@ -193,7 +193,7 @@ Rectangle{
             anchors.topMargin: 1
             anchors.bottom: parent.bottom
             anchors.bottomMargin: -1
-            smooth: true
+            //
             font.bold: true
             font.pixelSize: 10
         }

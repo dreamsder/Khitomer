@@ -36,7 +36,7 @@ Rectangle {
 
     Keys.onEscapePressed: {
 
-        rectPrincipalAparecerYIn.stop()
+    //    rectPrincipalAparecerYIn.stop()
         rectPrincipalListaMenu.visible=false
 
     }
@@ -277,14 +277,14 @@ Rectangle {
 
     property alias textoBoton: txtTextoMenu.text
 
-    smooth: true
+    //
     border.color: "#272525"
 
     Rectangle {
         id: rectCapaTransparente
         color: "#00000000"
         radius: 1
-        smooth: true
+        //
         visible: true
         enabled: false
         anchors.fill: parent
@@ -310,14 +310,14 @@ Rectangle {
 
 
 
-    PropertyAnimation{
+    /*PropertyAnimation{
         id:rectPrincipalAparecerYIn
         target: rectPrincipalListaMenu
         property: "y"
         from:20
         to: 30
         duration: 150
-    }
+    }*/
 
     Text {
         id: txtTextoMenu
@@ -326,7 +326,7 @@ Rectangle {
         color: "#fdfdfd"
         text: qsTr("A")
         font.family: "Arial"
-        smooth: true
+        //
         font.bold: true
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -337,7 +337,7 @@ Rectangle {
         id: imageTextMenu
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        smooth: true
+        //
         asynchronous: true
         source: ""
     }
@@ -345,12 +345,12 @@ Rectangle {
     Rectangle {
         id: rectPrincipalListaMenu
         x: 0
-        y: 20
+        y: 30
         color: "#eceeee"
         radius: 6
         width: 1160
         height: 670
-        smooth: true
+        //
         border.color: "#a8a0a0"
 
         MouseArea {
@@ -362,7 +362,6 @@ Rectangle {
                 x: 192
                 y: 30
                 color: rectPrincipalListaMenu.color
-                smooth: true
                 visible: true
                 anchors.left: rectLineaVerticalMenuGris.right
                 anchors.leftMargin: 10
@@ -448,7 +447,7 @@ Rectangle {
                 y: 28
                 width: 1
                 color: "#ffffff"
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 28
                 anchors.bottom: parent.bottom
@@ -471,7 +470,7 @@ Rectangle {
                 anchors.leftMargin: 1
                 anchors.top: parent.top
                 anchors.topMargin: 28
-                smooth: true
+                //
                 rotation: 0
                 visible: true
             }
@@ -483,7 +482,7 @@ Rectangle {
                 width: 18
                 height: 18
                 z: 2
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -493,7 +492,7 @@ Rectangle {
 
                 onClic: {
 
-                    rectPrincipalAparecerYIn.stop()
+                 //   rectPrincipalAparecerYIn.stop()
                     rectPrincipalListaMenu.visible=false
                 }
             }
@@ -505,7 +504,7 @@ Rectangle {
                 width: 25
                 height: 25
                 color: rectPrincipalListaMenu.color
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: -12
                 rotation: 20
@@ -550,7 +549,7 @@ Rectangle {
 
 
                             text: nombreMenu
-                            smooth: true
+                            //
                             font.family: "Arial"
                             font.bold: false
                             Rectangle {
@@ -560,7 +559,7 @@ Rectangle {
                                 height: 19
                                 color: "#5358be"
                                 radius: 1
-                                smooth: true
+                                //
                                 anchors.top: parent.top
                                 border.color: "#000000"
                                 anchors.topMargin: -5
@@ -752,7 +751,7 @@ Rectangle {
                     }
                     Keys.onEscapePressed: {
 
-                        rectPrincipalAparecerYIn.stop()
+                       // rectPrincipalAparecerYIn.stop()
                         rectPrincipalListaMenu.visible=false
 
                     }
@@ -769,7 +768,7 @@ Rectangle {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 1
                 visible: true
@@ -787,7 +786,7 @@ Rectangle {
             y: 5
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -821,7 +820,7 @@ Rectangle {
             if(rectPrincipalListaMenu.visible==false){
                 listview1.forceActiveFocus()
                 rectPrincipalListaMenu.visible=true
-                rectPrincipalAparecerYIn.start();
+             //   rectPrincipalAparecerYIn.start();
 
             }else if(rectPrincipalListaMenu.visible){
 

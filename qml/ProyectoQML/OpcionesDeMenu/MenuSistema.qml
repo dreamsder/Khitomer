@@ -28,7 +28,7 @@ Rectangle {
     height: 500
     color: "#00000000"
     radius: 0
-    smooth: true
+    //
     Text {
         id: txtTituloMenuOpcion
         x: 560
@@ -43,7 +43,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
     Column {
@@ -59,7 +59,7 @@ Rectangle {
             color: "#2b2a2a"
             text: qsTr("Clase:  Ambassador")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 12
             font.bold: false
         }
@@ -70,7 +70,7 @@ Rectangle {
             color: "#2b2a2a"
             text: qsTr("Versión: "+ versionKhitomer + " - " + funcionesmysql.versionDeBaseDeDatos())
             font.family: "Arial"
-            smooth: true
+            //
             font.bold: false
             font.pixelSize: 12
         }
@@ -277,7 +277,7 @@ Rectangle {
             wrapMode: Text.NoWrap
             font.family: "Arial"
             font.bold: false
-            smooth: true
+            //
             font.pixelSize: 12
         }
 
@@ -286,7 +286,7 @@ Rectangle {
             id: txtTelefono
             color: "#2b2a2a"
             text: qsTr("Teléfono: (+598) 097225884")
-            smooth: true
+            //
             font.pixelSize: 12
             font.family: "Arial"
         }
@@ -296,7 +296,7 @@ Rectangle {
             id: txtWeb
             color: "#2b2a2a"
             text: qsTr("Sitio Web: www.khitomer-software.org")
-            smooth: true
+            //
             visible: false
             font.pixelSize: 12
             font.family: "Arial"
@@ -308,7 +308,7 @@ Rectangle {
             y: 2
             color: "#2b2a2a"
             text: qsTr("E-mail: ventas@dreamsder.com  -  info@dreamsder.com")
-            smooth: true
+            //
             visible: false
             font.pixelSize: 12
             font.family: "Arial"
@@ -321,7 +321,7 @@ Rectangle {
             text: qsTr("Licencia Pública General GNU versión 3")
             font.family: "Arial"
             font.bold: false
-            smooth: true
+            //
             font.pixelSize: 12
         }
         Text {
@@ -331,7 +331,7 @@ Rectangle {
             color: "#2b2a2a"
             text: qsTr("Impresora predeterminada:  "+funcionesmysql.impresoraPorDefecto())
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 12
         }
 
@@ -339,7 +339,7 @@ Rectangle {
             id: txtCreditos
             color: "#2b2a2a"
             text: "Contribuyentes: Maria Montano - mmontano@dreamsder.com\n                          Cristian Montano - cmontano@dreamsder.com\nLibreria XLS creada por: Yap Chun Wei - Martin Fuchs - Ami Castonguay - Long Wenbiao\nLibreria JSON creada por: Eeli Reilin\nLibreria base64 creada por: René Nyffenegger\nLibreria base64-NibbleAndAHalf creada por:  William Sherif\nLibreria CURL creada por:  Daniel Stenberg"
-            smooth: true
+            //
             font.pixelSize: 12
             font.family: "Arial"
         }
@@ -357,7 +357,7 @@ Rectangle {
         asynchronous: true
         anchors.right: parent.right
         anchors.rightMargin: 50
-        smooth: true
+        //
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Facebook.png"
 
         /*MouseArea {
@@ -394,7 +394,7 @@ Rectangle {
         height: 100
         opacity: 0.600
         asynchronous: true
-        smooth: true
+        //
        /* MouseArea {
             id: mouse_areaYouTube
             hoverEnabled: true
@@ -475,7 +475,7 @@ Rectangle {
         asynchronous: true
         anchors.right: parent.right
         anchors.rightMargin: 50
-        smooth: true
+        //
         opacity: 0.600
         source:
 
@@ -550,7 +550,7 @@ Rectangle {
         }
         anchors.bottom: parent.bottom
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Built_with_Qt_logo_RGB_vertical.png"
-        smooth: true
+        //
     }
 
 

@@ -45,7 +45,7 @@ Rectangle{
     clip: false
     border.width: 1
     border.color: "#bebbbb"
-    smooth: true
+    //
     opacity: 1
 
 
@@ -86,7 +86,7 @@ Rectangle{
         height: 19
         color: "#e9e8e9"
         clip: false
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 1
         anchors.top: parent.top
@@ -101,7 +101,7 @@ Rectangle{
             width: 80
             font.family: "Arial"
             opacity: 0.900
-            smooth: true
+            //
             font.pointSize: 10
             font.bold: true
             verticalAlignment: Text.AlignVCenter
@@ -160,7 +160,7 @@ Rectangle{
             horizontalAlignment: Text.AlignRight
             anchors.right: parent.right
             anchors.rightMargin: 30
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             style: Text.Normal
@@ -198,7 +198,7 @@ Rectangle{
             horizontalAlignment: Text.AlignRight
             style: Text.Normal
             opacity: 0.900
-            smooth: true
+            //
             anchors.topMargin: 1
             anchors.rightMargin: 30
         }
@@ -218,7 +218,7 @@ Rectangle{
         visible: false
         anchors.right: parent.right
         anchors.rightMargin: 15
-        smooth: true
+        //
     }
 
     MouseArea {
@@ -267,7 +267,7 @@ Rectangle{
         anchors.left: parent.left
         keyNavigationWraps: false
         interactive: false
-        smooth: true
+        //
         anchors.topMargin: 2
         model: modeloListasPreciosBusquedaInteligente
     }
@@ -373,7 +373,7 @@ Rectangle{
         anchors.left: txtArticulo.right
         anchors.leftMargin: 10
         anchors.verticalCenter: txtArticulo.verticalCenter
-        smooth: true
+        //
         font.family: "Arial"
         visible: false
         font.pixelSize: 12
@@ -390,7 +390,7 @@ Rectangle{
         clip: true
         rotation: 0
         visible: false
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.left: parent.left

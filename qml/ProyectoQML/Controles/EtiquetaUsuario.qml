@@ -27,10 +27,9 @@ Rectangle {
     width: txtNombreUsuarioLogueado.implicitWidth+20
     height: 25
     color: "#00000000"
-    smooth: true
+    //
     rotation: -90
     Keys.onEscapePressed: {
-        rectPrincipalComboBoxAparecerYIn.stop()
         rectPrincipalComboBox.visible=false
     }
 
@@ -57,7 +56,6 @@ Rectangle {
         }
     }
     function cerrarComboBox(){
-        rectPrincipalComboBoxAparecerYIn.stop()        
         rectPrincipalComboBox.visible=false
     }
 
@@ -77,7 +75,7 @@ Rectangle {
             color: "#2f2c2c"
             radius: 2
             z: 1
-            smooth: true
+            //
             anchors.rightMargin: 2
             anchors.leftMargin: 2
             anchors.bottomMargin: 2
@@ -93,7 +91,7 @@ Rectangle {
                 font.family: "Arial"
                 style: Text.Sunken
                 font.bold: true
-                smooth: true
+                //
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 verticalAlignment: Text.AlignVCenter
@@ -111,7 +109,6 @@ Rectangle {
                         if(!rectPrincipalComboBox.visible){
                             visibleComboBox=true
                             rectPrincipalComboBox.visible=true
-                            rectPrincipalComboBoxAparecerYIn.start();
                             txtContraseniaDeUsuarioActual.textoInputBox=""
                             txtContraseniaDeUsuarioNueva.textoInputBox=""
                             txtContraseniaDeUsuarioReingreso.textoInputBox=""
@@ -136,7 +133,7 @@ Rectangle {
             color: "#639559"
             anchors.left: parent.left
             anchors.leftMargin: (rectPrincipalEtiqueUsuario.width/2)+10
-            smooth: true
+            //
             rotation: -40
         }
 
@@ -150,14 +147,14 @@ Rectangle {
             anchors.right: parent.right
             anchors.rightMargin: (rectPrincipalEtiqueUsuario.width/2)+10
             rotation: -40
-            smooth: true
+            //
         }
     }
 
     Rectangle {
         id: rectPrincipalComboBox
         x: 0
-        y: 30
+        y: 39
         rotation: 90
         width: 300
         height: 242
@@ -182,7 +179,7 @@ Rectangle {
                 width: 18
                 height: 18
                 z: 4
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -216,7 +213,7 @@ Rectangle {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 visible: true
                 anchors.rightMargin: 1
@@ -235,7 +232,7 @@ Rectangle {
                 anchors.rightMargin: 0
                 anchors.left: parent.left
                 anchors.leftMargin: 10
-                smooth: true
+                //
                 echoMode: 2
                 largoMaximo: 25
                 textoDeFondo: "clave privada"
@@ -254,7 +251,7 @@ Rectangle {
                 height: 35
                 anchors.top: txtContraseniaDeUsuarioActual.bottom
                 anchors.topMargin: 24
-                smooth: true
+                //
                 echoMode: 2
                 anchors.rightMargin: 0
                 botonBorrarTextoVisible: true
@@ -274,7 +271,7 @@ Rectangle {
                 x: 6
                 y: 9
                 height: 35
-                smooth: true
+                //
                 anchors.top: txtContraseniaDeUsuarioNueva.bottom
                 anchors.topMargin: 5
                 echoMode: 2
@@ -341,7 +338,7 @@ Rectangle {
                 id: lblCambioDeContrasenia
                 text: qsTr("Cambio de contraseña:")
                 font.family: "Arial"
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 20
                 anchors.left: parent.left
@@ -351,12 +348,5 @@ Rectangle {
         }
 
     }
-    PropertyAnimation{
-        id:rectPrincipalComboBoxAparecerYIn
-        target: rectPrincipalComboBox
-        property: "y"
-        from:30
-        to: 39
-        duration: 200
-    }
+
 }

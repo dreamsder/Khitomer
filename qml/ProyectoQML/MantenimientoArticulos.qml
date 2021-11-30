@@ -33,7 +33,7 @@ Rectangle {
     height: 600
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
     property alias botonNuevoArticuloVisible: botonNuevoArticulo.visible
     property alias botonEliminarArticuloVisible: botonEliminarArticulo.visible
@@ -48,7 +48,7 @@ Rectangle {
         color: "#494747"
         radius: 8
         z: 2
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -404,7 +404,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.top: flow1.bottom
             anchors.topMargin: 50
             anchors.left: parent.left
@@ -438,7 +438,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
                 delegate:  ListaArticulos{}
                 model: modeloArticulos
 
@@ -460,7 +460,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
 
             }
@@ -479,7 +479,7 @@ Rectangle {
                 font.bold: false
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
             }
 
             Text {
@@ -493,7 +493,7 @@ Rectangle {
                 anchors.topMargin: 5
                 font.family: "Arial"
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
                 anchors.left: txtCantidadDeItemsTitulo.right
@@ -547,7 +547,7 @@ Rectangle {
                     0
                 }
             }
-            smooth: true
+            //
             anchors.bottom: btnCargarArticulosBatch.top
             anchors.bottomMargin: 10
             anchors.right: parent.right
@@ -575,7 +575,7 @@ Rectangle {
                 keyNavigationWraps: true
                 anchors.left: parent.left
                 interactive: true
-                smooth: true
+                //
                 anchors.topMargin: 25
                 anchors.rightMargin: 1
                 model: modeloArticulosCodigoDeBarras
@@ -592,7 +592,7 @@ Rectangle {
                     z: 1
                     opacity: 0.500
                     visible: true
-                    smooth: true
+                    //
                 }
             }
 
@@ -602,7 +602,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 font.family: "Arial"
-                smooth: true
+                //
                 font.pointSize: 10
                 font.bold: false
                 anchors.left: parent.left
@@ -723,7 +723,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasArticulos
-        smooth: true
+        //
         anchors.bottom: rectContenedorArticulos.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -1033,7 +1033,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 

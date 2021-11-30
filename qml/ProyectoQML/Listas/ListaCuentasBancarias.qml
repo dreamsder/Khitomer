@@ -32,7 +32,7 @@ Rectangle{
     color: "#e9e8e9"
     radius: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
 
@@ -41,7 +41,7 @@ Rectangle{
         text: numeroCuentaBancaria + " - "+descripcionCuentaBancaria + " - Banco: "+modeloListaBancos.retornaDescripcionBanco(codigoBanco)
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter

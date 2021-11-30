@@ -34,7 +34,7 @@ Rectangle {
     color: "#ffffff"
     radius: 8
     visible: true
-    smooth: true
+    //
 
 
     property alias codigoClienteInputMask: cbCodigoClienteCuentaCorriente.inputMask
@@ -331,7 +331,7 @@ Rectangle {
         color: "#484646"
         radius: 8
         z: 2
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -524,7 +524,7 @@ Rectangle {
             font.underline: false
             font.italic: false
             style: Text.Raised
-            smooth: true
+            //
             font.pixelSize: 17
             font.bold: true
             horizontalAlignment: Text.AlignLeft
@@ -543,7 +543,7 @@ Rectangle {
                 }
             }
             radius: 3
-            smooth: true
+            //
             anchors.top: lblRazonSocialClienteEnCuentaCorriente.bottom
             anchors.topMargin: 15
             anchors.left: parent.left
@@ -574,7 +574,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
                 delegate:  ListaDocumentosCuentaCorriente{
                     id:delegadas
 
@@ -605,7 +605,7 @@ Rectangle {
                         }
                     }
 
-                    smooth: true
+                    //
                 }
             }
         }
@@ -657,7 +657,7 @@ Rectangle {
                     }
                 }
                 keyNavigationWraps: true
-                smooth: true
+                //
                 highlightRangeMode: ListView.NoHighlightRange
 
 
@@ -679,7 +679,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
 
             }
@@ -687,7 +687,7 @@ Rectangle {
             anchors.leftMargin: 120
             anchors.topMargin: 15
             anchors.bottom: parent.bottom
-            smooth: true
+            //
             anchors.top: lblRazonSocialClienteEnCuentaCorriente.bottom
 
 
@@ -796,7 +796,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasCuentaCorriente
-        smooth: true
+        //
         anchors.bottom: rectContenedorCuentaCorriente.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -853,7 +853,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 

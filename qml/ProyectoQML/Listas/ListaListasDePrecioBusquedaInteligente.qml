@@ -30,7 +30,7 @@ Rectangle{
     height: 16
     color: "#00000000"
     radius: 0
-    smooth: true
+    //
     opacity: 1
 
     property string  codigoDeArticulos: "0"
@@ -40,7 +40,7 @@ Rectangle{
         id:lblListasDePrecio
         color: "#201c1c"
         text: descripcionListaPrecio + ":   "+modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaCodigoMoneda(codigoDeArticulos))+" "+precioArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
-        smooth: true
+        //
         font.bold: false
         verticalAlignment: Text.AlignVCenter
         anchors.left: parent.left

@@ -29,7 +29,7 @@ import QtQuick 1.1
         color: "#be231919"
         visible: true
         anchors.fill: parent
-        smooth: true
+        //
         z: 8
 
 
@@ -77,7 +77,7 @@ import QtQuick 1.1
                 clip: true
                 visible: true
                 border.color: "#1d7195"
-                smooth: true
+                //
                 anchors.horizontalCenter: parent.horizontalCenter
                 Text {
                     id: lblTitulo
@@ -197,7 +197,7 @@ import QtQuick 1.1
                     anchors.leftMargin: 30
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
-                    smooth: true
+                    //
                     font.pixelSize: 15
                     visible: false
                     styleColor: "#ffffff"

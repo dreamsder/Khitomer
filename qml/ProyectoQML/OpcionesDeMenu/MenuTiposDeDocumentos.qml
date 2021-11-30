@@ -29,7 +29,7 @@ Rectangle {
     width: 800
     height: 700
     color: "#00000000"
-    smooth: true
+    //
 
     function serearPermisos(){
 
@@ -116,7 +116,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -126,7 +126,7 @@ Rectangle {
         height: 30
         anchors.top: parent.top
         anchors.topMargin: 20
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevoDocumento
@@ -407,7 +407,7 @@ Rectangle {
             color: "#d93e3e"
             text: qsTr("Información:")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -426,7 +426,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -442,7 +442,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0
@@ -465,7 +465,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        smooth: true
+        //
         ListView {
             id: listaDeTiposDeDocumentos
             clip: true
@@ -484,7 +484,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloListaTipoDocumentosMantenimiento
@@ -501,7 +501,7 @@ Rectangle {
                 z: 1
                 opacity: 0.500
                 visible: true
-                smooth: true
+                //
             }
         }
 
@@ -601,7 +601,7 @@ Rectangle {
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
                     clip: false
-                    smooth: true
+                    //
 
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco1
@@ -611,7 +611,7 @@ Rectangle {
                         color: "#ffffff"
                         anchors.right: parent.right
                         anchors.rightMargin: 6
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -630,7 +630,7 @@ Rectangle {
                         color: "#abb2b1"
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -645,7 +645,7 @@ Rectangle {
                         text: qsTr("configuración general del documento")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -753,7 +753,7 @@ Rectangle {
                         anchors.rightMargin: 30
                         anchors.left: parent.left
                         anchors.leftMargin: 30
-                        smooth: true
+                        //
                     }
 
                     Rectangle {
@@ -762,7 +762,7 @@ Rectangle {
                         y: 0
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: text3.bottom
                         anchors.topMargin: 16
                         anchors.rightMargin: 30
@@ -777,7 +777,7 @@ Rectangle {
                     width: 530
                     height: rectSolapaTipoDocumentos.height
                     color: "#a6a4ea"
-                    smooth: true
+                    //
 
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco2
@@ -785,7 +785,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -804,7 +804,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -829,7 +829,7 @@ Rectangle {
                         anchors.leftMargin: 10
                         anchors.top: parent.top
                         anchors.topMargin: 16
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         font.italic: false
                         font.bold: true
@@ -886,7 +886,7 @@ Rectangle {
                         x: 4
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbpermiteBuscarClientesYProveedores.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -900,7 +900,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle5.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -915,14 +915,14 @@ Rectangle {
                     width: 600
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco4
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -939,7 +939,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -956,7 +956,7 @@ Rectangle {
                         text: qsTr("artículos")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1118,7 +1118,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbPermitIngresoDeArticulosTipoDocumentos.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1132,7 +1132,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle9.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1147,14 +1147,14 @@ Rectangle {
                     width: 450
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco5
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1171,7 +1171,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1188,7 +1188,7 @@ Rectangle {
                         text: qsTr("medios de pago")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1251,7 +1251,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbIngresoMedioDePago.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1265,7 +1265,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle11.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1280,14 +1280,14 @@ Rectangle {
                     width: 550
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco6
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1304,7 +1304,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1321,7 +1321,7 @@ Rectangle {
                         text: qsTr("total del documento")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1446,7 +1446,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbUtilizaTotalesTipoDocumento.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1460,7 +1460,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle13.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1476,14 +1476,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco8
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1500,7 +1500,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1515,7 +1515,7 @@ Rectangle {
                         id: text9
                         color: "#fdfdfd"
                         text: qsTr("impresión")
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1613,7 +1613,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbEmitenEnImpresoras.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1627,7 +1627,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle17.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1642,14 +1642,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco7
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1666,7 +1666,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1682,7 +1682,7 @@ Rectangle {
                         color: "#fdfdfd"
                         text: qsTr("cuentas corrientes")
                         styleColor: "#8d8b8b"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1776,7 +1776,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: text8.bottom
                         anchors.topMargin: 15
                         anchors.rightMargin: 30
@@ -1790,7 +1790,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle15.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1805,14 +1805,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaTipoDocumentos.height
                     color: "#a4a4ea"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco9
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1829,7 +1829,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1844,7 +1844,7 @@ Rectangle {
                         id: text10
                         color: "#fdfdfd"
                         text: qsTr("cuentas bancarias")
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1922,7 +1922,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: chbUtilizaCuentasBancarias.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1936,7 +1936,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle19.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1954,7 +1954,7 @@ Rectangle {
             height: 10
             x:flickable1.visibleArea.xPosition * flickable1.width+5
             color: "#000000"
-            smooth: true
+            //
             opacity: 0.500
             radius: 2
             anchors.bottom: flickable1.top

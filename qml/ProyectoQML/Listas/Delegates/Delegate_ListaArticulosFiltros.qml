@@ -53,7 +53,7 @@ FocusScope {
             text: descripcionArticulo
             font.family: "Arial"
             clip: false
-            smooth: true
+            //
 
             onActiveFocusChanged: {
 
@@ -98,7 +98,7 @@ FocusScope {
                 height: 19
                 color: "#5358be"
                 radius: 1
-                smooth: true
+                //
                 anchors.top: parent.top
                 border.color: "#000000"
                 anchors.topMargin: -3
@@ -188,7 +188,7 @@ FocusScope {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             horizontalAlignment: Text.AlignLeft
-            smooth: true
+            //
             clip: false
             color: "#d93e3e"
             font.pointSize: 10
@@ -202,7 +202,7 @@ FocusScope {
             text: "Stock previsto: "+modeloArticulos.retornaStockTotalArticulo(codigoArticulo)
             anchors.right: parent.right
             anchors.rightMargin: 20
-            smooth: true
+            //
             clip: false
             anchors.bottom: parent.bottom
             visible: true

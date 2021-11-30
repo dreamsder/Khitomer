@@ -28,7 +28,7 @@ Rectangle {
     color: "#be231919"
     visible: true
     anchors.fill: parent
-    smooth: true
+    //
     z: 8
 
     property string _codigoTipoDocumentoSeleccionado: "0"
@@ -120,7 +120,7 @@ Rectangle {
             highlightFollowsCurrentItem: true
             anchors.leftMargin: 35
             spacing: 1
-            smooth: true
+            //
             anchors.topMargin: 50
             snapMode: ListView.NoSnap
             flickableDirection: Flickable.VerticalFlick
@@ -143,7 +143,7 @@ Rectangle {
                                     }
                                 }
                 anchors.right: listaDeTipoDocumentosParaDevoluciones.right
-                smooth: true
+                //
                 z: 1
             }
             }

@@ -27,7 +27,6 @@ Rectangle {
     height: 16
     color: "#00000000"
     clip: true
-    smooth: true
 
     property alias imagen: image1.source
     property double opacidad: 0.600
@@ -43,14 +42,12 @@ Rectangle {
         opacity: opacidad
         visible: true
         asynchronous: true
-        smooth: true
         anchors.fill: parent
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Mas.png"
     }
 
     MouseArea {
         id: mouse_area1
-        smooth: true
         anchors.fill: parent
         hoverEnabled: true
         z: 1

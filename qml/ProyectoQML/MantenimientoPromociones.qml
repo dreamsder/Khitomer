@@ -31,7 +31,7 @@ Rectangle {
     color: "#ffffff"
     radius: 8
     visible: true
-    smooth: true
+    //
 
 
     Rectangle {
@@ -41,7 +41,7 @@ Rectangle {
         color: "#484646"
         radius: 8
         z: 2
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -174,7 +174,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.top: flow1.bottom
             anchors.topMargin: 50
             anchors.left: parent.left
@@ -209,7 +209,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
                 delegate:  ListaDocumentos{}
                 model: modeloDocumentosMantenimiento
 
@@ -231,7 +231,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
             }
 
@@ -248,7 +248,7 @@ Rectangle {
                 font.bold: false
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
             }
 
             Text {
@@ -261,7 +261,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
                 anchors.left: lblCantidadDeDocumentosFiltrados.right
@@ -282,7 +282,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "# Doc. interno"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -301,7 +301,7 @@ Rectangle {
                     y: 0
                     width: 2
                     color: "#C4C4C6"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -318,7 +318,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "Razón social"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -338,7 +338,7 @@ Rectangle {
                     y: -4
                     width: 2
                     color: "#C4C4C6"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -353,7 +353,7 @@ Rectangle {
                     y: -7
                     width: 2
                     color: "#C4C4C6"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -370,7 +370,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "# CFE"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -392,7 +392,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "Nombre"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -458,7 +458,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasPromociones
-        smooth: true
+        //
         anchors.bottom: rectContenedorPromociones.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -552,7 +552,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 

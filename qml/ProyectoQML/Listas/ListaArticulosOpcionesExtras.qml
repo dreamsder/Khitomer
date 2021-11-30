@@ -38,7 +38,7 @@ Rectangle{
         id:txtItemArticulo
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter

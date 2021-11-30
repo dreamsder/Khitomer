@@ -28,7 +28,7 @@ import "../Listas"
         id: rectMantenimientoBatch
         color: "#be251a1a"
         anchors.fill: parent
-        smooth: true
+        //
         z: 8
 
 
@@ -55,7 +55,7 @@ import "../Listas"
                         color: "#1e7597"
                     }
                 }
-                smooth: true
+                //
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 focus: false
@@ -68,7 +68,7 @@ import "../Listas"
                     text: qsTr("carga de clientes desde archivo")
                     anchors.left: parent.left
                     anchors.leftMargin: 20
-                    smooth: true
+                    //
                     font.pixelSize: 25
                     anchors.top: parent.top
                     anchors.topMargin: 10
@@ -99,7 +99,7 @@ import "../Listas"
                     anchors.leftMargin: 30
                     font.bold: true
                     font.family: "Arial"
-                    smooth: true
+                    //
                     font.pixelSize: 12
                 }
 
@@ -109,7 +109,7 @@ import "../Listas"
                     y: 1
                     color: "#ffffff"
                     text: qsTr("* Se informarán los registros que no se cargaron exitosamente.")
-                    smooth: true
+                    //
                     font.pixelSize: 12
                     anchors.top: lblCantidadDeRegistrosACargar.bottom
                     anchors.topMargin: 10
@@ -125,7 +125,7 @@ import "../Listas"
                     y: 0
                     color: "#ffffff"
                     text: qsTr("* El archivo a cargar es: ")
-                    smooth: true
+                    //
                     font.pixelSize: 12
                     anchors.top: lblSeInformara.bottom
                     anchors.topMargin: 10
@@ -141,7 +141,7 @@ import "../Listas"
                     y: 2
                     color: "#ffffff"
                     text: qsTr("* Ubicado en:")
-                    smooth: true
+                    //
                     font.pixelSize: 12
                     anchors.top: lblNombreArchivoBatch.bottom
                     anchors.topMargin: 10
@@ -158,7 +158,7 @@ import "../Listas"
                     color: "#c4c4c6"
                     radius: 3
                     clip: true
-                    smooth: true
+                    //
                     ListView {
                         id: listaDeItemsSinCargar
                         highlightRangeMode: ListView.NoHighlightRange
@@ -182,7 +182,7 @@ import "../Listas"
                             height: listaDeItemsSinCargar.visibleArea.heightRatio * listaDeItemsSinCargar.height+18
                             color: "#000000"
                             radius: 2
-                            smooth: true
+                            //
                             anchors.rightMargin: 4
                             visible: true
                             z: 1
@@ -192,7 +192,7 @@ import "../Listas"
                         keyNavigationWraps: true
                         anchors.left: parent.left
                         interactive: true
-                        smooth: true
+                        //
                         anchors.topMargin: 25
                         anchors.rightMargin: 1
                         model: modeloListaPerfiles

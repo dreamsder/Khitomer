@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property double totalidad: parseFloat(precioTotalVenta)
@@ -46,7 +46,7 @@ Rectangle{
         text:codigoDocumento
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -151,7 +151,7 @@ Rectangle{
             y: -15
             width: 190
             font.bold: false
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtTotalDocumento.implicitHeight
@@ -165,7 +165,7 @@ Rectangle{
             height: txtEstadoDocumento.implicitHeight
             text: qsTr("Estado:  "+descripcionEstadoDocumento)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
             width: 250
@@ -190,7 +190,7 @@ Rectangle{
             id: txtFechaDocumentoEmitido
             width: 150
             font.bold: false
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtFechaDocumentoEmitido.implicitHeight
@@ -240,7 +240,7 @@ Rectangle{
         width: 2
         height: 20
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.leftMargin: 40
@@ -268,7 +268,7 @@ Rectangle{
 
         font.family: "Arial"
         horizontalAlignment: Text.AlignHCenter
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: false
@@ -285,7 +285,7 @@ Rectangle{
         width: 2
         height: 20
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.leftMargin: 10
@@ -302,7 +302,7 @@ Rectangle{
         clip: true
         font.family: "Arial"
         horizontalAlignment: Text.AlignLeft
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: false
@@ -319,7 +319,7 @@ Rectangle{
         width: 2
         height: 20
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.leftMargin: 10
@@ -336,7 +336,7 @@ Rectangle{
         clip: true
         font.family: "Arial"
         horizontalAlignment: Text.AlignLeft
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: false
@@ -372,7 +372,7 @@ Rectangle{
         anchors.bottomMargin: 5
         anchors.right: imgEsDocumentoWeb.left
         anchors.rightMargin: 5
-        smooth: true
+        //
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/IconCFE.png"
     }
 
@@ -402,7 +402,7 @@ Rectangle{
         anchors.bottomMargin: 5
         anchors.right: parent.right
         anchors.rightMargin: 15
-        smooth: true
+        //
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/ClienteWeb.png"
     }
 
@@ -423,7 +423,7 @@ Rectangle{
         clip: true
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
-        smooth: true
+        //
         font.pixelSize: 11
         font.family: "Arial"
         opacity: 0.500

@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property double montoDeuda: parseFloat(montoDeLaDeuda)
@@ -85,7 +85,7 @@ Rectangle{
         text: modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(codigoTipoDocumento)+"("+numeroFactura+") - "+fechaFactura
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -163,7 +163,7 @@ Rectangle{
         font.family: "Arial"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 30
         horizontalAlignment: Text.AlignRight
@@ -181,7 +181,7 @@ Rectangle{
         color: "#4a68b5"
         text: simboloMoneda
         font.family: "Arial"
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.rightMargin: 10
         anchors.bottomMargin: 2
@@ -220,14 +220,14 @@ Rectangle{
         font.family: "Arial"
         font.pointSize: 10
         font.bold: false
-        smooth: true
+        //
     }
 
    /* Text {
         id: txtFechaFactura
         color: "#212121"
         text: "Fecha doc: "+fechaDocumento
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         font.bold: false

@@ -41,7 +41,7 @@ Rectangle{
         opacity: 0.900
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -105,7 +105,7 @@ Rectangle{
         anchors.bottomMargin: 0
         anchors.left: mousearea1.right
         anchors.leftMargin: 5
-        smooth: true
+        //
         font.bold: true
         font.pixelSize: 10
 

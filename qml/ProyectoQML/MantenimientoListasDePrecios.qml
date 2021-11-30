@@ -32,7 +32,7 @@ Rectangle {
     height: 500
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
     property int codigoDeLiquidacion: 0
     property string codigoArticuloEnOpcionesExtras :""
@@ -89,7 +89,7 @@ Rectangle {
         color: "#494747"
         radius: 8
         z: 1
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -238,7 +238,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.top: flow1.bottom
             anchors.topMargin: 35
             anchors.left: parent.left
@@ -270,7 +270,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
 
                 delegate:  ListaListasDePrecios{}
                 model: modeloListasPrecios
@@ -293,7 +293,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
 
             }
@@ -308,7 +308,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
                 anchors.left: txtCantidadDeItemsTitulo.right
@@ -327,7 +327,7 @@ Rectangle {
                 font.bold: false
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
             }
 
             BotonBarraDeHerramientas {
@@ -378,7 +378,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.left: rectListasDePrecio.right
             anchors.leftMargin: 10
             anchors.right: parent.right
@@ -410,7 +410,7 @@ Rectangle {
                         false
                     }
                 }
-                smooth: true
+                //
                 anchors.topMargin: 48
                 anchors.rightMargin: 1
 
@@ -437,7 +437,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
 
             }
@@ -719,7 +719,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasListaDePrecios
-        smooth: true
+        //
         anchors.bottom: rectContenedorListasDePrecios.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -959,7 +959,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 
@@ -1031,7 +1031,7 @@ Rectangle {
         color: rectColorBarraHerramientas.color
         radius: 2
         visible: true
-        smooth: true
+        //
         anchors.left: parent.left
         anchors.leftMargin: -515
         anchors.bottom: parent.bottom
@@ -1058,7 +1058,7 @@ Rectangle {
             x: 333
             width: 17
             color: rectColorBarraHerramientas.color
-            smooth: true
+            //
             opacity: 0.300
             anchors.right: parent.right
             anchors.rightMargin: -12
@@ -1218,7 +1218,7 @@ Rectangle {
                 color: "#64b7b6b6"
                 radius: 3
                 clip: true
-                smooth: true
+                //
                 z: 2
                 anchors.top: flowOpcionesExtras.bottom
                 anchors.topMargin: 30
@@ -1246,7 +1246,7 @@ Rectangle {
                     keyNavigationWraps: true
                     anchors.left: parent.left
                     interactive: true
-                    smooth: true
+                    //
                     anchors.topMargin: 68
                     anchors.rightMargin: 1
                     model: modeloArticulosOpcionesExtra
@@ -1264,7 +1264,7 @@ Rectangle {
                         z: 1
                         opacity: 0.500
                         visible: true
-                        smooth: true
+                        //
 
 
                     }
@@ -1326,7 +1326,7 @@ Rectangle {
                     anchors.top: parent.top
                     anchors.topMargin: 20
                     verticalAlignment: Text.AlignVCenter
-                    smooth: true
+                    //
                     font.pointSize: 10
                     anchors.right: txtPrecioArticuloParaLista1.left
                     anchors.rightMargin: 5
@@ -1403,7 +1403,7 @@ Rectangle {
         width: 450
         color: "#372f42"
         radius: 2
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: -68
         Keys.onEscapePressed: {
@@ -1424,7 +1424,7 @@ Rectangle {
             x: 333
             width: 17
             color: "#372f42"
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.bottom: parent.bottom
@@ -1625,7 +1625,7 @@ Rectangle {
 
             Flow {
                 id: rowBarraDeHerramientasListaDePrecios1
-                smooth: true
+                //
                 spacing: 15
                 height: rowBarraDeHerramientasListaDePrecios1.implicitHeight
                 anchors.top: txtTituloOpcionesExtras1.bottom
@@ -1691,7 +1691,7 @@ Rectangle {
                     y: 7
                     color: "#d93e3e"
                     text: qsTr("Información:")
-                    smooth: true
+                    //
                     font.pixelSize: 14
                     style: Text.Normal
                     visible: false
@@ -1966,7 +1966,7 @@ Rectangle {
                 color: "#64b7b6b6"
                 radius: 3
                 clip: true
-                smooth: true
+                //
                 anchors.top: flow2.bottom
                 anchors.topMargin: 10
                 ListView {
@@ -1993,7 +1993,7 @@ Rectangle {
                         height: listaArticulosACambiarPrecioOpcionesExtra.visibleArea.heightRatio * listaArticulosACambiarPrecioOpcionesExtra.height+18
                         color: "#000000"
                         radius: 2
-                        smooth: true
+                        //
                         anchors.rightMargin: 4
                         visible: true
                         z: 1
@@ -2003,7 +2003,7 @@ Rectangle {
                     keyNavigationWraps: true
                     anchors.left: parent.left
                     interactive: true
-                    smooth: true
+                    //
                     anchors.topMargin: 70
                     anchors.rightMargin: 1
                     model: modeloArticulosACambiarDePrecio

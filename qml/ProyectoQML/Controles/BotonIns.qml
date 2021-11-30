@@ -27,7 +27,7 @@ Rectangle {
 
     height: 32
     color: "#00000000"
-    smooth: true
+    //
 
 
     property alias textoBoton: txtTextoBoton.text
@@ -99,14 +99,14 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.bold: false
-        smooth: true
+        //
         font.pixelSize: 14
     }
 
     MouseArea {
         id: mouseAreaBoton
         hoverEnabled: true
-        smooth: true
+        //
         anchors.fill: parent
         onEntered: {
             if(!estaPrecionado)
@@ -138,7 +138,6 @@ Rectangle {
         id: rectangle2
         color: "#f1f1f0"
         radius: 4
-        smooth: true
         border.width: 1
         border.color: "#d1d0d0"
         opacity: 0
@@ -155,7 +154,6 @@ Rectangle {
             anchors.bottomMargin: 1
             anchors.topMargin: 2
             border.color: "#ffffff"
-            smooth: true
             anchors.fill: parent
         }
     }

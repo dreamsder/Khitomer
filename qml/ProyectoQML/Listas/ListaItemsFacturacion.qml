@@ -59,7 +59,7 @@ Rectangle{
         width: 70
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -141,7 +141,7 @@ Rectangle{
         anchors.bottomMargin: 0
         anchors.left: mousearea1.right
         anchors.leftMargin: 5
-        smooth: true
+        //
         font.bold: true
         font.pixelSize: 10
         visible: activo
@@ -180,7 +180,7 @@ Rectangle{
         color: "#C4C4C6"
         anchors.left: txtItemCodigoArticuloFacturacion.right
         anchors.leftMargin: 10
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -211,7 +211,7 @@ Rectangle{
         text: descripcionArticulo
         font.family: "Arial"
         clip: true
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -232,7 +232,7 @@ Rectangle{
         font.family: "Arial"
         visible: descripcionArticuloExtendido=="" ? false : true
         clip: true
-        smooth: true
+        //
         //anchors.top: parent.bottom
         // anchors.topMargin: 2
         anchors.bottom: parent.bottom
@@ -257,7 +257,7 @@ Rectangle{
             }
         }
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -279,7 +279,7 @@ Rectangle{
         y: -7
         width: 2
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -298,7 +298,7 @@ Rectangle{
         font.family: "Arial"
         anchors.right: parent.right
         anchors.rightMargin: 74
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -316,7 +316,7 @@ Rectangle{
         y: -7
         width: 2
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -341,7 +341,7 @@ Rectangle{
         clip: true
         font.family: "Arial"
         horizontalAlignment: Text.AlignHCenter
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -381,7 +381,7 @@ Rectangle{
         text: cantidadItems
         horizontalAlignment: Text.AlignRight
         font.family: "Arial"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -399,7 +399,7 @@ Rectangle{
         y: 0
         width: 2
         color: "#C4C4C6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -420,13 +420,13 @@ Rectangle{
         anchors.left: rectLineaSeparacion3.right
         anchors.leftMargin: 3
         anchors.verticalCenter: parent.verticalCenter
-        smooth: true
+        //
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Mas.png"
         visible: txtCantidadArticulosFacturacion.visible
         MouseArea {
             id: mouse_area2
             clip: true
-            smooth: true
+            //
             anchors.fill: parent
             visible: activo
             onClicked: {
@@ -477,13 +477,13 @@ Rectangle{
         anchors.leftMargin: 2
         asynchronous: true
         anchors.verticalCenter: parent.verticalCenter
-        smooth: true
+        //
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Menos.png"
         visible: txtCantidadArticulosFacturacion.visible
 
         MouseArea {
             id: mouse_area3
-            smooth: true
+            //
             clip: true
             visible: activo
             anchors.fill: parent
@@ -524,7 +524,7 @@ Rectangle{
         text: precioArticulo
         anchors.left: rectLineaSeparacion5.right
         anchors.leftMargin: 10
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -543,7 +543,7 @@ Rectangle{
         y: -4
         width: 2
         color: "#c4c4c6"
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -559,7 +559,7 @@ Rectangle{
         color: "#212121"
         text: costoArticuloMonedaReferencia
         verticalAlignment: Text.AlignVCenter
-        smooth: true
+        //
         font.pointSize: 10
         horizontalAlignment: Text.AlignRight
         font.bold: false
@@ -593,7 +593,7 @@ Rectangle{
         anchors.bottomMargin: 0
         anchors.topMargin: 0
         anchors.left: txtItemPrecioMonedaReferenciaFacturacion.right
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         visible: txtItemPrecioMonedaReferenciaFacturacion.visible

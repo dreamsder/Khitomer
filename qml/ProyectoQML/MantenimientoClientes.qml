@@ -29,7 +29,7 @@ Rectangle {
     height: 600
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
     property alias botonNuevoClienteVisible: botonNuevoCliente.visible
     property alias botonEliminarClienteVisible: botonEliminarCliente.visible
@@ -98,7 +98,7 @@ Rectangle {
         color: "#494747"
         radius: 8
         z: 2
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -721,7 +721,7 @@ Rectangle {
             color: "#C4C4C6"
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.top: flow1.bottom
             anchors.topMargin: 50
             anchors.left: parent.left
@@ -749,7 +749,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
 
                 delegate:  ListaClientes{}
                 model: modeloClientes
@@ -768,7 +768,7 @@ Rectangle {
                     z: 1
                     opacity: 0.500
                     visible: true
-                    smooth: true
+                    //
                 }
 
             }
@@ -784,7 +784,7 @@ Rectangle {
                 anchors.topMargin: 5
                 font.family: "Arial"
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
                 anchors.left: txtCantidadDeItemsTitulo.right
@@ -804,7 +804,7 @@ Rectangle {
                 font.bold: false
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
             }
 
             BotonBarraDeHerramientas {
@@ -950,7 +950,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientas
-        smooth: true
+        //
         anchors.bottom: rectContenedor.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -1372,7 +1372,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 

@@ -28,7 +28,6 @@ Item {
     id: itemBotonLateralBusquedas
     width: 40
     height: 40
-    smooth: false
 
     onZChanged: {
 
@@ -61,7 +60,7 @@ Item {
             anchors.fill: parent
             opacity: 0.15
             color: "red"
-            smooth: true
+            //
             anchors.rightMargin: 2
             anchors.leftMargin: 2
             anchors.bottomMargin: 2
@@ -173,7 +172,7 @@ Item {
         radius: 6
         opacity: 1
         z: 3
-        smooth: true
+        //
         Text {
             id: toolTipText
             color: "#fdfbfb"
@@ -182,7 +181,7 @@ Item {
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.fill: parent
-            smooth: true
+            //
             visible: true
         }
 
@@ -213,7 +212,7 @@ Item {
         clip: true
         anchors.top: parent.top
         anchors.topMargin: -6
-        smooth: true
+        //
         border.color: "#a8a0a0"
 
 
@@ -230,7 +229,7 @@ Item {
                 y: 10
                 width: 18
                 height: 18
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -247,7 +246,7 @@ Item {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 1
                 visible: true
@@ -516,7 +515,7 @@ Item {
                 horizontalAlignment: TextEdit.AlignLeft
                 anchors.right: parent.right
                 anchors.rightMargin: 40
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 10
                 activeFocusOnPress: false
@@ -554,7 +553,7 @@ Item {
                     height: listaResultadoBusquedaInteligenteArticulos.visibleArea.heightRatio * listaResultadoBusquedaInteligenteArticulos.height+18
                     color: "#000000"
                     radius: 2
-                    smooth: true
+                    //
                     anchors.rightMargin: 4
                     visible: true
                     z: 1
@@ -564,7 +563,7 @@ Item {
                 keyNavigationWraps: true
                 anchors.left: parent.left
                 interactive: true
-                smooth: true
+                //
                 anchors.topMargin: 40
                 anchors.rightMargin: 5
             }
@@ -585,7 +584,7 @@ Item {
                     color: "#000000"
                     radius: 2
                     z: 1
-                    smooth: true
+                    //
                     anchors.right: listaResultadoBusquedaInteligenteClientes.right
                     anchors.rightMargin: 4
                     opacity: 0.5
@@ -606,7 +605,7 @@ Item {
                 interactive: true
                 anchors.bottomMargin: 15
                 snapMode: ListView.NoSnap
-                smooth: true
+                //
             }
 
             ListView {
@@ -624,7 +623,7 @@ Item {
                     color: "#000000"
                     radius: 2
                     z: 1
-                    smooth: true
+                    //
                     anchors.right: listaResultadoBusquedaInteligenteProveedores.right
                     anchors.rightMargin: 4
                     opacity: 0.5
@@ -646,7 +645,7 @@ Item {
                 visible: false
                 anchors.bottomMargin: 15
                 snapMode: ListView.NoSnap
-                smooth: true
+                //
             }
 
             CheckBox {
@@ -698,7 +697,7 @@ Item {
         color: rectPrincipalBusqueda.color
         anchors.right: rectPrincipalBusqueda.left
         anchors.rightMargin: -14
-        smooth: true
+        //
         rotation: 45
         z: 2003
         visible: rectPrincipalBusqueda.visible

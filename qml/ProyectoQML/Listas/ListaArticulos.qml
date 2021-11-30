@@ -26,14 +26,14 @@ import "../Controles"
 
 Rectangle{
     id: rectListaItem
-   // width: parent.width
-    width: 1524
+    width: parent.width
+    //width: 1524
     height: 52
     color: "#e9e8e9"
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property double precioArticuloListaGenerica : parseFloat(modeloListaPrecioArticulos.retornarPrecioDeArticuloEnBaseDeDatos(codigoArticulo,"1"))
@@ -48,7 +48,7 @@ Rectangle{
         text: descripcionArticulo
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter
@@ -146,7 +146,7 @@ Rectangle{
         height: 1
         color: "#975f5f"
         visible: false
-        smooth: true
+        //
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
@@ -178,7 +178,7 @@ Rectangle{
             width: 210
             text: qsTr("Codigo:  "+codigoArticulo)
             font.family: "Arial"
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtCodigoArticuloEnLista.implicitHeight
@@ -190,7 +190,7 @@ Rectangle{
             height: txtNombreProveedorEnLista.implicitHeight
             text: qsTr("Proveedor:  "+modeloListaProveedor.primerRegistroDeProveedorNombreEnBase(codigoProveedor)+" ("+codigoProveedor+")")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
             width: 270
@@ -203,7 +203,7 @@ Rectangle{
             height: txtStockArticuloEnListaPrevisto.implicitHeight
             text: qsTr("Stock previsto:  "+modeloArticulos.retornaStockTotalArticulo(codigoArticulo))
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -216,7 +216,7 @@ Rectangle{
             height: txtStockArticuloEnListaReal.implicitHeight
             text: qsTr("Stock real:  "+modeloArticulos.retornaStockTotalArticuloReal(codigoArticulo))
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -227,7 +227,7 @@ Rectangle{
             height: txtPrecioArticuloEnListaGenerica.implicitHeight
             text: qsTr("Precio generico:  "+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(codigoArticulo))+"   " +precioArticuloListaGenerica.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))   )
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -238,7 +238,7 @@ Rectangle{
             height: txtCostoEnMonedaExtrangera.implicitHeight
             text: qsTr("Costo en origen:  "+simboloCostoMonedaExtrangeraArticulo+"   "+costoMonedaExtrangeraArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
             color: txtCodigoArticuloEnLista.color
@@ -249,7 +249,7 @@ Rectangle{
             height: txtCostoEnMonedaReferencia.implicitHeight
             text: qsTr("Costo en moneda referencia:  "+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaMonedaReferenciaSistema())+"   " +costoMonedaReferenciaArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
             color: txtCodigoArticuloEnLista.color

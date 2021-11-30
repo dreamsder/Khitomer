@@ -28,7 +28,7 @@ Rectangle {
     width: 30
     height: 30
     color: "#00000000"
-    smooth: true
+    //
 
 
     property alias textoBoton: txtTextoAdvertencia.text
@@ -38,7 +38,7 @@ Rectangle {
     Image {
         id: imgIconoAdvertencia
         opacity: 1
-        smooth: true
+        //
         anchors.fill: parent
         asynchronous: true
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Advertencia.png"
@@ -50,7 +50,7 @@ Rectangle {
         height: txtTextoAdvertencia.implicitHeight+1
         color: "#64716c6c"
         radius: 3
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.right: parent.right
@@ -71,7 +71,7 @@ Rectangle {
             opacity: 1
             visible: true
             horizontalAlignment: Text.AlignHCenter
-            smooth: true
+            //
             font.family: "Arial"
             font.bold: true
             z: 1

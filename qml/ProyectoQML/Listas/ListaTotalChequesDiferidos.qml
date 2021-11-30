@@ -30,7 +30,7 @@ Rectangle{
     height: 16
     color: "#9294c6"
     radius: 0
-    smooth: true
+    //
     opacity: 1
     property double totalidad: parseFloat(importeTotalChequesDiferidos)
     property string textoLabel: "Total cheques diferidos "
@@ -39,7 +39,7 @@ Rectangle{
         id:lblTotalChequesDiferidos
         color: "white"
         text: textoLabel+modeloMonedas.retornaSimboloMoneda(codigoMoneda)+": "+totalidad.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
-        smooth: true
+        //
         font.bold: false
         verticalAlignment: Text.AlignVCenter
         anchors.left: parent.left

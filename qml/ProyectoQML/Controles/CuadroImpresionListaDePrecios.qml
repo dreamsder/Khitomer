@@ -29,7 +29,7 @@ Rectangle {
     color: "#be231919"
     visible: true
     anchors.fill: parent
-    smooth: true
+    //
     z: 8
 
 

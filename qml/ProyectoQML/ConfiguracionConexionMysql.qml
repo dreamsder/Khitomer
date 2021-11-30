@@ -230,7 +230,6 @@ Rectangle {
         color: "#3d3d4b"
         text: qsTr("configuración de acceso")
         font.italic: true
-        smooth: true
         font.underline: false
         font.strikeout: false
         anchors.bottom: rectangle1.top

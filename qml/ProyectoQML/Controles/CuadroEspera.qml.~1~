@@ -29,7 +29,7 @@ Rectangle {
     color: "#be231919"
     visible: false
     anchors.fill: parent
-    smooth: true
+    //
     z: 8
 
 
@@ -55,7 +55,7 @@ Rectangle {
 
         id: container
         width: 120
-        smooth: true
+        //
         height: 120
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter

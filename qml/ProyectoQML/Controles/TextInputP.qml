@@ -121,7 +121,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         border.width: 1
         border.color: "#686b71"
 
@@ -170,7 +170,7 @@ Rectangle {
             color: "#000000"
             text: qsTr("")
             font.family: "Arial"
-            smooth: true
+            //
             anchors.topMargin: 1
             horizontalAlignment: TextInput.AlignHCenter
             anchors.rightMargin: 25
@@ -262,7 +262,7 @@ Rectangle {
                 color: "#64000000"
                 text: qsTr("<X")
                 font.family: "Arial"
-                smooth: true
+                //
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -292,7 +292,7 @@ Rectangle {
         text: qsTr("Titulo:")
         font.family: "Arial"
         verticalAlignment: Text.AlignBottom
-        smooth: true
+        //
         font.bold: true
         anchors.bottom: recTextInput.top
         anchors.bottomMargin: 0
@@ -305,7 +305,7 @@ Rectangle {
         id: imageBuscar
         y: 16
         height: 20
-        smooth: true
+        //
         anchors.left: recTextInput.right
         anchors.leftMargin: 0
         anchors.bottom: parent.bottom
@@ -392,7 +392,7 @@ Rectangle {
         color: "#d93e3e"
         text: qsTr("")
         font.family: "Arial"
-        smooth: true
+        //
         visible: false
         font.pixelSize: 10
         anchors.bottom: recTextInput.top
@@ -422,7 +422,7 @@ Rectangle {
         height: 300
         color: "#eceeee"
         radius: 3
-        smooth: true
+        //
         border.color: "#a8a0a0"
         Rectangle {
             id: rectSombra
@@ -430,7 +430,7 @@ Rectangle {
             y: -34
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -451,7 +451,7 @@ Rectangle {
                 y: 5
                 width: 18
                 height: 18
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -489,7 +489,7 @@ Rectangle {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 visible: true
                 anchors.rightMargin: 1
@@ -503,7 +503,7 @@ Rectangle {
             Rectangle {
                 id: rectangle2
                 color: "#00000000"
-                smooth: true
+                //
                 clip: true
                 visible: true
                 anchors.right: parent.right
@@ -582,7 +582,7 @@ Rectangle {
                 }
                 z: 5
                 visible: true
-                smooth: true
+                //
                 opacity: 1
                 anchors.top: textinputsimple1.bottom
                 anchors.topMargin: 9
@@ -602,7 +602,7 @@ Rectangle {
                     visible: true
                     anchors.right: parent.right
                     anchors.rightMargin: 2
-                    smooth: true
+                    //
                     z: 2
                     y: listview1.visibleArea.yPosition * listview1.height+3
                     opacity: 0.550
@@ -617,7 +617,7 @@ Rectangle {
                 font.family: "Arial"
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 7
-                smooth: true
+                //
                 font.pixelSize: 9
                 visible: true
                 font.bold: false

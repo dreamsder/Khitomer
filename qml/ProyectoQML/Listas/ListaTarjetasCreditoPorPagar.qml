@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property double montoMedioDePagoSeleccionado: parseFloat(montoMedioDePago)
@@ -45,7 +45,7 @@ Rectangle{
         text:descripcionMedioDePago
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -156,7 +156,7 @@ mostrarMantenimientos(0,"derecha")
         font.family: "Arial"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 30
         horizontalAlignment: Text.AlignRight
@@ -174,7 +174,7 @@ mostrarMantenimientos(0,"derecha")
         color: "#4c6bb5"
         text: simboloMonedaMedioDePago
         font.family: "Arial"
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.rightMargin: 10
         anchors.bottomMargin: 2
@@ -195,7 +195,7 @@ mostrarMantenimientos(0,"derecha")
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
-        smooth: true
+        //
         font.bold: false
         font.pointSize: 10
         anchors.leftMargin: 50
@@ -209,7 +209,7 @@ mostrarMantenimientos(0,"derecha")
         text: cantidadCuotas
         font.family: "Arial"
         horizontalAlignment: Text.AlignRight
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         font.bold: false
@@ -232,7 +232,7 @@ mostrarMantenimientos(0,"derecha")
         horizontalAlignment: Text.AlignRight
         anchors.right: parent.right
         anchors.rightMargin: 30
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: false
@@ -296,7 +296,7 @@ mostrarMantenimientos(0,"derecha")
         id: txtClienteFactura
         color: "#212121"
         text: modeloLineasDePagoTarjetasCredito.retornaRazonDeCliente(codigoDoc,codigoTipoDoc, serieDocumento)
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         font.family: "Arial"
@@ -315,7 +315,7 @@ mostrarMantenimientos(0,"derecha")
         y: 3
         color: "#212121"
         text: "Fecha doc: "+modeloLineasDePagoTarjetasCredito.retornaFechaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         font.bold: false

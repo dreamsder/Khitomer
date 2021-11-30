@@ -787,7 +787,7 @@ Rectangle {
             color: "#db4d4d"
             radius: 3
             opacity: 1
-            smooth: true
+            //
             anchors.left: parent.left
             anchors.leftMargin: 67
             anchors.top: parent.top
@@ -805,7 +805,7 @@ Rectangle {
                 font.family: "Arial"
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 2
-                smooth: true
+                //
                 verticalAlignment: Text.AlignTop
                 horizontalAlignment: Text.AlignRight
                 anchors.left: parent.left
@@ -828,7 +828,7 @@ Rectangle {
                 anchors.rightMargin: 15
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.pixelSize: 11
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 30
@@ -843,7 +843,7 @@ Rectangle {
                 color: "#bbb7b7"
                 text: "0.00"
                 font.family: "Arial"
-                smooth: true
+                //
                 font.pixelSize: 11
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 15
@@ -866,7 +866,7 @@ Rectangle {
             font.family: "Arial"
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 30
-            smooth: true
+            //
             anchors.right: rectMontoTotales.left
             anchors.rightMargin: 5
             font.pixelSize: 11
@@ -882,7 +882,7 @@ Rectangle {
             font.family: "Arial"
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 50
-            smooth: true
+            //
             anchors.right: rectMontoTotales.left
             anchors.rightMargin: 5
             font.pixelSize: 11
@@ -898,7 +898,7 @@ Rectangle {
             font.family: "Arial"
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 2
-            smooth: true
+            //
             style: Text.Sunken
             anchors.right: rectMontoTotales.left
             anchors.rightMargin: 5
@@ -914,7 +914,7 @@ Rectangle {
             radius: 3
             clip: true
             visible: false
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             enabled: true//cbListaMonedasEnFacturacion.enabled
@@ -923,7 +923,7 @@ Rectangle {
                 y: 37
                 color: "#ffffff"
                 text: "0.00"
-                smooth: true
+                //
                 font.pixelSize: 23
                 anchors.bottom: parent.bottom
                 style: Text.Sunken
@@ -1042,7 +1042,7 @@ Rectangle {
             anchors.bottomMargin: 2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            smooth: true
+            //
             font.pixelSize: 21
             style: Text.Sunken
             anchors.rightMargin: 5

@@ -30,7 +30,7 @@ Rectangle {
     width: 900
     height: 600
     color: "#00000000"
-    smooth: true
+    //
 
     Text {
         id: txtTituloMenuOpcion
@@ -46,7 +46,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -114,7 +114,7 @@ Rectangle {
         y: 55
         height: 30
         z: 2
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevoDepartamento
@@ -266,7 +266,7 @@ Rectangle {
             y: 7
             color: "#d93e3e"
             text: qsTr("Información:")
-            smooth: true
+            //
             font.pixelSize: 15
             style: Text.Raised
             visible: false
@@ -285,7 +285,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientasDepartamentos.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -301,7 +301,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientasDepartamentos.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0
@@ -322,7 +322,7 @@ Rectangle {
         anchors.topMargin: 10
         anchors.left: parent.left
         anchors.leftMargin: 0
-        smooth: true
+        //
         ListView {
             id: listaDeDepartamentos
             clip: true
@@ -341,7 +341,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloDepartamentos
@@ -358,7 +358,7 @@ Rectangle {
                 z: 1
                 opacity: 0.500
                 visible: true
-                smooth: true
+                //
             }
         }
 
@@ -455,7 +455,7 @@ Rectangle {
         height: 30
         anchors.right: parent.right
         anchors.rightMargin: 10
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevaLocalidad
@@ -592,7 +592,7 @@ Rectangle {
             y: 7
             color: "#d93e3e"
             text: qsTr("Información:")
-            smooth: true
+            //
             font.pixelSize: 15
             style: Text.Raised
             visible: false
@@ -672,7 +672,7 @@ Rectangle {
         clip: true
         anchors.right: parent.right
         anchors.rightMargin: 0
-        smooth: true
+        //
         anchors.top: flowLocalidades.bottom
         anchors.topMargin: 10
         ListView {
@@ -694,7 +694,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloLocalidades
@@ -711,7 +711,7 @@ Rectangle {
                 z: 1
                 opacity: 0.500
                 visible: true
-                smooth: true
+                //
             }
         }
 
@@ -778,7 +778,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 0
         clip: true
-        smooth: true
+        //
         anchors.top: flowPais.bottom
         anchors.topMargin: 10
         ListView {
@@ -804,7 +804,7 @@ Rectangle {
                 height: listaDePaises.visibleArea.heightRatio * listaDePaises.height+18
                 color: "#000000"
                 radius: 2
-                smooth: true
+                //
                 anchors.rightMargin: 4
                 visible: true
                 z: 1
@@ -814,7 +814,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloPaises
@@ -924,7 +924,7 @@ Rectangle {
         height: 30
         anchors.right: parent.right
         anchors.rightMargin: 10
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevoPais
@@ -1080,7 +1080,7 @@ Rectangle {
             y: 7
             color: "#d93e3e"
             text: qsTr("Información:")
-            smooth: true
+            //
             font.pixelSize: 15
             style: Text.Raised
             visible: false
@@ -1102,7 +1102,7 @@ Rectangle {
         y: -4
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientasPais.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -1119,7 +1119,7 @@ Rectangle {
         y: -4
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientasPais.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0

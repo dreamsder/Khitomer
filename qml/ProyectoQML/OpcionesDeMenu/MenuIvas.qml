@@ -30,7 +30,7 @@ Rectangle {
     width: 600
     height: 500
     color: "#00000000"
-    smooth: true
+    //
 
     Text {
         id: txtTituloMenuOpcion
@@ -46,7 +46,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -133,7 +133,7 @@ Rectangle {
         x: 30
         y: 55
         height: 30
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevoIva
@@ -295,7 +295,7 @@ Rectangle {
             color: "#d93e3e"
             text: qsTr("Información:")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -316,7 +316,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -332,7 +332,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0
@@ -354,7 +354,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        smooth: true
+        //
         ListView {
             id: listaDeIvas
             clip: true
@@ -373,7 +373,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloListaBancos
@@ -390,7 +390,7 @@ Rectangle {
                 z: 1
                 opacity: 0.500
                 visible: true
-                smooth: true
+                //
             }
         }
 

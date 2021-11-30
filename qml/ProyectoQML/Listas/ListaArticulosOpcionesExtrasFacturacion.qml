@@ -42,7 +42,7 @@ Rectangle{
         id:txtItemArticulo
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -418,7 +418,7 @@ Rectangle{
         y: 8
         color: "#d93e3e"
         horizontalAlignment: Text.AlignRight
-        smooth: true
+        //
         anchors.top: parent.top
         text:"Inactivo"
         font.family: "Arial"
@@ -450,7 +450,7 @@ Rectangle{
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignLeft
         anchors.top: txtItemArticulo.bottom
-        smooth: true
+        //
         anchors.topMargin: 0
     }
 

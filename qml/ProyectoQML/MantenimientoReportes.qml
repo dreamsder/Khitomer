@@ -34,7 +34,7 @@ Rectangle {
     height: 600
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
 
     property alias botonGenerarPDFVisible: btnGenerarPDF.visible
@@ -355,7 +355,7 @@ Rectangle {
         color: "#494747"
         radius: 8
         z: 2
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -1001,7 +1001,7 @@ Rectangle {
                 text: qsTr("Comience a explorar los reportes, dando clic en el botón")
                 z: 2
                 font.family: "Arial"
-                smooth: true
+                //
                 styleColor: "#888282"
                 style: Text.Raised
                 horizontalAlignment: Text.AlignHCenter
@@ -1021,7 +1021,7 @@ Rectangle {
                 height: flickable.visibleArea.heightRatio * flickable.height
                 color: "#000000"
                 radius: height/2 - 1
-                smooth: true
+                //
                 opacity: 0.700
                 z: 1
                 anchors.rightMargin: 2
@@ -1031,7 +1031,7 @@ Rectangle {
                 id: rectangle1
                 width: 15
                 color: "#ffffff"
-                smooth: true
+                //
                 opacity: 0.600
                 z: 0
                 anchors.top: parent.top
@@ -1177,7 +1177,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasReportes
-        smooth: true
+        //
         anchors.bottom: rectContenedorReportes.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -1259,7 +1259,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
     Timer{

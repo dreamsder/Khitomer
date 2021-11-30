@@ -97,7 +97,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: -20
-        smooth: true
+        //
         visible: false
         z:2000
 
@@ -107,7 +107,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             y: -34
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -155,7 +155,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
                             id: texto1
                             focus: true
                             text: descripcionTipoDocumento
-                            smooth: true
+                            //
                             font.pointSize: 10
                             color:"#212121"
                             styleColor: "white"
@@ -193,7 +193,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
                                 color: "#5358be"
                                 width: listview1.width+20
                                 radius: 1
-                                smooth: true
+                                //
                                 opacity: 0
                                 border.width: 0
                                 border.color: "#000000"
@@ -282,7 +282,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             height: 2
             color: "#201c1c"
             radius: 1
-            smooth: true
+            //
             anchors.bottom: parent.bottom
             visible: true
             anchors.rightMargin: 1
@@ -307,7 +307,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             anchors.topMargin: 10
             anchors.left: parent.left
             anchors.leftMargin: 5
-            smooth: true
+            //
             font.pixelSize: 9
         }
 
@@ -331,7 +331,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             y: 35
             width: 18
             height: 18
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 5
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -356,7 +356,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             radius: 6
             anchors.left: parent.left
             anchors.leftMargin: 2
-            smooth: true
+            //
             clip: true
             anchors.top: parent.top
             anchors.topMargin: 30
@@ -368,7 +368,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
                 radius: 3
                 anchors.left: parent.left
                 anchors.leftMargin: 2
-                smooth: true
+                //
                 visible: true
                 anchors.rightMargin: 2
                 z: 2
@@ -402,7 +402,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
             color: "#000000"
             text: qsTr("")
             font.family: "Arial"
-            smooth: true
+            //
             anchors.topMargin: 1
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -485,7 +485,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
         color: "#dbd8d8"
         text: qsTr("Titulo:")
         font.family: "Arial"
-        smooth: true
+        //
         verticalAlignment: Text.AlignBottom
         font.pixelSize: 10
         anchors.top: parent.top
@@ -545,7 +545,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
         anchors.left: rectTextComboBox2.right
         anchors.right: parent.right
         anchors.rightMargin: 0
-        smooth: true
+        //
         asynchronous: true
         MouseArea {
             id: mouse_area2

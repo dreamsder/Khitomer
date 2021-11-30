@@ -32,7 +32,7 @@ Rectangle {
     height: 700
     color: "#00000000"
     radius: 0
-    smooth: true
+    //
 
     Text {
         id: txtTituloMenuOpcion
@@ -48,7 +48,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
     Rectangle{
@@ -59,7 +59,7 @@ Rectangle {
         radius: 7
         anchors.right: parent.right
         anchors.rightMargin: 50
-        smooth: true
+        //
         anchors.top: parent.top
         clip: true
         anchors.topMargin: 30
@@ -75,7 +75,7 @@ Rectangle {
             contentsScale: 1
             preferredWidth: 0
             preferredHeight: 0
-            smooth: true
+            //
             visible: true
             url: "https://www.portal.brou.com.uy/web/guest/cotizaciones"
             enabled: false
@@ -103,7 +103,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            smooth: true
+            //
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 13
@@ -119,7 +119,7 @@ Rectangle {
         anchors.topMargin: 20
         anchors.right: parent.right
         anchors.rightMargin: 0
-        smooth: true
+        //
         visible: true
         rotation: 0
         anchors.leftMargin: 0
@@ -134,7 +134,7 @@ Rectangle {
         anchors.topMargin: 19
         anchors.right: parent.right
         anchors.rightMargin: 0
-        smooth: true
+        //
         visible: true
         rotation: 0
         anchors.leftMargin: 0
@@ -288,7 +288,7 @@ Rectangle {
         font.family: "Arial"
         anchors.top: rectangle1.bottom
         anchors.topMargin: -2
-        smooth: true
+        //
         font.pixelSize: 9
         visible: true
         horizontalAlignment: Text.AlignHCenter
@@ -302,7 +302,7 @@ Rectangle {
         color: "#c4c4c6"
         radius: 3
         clip: true
-        smooth: true
+        //
         anchors.top: flow1.bottom
         anchors.topMargin: 20
         ListView {
@@ -328,7 +328,7 @@ Rectangle {
                 height: listaDeMonedas.visibleArea.heightRatio * listaDeMonedas.height+18
                 color: "#000000"
                 radius: 2
-                smooth: true
+                //
                 anchors.rightMargin: 4
                 visible: true
                 z: 1
@@ -338,7 +338,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloMonedas
@@ -347,7 +347,7 @@ Rectangle {
         Text {
             id: txtTituloListaMonedas
             text: qsTr("Monedas: "+listaDeMonedas.count)
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 5
             font.family: "Arial"
@@ -404,7 +404,7 @@ Rectangle {
         x: 30
         y: 55
         height: 30
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevaMoneda
@@ -599,7 +599,7 @@ Rectangle {
             y: 7
             color: "#d93e3e"
             text: qsTr("Información:")
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -639,7 +639,7 @@ Rectangle {
         textFormat: TextEdit.RichText
         activeFocusOnPress: false
         readOnly: true
-        smooth: true
+        //
         wrapMode: TextEdit.WordWrap
         anchors.top: parent.top
         anchors.topMargin: 30

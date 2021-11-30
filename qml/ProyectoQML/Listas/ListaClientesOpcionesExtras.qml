@@ -39,7 +39,7 @@ Rectangle{
         id:txtItem
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -142,7 +142,7 @@ Rectangle{
         text:  modeloTipoClientes.primerRegistroDeTipoClienteEnBase(tipoCliente)
         font.family: "Arial"
         horizontalAlignment: Text.AlignRight
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom

@@ -32,7 +32,7 @@ Rectangle{
     color: "#e9e8e9"
     radius: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
 
@@ -42,7 +42,7 @@ Rectangle{
         text: codigoLiquidacion + " - "+ nombreCompletoVendedor
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter
@@ -195,7 +195,7 @@ Rectangle{
         height: 1
         color: "#975f5f"
         visible: false
-        smooth: true
+        //
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
@@ -225,7 +225,7 @@ Rectangle{
             width: 210
             text: "Fecha de caja:  "+fechaLiquidacion
             font.family: "Arial"
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtFechaDeLiquidacion.implicitHeight
@@ -237,7 +237,7 @@ Rectangle{
             height: txtCantidadDeDocumentosPendientes.implicitHeight
             text: "Documentos pendientes: "+modeloLiquidaciones.retornaCantidadDocumentosEnLiquidacionSegunEstado(codigoLiquidacion,codigoVendedor,"P")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -249,7 +249,7 @@ Rectangle{
             text: "Documentos emitidos: " +modeloLiquidaciones.retornaCantidadDocumentosEnLiquidacionSegunEstado(codigoLiquidacion,codigoVendedor,"E")
             font.family: "Arial"
             visible: true
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -364,7 +364,7 @@ Rectangle{
         keyNavigationWraps: false
         anchors.left: parent.left
         interactive: false
-        smooth: true
+        //
         anchors.topMargin: 3
         model: modeloMonedasTotales
         visible: false
@@ -390,7 +390,7 @@ Rectangle{
         anchors.left: parent.left
         keyNavigationWraps: false
         interactive: false
-        smooth: true
+        //
         anchors.topMargin: 1
         model: modeloTotalChequesDiferidos
         visible: false
@@ -416,7 +416,7 @@ Rectangle{
         anchors.left: parent.left
         keyNavigationWraps: false
         interactive: false
-        smooth: true
+        //
         anchors.topMargin: 1
         model: modeloTotalOtrosCheques
         visible: false

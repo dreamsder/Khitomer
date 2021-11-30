@@ -105,7 +105,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 150
-        smooth: true
+        //
         height: listview1.contentHeight+40
 
         visible: false
@@ -117,7 +117,7 @@ Rectangle {
             y: -34
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -166,7 +166,7 @@ Rectangle {
                         Image {
                             id: imagenReporte
                             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/FlechaDerecha.png"
-                            smooth: true
+                            //
                             width: rect1.height
                             anchors.right: parent.right
                             asynchronous: true
@@ -181,7 +181,7 @@ Rectangle {
                             id: texto1
                             focus: true
                             text: descripcionMenuReporte
-                            smooth: true
+                            //
                             font.pointSize: 10
                             color:"#212121"
                             styleColor: "white"
@@ -218,7 +218,7 @@ Rectangle {
                                 color: "#5358be"
                                 width: listview1.width+20
                                 radius: 1
-                                smooth: true
+                                //
                                 opacity: 0
                                 border.width: 0
                                 border.color: "#000000"
@@ -319,7 +319,7 @@ Rectangle {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 visible: true
                 anchors.rightMargin: 1
@@ -344,7 +344,7 @@ Rectangle {
             anchors.topMargin: 10
             anchors.left: parent.left
             anchors.leftMargin: 5
-            smooth: true
+            //
             font.pixelSize: 9
         }
 
@@ -368,7 +368,7 @@ Rectangle {
             y: 35
             width: 18
             height: 18
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 5
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -397,7 +397,7 @@ Rectangle {
             color: "#000000"
             text: qsTr("")
             font.family: "Arial"
-            smooth: true
+            //
             anchors.topMargin: 1
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -480,7 +480,7 @@ Rectangle {
         color: "#dbd8d8"
         text: qsTr("Titulo:")
         font.family: "Arial"
-        smooth: true
+        //
         verticalAlignment: Text.AlignBottom
         font.pixelSize: 10
         anchors.top: parent.top
@@ -541,7 +541,7 @@ Rectangle {
         anchors.right: parent.right
         asynchronous: true
         anchors.rightMargin: 0
-        smooth: true
+        //
         MouseArea {
             id: mouse_area2
             hoverEnabled: true
@@ -624,7 +624,7 @@ Rectangle {
         radius: 3
         anchors.top: parent.top
         anchors.topMargin: 78
-        smooth: true
+        //
         border.color: "#a8a0a0"
         Rectangle {
             id: rectSombra1
@@ -632,7 +632,7 @@ Rectangle {
             y: -34
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -675,7 +675,7 @@ Rectangle {
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             asynchronous: true
-                            smooth: true
+                            //
                             visible: {
                                 if(consultaSqlGraficas==""){
                                     false
@@ -689,7 +689,7 @@ Rectangle {
                             id: texto2
                             color: "#000000"
                             text: descripcionReporte
-                            smooth: true
+                            //
                             style: Text.Raised
                             styleColor: "#ffffff"
                             font.family: "Arial"
@@ -726,7 +726,7 @@ Rectangle {
                                 height: 19
                                 color: "#5358be"
                                 radius: 1
-                                smooth: true
+                                //
                                 anchors.top: parent.top
                                 border.color: "#000000"
                                 anchors.topMargin: -3
@@ -820,7 +820,7 @@ Rectangle {
                 y: 5
                 width: 18
                 height: 18
-                smooth: true
+                //
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -842,7 +842,7 @@ Rectangle {
                 height: 2
                 color: "#201c1c"
                 radius: 1
-                smooth: true
+                //
                 anchors.bottom: parent.bottom
                 visible: true
                 anchors.rightMargin: 1

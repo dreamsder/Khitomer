@@ -31,7 +31,7 @@ Rectangle {
     height: 800
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
 
 
@@ -1362,7 +1362,7 @@ Rectangle {
         color: "#484646"
         radius: 8
         z: 1
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -1576,7 +1576,7 @@ Rectangle {
             property int xAxis: 0
             property int yAxis: 1
             property int angle: 180
-            smooth: true
+            //
 
             transform: Rotation {
                 id: rotation
@@ -1612,7 +1612,7 @@ Rectangle {
                 radius: 3
                 clip: true
                 anchors.fill: parent
-                smooth: true
+                //
 
                 visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")
                 ListView {
@@ -1636,7 +1636,7 @@ Rectangle {
                     keyNavigationWraps: true
                     highlightRangeMode: ListView.NoHighlightRange
                     flickableDirection: Flickable.VerticalFlick
-                    smooth: true
+                    //
 
                     delegate:  ListaItemsFacturacion{id: itemsFactura
 
@@ -1666,7 +1666,7 @@ Rectangle {
                         z: 1
                         opacity: 0.500
                         visible: true
-                        smooth: true
+                        //
                     }
 
 
@@ -1696,7 +1696,7 @@ Rectangle {
                         font.family: "Arial"
                         style: Text.Normal
                         horizontalAlignment: Text.AlignHCenter
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1713,7 +1713,7 @@ Rectangle {
                         y: 0
                         width: 2
                         color: "#C4C4C6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1752,7 +1752,7 @@ Rectangle {
                         font.family: "Arial"
                         style: Text.Normal
                         horizontalAlignment: Text.AlignHCenter
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1776,7 +1776,7 @@ Rectangle {
                             }
                         }
                         color: "#C4C4C6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1800,7 +1800,7 @@ Rectangle {
                         y: -7
                         width: 2
                         color: "#C4C4C6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1819,7 +1819,7 @@ Rectangle {
                         text: "Sub total "+modeloListaMonedas.retornaSimboloMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion)
                         font.family: "Arial"
                         style: Text.Normal
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1838,7 +1838,7 @@ Rectangle {
                         y: -7
                         width: 2
                         color: "#C4C4C6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1867,7 +1867,7 @@ Rectangle {
                             }
                         }
                         font.family: "Arial"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1889,7 +1889,7 @@ Rectangle {
                         color: "#ffffff"
                         text: "Cantidad"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1909,7 +1909,7 @@ Rectangle {
                         y: -2
                         width: 2
                         color: "#C4C4C6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1936,7 +1936,7 @@ Rectangle {
                         anchors.leftMargin: 10
                         anchors.left: rectLineaSeparacion3Titulo1.right
                         style: Text.Normal
-                        smooth: true
+                        //
                         anchors.topMargin: 0
                     }
 
@@ -1946,7 +1946,7 @@ Rectangle {
                         y: 5
                         width: 2
                         color: "#c4c4c6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -1975,7 +1975,7 @@ Rectangle {
                         anchors.leftMargin: 10
                         anchors.left: rectLineaSeparacion3Titulo2.right
                         style: Text.Normal
-                        smooth: true
+                        //
                         anchors.topMargin: 0
                         visible: txtCostoArticuloMonedaReferencia.visible
                     }
@@ -1987,7 +1987,7 @@ Rectangle {
                         width: 2
                         visible: txtCostoArticuloMonedaReferencia.visible
                         color: "#c4c4c6"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 0
                         anchors.bottom: parent.bottom
@@ -2010,7 +2010,7 @@ Rectangle {
                     font.family: "Arial"
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 5
-                    smooth: true
+                    //
                     font.bold: false
                     font.pointSize: 10
                     anchors.leftMargin: 5
@@ -2032,7 +2032,7 @@ Rectangle {
                     font.family: "Arial"
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 5
-                    smooth: true
+                    //
                     font.bold: true
                     font.pointSize: 10
                     anchors.leftMargin: 10
@@ -2049,7 +2049,7 @@ Rectangle {
                     font.family: "Arial"
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 5
-                    smooth: true
+                    //
                     font.bold: false
                     font.pointSize: 10
                     anchors.leftMargin: 5
@@ -2098,7 +2098,7 @@ Rectangle {
                 id: rectMediosDePago
                 color: "#ebf0f0"
                 radius: 3
-                smooth: true
+                //
                 anchors.fill: parent
                 visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")
 
@@ -2112,7 +2112,7 @@ Rectangle {
                     anchors.bottomMargin: 10
                     anchors.left: parent.left
                     anchors.leftMargin: 5
-                    smooth: true
+                    //
 
                     ListView {
                         id: listaDeMediosDePago
@@ -2135,7 +2135,7 @@ Rectangle {
                         flickableDirection: Flickable.VerticalFlick
                         keyNavigationWraps: true
                         interactive: true
-                        smooth: true
+                        //
                         model: modeloMediosDePago
                     }
 
@@ -2145,7 +2145,7 @@ Rectangle {
                         width: 14
                         color: "#e9e8e9"
                         radius: 3
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
 
@@ -2199,7 +2199,7 @@ Rectangle {
                     anchors.bottomMargin: 5
                     anchors.right: parent.right
                     anchors.rightMargin: 10
-                    smooth: true
+                    //
                     ListView {
                         id: listaDeMediosDePagoSeleccionados
                         clip: true
@@ -2211,7 +2211,7 @@ Rectangle {
                         anchors.leftMargin: 1
                         anchors.bottomMargin: 10
                         anchors.topMargin: 5
-                        smooth: true
+                        //
                         interactive: true
                         spacing: 1
                         snapMode: ListView.NoSnap
@@ -2248,7 +2248,7 @@ Rectangle {
                         width: 14
                         color: "#e9e8e9"
                         radius: 3
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
 
@@ -2307,7 +2307,7 @@ Rectangle {
                     font.family: "Arial"
                     anchors.top: parent.top
                     anchors.topMargin: 10
-                    smooth: true
+                    //
                     font.pixelSize: 12
                     //     anchors.bottom: rectArticulosFacturacion.top
                     //     anchors.bottomMargin: 5
@@ -2898,7 +2898,7 @@ Rectangle {
                     font.underline: false
                     font.italic: false
                     style: Text.Raised
-                    smooth: true
+                    //
                     font.pixelSize: 14
                     font.bold: true
                     horizontalAlignment: Text.AlignLeft
@@ -5845,7 +5845,7 @@ Rectangle {
     Row {
         id: rowBarraDeHerramientas
         z: 0
-        smooth: true
+        //
         anchors.bottom: rectContenedor.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -6881,7 +6881,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 
@@ -6956,7 +6956,7 @@ Rectangle {
         width: 450
         color: rectColorBarraHerramientas.color
         radius: 2
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: -68
 
@@ -6980,7 +6980,7 @@ Rectangle {
             x: 333
             width: 17
             color: rectColorBarraHerramientas.color
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.bottom: parent.bottom
@@ -7028,7 +7028,7 @@ Rectangle {
                 color: "#64b7b6b6"
                 radius: 3
                 clip: true
-                smooth: true
+                //
                 anchors.top: flowOpcionesExtras.bottom
                 anchors.topMargin: 30
                 ListView {
@@ -7051,7 +7051,7 @@ Rectangle {
                     keyNavigationWraps: true
                     anchors.left: parent.left
                     interactive: true
-                    smooth: true
+                    //
                     anchors.topMargin: 25
                     anchors.rightMargin: 1
                     model: modeloClientesOpcionesExtra
@@ -7068,7 +7068,7 @@ Rectangle {
                         z: 1
                         opacity: 0.500
                         visible: true
-                        smooth: true
+                        //
                     }
                 }
 
@@ -7335,7 +7335,7 @@ Rectangle {
         width: 450
         color: "#27acb3"
         radius: 2
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: -68
 
@@ -7359,7 +7359,7 @@ Rectangle {
             x: 333
             width: 17
             color: "#27acb3"
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.bottom: parent.bottom
@@ -7497,7 +7497,7 @@ Rectangle {
                 color: "#64b9b7b7"
                 radius: 3
                 visible: true
-                smooth: true
+                //
                 anchors.top: flowOpcionesExtras1.bottom
                 anchors.topMargin: 30
                 ListView {
@@ -7523,7 +7523,7 @@ Rectangle {
                     keyNavigationWraps: true
                     anchors.left: parent.left
                     interactive: true
-                    smooth: true
+                    //
                     anchors.topMargin: 110
                     anchors.rightMargin: 0
                     model: modeloArticulosOpcionesExtraFacturacion
@@ -7540,7 +7540,7 @@ Rectangle {
                         z: 1
                         opacity: 0.500
                         visible: true
-                        smooth: true
+                        //
                     }
                 }
 
@@ -7847,7 +7847,7 @@ Rectangle {
                 font.family: "Arial"
                 anchors.left: parent.left
                 anchors.leftMargin: 10
-                smooth: true
+                //
                 anchors.bottom: rectArticulosFacturacion.top
                 anchors.bottomMargin: 5
             }
@@ -8257,7 +8257,7 @@ Rectangle {
         font.bold: true
         font.family: "Arial"
         styleColor: "#212121"
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 50
         verticalAlignment: Text.AlignVCenter
@@ -8275,7 +8275,7 @@ Rectangle {
         id: rectColorBarraHerramientas1
         y: 0
         color: "#db4d4d"
-        smooth: true
+        //
         anchors.left: lblEstadoDocumento.right
         anchors.leftMargin: (lblEstadoDocumento.implicitWidth+40)*-1
         anchors.right: parent.right
@@ -8303,7 +8303,7 @@ Rectangle {
             font.bold: true
             font.family: "Arial"
             styleColor: "white"
-            smooth: true
+            //
 
         }
 
@@ -8318,7 +8318,7 @@ Rectangle {
                     0
                 }
             }
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 4
             anchors.bottom: parent.bottom
@@ -8339,7 +8339,7 @@ Rectangle {
                     0
                 }
             }
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 4
             anchors.bottom: parent.bottom

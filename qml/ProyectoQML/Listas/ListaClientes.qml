@@ -32,7 +32,7 @@ Rectangle{
     color: "#e9e8e9"
     radius: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property string  tipoDeCliente: ""
@@ -42,7 +42,7 @@ Rectangle{
         text: razonSocial + "  ("+nombreCliente+")"
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter
@@ -149,7 +149,7 @@ Rectangle{
         height: 1
         color: "#975f5f"
         visible: false
-        smooth: true
+        //
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
@@ -181,7 +181,7 @@ Rectangle{
             width: 210
             text: qsTr("Codigo:  "+codigoCliente)
             font.family: "Arial"
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtCodigoClienteEnLista.implicitHeight
@@ -194,7 +194,7 @@ Rectangle{
             width: 210
             text: qsTr(modeloTipoDocumentoClientes.retornaDescripcionTipoDocumentoCliente(codigoTipoDocumentoCliente)+": "+rut)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
             height: txtRutEnLista.implicitHeight
@@ -208,7 +208,7 @@ Rectangle{
             width: 250
             text: qsTr("Telefono:  "+telefono)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
 
             opacity: 0.500
@@ -223,7 +223,7 @@ Rectangle{
             height: txtDireccionEnLista.implicitHeight
             text: qsTr("Dirección:  "+direccion + " " +numeroPuerta + " - "+esquina)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -237,7 +237,7 @@ Rectangle{
 
             text: qsTr("Tipo:  "+descripcionTipoCliente)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }
@@ -273,7 +273,7 @@ Rectangle{
         anchors.topMargin: 5
         anchors.right: parent.right
         anchors.rightMargin: 30
-        smooth: true
+        //
         visible: modeloClientes.retornaSiEsClienteWeb(codigoCliente,codigoTipoCliente)
         z: 2
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/ClienteWeb.png"

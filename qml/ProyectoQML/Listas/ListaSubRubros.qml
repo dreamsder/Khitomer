@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
 
@@ -42,7 +42,7 @@ Rectangle{
         text: descripcionSubRubro
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter
@@ -88,7 +88,7 @@ Rectangle{
         height: 1
         color: "#975f5f"
         visible: false
-        smooth: true
+        //
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
@@ -120,7 +120,7 @@ Rectangle{
             width: 210
             text: qsTr("Código:  "+codigoSubRubro)
             font.family: "Arial"
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtCodigoSubRubroEnLista.implicitHeight

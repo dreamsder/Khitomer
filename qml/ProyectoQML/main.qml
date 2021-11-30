@@ -31,7 +31,6 @@ Rectangle {
     width: 900; height: 600
     color: "#041c24"
     clip: true
-    smooth: true
 
     property int   opcionEnCurso: 0
     property bool  estadoConexionMysql: true
@@ -1015,7 +1014,6 @@ Rectangle {
         color: "#525151"
         radius: 0
         z: 1
-        smooth: true
         anchors.right: parent.right
         anchors.rightMargin: -20
         anchors.top: parent.top
@@ -1202,7 +1200,6 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.NoWrap
-            smooth: true
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 29
@@ -1215,7 +1212,6 @@ Rectangle {
             text: ""
             anchors.top: txtMensajeErrorSinConexionMysql.bottom
             anchors.topMargin: 20
-            smooth: true
             font.pixelSize: 29
             anchors.horizontalCenter: parent.horizontalCenter
             style: Text.Outline
@@ -1289,7 +1285,6 @@ Rectangle {
         radius: 0
         visible: true
         opacity: 1
-        smooth: true
         anchors.rightMargin: -20
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -1303,7 +1298,6 @@ Rectangle {
         /* Image {
             id: imageLogin
             visible: true
-            smooth: true
             fillMode: Image.Tile
             anchors.fill: parent
 
@@ -1358,7 +1352,6 @@ Rectangle {
                 border.color: "#1d7195"
                 focus: false
                 opacity: 1
-                smooth: true
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -1411,7 +1404,6 @@ Rectangle {
                     anchors.leftMargin: 45
                     anchors.top: parent.top
                     anchors.topMargin: 10
-                    smooth: true
                     font.bold: false
                     font.pixelSize: 37
                     focus: false
@@ -1425,7 +1417,6 @@ Rectangle {
                  //   height: 35
                     textoDeFondo: qsTr("login de usuario")
                     textoInputBox: ""
-                    smooth: true
                     anchors.horizontalCenter: parent.horizontalCenter
                     echoMode: 0
                     textoTitulo: qsTr("Usuario:")
@@ -1448,7 +1439,6 @@ Rectangle {
                 //    height: 35
                     largoMaximo: 25
                     textoDeFondo: qsTr("clave privada de acceso")
-                    smooth: true
                     echoMode: 2
                     anchors.horizontalCenter: parent.horizontalCenter
                     textoTitulo: qsTr("Contraseña:")
@@ -1458,13 +1448,16 @@ Rectangle {
                     onEnter: {
 
                         if(modeloUsuarios.conexionUsuario(txtNombreDeUsuario.textoInputBox.toString().trim(),txtContraseniaDeUsuario.textoInputBox.toString().trim())){
-                            rectLoginOpacidadOut.stop()
-                            rectAccesoWHOut.stop()
-                            rectLoginOpacidadOut.start()
-                            rectAccesoWHOut.start()
+                            //rectLoginOpacidadOut.stop()
+                            //rectAccesoWHOut.stop()
+                           // rectLoginOpacidadOut.start()
+                            //rectAccesoWHOut.start()
                             navegador.enabled=true
                             timeReajustarGradient.stop()
                             rectLogin.enabled=false
+                            rectLogin.visible=false
+                            rectAcceso.visible=rectLogin.visible
+
 
                             etUsuario.setearUsuario(modeloUsuarios.retornaNombreUsuarioLogueado(txtNombreDeUsuario.textoInputBox.trim()))
 
@@ -1563,7 +1556,6 @@ Rectangle {
                     anchors.top: parent.top
                     anchors.topMargin: 10
                     asynchronous: true
-                    smooth: true
                     focus: false
                     source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Acceso.png"
                 }
@@ -1573,7 +1565,6 @@ Rectangle {
                     height: 1
                     color: "#c2bfbf"
                     radius: 1
-                    smooth: true
                     anchors.top: parent.top
                     anchors.topMargin: 72
                     anchors.left: parent.left
@@ -1608,7 +1599,6 @@ Rectangle {
                 radius: 1
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 20
-                smooth: true
                 anchors.rightMargin: 70
                 anchors.right: parent.right
                 anchors.leftMargin: 50
@@ -1625,7 +1615,6 @@ Rectangle {
                 radius: 1
                 anchors.top: parent.top
                 anchors.topMargin: 20
-                smooth: true
                 anchors.rightMargin: 70
                 anchors.right: parent.right
                 anchors.leftMargin: 50
@@ -1637,6 +1626,7 @@ Rectangle {
             Image {
                 property string fechaImportante:funcionesmysql.retornaFechaImportante()
                 id: imgLogoKhitomer
+                smooth: true
                 width: {
                     if(fechaImportante=="reyes_magos"){
                         150
@@ -1653,7 +1643,6 @@ Rectangle {
                 z: 1
                 asynchronous: true
                 enabled: false
-                smooth: true
                 source:   {
                     
                     if(fechaImportante=="navidad"){
@@ -1690,7 +1679,6 @@ Rectangle {
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Built_with_Qt_logo_RGB.png"
                 anchors.left: parent.left
                 anchors.leftMargin: 50
-                smooth: true
                 anchors.bottomMargin: 30
                 asynchronous: true
                 z: 1
@@ -1722,7 +1710,7 @@ Rectangle {
 
 
 
-        PropertyAnimation{
+       /* PropertyAnimation{
             id:rectLoginOpacidadOut
             target: rectLogin
             property: "opacity"
@@ -1737,7 +1725,7 @@ Rectangle {
             from:1
             to:0
             duration: 200
-        }
+        }*/
 
 
         Timer{

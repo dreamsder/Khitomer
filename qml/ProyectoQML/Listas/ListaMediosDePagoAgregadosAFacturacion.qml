@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     property double montoMedioDePagoSelecionado: 0.0
@@ -47,7 +47,7 @@ Rectangle{
         text:descripcionMedioDePago
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -122,7 +122,7 @@ Rectangle{
         font.family: "Arial"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 30
         horizontalAlignment: Text.AlignRight
@@ -141,7 +141,7 @@ Rectangle{
         anchors.rightMargin: 5
         anchors.verticalCenter: parent.verticalCenter
         z: 2
-        smooth: true
+        //
         font.pixelSize: 10
         visible: activo
         MouseArea {
@@ -190,7 +190,7 @@ Rectangle{
         color: "#4c6bb5"
         text: simboloMonedaMedioDePago
         font.family: "Arial"
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.rightMargin: 10
         anchors.bottomMargin: 2
@@ -211,7 +211,7 @@ Rectangle{
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
-        smooth: true
+        //
         font.bold: false
         font.pointSize: 10
         anchors.leftMargin: 10
@@ -225,7 +225,7 @@ Rectangle{
         text: cantidadCuotas
         font.family: "Arial"
         horizontalAlignment: Text.AlignRight
-        smooth: true
+        //
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
         font.bold: false
@@ -248,7 +248,7 @@ Rectangle{
         horizontalAlignment: Text.AlignRight
         anchors.right: parent.right
         anchors.rightMargin: 30
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: false

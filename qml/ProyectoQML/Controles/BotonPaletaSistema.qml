@@ -52,7 +52,7 @@ Rectangle {
 
 
     width: txtTituloBoton.width + 20; height: 30;    border { width: 1; color: Qt.darker(activePalette.button) }
-    smooth: true
+    //
     radius: 3
 
     // color the button with a gradient
@@ -92,7 +92,7 @@ Rectangle {
         font.pointSize: 11
         opacity: 0.7
         font.family: "Arial"
-        smooth: true
+        //
         width: txtTituloBoton.implicitWidth
         height: 20
     }
@@ -127,7 +127,7 @@ Rectangle {
         font.pointSize: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 34
-        smooth: true
+        //
         visible: false
         height: 15
         width: txtMensajeInformacion.implicitWidth

@@ -30,7 +30,7 @@ Rectangle {
     width: 800
     height: 700
     color: "#00000000"
-    smooth: true
+    //
 
 
     function cargarTipoDocumentos(_codigoPerfil){
@@ -199,7 +199,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -209,7 +209,7 @@ Rectangle {
         height: 30
         anchors.top: parent.top
         anchors.topMargin: 25
-        smooth: true
+        //
         spacing: 15
         BotonBarraDeHerramientas {
             id: botonNuevoPerfil
@@ -523,7 +523,7 @@ Rectangle {
             color: "#d93e3e"
             text: qsTr("Información:")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -544,7 +544,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -560,7 +560,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0
@@ -583,7 +583,7 @@ Rectangle {
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        smooth: true
+        //
         ListView {
             id: listaDePerfiles
             clip: true
@@ -602,7 +602,7 @@ Rectangle {
             keyNavigationWraps: true
             anchors.left: parent.left
             interactive: true
-            smooth: true
+            //
             anchors.topMargin: 25
             anchors.rightMargin: 1
             model: modeloListaPerfiles
@@ -619,7 +619,7 @@ Rectangle {
                 z: 1
                 opacity: 0.500
                 visible: true
-                smooth: true
+                //
             }
         }
 
@@ -723,7 +723,7 @@ Rectangle {
                     width: 400
                     height: rectSolapaPermisos.height
                     color: "#643ca239"
-                    smooth: true
+                    //
 
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco1
@@ -733,7 +733,7 @@ Rectangle {
                         color: "#ffffff"
                         anchors.right: parent.right
                         anchors.rightMargin: 6
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -752,7 +752,7 @@ Rectangle {
                         color: "#abb2b1"
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -769,7 +769,7 @@ Rectangle {
                         text: qsTr("permisos clientes")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -838,7 +838,7 @@ Rectangle {
                         anchors.rightMargin: 30
                         anchors.left: parent.left
                         anchors.leftMargin: 30
-                        smooth: true
+                        //
                     }
 
                     Rectangle {
@@ -847,7 +847,7 @@ Rectangle {
                         y: 0
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarClientes.bottom
                         anchors.topMargin: 11
                         anchors.rightMargin: 30
@@ -862,7 +862,7 @@ Rectangle {
                     width: 400
                     height: rectSolapaPermisos.height
                     color: "#6427acb3"
-                    smooth: true
+                    //
 
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco2
@@ -870,7 +870,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -889,7 +889,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -914,7 +914,7 @@ Rectangle {
                         anchors.leftMargin: 10
                         anchors.top: parent.top
                         anchors.topMargin: 16
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         font.italic: false
                         font.bold: true
@@ -971,7 +971,7 @@ Rectangle {
                         x: 4
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarArticulos.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -985,7 +985,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle5.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -999,7 +999,7 @@ Rectangle {
                     width: 580
                     height: rectSolapaPermisos.height
                     color: "#64db4d4d"
-                    smooth: true
+                    //
 
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco3
@@ -1007,7 +1007,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1026,7 +1026,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1045,7 +1045,7 @@ Rectangle {
                         text: qsTr("permisos facturación")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1144,7 +1144,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarFacturacion.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1158,7 +1158,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle7.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1173,14 +1173,14 @@ Rectangle {
                     width: 450
                     height: rectSolapaPermisos.height
                     color: "#644c6bb5"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco4
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1199,7 +1199,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1218,7 +1218,7 @@ Rectangle {
                         text: qsTr("permisos liquidaciones/cajas")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1297,7 +1297,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarLiquidaciones.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1311,7 +1311,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle9.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1326,14 +1326,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaPermisos.height
                     color: "#64f8a218"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco5
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1352,7 +1352,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1371,7 +1371,7 @@ Rectangle {
                         text: qsTr("permisos lista de precios")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1442,7 +1442,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarListaPrecios.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1456,7 +1456,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle11.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1471,14 +1471,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaPermisos.height
                     color: "#64e235dd"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco6
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1497,7 +1497,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1516,7 +1516,7 @@ Rectangle {
                         text: qsTr("permisos reportes")
                         styleColor: "#8d8b8b"
                         font.family: "Arial"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1572,7 +1572,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarReportes.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1586,7 +1586,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle13.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1602,14 +1602,14 @@ Rectangle {
                     width: 400
                     height: rectSolapaPermisos.height
                     color: "#647a14be"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco8
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1628,7 +1628,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1645,7 +1645,7 @@ Rectangle {
                         id: text9
                         color: "#fdfdfd"
                         text: qsTr("permisos documentos")
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1695,7 +1695,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarDocumentos.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1709,7 +1709,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle17.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1726,14 +1726,14 @@ Rectangle {
                     height: rectSolapaPermisos.height
                     color: "#de5454"
                     visible: true
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco9
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1752,7 +1752,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1769,7 +1769,7 @@ Rectangle {
                         id: text10
                         color: "#fdfdfd"
                         text: qsTr("permisos cuenta corriente")
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -1819,7 +1819,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarCuentaCorriente.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -1833,7 +1833,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle19.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -1847,14 +1847,14 @@ Rectangle {
                     width: 750
                     height: rectSolapaPermisos.height
                     color: "#00000000"
-                    smooth: true
+                    //
                     Rectangle {
                         id: rectLineaVerticalMenuBlanco7
                         x: 180
                         y: 28
                         width: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1873,7 +1873,7 @@ Rectangle {
                         y: 28
                         width: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: parent.top
                         anchors.topMargin: 5
                         anchors.bottom: parent.bottom
@@ -1891,7 +1891,7 @@ Rectangle {
                         color: "#fdfdfd"
                         text: qsTr("otros permisos")
                         styleColor: "#8d8b8b"
-                        smooth: true
+                        //
                         font.pixelSize: 20
                         anchors.top: parent.top
                         anchors.topMargin: 16
@@ -2003,7 +2003,7 @@ Rectangle {
                         x: -3
                         height: 1
                         color: "#ffffff"
-                        smooth: true
+                        //
                         anchors.top: cbxpermiteUsarMenuAdministracion.bottom
                         anchors.topMargin: 10
                         anchors.rightMargin: 30
@@ -2017,7 +2017,7 @@ Rectangle {
                         x: 8
                         height: 1
                         color: "#abb2b1"
-                        smooth: true
+                        //
                         anchors.top: rectangle15.bottom
                         anchors.topMargin: 1
                         anchors.rightMargin: 30
@@ -2035,7 +2035,7 @@ Rectangle {
             height: 10
             x:flickable1.visibleArea.xPosition * flickable1.width+5
             color: "#000000"
-            smooth: true
+            //
             opacity: 0.500
             radius: 2
             anchors.bottom: flickable1.top

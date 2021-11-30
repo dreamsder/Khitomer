@@ -50,7 +50,7 @@ FocusScope {
             text: nombreCliente
             font.family: "Arial"
             clip: false
-            smooth: true
+            //
 
             onActiveFocusChanged: {
 
@@ -95,7 +95,7 @@ FocusScope {
                 height: 19
                 color: "#5358be"
                 radius: 1
-                smooth: true
+                //
                 anchors.top: parent.top
                 border.color: "#000000"
                 anchors.topMargin: -3
@@ -182,7 +182,7 @@ FocusScope {
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             horizontalAlignment: Text.AlignLeft
-            smooth: true
+            //
             clip: false
             style: Text.Normal
             styleColor: "#ffffff"

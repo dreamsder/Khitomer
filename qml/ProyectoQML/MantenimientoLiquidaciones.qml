@@ -31,7 +31,7 @@ Rectangle {
     height: 600
     color: "#ffffff"
     radius: 8
-    smooth: true
+    //
 
     property int codigoDeLiquidacion: 0
     property string vendedorDeLiquidacio: ""
@@ -51,7 +51,7 @@ Rectangle {
         color: "#494747"
         radius: 8
         z: 1
-        smooth: true
+        //
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
@@ -125,7 +125,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.top: flow1.bottom
             anchors.topMargin: 10
             anchors.left: parent.left
@@ -157,7 +157,7 @@ Rectangle {
                 keyNavigationWraps: true
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
-                smooth: true
+                //
 
                 delegate:  ListaLiquidaciones{}
                 model: modeloLiquidaciones
@@ -181,7 +181,7 @@ Rectangle {
                         }
                     }
 
-                    smooth: true
+                    //
                 }
 
             }
@@ -197,7 +197,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
                 anchors.left: txtCantidadDeItemsTitulo.right
@@ -217,7 +217,7 @@ Rectangle {
                 font.bold: false
                 anchors.left: parent.left
                 anchors.leftMargin: 5
-                smooth: true
+                //
             }
 
             BotonBarraDeHerramientas {
@@ -270,7 +270,7 @@ Rectangle {
             }
             radius: 3
             clip: true
-            smooth: true
+            //
             anchors.right: parent.right
             anchors.rightMargin: 20
             anchors.top: flow1.bottom
@@ -301,7 +301,7 @@ Rectangle {
                         false
                     }
                 }
-                smooth: true
+                //
                 anchors.topMargin: 45
                 anchors.rightMargin: 1
                 model: modeloDocumentosEnLiquidaciones
@@ -324,7 +324,7 @@ Rectangle {
                             false
                         }
                     }
-                    smooth: true
+                    //
                 }
 
             }
@@ -341,7 +341,7 @@ Rectangle {
                 anchors.topMargin: 5
                 anchors.left: txtCantidadDeItemsTituloDocumentosDeLiquidacion.right
                 anchors.leftMargin: 5
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
             }
@@ -358,7 +358,7 @@ Rectangle {
                 anchors.topMargin: 5
                 anchors.leftMargin: ((rectListaDeDocumentos.width)*-1)+5
                 anchors.left: rectListaDeDocumentos.right
-                smooth: true
+                //
                 font.bold: false
                 font.pointSize: 10
             }
@@ -378,7 +378,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "# Doc. interno"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -397,7 +397,7 @@ Rectangle {
                     y: 0
                     width: 2
                     color: "#C4C4C6"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -414,7 +414,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "Razón social"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -434,7 +434,7 @@ Rectangle {
                     y: -4
                     width: 2
                     color: "#c3c3c7"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -449,7 +449,7 @@ Rectangle {
                     y: -7
                     width: 2
                     color: "#C4C4C6"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -466,7 +466,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "# CFE"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -488,7 +488,7 @@ Rectangle {
                     color: "#ffffff"
                     text: "Nombre"
                     font.family: "Arial"
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 0
                     anchors.bottom: parent.bottom
@@ -513,7 +513,7 @@ Rectangle {
                 x: 454
                 text: qsTr("Doble-clic para visualizar facturas.")
                 font.family: "Arial"
-                smooth: true
+                //
                 anchors.right: parent.right
                 anchors.rightMargin: 10
                 anchors.top: parent.top
@@ -627,7 +627,7 @@ Rectangle {
 
     Row {
         id: rowBarraDeHerramientasLiquidaciones
-        smooth: true
+        //
         anchors.bottom: rectContenedorLiquidaciones.top
         anchors.bottomMargin: 0
         anchors.top: parent.top
@@ -775,7 +775,7 @@ Rectangle {
             font.bold: true
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignRight
-            smooth: true
+            //
         }
     }
 
@@ -832,7 +832,7 @@ Rectangle {
         width: 610
         color: "#4a68b5"
         radius: 2
-        smooth: true
+        //
         anchors.top: parent.top
         anchors.topMargin: -68
 
@@ -850,7 +850,7 @@ Rectangle {
             x: 333
             width: 17
             color: rectangle4.color
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.bottom: parent.bottom

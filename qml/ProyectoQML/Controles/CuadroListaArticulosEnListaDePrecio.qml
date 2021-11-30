@@ -28,7 +28,7 @@ Rectangle {
     color: "#be231919"
     visible: true
     anchors.fill: parent
-    smooth: true
+    //
     z: 8
 
     signal clicActualizar
@@ -172,7 +172,7 @@ Rectangle {
                 highlightFollowsCurrentItem: true
                 anchors.leftMargin: 35
                 spacing: 1
-                smooth: true
+                //
                 anchors.topMargin: 7
                 snapMode: ListView.NoSnap
                 flickableDirection: Flickable.VerticalFlick
@@ -190,7 +190,7 @@ Rectangle {
                     opacity: 0.5
                     visible: listaDePreciosDondeSeModificaraElArticulo.interactive
                     anchors.right: listaDePreciosDondeSeModificaraElArticulo.right
-                    smooth: true
+                    //
                     z: 1
                 }
 

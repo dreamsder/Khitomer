@@ -27,7 +27,6 @@ Item {
     id: itemBotonBarraHerramientas
     width: 25
     height: 25
-    smooth: false
 
     signal clic
 
@@ -43,7 +42,6 @@ Item {
     Image {
         id: imagenIcono
         opacity: opacidad
-        smooth: true
         asynchronous: true
         anchors.fill: parent
 
@@ -53,7 +51,6 @@ Item {
             anchors.fill: parent
             opacity: 0.15
             color: "red"
-            smooth: true
             anchors.rightMargin: 2
             anchors.leftMargin: 2
             anchors.bottomMargin: 2
@@ -143,7 +140,6 @@ Item {
         radius: 6
         opacity: 1
         z: 3
-        smooth: true
         Text {
             id: toolTipText
             color: "#fdfbfb"
@@ -152,7 +148,6 @@ Item {
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.fill: parent
-            smooth: true
             visible: true
         }
 
@@ -169,7 +164,6 @@ Item {
         style: Text.Raised
         font.bold: true
         font.family: "Arial"
-        smooth: true
         anchors.left: imagenIcono.right
         anchors.leftMargin: 8
         anchors.verticalCenter: parent.verticalCenter

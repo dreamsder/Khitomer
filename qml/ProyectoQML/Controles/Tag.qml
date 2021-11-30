@@ -22,7 +22,6 @@ Rectangle {
         id: imageTag
         width: 20
         height: 20
-        smooth: true
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.top: parent.top
@@ -47,7 +46,6 @@ Rectangle {
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
         font.pixelSize: 12
     }
 
@@ -97,7 +95,6 @@ Rectangle {
         color: "#4d7dc0"
         radius: 6
         z: 1
-        smooth: true
         Text {
             id: toolTipText
             color: "#fdfbfb"
@@ -106,7 +103,6 @@ Rectangle {
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.fill: parent
-            smooth: true
             visible: true
         }
     }
@@ -151,7 +147,6 @@ Rectangle {
             anchors.rightMargin: 0
             anchors.left: parent.left
             anchors.leftMargin: 0
-            smooth: true
             anchors.bottom: parent.bottom
             visible: true
             anchors.bottomMargin: 0
@@ -167,7 +162,6 @@ Rectangle {
         radius: 4
         anchors.top: parent.bottom
         anchors.topMargin: 2
-        smooth: true
         visible: opacidadPorDefecto==1 ? "true" : "false"
         anchors.rightMargin: 10
         z: -1

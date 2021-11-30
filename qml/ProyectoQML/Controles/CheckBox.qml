@@ -55,7 +55,6 @@ Rectangle {
     color: "#00000000"
     anchors.topMargin: 16
     anchors.fill: parent
-    smooth: true
 
 
 
@@ -64,7 +63,6 @@ Rectangle {
         width: 18
         height: 18
         color: "#ffffff"
-        smooth: true
         radius: 2
         border.color: "#686b71"
         anchors.bottom: parent.bottom
@@ -84,7 +82,6 @@ Rectangle {
         Image {
             id: image1
             visible: chekActivo
-            smooth: true
             anchors.rightMargin: -6
             anchors.leftMargin: 2
             anchors.bottomMargin: 2
@@ -100,7 +97,6 @@ Rectangle {
         color: "#333333"
         text: qsTr("checkbox")
         font.family: "Arial"
-        smooth: true
         anchors.top: parent.top
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
@@ -196,7 +192,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         asynchronous: true
-        smooth: true
         MouseArea {
             id: mouse_area2
             visible: true

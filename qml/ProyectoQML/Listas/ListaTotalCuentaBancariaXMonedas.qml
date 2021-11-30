@@ -30,7 +30,7 @@ Rectangle{
     height: 16
     color: "#9294c6"
     radius: 0
-    smooth: true
+    //
     opacity: 1
     property string _numeroCuentaBancaria: ""
     property string _codigoBancoCuentaBancaria: ""
@@ -40,7 +40,7 @@ Rectangle{
         id:lblTotalMonedas
         color: "white"
         text: "Total "+simboloMoneda+": "+_totalidad.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
-        smooth: true
+        //
         font.bold: false
         verticalAlignment: Text.AlignVCenter
         anchors.left: parent.left

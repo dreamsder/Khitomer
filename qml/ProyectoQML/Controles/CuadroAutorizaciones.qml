@@ -29,7 +29,7 @@ import QtQuick 1.1
         color: "#be231919"
         visible: false
         anchors.fill: parent
-        smooth: true
+        //
         z: 8
 
 
@@ -84,14 +84,14 @@ import QtQuick 1.1
                 clip: true
                 visible: true
                 border.color: "#1d7195"
-                smooth: true
+                //
                 anchors.horizontalCenter: parent.horizontalCenter
                 Text {
                     id: txtAcceso
                     color: "#fdfbfb"
                     text: qsTr("Autorización")
                     font.family: "Arial"
-                    smooth: true
+                    //
                     font.pixelSize: 37
                     anchors.top: parent.top
                     anchors.topMargin: 10
@@ -109,7 +109,7 @@ import QtQuick 1.1
                     y: 83
                     width: 230
                     height: 35
-                    smooth: true
+                    //
                     textoInputBox: ""
                     anchors.horizontalCenter: parent.horizontalCenter
                     echoMode: 0
@@ -135,7 +135,7 @@ import QtQuick 1.1
                     y: 126
                     width: 230
                     height: 35
-                    smooth: true
+                    //
                     anchors.horizontalCenter: parent.horizontalCenter
                     echoMode: 2
                     largoMaximo: 25
@@ -209,7 +209,7 @@ import QtQuick 1.1
                     x: 308
                     width: 51
                     height: 51
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 10
                     asynchronous: true
@@ -225,7 +225,7 @@ import QtQuick 1.1
                     height: 1
                     color: "#c2bfbf"
                     radius: 1
-                    smooth: true
+                    //
                     anchors.top: parent.top
                     anchors.topMargin: 72
                     anchors.rightMargin: 20
@@ -245,7 +245,7 @@ import QtQuick 1.1
                     anchors.leftMargin: 30
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
-                    smooth: true
+                    //
                     font.pixelSize: 15
                     visible: false
                     styleColor: "#ffffff"

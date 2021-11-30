@@ -30,7 +30,7 @@ Rectangle {
     color: "#00030202"
     radius: 100
     opacity: opacidadRectPrincipal
-    smooth: true
+    //
     border.width: 2
     border.color: "#fffdfd"
 
@@ -146,7 +146,7 @@ Rectangle {
     Image {
         id: image1
         clip: true
-        smooth: true
+        //
         asynchronous: true
         anchors.fill: parent
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/FlechaDerecha.png"

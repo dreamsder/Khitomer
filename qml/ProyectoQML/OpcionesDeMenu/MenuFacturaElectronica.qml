@@ -29,7 +29,7 @@ Rectangle {
     width: 500
     height: 500
     color: "#00000000"
-    smooth: true
+    //
 
     Text {
         id: txtTituloMenuOpcion
@@ -45,7 +45,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -100,7 +100,7 @@ Rectangle {
             largoMaximo: 25
             colorDeTitulo: "#333333"
             textoInputBox: modelo_CFE_ParametrosGenerales.retornaValor("password")
-            smooth: true
+            //
             echoMode: 2
             textoDeFondo: "clave privada"
             botonBorrarTextoVisible: true
@@ -234,7 +234,7 @@ Rectangle {
         y: 55
         height: 30
         visible: true
-        smooth: true
+        //
         spacing: 15
         anchors.bottom: flow1.top
         anchors.rightMargin: 10
@@ -324,7 +324,7 @@ Rectangle {
             color: "#d93e3e"
             text: qsTr("Información:")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -340,7 +340,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -356,7 +356,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0

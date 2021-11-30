@@ -33,7 +33,7 @@ Rectangle{
     radius: 1
     border.width: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
     Text {
@@ -42,7 +42,7 @@ Rectangle{
         text: codigoArticulo+" - "+modeloArticulos.retornaDescripcionArticulo(codigoArticulo)
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
@@ -100,7 +100,7 @@ Rectangle{
         text: "Precio actual: "+modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaCodigoMoneda(codigoArticulo))+" "+precioActual+"  "
         anchors.right: lblNuevoPrecio.left
         anchors.rightMargin: 10
-        smooth: true
+        //
         font.family: "Arial"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 5
@@ -118,7 +118,7 @@ Rectangle{
         text: nuevoPrecio +" "+modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaCodigoMoneda(codigoArticulo))+" :Nuevo precio"
         anchors.left: parent.left
         anchors.leftMargin: rectListaItem.width/2
-        smooth: true
+        //
         anchors.right: parent.right
         anchors.rightMargin: 40
         anchors.bottom: parent.bottom
@@ -135,7 +135,7 @@ Rectangle{
         x: -4
         y: 5
         text: qsTr("<x")
-        smooth: true
+        //
         font.pixelSize: 10
         anchors.top: parent.top
         anchors.topMargin: 0

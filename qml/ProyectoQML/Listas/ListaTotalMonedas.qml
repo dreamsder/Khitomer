@@ -30,7 +30,7 @@ Rectangle{
     height: 16
     color: "#9294c6"
     radius: 0
-    smooth: true
+    //
     opacity: 1
     property double totalidad: parseFloat(modeloLiquidaciones.retornaValorTotalDocumentosEnLiquidaciones(codigoDeLiquidacion,txtVendedorDeLaLiquidacion.codigoValorSeleccion,codigoMoneda))
 
@@ -38,7 +38,7 @@ Rectangle{
         id:lblTotalMonedas
         color: "white"
         text: "Total "+simboloMoneda+": "+totalidad.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
-        smooth: true
+        //
         font.bold: false
         verticalAlignment: Text.AlignVCenter
         anchors.left: parent.left

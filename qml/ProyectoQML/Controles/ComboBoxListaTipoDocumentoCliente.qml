@@ -92,7 +92,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: -20
-        smooth: true
+        //
         height: listview1.contentHeight+40
         visible: false
         z:2000
@@ -103,7 +103,7 @@ Rectangle {
             y: -34
             color: "#1e646262"
             radius: 6
-            smooth: true
+            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -149,7 +149,7 @@ Rectangle {
                             id: texto1
                             focus: true
                             text: descripcionTipoDocumentoCliente
-                            smooth: true
+                            //
                             font.pointSize: 10
                             color:"#212121"
                             styleColor: "white"
@@ -187,7 +187,7 @@ Rectangle {
                                 color: "#5358be"
                                 width: listview1.width+20
                                 radius: 1
-                                smooth: true
+                                //
                                 opacity: 0
                                 border.width: 0
                                 border.color: "#000000"
@@ -272,7 +272,7 @@ Rectangle {
             height: 2
             color: "#201c1c"
             radius: 1
-            smooth: true
+            //
             anchors.bottom: parent.bottom
             visible: true
             anchors.rightMargin: 1
@@ -297,7 +297,7 @@ Rectangle {
             anchors.topMargin: 10
             anchors.left: parent.left
             anchors.leftMargin: 5
-            smooth: true
+            //
             font.pixelSize: 9
         }
 
@@ -321,7 +321,7 @@ Rectangle {
             y: 35
             width: 18
             height: 18
-            smooth: true
+            //
             anchors.top: parent.top
             anchors.topMargin: 5
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
@@ -353,7 +353,7 @@ Rectangle {
             color: "#000000"
             text: qsTr("")
             font.family: "Arial"
-            smooth: true
+            //
             anchors.topMargin: 1
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -404,7 +404,7 @@ Rectangle {
             width: 16
             height: 16
             asynchronous: true
-            smooth: true
+            //
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/FlechaAbajoComboBox.png"
             anchors.rightMargin: 2
             anchors.verticalCenter: parent.verticalCenter
@@ -436,7 +436,7 @@ Rectangle {
         text: qsTr("Titulo:")
         font.family: "Arial"
         verticalAlignment: Text.AlignBottom
-        smooth: true
+        //
         font.pixelSize: 10
         anchors.top: parent.top
         anchors.topMargin: 0
@@ -496,7 +496,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 0
         asynchronous: true
-        smooth: true
+        //
         MouseArea {
             id: mouse_area2
             hoverEnabled: true

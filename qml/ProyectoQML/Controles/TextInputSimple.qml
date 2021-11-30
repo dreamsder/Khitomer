@@ -136,7 +136,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        smooth: true
+        //
         border.width: 1
         border.color: "#686b71"
 
@@ -190,7 +190,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.left: parent.left
             font.family: "Arial"
-            smooth: true
+            //
             horizontalAlignment: TextInput.AlignHCenter
             inputMask: ""
             echoMode: TextInput.Normal
@@ -274,7 +274,7 @@ Rectangle {
                 color: "#64000000"
                 text: qsTr("<X")
                 font.family: "Arial"
-                smooth: true
+                //
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -303,7 +303,7 @@ Rectangle {
         text: qsTr("Titulo:")
         font.family: "Arial"
         verticalAlignment: Text.AlignBottom
-        smooth: true
+        //
         font.bold: true
         anchors.bottom: recTextInput.top
         anchors.bottomMargin: 0
@@ -316,7 +316,7 @@ Rectangle {
         id: imageBuscar
         y: 16
         height: 20
-        smooth: true
+        //
         anchors.left: recTextInput.right
         anchors.leftMargin: 0
         anchors.bottom: parent.bottom
@@ -403,7 +403,7 @@ Rectangle {
         color: "#d93e3e"
         text: qsTr("")
         font.family: "Arial"
-        smooth: true
+        //
         visible: false
         font.pixelSize: 12
         anchors.bottom: recTextInput.top

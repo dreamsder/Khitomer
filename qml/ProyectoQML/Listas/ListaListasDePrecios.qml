@@ -31,7 +31,7 @@ Rectangle{
     color: "#e9e8e9"
     radius: 1
     border.color: "#aaaaaa"
-    smooth: true
+    //
     opacity: 1
 
 
@@ -40,7 +40,7 @@ Rectangle{
         text: codigoListaPrecio + " - "+ descripcionListaPrecio
         font.family: "Arial"
         opacity: 0.900
-        smooth: true
+        //
         font.pointSize: 10
         font.bold: true
         verticalAlignment: Text.AlignVCenter
@@ -177,7 +177,7 @@ Rectangle{
         height: 1
         color: "#975f5f"
         visible: false
-        smooth: true
+        //
         opacity: 0.500
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2
@@ -209,7 +209,7 @@ Rectangle{
             width: 210
             text: "Vigencia:  desde  "+vigenciaDesdeFecha+"  hasta  "+vigenciaHastaFecha
             font.family: "Arial"
-            smooth: true
+            //
             opacity: 0.500
             font.pixelSize: 11
             height: txtFechaVigenciaDesde.implicitHeight
@@ -222,7 +222,7 @@ Rectangle{
             height: txtCantidadDeArticulos.implicitHeight
             text: "Cantidad de artículos: "+ modeloListaPrecioArticulos.retornaCantidadArticulosEnListaPrecio(codigoListaPrecio)
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 11
             opacity: 0.500
         }

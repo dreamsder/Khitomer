@@ -27,7 +27,7 @@ Rectangle {
     id: rectIndicadorOpcion
     width: 25
     height: 25
-    smooth: true
+    //
     rotation: 45
     radius: 1
 
@@ -36,7 +36,7 @@ Rectangle {
 
     MouseArea {
         id: mouse_area1
-        smooth: true
+        //
         hoverEnabled: true
         anchors.fill: parent
         onClicked: clic()

@@ -29,7 +29,7 @@ Rectangle {
     width: 500
     height: 500
     color: "#00000000"
-    smooth: true
+    //
 
 
     function scrollToEnd() {
@@ -52,7 +52,7 @@ Rectangle {
         anchors.topMargin: -10
         anchors.right: parent.right
         anchors.rightMargin: 40
-        smooth: true
+        //
         font.pixelSize: 23
     }
 
@@ -63,7 +63,7 @@ Rectangle {
         anchors.top: txtTituloMenuOpcion.bottom
         anchors.topMargin: 20
         visible: true
-        smooth: true
+        //
         spacing: 15
         anchors.rightMargin: 10
         anchors.right: parent.right
@@ -95,7 +95,7 @@ Rectangle {
             color: "#d93e3e"
             text: qsTr("Información:")
             font.family: "Arial"
-            smooth: true
+            //
             font.pixelSize: 14
             style: Text.Raised
             visible: false
@@ -111,7 +111,7 @@ Rectangle {
         id: rectLineaVerticalMenuGris
         height: 1
         color: "#abb2b1"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 5
         anchors.rightMargin: 0
@@ -127,7 +127,7 @@ Rectangle {
         x: -7
         height: 1
         color: "#ffffff"
-        smooth: true
+        //
         anchors.top: rowBarraDeHerramientas.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 0
@@ -219,7 +219,7 @@ Rectangle {
             height: flickable1.visibleArea.heightRatio * flickable1.height+18
             y:flickable1.visibleArea.yPosition * flickable1.height-5
             color: "#000000"
-            smooth: true
+            //
             opacity: 0.500
             radius: 2
             anchors.right: flickable1.right
