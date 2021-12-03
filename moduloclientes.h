@@ -42,7 +42,9 @@ public:
                        , const int &codigoTipoProcedenciaCliente,
 
                        const QString &fechaNacimiento,
-                       const QString &permiteFacturaCredito
+                       const QString &permiteFacturaCredito,
+                       const int &codigoMonedaDefault,
+                       const int &codigoFormasDePagoDefault
                        );
 
 
@@ -82,7 +84,8 @@ public:
 
    QString fechaNacimiento() const;
    QString permiteFacturaCredito() const;
-
+   int codigoMonedaDefault() const;
+   int codigoFormasDePagoDefault() const;
 
 private:
     QString m_codigoCliente;
@@ -118,7 +121,8 @@ private:
     int m_codigoTipoProcedenciaCliente;
     QString m_fechaNacimiento;
     QString m_permiteFacturaCredito;
-
+    int m_codigoMonedaDefault;
+    int m_codigoFormasDePagoDefault;
 
 };
 
@@ -156,7 +160,9 @@ public:
         codigoTipoDocumentoClienteRole,
         codigoTipoProcedenciaClienteRole,
         fechaNacimientoRole,
-        permiteFacturaCreditoRole
+        permiteFacturaCreditoRole,
+        codigoMonedaDefaultRole,
+        codigoFormasDePagoDefaultRole
 
 
 
@@ -186,7 +192,7 @@ public:
             , QString , QString, QString
 
             , QString , QString, QString
-            , QString, QString, QString, QString) const;
+            , QString, QString, QString, QString, QString, QString) const;
 
     Q_INVOKABLE bool eliminarCliente(QString , QString) const;
 
@@ -195,6 +201,8 @@ public:
     Q_INVOKABLE bool retornaSiEsClienteWeb(QString ,QString ) const;
 
     Q_INVOKABLE bool retornaSiPermiteFacturaCredito(QString _codigoCliente,QString _tipoCliente) const;
+
+    Q_INVOKABLE QString retornaDatoGenericoCliente(QString _codigoCliente,QString _tipoCliente, QString _campo) const;
 
 
 

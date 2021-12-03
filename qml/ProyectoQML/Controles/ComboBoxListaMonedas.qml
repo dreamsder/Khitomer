@@ -66,6 +66,11 @@ Rectangle {
 
     }
 
+
+    function aceptarOClic(){
+        senialAlAceptarOClick()
+    }
+
     function cerrarComboBox(){
         rectPrincipalComboBoxAparecerYIn.stop()
         mouse_area1.enabled=true

@@ -709,6 +709,24 @@ Rectangle {
                 }
             }
 
+            ComboBoxListaFormasDePago {
+                id: cbListaFormasDePagoCliente
+                width: 250
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaFormaDePago")
+                textoTitulo: "Forma de pago por defecto:"
+                textoComboBox: ""
+                codigoValorSeleccion: ""
+            }
+
+            ComboBoxListaMonedas {
+                id: cbListaMonedaCliente
+                width: 130
+                textoTitulo: "Moneda por defecto:"
+                botonBuscarTextoVisible: false
+                codigoValorSeleccion: ""
+                textoComboBox: ""
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
+            }
 
 
 
@@ -1057,6 +1075,13 @@ Rectangle {
                 }else{
                     txtTipoProcedenciaCliente.codigoValorSeleccion="1";
                 }
+                if(!cbListaMonedaCliente.visible){
+                    cbListaMonedaCliente.codigoValorSeleccion="0";
+                }
+                if(!cbListaFormasDePagoCliente.visible){
+                    cbListaFormasDePagoCliente.codigoValorSeleccion="0";
+                }
+
 
                 txtMensajeInformacion.visible=true
                 txtMensajeInformacionTimer.stop()
@@ -1079,11 +1104,11 @@ Rectangle {
                         if(cedulaIdentidad==="-1ERROR"){
                             resultadoInsertarCliente="-6";
                         }else{
-                            txtRut.textoInputBox=cedulaIdentidad;
-                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito);
+                            txtRut.textoInputBox=cedulaIdentidad;                            
+                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion);
                         }
                     }else{
-                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito);
+                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion);
                     }
 
 
@@ -1158,6 +1183,11 @@ Rectangle {
                         txtTipoProcedenciaCliente.codigoValorSeleccion="-1"
                         txtFechaNacimiento.textoInputBox=""
 
+                        cbListaMonedaCliente.codigoValorSeleccion="0"
+                        cbListaMonedaCliente.textoComboBox=""
+                        cbListaFormasDePagoCliente.codigoValorSeleccion="0"
+                        cbListaFormasDePagoCliente.textoComboBox=""
+
                         cargarListasDePrecioCliente("","")
 
                         txtCodigoCliente.tomarElFoco()
@@ -1204,9 +1234,14 @@ Rectangle {
                         txtContacto.textoInputBox=""
                         txtHorario.textoInputBox=""
                         txtTipoProcedenciaCliente.textoComboBox=""
-                        txtTipoProcedenciaCliente.codigoValorSeleccion="-1"
+                        txtTipoProcedenciaCliente.codigoValorSeleccion="-1"                                                
                         txtFechaNacimiento.textoInputBox=""
                         chbEsClienteCredito.setActivo(false)
+
+                        cbListaMonedaCliente.codigoValorSeleccion="0"
+                        cbListaMonedaCliente.textoComboBox=""
+                        cbListaFormasDePagoCliente.codigoValorSeleccion="0"
+                        cbListaFormasDePagoCliente.textoComboBox=""
 
                         cargarListasDePrecioCliente("","")
 

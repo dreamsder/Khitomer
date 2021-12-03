@@ -113,6 +113,11 @@ Rectangle{
             txtTipoProcedenciaCliente.textoComboBox= modeloTipoProcedenciaCliente.retornaDescripcionTipoProcedenciaCliente(codigoTipoProcedenciaCliente)
 
 
+            cbListaMonedaCliente.codigoValorSeleccion=codigoMonedaDefault
+            cbListaMonedaCliente.textoComboBox=modeloMonedas.retornaDescripcionMoneda(codigoMonedaDefault)
+            cbListaFormasDePagoCliente.codigoValorSeleccion=codigoFormasDePagoDefault
+            cbListaFormasDePagoCliente.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(codigoFormasDePagoDefault)
+
             txtTipoValoracion.textoComboBox=descripcionTipoClasificacion
             txtTipoValoracion.codigoValorSeleccion=codigoTipoClasificacion
             txtCodigoCliente.enabled=false

@@ -240,6 +240,7 @@ bool Funciones::mensajeAdvertencia(QString mensaje) const{
     QMessageBox msgBox;
     msgBox.setText(mensaje);
     msgBox.setModal(true);
+    msgBox.setIcon(QMessageBox::Critical);
     msgBox.setWindowTitle("ATENCIÓN!!!: ");
     msgBox.setWindowIcon(QIcon("qrc:/qml/ProyectoQML/Imagenes/icono.png"));
     msgBox.setMinimumHeight(100);
@@ -1867,7 +1868,24 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
                 _iterador=false; return false;
             }
             break;
-
+        case 387:
+            if(!impactoCambioEnBD("ALTER TABLE Clientes ADD codigoMonedaDefault int(10) unsigned DEFAULT 0 NOT NULL;","388")){
+                _iterador=false; return false;
+            }
+            break;
+        case 388:
+            if(!impactoCambioEnBD("ALTER TABLE Clientes ADD codigoFormasDePagoDefault int(10) unsigned DEFAULT 0 NOT NULL;","389")){
+                _iterador=false; return false;
+            }
+            break;
+        case 389:
+            if(impactoCambioEnBD("ALTER TABLE Mantenimientos ADD clientesUsaFormaDePago char(1) DEFAULT '0' NOT NULL;","389")){
+                if(!impactoCambioEnBD("ALTER TABLE Mantenimientos ADD clientesUsaMoneda char(1) DEFAULT '0' NOT NULL;","390")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
+        //
         //
         //
 

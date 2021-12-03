@@ -75,6 +75,8 @@ ModuloClientes::ModuloClientes(QObject *parent)
     roles[fechaNacimientoRole] = "fechaNacimiento";
     roles[permiteFacturaCreditoRole] = "permiteFacturaCredito";
 
+    roles[codigoMonedaDefaultRole] = "codigoMonedaDefault";
+    roles[codigoFormasDePagoDefaultRole] = "codigoFormasDePagoDefault";
 
 
 
@@ -85,7 +87,8 @@ ModuloClientes::ModuloClientes(QObject *parent)
 }
 
 
-Cliente::Cliente(const QString &codigoCliente, const int &tipoCliente, const QString &rut, const QString &nombreCliente,const QString &razonSocial,const QString &direccion,const QString &esquina,const QString &numeroPuerta,const QString &telefono,const QString &telefono2,const QString &documento,const QString &codigoPostal, const QString &email,const QString &sitioWeb,const QString &usuarioAlta,const QString &observaciones,const int &tipoClasificacion,const int &codigoTipoCliente,const QString &descripcionTipoCliente,const int &codigoTipoClasificacion,const QString &descripcionTipoClasificacion,const QString &contacto,const QString &horario,const int &codigoPais,const int &codigoDepartamento,const int &codigoLocalidad,const int &codigoTipoDocumentoCliente,const int &codigoTipoProcedenciaCliente, const QString &fechaNacimiento, const QString &permiteFacturaCredito)
+Cliente::Cliente(const QString &codigoCliente, const int &tipoCliente, const QString &rut, const QString &nombreCliente,const QString &razonSocial,const QString &direccion,const QString &esquina,const QString &numeroPuerta,const QString &telefono,const QString &telefono2,const QString &documento,const QString &codigoPostal, const QString &email,const QString &sitioWeb,const QString &usuarioAlta,const QString &observaciones,const int &tipoClasificacion,const int &codigoTipoCliente,const QString &descripcionTipoCliente,const int &codigoTipoClasificacion,const QString &descripcionTipoClasificacion,const QString &contacto,const QString &horario,const int &codigoPais,const int &codigoDepartamento,const int &codigoLocalidad,const int &codigoTipoDocumentoCliente,const int &codigoTipoProcedenciaCliente, const QString &fechaNacimiento, const QString &permiteFacturaCredito
+,const int &codigoMonedaDefault,const int &codigoFormasDePagoDefault)
 
     : m_codigoCliente(codigoCliente), m_tipoCliente(tipoCliente), m_rut(rut), m_nombreCliente(nombreCliente), m_razonSocial(razonSocial), m_direccion(direccion),  m_esquina(esquina), m_numeroPuerta(numeroPuerta), m_telefono(telefono), m_telefono2(telefono2), m_documento(documento), m_codigoPostal(codigoPostal), m_email(email),
 
@@ -94,10 +97,14 @@ Cliente::Cliente(const QString &codigoCliente, const int &tipoCliente, const QSt
       m_codigoTipoDocumentoCliente(codigoTipoDocumentoCliente),
       m_codigoTipoProcedenciaCliente(codigoTipoProcedenciaCliente),
       m_fechaNacimiento(fechaNacimiento),
-      m_permiteFacturaCredito(permiteFacturaCredito)
+      m_permiteFacturaCredito(permiteFacturaCredito),
+      m_codigoMonedaDefault(codigoMonedaDefault),
+      m_codigoFormasDePagoDefault(codigoFormasDePagoDefault)
 
 {
 }
+
+
 
 QString Cliente::codigoCliente() const
 {
@@ -219,6 +226,16 @@ QString Cliente::permiteFacturaCredito() const
 {
     return m_permiteFacturaCredito;
 }
+int Cliente::codigoMonedaDefault() const
+{
+    return m_codigoMonedaDefault;
+}
+int Cliente::codigoFormasDePagoDefault() const
+{
+    return m_codigoFormasDePagoDefault;
+}
+
+
 
 
 
@@ -252,7 +269,7 @@ void ModuloClientes::buscarCliente(QString campo, QString datoABuscar){
         QSqlRecord rec = q.record();
 
         ModuloClientes::reset();
-        if(q.record().count()>0){
+        if(q.record().count()>0){          
 
             while (q.next()){
                 ModuloClientes::addCliente(Cliente(q.value(rec.indexOf("codigoCliente")).toString(), q.value(rec.indexOf("tipoCliente")).toInt(), q.value(rec.indexOf("rut")).toString(),  q.value(rec.indexOf("nombreCliente")).toString(),     q.value(rec.indexOf("razonSocial")).toString(),  q.value(rec.indexOf("direccion")).toString(),  q.value(rec.indexOf("esquina")).toString(),  q.value(rec.indexOf("numeroPuerta")).toString(), q.value(rec.indexOf("telefono")).toString(),  q.value(rec.indexOf("telefono2")).toString(),  q.value(rec.indexOf("documento")).toString(), q.value(rec.indexOf("codigoPostal")).toString(), q.value(rec.indexOf("email")).toString(), q.value(rec.indexOf("sitioWeb")).toString(), q.value(rec.indexOf("usuarioAlta")).toString() ,q.value(rec.indexOf("observaciones")).toString() ,q.value(rec.indexOf("tipoClasificacion")).toInt()
@@ -265,6 +282,8 @@ void ModuloClientes::buscarCliente(QString campo, QString datoABuscar){
                                                    ,q.value(rec.indexOf("codigoTipoProcedenciaCliente")).toInt()
                                                    ,q.value(rec.indexOf("fechaNacimiento")).toString()
                                                    ,q.value(rec.indexOf("permiteFacturaCredito")).toString()
+                                                   ,q.value(rec.indexOf("codigoMonedaDefault")).toInt()
+                                                   ,q.value(rec.indexOf("codigoFormasDePagoDefault")).toInt()
 
                                                    ));
             }
@@ -380,6 +399,9 @@ QVariant ModuloClientes::data(const QModelIndex & index, int role) const {
 
     else if (role == permiteFacturaCreditoRole){ return cliente.permiteFacturaCredito(); }
 
+    else if (role == codigoMonedaDefaultRole){ return cliente.codigoMonedaDefault(); }
+    else if (role == codigoFormasDePagoDefaultRole){ return cliente.codigoFormasDePagoDefault(); }
+
 
 
     return QVariant();
@@ -437,7 +459,9 @@ qlonglong ModuloClientes::primerRegistroDeClienteEnBase() const {
     }
 }
 
-QString ModuloClientes::insertarCliente(QString _codigoCliente,QString _tipoCliente, QString _nombreCliente, QString _razonSocial, QString _rut, QString _tipoClasificacion,QString _direccion,QString _esquina, QString _numeroPuerta, QString _telefono, QString _telefono2, QString _codigoPostal, QString _email, QString _sitioWeb, QString _contacto,QString _observaciones,QString _usuarioAlta, QString _horario, QString _codigoPais, QString _codigoDepartamento, QString _codigoLocalidad, QString _codigoTipoDocumentoCliente, QString  _codigoTipoProcedenciaCliente, QString _fechaNacimiento,QString _permiteFacturaCredito) const {
+QString ModuloClientes::insertarCliente(QString _codigoCliente,QString _tipoCliente, QString _nombreCliente, QString _razonSocial, QString _rut, QString _tipoClasificacion,QString _direccion,QString _esquina, QString _numeroPuerta, QString _telefono, QString _telefono2, QString _codigoPostal, QString _email, QString _sitioWeb, QString _contacto,QString _observaciones,QString _usuarioAlta, QString _horario, QString _codigoPais, QString _codigoDepartamento, QString _codigoLocalidad, QString _codigoTipoDocumentoCliente, QString  _codigoTipoProcedenciaCliente, QString _fechaNacimiento,QString _permiteFacturaCredito,QString _codigoMonedaDefault, QString _codigoFormasDePagoDefault) const {
+
+
 
     // -1  No se pudo conectar a la base de datos
     // -2  No se pudo actualizar el cliente
@@ -495,7 +519,7 @@ Database::chequeaStatusAccesoMysql();
             if(query.first()){
                 if(query.value(0).toString()!=""){
 
-                    if(query.exec("update Clientes set nombreCliente='"+_nombreCliente+"', razonSocial='"+_razonSocial+"',rut='"+_rut+"',tipoClasificacion='"+_tipoClasificacion+"', direccion='"+_direccion+"',esquina='"+_esquina+"', numeroPuerta='"+_numeroPuerta+"',telefono='"+_telefono+"',telefono2='"+_telefono2+"',codigoPostal='"+_codigoPostal+"',email='"+_email+"',sitioWeb='"+_sitioWeb+"',contacto='"+_contacto+"',observaciones='"+_observaciones+"',usuarioAlta='"+_usuarioAlta+"',horario='"+_horario+"',codigoPais='"+_codigoPais+"',codigoDepartamento='"+_codigoDepartamento+"',codigoLocalidad='"+_codigoLocalidad+"',sincronizadoWeb='0',codigoTipoDocumentoCliente='"+_codigoTipoDocumentoCliente+"',codigoTipoProcedenciaCliente='"+_codigoTipoProcedenciaCliente+"',fechaNacimiento='"+_fechaNacimiento+"',permiteFacturaCredito='"+_permiteFacturaCredito+"'   where codigoCliente='"+_codigoCliente+"' and tipoCliente='"+_tipoCliente+"'")){
+                    if(query.exec("update Clientes set nombreCliente='"+_nombreCliente+"', razonSocial='"+_razonSocial+"',rut='"+_rut+"',tipoClasificacion='"+_tipoClasificacion+"', direccion='"+_direccion+"',esquina='"+_esquina+"', numeroPuerta='"+_numeroPuerta+"',telefono='"+_telefono+"',telefono2='"+_telefono2+"',codigoPostal='"+_codigoPostal+"',email='"+_email+"',sitioWeb='"+_sitioWeb+"',contacto='"+_contacto+"',observaciones='"+_observaciones+"',usuarioAlta='"+_usuarioAlta+"',horario='"+_horario+"',codigoPais='"+_codigoPais+"',codigoDepartamento='"+_codigoDepartamento+"',codigoLocalidad='"+_codigoLocalidad+"',sincronizadoWeb='0',codigoTipoDocumentoCliente='"+_codigoTipoDocumentoCliente+"',codigoTipoProcedenciaCliente='"+_codigoTipoProcedenciaCliente+"',fechaNacimiento='"+_fechaNacimiento+"',permiteFacturaCredito='"+_permiteFacturaCredito+"',codigoMonedaDefault='"+_codigoMonedaDefault+"',codigoFormasDePagoDefault='"+_codigoFormasDePagoDefault+"'   where codigoCliente='"+_codigoCliente+"' and tipoCliente='"+_tipoCliente+"'")){
 
                         return "-7";
                     }else{
@@ -504,7 +528,7 @@ Database::chequeaStatusAccesoMysql();
 
                 }
             }else{
-                if(query.exec("insert INTO Clientes (codigoCliente,tipoCliente,nombreCliente,razonSocial,rut,tipoClasificacion,direccion,esquina,numeroPuerta,telefono,telefono2,codigoPostal,email,sitioWeb,contacto,observaciones,usuarioAlta,horario,fechaAlta,codigoPais,codigoDepartamento,codigoLocalidad,sincronizadoWeb,codigoTipoDocumentoCliente,codigoTipoProcedenciaCliente,fechaNacimiento,permiteFacturaCredito) values('"+_codigoCliente+"',"+_tipoCliente+",'"+_nombreCliente+"','"+_razonSocial+"','"+_rut+"','"+_tipoClasificacion+"','"+ _direccion +"','"+ _esquina +"','" + _numeroPuerta+"','"+_telefono+"','"+_telefono2+"','"+_codigoPostal+"','"+_email+"','"+_sitioWeb+"','"+_contacto+"','"+_observaciones+"','" +_usuarioAlta+"','"+_horario+"','"+func_Fecha.fechaHoraDeHoy()+"','"+_codigoPais+"','"+_codigoDepartamento+"','"+_codigoLocalidad+"','0','"+_codigoTipoDocumentoCliente+"','"+_codigoTipoProcedenciaCliente+"','"+_fechaNacimiento+"','"+_permiteFacturaCredito+"' )")){
+                if(query.exec("insert INTO Clientes (codigoCliente,tipoCliente,nombreCliente,razonSocial,rut,tipoClasificacion,direccion,esquina,numeroPuerta,telefono,telefono2,codigoPostal,email,sitioWeb,contacto,observaciones,usuarioAlta,horario,fechaAlta,codigoPais,codigoDepartamento,codigoLocalidad,sincronizadoWeb,codigoTipoDocumentoCliente,codigoTipoProcedenciaCliente,fechaNacimiento,permiteFacturaCredito,codigoMonedaDefault,codigoFormasDePagoDefault ) values('"+_codigoCliente+"',"+_tipoCliente+",'"+_nombreCliente+"','"+_razonSocial+"','"+_rut+"','"+_tipoClasificacion+"','"+ _direccion +"','"+ _esquina +"','" + _numeroPuerta+"','"+_telefono+"','"+_telefono2+"','"+_codigoPostal+"','"+_email+"','"+_sitioWeb+"','"+_contacto+"','"+_observaciones+"','" +_usuarioAlta+"','"+_horario+"','"+func_Fecha.fechaHoraDeHoy()+"','"+_codigoPais+"','"+_codigoDepartamento+"','"+_codigoLocalidad+"','0','"+_codigoTipoDocumentoCliente+"','"+_codigoTipoProcedenciaCliente+"','"+_fechaNacimiento+"','"+_permiteFacturaCredito+"','"+_codigoMonedaDefault+"','"+_codigoFormasDePagoDefault+"' )")){
                     return _codigoCliente;
                 }else{
                     return "-3";
@@ -655,5 +679,40 @@ bool ModuloClientes::retornaSiPermiteFacturaCredito(QString _codigoCliente,QStri
         }
     }else{
         return false;
+    }
+}
+
+QString ModuloClientes::retornaDatoGenericoCliente(QString _codigoCliente,QString _tipoCliente, QString _campo) const {
+    bool conexion=true;
+
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select  "+_campo+"  from Clientes C  where C.codigoCliente='"+_codigoCliente+"' and C.tipoCliente='"+_tipoCliente+"'")) {
+
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+
+                    return query.value(0).toString();
+
+                }else{
+                    return "0";
+                }
+            }else{return "0";}
+
+        }else{
+            return "0";
+        }
+    }else{
+        return "0";
     }
 }

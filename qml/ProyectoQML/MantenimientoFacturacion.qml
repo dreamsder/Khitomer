@@ -1184,6 +1184,18 @@ Rectangle {
 
 
 
+    function borrarArticulos(){
+
+        etiquetaTotal.setearPorcenjeDescuento(0.00)
+        etiquetaTotal.sereaTotalesSinDescuento();
+        etiquetaTotal.sereaTotales()
+        etiquetaTotalMedioDePago.sereaTotalesSinDescuento();
+        etiquetaTotalMedioDePago.sereaTotales()
+        modeloListaMediosDePagoAgregados.clear()
+        modeloItemsFactura.clear();
+
+    }
+
     /////
     ///// Crea una nueva factura, borrando todos los datos, y restaurando los controles
     function crearNuevaFactura(){
@@ -2828,6 +2840,29 @@ Rectangle {
                         }
 
 
+                        var monedaDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoMonedaDefault");
+                        var formaDePagoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoFormasDePagoDefault");
+
+                        // Seteo la forma de pago por defecto para el cliente
+                        if(formaDePagoDefaulCliente!="0"){
+                            if(cbListaFormasDePago.visible){
+                                cbListaFormasDePago.codigoValorSeleccion=formaDePagoDefaulCliente
+                                cbListaFormasDePago.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(formaDePagoDefaulCliente)
+                            }
+                        }
+
+                        if(monedaDefaulCliente!="0"){
+                            if(cbListaMonedasEnFacturacion.codigoValorSeleccion!=monedaDefaulCliente){
+                                cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
+                                cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
+                                cbListaMonedasEnFacturacion.aceptarOClic()
+                                borrarArticulos()
+                            }
+                        }
+
+
+
+
                         if(modeloconfiguracion.retornaValorConfiguracion("UTILIZA_CONTROL_CLIENTE_CREDITO")=="1"){
                             if(txtCodigoClienteFacturacion.textoInputBox.trim()!="" && lblRazonSocialCliente.text.trim()!=""){
                                 if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
@@ -2844,7 +2879,7 @@ Rectangle {
                         }
 
                     }
-                }
+                }// fin onEnter
             }
 
 
@@ -5884,6 +5919,16 @@ Rectangle {
         }
 
         BotonBarraDeHerramientas {
+            id: separador
+            toolTip: ""
+            source: ""
+            enabled: false
+        }
+
+
+
+
+        BotonBarraDeHerramientas {
             id: botonGuardarFacturaEmitir
             toolTip: "Guardar factura"
             z: 7
@@ -6757,6 +6802,13 @@ Rectangle {
         }
 
         BotonBarraDeHerramientas {
+            id: separador2
+            toolTip: ""
+            source: ""
+            enabled: false
+        }
+
+        BotonBarraDeHerramientas {
             id: botonEliminarFactura
             visible: false
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/BorrarCliente.png"
@@ -6801,6 +6853,10 @@ Rectangle {
                 }
             }
         }
+
+
+
+
 
 
         BotonBarraDeHerramientas {
