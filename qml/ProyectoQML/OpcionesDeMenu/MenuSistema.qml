@@ -266,6 +266,7 @@ Rectangle {
         /// 1.16.20 :Se agrega soporte para clientes con credito. Si el cliente tiene marcada el combobox Puede hcaer documentos credito, podra facturar tipos de documentos credito, sino, sera solo contado.
         /// 1.16.21 :Se agrega soporte para imix Nube y facturas con iva excento. Se agrega Tabla TipoDocumentoImix para tener a mano los tipos de envios segun documento.
         ///         :Se agrega el campo Comentario en la tabla Documentos y se agrega en el mantenimiento de facturación.
+        ///         :Corrección en reportes por procedencia, dado que la fecha de alta es diferente a la fecha por defecto y hay que recortarla a 10 caracteres.
 
 
         Text {
