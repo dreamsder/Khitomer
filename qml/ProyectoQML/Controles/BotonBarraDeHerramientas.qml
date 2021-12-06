@@ -67,29 +67,28 @@ Item {
 
 
             onEntered: {
-
+                timer1.start()
                 imagenIconoOpacidadOut.stop()
                 imagenIconoOpacidadIn.start()
             }
 
             onExited: {
-
+                timer1.stop()
                 rectToolTipTextBarraHerramientas.visible=false
                 imagenIconoOpacidadIn.stop()
                 imagenIconoOpacidadOut.start()
             }
 
-
             onPressed: {
+                timer1.stop()
                 rectToolTipTextBarraHerramientas.visible=false
                 imagenIconoScaleOut.stop()
-                imagenIconoScaleIn.start()
-
+                imagenIconoScaleIn.start()                
             }
             onReleased: {
+                timer1.start()
                 imagenIconoScaleIn.stop()
-                imagenIconoScaleOut.start()
-
+                imagenIconoScaleOut.start()                
             }
         }
     }
@@ -152,6 +151,22 @@ Item {
         }
 
     }
+
+    Timer {
+           id:timer1
+           interval: 600;
+           running: false;
+           repeat: false;
+           onTriggered: {
+               if(toolTipText.text!=""){
+                   rectToolTipTextBarraHerramientas.x=itemBotonBarraHerramientas.width+10
+                   rectToolTipTextBarraHerramientas.y=itemBotonBarraHerramientas.height/4
+                   rectToolTipTextBarraHerramientas.visible=true
+               }
+           }
+
+
+       }
 
 
     Text {

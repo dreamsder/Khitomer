@@ -2851,12 +2851,20 @@ Rectangle {
                             }
                         }
 
+
                         if(monedaDefaulCliente!="0"){
                             if(cbListaMonedasEnFacturacion.codigoValorSeleccion!=monedaDefaulCliente){
+                                // si hay articulo, aviso que voy a borrarlos
+                                if(modeloItemsFactura.count!=0){
+                                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
+                                }
+
                                 cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
                                 cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
                                 cbListaMonedasEnFacturacion.aceptarOClic()
                                 borrarArticulos()
+
+
                             }
                         }
 
@@ -2920,6 +2928,7 @@ Rectangle {
                 height: 25
                 color: "#f55858"
                 radius: 7
+                visible: txtCodigoClienteFacturacion.visible
                 clip: true
                 Text {
                     id: lblRazonSocialCliente
@@ -6508,6 +6517,14 @@ Rectangle {
         }
 
         BotonBarraDeHerramientas {
+            id: separador2
+            toolTip: ""
+            source: ""
+            enabled: false
+        }
+
+
+        BotonBarraDeHerramientas {
             id: botonGuardarFacturaPendiente
             rectanguloSecundarioVisible: true
             opacidad: 0.200
@@ -6802,7 +6819,7 @@ Rectangle {
         }
 
         BotonBarraDeHerramientas {
-            id: separador2
+            id: separador3
             toolTip: ""
             source: ""
             enabled: false

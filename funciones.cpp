@@ -256,10 +256,18 @@ bool Funciones::mensajeAdvertencia(QString mensaje) const{
 }
 bool Funciones::mensajeAdvertenciaOk(QString mensaje) const{
 
-
     QMessageBox msgBox;
     msgBox.setText(mensaje);
     msgBox.setModal(true);
+
+    if(mensaje.contains("error",Qt::CaseInsensitive)){
+        msgBox.setIcon(QMessageBox::Critical);
+    }else{
+        msgBox.setIcon(QMessageBox::Information);
+    }
+
+
+
     msgBox.setWindowTitle("ATENCIÓN!!!: ");
     msgBox.setWindowIcon(QIcon("qrc:/qml/ProyectoQML/Imagenes/icono.png"));
     msgBox.setMinimumHeight(100);
@@ -269,6 +277,7 @@ bool Funciones::mensajeAdvertenciaOk(QString mensaje) const{
 
     if(msgBox.exec()!=1024)
         return false;
+
 
     return true;
 
