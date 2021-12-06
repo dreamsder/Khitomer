@@ -1900,6 +1900,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 391:
                 if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;REPLACE INTO `Reportes` VALUES (68,2,'Clientes según procedencia entre fechas','SELECT TPC.descripcionTipoProcedenciaCliente\\'Procedencia\\', count(CLI.codigoTipoProcedenciaCliente)\\'Cantidad\\'  FROM Clientes CLI  join TipoProcedenciaCliente TPC on TPC.codigoTipoProcedenciaCliente=CLI.codigoTipoProcedenciaCliente   where  CLI.tipoCliente=1 and left(CLI.fechaAlta,10) between \\'@_desde\\' and \\'@_hasta\\'  group by CLI.codigoTipoProcedenciaCliente;','SELECT TPC.descripcionTipoProcedenciaCliente\\'Procedencia\\', count(CLI.codigoTipoProcedenciaCliente)\\'Cantidad\\',\\'#\\',count(CLI.codigoTipoProcedenciaCliente)  FROM Clientes CLI  join TipoProcedenciaCliente TPC on TPC.codigoTipoProcedenciaCliente=CLI.codigoTipoProcedenciaCliente   where  CLI.tipoCliente=1 and left(CLI.fechaAlta,10) between \\'@_desde\\' and \\'@_hasta\\'  group by CLI.codigoTipoProcedenciaCliente;','','0','0','0','0','0','1','1','0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0','0'); SET FOREIGN_KEY_CHECKS=1;","392")){
                 _iterador=false; return false; } break;
+        case 392:
+                if(!impactoCambioEnBD("REPLACE INTO ReportesMenu values(14,'Marketing');","393")){
+                _iterador=false; return false; } break;
         //
         //
         //
