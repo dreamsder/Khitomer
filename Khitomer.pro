@@ -1,6 +1,6 @@
 #/*********************************************************************
 #Khitomer - Sistema de facturación
-#Copyright (C) <2012-2021>  <Cristian Montano>
+#Copyright (C) <2012-2022>  <Cristian Montano>
 #
 #Este archivo es parte de Khitomer.
 #

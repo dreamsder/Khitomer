@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2021>  <Cristian Montano>
+Copyright (C) <2012-2022>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -274,7 +274,7 @@ Rectangle {
             x: 0
             y: 138
             color: "#2b2a2a"
-            text: qsTr("Copyright (C) <2012-2021>  Dreamsder")
+            text: qsTr("Copyright (C) <2012-2022>  Dreamsder")
             wrapMode: Text.NoWrap
             font.family: "Arial"
             font.bold: false
@@ -308,7 +308,7 @@ Rectangle {
             x: 0
             y: 2
             color: "#2b2a2a"
-            text: qsTr("E-mail: ventas@dreamsder.com  -  info@dreamsder.com")
+            text: qsTr("E-mail: cristianmontano@gmail.com")
             //
             visible: false
             font.pixelSize: 12
@@ -339,7 +339,7 @@ Rectangle {
         TextEdit {
             id: txtCreditos
             color: "#2b2a2a"
-            text: "Contribuyentes: Maria Montano - mmontano@dreamsder.com\n                          Cristian Montano - cmontano@dreamsder.com\nLibreria XLS creada por: Yap Chun Wei - Martin Fuchs - Ami Castonguay - Long Wenbiao\nLibreria JSON creada por: Eeli Reilin\nLibreria base64 creada por: René Nyffenegger\nLibreria base64-NibbleAndAHalf creada por:  William Sherif\nLibreria CURL creada por:  Daniel Stenberg"
+            text: "Contribuyentes: Maria Montano - mmontano@dreamsder.com\n                          Cristian Montano - cristianmontano@gmail.com\nLibreria XLS creada por: Yap Chun Wei - Martin Fuchs - Ami Castonguay - Long Wenbiao\nLibreria JSON creada por: Eeli Reilin\nLibreria base64 creada por: René Nyffenegger\nLibreria base64-NibbleAndAHalf creada por:  William Sherif\nLibreria CURL creada por:  Daniel Stenberg"
             //
             font.pixelSize: 12
             font.family: "Arial"
