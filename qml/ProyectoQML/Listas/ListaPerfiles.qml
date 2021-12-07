@@ -31,7 +31,6 @@ Rectangle{
     color: "#e9e8e9"
     radius: 1
     border.color: "#aaaaaa"
-    //
     opacity: 1
 
 
@@ -241,6 +240,14 @@ Rectangle{
             }else{
                 cbxpermiteCargaRapidaDePrecioListaPrecio.setActivo(true)
             }
+
+
+            if(permiteUsarMenuAvanzadoUsuarios==0){
+                cbxAccedeAlMenuUsuarios.setActivo(false)
+            }else{
+                cbxAccedeAlMenuUsuarios.setActivo(true)
+            }
+
             if(permiteUsarMenuAvanzadoPermisos==0){
                 cbxAccedeAlMenuPermisos.setActivo(false)
             }else{
