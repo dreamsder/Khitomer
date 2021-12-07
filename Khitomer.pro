@@ -253,6 +253,10 @@ win64:LIBS += "%systemdrive%\Khitomer\curlWin\libcurl.dll"
 
 #QMAKE_CXXFLAGS += -std=c++11
 
+DISTFILES += \
+    qml/ProyectoQML/OpcionesDeMenu/MenuGarantias.qml \
+    qml/ProyectoQML/Listas/ListaGenerica.qml
+
 
 
 

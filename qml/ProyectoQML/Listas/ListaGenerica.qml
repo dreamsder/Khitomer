@@ -20,7 +20,6 @@ junto a este programa.
 En caso contrario, consulte <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import "../Controles"
 
@@ -33,10 +32,11 @@ Rectangle{
     border.color: "#aaaaaa"
     opacity: 1
 
+    signal send( string datoUno, string datoDos)
 
     Text {
-        id:lblBanco
-        text: codigoBanco+" - "+descripcionBanco
+        id:lblEtiqueta
+        text: codigoItem+" - "+descripcionItem
         anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.right: parent.right
@@ -66,9 +66,7 @@ Rectangle{
             rectListaItemColorDeseleccionado.start()
         }
         onClicked: {
-            txtCodigoBanco.textoInputBox=codigoBanco
-            txtNombreBanco.textoInputBox=descripcionBanco
-            txtNombreBanco.tomarElFoco()
+            send(codigoItem,descripcionItem)        
         }
 
     }

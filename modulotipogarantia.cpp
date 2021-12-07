@@ -66,7 +66,7 @@ void ModuloTipoGarantia::limpiarListaTipoGarantia(){
 void ModuloTipoGarantia::buscarTipoGarantia(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -116,7 +116,7 @@ QVariant ModuloTipoGarantia::data(const QModelIndex & index, int role) const {
 QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoIva) const{
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -144,11 +144,126 @@ Database::chequeaStatusAccesoMysql();
         return "";
     }
 }
+QString ModuloTipoGarantia::retornaUltimoCodigo() const{
+    bool conexion=true;
+
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+
+        if(query.exec("select codigoTipoGarantia from TipoGarantia order by codigoTipoGarantia desc limit 1")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+                    return QString::number(query.value(0).toInt()+1);
+                }else{
+                    return "1";
+                }
+            }else{return "1";}
+        }else{
+            return "1";
+        }
+    }else{
+        return "1";
+    }
+}
+bool ModuloTipoGarantia::eliminar(QString _codigo) const {
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+        if(query.exec("select codigoTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigo+"'")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+                    if(query.exec("delete from TipoGarantia where codigoTipoGarantia='"+_codigo+"'")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }else{return false;}
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
 
 
 
+int ModuloTipoGarantia::insertarTipoGarantia(QString _codigo,QString _nombre){
+
+    // -1  No se pudo conectar a la base de datos
+    // -2  No se pudo actualizar
+    // 1  item dado de alta ok
+    // 2  Actualizacion correcta
+    // -3  no se pudo insertar
+    // -4 no se pudo realizar la consulta a la base de datos
+    // -5 El item no tiene los datos sufucientes para darse de alta.
+
+    if(_codigo.trimmed()=="" || _nombre.trimmed()=="" ){
+        return -5;
+    }
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
 
 
+        if(query.exec("select codigoTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigo+"'")) {
+
+            if(query.first()){
+
+                if(query.value(0).toString()!=""){
+
+                    if(query.exec("update TipoGarantia set descripcionTipoGarantia='"+_nombre+"'  where codigoTipoGarantia='"+_codigo+"'")){
+                        return 2;
+                    }else{
+                        return -2;
+                    }
+                }else{
+                    return -4;
+                }
+            }else{
+                if(query.exec("insert INTO TipoGarantia (codigoTipoGarantia,descripcionTipoGarantia) values('"+_codigo+"','"+_nombre+"')")){
+                    return 1;
+                }else{
+                    return -3;
+                }
+            }
+        }else{
+            return -4;
+        }
+    }else{
+        return -1;
+    }
+}
 
 
 

@@ -64,6 +64,8 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
+            menuGarantias.visible=false
 
         }else if(codigoDelMenu==2){
 
@@ -80,6 +82,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
 
         }else if(codigoDelMenu==3){
             menusistema1.visible=false
@@ -95,6 +98,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
 
         }else if(codigoDelMenu==4){
 
@@ -111,6 +115,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
 
         }else if(codigoDelMenu==5){
             menusistema1.visible=false
@@ -126,6 +131,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }
         else if(codigoDelMenu==6){
             menusistema1.visible=false
@@ -141,6 +147,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==7){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -155,6 +162,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==8){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -169,6 +177,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==9){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -183,6 +192,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==10){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -197,6 +207,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==11){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -211,6 +222,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==12){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -225,6 +237,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }else if(codigoDelMenu==13){
             menusistema1.visible=false
             menucotizaciones1.visible=false
@@ -239,6 +252,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }
         else if(codigoDelMenu==14){
             menusistema1.visible=false
@@ -254,6 +268,7 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=true
             menuLogSistema.visible=false
+            menuGarantias.visible=false
         }
         else if(codigoDelMenu==15){
             menusistema1.visible=false
@@ -269,6 +284,23 @@ Rectangle {
             menuIvas.visible=false
             menuFacturaElectronica.visible=false
             menuLogSistema.visible=true
+            menuGarantias.visible=false
+        }
+        else if(codigoDelMenu==16){
+            menusistema1.visible=false
+            menucotizaciones1.visible=false
+            menuusuarios1.visible=false
+            menuPermisos.visible=false
+            menuRubros.visible=false
+            menuCuentasBancarias.visible=false
+            menuPagoDeFinancieras.visible=false
+            menuBancos.visible=false
+            menuLocalidades.visible=false
+            menuTipoDeDocumentos.visible=false
+            menuIvas.visible=false
+            menuFacturaElectronica.visible=false
+            menuLogSistema.visible=false
+            menuGarantias.visible=true
         }
 
     }
@@ -436,6 +468,11 @@ Rectangle {
                 }
                 MenuLog{
                     id: menuLogSistema
+                    anchors.fill: parent
+                    visible: false
+                }
+                MenuGarantias{
+                    id: menuGarantias
                     anchors.fill: parent
                     visible: false
                 }
@@ -678,6 +715,10 @@ Rectangle {
                                         mostrarMenu(codigoMenu)
                                     }
                                     if(codigoMenu==15 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoLogDelSistema")){
+
+                                        mostrarMenu(codigoMenu)
+                                    }
+                                    if(codigoMenu==16 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoGarantia")){
 
                                         mostrarMenu(codigoMenu)
                                     }

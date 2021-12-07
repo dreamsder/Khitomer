@@ -24,17 +24,16 @@ import "../Controles"
 import "../Listas"
 
 Rectangle {
-    id: rectPrincipalMenuBanco
+    id: rectPrincipalMenu
     width: 500
     height: 500
     color: "#00000000"
-
 
     Text {
         id: txtTituloMenuOpcion
         x: 560
         color: "#4d5595"
-        text: qsTr("mantenimiento de bancos")
+        text: qsTr("mantenimiento de garantías")
         font.family: "Arial"
         style: Text.Normal
         font.bold: true
@@ -64,8 +63,7 @@ Rectangle {
         anchors.left: parent.left
 
         TextInputSimple {
-            id: txtCodigoBanco
-          //  width: 120
+            id: txtCodigoGarantia
             enFocoSeleccionarTodo: true
             colorDeTitulo: "#333333"
             textoInputBox: ""
@@ -73,16 +71,16 @@ Rectangle {
             inputMask: "000000;"
             largoMaximo: 6
             botonBorrarTextoVisible: true
-            textoTitulo: "Código banco:"
+            textoTitulo: "Código garantía:"
 
-            onEnter: txtNombreBanco.tomarElFoco()
+            onEnter: txtNombreGarantia.tomarElFoco()
 
-            onTabulacion: txtNombreBanco.tomarElFoco()
+            onTabulacion: txtNombreGarantia.tomarElFoco()
         }
 
 
         TextInputSimple {
-            id: txtNombreBanco
+            id: txtNombreGarantia
          //   width: 200
             colorDeTitulo: "#333333"
             botonBorrarTextoVisible: true
@@ -90,11 +88,11 @@ Rectangle {
             textoInputBox: ""
             botonBuscarTextoVisible: false
             largoMaximo: 45
-            textoTitulo: "Nombre banco:"
+            textoTitulo: "Nombre garantía:"
 
-            onEnter: txtCodigoBanco.tomarElFoco()
+            onEnter: txtCodigoGarantia.tomarElFoco()
 
-            onTabulacion: txtCodigoBanco.tomarElFoco()
+            onTabulacion: txtCodigoGarantia.tomarElFoco()
         }
     }
 
@@ -106,27 +104,27 @@ Rectangle {
         //
         spacing: 15
         BotonBarraDeHerramientas {
-            id: botonNuevoBanco
+            id: botonNuevaGarantia
             x: 33
             y: 10
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Bancos.png"
-            toolTip: "Nuevo banco"
+            toolTip: "Nueva garantía"
             anchors.verticalCenter: parent.verticalCenter
             z: 8
 
-            onClic: {                
-                txtCodigoBanco.textoInputBox=modeloListaBancos.retornaUltimoCodigoBanco()
-                txtNombreBanco.textoInputBox=""
-                txtNombreBanco.tomarElFoco()
+            onClic: {
+                txtCodigoGarantia.textoInputBox=modeloTipoGarantiaMantenimiento.retornaUltimoCodigo()
+                txtNombreGarantia.textoInputBox=""
+                txtNombreGarantia.tomarElFoco()
             }
         }
 
         BotonBarraDeHerramientas {
-            id: botonGuardarBanco
+            id: botonGuardarGarantia
             x: 61
             y: 3
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/GuardarCliente.png"
-            toolTip: "Gurardar banco"
+            toolTip: "Gurardar garantía"
             anchors.verticalCenter: parent.verticalCenter
             z: 7
             onClic: {
@@ -135,41 +133,41 @@ Rectangle {
                 txtMensajeInformacionTimer.stop()
                 txtMensajeInformacionTimer.start()
 
-                var resultadoConsulta = modeloListaBancos.insertarBanco(txtCodigoBanco.textoInputBox.trim(),txtNombreBanco.textoInputBox.trim())
+                var resultadoConsulta = modeloTipoGarantiaMantenimiento.insertarTipoGarantia(txtCodigoGarantia.textoInputBox.trim(),txtNombreGarantia.textoInputBox.trim())
 
                     if(resultadoConsulta==1){
 
                         txtMensajeInformacion.color="#2f71a0"
-                        txtMensajeInformacion.text="Banco "+ txtCodigoBanco.textoInputBox+" dado de alta correctamente"
+                        txtMensajeInformacion.text="Garantía "+ txtCodigoGarantia.textoInputBox+" dada de alta correctamente"
 
-                        txtCodigoBanco.textoInputBox=""
-                        txtNombreBanco.textoInputBox=""
+                        txtCodigoGarantia.textoInputBox=""
+                        txtNombreGarantia.textoInputBox=""
 
-                        txtCodigoBanco.tomarElFoco()
+                        txtCodigoGarantia.tomarElFoco()
 
-                        modeloListaBancos.limpiarListaBancos()
-                        modeloListaBancos.buscarBancos("1=","1")
-                        listaDeBancos.currentIndex=0;
+                        modeloTipoGarantiaMantenimiento.limpiarListaTipoGarantia()
+                        modeloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1")
+                        listaGarantia.currentIndex=0;
 
-                        modeloListaBancosComboBox.limpiarListaBancos()
-                        modeloListaBancosComboBox.buscarBancos("1=","1")
+                        modeloTipoGarantia.limpiarListaTipoGarantia()
+                        modeloTipoGarantia.buscarTipoGarantia("1=","1")
 
 
                     }else if(resultadoConsulta==2){
                         txtMensajeInformacion.color="#2f71a0"
-                        txtMensajeInformacion.text="Banco "+ txtCodigoBanco.textoInputBox+" actualizado correctamente"
+                        txtMensajeInformacion.text="Garantía "+ txtCodigoGarantia.textoInputBox+" actualizada correctamente"
 
-                        txtCodigoBanco.textoInputBox=""
-                        txtNombreBanco.textoInputBox=""
+                        txtCodigoGarantia.textoInputBox=""
+                        txtNombreGarantia.textoInputBox=""
 
-                        txtCodigoBanco.tomarElFoco()
+                        txtCodigoGarantia.tomarElFoco()
 
-                        modeloListaBancos.limpiarListaBancos()
-                        modeloListaBancos.buscarBancos("1=","1")
-                        listaDeBancos.currentIndex=0;
+                        modeloTipoGarantiaMantenimiento.limpiarListaTipoGarantia()
+                        modeloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1")
+                        listaGarantia.currentIndex=0;
 
-                        modeloListaBancosComboBox.limpiarListaBancos()
-                        modeloListaBancosComboBox.buscarBancos("1=","1")
+                        modeloTipoGarantia.limpiarListaTipoGarantia()
+                        modeloTipoGarantia.buscarTipoGarantia("1=","1")
 
 
                     }else if(resultadoConsulta==-1){
@@ -179,12 +177,12 @@ Rectangle {
 
                     }else if(resultadoConsulta==-2){
                         txtMensajeInformacion.color="#d93e3e"
-                        txtMensajeInformacion.text="No se pudo actualizar la información del banco"
+                        txtMensajeInformacion.text="No se pudo actualizar la información de la garantía"
 
 
                     }else if(resultadoConsulta==-3){
                         txtMensajeInformacion.color="#d93e3e"
-                        txtMensajeInformacion.text="No se pudo dar de alta el banco"
+                        txtMensajeInformacion.text="No se pudo dar de alta la garantía"
 
 
                     }else if(resultadoConsulta==-4){
@@ -194,68 +192,68 @@ Rectangle {
 
                     }else if(resultadoConsulta==-5){
                         txtMensajeInformacion.color="#d93e3e"
-                        txtMensajeInformacion.text="Faltan datos para guardar el banco. Verifique antes de continuar"
+                        txtMensajeInformacion.text="Faltan datos para guardar la garantía. Verifique antes de continuar"
 
-                    }               
+                    }
             }
         }
 
         BotonBarraDeHerramientas {
-            id: botonEliminarBanco
+            id: botonEliminarGarantia
             x: 54
             y: 3
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/BorrarCliente.png"
-            toolTip: "Eliminar banco"
+            toolTip: "Eliminar garantía"
             anchors.verticalCenter: parent.verticalCenter
             z: 6
             onClic: {
 
 
-                if(txtCodigoBanco.textoInputBox.trim()!="")
-                    if(funcionesmysql.mensajeAdvertencia("Realmente desea eliminar el banco "+txtCodigoBanco.textoInputBox.trim()+"?\n\nPresione [ Sí ] para confirmar.")){
+                if(txtCodigoGarantia.textoInputBox.trim()!="")
+                    if(funcionesmysql.mensajeAdvertencia("Realmente desea eliminar la garantía "+txtCodigoGarantia.textoInputBox.trim()+"?\n\nPresione [ Sí ] para confirmar.")){
 
                 txtMensajeInformacion.visible=true
                 txtMensajeInformacionTimer.stop()
                 txtMensajeInformacionTimer.start()
 
-                if(modeloListaBancos.eliminarBanco(txtCodigoBanco.textoInputBox.trim())){
+                if(modeloTipoGarantiaMantenimiento.eliminar(txtCodigoGarantia.textoInputBox.trim())){
 
                     txtMensajeInformacion.color="#2f71a0"
-                    txtMensajeInformacion.text="Banco "+txtCodigoBanco.textoInputBox.trim()+" eliminado correctamente"
+                    txtMensajeInformacion.text="Garantía "+txtCodigoGarantia.textoInputBox.trim()+" eliminada correctamente"
 
-                    modeloListaBancos.limpiarListaBancos()
-                    modeloListaBancos.buscarBancos("1=","1")
-                    listaDeBancos.currentIndex=0;
+                    modeloTipoGarantiaMantenimiento.limpiarListaTipoGarantia()
+                    modeloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1")
+                    listaGarantia.currentIndex=0;
 
-                    modeloListaBancosComboBox.limpiarListaBancos()
-                    modeloListaBancosComboBox.buscarBancos("1=","1")
+                    modeloTipoGarantia.limpiarListaTipoGarantia()
+                    modeloTipoGarantia.buscarTipoGarantia("1=","1")
 
-                    txtCodigoBanco.textoInputBox=""
-                    txtNombreBanco.textoInputBox=""
-                    txtCodigoBanco.tomarElFoco()
+                    txtCodigoGarantia.textoInputBox=""
+                    txtNombreGarantia.textoInputBox=""
+                    txtCodigoGarantia.tomarElFoco()
 
                 }else{
                     txtMensajeInformacion.color="#d93e3e"
-                    txtMensajeInformacion.text="No se puede eliminar el banco, verifique la información."
+                    txtMensajeInformacion.text="No se puede eliminar la garantía, verifique la información."
 
                 }}
             }
         }
 
         BotonBarraDeHerramientas {
-            id: botonListarTodosLosBancos
+            id: botonListarTodosLasGarantias
             x: 47
             y: 10
-            toolTip: "Listar todas los bancos"
+            toolTip: "Listar todas las garantías"
             z: 5
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Update.png"
             anchors.verticalCenter: parent.verticalCenter
 
             onClic: {
 
-                modeloListaBancos.limpiarListaBancos()
-                modeloListaBancos.buscarBancos("1=","1")
-                listaDeBancos.currentIndex=0;
+                modeloTipoGarantiaMantenimiento.limpiarListaTipoGarantia()
+                modeloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1")
+                listaGarantia.currentIndex=0;
             }
         }
 
@@ -314,7 +312,7 @@ Rectangle {
     }
 
     Rectangle {
-        id: rectListaDeBancos
+        id: rectListaGarantia
         color: "#C4C4C6"
         radius: 3
         clip: true
@@ -326,14 +324,21 @@ Rectangle {
         anchors.leftMargin: 0
         //
         ListView {
-            id: listaDeBancos
+            id: listaGarantia
             clip: true
             highlightRangeMode: ListView.NoHighlightRange
             anchors.top: parent.top
             boundsBehavior: Flickable.DragAndOvershootBounds
             highlightFollowsCurrentItem: true
             anchors.right: parent.right
-            delegate: ListaBancos {}
+            delegate: ListaGenerica {
+                onSend: {
+                    txtCodigoGarantia.textoInputBox=datoUno
+                    txtNombreGarantia.textoInputBox=datoDos
+                    txtNombreGarantia.tomarElFoco()
+                }
+
+            }
             snapMode: ListView.NoSnap
             anchors.bottomMargin: 25
             spacing: 1
@@ -346,16 +351,16 @@ Rectangle {
             //
             anchors.topMargin: 25
             anchors.rightMargin: 1
-            model: modeloListaBancos
+            model: modeloTipoGarantiaMantenimiento
 
             Rectangle {
                 id: rectangle3
-                y: listaDeBancos.visibleArea.yPosition * listaDeBancos.height+5
+                y: listaGarantia.visibleArea.yPosition * listaGarantia.height+5
                 width: 10
                 color: "#000000"
-                height: listaDeBancos.visibleArea.heightRatio * listaDeBancos.height+18
+                height: listaGarantia.visibleArea.heightRatio * listaGarantia.height+18
                 radius: 2
-                anchors.right: listaDeBancos.right
+                anchors.right: listaGarantia.right
                 anchors.rightMargin: 4
                 z: 1
                 opacity: 0.500
@@ -365,8 +370,8 @@ Rectangle {
         }
 
         Text {
-            id: txtTituloListaBancos
-            text: qsTr("Bancos: "+listaDeBancos.count)
+            id: txtTituloListaGarantias
+            text: qsTr("Garantias: "+listaGarantia.count)
             font.family: "Arial"
             anchors.top: parent.top
             anchors.topMargin: 5
@@ -389,7 +394,7 @@ Rectangle {
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/FlechaFinal.png"
             toolTip: ""
             rotation: 90
-            onClic: listaDeBancos.positionViewAtIndex(0,0)
+            onClic: listaGarantia.positionViewAtIndex(0,0)
         }
 
         BotonBarraDeHerramientas {
@@ -406,7 +411,7 @@ Rectangle {
             anchors.bottomMargin: 5
             rotation: -90
 
-            onClic: listaDeBancos.positionViewAtIndex(listaDeBancos.count-1,0)
+            onClic: listaGarantia.positionViewAtIndex(listaGarantia.count-1,0)
         }
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0

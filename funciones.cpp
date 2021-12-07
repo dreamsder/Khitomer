@@ -1913,9 +1913,18 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 394:
                 if(!impactoCambioEnBD("ALTER TABLE Mantenimientos ADD articulosUsaTipoGarantia char(1) DEFAULT '0' NOT NULL;","395")){
                 _iterador=false; return false; } break;
+        case 395:
+            if(impactoCambioEnBD("INSERT INTO `MenuSistema` (`codigoMenu`, `nombreMenu`) VALUES ('16', 'Garantías');","395")){
+                if(impactoCambioEnBD("ALTER TABLE `PerfilesUsuarios` ADD COLUMN `permiteUsarMenuAvanzadoGarantia` CHAR(1) NOT NULL DEFAULT '0' AFTER `permiteUsarMenuAvanzadoLogDelSistema`;","395")){
+                    if(!impactoCambioEnBD("UPDATE `PerfilesUsuarios` SET `permiteUsarMenuAvanzadoGarantia`='1' WHERE `codigoPerfil`='1' or permiteUsarMenuAvanzadoRubros='1' ;","396")){
+                        _iterador=false; return false;
+                    }
+                }else{_iterador=false; return false;}
+            }else{_iterador=false; return false;}
+            break;
         //
         //
-        //
+        //permiteUsarMenuAvanzadoGarantia
 
 
 

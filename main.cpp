@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
     ModuloGenericoCombobox moduloGenericoTipoPromocion;
     ModuloPromociones moduloPromociones;
     ModuloTipoGarantia moduloTipoGarantia;
-
+    ModuloTipoGarantia moduloTipoGarantiaMantenimiento;
 
     DialogosWidget dialogoQT;
 
@@ -475,6 +475,8 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloGenericoTipoPromocion", &moduloGenericoTipoPromocion);
     viewer.rootContext()->setContextProperty("modeloPromociones", &moduloPromociones);
     viewer.rootContext()->setContextProperty("modeloTipoGarantia", &moduloTipoGarantia);
+    viewer.rootContext()->setContextProperty("modeloTipoGarantiaMantenimiento", &moduloTipoGarantiaMantenimiento);
+
 
 
 

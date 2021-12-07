@@ -119,5 +119,7 @@
         <file>qml/ProyectoQML/OpcionesDeMenu/MenuFacturaElectronica.qml</file>
         <file>qml/ProyectoQML/OpcionesDeMenu/MenuLog.qml</file>
         <file>qml/ProyectoQML/MantenimientoPromociones.qml</file>
+        <file>qml/ProyectoQML/OpcionesDeMenu/MenuGarantias.qml</file>
+        <file>qml/ProyectoQML/Listas/ListaGenerica.qml</file>
     </qresource>
 </RCC>

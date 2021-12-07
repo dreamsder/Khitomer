@@ -43,6 +43,10 @@ public:
 
     Q_INVOKABLE QString retornaDescripcionTipoGarantia(QString) const;
 
+    Q_INVOKABLE QString retornaUltimoCodigo() const;
+    Q_INVOKABLE bool eliminar(QString _codigo) const ;
+    Q_INVOKABLE int insertarTipoGarantia(QString ,QString );
+
 private:
     QList<TipoGarantia> m_TipoGarantia;
 };
