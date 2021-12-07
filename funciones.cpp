@@ -1903,6 +1903,16 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 392:
                 if(!impactoCambioEnBD("REPLACE INTO ReportesMenu values(14,'Marketing');","393")){
                 _iterador=false; return false; } break;
+        case 393:
+            if(impactoCambioEnBD("CREATE TABLE TipoGarantia (codigoTipoGarantia INT UNSIGNED NOT NULL,descripcionTipoGarantia varchar(45) NULL)ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;","393")){
+                if(!impactoCambioEnBD("ALTER TABLE Articulos ADD codigoTipoGarantia INT UNSIGNED DEFAULT 0 NULL;","394")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
+        case 394:
+                if(!impactoCambioEnBD("ALTER TABLE Mantenimientos ADD articulosUsaTipoGarantia char(1) DEFAULT '0' NOT NULL;","395")){
+                _iterador=false; return false; } break;
         //
         //
         //

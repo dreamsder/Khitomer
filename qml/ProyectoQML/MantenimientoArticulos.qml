@@ -368,6 +368,15 @@ Rectangle {
                 }
 
             }
+            ComboBoxGenerico {
+                id: cbxListaTipoGarantias
+                width: 130
+                codigoValorSeleccion: ""
+                textoComboBox: ""
+                textoTitulo: qsTr("Garantia:")
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("articulosUsaTipoGarantia")
+                modeloItems: modeloTipoGarantia
+            }
 
             CheckBox {
                 id: chbArticuloActivo
@@ -542,7 +551,7 @@ Rectangle {
             radius: 3
             width: {
                 if(visible){
-                    365
+                    200
                 }else{
                     0
                 }
@@ -758,6 +767,8 @@ Rectangle {
                 txtProveedorArticulo.codigoValorSeleccion=modeloListaProveedor.primerRegistroDeProveedorCodigoEnBase()
                 txtProveedorArticulo.textoComboBox=modeloListaProveedor.primerRegistroDeProveedorNombreEnBase(txtProveedorArticulo.codigoValorSeleccion.toString())
 
+                cbxListaTipoGarantias.codigoValorSeleccion=""
+                cbxListaTipoGarantias.textoComboBox=""
 
                 cbListaDePrecioDeArticuloSeleccionado.textoComboBox=modeloListasPreciosComboBox.retornaDescripcionListaPrecio(1)
                 if(cbListaDePrecioDeArticuloSeleccionado.textoComboBox!="")
@@ -805,7 +816,7 @@ Rectangle {
                 if(chbArticuloActivo.chekActivo)
                     activo=1
 
-                var resultadoInsertArticulo = modeloArticulos.insertarArticulo(txtCodigoArticulo.textoInputBox,txtDescripcionArticulo.textoInputBox,txtDescripcionExtendidaArticulo.textoInputBox,txtProveedorArticulo.codigoValorSeleccion,txtListaDeIvas.codigoValorSeleccion,txtMonedaArticulo.codigoValorSeleccion,activo ,txtNombreDeUsuario.textoInputBox,txtCantidadMinimaStock.textoInputBox.trim(),cbxListaSubRubrosArticulos.codigoValorSeleccion);
+                var resultadoInsertArticulo = modeloArticulos.insertarArticulo(txtCodigoArticulo.textoInputBox,txtDescripcionArticulo.textoInputBox,txtDescripcionExtendidaArticulo.textoInputBox,txtProveedorArticulo.codigoValorSeleccion,txtListaDeIvas.codigoValorSeleccion,txtMonedaArticulo.codigoValorSeleccion,activo ,txtNombreDeUsuario.textoInputBox,txtCantidadMinimaStock.textoInputBox.trim(),cbxListaSubRubrosArticulos.codigoValorSeleccion,cbxListaTipoGarantias.codigoValorSeleccion);
 
                 txtMensajeInformacionArticulos.visible=true
                 txtMensajeInformacionTimer.stop()
@@ -967,6 +978,9 @@ Rectangle {
                                         txtCantidadMinimaStock.textoInputBox="0"
                                         modeloArticulosCodigoDeBarras.clear()
                                         txtCodigoArticulo.tomarElFoco()
+
+                                        cbxListaTipoGarantias.codigoValorSeleccion=""
+                                        cbxListaTipoGarantias.textoComboBox=""
 
 
                                     }else{

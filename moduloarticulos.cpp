@@ -51,11 +51,15 @@ ModuloArticulos::ModuloArticulos(QObject *parent)
     roles[UsuarioAltaRole] = "usuarioAlta";
     roles[CantidadMinimaStockRole] = "cantidadMinimaStock";
     roles[CodigoSubRubroRole] = "codigoSubRubro";
+    roles[codigoTipoGarantiaRole] = "codigoTipoGarantia";
+
     setRoleNames(roles);
 
 }
-Articulo::Articulo(const QString &codigoArticulo, const QString &descripcionArticulo, const QString &descripcionExtendida, const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda, const QString &activo, const QString &usuarioAlta, const QString &cantidadMinimaStock, const QString &codigoSubRubro)
-    : m_codigoArticulo(codigoArticulo), m_descripcionArticulo(descripcionArticulo), m_descripcionExtendida(descripcionExtendida), m_codigoProveedor(codigoProveedor),m_codigoIva(codigoIva),m_codigoMoneda(codigoMoneda), m_activo(activo), m_usuarioAlta(usuarioAlta), m_cantidadMinimaStock(cantidadMinimaStock), m_codigoSubRubro(codigoSubRubro)
+Articulo::Articulo(const QString &codigoArticulo, const QString &descripcionArticulo, const QString &descripcionExtendida, const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda, const QString &activo, const QString &usuarioAlta,
+                   const QString &cantidadMinimaStock, const QString &codigoSubRubro, const int &codigoTipoGarantia)
+    : m_codigoArticulo(codigoArticulo), m_descripcionArticulo(descripcionArticulo), m_descripcionExtendida(descripcionExtendida), m_codigoProveedor(codigoProveedor),m_codigoIva(codigoIva),m_codigoMoneda(codigoMoneda), m_activo(activo), m_usuarioAlta(usuarioAlta), m_cantidadMinimaStock(cantidadMinimaStock)
+    , m_codigoSubRubro(codigoSubRubro),m_codigoTipoGarantia(codigoTipoGarantia)
 {
 }
 
@@ -100,6 +104,10 @@ QString Articulo::cantidadMinimaStock() const
 QString Articulo::codigoSubRubro() const
 {
     return m_codigoSubRubro;
+}
+
+int Articulo::codigoTipoGarantia() const{
+    return m_codigoTipoGarantia;
 }
 
 void ModuloArticulos::addArticulo(const Articulo &articulo)
@@ -153,7 +161,9 @@ void ModuloArticulos::buscarArticulo(QString campo, QString datoABuscar, int ord
                                                       q.value(rec.indexOf("activo")).toString(),
                                                       q.value(rec.indexOf("usuarioAlta")).toString(),
                                                       q.value(rec.indexOf("cantidadMinimaStock")).toString(),
-                                                      q.value(rec.indexOf("codigoSubRubro")).toString()
+                                                      q.value(rec.indexOf("codigoSubRubro")).toString(),
+                                                      q.value(rec.indexOf("codigoTipoGarantia")).toInt()
+
                                                       ));
             }
         }
@@ -210,6 +220,10 @@ QVariant ModuloArticulos::data(const QModelIndex & index, int role) const {
     else if (role == CodigoSubRubroRole){
         return articulo.codigoSubRubro();
     }
+    else if (role == codigoTipoGarantiaRole){
+        return articulo.codigoTipoGarantia();
+    }
+
     return QVariant();
 }
 
@@ -245,7 +259,7 @@ ulong ModuloArticulos::ultimoRegistroDeArticuloEnBase()const {
     }
 }
 
-int ModuloArticulos::insertarArticulo(QString _codigoArticulo,QString _descripcionArticulo,QString _descripcionExtendida, QString _codigoProveedor,QString _codigoIva,QString _codigoMoneda,QString _activo, QString _usuarioAlta, QString _cantidadMinimaStock, QString _codigoSubRubro) const {
+int ModuloArticulos::insertarArticulo(QString _codigoArticulo,QString _descripcionArticulo,QString _descripcionExtendida, QString _codigoProveedor,QString _codigoIva,QString _codigoMoneda,QString _activo, QString _usuarioAlta, QString _cantidadMinimaStock, QString _codigoSubRubro, QString _codigoTipoGarantia) const {
 
 
     // -1  No se pudo conectar a la base de datos
@@ -280,7 +294,7 @@ int ModuloArticulos::insertarArticulo(QString _codigoArticulo,QString _descripci
             if(query.first()){
                 if(query.value(0).toString()!=""){
 
-                    if(query.exec("update Articulos set descripcionArticulo='"+_descripcionArticulo+"',descripcionExtendida='"+_descripcionExtendida+"', codigoProveedor='"+_codigoProveedor+"',codigoIva='"+_codigoIva+"',codigoMoneda='"+_codigoMoneda+"',activo='"+_activo+"',usuarioUltimaModificacion='"+_usuarioAlta+"',cantidadMinimaStock='"+_cantidadMinimaStock+"',codigoSubRubro='"+_codigoSubRubro+"',sincronizadoWeb='0' where codigoArticulo='"+_codigoArticulo+"'")){
+                    if(query.exec("update Articulos set descripcionArticulo='"+_descripcionArticulo+"',descripcionExtendida='"+_descripcionExtendida+"', codigoProveedor='"+_codigoProveedor+"',codigoIva='"+_codigoIva+"',codigoMoneda='"+_codigoMoneda+"',activo='"+_activo+"',usuarioUltimaModificacion='"+_usuarioAlta+"',cantidadMinimaStock='"+_cantidadMinimaStock+"',codigoSubRubro='"+_codigoSubRubro+"',sincronizadoWeb='0', codigoTipoGarantia='"+_codigoTipoGarantia+"'     where codigoArticulo='"+_codigoArticulo+"'")){
 
                         return 2;
                     }else{
@@ -290,7 +304,7 @@ int ModuloArticulos::insertarArticulo(QString _codigoArticulo,QString _descripci
                     return -2;
                 }
             }else{
-                if(query.exec("insert INTO Articulos (codigoArticulo,descripcionArticulo,descripcionExtendida,codigoProveedor,codigoIva,codigoMoneda,activo,usuarioAlta,fechaAlta,cantidadMinimaStock,codigoSubRubro,sincronizadoWeb) values('"+_codigoArticulo+"','"+_descripcionArticulo+"','"+_descripcionExtendida+"','"+_codigoProveedor+"','"+_codigoIva+"','"+_codigoMoneda+"','"+_activo+"','"+_usuarioAlta+"','"+func.fechaHoraDeHoy()+"','"+_cantidadMinimaStock+"','"+_codigoSubRubro+"','0')")){
+                if(query.exec("insert INTO Articulos (codigoArticulo,descripcionArticulo,descripcionExtendida,codigoProveedor,codigoIva,codigoMoneda,activo,usuarioAlta,fechaAlta,cantidadMinimaStock,codigoSubRubro,sincronizadoWeb,codigoTipoGarantia) values('"+_codigoArticulo+"','"+_descripcionArticulo+"','"+_descripcionExtendida+"','"+_codigoProveedor+"','"+_codigoIva+"','"+_codigoMoneda+"','"+_activo+"','"+_usuarioAlta+"','"+func.fechaHoraDeHoy()+"','"+_cantidadMinimaStock+"','"+_codigoSubRubro+"','0','"+_codigoTipoGarantia+"')")){
                     return 1;
                 }else{
                     return -3;

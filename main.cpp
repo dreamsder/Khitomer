@@ -75,6 +75,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 
 #include <modulotipopromocion.h>
 #include <modulopromociones.h>
+#include <modulotipogarantia.h>
 
 
 #include <CFE/modulo_cfe_parametrosgenerales.h>
@@ -243,6 +244,7 @@ int main(int argc, char *argv[])
 
     ModuloGenericoCombobox moduloGenericoTipoPromocion;
     ModuloPromociones moduloPromociones;
+    ModuloTipoGarantia moduloTipoGarantia;
 
 
     DialogosWidget dialogoQT;
@@ -470,8 +472,10 @@ inicio:
 
     viewer.rootContext()->setContextProperty("modeloTipoProcedenciaCliente", &moduloTipoProcedenciaCliente);
 
-    viewer.rootContext()->setContextProperty("moduloGenericoTipoPromocion", &moduloGenericoTipoPromocion);
-    viewer.rootContext()->setContextProperty("moduloPromociones", &moduloPromociones);
+    viewer.rootContext()->setContextProperty("modeloGenericoTipoPromocion", &moduloGenericoTipoPromocion);
+    viewer.rootContext()->setContextProperty("modeloPromociones", &moduloPromociones);
+    viewer.rootContext()->setContextProperty("modeloTipoGarantia", &moduloTipoGarantia);
+
 
 
     viewer.rootContext()->setContextProperty("modeloDialogoQT", &dialogoQT);
@@ -547,6 +551,8 @@ inicio:
     moduloGenericoComboboxReportesPermisos.buscarTodosLosReportes();
 
     moduloGenericoTipoPromocion.buscarTodosLosTiposPromocion();
+
+    moduloTipoGarantia.buscarTipoGarantia("1=","1");
 
     moduloTipoProcedenciaCliente.buscar();
 

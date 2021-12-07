@@ -110,7 +110,8 @@ SOURCES += main.cpp \
     modulopromociones.cpp \
     QrCode/qrcode.cpp \
     Utilidades/waitingdlg.cpp \
-    Utilidades/wsdatabase.cpp
+    Utilidades/wsdatabase.cpp \
+    modulotipogarantia.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -190,7 +191,8 @@ HEADERS += \
     curl4/stdcheaders.h \
     QrCode/qrcode.hpp \
     Utilidades/waitingdlg.h \
-    Utilidades/wsdatabase.h
+    Utilidades/wsdatabase.h \
+    modulotipogarantia.h
 
 RESOURCES += \
     Imagenes.qrc \

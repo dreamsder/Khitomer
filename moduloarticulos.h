@@ -29,7 +29,9 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class Articulo
 {
 public:
-   Q_INVOKABLE Articulo(const QString &codigoArticulo,const QString &descripcionArticulo,const QString &descripcionExtendida,const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda,const QString &activo,const QString &usuarioAlta ,const QString &cantidadMinimaStock,const QString &codigoSubRubro);
+   Q_INVOKABLE Articulo(const QString &codigoArticulo,const QString &descripcionArticulo,const QString &descripcionExtendida,const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda,const QString &activo,const QString &usuarioAlta ,const QString &cantidadMinimaStock,const QString &codigoSubRubro,
+                        const int &codigoTipoGarantia
+                        );
 
     QString codigoArticulo() const;
     QString descripcionArticulo() const;
@@ -41,6 +43,7 @@ public:
     QString usuarioAlta() const;
     QString cantidadMinimaStock() const;
     QString codigoSubRubro() const;
+    int codigoTipoGarantia() const;
 
 
 private:
@@ -54,6 +57,7 @@ private:
     QString m_usuarioAlta;
     QString m_cantidadMinimaStock;
     QString m_codigoSubRubro;
+    int m_codigoTipoGarantia;
 
 };
 
@@ -71,7 +75,8 @@ public:
         ActivoRole,
         UsuarioAltaRole,
         CantidadMinimaStockRole,
-        CodigoSubRubroRole
+        CodigoSubRubroRole,
+        codigoTipoGarantiaRole
     };
 
     ModuloArticulos(QObject *parent = 0);
@@ -88,7 +93,7 @@ public:
 
     Q_INVOKABLE ulong ultimoRegistroDeArticuloEnBase()const;
 
-    Q_INVOKABLE int insertarArticulo( QString , QString, QString, QString, QString ,QString,QString ,QString, QString, QString) const;
+    Q_INVOKABLE int insertarArticulo( QString , QString, QString, QString, QString ,QString,QString ,QString, QString, QString,QString) const;
 
     Q_INVOKABLE bool eliminarArticulo(QString) const;
 

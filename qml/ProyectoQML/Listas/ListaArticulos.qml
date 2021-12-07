@@ -118,6 +118,9 @@ Rectangle{
             if(cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion.trim()!="")
                 txtPrecioArticuloSeleccionado.textoInputBox=modeloListaPrecioArticulos.retornarPrecioDeArticuloEnBaseDeDatos(txtCodigoArticulo.textoInputBox,cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion)
 
+            cbxListaTipoGarantias.codigoValorSeleccion=codigoTipoGarantia
+            cbxListaTipoGarantias.textoComboBox=modeloTipoGarantia.retornaDescripcionTipoGarantia(codigoTipoGarantia)
+
             txtCodigoDeBarras.enabled=true
             listaDeArticulosBarrar.enabled=true
             modeloArticulosCodigoDeBarras.clear()

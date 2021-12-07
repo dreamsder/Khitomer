@@ -70,7 +70,7 @@ Rectangle {
                 textoComboBox: "Mail de cumpleaños"
                 botonBuscarTextoVisible: false
                 textoTitulo: qsTr("Tipo Promoción:")
-                modeloItems: moduloGenericoTipoPromocion
+                modeloItems: modeloGenericoTipoPromocion
             }
 
 
