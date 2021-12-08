@@ -23,7 +23,6 @@ import QtQuick 1.1
 import "../Listas"
 
 Rectangle {
-    id: rectListaTipoDocumentos
     color: "#be231919"
     visible: true
     anchors.fill: parent
@@ -143,7 +142,7 @@ Rectangle {
                 id: lblInformacionLista
                 y: 7
                 color: "#ffffff"
-                text: qsTr("Haga clic, para que se cree automaticamente el nuevo documento; si no esta seguro, puede cancelar la operación.")
+                text: qsTr("Doble clic en una garantia para cargarla en el artículo. O cancelar para salir")
                 style: Text.Normal
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 anchors.left: parent.left

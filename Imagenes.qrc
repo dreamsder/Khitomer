@@ -77,5 +77,6 @@
         <file>qml/ProyectoQML/Imagenes/Notebook.png</file>
         <file>qml/ProyectoQML/Imagenes/Garantia.png</file>
         <file>qml/ProyectoQML/Imagenes/Nuevo.png</file>
+        <file>qml/ProyectoQML/Imagenes/SinGarantia.png</file>
     </qresource>
 </RCC>

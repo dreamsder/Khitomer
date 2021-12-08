@@ -8207,19 +8207,9 @@ Rectangle {
         modeloItems: modeloTipoGarantia
         textoBoton:  "Cerrar"
         onSendInformacion: {
-            console.log(id+" - "+nombre)
-            console.log(index)
-
-            //modeloItemsFactura.setProperty(index,"codigoBarrasArticulo",id)
             modeloItemsFactura.set(index,{"codigoTipoGarantia": id,"descripcionTipoGarantia": nombre})
-           // property string idGarantia: codigoTipoGarantia
-           // property string nombreGarantia: descripcionTipoGarantia
-
-
             cuadroListaGarantias.visible=false
-
         }
-
     }
 
 

@@ -420,12 +420,21 @@ Rectangle{
         height: 16
         clip: true
         opacity: 0.900
+        smooth: true
         asynchronous: true
         z: 2
         anchors.left: rectLineaSeparacionGarantia.right
         anchors.leftMargin: 7
         anchors.verticalCenter: parent.verticalCenter
-        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Garantia.png"
+
+        source: {
+            if(idGarantia=="" || idGarantia=="0"){
+                "qrc:/imagenes/qml/ProyectoQML/Imagenes/SinGarantia.png"
+            }else{
+                "qrc:/imagenes/qml/ProyectoQML/Imagenes/Garantia.png"
+            }
+        }
+
         MouseArea {
             id: mouse_areaGarantia
             clip: true
@@ -464,7 +473,13 @@ Rectangle{
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.fill: parent
-            text: nombreGarantia
+            text: {
+              if(idGarantia=="" || idGarantia=="0"){
+               "Sin garantia establecida"
+              }else{
+                  nombreGarantia
+              }
+            }
             visible: true
         }
     }
@@ -511,7 +526,7 @@ Rectangle{
         anchors.left: rectLineaSeparacion3.right
         anchors.leftMargin: 3
         anchors.verticalCenter: parent.verticalCenter
-        //
+        smooth: true
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Mas.png"
         visible: txtCantidadArticulosFacturacion.visible
         MouseArea {
@@ -568,7 +583,7 @@ Rectangle{
         anchors.leftMargin: 2
         asynchronous: true
         anchors.verticalCenter: parent.verticalCenter
-        //
+        smooth: true
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Menos.png"
         visible: txtCantidadArticulosFacturacion.visible
 
