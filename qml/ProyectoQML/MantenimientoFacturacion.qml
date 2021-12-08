@@ -1930,6 +1930,46 @@ Rectangle {
                         anchors.left: lbltemCantidadArticuloFacturacion.right
                     }
 
+
+                    Text {
+                        id: lbltemGarantiaArticuloFacturacion
+                        x: 0
+                        y: 2
+                        width: 23
+                        color: "#ffffff"
+                        text: "GA"
+                        font.family: "Arial"
+
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                        anchors.bottom: parent.bottom
+                        style: Text.Normal
+                        anchors.bottomMargin: 0
+                        font.bold: true
+                        font.pointSize: 10
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.leftMargin: 5
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.left: rectLineaSeparacion3Titulo1.right
+                    }
+
+                    Rectangle {
+                        id: rectLineaSeparacion3TituloGarantia
+                        x: 7
+                        y: -2
+                        width: 2
+                        color: "#C4C4C6"
+                        //
+                        anchors.top: parent.top
+                        anchors.topMargin: 0
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
+                        anchors.leftMargin: 5
+                        anchors.left: lbltemGarantiaArticuloFacturacion.right
+                    }
+
+
+
                     Text {
                         id: lbltemTotalVentaFacturacion
                         x: 4
@@ -1946,7 +1986,7 @@ Rectangle {
                         font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         anchors.leftMargin: 10
-                        anchors.left: rectLineaSeparacion3Titulo1.right
+                        anchors.left: rectLineaSeparacion3TituloGarantia.right
                         style: Text.Normal
                         //
                         anchors.topMargin: 0

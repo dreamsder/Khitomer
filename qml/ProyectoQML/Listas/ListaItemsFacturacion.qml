@@ -46,12 +46,15 @@ Rectangle{
     property double descuentoLineaItem: 0.00
 
 
+    property string idGarantia: "codigoTipoGarantia"
+    property string nombreGarantia: "descripcionTipoGarantia"
 
     Text {
         id:txtDescuentoLineaItem
         text: descuentoLineaItem
         visible: false
     }
+
 
 
     Text {
@@ -394,6 +397,92 @@ Rectangle{
     }
 
     Rectangle {
+        id: rectLineaSeparacionGarantia
+        x: 8
+        y: 0
+        width: 2
+        color: "#C4C4C6"
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 10
+        anchors.left: txtItemCantidadArticuloFacturacion.right
+    }
+
+    Image {
+        id: imgGarantia
+        y: 4
+        width: 16
+        height: 16
+        clip: true
+        opacity: 0.900
+        asynchronous: true
+        z: 2
+        anchors.left: rectLineaSeparacionGarantia.right
+        anchors.leftMargin: 7
+        anchors.verticalCenter: parent.verticalCenter
+        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Garantia.png"
+        MouseArea {
+            id: mouse_areaGarantia
+            clip: true
+            hoverEnabled: true
+            anchors.fill: parent
+            visible: activo
+            onClicked: {
+                console.log(idGarantia)
+
+            }
+            onEntered: {
+                timer1.start()
+            }
+
+            onExited: {
+                timer1.stop()
+                rectToolTipText.visible=false
+            }
+        }
+    }
+
+    Rectangle{
+        id:rectToolTipText
+        visible: false
+        width: toolTipText.implicitWidth+20
+        height: toolTipText.implicitHeight
+        color: "#4d7dc0"
+        radius: 6
+        opacity: 1
+        z: 3
+        Text {
+            id: toolTipText
+            color: "#fdfbfb"
+            font.family: "Arial"
+            font.bold: false
+            anchors.rightMargin: 10
+            anchors.leftMargin: 10
+            anchors.fill: parent
+            text: "otro"
+            visible: true
+        }
+    }
+    Timer {
+           id:timer1
+           interval: 600;
+           running: false;
+           repeat: false;
+           onTriggered: {
+               console.log(toolTipText.text)
+               if(toolTipText.text!=""){
+                   rectToolTipText.x=imgGarantia.x
+                   rectToolTipText.y=imgGarantia.y
+                   rectToolTipText.visible=true
+               }
+           }
+       }
+
+
+
+    Rectangle {
         id: rectLineaSeparacion5
         x: 8
         y: 0
@@ -405,7 +494,7 @@ Rectangle{
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         anchors.leftMargin: 10
-        anchors.left: txtItemCantidadArticuloFacturacion.right
+        anchors.left: imgGarantia.right
     }
 
     Image {
