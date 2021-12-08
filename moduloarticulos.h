@@ -120,6 +120,7 @@ public:
 
     Q_INVOKABLE bool retornaSiPuedeVenderSinStock(qlonglong _cantidad, QString _codigoTipoDocumento, QString _codigoArticulo, qlonglong _cantidadYaVendida) const;
 
+    Q_INVOKABLE QString retornaCodigoTipoGarantia(QString _codigoArticulo) const;
 
 
 

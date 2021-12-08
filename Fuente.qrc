@@ -121,5 +121,6 @@
         <file>qml/ProyectoQML/MantenimientoPromociones.qml</file>
         <file>qml/ProyectoQML/OpcionesDeMenu/MenuGarantias.qml</file>
         <file>qml/ProyectoQML/Listas/ListaGenerica.qml</file>
+        <file>qml/ProyectoQML/Controles/CuadroListaGarantias.qml</file>
     </qresource>
 </RCC>

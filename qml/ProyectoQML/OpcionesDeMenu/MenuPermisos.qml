@@ -215,7 +215,8 @@ Rectangle {
             id: botonNuevoPerfil
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Perfiles.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Perfiles.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo perfil"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

@@ -475,7 +475,8 @@ Rectangle {
             y: 10
             toolTip: "Nueva promoción"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/MantenimientoPromociones.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/MantenimientoPromociones.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
 
 
@@ -525,7 +526,7 @@ Rectangle {
             y: 10
             toolTip: "Listar todas las promociones"
             z: 5
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Update.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Update.png"            
             anchors.verticalCenter: parent.verticalCenter
             onClic: {
 

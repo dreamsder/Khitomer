@@ -410,7 +410,8 @@ Rectangle {
             id: botonNuevaMoneda
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Monedas.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Monedas.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nueva moneda"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

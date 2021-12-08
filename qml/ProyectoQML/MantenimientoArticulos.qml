@@ -749,7 +749,8 @@ Rectangle {
             y: 10
             toolTip: "Nuevo articulo"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoArticulo.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoArticulo.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
 
 

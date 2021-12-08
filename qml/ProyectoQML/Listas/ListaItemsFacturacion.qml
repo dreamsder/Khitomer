@@ -46,8 +46,11 @@ Rectangle{
     property double descuentoLineaItem: 0.00
 
 
-    property string idGarantia: "codigoTipoGarantia"
-    property string nombreGarantia: "descripcionTipoGarantia"
+    property string idGarantia: codigoTipoGarantia
+    property string nombreGarantia: descripcionTipoGarantia
+
+
+    signal abrirGarantias
 
     Text {
         id:txtDescuentoLineaItem
@@ -429,10 +432,10 @@ Rectangle{
             hoverEnabled: true
             anchors.fill: parent
             visible: activo
-            onClicked: {
-                console.log(idGarantia)
-
+            onDoubleClicked: {
+                abrirGarantias()
             }
+
             onEntered: {
                 timer1.start()
             }
@@ -461,7 +464,7 @@ Rectangle{
             anchors.rightMargin: 10
             anchors.leftMargin: 10
             anchors.fill: parent
-            text: "otro"
+            text: nombreGarantia
             visible: true
         }
     }
@@ -471,9 +474,8 @@ Rectangle{
            running: false;
            repeat: false;
            onTriggered: {
-               console.log(toolTipText.text)
                if(toolTipText.text!=""){
-                   rectToolTipText.x=imgGarantia.x
+                   rectToolTipText.x=imgGarantia.x+20
                    rectToolTipText.y=imgGarantia.y
                    rectToolTipText.visible=true
                }

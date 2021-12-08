@@ -138,7 +138,8 @@ Rectangle {
             id: botonNuevaCuentaBancaria
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CuentasBancarias.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CuentasBancarias.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nueva cuenta bancaria"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

@@ -985,7 +985,8 @@ Rectangle {
             y: 10
             toolTip: "Nuevo cliente"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoCliente.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoCliente.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
 
 

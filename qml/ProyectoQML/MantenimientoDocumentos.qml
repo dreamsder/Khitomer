@@ -783,7 +783,8 @@ Rectangle {
             y: 10
             toolTip: "Nuevo filtro"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Search.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Search.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
 
 

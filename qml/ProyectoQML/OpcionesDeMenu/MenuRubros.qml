@@ -110,7 +110,8 @@ Rectangle {
             id: botonNuevoRubro
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Rubros.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Rubros.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo Rubro"
             anchors.verticalCenter: parent.verticalCenter
             z: 8
@@ -444,7 +445,8 @@ Rectangle {
             id: botonNuevoSubRubro
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/SubRubros.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/SubRubros.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo Sub Rubro"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

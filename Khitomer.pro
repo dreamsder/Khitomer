@@ -255,7 +255,8 @@ win64:LIBS += "%systemdrive%\Khitomer\curlWin\libcurl.dll"
 
 DISTFILES += \
     qml/ProyectoQML/OpcionesDeMenu/MenuGarantias.qml \
-    qml/ProyectoQML/Listas/ListaGenerica.qml
+    qml/ProyectoQML/Listas/ListaGenerica.qml \
+    qml/ProyectoQML/Controles/CuadroListaGarantias.qml
 
 
 

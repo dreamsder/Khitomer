@@ -33,6 +33,7 @@ Rectangle{
     opacity: 1
 
     signal send( string datoUno, string datoDos)
+    signal doubleClicSend(string datoUno, string datoDos)
 
     Text {
         id:lblEtiqueta
@@ -68,6 +69,7 @@ Rectangle{
         onClicked: {
             send(codigoItem,descripcionItem)        
         }
+        onDoubleClicked: doubleClicSend(codigoItem,descripcionItem)
 
     }
 

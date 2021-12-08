@@ -146,7 +146,7 @@ Rectangle {
     Image {
         id: image1
         clip: true
-        //
+        smooth: true
         asynchronous: true
         anchors.fill: parent
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/FlechaDerecha.png"

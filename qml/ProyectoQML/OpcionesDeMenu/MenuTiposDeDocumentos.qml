@@ -132,7 +132,8 @@ Rectangle {
             id: botonNuevoDocumento
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/TipoDocumentos.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/TipoDocumentos.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: qsTr("Nuevo documento")
             anchors.verticalCenter: parent.verticalCenter
             z: 8

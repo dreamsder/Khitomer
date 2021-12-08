@@ -177,7 +177,10 @@ Rectangle{
                                                           activo:true,
                                                           consideraDescuento:false,
                                                           indiceLinea:-1,
-                                                          descuentoLineaItem:0
+                                                          descuentoLineaItem:0,
+                                                          codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
+                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo))
+
                                                       })
 
                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -249,7 +252,9 @@ Rectangle{
                                                           activo:true,
                                                           consideraDescuento:false,
                                                           indiceLinea:-1,
-                                                          descuentoLineaItem:0
+                                                          descuentoLineaItem:0,
+                                                          codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
+                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo))
                                                       })
 
                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -321,7 +326,9 @@ Rectangle{
                                                       costoArticuloMonedaReferencia:costoArticuloOpcionesExtraFacturacion.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
                                                       activo:true,
                                                       consideraDescuento:false,
-                                                      indiceLinea:-1
+                                                      indiceLinea:-1,
+                                                      codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
+                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo))
                                                   })
 
                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)

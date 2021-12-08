@@ -644,7 +644,8 @@ Rectangle {
             y: 10
             toolTip: "Nueva caja"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaLiquidacion.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaLiquidacion.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
             onClic: {
                 txtVendedorDeLaLiquidacion.tomarElFoco()

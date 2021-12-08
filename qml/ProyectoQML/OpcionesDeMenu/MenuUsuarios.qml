@@ -191,7 +191,8 @@ Rectangle {
             id: botonNuevoUsuario
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Usuarios.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Usuarios.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo usuario"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

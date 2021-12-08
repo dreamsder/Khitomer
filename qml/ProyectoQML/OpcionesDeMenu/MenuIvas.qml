@@ -138,8 +138,8 @@ Rectangle {
         BotonBarraDeHerramientas {
             id: botonNuevoIva
             x: 33
-            y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Bancos.png"
+            y: 10            
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo iva"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

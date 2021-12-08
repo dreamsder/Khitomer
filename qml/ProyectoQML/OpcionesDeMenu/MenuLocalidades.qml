@@ -120,7 +120,8 @@ Rectangle {
             id: botonNuevoDepartamento
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Departamentos.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Departamentos.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo Departamento"
             anchors.verticalCenter: parent.verticalCenter
             z: 8
@@ -461,7 +462,8 @@ Rectangle {
             id: botonNuevaLocalidad
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Localidades.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Localidades.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nueva Localidad"
             anchors.verticalCenter: parent.verticalCenter
             z: 8
@@ -930,7 +932,8 @@ Rectangle {
             id: botonNuevoPais
             x: 33
             y: 10
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Paises.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Paises.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             toolTip: "Nuevo Pais"
             anchors.verticalCenter: parent.verticalCenter
             z: 8

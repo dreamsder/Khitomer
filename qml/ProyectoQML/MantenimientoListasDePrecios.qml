@@ -736,7 +736,8 @@ Rectangle {
             y: 10
             toolTip: "Nueva lista de precio"
             z: 8
-            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaListaDePrecios.png"
+            //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaListaDePrecios.png"
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             anchors.verticalCenter: parent.verticalCenter
             onClic: {
 
