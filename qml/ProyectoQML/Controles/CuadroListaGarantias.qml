@@ -64,7 +64,6 @@ Rectangle {
                 z: 1
                 anchors.right: parent.right
                 onClic: {
-
                     clicCancelar()
 
                 }

@@ -273,8 +273,6 @@ Rectangle {
 
 
 
-
-
     function superaCantidadMaximaLineasDocumento(){
 
         var _cantidadLineasTipoDocumento = modeloListaTipoDocumentosMantenimiento.cantidadMaximaLineasTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion);
@@ -720,7 +718,7 @@ Rectangle {
                 var valorCantidadDeArticulos=modeloDocumentosEnLiquidaciones.retornoCantidadArticuloDeLineaDocumento(numeroFactura,tipoDocumento,i,serieDocumento)
                 var valorCostoArticuloMonedaReferencia=modeloDocumentosEnLiquidaciones.retornoCostoArticuloMonedaReferenciaDeLineaDocumento(numeroFactura,tipoDocumento,i,serieDocumento)
                 var valorDescuentoLinea= modeloDocumentosEnLiquidaciones.retornoDescuentoLineaArticuloDeLineaDocumento(numeroFactura,tipoDocumento,i,serieDocumento)
-
+                var valorCodigoTipoGarantia = modeloDocumentosEnLiquidaciones.retornoCodigoTipoGarantiaLineaArticuloDeLineaDocumento(numeroFactura,tipoDocumento,i,serieDocumento)
 
                 if(estadoDocumento=="P"){
 
@@ -737,8 +735,8 @@ Rectangle {
                                                   consideraDescuento:true,
                                                   indiceLinea:i,
                                                   descuentoLineaItem:valorDescuentoLinea.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-                                                  codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                  codigoTipoGarantia:valorCodigoTipoGarantia,
+                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia)
                                               })
 
 
@@ -756,8 +754,8 @@ Rectangle {
                                                   consideraDescuento:false,
                                                   indiceLinea:i,
                                                   descuentoLineaItem:valorDescuentoLinea.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-                                                  codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                  codigoTipoGarantia:valorCodigoTipoGarantia,
+                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia)
                                               })
                 }
 
@@ -6263,7 +6261,7 @@ Rectangle {
                                 var costoPonderado=0.00;
                                 var esDocumentoValidoParaCalculoPonderado=modeloDocumentos.documentoValidoParaCalculoPonderado(cbListatipoDocumentos.codigoValorSeleccion);
 
-                                var _insertLineasDocumentos="insert INTO DocumentosLineas (codigoDocumento, codigoTipoDocumento, serieDocumento , numeroLinea, codigoArticulo, codigoArticuloBarras, cantidad, precioTotalVenta, precioArticuloUnitario, precioIvaArticulo,costoArticuloMonedaReferencia,costoArticuloPonderado,montoDescuento)values"
+                                var _insertLineasDocumentos="insert INTO DocumentosLineas (codigoDocumento, codigoTipoDocumento, serieDocumento , numeroLinea, codigoArticulo, codigoArticuloBarras, cantidad, precioTotalVenta, precioArticuloUnitario, precioIvaArticulo,costoArticuloMonedaReferencia,costoArticuloPonderado,montoDescuento,codigoTipoGarantia)values"
 
                                 for(var i=0; i<modeloItemsFactura.count;i++){
                                     cantidad=modeloItemsFactura.get(i).cantidadItems
@@ -6282,10 +6280,10 @@ Rectangle {
 
 
                                     if(i==0){
-                                        _insertLineasDocumentos+="('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"' )"
+                                        _insertLineasDocumentos+="('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"' )"
                                         modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
                                     }else{
-                                        _insertLineasDocumentos+=",('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"')"
+                                        _insertLineasDocumentos+=",('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"')"
                                         modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
                                     }
 
@@ -6749,7 +6747,7 @@ Rectangle {
                             var esDocumentoValidoParaCalculoPonderado=modeloDocumentos.documentoValidoParaCalculoPonderado(cbListatipoDocumentos.codigoValorSeleccion);
 
 
-                            var _insertLineasDocumentos="insert INTO DocumentosLineas (codigoDocumento, codigoTipoDocumento, serieDocumento , numeroLinea, codigoArticulo, codigoArticuloBarras, cantidad, precioTotalVenta, precioArticuloUnitario, precioIvaArticulo,costoArticuloMonedaReferencia,costoArticuloPonderado,montoDescuento)values"
+                            var _insertLineasDocumentos="insert INTO DocumentosLineas (codigoDocumento, codigoTipoDocumento, serieDocumento , numeroLinea, codigoArticulo, codigoArticuloBarras, cantidad, precioTotalVenta, precioArticuloUnitario, precioIvaArticulo,costoArticuloMonedaReferencia,costoArticuloPonderado,montoDescuento,codigoTipoGarantia)values"
 
                             for(var i=0; i<modeloItemsFactura.count;i++){
 
@@ -6764,10 +6762,10 @@ Rectangle {
 
 
                                 if(i==0){
-                                    _insertLineasDocumentos+="('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"')"
+                                    _insertLineasDocumentos+="('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"')"
                                     modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
                                 }else{
-                                    _insertLineasDocumentos+=",('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"')"
+                                    _insertLineasDocumentos+=",('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"')"
                                     modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
                                 }
 

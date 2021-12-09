@@ -1769,6 +1769,34 @@ double ModuloDocumentos::retornoDescuentoLineaArticuloDeLineaDocumento(QString _
     }
 }
 
+QString ModuloDocumentos::retornoCodigoTipoGarantiaLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("SELECT codigoTipoGarantia FROM DocumentosLineas where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and numeroLinea='"+_linea+"' and serieDocumento='"+_serieDocumento+"'")) {
+            if(query.first()){
+                if(query.value(0).toString()!=0){
+                    return query.value(0).toString();
+                }else{
+                    return "0";
+                }
+            }else{return "0";}
+        }else{
+            return "0";
+        }
+    }else{
+        return "0";
+    }
+}
+
 
 int ModuloDocumentos::retornoCantidadArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;

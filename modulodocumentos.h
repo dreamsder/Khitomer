@@ -251,6 +251,7 @@ public:
 
     Q_INVOKABLE double retornoCostoArticuloMonedaReferenciaDeLineaDocumento(QString , QString, QString,QString _serieDocumento);
 
+    Q_INVOKABLE QString retornoCodigoTipoGarantiaLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento);
 
     Q_INVOKABLE int retornoCantidadArticuloDeLineaDocumento(QString , QString , QString , QString _serieDocumento);
 
