@@ -71,6 +71,7 @@ import QtQuick 1.1
         MouseArea {
             id: mouse_area2
             anchors.fill: parent
+            hoverEnabled: true
 
 
             Rectangle {

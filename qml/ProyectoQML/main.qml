@@ -29,7 +29,8 @@ import "Listas"
 Rectangle {
     id: rectPrincipal
     width: 900; height: 600
-    color: "#041c24"
+    //color: "#041c24"
+    color: "#000000"
     clip: true
 
     property int   opcionEnCurso: 0
@@ -1280,8 +1281,8 @@ Rectangle {
     }*/
 
     Rectangle {
-        id: rectLogin
-        color: "#041c24"
+        id: rectLogin        
+        color: rectPrincipal.color
         radius: 0
         visible: true
         opacity: 1
@@ -1306,6 +1307,7 @@ Rectangle {
         MouseArea {
             id: mouse_area1
             anchors.fill: parent
+            hoverEnabled: true
 
 
 
@@ -1682,6 +1684,7 @@ Rectangle {
                 anchors.bottomMargin: 30
                 asynchronous: true
                 z: 1
+                smooth: true
                 enabled: false
                 anchors.bottom: parent.bottom
             }
