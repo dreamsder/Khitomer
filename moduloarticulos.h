@@ -122,6 +122,8 @@ public:
 
     Q_INVOKABLE QString retornaCodigoTipoGarantia(QString _codigoArticulo) const;
 
+    Q_INVOKABLE void actualizarGarantia(QString _codigoArticulo, QString _codigoTipoGarantia) const;
+
 
 
 private:

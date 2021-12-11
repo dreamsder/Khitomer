@@ -50,6 +50,7 @@ Rectangle {
     MouseArea {
         id: mouse_area2
         anchors.fill: parent
+        hoverEnabled: true
 
         Rectangle {
             id: rectImpresionListaPrecios

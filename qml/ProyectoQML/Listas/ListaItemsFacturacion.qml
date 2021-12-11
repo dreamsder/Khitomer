@@ -49,6 +49,8 @@ Rectangle{
     property string idGarantia: codigoTipoGarantia
     property string nombreGarantia: descripcionTipoGarantia
 
+    property bool _asignarGarantiaAArticulo: asignarGarantiaAArticulo
+
 
     signal abrirGarantias
 

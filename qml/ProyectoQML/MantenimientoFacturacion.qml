@@ -736,7 +736,8 @@ Rectangle {
                                                   indiceLinea:i,
                                                   descuentoLineaItem:valorDescuentoLinea.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
                                                   codigoTipoGarantia:valorCodigoTipoGarantia,
-                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia)
+                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia),
+                                                  asignarGarantiaAArticulo:false
                                               })
 
 
@@ -755,7 +756,8 @@ Rectangle {
                                                   indiceLinea:i,
                                                   descuentoLineaItem:valorDescuentoLinea.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
                                                   codigoTipoGarantia:valorCodigoTipoGarantia,
-                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia)
+                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(valorCodigoTipoGarantia),
+                                                  asignarGarantiaAArticulo:false
                                               })
                 }
 
@@ -1658,8 +1660,10 @@ Rectangle {
 
 
                         onAbrirGarantias: {
+                            cuadroListaGarantias.marcaActivoCheckbox(false)
                             cuadroListaGarantias.visible=true
                             cuadroListaGarantias.index=index
+
                         }
 
                     }
@@ -3206,7 +3210,8 @@ Rectangle {
                                                                                       indiceLinea:-1,
                                                                                       descuentoLineaItem:0,
                                                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                      asignarGarantiaAArticulo:false
                                                                                   })
                                                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
 
@@ -3293,7 +3298,8 @@ Rectangle {
                                                                                       indiceLinea:-1,
                                                                                       descuentoLineaItem:0,
                                                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                      asignarGarantiaAArticulo:false
                                                                                   })
                                                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
 
@@ -3372,7 +3378,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
                                                     listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
 
@@ -3778,7 +3785,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -3863,7 +3871,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -3954,7 +3963,8 @@ Rectangle {
                                                                           indiceLinea:-1,
                                                                           descuentoLineaItem:0,
                                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                          asignarGarantiaAArticulo:false
                                                                       })
 
                                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4338,7 +4348,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4425,7 +4436,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4515,7 +4527,8 @@ Rectangle {
                                                                           indiceLinea:-1,
                                                                           descuentoLineaItem:0,
                                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                          asignarGarantiaAArticulo:false
                                                                       })
 
                                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4783,7 +4796,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4870,7 +4884,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -4960,7 +4975,8 @@ Rectangle {
                                                                           indiceLinea:-1,
                                                                           descuentoLineaItem:0,
                                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                          asignarGarantiaAArticulo:false
                                                                       })
 
                                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5088,7 +5104,8 @@ Rectangle {
                                                                                       indiceLinea:-1,
                                                                                       descuentoLineaItem:0,
                                                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                      asignarGarantiaAArticulo:false
                                                                                   })
 
                                                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5146,7 +5163,8 @@ Rectangle {
                                                                                       indiceLinea:-1,
                                                                                       descuentoLineaItem:0,
                                                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                      asignarGarantiaAArticulo:false
                                                                                   })
 
 
@@ -5209,7 +5227,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
 
 
@@ -5279,7 +5298,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
 
 
@@ -5336,7 +5356,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
 
                                                     listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5395,7 +5416,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5542,7 +5564,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
 
 
@@ -5595,7 +5618,8 @@ Rectangle {
                                                                                   indiceLinea:-1,
                                                                                   descuentoLineaItem:0,
                                                                                   codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                                  descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                                  asignarGarantiaAArticulo:false
                                                                               })
 
                                                     listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5653,7 +5677,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
 
@@ -5716,7 +5741,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5771,7 +5797,8 @@ Rectangle {
                                                                               indiceLinea:-1,
                                                                               descuentoLineaItem:0,
                                                                               codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                              descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                              asignarGarantiaAArticulo:false
                                                                           })
 
                                                 listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -5830,7 +5857,8 @@ Rectangle {
                                                                           indiceLinea:-1,
                                                                           descuentoLineaItem:0,
                                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
+                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno)),
+                                                                          asignarGarantiaAArticulo:false
                                                                       })
 
                                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -6266,7 +6294,8 @@ Rectangle {
                                 for(var i=0; i<modeloItemsFactura.count;i++){
                                     cantidad=modeloItemsFactura.get(i).cantidadItems
 
-
+                                    if(modeloItemsFactura.get(i).asignarGarantiaAArticulo)
+                                        modeloArticulos.actualizarGarantia(modeloItemsFactura.get(i).codigoArticulo,modeloItemsFactura.get(i).codigoTipoGarantia);
 
 
                                     if(esDocumentoValidoParaCalculoPonderado){
@@ -6752,6 +6781,9 @@ Rectangle {
                             for(var i=0; i<modeloItemsFactura.count;i++){
 
                                 cantidad=modeloItemsFactura.get(i).cantidadItems
+
+                                if(modeloItemsFactura.get(i).asignarGarantiaAArticulo)
+                                    modeloArticulos.actualizarGarantia(modeloItemsFactura.get(i).codigoArticulo,modeloItemsFactura.get(i).codigoTipoGarantia);
 
                                 if(esDocumentoValidoParaCalculoPonderado){
                                     ///codigoArticulo, cantidad, costoTotal
@@ -7877,7 +7909,8 @@ Rectangle {
                                                                       indiceLinea:-1,
                                                                       descuentoLineaItem:0,
                                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(txtCodigoArticuloParaAgregarFacturacion.textoInputBox.trim()),
-                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(txtCodigoArticuloParaAgregarFacturacion.textoInputBox.trim()))
+                                                                      descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(txtCodigoArticuloParaAgregarFacturacion.textoInputBox.trim())),
+                                                                      asignarGarantiaAArticulo:false
                                                                   })
 
                                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -8205,8 +8238,9 @@ Rectangle {
         modeloItems: modeloTipoGarantia
         textoBoton:  "Cerrar"
         onSendInformacion: {
-            modeloItemsFactura.set(index,{"codigoTipoGarantia": id,"descripcionTipoGarantia": nombre})
+            modeloItemsFactura.set(index,{"codigoTipoGarantia": id,"descripcionTipoGarantia": nombre,"asignarGarantiaAArticulo":check})
             cuadroListaGarantias.visible=false
+
         }
     }
 

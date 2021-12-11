@@ -37,11 +37,16 @@ Rectangle {
 
     property string index:""
 
-    signal sendInformacion(string id,string nombre)
+    signal sendInformacion(string id,string nombre,bool check)
+
+    function marcaActivoCheckbox(valor){
+        cbxMarcarGarantiaArticuloPorDefecto.setActivo(valor)
+    }
 
     MouseArea {
         id: mouse_area2
         anchors.fill: parent
+        hoverEnabled: true
 
         Rectangle {
             id: rectListaItems
@@ -88,7 +93,7 @@ Rectangle {
                 id: listaDeGarantias
                 delegate: ListaGenerica {
                     onDoubleClicSend: {
-                        sendInformacion(datoUno,datoDos)
+                        sendInformacion(datoUno,datoDos,cbxMarcarGarantiaArticuloPorDefecto.chekActivo)
                     }
                 }
                 anchors.bottom: btnCancelarOperacion.top
@@ -168,6 +173,17 @@ Rectangle {
 
                 onClicked: clicCancelar()
             }
+
+            CheckBox{
+                id: cbxMarcarGarantiaArticuloPorDefecto
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 10
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                textoValor: "Asignar garantía por defecto al artículo."
+                colorTexto: "#ffffff"
+            }
+
 
             Rectangle {
                 id: rectangle1

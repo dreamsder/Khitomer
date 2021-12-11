@@ -20,7 +20,6 @@ junto a este programa.
 En caso contrario, consulte <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import "../Controles"
 import "../Listas"

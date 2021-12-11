@@ -776,3 +776,22 @@ QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) cons
         return "0";
     }
 }
+
+
+
+void ModuloArticulos::actualizarGarantia(QString _codigoArticulo, QString _codigoTipoGarantia) const {
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+        QSqlQuery query(Database::connect());
+        query.exec("update Articulos set codigoTipoGarantia='"+_codigoTipoGarantia+"'  where codigoArticulo='"+_codigoArticulo+"'");
+    }
+}
