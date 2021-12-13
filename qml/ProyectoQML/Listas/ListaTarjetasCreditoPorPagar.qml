@@ -92,40 +92,8 @@ Rectangle{
                 modeloListaTarjetasCreditoACobrar.setProperty(index,"checkboxActivo",true)
             }
 
+            mantenimientoFactura.cargoFacturaEnMantenimiento(codigoDoc,codigoTipoDoc,serieDocumento)
 
-            if(tagFacturacion.enabled && funcionesmysql.mensajeAdvertencia("Se va a cargar la factura seleccionada, \nsi tiene datos en uso se perderan, desea continuar?\n\nPresione [ Sí ] para confirmar.")){
-
-mostrarMantenimientos(0,"derecha")
-
-                mantenimientoFactura.cargarFactura(codigoDoc
-                                                   ,codigoTipoDoc                                                   
-                                                   ,modeloDocumentos.retornacodigoEstadoDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornatipoClienteDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornacodigoClienteDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,serieDocumento
-                                                   ,modeloDocumentos.retornacodigoVendedorComisionaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornacodigoLiquidacionDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornacodigoVendedorLiquidacionDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornafechaEmisionDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornafechaEmisionDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornacodigoMonedaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaprecioIvaVentaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaprecioSubTotalVentaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaprecioTotalVentaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornatotalIva1Documento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornatotalIva2Documento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornatotalIva3Documento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaobservacionesDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaonumeroCuentaBancariaDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaocodigoBancoDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaMontoDescuentoTotalDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaFormaDePagoDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   ,"","",
-                                                    modeloDocumentos.retornacomentariosDocumento(codigoDoc,codigoTipoDoc,serieDocumento)
-                                                   )
-
-            }
         }
     }
 

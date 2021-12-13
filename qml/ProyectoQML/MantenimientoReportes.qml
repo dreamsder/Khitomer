@@ -953,8 +953,28 @@ Rectangle {
                     settings.standardFontFamily: "Arial"
                     settings.defaultFontSize: 13
                     settings.minimumFontSize: 13
-                    settings.defaultFixedFontSize: 13                    
+                    settings.defaultFixedFontSize: 13
                     visible: true                    
+
+                    javaScriptWindowObjects: QtObject {
+                        WebView.windowObjectName: "qml"
+
+                        /*function qmlCall() {
+                            console.log("This call is in QML!");
+                        }*/
+                    }
+
+
+                    /*WebView {
+                        javaScriptWindowObjects: QtObject {
+                            WebView.windowObjectName: "qml"
+
+                            function qmlCall() {
+                                console.log("This call is in QML!");
+                            }
+                        }
+                        html: "<script>window.qml.qmlCall();</script>"
+                    }*/
 
                     enabled: false
 
@@ -1288,4 +1308,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.left: parent.left
     }
+
+
+
 }

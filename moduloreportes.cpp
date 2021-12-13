@@ -602,6 +602,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
             out << "\n<script type=\"text/javascript\" src=\""+retornaDirectorioJquery_min_js()+"\"></script>";
             out << "\n<script type=\"text/javascript\">";
 
+
             out << "\n$(function () { $('#container').highcharts({";
             out << "\nplotOptions: {";
             out << "\npie: {";
@@ -730,8 +731,16 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
                         int totalquery=query.record().count();
 
-                        for(int i=0;i< totalquery;i++)
-                            out << "\n<th>"+query.record().fieldName(i)+"</th>";
+
+
+                        for(int i=0;i< totalquery;i++){
+
+                            if(query.record().fieldName(i)=="LINK_CLI"){
+
+                            }else{
+                                out << "\n<th>"+query.record().fieldName(i)+"</th>";
+                            }
+                        }
 
                         out << "\n</tr>";
                         out << "\n</thead>";
@@ -741,31 +750,50 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                         query.previous();
 
                         while(query.next()){
-                            out << "\n<tr>";
+
+                            //if(query.record().fieldName(0)=="LINK_CLI"){
+                            //    out << "\n<tr hidden>";
+                            //}else{
+                                out << "\n<tr>";
+                           // }
+
+
                             cantidadLineas++;
 
                             int totalquery=query.record().count();
 
+
                             for(int j=0;j< totalquery;j++){
+
+                                /*if(query.record().fieldName(j)=="LINK_DOC"){
+                                    qDebug()<< query.value(j).toString().split("#");
+                                    continue;
+                                }else if(query.record().fieldName(j)=="LINK_CLI"){
+                                    qDebug()<< query.value(j).toString().split("#");
+                                    continue;
+                                }*/
+
+                                //qDebug()<<query.record().fieldName(j);
+
 
                                 QString _alineacion=retornaConfiguracionAlineacionDeColumnaDelReporte(_codigoReporte,QString::number(j));
                                 QString _tipoDatoColumna=retornaConfiguracionTipoDeDatoDeColumnaDelReporte(_codigoReporte,QString::number(j));
 
-                                if(_alineacion=="-1"){
+                                if(_alineacion=="-1" ){
                                     if(_tipoDatoColumna=="TEXTO"){
                                         out << "\n<th>"+query.value(j).toString()+"</th>";
                                     }else if(_tipoDatoColumna=="MONTO"){
                                         out << "\n<th>"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
                                     }
 
-                                }else if(_alineacion=="0"){
+                                }else if(_alineacion=="0" ){
                                     if(_tipoDatoColumna=="TEXTO"){
                                         out << "\n<th align=\"left\">"+query.value(j).toString()+"</th>";
                                     }else if(_tipoDatoColumna=="MONTO"){
                                         out << "\n<th align=\"left\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
                                     }
 
-                                }else if(_alineacion=="1"){
+                                }else if(_alineacion=="1" ){
 
                                     if(_tipoDatoColumna=="TEXTO"){
                                         out << "\n<th  align=\"center\">"+query.value(j).toString()+"</th>";
@@ -773,7 +801,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                                         out << "\n<th  align=\"center\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
                                     }
 
-                                }else if(_alineacion=="2"){
+                                }else if(_alineacion=="2" ){
 
                                     if(_tipoDatoColumna=="TEXTO"){
                                         out << "\n<th  align=\"right\">"+query.value(j).toString()+"</th>";
@@ -783,6 +811,8 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                                 }
                             }
                             out << "\n</tr>";
+
+
                         }
 
                         out << "\n</tbody>";
@@ -880,6 +910,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
         out << "\n<h3 align=\"center\">Cantidad de registros: "+QString::number(cantidadLineas)+"</h3>";
         out << "\n</article>";
 
+        // out <<"\n<script>window.qml.qmlCall();</script>";
         out << "\n</footer>";
         out << "\n</body>";
         out << "\n</html>";

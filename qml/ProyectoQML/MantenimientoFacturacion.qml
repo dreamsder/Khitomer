@@ -546,6 +546,53 @@ Rectangle {
 
 
 
+    function cargoFacturaEnMantenimiento(codigoDocumento, codigoTipoDocumento,serieDocumento){
+
+        if(tagFacturacion.enabled && funcionesmysql.mensajeAdvertencia("Se va a cargar la factura seleccionada, \nsi tiene datos en uso se perderan, desea continuar?\n\nPresione [ Sí ] para confirmar.")){
+
+            if(modeloDocumentos.existeDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)){
+
+                mostrarMantenimientos(0,"derecha")
+
+                cargarFactura(codigoDocumento,
+                                                   codigoTipoDocumento,
+                                                   modeloDocumentos.retornacodigoEstadoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornatipoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornacodigoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   serieDocumento,
+                                                   modeloDocumentos.retornacodigoVendedorComisionaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornacodigoLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornacodigoVendedorLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornacodigoMonedaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaprecioIvaVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaprecioSubTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaprecioTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornatotalIva1Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornatotalIva2Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornatotalIva3Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaobservacionesDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaonumeroCuentaBancariaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaocodigoBancoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaMontoDescuentoTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaFormaDePagoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                                                   modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+
+                                                   "","",
+                                                   modeloDocumentos.retornacomentariosDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)
+                                                   )
+
+
+            }else{
+                funcionesmysql.mensajeAdvertenciaOk("El documento ya no existe, actualice la liquidacion y verifique.")
+            }
+        }
+
+    }
+
+
+
     /////
     ///// Carga la factura pendiente o en otro estado a la que se le da dobe clic en las liquidaciones/caja
     ///// Lista: ListaDocumentosEnLiquidaciones.qml

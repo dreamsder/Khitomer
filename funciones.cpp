@@ -1925,6 +1925,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 396:
             if(!impactoCambioEnBD("ALTER TABLE DocumentosLineas ADD codigoTipoGarantia INT UNSIGNED DEFAULT 0 NOT NULL;","397")){
                 _iterador=false; return false; } break;
+        case 397:
+            if(!impactoCambioEnBD("update Reportes set codigoMenuReporte=14 where codigoReporte=75;","398")){
+                _iterador=false; return false; } break;
             //
             //
             //
