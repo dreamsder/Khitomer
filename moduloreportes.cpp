@@ -717,14 +717,16 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
 
                 if(query.exec(listaConsultas.at(j))) {
-                    query.next();
 
+                    query.next();
+                  //  qDebug()<< QDateTime::currentDateTime();
                     if(query.value(0).toString()!=""){
 
                         out << "\n<section>";
 
                         out << "\n<article>";
-                        out << "\n<table  width=\"100%\" align=\"center\">";
+                        out << "\n<table class=\"rtable \">";
+                        //out << "\n<table class=\"rtable\" width=\"100%\" align=\"center\">";
 
                         out << "\n<thead>";
                         out << "\n<tr>";
@@ -781,32 +783,32 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
                                 if(_alineacion=="-1" ){
                                     if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<th>"+query.value(j).toString()+"</th>";
+                                        out << "\n<td>"+query.value(j).toString()+"</td>";
                                     }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<th>"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
+                                        out << "\n<td>"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
                                     }
 
                                 }else if(_alineacion=="0" ){
                                     if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<th align=\"left\">"+query.value(j).toString()+"</th>";
+                                        out << "\n<td align=\"left\">"+query.value(j).toString()+"</td>";
                                     }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<th align=\"left\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
+                                        out << "\n<td align=\"left\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
                                     }
 
                                 }else if(_alineacion=="1" ){
 
                                     if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<th  align=\"center\">"+query.value(j).toString()+"</th>";
+                                        out << "\n<td  align=\"center\">"+query.value(j).toString()+"</td>";
                                     }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<th  align=\"center\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
+                                        out << "\n<td  align=\"center\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
                                     }
 
                                 }else if(_alineacion=="2" ){
 
                                     if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<th  align=\"right\">"+query.value(j).toString()+"</th>";
+                                        out << "\n<td  align=\"right\">"+query.value(j).toString()+"</td>";
                                     }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<th  align=\"right\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</th>";
+                                        out << "\n<td  align=\"right\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
                                     }
                                 }
                             }
@@ -884,6 +886,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                             return "0";
 
                     }
+                  //  qDebug()<< QDateTime::currentDateTime();
                 }else{
                     return "-1";
                 }
