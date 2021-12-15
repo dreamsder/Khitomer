@@ -296,6 +296,9 @@ ModuloDocumentos::ModuloDocumentos(QObject *parent)
     roles[cae_numeroCaeRole] = "cae_numeroCae";
     roles[cae_serieRole] = "cae_serie";
 
+    roles[comentariosRole] = "comentarios";
+
+
 
 
 
@@ -320,6 +323,7 @@ Documentos::Documentos(const qulonglong &codigoDocumento, const int &codigoTipoD
 
                        ,const QString &cae_numeroCae
                        ,const QString &cae_serie
+                       ,const QString &comentarios
 
                        )
 
@@ -331,7 +335,7 @@ Documentos::Documentos(const qulonglong &codigoDocumento, const int &codigoTipoD
     , m_descripcionEstadoDocumento(descripcionEstadoDocumento), m_totalIva1(totalIva1), m_totalIva2(totalIva2), m_totalIva3(totalIva3), m_observaciones(observaciones)
     , m_numeroCuentaBancaria(numeroCuentaBancaria), m_codigoBanco(codigoBanco), m_esDocumentoWeb(esDocumentoWeb), m_montoDescuentoTotal(montoDescuentoTotal)
     , m_saldoClienteCuentaCorriente(saldoClienteCuentaCorriente), m_formaDePago(formaDePago),m_porcentajeDescuentoAlTotal(porcentajeDescuentoAlTotal)
-    , m_esDocumentoCFE(esDocumentoCFE), m_cae_numeroCae(cae_numeroCae), m_cae_serie(cae_serie)
+    , m_esDocumentoCFE(esDocumentoCFE), m_cae_numeroCae(cae_numeroCae), m_cae_serie(cae_serie), m_comentarios(comentarios)
 
 {
 }
@@ -476,6 +480,12 @@ QString Documentos::cae_serie() const
 {
     return m_cae_serie;
 }
+QString Documentos::comentarios() const
+{
+    return m_comentarios;
+}
+
+
 
 
 qulonglong ModuloDocumentos::retornaCodigoDocumentoPorIndice(int indice) const{
@@ -502,6 +512,11 @@ QString ModuloDocumentos::retornaFechaDocumentoPorIndice(int indice) const{
 QString ModuloDocumentos::retornaObservacionesDocumentoPorIndice(int indice) const{
     return m_Documentos[indice].observaciones();
 }
+QString ModuloDocumentos::retornacomentariosDocumentoPorIndice(int indice) const{
+    return m_Documentos[indice].comentarios();
+}
+
+
 
 
 void ModuloDocumentos::agregarDocumento(const Documentos &documentos)
@@ -574,7 +589,8 @@ void ModuloDocumentos::buscarDocumentos(QString campo, QString datoABuscar){
                                                        q.value(rec.indexOf("porcentajeDescuentoAlTotal")).toString(),
                                                        q.value(rec.indexOf("esDocumentoCFE")).toString(),
                                                        q.value(rec.indexOf("cae_numeroCae")).toString(),
-                                                       q.value(rec.indexOf("cae_serie")).toString()
+                                                       q.value(rec.indexOf("cae_serie")).toString(),
+                                                       q.value(rec.indexOf("comentarios")).toString()
 
                                                        )
 
@@ -650,7 +666,8 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
                                                        q.value(rec.indexOf("porcentajeDescuentoAlTotal")).toString(),
                                                        q.value(rec.indexOf("esDocumentoCFE")).toString(),
                                                        q.value(rec.indexOf("cae_numeroCae")).toString(),
-                                                       q.value(rec.indexOf("cae_serie")).toString()
+                                                       q.value(rec.indexOf("cae_serie")).toString(),
+                                                       q.value(rec.indexOf("comentarios")).toString()
 
 
                                                        )
@@ -724,7 +741,8 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
                                                        q.value(rec.indexOf("porcentajeDescuentoAlTotal")).toString(),
                                                        q.value(rec.indexOf("esDocumentoCFE")).toString(),
                                                        q.value(rec.indexOf("cae_numeroCae")).toString(),
-                                                       q.value(rec.indexOf("cae_serie")).toString()
+                                                       q.value(rec.indexOf("cae_serie")).toString(),
+                                                       q.value(rec.indexOf("comentarios")).toString()
 
 
 
@@ -799,7 +817,8 @@ void ModuloDocumentos::buscarDocumentosAPagarCuentaCorriente(QString _codigoMone
                                                        q.value(rec.indexOf("porcentajeDescuentoAlTotal")).toString(),
                                                        q.value(rec.indexOf("esDocumentoCFE")).toString(),
                                                        q.value(rec.indexOf("cae_numeroCae")).toString(),
-                                                       q.value(rec.indexOf("cae_serie")).toString()
+                                                       q.value(rec.indexOf("cae_serie")).toString(),
+                                                       q.value(rec.indexOf("comentarios")).toString()
 
                                                        )
 
@@ -873,7 +892,8 @@ void ModuloDocumentos::buscarDocumentosDePagoCuentaCorriente(QString _codigoMone
                                                        q.value(rec.indexOf("porcentajeDescuentoAlTotal")).toString(),
                                                        q.value(rec.indexOf("esDocumentoCFE")).toString(),
                                                        q.value(rec.indexOf("cae_numeroCae")).toString(),
-                                                       q.value(rec.indexOf("cae_serie")).toString()
+                                                       q.value(rec.indexOf("cae_serie")).toString(),
+                                                       q.value(rec.indexOf("comentarios")).toString()
 
                                                        )
 
@@ -997,6 +1017,9 @@ QVariant ModuloDocumentos::data(const QModelIndex & index, int role) const {
     }
     else if (role == cae_serieRole){
         return documentos.cae_serie();
+    }
+    else if (role == comentariosRole){
+        return documentos.comentarios();
     }
 
     return QVariant();
@@ -1541,6 +1564,36 @@ bool ModuloDocumentos::actualizoSaldoClientePagoContadoDocumento(QString _codigo
 
         QSqlQuery query(Database::connect());
         if(query.exec("update Documentos set saldoClientePagoContado='"+_saldoClientePagoContado+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+
+
+bool ModuloDocumentos::actualizoComentarios(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento,QString _comentarios   ) const {
+
+
+    if(_codigoDocumento.trimmed()=="" || _codigoTipoDocumento.trimmed()=="" ){
+        return false;
+    }
+    Database::chequeaStatusAccesoMysql();
+    bool conexion=true;
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("update Documentos set comentarios='"+_comentarios+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;

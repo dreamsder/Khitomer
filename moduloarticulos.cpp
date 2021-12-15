@@ -629,7 +629,7 @@ QString ModuloArticulos::retornaCantidadArticulosSinStock() const {
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("select sum(cantidadArticulosSinStock) from FaltaStock ")) {
+        if(query.exec("select sum(FS.cantidadArticulosSinStock) from FaltaStock FS join Articulos AR on AR.codigoArticulo=FS.codigoArticulo where AR.activo=1; ")) {
 
             if(query.first()){
 

@@ -555,33 +555,33 @@ Rectangle {
                 mostrarMantenimientos(0,"derecha")
 
                 cargarFactura(codigoDocumento,
-                                                   codigoTipoDocumento,
-                                                   modeloDocumentos.retornacodigoEstadoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornatipoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornacodigoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   serieDocumento,
-                                                   modeloDocumentos.retornacodigoVendedorComisionaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornacodigoLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornacodigoVendedorLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornacodigoMonedaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaprecioIvaVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaprecioSubTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaprecioTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornatotalIva1Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornatotalIva2Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornatotalIva3Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaobservacionesDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaonumeroCuentaBancariaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaocodigoBancoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaMontoDescuentoTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaFormaDePagoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
-                                                   modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              codigoTipoDocumento,
+                              modeloDocumentos.retornacodigoEstadoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornatipoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornacodigoClienteDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              serieDocumento,
+                              modeloDocumentos.retornacodigoVendedorComisionaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornacodigoLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornacodigoVendedorLiquidacionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornafechaEmisionDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornacodigoMonedaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaprecioIvaVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaprecioSubTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaprecioTotalVentaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornatotalIva1Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornatotalIva2Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornatotalIva3Documento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaobservacionesDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaonumeroCuentaBancariaDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaocodigoBancoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaMontoDescuentoTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaFormaDePagoDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
+                              modeloDocumentos.retornaPorcentajeDescuentoAlTotalDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento),
 
-                                                   "","",
-                                                   modeloDocumentos.retornacomentariosDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)
-                                                   )
+                              "","",
+                              modeloDocumentos.retornacomentariosDocumento(codigoDocumento,codigoTipoDocumento,serieDocumento)
+                              )
 
 
             }else{
@@ -7057,7 +7057,7 @@ Rectangle {
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Anular.png"
             visible: false
             toolTip: "Anular documento"
-            z: 7
+            z: 6
             onClic: {
 
                 if(txtNumeroDocumentoFacturacion.textoInputBox.trim()!="" && cbListatipoDocumentos.codigoValorSeleccion!=""){
@@ -7117,6 +7117,50 @@ Rectangle {
             }
 
         }
+
+        BotonBarraDeHerramientas {
+            id: botonGuardarComentarios
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Comentarios.png"
+            toolTip: "Guardar comentario"
+            visible: {
+                var estadoDocumento=modeloDocumentos.retornacodigoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim())
+                if((estadoDocumento=="E" || estadoDocumento=="G") && nuevoDocumento==""){
+                    txtComentariosFactura.visible
+                }else{
+                    false
+                }
+            }
+
+            z: 6
+            onClic: {
+                var estadoDocumento=modeloDocumentos.retornacodigoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim())
+                if((estadoDocumento=="E" || estadoDocumento=="G") && nuevoDocumento==""){
+
+                    modeloDocumentos.actualizoComentarios(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim())
+                    txtMensajeInformacion.color="#2f71a0"
+                    txtMensajeInformacion.text="Comentario actualizado"
+                    txtMensajeInformacion.visible=true
+                    txtMensajeInformacionTimer.stop()
+                    txtMensajeInformacionTimer.start()
+
+                }
+
+                /*if(funcionesmysql.mensajeAdvertencia("Se va a realizar el documento contrario al que esta visualizando.\nA continuación se mostraran los documentos disponibles.\nDesea proceder?\n\nPresione [ Sí ] para confirmar.")){
+                    modeloListaTipoDocumentosParaDevoluciones.limpiarListaTipoDocumentos()
+                    if(modeloListaTipoDocumentosParaDevoluciones.permiteDevolucionTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion)){
+
+                        cuadroListaDocumentosDevolucion.visible=true;
+
+
+                    }
+                }*/
+
+            }
+
+        }
+
+
+
         Text {
             id: txtMensajeInformacion
             color: "#d93e3e"

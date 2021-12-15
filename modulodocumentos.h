@@ -78,7 +78,7 @@ public:
                            ,const QString &esDocumentoCFE
                            ,const QString &cae_numeroCae
                            ,const QString &cae_serie
-
+                            ,const QString &comentarios
 
                            );
 
@@ -121,6 +121,8 @@ public:
 
     QString cae_numeroCae() const;
     QString cae_serie() const;
+    QString comentarios() const;
+
 
 
 
@@ -162,6 +164,7 @@ private:
 
     QString m_cae_numeroCae;
     QString m_cae_serie;
+    QString m_comentarios;
 
 
 };
@@ -206,7 +209,8 @@ public:
 
         esDocumentoCFERole,
         cae_numeroCaeRole,
-        cae_serieRole
+        cae_serieRole,
+        comentariosRole
 
     };
 
@@ -375,6 +379,10 @@ public:
 
     Q_INVOKABLE  QString retornaObservacionesDocumentoPorIndice(int indice) const;
 
+    Q_INVOKABLE  QString retornacomentariosDocumentoPorIndice(int indice) const;
+
+
+    Q_INVOKABLE bool actualizoComentarios(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento,QString _comentarios   ) const;
 
 
 

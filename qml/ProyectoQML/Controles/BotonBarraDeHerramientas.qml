@@ -44,6 +44,7 @@ Item {
         opacity: opacidad
         asynchronous: true
         anchors.fill: parent
+        smooth: true
 
 
         Rectangle{

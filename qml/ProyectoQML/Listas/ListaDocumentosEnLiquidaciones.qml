@@ -349,6 +349,29 @@ Rectangle{
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/ClienteWeb.png"
     }
 
+
+    Text {
+        id: txtComentarios
+        text: {
+            if(comentarios==""){
+                ""
+            }else{
+                qsTr("Comentario:  "+comentarios)
+            }
+        }
+        anchors.right: txtTipoDeDocumentoListado.left
+        anchors.rightMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        clip: true
+        anchors.bottom: txtObservaciones.top
+        anchors.bottomMargin: 1
+        font.pixelSize: 10
+        font.family: "Arial"
+        opacity: 0.800
+        color: "purple"
+    }
+
     Text {
         id: txtObservaciones
         text: {
@@ -364,9 +387,8 @@ Rectangle{
         anchors.leftMargin: 10
         clip: true
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
-        //
-        font.pixelSize: 11
+        anchors.bottomMargin: 4
+        font.pixelSize: 10
         font.family: "Arial"
         opacity: 0.500
     }

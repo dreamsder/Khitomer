@@ -268,6 +268,9 @@ Rectangle {
         ///         :Se agrega el campo Comentario en la tabla Documentos y se agrega en el mantenimiento de facturación.
         ///         :Corrección en reportes por procedencia, dado que la fecha de alta es diferente a la fecha por defecto y hay que recortarla a 10 caracteres.
         ///         :Se agregan 3 nuevos reportes para marketing a pedido de Cynthia de Digital World.
+        /// 1.16.22 :Se corrige reporte de stock bajo, para que no tome inactivos.
+        ///         :Se agrega un boton para guardar los comentarios en documentos emitidos.
+
 
 
         Text {
