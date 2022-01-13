@@ -89,6 +89,8 @@ Rectangle{
                     txtCodigoClienteFacturacion.textoInputBox=codigoCliente
 
 
+                    setearFormaDePagoYMonedaDefaulCliente()
+
                     if(modeloconfiguracion.retornaValorConfiguracion("UTILIZA_CONTROL_CLIENTE_CREDITO")=="1"){
                         if(txtCodigoClienteFacturacion.textoInputBox.trim()!="" && lblRazonSocialCliente.text.trim()!=""){
                             if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){

@@ -270,6 +270,8 @@ Rectangle {
         ///         :Se agregan 3 nuevos reportes para marketing a pedido de Cynthia de Digital World.
         /// 1.16.22 :Se corrige reporte de stock bajo, para que no tome inactivos.
         ///         :Se agrega un boton para guardar los comentarios en documentos emitidos.
+        ///         :Se corrige error con descuento en tipo de documento devilución.
+        ///         :Se corrige error en carga de cliente.
 
 
 

@@ -511,6 +511,7 @@ inicio:
         }
     }
 
+
     //Carga de datos a ComboBox
     moduloTipoClientes.buscarTipoCliente("1=","1");
     moduloTipoDocumentoCliente.buscar();
@@ -529,6 +530,7 @@ inicio:
     moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
     moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
     moduloReportesMenu.buscarReportesMenu("1=","1","");
+
 
     moduloReportes.buscarReportes("1=","1","");
 
@@ -560,7 +562,6 @@ inicio:
 
     moduloFormasDePago.buscarFormaDePago("1=","1");
     //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
-
 
 
 

@@ -75,6 +75,39 @@ Rectangle {
 
 
 
+    function setearFormaDePagoYMonedaDefaulCliente(){
+
+        var monedaDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoMonedaDefault");
+        var formaDePagoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoFormasDePagoDefault");
+
+        // Seteo la forma de pago por defecto para el cliente
+        if(formaDePagoDefaulCliente!="0"){
+            if(cbListaFormasDePago.visible){
+                cbListaFormasDePago.codigoValorSeleccion=formaDePagoDefaulCliente
+                cbListaFormasDePago.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(formaDePagoDefaulCliente)
+            }
+        }
+
+
+        if(monedaDefaulCliente!="0"){
+            if(cbListaMonedasEnFacturacion.codigoValorSeleccion!=monedaDefaulCliente){
+                // si hay articulo, aviso que voy a borrarlos
+                if(modeloItemsFactura.count!=0){
+                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
+                }
+
+                cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
+                cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
+                cbListaMonedasEnFacturacion.aceptarOClic()
+                borrarArticulos()
+
+
+            }
+        }
+    }
+
+
+
     function retornaCantidadDeUnArticuloEnFacturacion(articuloEnFacturacion){
 
 
@@ -457,6 +490,12 @@ Rectangle {
         txtTipoClienteFacturacion.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaTipoCliente")
         rectListaDeArticulos.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")
         etiquetaTotal.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaTotales")
+        if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaDescuentoTotal") || modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaDescuentoArticulo")){
+            etiquetaTotal.descuentosVisible=true
+        }else{
+            etiquetaTotal.descuentosVisible=false
+        }
+
         txtCantidadArticulosFacturacion.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCantidades")
         txtPrecioItemManualFacturacion.visible=modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaPrecioManual")
 
@@ -713,7 +752,8 @@ Rectangle {
             etiquetaTotal.txtValorSubTotalText= precioSubTotalVenta
             etiquetaTotal.txtValorTotalText= precioTotalVenta
             valorReutilizar=montoDescuentoTotal
-            montoDescuentoTotal=valorReutilizar.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
+            montoDescuentoTotal=valorReutilizar.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))           
+
             etiquetaTotal.txtvalorTotalDescuentoText=montoDescuentoTotal
 
             etiquetaTotal.valorIvaAcumulado=precioIvaVenta
@@ -723,7 +763,12 @@ Rectangle {
             etiquetaTotal.valorTotalDescuentoAcumulado=montoDescuentoTotal
 
 
-            etiquetaTotal.setearPorcenjeDescuento(porcentajeDescuentoAlTotal)
+            etiquetaTotal.setearPorcenjeDescuento(porcentajeDescuentoAlTotal)            
+
+            if(porcentajeDescuentoAlTotal!==0){
+                etiquetaTotal.descuentosVisible=true
+            }
+
         }
 
         lbltemTotalVentaFacturacion.text=qsTr("Unidad "+_simboloMoneda)
@@ -2868,6 +2913,9 @@ Rectangle {
                         txtTipoClienteFacturacion.textoComboBox=modeloTipoClientes.primerRegistroDeTipoClienteEnBase(codigoValorSeleccionTipoCliente)
                         txtCodigoClienteFacturacion.tomarElFocoP()
                         txtCodigoClienteFacturacion.cerrarComboBox()
+
+                        setearFormaDePagoYMonedaDefaulCliente();
+
                     }
                     onKeyEscapeCerrar: {
                         txtCodigoClienteFacturacion.tomarElFocoP()
@@ -2939,33 +2987,10 @@ Rectangle {
                         }
 
 
-                        var monedaDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoMonedaDefault");
-                        var formaDePagoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoFormasDePagoDefault");
-
-                        // Seteo la forma de pago por defecto para el cliente
-                        if(formaDePagoDefaulCliente!="0"){
-                            if(cbListaFormasDePago.visible){
-                                cbListaFormasDePago.codigoValorSeleccion=formaDePagoDefaulCliente
-                                cbListaFormasDePago.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(formaDePagoDefaulCliente)
-                            }
-                        }
 
 
-                        if(monedaDefaulCliente!="0"){
-                            if(cbListaMonedasEnFacturacion.codigoValorSeleccion!=monedaDefaulCliente){
-                                // si hay articulo, aviso que voy a borrarlos
-                                if(modeloItemsFactura.count!=0){
-                                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
-                                }
+                        setearFormaDePagoYMonedaDefaulCliente();
 
-                                cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
-                                cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
-                                cbListaMonedasEnFacturacion.aceptarOClic()
-                                borrarArticulos()
-
-
-                            }
-                        }
 
 
 
