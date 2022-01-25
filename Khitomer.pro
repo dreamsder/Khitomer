@@ -212,13 +212,13 @@ win64:INCLUDEPATH += "%systemdrive%\Khitomer\ExcelWin"
 win32:INCLUDEPATH += "%systemdrive%\Khitomer\chilkatWin\include"
 win64:INCLUDEPATH += "%systemdrive%\Khitomer\chilkatWin\include"
 
-#unix:INCLUDEPATH += "/opt/Khitomer/lib"
-#unix:INCLUDEPATH += "/opt/Khitomer/lib/lib32"
-#unix:INCLUDEPATH += "/opt/Khitomer/lib/lib64"
+unix:INCLUDEPATH += "/opt/Khitomer/lib"
+unix:INCLUDEPATH += "/opt/Khitomer/lib/lib32"
+unix:INCLUDEPATH += "/opt/Khitomer/lib/lib64"
 
-unix:INCLUDEPATH += "lib"
-unix:INCLUDEPATH += "lib/lib32"
-unix:INCLUDEPATH += "lib/lib64"
+#unix:INCLUDEPATH += "lib"
+#unix:INCLUDEPATH += "lib/lib32"
+#unix:INCLUDEPATH += "lib/lib64"
 
 win32:LIBS += -lBasicExcelWin -L"%systemdrive%\Khitomer\ExcelWin"
 win64:LIBS += -lBasicExcelWin -L"%systemdrive%\Khitomer\ExcelWin"
@@ -226,14 +226,14 @@ win64:LIBS += -lBasicExcelWin -L"%systemdrive%\Khitomer\ExcelWin"
 win32:LIBS += -lchilkat-9.5.0 -L"%systemdrive%\Khitomer\chilkatWin"
 win64:LIBS += -lchilkat-9.5.0 -L"%systemdrive%\Khitomer\chilkatWin"
 
-#unix:LIBS += -lBasicExcel -L"/opt/Khitomer/lib"  -lboost_system -lresolv -lpthread -lcurl  -lcrypt -lm -lcrypto
-#unix32:LIBS += -lchilkat-9.5.0 -L"/opt/Khitomer/lib/lib32"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
-#unix64:LIBS += -lchilkat-9.5.0 -L"/opt/Khitomer/lib/lib64"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
+unix:LIBS += -lBasicExcel -L"/opt/Khitomer/lib"  -lboost_system -lresolv -lpthread -lcurl  -lcrypt -lm -lcrypto
+unix32:LIBS += -lchilkat-9.5.0 -L"/opt/Khitomer/lib/lib32"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
+unix64:LIBS += -lchilkat-9.5.0 -L"/opt/Khitomer/lib/lib64"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
 
 
-unix:LIBS += -lBasicExcel -L"lib"  -lboost_system -lresolv -lpthread -lcurl  -lcrypt -lm -lcrypto
-unix32:LIBS += -lchilkat-9.5.0 -L"lib/lib32"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
-unix64:LIBS += -lchilkat-9.5.0 -L"lib/lib64"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
+#unix:LIBS += -lBasicExcel -L"lib"  -lboost_system -lresolv -lpthread -lcurl  -lcrypt -lm -lcrypto
+#unix32:LIBS += -lchilkat-9.5.0 -L"lib/lib32"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
+#unix64:LIBS += -lchilkat-9.5.0 -L"lib/lib64"  -lboost_system -lresolv -lpthread -lcurl   -lcrypt -lm -lcrypto
 
 
 win32:INCLUDEPATH += "%systemdrive%\OpenSSL-Win32\include"
