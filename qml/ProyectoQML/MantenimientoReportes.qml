@@ -959,9 +959,10 @@ Rectangle {
                     javaScriptWindowObjects: QtObject {
                         WebView.windowObjectName: "qml"
 
-                        /*function qmlCall() {
-                            console.log("This call is in QML!");
-                        }*/
+                        function qmlCall(codigo) {
+                            var arrayDeCadenas = codigo.split("-");
+                            mantenimientoFactura.cargoFacturaEnMantenimiento(arrayDeCadenas[0],arrayDeCadenas[1],arrayDeCadenas[2])
+                        }
                     }
 
 
@@ -976,7 +977,7 @@ Rectangle {
                         html: "<script>window.qml.qmlCall();</script>"
                     }*/
 
-                    enabled: false
+                    enabled: true
 
                     onLoadFinished: {
 

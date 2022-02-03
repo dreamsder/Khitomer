@@ -583,6 +583,8 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
         out << "\n<link rel=\"stylesheet\" href=\""+retornaDirectorioEstiloCssHTML()+"\">";
 
 
+        bool _utilizaAbrirDocumentos=retornaPermisosDelReporte(_codigoReporte,"utilizaAbrirDocumentos");
+
         bool _utilizaGraficas=retornaPermisosDelReporte(_codigoReporte,"utilizaGraficas");
         if(_utilizaGraficas && _incluirGrafica){
 
@@ -662,6 +664,10 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
             out << "\n      ]";
             out << "\n }]";
             out << "\n      });});";
+
+            out <<"function myfunction() {    window.qml.qmlCall();     }";
+
+
             out << "</script>";
         }
         out << "\n</head>";
@@ -782,36 +788,63 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                                 QString _tipoDatoColumna=retornaConfiguracionTipoDeDatoDeColumnaDelReporte(_codigoReporte,QString::number(j));
 
                                 if(_alineacion=="-1" ){
-                                    if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<td>"+query.value(j).toString()+"</td>";
-                                    }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<td>"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                    if(_utilizaAbrirDocumentos && j==(totalquery-1)){
+
+                                    }else{
+                                        if(_tipoDatoColumna=="TEXTO"){
+                                            out << "\n<td>"+query.value(j).toString()+"</td>";
+                                        }else if(_tipoDatoColumna=="MONTO"){
+                                            out << "\n<td>"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                        }
                                     }
 
+
                                 }else if(_alineacion=="0" ){
-                                    if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<td align=\"left\">"+query.value(j).toString()+"</td>";
-                                    }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<td align=\"left\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                    if(_utilizaAbrirDocumentos && j==(totalquery-1)){
+
+                                    }else{
+                                        if(_tipoDatoColumna=="TEXTO"){
+                                            out << "\n<td align=\"left\">"+query.value(j).toString()+"</td>";
+                                        }else if(_tipoDatoColumna=="MONTO"){
+                                            out << "\n<td align=\"left\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                        }
                                     }
+
 
                                 }else if(_alineacion=="1" ){
 
-                                    if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<td  align=\"center\">"+query.value(j).toString()+"</td>";
-                                    }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<td  align=\"center\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+
+                                    if(_utilizaAbrirDocumentos && j==(totalquery-1)){
+
+                                    }else{
+                                        if(_tipoDatoColumna=="TEXTO"){
+                                            out << "\n<td  align=\"center\">"+query.value(j).toString()+"</td>";
+                                        }else if(_tipoDatoColumna=="MONTO"){
+                                            out << "\n<td  align=\"center\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                        }
                                     }
+
 
                                 }else if(_alineacion=="2" ){
 
-                                    if(_tipoDatoColumna=="TEXTO"){
-                                        out << "\n<td  align=\"right\">"+query.value(j).toString()+"</td>";
-                                    }else if(_tipoDatoColumna=="MONTO"){
-                                        out << "\n<td  align=\"right\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                    if(_utilizaAbrirDocumentos && j==(totalquery-1)){
+
+                                    }else{
+                                        if(_tipoDatoColumna=="TEXTO"){
+                                            out << "\n<td  align=\"right\">"+query.value(j).toString()+"</td>";
+                                        }else if(_tipoDatoColumna=="MONTO"){
+                                            out << "\n<td  align=\"right\">"+QString::number(query.value(j).toFloat(),'f',cantidadDecimalesMontoReportes)+"</td>";
+                                        }
                                     }
+
                                 }
+
                             }
+
+                            if(_utilizaAbrirDocumentos){
+                                out << "\n<td><input class=\"button-12\" type = \"button\" onclick = \"window.qml.qmlCall('"+query.value(totalquery-1).toString()+"')\" value = \" Abrir \">  </td>";
+                            }
+
                             out << "\n</tr>";
 
 
@@ -913,7 +946,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
         out << "\n<h3 align=\"center\">Cantidad de registros: "+QString::number(cantidadLineas)+"</h3>";
         out << "\n</article>";
 
-        // out <<"\n<script>window.qml.qmlCall();</script>";
+
         out << "\n</footer>";
         out << "\n</body>";
         out << "\n</html>";

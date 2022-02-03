@@ -118,6 +118,9 @@ Rectangle{
             cbListaFormasDePagoCliente.codigoValorSeleccion=codigoFormasDePagoDefault
             cbListaFormasDePagoCliente.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(codigoFormasDePagoDefault)
 
+            cbListaDocumentosCliente.codigoValorSeleccion=codigoTipoDocumentoDefault
+            cbListaDocumentosCliente.textoComboBox=modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(codigoTipoDocumentoDefault)
+
             txtTipoValoracion.textoComboBox=descripcionTipoClasificacion
             txtTipoValoracion.codigoValorSeleccion=codigoTipoClasificacion
             txtCodigoCliente.enabled=false

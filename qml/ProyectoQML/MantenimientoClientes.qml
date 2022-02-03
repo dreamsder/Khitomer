@@ -728,6 +728,18 @@ Rectangle {
                 visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
             }
 
+            ComboBoxListaTipoDocumentos{
+                id: cbListaDocumentosCliente
+                width: 220
+                textoTitulo: "Documento por defecto:"
+                botonBuscarTextoVisible: false
+                codigoValorSeleccion: ""
+                textoComboBox: ""
+                //visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
+
+
+
+            }
 
 
 
@@ -1082,6 +1094,9 @@ Rectangle {
                 if(!cbListaFormasDePagoCliente.visible){
                     cbListaFormasDePagoCliente.codigoValorSeleccion="0";
                 }
+                if(!cbListaDocumentosCliente.visible){
+                    cbListaDocumentosCliente.codigoValorSeleccion="0";
+                }
 
 
                 txtMensajeInformacion.visible=true
@@ -1106,10 +1121,10 @@ Rectangle {
                             resultadoInsertarCliente="-6";
                         }else{
                             txtRut.textoInputBox=cedulaIdentidad;                            
-                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion);
+                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion);
                         }
                     }else{
-                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion);
+                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion);
                     }
 
 
@@ -1189,6 +1204,9 @@ Rectangle {
                         cbListaFormasDePagoCliente.codigoValorSeleccion="0"
                         cbListaFormasDePagoCliente.textoComboBox=""
 
+                        cbListaDocumentosCliente.codigoValorSeleccion="0"
+                        cbListaDocumentosCliente.textoComboBox=""
+
                         cargarListasDePrecioCliente("","")
 
                         txtCodigoCliente.tomarElFoco()
@@ -1243,6 +1261,11 @@ Rectangle {
                         cbListaMonedaCliente.textoComboBox=""
                         cbListaFormasDePagoCliente.codigoValorSeleccion="0"
                         cbListaFormasDePagoCliente.textoComboBox=""
+
+
+                        cbListaDocumentosCliente.codigoValorSeleccion="0"
+                        cbListaDocumentosCliente.textoComboBox=""
+
 
                         cargarListasDePrecioCliente("","")
 

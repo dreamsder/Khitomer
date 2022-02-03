@@ -4312,19 +4312,19 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
                 QString DatoTipoDeTraslado=",\"TipoDeTraslado\":"+TipoTrasladoRemito+"";
 
 
-                if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
+                if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"  || Comprobante== "VENTA CONTADO EXENTA" ){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
+                }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta" || Comprobante=="VENTA CRÉDITO EXENTA"){
 
                     caeTipoDocumentoCFEDescripcionV="e-Ticket";
 
-                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
+                }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta" || Comprobante== "DV EXENTA"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
-                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
+                }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"  || Comprobante== "NC VTA EXENTA"){
 
                     caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Ticket";
 
@@ -4337,19 +4337,19 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
 
                   if(TipoDocumento=="2"){
 
-                      if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"){
+                      if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"  || Comprobante== "VENTA CONTADO EXENTA"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta"){
+                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta" || Comprobante=="VENTA CRÉDITO EXENTA"){
 
                           caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta"){
+                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta" || Comprobante== "DV EXENTA"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
-                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta"){
+                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta" || Comprobante== "NC VTA EXENTA"){
 
                           caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 

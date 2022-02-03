@@ -272,6 +272,9 @@ Rectangle {
         ///         :Se agrega un boton para guardar los comentarios en documentos emitidos.
         ///         :Se corrige error con descuento en tipo de documento devilución.
         ///         :Se corrige error en carga de cliente.
+        ///         :Soporte para abrir documentos desde los reportes. La ultima columna debe tener codigoDocumento-tipoDocumento-seriesDocumento separado por guiones, y el reprte debe
+        ///         :debe tener activo el parametro que indica que usa abrir documento.
+        ///         :Se modifico la forma de ver los documentos con deuda de medios de pago, para evitar posibles problemas de calculo.
 
 
 
