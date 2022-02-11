@@ -44,7 +44,8 @@ public:
                        const QString &fechaNacimiento,
                        const QString &permiteFacturaCredito,
                        const int &codigoMonedaDefault,
-                       const int &codigoFormasDePagoDefault
+                       const int &codigoFormasDePagoDefault,
+                       const int &codigoTipoDocumentoDefault
                        );
 
 
@@ -86,6 +87,7 @@ public:
    QString permiteFacturaCredito() const;
    int codigoMonedaDefault() const;
    int codigoFormasDePagoDefault() const;
+   int codigoTipoDocumentoDefault() const;
 
 private:
     QString m_codigoCliente;
@@ -123,6 +125,7 @@ private:
     QString m_permiteFacturaCredito;
     int m_codigoMonedaDefault;
     int m_codigoFormasDePagoDefault;
+    int m_codigoTipoDocumentoDefault;
 
 };
 
@@ -162,7 +165,8 @@ public:
         fechaNacimientoRole,
         permiteFacturaCreditoRole,
         codigoMonedaDefaultRole,
-        codigoFormasDePagoDefaultRole
+        codigoFormasDePagoDefaultRole,
+        codigoTipoDocumentoDefaultRole
 
 
 
@@ -192,7 +196,7 @@ public:
             , QString , QString, QString
 
             , QString , QString, QString
-            , QString, QString, QString, QString, QString, QString) const;
+            , QString, QString, QString, QString, QString, QString, QString _codigoTipoDocumentoDefault) const;
 
     Q_INVOKABLE bool eliminarCliente(QString , QString) const;
 

@@ -79,6 +79,7 @@ Rectangle {
 
         var monedaDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoMonedaDefault");
         var formaDePagoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoFormasDePagoDefault");
+        var tipoDocumentoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoTipoDocumentoDefault");
 
         // Seteo la forma de pago por defecto para el cliente
         if(formaDePagoDefaulCliente!="0"){
@@ -95,15 +96,27 @@ Rectangle {
                 if(modeloItemsFactura.count!=0){
                     funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
                 }
-
                 cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
                 cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
                 cbListaMonedasEnFacturacion.aceptarOClic()
+                borrarArticulos()
+            }
+        }
+
+
+        if(tipoDocumentoDefaulCliente!="0"){
+            if(cbListatipoDocumentos.codigoValorSeleccion!=tipoDocumentoDefaulCliente){
+                if(modeloItemsFactura.count!=0){
+                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene un tipo de documento diferente al documento actual.")
+                }
+                cbListatipoDocumentos.codigoValorSeleccion=tipoDocumentoDefaulCliente
+                cbListatipoDocumentos.textoComboBox=modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(tipoDocumentoDefaulCliente)
                 borrarArticulos()
 
 
             }
         }
+
     }
 
 

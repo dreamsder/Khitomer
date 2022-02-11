@@ -122,5 +122,6 @@
         <file>qml/ProyectoQML/OpcionesDeMenu/MenuGarantias.qml</file>
         <file>qml/ProyectoQML/Listas/ListaGenerica.qml</file>
         <file>qml/ProyectoQML/Controles/CuadroListaGarantias.qml</file>
+        <file>qml/ProyectoQML/Controles/ComboBoxListaTipoDocumentosClientesFacturacion.qml</file>
     </qresource>
 </RCC>

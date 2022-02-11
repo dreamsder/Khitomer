@@ -261,6 +261,9 @@ public:
     Q_INVOKABLE QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     Q_INVOKABLE void buscarTipoDocumentos(QString , QString,QString);
+
+    Q_INVOKABLE void buscarTipoDocumentosDefault();
+
     Q_INVOKABLE void buscarTodosLosTipoDocumentos(QString , QString);
 
     Q_INVOKABLE QString retornaDescripcionTipoDocumento(QString)const;

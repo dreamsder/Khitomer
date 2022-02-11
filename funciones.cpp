@@ -1949,7 +1949,11 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 404:
             if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;REPLACE INTO `Reportes` VALUES (49,5,'Saldo de cliente por moneda(nuevo)','SELECT DOC.codigoCliente\\'CODIGO CLIENTE\\', CLI.razonSocial\\'RAZON SOCIAL\\', DOC.fechaEmisionDocumento\\'FECHA DOC.\\', concat(TDOC.descripcionTipoDocumento,\\'(\\',DOC.codigoDocumento,\\') - CFE: \\',DOC.cae_numeroCae,\\'(\\',DOC.cae_serie,\\')\\')\\'DOCUMENTO\\', MON.simboloMoneda\\'\\', round(DOC.saldoClienteCuentaCorriente,2)\\'SALDO\\', formaDePago\\'FORMA DE PAGO\\',concat(DOC.codigoDocumento,\\'-\\',DOC.codigoTipoDocumento,\\'-\\',DOC.serieDocumento)\\'\\'  FROM Documentos DOC  join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento   join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento where DOC.codigoCliente=\\'@_codigoCliente\\' and DOC.tipoCliente=\\'1\\' and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\') and TDOC.afectaCuentaCorriente=1 and DOC.codigoMonedaDocumento=\\'@_codigoMonedaReporte\\'  and DOC.saldoClienteCuentaCorriente!=0  order by  DOC.fechaEmisionDocumento asc;','','select concat(CLI.nombreCliente,\\'(\\',CLI.codigoCliente,\\')\\'),concat(\\'Dirección: \\',CLI.direccion),concat(\\'Telefono: \\',CLI.telefono) from Clientes CLI  where CLI.codigoCliente=\\'@_codigoCliente\\' and CLI.tipoCliente=1;','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','1');SET FOREIGN_KEY_CHECKS=1;","405")){
                 _iterador=false; return false; } break;
-
+        case 405:
+            if(!impactoCambioEnBD("ALTER TABLE Clientes ADD codigoTipoDocumentoDefault int(10) unsigned DEFAULT 0 NOT NULL;","406")){
+                _iterador=false; return false;
+            }
+            break;
 
             //
             //

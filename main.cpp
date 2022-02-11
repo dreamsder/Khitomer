@@ -175,6 +175,8 @@ int main(int argc, char *argv[])
 
     ModuloListaTipoDocumentos moduloListaTipoDocumentos;
 
+    ModuloListaTipoDocumentos moduloListaTipoDocumentosComboBoxClienteDefault;
+
     ModuloListaTipoDocumentos moduloListaTipoDocumentosMantenimiento;
     ModuloListaTipoDocumentos moduloListaTipoDocumentosPerfiles;
     ModuloListaTipoDocumentos moduloListaTipoDocumentosParaDevoluciones;
@@ -413,6 +415,9 @@ inicio:
 
     viewer.rootContext()->setContextProperty("modeloListasPreciosComboBox", &moduloListasPreciosComboBox );
     viewer.rootContext()->setContextProperty("modeloListaTipoDocumentosComboBox", &moduloListaTipoDocumentos );
+    viewer.rootContext()->setContextProperty("modeloListaTipoDocumentosComboBoxClienteDefault", &moduloListaTipoDocumentosComboBoxClienteDefault );
+
+
     viewer.rootContext()->setContextProperty("modeloListaTipoDocumentosMantenimiento", &moduloListaTipoDocumentosMantenimiento );
     viewer.rootContext()->setContextProperty("modeloListaTipoDocumentosPerfiles", &moduloListaTipoDocumentosPerfiles );
     viewer.rootContext()->setContextProperty("modeloListaTipoDocumentosParaDevoluciones", &moduloListaTipoDocumentosParaDevoluciones );
@@ -528,6 +533,9 @@ inicio:
     moduloLiquidaciones.buscarLiquidacion("1=","1");
     moduloMediosDePago.buscarMediosDePago("1=","1");
     moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
+
+    moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
+
     moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
     moduloReportesMenu.buscarReportesMenu("1=","1","");
 

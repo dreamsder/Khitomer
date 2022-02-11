@@ -292,6 +292,87 @@ bool ModuloListaTipoDocumentos::retornaTipoDocumentoActivoPorPerfil(QString _cod
 
 }
 
+
+
+
+void ModuloListaTipoDocumentos::buscarTipoDocumentosDefault(){
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery q = Database::consultaSql("select TD.* from TipoDocumento TD join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=TD.codigoTipoDocumento where TDP.codigoPerfil=1 order by TD.ordenDelMenu,TD.codigoTipoDocumento ");
+        QSqlRecord rec = q.record();
+
+        ModuloListaTipoDocumentos::reset();
+        if(q.record().count()>0){
+
+            ModuloListaTipoDocumentos::agregarTipoDocumentos(TipoDocumentos(-1,"Sin documento seleccionado","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"));
+
+            while (q.next()){
+
+                ModuloListaTipoDocumentos::agregarTipoDocumentos(TipoDocumentos(
+                                                                     q.value(rec.indexOf("codigoTipoDocumento")).toInt(),
+                                                                     q.value(rec.indexOf("descripcionTipoDocumento")).toString(),
+                                                                     q.value(rec.indexOf("utilizaArticulos")).toString(),
+                                                                     q.value(rec.indexOf("utilizaCodigoBarrasADemanda")).toString(),
+                                                                     q.value(rec.indexOf("utilizaTotales")).toString(),
+                                                                     q.value(rec.indexOf("utilizaListaPrecio")).toString(),
+                                                                     q.value(rec.indexOf("utilizaMediosDePago")).toString(),
+                                                                     q.value(rec.indexOf("utilizaFechaPrecio")).toString(),
+                                                                     q.value(rec.indexOf("utilizaFechaDocumento")).toString(),
+                                                                     q.value(rec.indexOf("utilizaNumeroDocumento")).toString(),
+                                                                     q.value(rec.indexOf("utilizaSerieDocumento")).toString(),
+                                                                     q.value(rec.indexOf("serieDocumento")).toString(),
+                                                                     q.value(rec.indexOf("utilizaVendedor")).toString(),
+                                                                     q.value(rec.indexOf("utilizaCliente")).toString(),
+                                                                     q.value(rec.indexOf("utilizaTipoCliente")).toString(),
+                                                                     q.value(rec.indexOf("utilizaSoloProveedores")).toString(),
+                                                                     q.value(rec.indexOf("afectaCuentaCorriente")).toString(),
+                                                                     q.value(rec.indexOf("afectaCuentaCorrienteMercaderia")).toString(),
+                                                                     q.value(rec.indexOf("afectaStock")).toString(),
+                                                                     q.value(rec.indexOf("afectaTotales")).toString(),
+                                                                     q.value(rec.indexOf("utilizaCantidades")).toString(),
+                                                                     q.value(rec.indexOf("utilizaPrecioManual")).toString(),
+                                                                     q.value(rec.indexOf("utilizaDescuentoArticulo")).toString(),
+                                                                     q.value(rec.indexOf("utilizaDescuentoTotal")).toString(),
+                                                                     q.value(rec.indexOf("emiteEnImpresora")).toString(),
+                                                                     q.value(rec.indexOf("codigoModeloImpresion")).toString(),
+                                                                     q.value(rec.indexOf("cantidadCopias")).toString(),
+                                                                     q.value(rec.indexOf("utilizaObservaciones")).toString(),
+                                                                     q.value(rec.indexOf("afectaCuentaBancaria")).toString(),
+                                                                     q.value(rec.indexOf("utilizaCuentaBancaria")).toString(),
+                                                                     q.value(rec.indexOf("utilizaPagoChequeDiferido")).toString(),
+                                                                     q.value(rec.indexOf("utilizaSoloMediosDePagoCheque")).toString(),
+                                                                     q.value(rec.indexOf("esDocumentoDeVenta")).toString(),
+                                                                     q.value(rec.indexOf("descripcionTipoDocumentoImpresora")).toString(),
+                                                                     q.value(rec.indexOf("utilizaArticulosInactivos")).toString(),
+                                                                     q.value(rec.indexOf("utilizaRedondeoEnTotal")).toString(),
+                                                                     q.value(rec.indexOf("utilizaPrecioManualEnMonedaReferencia")).toString(),
+                                                                     q.value(rec.indexOf("descripcionCodigoBarrasADemanda")).toString(),
+                                                                     q.value(rec.indexOf("utilizaListaPrecioManual")).toString(),
+                                                                     q.value(rec.indexOf("utilizaFormasDePago")).toString(),
+                                                                     q.value(rec.indexOf("noAfectaIva")).toString(),
+                                                                     q.value(rec.indexOf("utilizaSeteoDePreciosEnListasDePrecioPorArticulo")).toString(),
+                                                                     q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
+                                                                     q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
+                                                                     q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
+                                                                     q.value(rec.indexOf("utilizaComentarios")).toString()
+
+                                                                     ));
+            }
+        }
+    }
+}
+
+
+
 void ModuloListaTipoDocumentos::buscarTipoDocumentos(QString campo, QString datoABuscar, QString _codigoPerfil){
 
 
@@ -377,6 +458,10 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentos(QString campo, QString dato
         }
     }
 }
+
+
+
+
 void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QString datoABuscar){
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();

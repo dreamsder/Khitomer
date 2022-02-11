@@ -728,13 +728,13 @@ Rectangle {
                 visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
             }
 
-            ComboBoxListaTipoDocumentos{
+            ComboBoxListaTipoDocumentosClientesFacturacion{
                 id: cbListaDocumentosCliente
                 width: 220
                 textoTitulo: "Documento por defecto:"
                 botonBuscarTextoVisible: false
-                codigoValorSeleccion: ""
-                textoComboBox: ""
+                codigoValorSeleccion: "-1"
+                textoComboBox: "Sin documento seleccionado"
                 //visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
 
 
