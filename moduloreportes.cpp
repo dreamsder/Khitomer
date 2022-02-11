@@ -691,7 +691,8 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
 
             query.clear();
 
-            if(query.exec("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;"+_consultaSqlCabezal.trimmed())){
+            //if(query.exec("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;"+_consultaSqlCabezal.trimmed())){
+            if(query.exec(_consultaSqlCabezal.trimmed())){
                 query.next();
 
 
