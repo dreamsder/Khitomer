@@ -270,11 +270,12 @@ Rectangle {
         ///         :Se agregan 3 nuevos reportes para marketing a pedido de Cynthia de Digital World.
         /// 1.16.22 :Se corrige reporte de stock bajo, para que no tome inactivos.
         ///         :Se agrega un boton para guardar los comentarios en documentos emitidos.
-        ///         :Se corrige error con descuento en tipo de documento devilución.
+        ///         :Se corrige error con descuento en tipo de documento devolución.
         ///         :Se corrige error en carga de cliente.
         ///         :Soporte para abrir documentos desde los reportes. La ultima columna debe tener codigoDocumento-tipoDocumento-seriesDocumento separado por guiones, y el reprte debe
         ///         :debe tener activo el parametro que indica que usa abrir documento.
         ///         :Se modifico la forma de ver los documentos con deuda de medios de pago, para evitar posibles problemas de calculo.
+        ///         :Se finalizo el agregado de tipo de documento, moneda y forma de pago por defecto para los clientes.
 
 
 

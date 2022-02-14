@@ -735,7 +735,7 @@ Rectangle {
                 botonBuscarTextoVisible: false
                 codigoValorSeleccion: "-1"
                 textoComboBox: "Sin documento seleccionado"
-                //visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaTipoDocumentoDefault")
 
 
 

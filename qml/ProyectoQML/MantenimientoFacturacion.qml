@@ -77,12 +77,16 @@ Rectangle {
 
     function setearFormaDePagoYMonedaDefaulCliente(){
 
+
+        var borrarArticulosPorMoneda=false;
+        var borrarArticulosPorTipoDocumento=false;
+
         var monedaDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoMonedaDefault");
         var formaDePagoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoFormasDePagoDefault");
         var tipoDocumentoDefaulCliente=modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,"codigoTipoDocumentoDefault");
 
         // Seteo la forma de pago por defecto para el cliente
-        if(formaDePagoDefaulCliente!="0"){
+        if(formaDePagoDefaulCliente!="0" && modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaFormaDePago")){
             if(cbListaFormasDePago.visible){
                 cbListaFormasDePago.codigoValorSeleccion=formaDePagoDefaulCliente
                 cbListaFormasDePago.textoComboBox=modeloFormasDePago.retornaDescripcionFormaDePago(formaDePagoDefaulCliente)
@@ -90,11 +94,11 @@ Rectangle {
         }
 
 
-        if(monedaDefaulCliente!="0"){
+        if(monedaDefaulCliente!="0" && modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaMoneda")){
             if(cbListaMonedasEnFacturacion.codigoValorSeleccion!=monedaDefaulCliente){
                 // si hay articulo, aviso que voy a borrarlos
                 if(modeloItemsFactura.count!=0){
-                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
+                    borrarArticulosPorMoneda=true
                 }
                 cbListaMonedasEnFacturacion.codigoValorSeleccion=monedaDefaulCliente
                 cbListaMonedasEnFacturacion.textoComboBox=modeloMonedas.retornaDescripcionMoneda(monedaDefaulCliente)
@@ -104,10 +108,11 @@ Rectangle {
         }
 
 
-        if(tipoDocumentoDefaulCliente!="0"){
+        if(tipoDocumentoDefaulCliente!="0" &&  modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaTipoDocumentoDefault")){
             if(cbListatipoDocumentos.codigoValorSeleccion!=tipoDocumentoDefaulCliente){
                 if(modeloItemsFactura.count!=0){
-                    funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene un tipo de documento diferente al documento actual.")
+                    borrarArticulosPorTipoDocumento=true
+
                 }
                 cbListatipoDocumentos.codigoValorSeleccion=tipoDocumentoDefaulCliente
                 cbListatipoDocumentos.textoComboBox=modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(tipoDocumentoDefaulCliente)
@@ -116,6 +121,18 @@ Rectangle {
 
             }
         }
+
+        if(borrarArticulosPorMoneda && borrarArticulosPorTipoDocumento){
+            funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene un tipo de documento diferente al documento actual y una moneda diferente a la actual.")
+        }else if (borrarArticulosPorMoneda && !borrarArticulosPorTipoDocumento){
+            funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene una moneda diferente a la del documento actual.")
+        }else if(!borrarArticulosPorMoneda && borrarArticulosPorTipoDocumento){
+            funcionesmysql.mensajeAdvertenciaOk("Se van a borrar los artículos ya facturados,\nel nuevo cliente tiene un tipo de documento diferente al documento actual.")
+        }
+
+
+
+
 
     }
 
