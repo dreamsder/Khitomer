@@ -307,7 +307,7 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentosDefault(){
 
     if(conexion){
 
-        QSqlQuery q = Database::consultaSql("select TD.* from TipoDocumento TD join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=TD.codigoTipoDocumento where TDP.codigoPerfil=1 order by TD.ordenDelMenu,TD.codigoTipoDocumento ");
+        QSqlQuery q = Database::consultaSql("select TD.* from TipoDocumento TD join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=TD.codigoTipoDocumento where TDP.codigoPerfil=1 and TD.utilizaCliente='1' order by TD.ordenDelMenu,TD.codigoTipoDocumento ");
         QSqlRecord rec = q.record();
 
         ModuloListaTipoDocumentos::reset();

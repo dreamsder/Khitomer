@@ -1959,6 +1959,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
                 _iterador=false; return false;
             }
             break;
+        case 407:
+            if(!impactoCambioEnBD("ALTER TABLE Mantenimientos ADD clientesUsaTipoDocumentoDefault char(1) DEFAULT '0' NOT NULL;","408")){
+                _iterador=false; return false; } break;
 
 
 
