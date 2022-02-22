@@ -73,6 +73,11 @@ Rectangle {
     property string codigoTipoDocumentoUsadoAnteriormente: "1"
 
 
+    property bool esUnDocumentoDeVenta: false
+    property bool elDocumentoUsaArticulos: false
+
+
+
 
 
     function setearFormaDePagoYMonedaDefaulCliente(){
@@ -111,12 +116,19 @@ Rectangle {
         if(tipoDocumentoDefaulCliente!="0" &&  modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaTipoDocumentoDefault")){
             if(cbListatipoDocumentos.codigoValorSeleccion!=tipoDocumentoDefaulCliente){
                 if(modeloItemsFactura.count!=0){
-                    borrarArticulosPorTipoDocumento=true
+
+                        borrarArticulosPorTipoDocumento=true
 
                 }
-                cbListatipoDocumentos.codigoValorSeleccion=tipoDocumentoDefaulCliente
-                cbListatipoDocumentos.textoComboBox=modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(tipoDocumentoDefaulCliente)
-                borrarArticulos()
+                if(esUnDocumentoDeVenta && elDocumentoUsaArticulos){
+                    cbListatipoDocumentos.codigoValorSeleccion=tipoDocumentoDefaulCliente
+                    cbListatipoDocumentos.textoComboBox=modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento(tipoDocumentoDefaulCliente)
+                    borrarArticulos()
+                }else{
+                    borrarArticulosPorTipoDocumento=false
+                }
+
+
 
 
             }
@@ -2739,6 +2751,19 @@ Rectangle {
             z: 22
             codigoValorSeleccion: "1"
             textoComboBox: modeloListaTipoDocumentosComboBox.retornaDescripcionTipoDocumento("1")
+            Component.onCompleted: {
+                if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")=="1" ){
+                    elDocumentoUsaArticulos=true
+                }else{
+                    elDocumentoUsaArticulos=false
+                }
+
+                if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"esDocumentoDeVenta")=="1" ){
+                    esUnDocumentoDeVenta=true
+                }else{
+                    esUnDocumentoDeVenta=false
+                }
+            }
 
             onCodigoValorSeleccionChanged: {
 
@@ -2746,6 +2771,21 @@ Rectangle {
                 setearDocumento()
 
                 //if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento())
+
+                if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")=="1" ){
+                    elDocumentoUsaArticulos=true
+                }else{
+                    elDocumentoUsaArticulos=false
+                }
+
+                if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"esDocumentoDeVenta")=="1" ){
+                    esUnDocumentoDeVenta=true
+                }else{
+                    esUnDocumentoDeVenta=false
+                }
+
+
+
 
 
                 // control para saber si borrar los articulos de la lista de item de la factura al cambiar de documento
