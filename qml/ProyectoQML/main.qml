@@ -1347,7 +1347,7 @@ Rectangle {
                 y: 19
                 width: 376
                 height: 200
-                radius: 15
+                radius: 4
                 clip: false
                 color: "#1d7195"
                 border.color: "#1d7195"
@@ -1551,6 +1551,7 @@ Rectangle {
                     x: 308
                     width: 51
                     height: 51
+                    smooth: true
                     opacity: 0.680
                     anchors.right: parent.right
                     anchors.rightMargin: 15

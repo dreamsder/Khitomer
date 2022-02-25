@@ -38,7 +38,7 @@ Rectangle {
     Image {
         id: imgIconoAdvertencia
         opacity: 1
-        //
+        smooth: true
         anchors.fill: parent
         asynchronous: true
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Advertencia.png"
