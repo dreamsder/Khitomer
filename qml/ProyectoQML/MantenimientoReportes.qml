@@ -954,6 +954,7 @@ Rectangle {
                     settings.defaultFontSize: 13
                     settings.minimumFontSize: 13
                     settings.defaultFixedFontSize: 13
+                    smooth: false
                     visible: true                    
 
                     javaScriptWindowObjects: QtObject {
@@ -1041,7 +1042,7 @@ Rectangle {
                 width: 10
                 height: flickable.visibleArea.heightRatio * flickable.height
                 color: "#000000"
-                radius: height/2 - 1
+                //radius: height/2 - 1
                 //
                 opacity: 0.700
                 z: 1

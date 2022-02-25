@@ -276,6 +276,8 @@ Rectangle {
         ///         :debe tener activo el parametro que indica que usa abrir documento.
         ///         :Se modifico la forma de ver los documentos con deuda de medios de pago, para evitar posibles problemas de calculo.
         ///         :Se finalizo el agregado de tipo de documento, moneda y forma de pago por defecto para los clientes.
+        /// 1.16.23 :Correcciones varias.
+        /// 1.16.24 :Corrección en reporte Stock bajo minimo.
 
 
 

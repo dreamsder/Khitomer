@@ -28,7 +28,7 @@ Rectangle {
     height: 32
     //color: "#28000000"
     color: "#00000000"
-    radius: 5
+    radius: 1
     opacity: 1
     //
 

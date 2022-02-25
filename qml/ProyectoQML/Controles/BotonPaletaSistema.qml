@@ -51,9 +51,9 @@ Rectangle {
     }
 
 
-    width: txtTituloBoton.width + 20; height: 30;    border { width: 1; color: Qt.darker(activePalette.button) }
+    width: txtTituloBoton.width + 20; height: 25;    border { width: 1; color: Qt.darker(activePalette.button) }
     //
-    radius: 3
+   // radius: 3
 
     // color the button with a gradient
     gradient: Gradient {
