@@ -35,9 +35,6 @@ public:
 
     MantenimientoBatch(QObject *parent = 0);
 
-   // Q_INVOKABLE void agregarIva(const CargaMantenimientoBatch &CargaMantenimientoBatch);
-
-  //  Q_INVOKABLE void limpiarListaIvas();
 
     Q_INVOKABLE int rowCount(const QModelIndex & parent = QModelIndex()) const;
 

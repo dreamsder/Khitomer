@@ -48,10 +48,6 @@ public:
 
     ControlesMantenimientos(QObject *parent = 0);
 
-   // Q_INVOKABLE void agregarIva(const Mantenimientos &Mantenimientos);
-
-  //  Q_INVOKABLE void limpiarListaIvas();
-
     Q_INVOKABLE int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
     Q_INVOKABLE QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

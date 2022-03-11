@@ -35,6 +35,8 @@ public:
     static void closeDb();
     static QSqlQuery consultaSql(QString);
     static bool chequeaStatusAccesoMysql();
+    static bool chequeaStatusAccesoMysqlInicio();
+
 
 
 

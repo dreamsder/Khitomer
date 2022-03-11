@@ -1005,6 +1005,9 @@ Rectangle {
                 }
 
 
+
+
+
     }
     Rectangle {
         id: navegador

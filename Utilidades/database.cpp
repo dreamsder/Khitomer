@@ -65,6 +65,45 @@ QSqlQuery Database::consultaSql(QString _consulta){
 
 bool Database::chequeaStatusAccesoMysql() {
 
+    int randNum = rand()%(1-15 + 1) + 1;
+
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            Database::connect().close();
+            return false;
+        }else{
+            if(randNum==7){
+                QSqlQuery query = Database::consultaSql("select 1");
+                if(query.first()) {
+                    return true;
+                }else{
+                    Database::connect().close();
+                    return false;
+                }
+            }else{
+                return true;
+            }
+
+        }
+    }else{
+        if(randNum==7){
+            QSqlQuery query = Database::consultaSql("select 1;");
+            if(query.first()) {
+                return true;
+            }else{
+                Database::connect().close();
+                return false;
+            }
+        }else{
+            return true;
+        }
+
+    }
+}
+
+bool Database::chequeaStatusAccesoMysqlInicio() {
+
+
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             Database::connect().close();
@@ -88,5 +127,4 @@ bool Database::chequeaStatusAccesoMysql() {
         }
     }
 }
-
 

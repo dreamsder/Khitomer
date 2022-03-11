@@ -95,7 +95,7 @@ bool Funciones::verificoConexionBaseDeDatos(){
     //    QString blah3 = QString(QCryptographicHash::hash(("admin"),QCryptographicHash::Sha1).toHex());
     //     qDebug() << blah3;
 
-    Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysqlInicio();
 
     if(Database::connect().isOpen()){
         return true;

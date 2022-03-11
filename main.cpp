@@ -308,7 +308,7 @@ inicio:
             if(funcionesMysql.verificoConexionBaseDeDatos()){
 
 
-                Database::chequeaStatusAccesoMysql();
+                Database::chequeaStatusAccesoMysqlInicio();
                 if(!Database::connect().isOpen()){
                     if(!Database::connect().open()){
                         qDebug() << "No conecto";
@@ -330,6 +330,8 @@ inicio:
 
                 moduloconfiguracion.cargarConfiguracion();
                 modulo_CFE_ParametrosGenerales.cargar();
+                moduloListaMonedas.cargarMonedas();
+
 
             }else{
                 QMessageBox men;
@@ -569,6 +571,8 @@ inicio:
     moduloTipoProcedenciaCliente.buscar();
 
     moduloFormasDePago.buscarFormaDePago("1=","1");
+
+
     //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
 
 
