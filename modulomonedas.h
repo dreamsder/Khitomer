@@ -94,7 +94,7 @@ public:
 
     Q_INVOKABLE void buscarMonedas(QString , QString);
 
-    Q_INVOKABLE void cargarMonedas();
+  //  Q_INVOKABLE void cargarMonedas();
 
     Q_INVOKABLE int insertarMonedas( QString , QString, QString , QString, QString , QString, QString , QString) const;
 

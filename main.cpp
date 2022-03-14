@@ -174,12 +174,12 @@ int main(int argc, char *argv[])
     ModuloPerfiles moduloListaPerfiles;
 
     ModuloListaTipoDocumentos moduloListaTipoDocumentos;
-
     ModuloListaTipoDocumentos moduloListaTipoDocumentosComboBoxClienteDefault;
-
     ModuloListaTipoDocumentos moduloListaTipoDocumentosMantenimiento;
     ModuloListaTipoDocumentos moduloListaTipoDocumentosPerfiles;
     ModuloListaTipoDocumentos moduloListaTipoDocumentosParaDevoluciones;
+
+
     ModuloTipoProcedenciaCliente moduloTipoProcedenciaCliente;
 
 
@@ -330,7 +330,14 @@ inicio:
 
                 moduloconfiguracion.cargarConfiguracion();
                 modulo_CFE_ParametrosGenerales.cargar();
-                moduloListaMonedas.cargarMonedas();
+                moduloListaMonedas.buscarMonedas("1=","1");
+                moduloMonedasTotales.buscarMonedas("1=","1");
+
+                moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
+                moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
+                moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
+
+                moduloControlesMantenimiento.buscarMantenimiento();
 
 
             }else{
@@ -525,7 +532,7 @@ inicio:
 
     moduloListaMenues.buscarMenus("1=","1");
     moduloTipoClasificacion.buscarTipoClasificacion("1=","1");
-    moduloListaMonedas.buscarMonedas("1=","1");
+    // moduloListaMonedas.buscarMonedas("1=","1");
     moduloListaProveedor.buscarCliente("tipoCliente=","2");
     moduloListaVendedores.buscarUsuarios("esVendedor=","1");
     moduloListaIvas.buscarIvas("1=","1");
@@ -534,11 +541,15 @@ inicio:
     moduloLiquidacionesComboBox.buscarLiquidacion( "1=","1");
     moduloLiquidaciones.buscarLiquidacion("1=","1");
     moduloMediosDePago.buscarMediosDePago("1=","1");
-    moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
 
-    moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
 
-    moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
+    // moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
+
+    //moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
+
+    //moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
+
+
     moduloReportesMenu.buscarReportesMenu("1=","1","");
 
 
@@ -550,7 +561,7 @@ inicio:
     moduloRubrosComboBox.buscarRubros("1=","1");
     moduloBancosComboBox.buscarBancos("1=","1");
     moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
-    moduloMonedasTotales.buscarMonedas("1=","1");
+    // moduloMonedasTotales.buscarMonedas("1=","1");
     moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
     moduloTipoChequesComboBox.buscarCheques("1=","1");
     moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");

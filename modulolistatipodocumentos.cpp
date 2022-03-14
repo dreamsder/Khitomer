@@ -86,6 +86,10 @@ ModuloListaTipoDocumentos::ModuloListaTipoDocumentos(QObject *parent)
 
     roles[utilizaComentariosRole] = "utilizaComentarios";
 
+    roles[cantidadMaximaLineasEnDocumentoRole] = "cantidadMaximaLineasEnDocumento";
+
+
+
 
 
     setRoleNames(roles);
@@ -141,7 +145,8 @@ TipoDocumentos::TipoDocumentos(
         const QString &noPermiteFacturarConStockPrevistoCero,
         const QString &imprimeEnFormatoTicket,
         const QString &imprimeObservacionesEnTicket,
-        const QString &utilizaComentarios
+        const QString &utilizaComentarios,
+        const QString &cantidadMaximaLineasEnDocumento
 
 
 
@@ -192,7 +197,8 @@ TipoDocumentos::TipoDocumentos(
       m_noPermiteFacturarConStockPrevistoCero(noPermiteFacturarConStockPrevistoCero),
       m_imprimeEnFormatoTicket(imprimeEnFormatoTicket),
       m_imprimeObservacionesEnTicket(imprimeObservacionesEnTicket),
-      m_utilizaComentarios(utilizaComentarios)
+      m_utilizaComentarios(utilizaComentarios),
+      m_cantidadMaximaLineasEnDocumento(cantidadMaximaLineasEnDocumento)
 
 
 
@@ -248,6 +254,8 @@ QString TipoDocumentos::noPermiteFacturarConStockPrevistoCero() const{ return m_
 QString TipoDocumentos::imprimeEnFormatoTicket() const{ return m_imprimeEnFormatoTicket;}
 QString TipoDocumentos::imprimeObservacionesEnTicket() const{ return m_imprimeObservacionesEnTicket;}
 QString TipoDocumentos::utilizaComentarios() const{ return m_utilizaComentarios;}
+QString TipoDocumentos::cantidadMaximaLineasEnDocumento() const{ return m_cantidadMaximaLineasEnDocumento;}
+
 
 
 void ModuloListaTipoDocumentos::agregarTipoDocumentos(const TipoDocumentos &monedas)
@@ -313,7 +321,7 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentosDefault(){
         ModuloListaTipoDocumentos::reset();
         if(q.record().count()>0){
 
-            ModuloListaTipoDocumentos::agregarTipoDocumentos(TipoDocumentos(-1,"Sin documento seleccionado","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"));
+            ModuloListaTipoDocumentos::agregarTipoDocumentos(TipoDocumentos(-1,"Sin documento seleccionado","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"));
 
             while (q.next()){
 
@@ -363,7 +371,9 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentosDefault(){
                                                                      q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                      q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
                                                                      q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
-                                                                     q.value(rec.indexOf("utilizaComentarios")).toString()
+                                                                     q.value(rec.indexOf("utilizaComentarios")).toString(),
+                                                                     q.value(rec.indexOf("cantidadMaximaLineasEnDocumento")).toString()
+
 
                                                                      ));
             }
@@ -444,7 +454,8 @@ void ModuloListaTipoDocumentos::buscarTipoDocumentos(QString campo, QString dato
                                                                      q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                      q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
                                                                      q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
-                                                                     q.value(rec.indexOf("utilizaComentarios")).toString()
+                                                                     q.value(rec.indexOf("utilizaComentarios")).toString(),
+                                                                     q.value(rec.indexOf("cantidadMaximaLineasEnDocumento")).toString()
 
 
 
@@ -528,7 +539,8 @@ void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QStr
                                                                                  q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                                  q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
                                                                                  q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
-                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString()
+                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString(),
+                                                                                 q.value(rec.indexOf("cantidadMaximaLineasEnDocumento")).toString()
 
 
 
@@ -544,7 +556,16 @@ void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QStr
 
 QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codigoTipoDocumento) const {
 
-    bool conexion=true;
+    QString _descripcionTipoDocumento="";
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+            _descripcionTipoDocumento = m_TipoDocumentos[var].descripcionTipoDocumento();
+        }
+    }
+    return _descripcionTipoDocumento;
+
+
+    /*  bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -570,11 +591,20 @@ QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codi
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloListaTipoDocumentos::retornaSerieTipoDocumento(QString _codigoTipoDocumento) const {
 
+    QString _valorARetornar="A";
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+            _valorARetornar = m_TipoDocumentos[var].serieDocumento();
+        }
+    }
+    return _valorARetornar;
+
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -600,11 +630,19 @@ QString ModuloListaTipoDocumentos::retornaSerieTipoDocumento(QString _codigoTipo
         }else{
             return "A";
         }
-    }else{return "A";}
+    }else{return "A";}*/
 }
 QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _codigoTipoDocumento) const {
 
-    bool conexion=true;
+    QString _valorARetornar="A";
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+            _valorARetornar = m_TipoDocumentos[var].descripcionCodigoBarrasADemanda();
+        }
+    }
+    return _valorARetornar;
+
+    /* bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -629,12 +667,94 @@ QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _cod
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 
 bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoDocumento,QString _permisoDocumento) const {
 
+    bool _valorARetornar=false;
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+
+            // _valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaBancaria());
+
+
+            if (_permisoDocumento == "utilizaArticulos"){
+                _valorARetornar = convertirStringABool(m_TipoDocumentos[var].utilizaArticulos());
+            }
+            else if (_permisoDocumento == "utilizaCodigoBarrasADemanda"){
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCodigoBarrasADemanda());
+            }
+            else if (_permisoDocumento == "utilizaTotales")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaTotales());}
+            else if (_permisoDocumento == "utilizaListaPrecio")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaListaPrecio());}
+            else if (_permisoDocumento == "utilizaMediosDePago")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaMediosDePago());}
+            else if (_permisoDocumento == "utilizaFechaPrecio")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFechaPrecio());}
+            else if (_permisoDocumento == "utilizaFechaDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFechaDocumento());}
+            else if (_permisoDocumento == "utilizaNumeroDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaNumeroDocumento());}
+            else if (_permisoDocumento == "utilizaSerieDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSerieDocumento());}
+            else if (_permisoDocumento == "utilizaVendedor")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaVendedor());}
+            else if (_permisoDocumento == "utilizaCliente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCliente());}
+            else if (_permisoDocumento == "utilizaTipoCliente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaTipoCliente());}
+            else if (_permisoDocumento == "utilizaSoloProveedores")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSoloProveedores());}
+            else if (_permisoDocumento == "afectaCuentaCorriente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaCorriente());}
+            else if (_permisoDocumento == "afectaCuentaCorrienteMercaderia")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaCorrienteMercaderia());
+            }
+
+
+            else if (_permisoDocumento == "afectaStock")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaStock());}
+            else if (_permisoDocumento == "afectaTotales")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaTotales());}
+            else if (_permisoDocumento == "utilizaCantidades")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCantidades());}
+            else if (_permisoDocumento == "utilizaPrecioManual")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPrecioManual());}
+            else if (_permisoDocumento == "utilizaDescuentoArticulo")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaDescuentoArticulo());}
+            else if (_permisoDocumento == "utilizaDescuentoTotal")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaDescuentoTotal());}
+            else if (_permisoDocumento == "emiteEnImpresora")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].emiteEnImpresora());}
+            else if (_permisoDocumento == "codigoModeloImpresion")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].codigoModeloImpresion());}
+            else if (_permisoDocumento == "cantidadCopias")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].cantidadCopias());}
+            else if (_permisoDocumento == "utilizaObservaciones")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaObservaciones());}
+            else if (_permisoDocumento == "afectaCuentaBancaria")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaBancaria());}
+            else if (_permisoDocumento == "utilizaCuentaBancaria")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCuentaBancaria());}
+            else if (_permisoDocumento == "utilizaPagoChequeDiferido")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPagoChequeDiferido());}
+
+
+            else if (_permisoDocumento == "utilizaSoloMediosDePagoCheque")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSoloMediosDePagoCheque());}
+            else if (_permisoDocumento == "esDocumentoDeVenta")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].esDocumentoDeVenta());}
+            else if (_permisoDocumento == "descripcionTipoDocumentoImpresora")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].descripcionTipoDocumentoImpresora());}
+            else if (_permisoDocumento == "utilizaArticulosInactivos")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaArticulosInactivos());}
+            else if (_permisoDocumento == "utilizaRedondeoEnTotal")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaRedondeoEnTotal());}
+            else if (_permisoDocumento == "utilizaPrecioManualEnMonedaReferencia")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPrecioManualEnMonedaReferencia());}
+            else if (_permisoDocumento == "descripcionCodigoBarrasADemanda")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].descripcionCodigoBarrasADemanda());}
+
+
+
+            else if (_permisoDocumento == "utilizaListaPrecioManual")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaListaPrecioManual());}
+            else if (_permisoDocumento == "utilizaFormasDePago")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFormasDePago());}
+            else if (_permisoDocumento == "noAfectaIva")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].noAfectaIva());}
+            else if (_permisoDocumento == "utilizaSeteoDePreciosEnListasDePrecioPorArticulo")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSeteoDePreciosEnListasDePrecioPorArticulo());}
+            else if (_permisoDocumento == "noPermiteFacturarConStockPrevistoCero")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].noPermiteFacturarConStockPrevistoCero());}
+            else if (_permisoDocumento == "imprimeEnFormatoTicket")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].imprimeEnFormatoTicket());}
+            else if (_permisoDocumento == "imprimeObservacionesEnTicket")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].imprimeObservacionesEnTicket());}
+            else if (_permisoDocumento == "utilizaComentarios")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaComentarios());}
+
+
+        }
+    }
+    return _valorARetornar;
+
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -647,6 +767,8 @@ bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoD
         QSqlQuery query(Database::connect());
 
         if(query.exec("select  "+_permisoDocumento+"  from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
+
+
             if(query.first()){
                 if(query.value(0).toString()!=""){
 
@@ -665,9 +787,17 @@ bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoD
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 
+
+bool ModuloListaTipoDocumentos::convertirStringABool(QString valor) const{
+    if(valor=="1"){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 bool ModuloListaTipoDocumentos::retornaPermiteModificacionMedioPagoPorDeudaContado(QString _codigoTipoDocumento,QString _codigoDocumento, QString _serieDocumento) const {
 
@@ -812,6 +942,8 @@ QVariant ModuloListaTipoDocumentos::data(const QModelIndex & index, int role) co
 
     else if (role == imprimeObservacionesEnTicketRole){  return tipoDocumentos.imprimeObservacionesEnTicket();}
     else if (role == utilizaComentariosRole){  return tipoDocumentos.utilizaComentarios();}
+    else if (role == cantidadMaximaLineasEnDocumentoRole){  return tipoDocumentos.cantidadMaximaLineasEnDocumento();}
+
 
     return QVariant();
 }
@@ -884,6 +1016,16 @@ bool ModuloListaTipoDocumentos::eliminarTipoDocumento(QString _codigoTipoDocumen
 
 
 int ModuloListaTipoDocumentos::cantidadMaximaLineasTipoDocumento(QString _codigoTipoDocumento)const {
+
+    int _valorARetornar=0;
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+            _valorARetornar = m_TipoDocumentos[var].cantidadMaximaLineasEnDocumento().toInt();
+        }
+    }
+    return _valorARetornar;
+
+    /*
     Database::chequeaStatusAccesoMysql();
     bool conexion=true;
     if(!Database::connect().isOpen()){
@@ -911,7 +1053,7 @@ int ModuloListaTipoDocumentos::cantidadMaximaLineasTipoDocumento(QString _codigo
         }else{
             return 0;
         }
-    }
+    }*/
 }
 
 
@@ -1190,7 +1332,9 @@ bool ModuloListaTipoDocumentos::permiteDevolucionTipoDocumento(QString _codigoTi
                                                                                  q.value(rec.indexOf("noPermiteFacturarConStockPrevistoCero")).toString(),
                                                                                  q.value(rec.indexOf("imprimeEnFormatoTicket")).toString(),
                                                                                  q.value(rec.indexOf("imprimeObservacionesEnTicket")).toString(),
-                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString()
+                                                                                 q.value(rec.indexOf("utilizaComentarios")).toString(),
+                                                                                 q.value(rec.indexOf("cantidadMaximaLineasEnDocumento")).toString()
+
 
 
 
@@ -1216,7 +1360,90 @@ bool ModuloListaTipoDocumentos::permiteDevolucionTipoDocumento(QString _codigoTi
 
 
 
-QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codigoTipoDocumento ,QString _campoTipoDocumento) const{
+QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codigoTipoDocumento ,QString _permisoDocumento) const{
+
+
+    QString _valorARetornar="";
+    for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
+        if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
+
+
+            if (_permisoDocumento == "utilizaArticulos"){
+                _valorARetornar = convertirStringABool(m_TipoDocumentos[var].utilizaArticulos());
+            }
+            else if (_permisoDocumento == "utilizaCodigoBarrasADemanda"){
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCodigoBarrasADemanda());
+            }
+            else if (_permisoDocumento == "utilizaTotales")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaTotales());}
+            else if (_permisoDocumento == "utilizaListaPrecio")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaListaPrecio());}
+            else if (_permisoDocumento == "utilizaMediosDePago")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaMediosDePago());}
+            else if (_permisoDocumento == "utilizaFechaPrecio")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFechaPrecio());}
+            else if (_permisoDocumento == "utilizaFechaDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFechaDocumento());}
+            else if (_permisoDocumento == "utilizaNumeroDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaNumeroDocumento());}
+            else if (_permisoDocumento == "utilizaSerieDocumento")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSerieDocumento());}
+            else if (_permisoDocumento == "utilizaVendedor")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaVendedor());}
+            else if (_permisoDocumento == "utilizaCliente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCliente());}
+            else if (_permisoDocumento == "utilizaTipoCliente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaTipoCliente());}
+            else if (_permisoDocumento == "utilizaSoloProveedores")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSoloProveedores());}
+            else if (_permisoDocumento == "afectaCuentaCorriente")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaCorriente());}
+            else if (_permisoDocumento == "afectaCuentaCorrienteMercaderia")           {
+                _valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaCorrienteMercaderia());
+            }
+
+
+            else if (_permisoDocumento == "afectaStock")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaStock());}
+            else if (_permisoDocumento == "afectaTotales")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaTotales());}
+            else if (_permisoDocumento == "utilizaCantidades")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCantidades());}
+            else if (_permisoDocumento == "utilizaPrecioManual")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPrecioManual());}
+            else if (_permisoDocumento == "utilizaDescuentoArticulo")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaDescuentoArticulo());}
+            else if (_permisoDocumento == "utilizaDescuentoTotal")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaDescuentoTotal());}
+            else if (_permisoDocumento == "emiteEnImpresora")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].emiteEnImpresora());}
+            else if (_permisoDocumento == "codigoModeloImpresion")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].codigoModeloImpresion());}
+            else if (_permisoDocumento == "cantidadCopias")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].cantidadCopias());}
+            else if (_permisoDocumento == "utilizaObservaciones")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaObservaciones());}
+            else if (_permisoDocumento == "afectaCuentaBancaria")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].afectaCuentaBancaria());}
+            else if (_permisoDocumento == "utilizaCuentaBancaria")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaCuentaBancaria());}
+            else if (_permisoDocumento == "utilizaPagoChequeDiferido")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPagoChequeDiferido());}
+
+
+            else if (_permisoDocumento == "utilizaSoloMediosDePagoCheque")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSoloMediosDePagoCheque());}
+            else if (_permisoDocumento == "esDocumentoDeVenta")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].esDocumentoDeVenta());}
+            else if (_permisoDocumento == "descripcionTipoDocumentoImpresora")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].descripcionTipoDocumentoImpresora());}
+            else if (_permisoDocumento == "utilizaArticulosInactivos")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaArticulosInactivos());}
+            else if (_permisoDocumento == "utilizaRedondeoEnTotal")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaRedondeoEnTotal());}
+            else if (_permisoDocumento == "utilizaPrecioManualEnMonedaReferencia")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaPrecioManualEnMonedaReferencia());}
+            else if (_permisoDocumento == "descripcionCodigoBarrasADemanda")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].descripcionCodigoBarrasADemanda());}
+
+
+
+            else if (_permisoDocumento == "utilizaListaPrecioManual")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaListaPrecioManual());}
+            else if (_permisoDocumento == "utilizaFormasDePago")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaFormasDePago());}
+            else if (_permisoDocumento == "noAfectaIva")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].noAfectaIva());}
+            else if (_permisoDocumento == "utilizaSeteoDePreciosEnListasDePrecioPorArticulo")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaSeteoDePreciosEnListasDePrecioPorArticulo());}
+            else if (_permisoDocumento == "noPermiteFacturarConStockPrevistoCero")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].noPermiteFacturarConStockPrevistoCero());}
+            else if (_permisoDocumento == "imprimeEnFormatoTicket")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].imprimeEnFormatoTicket());}
+            else if (_permisoDocumento == "imprimeObservacionesEnTicket")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].imprimeObservacionesEnTicket());}
+            else if (_permisoDocumento == "utilizaComentarios")           {_valorARetornar= convertirStringABool(m_TipoDocumentos[var].utilizaComentarios());}
+
+
+        }
+    }
+    return _valorARetornar;
+
+
+    /*
     Database::chequeaStatusAccesoMysql();
     bool conexion=true;
     if(!Database::connect().isOpen()){
@@ -1244,7 +1471,7 @@ QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codig
         }else{
             return "";
         }
-    }
+    }*/
 }
 
 

@@ -128,7 +128,7 @@ void ModuloMonedas::limpiarListaMonedas(){
 void ModuloMonedas::buscarMonedas(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -142,11 +142,27 @@ Database::chequeaStatusAccesoMysql();
         QSqlRecord rec = q.record();
 
         ModuloMonedas::reset();
+
+
         if(q.record().count()>0){
 
             while (q.next()){
 
-                ModuloMonedas::agregarMonedas(Monedas(q.value(rec.indexOf("codigoMoneda")).toInt(),
+
+
+                Monedas mon = Monedas(q.value(rec.indexOf("codigoMoneda")).toInt()
+                                      ,q.value(rec.indexOf("descripcionMoneda")).toString()
+                                      ,q.value(rec.indexOf("simboloMoneda")).toString()
+                                      ,q.value(rec.indexOf("cotizacionMoneda")).toDouble()
+                                      ,q.value(rec.indexOf("cotizacionMonedaOficial")).toDouble()
+                                      ,q.value(rec.indexOf("esMonedaReferenciaSistema")).toString()
+                                      ,q.value(rec.indexOf("codigoISO3166")).toString()
+                                      ,q.value(rec.indexOf("codigoISO4217")).toString());
+                //m_Monedas.append(mon);
+                ModuloMonedas::agregarMonedas(mon);
+
+
+                /*       ModuloMonedas::agregarMonedas(Monedas(q.value(rec.indexOf("codigoMoneda")).toInt(),
 
                                                       q.value(rec.indexOf("descripcionMoneda")).toString(),
 
@@ -162,7 +178,7 @@ Database::chequeaStatusAccesoMysql();
 
                                                       q.value(rec.indexOf("codigoISO4217")).toString()
 
-                                                      ));                       
+                                                      ));    */
             }
         }
     }
@@ -225,7 +241,7 @@ int ModuloMonedas::insertarMonedas(QString _codigoMoneda,QString _descripcionMon
 
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -269,7 +285,7 @@ Database::chequeaStatusAccesoMysql();
 
 bool ModuloMonedas::eliminarMonedas(QString _codigoMoneda) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -304,6 +320,16 @@ Database::chequeaStatusAccesoMysql();
 }
 
 QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
+
+    QString _descripcionMoneda="";
+    for (int var = 0; var < m_Monedas.size(); ++var) {
+        if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
+            _descripcionMoneda = m_Monedas[var].descripcionMoneda();
+        }
+    }
+    return _descripcionMoneda;
+
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -329,10 +355,20 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
+
+    QString _simboloMoneda="";
+    for (int var = 0; var < m_Monedas.size(); ++var) {
+        if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
+            _simboloMoneda = m_Monedas[var].simboloMoneda();
+        }
+    }
+    return _simboloMoneda;
+
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -360,11 +396,11 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -405,10 +441,7 @@ double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
 
 
 
-
-
-
-  /*
+    /*
 
      bool conexion=true;
 Database::chequeaStatusAccesoMysql();
@@ -455,7 +488,7 @@ int ModuloMonedas::actualizarCotizacion(QString _codigoMoneda, QString _cotizaci
         return -5;
     }
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -489,6 +522,16 @@ Database::chequeaStatusAccesoMysql();
     }else{return -1;}
 }
 QString ModuloMonedas::retornaMonedaReferenciaSistema() const{
+
+    QString _codigoMoneda="";
+    for (int var = 0; var < m_Monedas.size(); ++var) {
+        if(m_Monedas[var].esMonedaReferenciaSistema()=="1"){
+            _codigoMoneda= QString::number(m_Monedas[var].codigoMoneda());
+        }
+    }
+    return _codigoMoneda;
+    /*
+
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -515,10 +558,12 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
+
+
 int ModuloMonedas::ultimoRegistroDeMoneda()const {
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     bool conexion=true;
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -547,64 +592,5 @@ Database::chequeaStatusAccesoMysql();
 }
 
 
-
-
-
-void ModuloMonedas::cargarMonedas(){
-
-    bool conexion=true;
-
-    Database::chequeaStatusAccesoMysql();
-
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-
-    if(conexion){
-
-        QSqlQuery q = Database::consultaSql("select * from Monedas;");
-        QSqlRecord rec = q.record();
-
-        ModuloMonedas::reset();
-
-        m_Monedas.clear();
-
-
-        if(q.record().count()>0){
-
-            while (q.next()){
-
-                Monedas mon = Monedas(q.value(rec.indexOf("codigoMoneda")).toInt()
-                                      ,q.value(rec.indexOf("descripcionMoneda")).toString()
-                                      ,q.value(rec.indexOf("simboloMoneda")).toString()
-                                      ,q.value(rec.indexOf("cotizacionMoneda")).toDouble()
-                                      ,q.value(rec.indexOf("cotizacionMonedaOficial")).toDouble()
-                                      ,q.value(rec.indexOf("esMonedaReferenciaSistema")).toString()
-                                      ,q.value(rec.indexOf("codigoISO3166")).toString()
-                                      ,q.value(rec.indexOf("codigoISO4217")).toString());
-                m_Monedas.append(mon);
-
-                /*ModuloMonedas::setCodigoMoneda(q.value(rec.indexOf("codigoMoneda")).toInt());
-                ModuloMonedas::setDescripcionMoneda(q.value(rec.indexOf("descripcionMoneda")).toString());
-                ModuloMonedas::setSimboloMoneda(q.value(rec.indexOf("simboloMoneda")).toString());
-                ModuloMonedas::setCotizacionMoneda(q.value(rec.indexOf("cotizacionMoneda")).toDouble());
-
-
-                ModuloMonedas::setCotizacionMoneda(q.value(rec.indexOf("cotizacionMonedaOficial")).toDouble());
-                ModuloMonedas::setSimboloMoneda(q.value(rec.indexOf("esMonedaReferenciaSistema")).toString());
-                ModuloMonedas::setSimboloMoneda(q.value(rec.indexOf("codigoISO3166")).toString());
-                ModuloMonedas::setSimboloMoneda(q.value(rec.indexOf("codigoISO4217")).toString());*/
-
-            }
-        }
-    }
-
-
-
-
-}
 
 

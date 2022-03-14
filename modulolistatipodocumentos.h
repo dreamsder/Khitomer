@@ -76,7 +76,8 @@ public:
                                const QString &noPermiteFacturarConStockPrevistoCero,
                                const QString &imprimeEnFormatoTicket,
                                const QString &imprimeObservacionesEnTicket,
-                               const QString &utilizaComentarios
+                               const QString &utilizaComentarios,
+                               const QString &cantidadMaximaLineasEnDocumento
 
                                );
 
@@ -132,6 +133,7 @@ public:
     QString imprimeObservacionesEnTicket()const;
 
     QString utilizaComentarios() const;
+    QString cantidadMaximaLineasEnDocumento()const;
 
 
 
@@ -190,6 +192,7 @@ private:
 
     QString m_imprimeObservacionesEnTicket;
     QString m_utilizaComentarios;
+    QString m_cantidadMaximaLineasEnDocumento;
 
 };
 
@@ -244,7 +247,8 @@ public:
         noPermiteFacturarConStockPrevistoCeroRole,
         imprimeEnFormatoTicketRole,
         imprimeObservacionesEnTicketRole,
-        utilizaComentariosRole
+        utilizaComentariosRole,
+        cantidadMaximaLineasEnDocumentoRole
 
 
 
@@ -287,6 +291,7 @@ public:
 
     Q_INVOKABLE void eliminarTipoDocumentoPerfil(QString ,QString ) const;
 
+    Q_INVOKABLE bool convertirStringABool(QString valor) const;
 
 
     Q_INVOKABLE int insertarTipoDocumento(QString ,
