@@ -118,6 +118,17 @@ QVariant ModuloFormasDePago::data(const QModelIndex & index, int role) const {
 }
 QString ModuloFormasDePago::retornaDescripcionFormaDePago(QString _codigoFormaDePago) const{
 
+
+    QString _valor="";
+    for (int var = 0; var < m_FormaDePago.size(); ++var) {
+        if(QString::number(m_FormaDePago[var].codigoFormaDePago())==_codigoFormaDePago ){
+
+            _valor= m_FormaDePago[var].descripcionFormaDePago();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -145,6 +156,6 @@ QString ModuloFormasDePago::retornaDescripcionFormaDePago(QString _codigoFormaDe
         }
     }else{
         return "";
-    }
+    }*/
 }
 

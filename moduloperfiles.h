@@ -239,11 +239,9 @@ public:
 
     Q_INVOKABLE void buscarPerfiles(QString , QString);
 
-    Q_INVOKABLE bool retornaValorDePermiso(QString , QString) const;
+    Q_INVOKABLE bool retornaValorDePermiso(QString _codigoPerfil, QString) const;
 
     Q_INVOKABLE QString retornaDescripcionPerfil(QString) const;
-
-    Q_INVOKABLE QString retornaCodigoPerfil(QString) const;
 
     Q_INVOKABLE int ultimoRegistroDePerfil() const;
 

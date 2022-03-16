@@ -270,36 +270,6 @@ void ModuloListaTipoDocumentos::limpiarListaTipoDocumentos(){
 }
 
 
-bool ModuloListaTipoDocumentos::retornaTipoDocumentoActivoPorPerfil(QString _codigoTipoDocumento,QString _codigoPerfil){
-
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select  codigoTipoDocumento  from TipoDocumentoPerfilesUsuarios where codigoTipoDocumento='"+_codigoTipoDocumento+"' and codigoPerfil='"+_codigoPerfil+"' order by  codigoTipoDocumento ")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return true;
-
-                }else{
-                    return false;
-                }
-            }else{return false;}
-        }else{
-            return false;
-        }
-    }else{return false;}
-
-}
-
 
 
 

@@ -63,7 +63,7 @@ Rectangle {
                 modeloListaTipoDocumentosVirtual.append({
                                                             codigoItem: modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),
                                                             descripcionItem: modeloGenericoComboboxTipoDocumento.retornarDescripcionItem(i),
-                                                            checkBoxActivo: modeloListaTipoDocumentosComboBox.retornaTipoDocumentoActivoPorPerfil(modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),_codigoPerfil),
+                                                            checkBoxActivo: modeloTipoDocumentoPerfilesUsuarios.retornaTipoDocumentoActivoPorPerfil(modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),_codigoPerfil),
                                                             codigoTipoItem:"0",
                                                             descripcionItemSegundafila:"",
                                                             valorItem:"0",
@@ -75,7 +75,7 @@ Rectangle {
                 modeloListaTipoDocumentosVirtual.append({
                                                             codigoItem: modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),
                                                             descripcionItem: modeloGenericoComboboxTipoDocumento.retornarDescripcionItem(i),
-                                                            checkBoxActivo: modeloListaTipoDocumentosComboBox.retornaTipoDocumentoActivoPorPerfil(modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),_codigoPerfil),
+                                                            checkBoxActivo: modeloTipoDocumentoPerfilesUsuarios.retornaTipoDocumentoActivoPorPerfil(modeloGenericoComboboxTipoDocumento.retornarCodigoItem(i),_codigoPerfil),
                                                             codigoTipoItem:"0",
                                                             valorItem:"0",
                                                             serieDoc:""
@@ -108,7 +108,7 @@ Rectangle {
                 modeloListaReportesVirtual.append({
                                                       codigoItem: modeloGenericoComboboxReportesPermisos.retornarCodigoItem(o),
                                                       descripcionItem:modeloGenericoComboboxReportesPermisos.retornarDescripcionItem(o),
-                                                      checkBoxActivo: modeloReportes.retornaReporteActivoPorPerfil(modeloGenericoComboboxReportesPermisos.retornarCodigoItem(o),_codigoPerfil),
+                                                      checkBoxActivo: modeloReportesPerfilesUsuarios.retornaReporteActivoPorPerfil(modeloGenericoComboboxReportesPermisos.retornarCodigoItem(o),_codigoPerfil),
                                                       codigoTipoItem:"0",
                                                       descripcionItemSegundafila:"",
                                                       valorItem:"0",

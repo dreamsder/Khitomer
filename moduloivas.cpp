@@ -131,6 +131,14 @@ QVariant ModuloIvas::data(const QModelIndex & index, int role) const {
 }
 QString ModuloIvas::retornaDescripcionIva(QString _codigoIva) const{
 
+    QString _valor="";
+    for (int var = 0; var < m_Ivas.size(); ++var) {
+        if(QString::number(m_Ivas[var].codigoIva())==_codigoIva){
+            _valor = m_Ivas[var].descripcionIva();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -158,7 +166,7 @@ Database::chequeaStatusAccesoMysql();
         }
     }else{
         return "";
-    }
+    }*/
 }
 
 
@@ -182,7 +190,15 @@ Database::chequeaStatusAccesoMysql();
 
                     _codigoIva = query.value(0).toString();
 
-                    if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
+                    double _valor=1;
+                    for (int var = 0; var < m_Ivas.size(); ++var) {
+                        if(QString::number(m_Ivas[var].codigoIva())==_codigoIva){
+                            _valor = m_Ivas[var].factorMultiplicador();
+                        }
+                    }
+                    return _valor;
+
+                    /*if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
                         if(query.first()){
                             if(query.value(0).toString()!=""){
                                 return query.value(0).toDouble();
@@ -193,6 +209,9 @@ Database::chequeaStatusAccesoMysql();
                     }else{
                         return 1;
                     }
+
+
+                    */
                 }else{
                     return 1;
                 }
@@ -226,7 +245,17 @@ Database::chequeaStatusAccesoMysql();
 
                     _codigoIva = query.value(0).toString();
 
-                    if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
+
+                    double _valor=1;
+                    for (int var = 0; var < m_Ivas.size(); ++var) {
+                        if(QString::number(m_Ivas[var].codigoIva())==_codigoIva){
+                            _valor = m_Ivas[var].factorMultiplicador();
+                        }
+                    }
+                    return _valor;
+
+
+                    /*if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
                         if(query.first()){
                             if(query.value(0).toString()!=""){
                                 return query.value(0).toDouble();
@@ -236,7 +265,10 @@ Database::chequeaStatusAccesoMysql();
                         }else{return 1;}
                     }else{
                         return 1;
-                    }
+                    }*/
+
+
+
                 }else{
                     return 1;
                 }

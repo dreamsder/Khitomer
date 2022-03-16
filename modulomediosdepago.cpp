@@ -107,19 +107,31 @@ void ModuloMediosDePago::buscarMediosDePago(QString campo, QString datoABuscar){
 
                 ModuloMediosDePago::agregarMediosDePago(MediosDePago(q.value(rec.indexOf("codigoMedioPago")).toInt(),
 
-                                                      q.value(rec.indexOf("descripcionMedioPago")).toString(),
+                                                                     q.value(rec.indexOf("descripcionMedioPago")).toString(),
 
-                                                      q.value(rec.indexOf("monedaMedioPago")).toInt(),
+                                                                     q.value(rec.indexOf("monedaMedioPago")).toInt(),
 
-                                                      q.value(rec.indexOf("codigoTipoMedioDePago")).toInt()
+                                                                     q.value(rec.indexOf("codigoTipoMedioDePago")).toInt()
 
-                                                      ));
+                                                                     ));
             }
         }
     }
 }
 
 bool ModuloMediosDePago::utilizaCuotas(QString _codigoMedioPago) const{
+    bool _valor=false;
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+
+            if(QString::number(m_MediosDePago[var].codigoTipoMedioDePago())=="2"){
+                return true;
+            }
+        }
+    }
+    return _valor;
+
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -143,9 +155,21 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
+    bool _valor=false;
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+
+            if(QString::number(m_MediosDePago[var].codigoTipoMedioDePago())=="2" || QString::number(m_MediosDePago[var].codigoTipoMedioDePago())=="3"){
+                return true;
+            }
+        }
+    }
+    return _valor;
+
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -172,9 +196,21 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
+
+    bool _valor=false;
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+
+            if(QString::number(m_MediosDePago[var].codigoTipoMedioDePago())=="4" ){
+                return true;
+            }
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -201,9 +237,21 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
+
+    bool _valor=false;
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+
+            if(QString::number(m_MediosDePago[var].codigoTipoMedioDePago())=="3" ){
+                return true;
+            }
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -228,12 +276,20 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 
 QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPago) const{
+    QString _valor="";
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+            _valor=m_MediosDePago[var].descripcionMedioPago();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -256,10 +312,21 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloMediosDePago::retornaMonedaMedioDePago(QString _codigoMedioPago) const{
+
+    QString _valor="";
+    for (int var = 0; var < m_MediosDePago.size(); ++var) {
+        if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
+
+            _valor= m_MediosDePago[var].monedaMedioPago();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -284,7 +351,7 @@ Database::chequeaStatusAccesoMysql();
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 
@@ -322,7 +389,7 @@ bool ModuloMediosDePago::guardarLineaMedioDePago(QString _codigoDocumento,QStrin
                                                  QString _codigoMedioPago,QString _monedaMedioPago,QString _importePago,QString _cuotas,
 
                                                  QString _codigoBanco,QString _codigoTarjetaCredito,QString _numeroCheque
-                                                ,QString _codigoTipoCheque,QString _fechaCheque
+                                                 ,QString _codigoTipoCheque,QString _fechaCheque
 
                                                  ,QString _codigoDocumentoCheque,QString _codigoTipoDocumentoCheque
                                                  ,QString _numeroLineaDocumentoCheque
@@ -362,7 +429,7 @@ bool ModuloMediosDePago::guardarLineaMedioDePago(QString _codigoDocumento,QStrin
 bool ModuloMediosDePago::eliminarLineaMedioDePagoDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento) const{
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -387,7 +454,7 @@ Database::chequeaStatusAccesoMysql();
 }
 int ModuloMediosDePago::retornaCantidadLineasMedioDePago(QString _codigoDocumento,QString _codigoTipoDocumento, QString _serieDocumento) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -407,7 +474,7 @@ Database::chequeaStatusAccesoMysql();
                     return 0;
                 }
             }else{return 0;}
-       }else{
+        }else{
             return 0;
         }
     }else{
@@ -418,7 +485,7 @@ Database::chequeaStatusAccesoMysql();
 QString ModuloMediosDePago::retornoCodigoMedioPago(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
 
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -451,7 +518,7 @@ Database::chequeaStatusAccesoMysql();
 QString ModuloMediosDePago::retornoMonedaMedioPago(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
 
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -482,7 +549,7 @@ Database::chequeaStatusAccesoMysql();
 double ModuloMediosDePago::retornoImportePago(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
 
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -514,7 +581,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoCuotas(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -577,7 +644,7 @@ QString ModuloMediosDePago::retornoCodigoTarjetaCredito(QString _codigoDocumento
 }
 QString ModuloMediosDePago::retornoCodigoBanco(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -608,7 +675,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoNumeroCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -637,7 +704,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoTipoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -666,7 +733,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoFechaCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -695,7 +762,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoCodigoDocumentoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -724,7 +791,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoCodigoTipoDocumentoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -754,7 +821,7 @@ Database::chequeaStatusAccesoMysql();
 
 QString ModuloMediosDePago::retornoSerieDocumentoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -785,7 +852,7 @@ Database::chequeaStatusAccesoMysql();
 
 QString ModuloMediosDePago::retornoCuentaBancaria(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -814,7 +881,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoBancoCuentaBancaria(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -843,7 +910,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloMediosDePago::retornoNumeroLineaDocumentoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -872,7 +939,7 @@ Database::chequeaStatusAccesoMysql();
 }
 bool ModuloMediosDePago::retornoEsDiferidoCheque(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";

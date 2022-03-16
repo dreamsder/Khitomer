@@ -44,15 +44,15 @@ Rectangle {
 
     // setea los permisos de la barra de herramientas del mantenimiento de liquidaciones
     function permisosMantenimientoLiquidaciones(){
-        mantenimientoLiquidaciones.botonNuevaLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearLiquidaciones");
-        mantenimientoLiquidaciones.botonCrearLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearLiquidaciones");
-        mantenimientoLiquidaciones.botonEliminarLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteBorrarLiquidaciones");
+        mantenimientoLiquidaciones.botonNuevaLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearLiquidaciones");
+        mantenimientoLiquidaciones.botonCrearLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearLiquidaciones");
+        mantenimientoLiquidaciones.botonEliminarLiquidacionVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteBorrarLiquidaciones");
     }
     // setea los permisos de la barra de herramientas del mantenimiento de facturacion
     function permisosMantenimientoFacturacion(){
-        mantenimientoFactura.botonNuevaFacturaVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearFacturas");
-        mantenimientoFactura.botonGuardarFacturaEmitirVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearFacturas");
-        mantenimientoFactura.botonGuardarFacturaPendienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearFacturas");
+        mantenimientoFactura.botonNuevaFacturaVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
+        mantenimientoFactura.botonGuardarFacturaEmitirVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
+        mantenimientoFactura.botonGuardarFacturaPendienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
 
 
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_CLIENTE")=="1"){
@@ -73,9 +73,9 @@ Rectangle {
     }
     // setea los permisos de la barra de herramientas del mantenimiento de articulos
     function permisosMantenimientoArticulos(){
-        mantenimientoArticulos.botonNuevoArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos");
-        mantenimientoArticulos.botonGuardarArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos");
-        mantenimientoArticulos.botonEliminarArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteBorrarArticulos");
+        mantenimientoArticulos.botonNuevoArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos");
+        mantenimientoArticulos.botonGuardarArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos");
+        mantenimientoArticulos.botonEliminarArticuloVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteBorrarArticulos");
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_ARTICULO")=="1"){
             mantenimientoArticulos.codigoArticuloInputMask="000000;"
         }else{
@@ -84,9 +84,9 @@ Rectangle {
     }
     // setea los permisos de la barra de herramientas del mantenimiento de clientes
     function permisosMantenimientoClientes(){
-        mantenimientoClientes.botonNuevoClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearClientes");
-        mantenimientoClientes.botonGuardarClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearClientes");
-        mantenimientoClientes.botonEliminarClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteBorrarClientes");
+        mantenimientoClientes.botonNuevoClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearClientes");
+        mantenimientoClientes.botonGuardarClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearClientes");
+        mantenimientoClientes.botonEliminarClienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteBorrarClientes");
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_CLIENTE")=="1"){
             mantenimientoClientes.codigoClienteInputMask="000000;"
         }else{
@@ -101,10 +101,10 @@ Rectangle {
 
     // setea los permisos de la barra de herramientas del mantenimiento de lista de precios
     function permisosMantenimientoListaDePrecios(){
-        mantenimientoListaPrecios.botonNuevaListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearLiquidaciones");
-        mantenimientoListaPrecios.botonGuardarListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearLiquidaciones");
-        mantenimientoListaPrecios.botonEliminarListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteBorrarLiquidaciones");
-        mantenimientoListaPrecios.botonCambioRapidoDePreciosVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCambioRapidoDePrecios");
+        mantenimientoListaPrecios.botonNuevaListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearLiquidaciones");
+        mantenimientoListaPrecios.botonGuardarListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearLiquidaciones");
+        mantenimientoListaPrecios.botonEliminarListaDePrecioVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteBorrarLiquidaciones");
+        mantenimientoListaPrecios.botonCambioRapidoDePreciosVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCambioRapidoDePrecios");
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_ARTICULO")=="1"){
             mantenimientoListaPrecios.codigoArticuloDesdeHastaCuadroListaPrecioInputMask="000000;"
         }else{
@@ -116,7 +116,7 @@ Rectangle {
 
     // setea los permisos del mantenimiento de reportes
     function permisosMantenimientoReportes(){
-        mantenimientoReportes.botonGenerarPDFVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteExportarAPDF");
+        mantenimientoReportes.botonGenerarPDFVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteExportarAPDF");
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_CLIENTE")=="1"){
             mantenimientoReportes.codigoCodigoClienteReporteInputMask="000000;"
             mantenimientoReportes.codigoCodigoProveedorReporteInputMask="000000;"
@@ -156,7 +156,7 @@ Rectangle {
 
             if(lado=="home"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarLiquidaciones")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarLiquidaciones")){
 
                     permisosMantenimientoLiquidaciones()
                     mantenimientoLiquidaciones.enabled=true
@@ -188,12 +188,12 @@ Rectangle {
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
 
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloListaVendedores.clearUsuarios()
                     modeloListaVendedores.buscarUsuarios("esVendedor=","1")
 
-                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarFacturacion")){
+                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarFacturacion")){
 
                     permisosMantenimientoFacturacion()
 
@@ -228,10 +228,10 @@ Rectangle {
 
                     btnLateralBusquedas.z=0
                     rowMenusDelSistema.z=-1
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
 
-                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes")){
+                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarClientes")){
                     mantenimientoClientes.enabled=true
                     permisosMantenimientoClientes()
 
@@ -258,7 +258,7 @@ Rectangle {
                     opcionEnCurso=2
                     btnLateralBusquedas.z=0
                     rowMenusDelSistema.z=-1
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     var cantidadRegistrosListaPrecioCliente=mantenimientoClientes.retornaCantidadRegistrosListaPrecioCliente()
 
@@ -266,7 +266,7 @@ Rectangle {
                         mantenimientoClientes.cargarListasDePrecioCliente("","")
                     }
 
-                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos")){
+                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos")){
 
                     permisosMantenimientoArticulos()
 
@@ -293,7 +293,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloListaProveedor.clearClientes();
                     modeloListaProveedor.buscarCliente("tipoCliente=","2")
@@ -305,7 +305,7 @@ Rectangle {
 
 
 
-                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarListaPrecios")){
+                }else if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarListaPrecios")){
 
                     permisosMantenimientoListaDePrecios()
 
@@ -335,7 +335,7 @@ Rectangle {
                         rowMenusDelSistema.z=-1
                         btnLateralBusquedas.z=0
 
-                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     }else{
                         rowMenusDelSistema.z=0
                         btnLateralBusquedas.z=0
@@ -366,7 +366,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                 }
 
 
@@ -374,7 +374,7 @@ Rectangle {
 
             }else if(lado=="derecha"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarFacturacion")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarFacturacion")){
                     permisosMantenimientoFacturacion()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -401,7 +401,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloLiquidacionesComboBox.clearLiquidaciones()
                     modeloLiquidacionesComboBox.buscarLiquidacion("1=","1")
@@ -421,7 +421,7 @@ Rectangle {
         }else if(posicion==1){
             if(lado=="izquierda"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarLiquidaciones")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarLiquidaciones")){
                     permisosMantenimientoLiquidaciones()
 
                     mantenimientoLiquidaciones.enabled=true
@@ -446,7 +446,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloListaVendedores.clearUsuarios()
                     modeloListaVendedores.buscarUsuarios("esVendedor=","1")
@@ -456,7 +456,7 @@ Rectangle {
 
             }else if(lado=="derecha"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarClientes")){
                     mantenimientoClientes.enabled=true
                     permisosMantenimientoClientes()
 
@@ -482,7 +482,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     var cantidadRegistrosListaPrecioCliente=mantenimientoClientes.retornaCantidadRegistrosListaPrecioCliente()
 
@@ -499,7 +499,7 @@ Rectangle {
             if(lado=="izquierda"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarFacturacion")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarFacturacion")){
 
                     permisosMantenimientoFacturacion()
 
@@ -526,7 +526,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloLiquidacionesComboBox.clearLiquidaciones()
                     modeloLiquidacionesComboBox.buscarLiquidacion("1=","1")
@@ -543,7 +543,7 @@ Rectangle {
 
             }else if(lado=="derecha"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos")){
                     permisosMantenimientoArticulos()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -568,7 +568,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     modeloListaProveedor.clearClientes();
                     modeloListaProveedor.buscarCliente("tipoCliente=","2")
@@ -586,7 +586,7 @@ Rectangle {
         }else if(posicion==3){
             if(lado=="izquierda"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarClientes")){
 
                     mantenimientoClientes.enabled=true
                     permisosMantenimientoClientes()
@@ -612,7 +612,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                     var cantidadRegistrosListaPrecioCliente=mantenimientoClientes.retornaCantidadRegistrosListaPrecioCliente()
 
@@ -628,7 +628,7 @@ Rectangle {
             }else if(lado=="derecha"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarListaPrecios")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarListaPrecios")){
                     permisosMantenimientoListaDePrecios()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -656,7 +656,7 @@ Rectangle {
 
                         rowMenusDelSistema.z=-1
                         btnLateralBusquedas.z=0
-                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     }else{
                         btnLateralBusquedas.z=0
                         rowMenusDelSistema.z=-1
@@ -669,7 +669,7 @@ Rectangle {
         }else if(posicion==4){
             if(lado=="izquierda"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos")){
                     permisosMantenimientoArticulos()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -707,7 +707,7 @@ Rectangle {
             }else if(lado=="derecha"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarDocumentos")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarDocumentos")){
 
                     mantenimientoLiquidaciones.enabled=false
                     mantenimientoLiquidaciones.visible=false
@@ -732,7 +732,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }
 
@@ -741,7 +741,7 @@ Rectangle {
             if(lado=="izquierda"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarListaPrecios")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarListaPrecios")){
                     permisosMantenimientoListaDePrecios()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -768,7 +768,7 @@ Rectangle {
 
                         rowMenusDelSistema.z=-1
                         btnLateralBusquedas.z=0
-                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                        menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     }else{
                         btnLateralBusquedas.z=0
                         rowMenusDelSistema.z=-1
@@ -782,7 +782,7 @@ Rectangle {
             }else if(lado=="derecha"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarReportes")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarReportes")){
                     permisosMantenimientoReportes()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -808,7 +808,7 @@ Rectangle {
                     btnLateralBusquedas.z=0
                     rowMenusDelSistema.z=-1
 
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }
 
@@ -816,7 +816,7 @@ Rectangle {
         }else if(posicion==6){
             if(lado=="izquierda"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarDocumentos")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarDocumentos")){
 
 
                     mantenimientoLiquidaciones.enabled=false
@@ -842,7 +842,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }else{
                     mostrarMantenimientos(4,"izquierda")
@@ -853,7 +853,7 @@ Rectangle {
             }else if(lado=="derecha"){
 
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarCuentaCorriente")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarCuentaCorriente")){
 
                     permisosMantenimientoCuentacorriente()
 
@@ -881,7 +881,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }
 
@@ -889,7 +889,7 @@ Rectangle {
         }else if(posicion==7){
             if(lado=="izquierda"){
 
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarReportes")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarReportes")){
                     permisosMantenimientoReportes()
 
                     mantenimientoLiquidaciones.enabled=false
@@ -917,7 +917,7 @@ Rectangle {
                     btnLateralBusquedas.z=0
                     rowMenusDelSistema.z=-1
 
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }else{
                     mostrarMantenimientos(5,"izquierda")
@@ -926,7 +926,7 @@ Rectangle {
 
 
             }else if(lado=="derecha"){
-                if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarPromociones")){
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarPromociones")){
 
                     mantenimientoLiquidaciones.enabled=false
                     mantenimientoLiquidaciones.visible=false
@@ -952,7 +952,7 @@ Rectangle {
 
                     rowMenusDelSistema.z=-1
                     btnLateralBusquedas.z=0
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }
 
@@ -961,7 +961,7 @@ Rectangle {
          else if(posicion==8){
                     if(lado=="izquierda"){
 
-                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarCuentaCorriente")){
+                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarCuentaCorriente")){
 
                             permisosMantenimientoCuentacorriente()
 
@@ -989,7 +989,7 @@ Rectangle {
 
                             rowMenusDelSistema.z=-1
                             btnLateralBusquedas.z=0
-                            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                         }else{
                             mostrarMantenimientos(6,"izquierda")
@@ -1009,6 +1009,7 @@ Rectangle {
 
 
     }
+
     Rectangle {
         id: navegador
         x: 60
@@ -1312,38 +1313,6 @@ Rectangle {
             hoverEnabled: true
 
 
-
-
-         /*   Particles {
-                property string fechaImportante:funcionesmysql.retornaFechaImportante()
-                y: 0
-                width: parent.width
-                height: parent.height-100
-                source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/flake-snow2-b.png"
-                lifeSpan: 5000
-                count: 100
-                angle: 70
-                angleDeviation: 36
-                velocity: 30
-                emissionRate: {
-                    if(fechaImportante=="navidad" || fechaImportante=="reyes_magos"){
-                        if(rectLogin.visible){
-                            -1
-                        }else{
-                            0
-                        }
-                    }else{
-                        0
-                    }
-                }
-                visible: rectLogin.visible
-                enabled: rectLogin.visible
-                velocityDeviation: 10
-                ParticleMotionWander {
-                    xvariance: 30
-                    pace: 100
-                }
-            }*/
             Rectangle {
                 id: rectAcceso
                 x: 184
@@ -1466,45 +1435,45 @@ Rectangle {
                             etUsuario.setearUsuario(modeloUsuarios.retornaNombreUsuarioLogueado(txtNombreDeUsuario.textoInputBox.trim()))
 
                             //Mantenimientos
-                            mantenimientoLiquidaciones.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarLiquidaciones")
+                            mantenimientoLiquidaciones.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarLiquidaciones")
                             tagLiquidaciones.enabled=mantenimientoLiquidaciones.enabled;
                             tagLiquidaciones.visible=mantenimientoLiquidaciones.enabled;
 
-                            tagFacturacion.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarFacturacion")
+                            tagFacturacion.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarFacturacion")
                             tagFacturacion.visible=tagFacturacion.enabled
 
-                            mantenimientoClientes.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes")
+                            mantenimientoClientes.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarClientes")
                             tagClientes.enabled=mantenimientoClientes.enabled
                             tagClientes.visible=mantenimientoClientes.enabled
 
-                            mantenimientoListaPrecios.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarListaPrecios")
+                            mantenimientoListaPrecios.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarListaPrecios")
                             tagListaDePrecios.enabled=mantenimientoListaPrecios.enabled
                             tagListaDePrecios.visible=mantenimientoListaPrecios.enabled
 
-                            mantenimientoArticulos.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos")
+                            mantenimientoArticulos.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos")
                             tagArticulos.enabled=mantenimientoArticulos.enabled
                             tagArticulos.visible=mantenimientoArticulos.enabled
 
-                            mantenimientoDocumentos.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarDocumentos")
+                            mantenimientoDocumentos.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarDocumentos")
                             tagDocumentos.enabled=mantenimientoDocumentos.enabled
                             tagDocumentos.visible=mantenimientoDocumentos.enabled
 
-                            mantenimientoReportes.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarReportes")
+                            mantenimientoReportes.enabled= modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarReportes")
                             tagReportes.enabled=mantenimientoReportes.enabled
                             tagReportes.visible=mantenimientoReportes.enabled
 
-                            mantenimientoCuentasCorriente.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarCuentaCorriente")                          
+                            mantenimientoCuentasCorriente.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarCuentaCorriente")
                             tagCuentaCorriente.enabled=mantenimientoCuentasCorriente.enabled
                             tagCuentaCorriente.visible=mantenimientoCuentasCorriente.enabled
 
-                            mantenimientoPromociones.enabled= false// modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarPromociones")
+                            mantenimientoPromociones.enabled= false// modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarPromociones")
                             //tagPromociones.enabled=mantenimientoPromociones.enabled
                             //tagPromociones.visible=mantenimientoPromociones.enabled
 
 
 
 
-                            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
 
 
@@ -1516,13 +1485,13 @@ Rectangle {
                             mantenimientoFactura.setearVendedorDelSistema()
 
                             modeloListaTipoDocumentosComboBox.limpiarListaTipoDocumentos()
-                            modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloListaPerfilesComboBox.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                            modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                             modeloReportesMenuComboBox.limpiarListaReportesMenu()
-                            modeloReportesMenuComboBox.buscarReportesMenu("1=","1",modeloListaPerfilesComboBox.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                            modeloReportesMenuComboBox.buscarReportesMenu("1=","1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
 
-                            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
+                            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
                                 var cantidadSinStock=modeloArticulos.retornaCantidadArticulosSinStock()
                                 if(cantidadSinStock!="0"){
                                     btnAvisoFaltaStock.textoBoton=cantidadSinStock
@@ -1711,27 +1680,12 @@ Rectangle {
 
 
         }
-        //        }
 
 
 
 
-       /* PropertyAnimation{
-            id:rectLoginOpacidadOut
-            target: rectLogin
-            property: "opacity"
-            from:1
-            to:0
-            duration: 300
-        }
-        PropertyAnimation{
-            id:rectAccesoWHOut
-            target: rectAcceso
-            property: "opacity"
-            from:1
-            to:0
-            duration: 200
-        }*/
+
+
 
 
         Timer{
@@ -1762,6 +1716,7 @@ Rectangle {
         anchors.rightMargin: 10
         anchors.left: parent.left
         anchors.leftMargin: 45
+        //enabled: false
 
         Tag {
             id: tagLiquidaciones
@@ -1999,7 +1954,7 @@ Rectangle {
 
         /*Component.onCompleted: {
 
-            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
+            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
                 var cantidadSinStock=modeloArticulos.retornaCantidadArticulosSinStock()
                 if(cantidadSinStock!="0"){
                     btnAvisoFaltaStock.textoBoton=cantidadSinStock
@@ -2020,7 +1975,7 @@ Rectangle {
         interval: 7254321
         repeat: true
         onTriggered: {
-            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
+            if(modeloReportes.retornaSiReportaEstaHabilitadoEnPerfil("22",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))){
                 var cantidadSinStock=modeloArticulos.retornaCantidadArticulosSinStock()
                 if(cantidadSinStock!="0"){
                     btnAvisoFaltaStock.textoBoton=cantidadSinStock

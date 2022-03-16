@@ -147,7 +147,7 @@ import QtQuick 1.1
 
                         if(modeloUsuarios.conexionUsuario(txtNombreDeUsuarioAutorizaciones.textoInputBox.toString().trim(),txtContraseniaDeUsuarioAutorizaciones.textoInputBox.toString().trim())){
 
-                            if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim(),permisosAEvaluar)){
+                            if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim()),permisosAEvaluar)){
 
 
 

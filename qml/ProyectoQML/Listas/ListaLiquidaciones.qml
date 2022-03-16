@@ -74,7 +74,7 @@ Rectangle{
                 rectListaItemContraer.stop()
                 rectListaItemExpandir.start()
 
-                btnCerrarLiquidacion.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCerrarLiquidaciones")
+                btnCerrarLiquidacion.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCerrarLiquidaciones")
                 btnReporteCaja.visible=btnCerrarLiquidacion.visible
 
                 rectListaItem.color="#9294C6"
@@ -160,7 +160,7 @@ Rectangle{
                 mantenimientoLiquidaciones.vendedorDeLiquidacio=codigoVendedor
 
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoLiquidacion,codigoVendedor,modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoLiquidacion,codigoVendedor,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }

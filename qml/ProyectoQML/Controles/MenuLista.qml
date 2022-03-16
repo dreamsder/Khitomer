@@ -666,59 +666,59 @@ Rectangle {
                                         mostrarMenu(codigoMenu)
                                     }
 
-                                    if(codigoMenu==3 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoUsuarios")){
+                                    if(codigoMenu==3 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoUsuarios")){
                                         mostrarMenu(codigoMenu)
                                     }
 
-                                    if(codigoMenu==4 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoPermisos")){
+                                    if(codigoMenu==4 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoPermisos")){
                                         mostrarMenu(codigoMenu)
                                     }
 
-                                    if(codigoMenu==5 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoConfiguraciones")){
+                                    if(codigoMenu==5 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoConfiguraciones")){
                                         mostrarMenu(codigoMenu)
                                     }
 
-                                    if(codigoMenu==6 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoMonedas")){
+                                    if(codigoMenu==6 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoMonedas")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==7 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoRubros")){
+                                    if(codigoMenu==7 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoRubros")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==8 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoCuentasBancarias")){
+                                    if(codigoMenu==8 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoCuentasBancarias")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==9 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoPagoDeFinacieras")){
+                                    if(codigoMenu==9 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoPagoDeFinacieras")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==10 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoBancos")){
+                                    if(codigoMenu==10 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoBancos")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==11 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoLocalidades")){
+                                    if(codigoMenu==11 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoLocalidades")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==12 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoTiposDeDocumentos")){
+                                    if(codigoMenu==12 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoTiposDeDocumentos")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==13 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoIvas")){
+                                    if(codigoMenu==13 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoIvas")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==14 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoFacturaElectronica")){
+                                    if(codigoMenu==14 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoFacturaElectronica")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==15 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoLogDelSistema")){
+                                    if(codigoMenu==15 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoLogDelSistema")){
 
                                         mostrarMenu(codigoMenu)
                                     }
-                                    if(codigoMenu==16 && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzadoGarantia")){
+                                    if(codigoMenu==16 && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzadoGarantia")){
 
                                         mostrarMenu(codigoMenu)
                                     }

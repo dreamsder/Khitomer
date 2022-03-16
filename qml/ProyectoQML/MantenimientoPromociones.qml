@@ -86,7 +86,7 @@ Rectangle {
                 textoInputBox: ""
                 onClicEnBusqueda: {
                 //    modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                 //    listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtSerieDocumento.tomarElFoco()
@@ -107,7 +107,7 @@ Rectangle {
                 textoTitulo: "Fecha emision:"
                 onClicEnBusqueda: {
                 //    modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                 //    listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtCodigoClienteDocumento.tomarElFoco()
@@ -131,7 +131,7 @@ Rectangle {
                 textoTitulo: "Artículo en documento:"
                 onClicEnBusqueda: {
                 //    modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                //    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                 //    listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:cbListaTipoDeDocumentosEnMantenimiento.tomarElFoco()
@@ -153,9 +153,9 @@ Rectangle {
                     /*
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
                     if(chekActivo){
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                     }else{
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                     }
                     listaDeDocumentosFiltrados.currentIndex=0*/
 

@@ -76,7 +76,8 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <modulotipopromocion.h>
 #include <modulopromociones.h>
 #include <modulotipogarantia.h>
-
+#include <moduloreportesperfilesusuarios.h>
+#include <modulotipodocumentoperfilesusuarios.h>
 
 #include <CFE/modulo_cfe_parametrosgenerales.h>
 
@@ -137,9 +138,13 @@ int main(int argc, char *argv[])
     ModuloTipoClientes moduloTipoClientes;
     ModuloTipoDocumentoCliente moduloTipoDocumentoCliente;
     ModuloTipoClasificacion moduloTipoClasificacion;
-    ModuloUsuarios moduloUsuarios;
+
     UtilidadesDeMenu moduloListaMenues;
+
+    ModuloUsuarios moduloUsuarios;
     ModuloUsuarios moduloListaUsuarios;
+    ModuloUsuarios moduloListaVendedores;
+
     ModuloListaProveedor moduloListaProveedor;
     ModuloArticulos moduloArticulos;
     ModuloArticulos moduloArticulosFiltros;
@@ -148,12 +153,12 @@ int main(int argc, char *argv[])
     ModuloArticulos moduloArticulosFiltrosListaPrecio2;
     ModuloArticulos moduloArticulosFiltrosListaPrecio3;
 
-
+    ModuloReportesPerfilesUsuarios moduloReportesPerfilesUsuarios;
 
     ModuloArticulos moduloArticulosOpcionesExtra;
     ModuloArticulos moduloArticulosOpcionesExtraFacturacion;
     ModuloArticulosBarra moduloArticulosBarra;
-    ModuloUsuarios moduloListaVendedores;
+
     ModuloLiquidaciones moduloLiquidaciones;
     ModuloLiquidaciones moduloLiquidacionesComboBox;
     ModuloListasPrecios moduloListasPrecios;
@@ -197,16 +202,18 @@ int main(int argc, char *argv[])
     ModuloDocumentos moduloComboBoxDocumentosConSaldoCuentaCorriente;
     ModuloDocumentos moduloDocumentosDePagoCuentaCorriente;
 
+    ModuloTipoDocumentoPerfilesUsuarios moduloTipoDocumentoPerfilesUsuarios;
 
     ModuloMediosDePago moduloMediosDePago;
     ModuloReportesMenu moduloReportesMenu;
     ModuloReportes moduloReportes;
     ModuloRubros moduloRubros;
     ModuloRubros moduloRubrosComboBox;
-    ModuloSubRubros moduloSubRubrosComboBox;
+
     ModuloBancos moduloBancos;
     ModuloBancos moduloBancosComboBox;
 
+    ModuloSubRubros moduloSubRubrosComboBox;
     ModuloSubRubros moduloSubRubros;
     ModuloTarjetasCredito moduloTarjetasCredito;
 
@@ -330,6 +337,8 @@ inicio:
 
                 moduloconfiguracion.cargarConfiguracion();
                 modulo_CFE_ParametrosGenerales.cargar();
+                moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
+                moduloListaPerfiles.buscarPerfiles("1=","1");
                 moduloListaMonedas.buscarMonedas("1=","1");
                 moduloMonedasTotales.buscarMonedas("1=","1");
 
@@ -337,7 +346,44 @@ inicio:
                 moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
                 moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
 
-                moduloControlesMantenimiento.buscarMantenimiento();
+                moduloControlesMantenimiento.buscarMantenimiento();                
+                moduloListaIvas.buscarIvas("1=","1");
+                moduloPaisesComboBox.buscarPaises("1=","1","descripcionPais");
+                moduloPaises.buscarPaises("1=","1","descripcionPais");
+                moduloListaVendedores.buscarUsuarios("esVendedor=","1");
+                moduloUsuarios.buscarUsuarios("1=","1");
+                moduloListaUsuarios.buscarUsuarios("1=","1");
+                moduloReportesPerfilesUsuarios.buscarReportesPerfilesUsuarios();
+                moduloTipoDocumentoPerfilesUsuarios.buscarTipoDocumentoPerfilesUsuarios();
+                moduloMediosDePago.buscarMediosDePago("1=","1");
+                moduloReportesMenu.buscarReportesMenu("1=","1","");
+                moduloBancosComboBox.buscarBancos("1=","1");
+                moduloBancos.buscarBancos("1=","1");
+
+
+                moduloListasPrecios.buscarListasPrecio("1=","1");
+                moduloListasPreciosClientes.buscarListasPrecio("1=","1");
+                moduloListasPreciosBusquedaInteligente.buscarListasPrecio("1=","1");
+                moduloListasPreciosComboBox.buscarListasPrecio("1=","1");
+                moduloTipoClientes.buscarTipoCliente("1=","1");
+
+
+                moduloSubRubrosComboBox.buscarSubRubros("1=","1");
+                moduloSubRubros.buscarSubRubros("1=","1");
+                moduloTipoGarantia.buscarTipoGarantia("1=","1");
+                moduloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1");
+                moduloTipoDocumentoCliente.buscar();
+                moduloTipoProcedenciaCliente.buscar();
+
+                moduloLocalidades.buscarLocalidades(" codigoPais=1 and codigoDepartamento=","1");
+                moduloLocalidadesComboBox.buscarLocalidades(" codigoPais=1 and codigoDepartamento=","1");
+
+                moduloDepartamentos.buscarDepartamentos(" codigoPais=","1");
+                moduloDepartamentosComboBox.buscarDepartamentos(" codigoPais=","1");
+
+
+
+
 
 
             }else{
@@ -371,7 +417,8 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloGenericoComboboxReportesPermisos", &moduloGenericoComboboxReportesPermisos );
 
 
-
+    viewer.rootContext()->setContextProperty("modeloReportesPerfilesUsuarios", &moduloReportesPerfilesUsuarios );
+    viewer.rootContext()->setContextProperty("modeloTipoDocumentoPerfilesUsuarios", &moduloTipoDocumentoPerfilesUsuarios );
 
 
     viewer.rootContext()->setContextProperty("modeloconfiguracion", &moduloconfiguracion );
@@ -385,7 +432,7 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloTipoDocumentoClientes", &moduloTipoDocumentoCliente );
 
     viewer.rootContext()->setContextProperty("modeloTipoClasificacion", &moduloTipoClasificacion );
-    viewer.rootContext()->setContextProperty("modeloUsuarios", &moduloUsuarios );
+
     viewer.rootContext()->setContextProperty("modeloListaMenues", &moduloListaMenues );
 
     viewer.rootContext()->setContextProperty("modeloListaUsuarios", &moduloListaUsuarios );
@@ -499,7 +546,7 @@ inicio:
     viewer.rootContext()->setContextProperty("modelo_CFE_ParametrosGenerales", &modulo_CFE_ParametrosGenerales);
 
 
-
+    viewer.rootContext()->setContextProperty("modeloUsuarios", &moduloUsuarios );
 
 
 
@@ -527,20 +574,18 @@ inicio:
 
 
     //Carga de datos a ComboBox
-    moduloTipoClientes.buscarTipoCliente("1=","1");
-    moduloTipoDocumentoCliente.buscar();
+
+
 
     moduloListaMenues.buscarMenus("1=","1");
     moduloTipoClasificacion.buscarTipoClasificacion("1=","1");
     // moduloListaMonedas.buscarMonedas("1=","1");
     moduloListaProveedor.buscarCliente("tipoCliente=","2");
-    moduloListaVendedores.buscarUsuarios("esVendedor=","1");
-    moduloListaIvas.buscarIvas("1=","1");
-    moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
-    moduloListasPreciosComboBox.buscarListasPrecio("1=","1");
+
+
     moduloLiquidacionesComboBox.buscarLiquidacion( "1=","1");
     moduloLiquidaciones.buscarLiquidacion("1=","1");
-    moduloMediosDePago.buscarMediosDePago("1=","1");
+
 
 
     // moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
@@ -550,16 +595,13 @@ inicio:
     //moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
 
 
-    moduloReportesMenu.buscarReportesMenu("1=","1","");
 
 
     moduloReportes.buscarReportes("1=","1","");
 
     moduloListaImpresoras.limpiarListaImpresoras();
     moduloListaImpresoras.buscarImpresoras();
-    moduloSubRubrosComboBox.buscarSubRubros("1=","1");
     moduloRubrosComboBox.buscarRubros("1=","1");
-    moduloBancosComboBox.buscarBancos("1=","1");
     moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
     // moduloMonedasTotales.buscarMonedas("1=","1");
     moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
@@ -567,9 +609,7 @@ inicio:
     moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");
     moduloTotalChequesDiferidos.buscarTotalCheques("1","1");
     moduloTotalOtrosCheques.buscarTotalOtrosCheques("1","1");
-    moduloPaisesComboBox.buscarPaises("1=","1","descripcionPais");
-    moduloDepartamentosComboBox.buscarDepartamentos(" codigoPais=","1");
-    moduloLocalidadesComboBox.buscarLocalidades(" codigoPais=1 and codigoDepartamento=","1");
+
     moduloModelosDeImpresion.buscarModeloImpresion("1=","1");
     moduloGenericoCombobox.buscarModuloGenerico();
     moduloGenericoComboboxTipoDocumento.buscarTodosLosTipoDocumentos();
@@ -577,9 +617,7 @@ inicio:
 
     moduloGenericoTipoPromocion.buscarTodosLosTiposPromocion();
 
-    moduloTipoGarantia.buscarTipoGarantia("1=","1");
 
-    moduloTipoProcedenciaCliente.buscar();
 
     moduloFormasDePago.buscarFormaDePago("1=","1");
 

@@ -119,6 +119,17 @@ void ModuloTipoProcedenciaCliente::buscar(){
 
 
 QString ModuloTipoProcedenciaCliente::retornaDescripcionTipoProcedenciaCliente(QString codigoTipoProcedenciaCliente) const {
+
+    QString _valor="";
+    for (int var = 0; var < m_lista.size(); ++var) {
+        if(QString::number(m_lista[var].codigoTipoProcedenciaCliente())==codigoTipoProcedenciaCliente){
+
+            _valor= m_lista[var].descripcionTipoProcedenciaCliente();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 
 
@@ -153,7 +164,7 @@ QString ModuloTipoProcedenciaCliente::retornaDescripcionTipoProcedenciaCliente(Q
         }
     }else{
         return "";
-    }
+    }*/
 }
 
 

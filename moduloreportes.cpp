@@ -223,35 +223,7 @@ bool ModuloReportes::retornaSiReportaEstaHabilitadoEnPerfil(QString _codigoRepor
     }else{return false;}
 }
 
-bool ModuloReportes::retornaReporteActivoPorPerfil(QString _codigoReporte,QString _codigoPerfil){
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("SELECT codigoReporte FROM ReportesPerfilesUsuarios where codigoReporte='"+_codigoReporte+"' and codigoPerfil='"+_codigoPerfil+"' ")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return true;
-
-                }else{
-                    return false;
-                }
-            }else{return false;}
-        }else{
-            return false;
-        }
-    }else{return false;}
-
-}
 
 void ModuloReportes::eliminarReportesPerfil(QString _codigoReporte,QString _codigoPerfil) const{
 
@@ -360,6 +332,14 @@ bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _p
 
 QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) const {
 
+    QString _valor="";
+    for (int var = 0; var < m_Reportes.size(); ++var) {
+        if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
+            _valor = m_Reportes[var].descripcionReporte();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -380,11 +360,19 @@ QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) con
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
 
+    QString _valor="";
+    for (int var = 0; var < m_Reportes.size(); ++var) {
+        if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
+            _valor = m_Reportes[var].consultaSql();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -405,10 +393,18 @@ QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const {
 
+    QString _valor="";
+    for (int var = 0; var < m_Reportes.size(); ++var) {
+        if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
+            _valor = m_Reportes[var].consultaSqlGraficas();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -429,11 +425,21 @@ QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const 
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
 
+    QString _valor="";
+    for (int var = 0; var < m_Reportes.size(); ++var) {
+        if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
+            _valor = m_Reportes[var].consultaSqlCabezal();
+        }
+    }
+    return _valor;
+
+
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -454,7 +460,7 @@ QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
 QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {

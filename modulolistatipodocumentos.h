@@ -285,7 +285,7 @@ public:
 
     Q_INVOKABLE bool eliminarTipoDocumento(QString) const;
 
-    Q_INVOKABLE bool retornaTipoDocumentoActivoPorPerfil(QString,QString);
+   // Q_INVOKABLE bool retornaTipoDocumentoActivoPorPerfil(QString,QString);
 
     Q_INVOKABLE void insertarTipoDocumentoPerfil(QString ,QString ) const;
 

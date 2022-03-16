@@ -411,7 +411,7 @@ Rectangle {
                 botonBorrarTextoVisible: true
                 textoTitulo: "Cliente/Proveedor:"
                 botonNuevoVisible: {
-                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearClientes")){
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarClientes") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearClientes")){
                         true
                     }else{
                         false

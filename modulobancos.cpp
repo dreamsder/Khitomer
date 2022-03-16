@@ -117,6 +117,17 @@ QVariant ModuloBancos::data(const QModelIndex & index, int role) const {
 }
 QString ModuloBancos::retornaDescripcionBanco(QString _codigoBanco) const{
 
+    QString _valor="";
+    for (int var = 0; var < m_Bancos.size(); ++var) {
+        if(QString::number(m_Bancos[var].codigoBanco())==_codigoBanco ){
+
+            _valor= m_Bancos[var].descripcionBanco();
+
+        }
+    }
+    return _valor;
+
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -143,7 +154,7 @@ Database::chequeaStatusAccesoMysql();
         }
     }else{
         return "";
-    }
+    }*/
 }
 
 QString ModuloBancos::retornaUltimoCodigoBanco() const{

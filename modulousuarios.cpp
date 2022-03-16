@@ -344,6 +344,17 @@ bool ModuloUsuarios::eliminarUsuario(QString _idUsuario) const {
 }
 QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
 
+    QString _valor="";
+    for (int var = 0; var < m_Usuarios.size(); ++var) {
+        if(m_Usuarios[var].idUsuario()==_idUsuario && m_Usuarios[var].esVendedor()=="1"){
+
+            _valor= m_Usuarios[var].nombreUsuario()+" "+m_Usuarios[var].apellidoUsuario();
+
+        }
+    }
+    return _valor;
+
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -377,10 +388,21 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
         }
     }else{
         return "";
-    }
+    }*/
 }
 QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
 
+
+    QString _valor="";
+    for (int var = 0; var < m_Usuarios.size(); ++var) {
+        if(m_Usuarios[var].idUsuario()==_idUsuario){
+
+            _valor= m_Usuarios[var].nombreUsuario()+" "+m_Usuarios[var].apellidoUsuario();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -413,7 +435,7 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
         }
     }else{
         return "";
-    }
+    }*/
 }
 int ModuloUsuarios::actualizarClave(QString _idUsuario, QString _claveUsuario ) const {
 
@@ -468,6 +490,18 @@ int ModuloUsuarios::actualizarClave(QString _idUsuario, QString _claveUsuario ) 
 }
 bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) const{
 
+    bool _valor=false;
+    for (int var = 0; var < m_Usuarios.size(); ++var) {
+        if(QString::number(m_Usuarios[var].codigoPerfil())==_codigoPerfil){
+
+            _valor= true;
+
+        }
+    }
+    return _valor;
+
+    /*
+
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -490,5 +524,47 @@ bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) con
         }
     }else{
         return true;
+    }*/
+}
+
+QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
+
+    QString _valor="0";
+    for (int var = 0; var < m_Usuarios.size(); ++var) {
+        if(m_Usuarios[var].idUsuario()==_idUsuario){
+
+            _valor = QString::number(m_Usuarios[var].codigoPerfil());
+
+        }
     }
+    return _valor;
+    /*
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select codigoPerfil from Usuarios where idUsuario='"+_idUsuario+"'")) {
+
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+
+                    return query.value(0).toString();
+
+                }else{
+                    return "0";
+                }
+            }else{return "0";}
+
+        }else{
+            return "0";
+        }
+    }else{return "0";}*/
+
 }

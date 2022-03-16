@@ -239,6 +239,17 @@ bool ModuloDepartamentos::eliminarDepartamento(QString _codigoDepartamento,QStri
 }
 QString ModuloDepartamentos::retornaDescripcionDepartamento(QString _codigoDepartamento,QString _codigoPais) const{
 
+
+    QString _valor="";
+    for (int var = 0; var < m_Departamentos.size(); ++var) {
+        if(QString::number(m_Departamentos[var].codigoDepartamento())==_codigoDepartamento &&  QString::number(m_Departamentos[var].codigoPais())==_codigoPais){
+
+            _valor= m_Departamentos[var].descripcionDepartamento();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -266,5 +277,5 @@ Database::chequeaStatusAccesoMysql();
         }
     }else{
         return "";
-    }
+    }*/
 }

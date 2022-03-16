@@ -607,7 +607,7 @@ Rectangle {
 
             onClicEnBusqueda: {
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }
@@ -841,7 +841,7 @@ Rectangle {
             rectOpcionesExtrasAparecer.stop()
             rectOpcionesExtrasDesaparecer.start()
 
-            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim()),"permiteUsarMenuAvanzado")
         }
 
 
@@ -955,7 +955,7 @@ Rectangle {
 
                     rectOpcionesExtrasAparecer.stop()
                     rectOpcionesExtrasDesaparecer.start()
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuarioAutorizaciones.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     txtFechaLiquidacion.tomarElFoco()
                 }
             }

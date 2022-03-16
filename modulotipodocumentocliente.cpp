@@ -117,9 +117,19 @@ void ModuloTipoDocumentoCliente::buscar(){
 
 
 QString ModuloTipoDocumentoCliente::retornaDescripcionTipoDocumentoCliente(QString codigoTipoDocumentoCliente) const {
+    QString _valor="";
+    for (int var = 0; var < m_lista.size(); ++var) {
+        if(QString::number(m_lista[var].codigoTipoDocumentoCliente())==codigoTipoDocumentoCliente ){
+
+            _valor= m_lista[var].descripcionTipoDocumentoCliente();
+
+        }
+    }
+    return _valor;
+
+
+    /*
     bool conexion=true;
-
-
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -151,7 +161,7 @@ QString ModuloTipoDocumentoCliente::retornaDescripcionTipoDocumentoCliente(QStri
         }
     }else{
         return "";
-    }
+    }*/
 }
 
 

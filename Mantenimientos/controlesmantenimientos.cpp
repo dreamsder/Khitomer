@@ -130,6 +130,66 @@ QString Mantenimientos::idConfiguracionMantenimiento() const
 {
     return m_idConfiguracionMantenimiento;
 }
+
+QString Mantenimientos::clientesUsaTelefono()const{
+    return m_clientesUsaTelefono;}
+QString Mantenimientos::clientesUsaTelefono2()const{
+    return m_clientesUsaTelefono2;}
+QString Mantenimientos::clientesUsaCodigoPostal()const{
+    return m_clientesUsaCodigoPostal;}
+QString Mantenimientos::clientesUsaEmail()const{
+    return m_clientesUsaEmail;}
+QString Mantenimientos::clientesUsaContacto()const{
+    return m_clientesUsaContacto;}
+QString Mantenimientos::clientesUsaObservaciones()const{
+    return m_clientesUsaObservaciones;}
+QString Mantenimientos::clientesUsaHorario()const{
+    return m_clientesUsaHorario;}
+QString Mantenimientos::clientesUsaLocalidad()const{
+    return m_clientesUsaLocalidad;}
+QString Mantenimientos::clientesUsaEsquina()const{
+    return m_clientesUsaEsquina;}
+QString Mantenimientos::clientesUsaNumeroPuerta()const{
+    return m_clientesUsaNumeroPuerta;}
+QString Mantenimientos::clientesUsaSitioWeb()const{
+    return m_clientesUsaSitioWeb;}
+QString Mantenimientos::clientesUsaValoracion()const{
+    return m_clientesUsaValoracion;}
+QString Mantenimientos::clientesUsaAgregarListaPrecio()const{
+    return m_clientesUsaAgregarListaPrecio;}
+QString Mantenimientos::clientesUsaCuentaBancaria()const{
+    return m_clientesUsaCuentaBancaria;}
+QString Mantenimientos::clientesUsaCargaBatch()const{
+    return m_clientesUsaCargaBatch;}
+QString Mantenimientos::articulosUsaTipoIVA()const{
+    return m_articulosUsaTipoIVA;}
+QString Mantenimientos::articulosUsaMoneda()const{
+    return m_articulosUsaMoneda;}
+QString Mantenimientos::articulosUsaSubRubro()const{
+    return m_articulosUsaSubRubro;}
+QString Mantenimientos::articulosUsaListaDePrecio()const{
+    return m_articulosUsaListaDePrecio;}
+QString Mantenimientos::articulosUsaCodigoBarras()const{
+    return m_articulosUsaCodigoBarras;}
+QString Mantenimientos::articulosUsaCantidadMinima()const{
+    return m_articulosUsaCantidadMinima;}
+QString Mantenimientos::articulosUsaDescripcionExtendida()const{
+    return m_articulosUsaDescripcionExtendida;}
+QString Mantenimientos::articulosUsaCheckActivo()const{
+    return m_articulosUsaCheckActivo;}
+QString Mantenimientos::articulosUsaCargaBatch()const{
+    return m_articulosUsaCargaBatch;}
+QString Mantenimientos::clientesUsaProcedencia()const{
+    return m_clientesUsaProcedencia;}
+QString Mantenimientos::clientesUsaFormaDePago()const{
+    return m_clientesUsaFormaDePago;}
+QString Mantenimientos::clientesUsaMoneda()const{
+    return m_clientesUsaMoneda;}
+QString Mantenimientos::articulosUsaTipoGarantia()const{
+    return m_articulosUsaTipoGarantia;}
+
+
+
 int ControlesMantenimientos::rowCount(const QModelIndex & parent) const {
     return m_Mantenimientos.count();
 }
@@ -144,6 +204,92 @@ QVariant ControlesMantenimientos::data(const QModelIndex & index, int role) cons
     if (role == idConfiguracionMantenimientoRole){
         return mantenimientos.idConfiguracionMantenimiento();
     }
+    else if (role == clientesUsaTelefonoRole){
+ return mantenimientos.clientesUsaTelefono();
+    }
+    else if (role == clientesUsaTelefono2Role){
+ return mantenimientos.clientesUsaTelefono2();
+    }
+    else if (role == clientesUsaCodigoPostalRole){
+ return mantenimientos.clientesUsaCodigoPostal();
+    }
+    else if (role == clientesUsaEmailRole){
+ return mantenimientos.clientesUsaEmail();
+    }
+    else if (role == clientesUsaContactoRole){
+ return mantenimientos.clientesUsaContacto();
+    }
+    else if (role == clientesUsaObservacionesRole){
+ return mantenimientos.clientesUsaObservaciones();
+    }
+    else if (role == clientesUsaHorarioRole){
+ return mantenimientos.clientesUsaHorario();
+    }
+    else if (role == clientesUsaLocalidadRole){
+ return mantenimientos.clientesUsaLocalidad();
+    }
+    else if (role == clientesUsaEsquinaRole){
+ return mantenimientos.clientesUsaEsquina();
+    }
+    else if (role == clientesUsaNumeroPuertaRole){
+ return mantenimientos.clientesUsaNumeroPuerta();
+    }
+    else if (role == clientesUsaSitioWebRole){
+ return mantenimientos.clientesUsaSitioWeb();
+    }
+    else if (role == clientesUsaValoracionRole){
+ return mantenimientos.clientesUsaValoracion();
+    }
+    else if (role == clientesUsaAgregarListaPrecioRole){
+ return mantenimientos.clientesUsaAgregarListaPrecio();
+    }
+    else if (role == clientesUsaCuentaBancariaRole){
+ return mantenimientos.clientesUsaCuentaBancaria();
+    }
+    else if (role == clientesUsaCargaBatchRole){
+ return mantenimientos.clientesUsaCargaBatch();
+    }
+    else if (role == articulosUsaTipoIVARole){
+ return mantenimientos.articulosUsaTipoIVA();
+    }
+    else if (role == articulosUsaMonedaRole){
+ return mantenimientos.articulosUsaMoneda();
+    }
+    else if (role == articulosUsaSubRubroRole){
+ return mantenimientos.articulosUsaSubRubro();
+    }
+    else if (role == articulosUsaListaDePrecioRole){
+ return mantenimientos.articulosUsaListaDePrecio();
+    }
+    else if (role == articulosUsaCodigoBarrasRole){
+ return mantenimientos.articulosUsaCodigoBarras();
+    }
+    else if (role == articulosUsaCantidadMinimaRole){
+ return mantenimientos.articulosUsaCantidadMinima();
+    }
+    else if (role == articulosUsaDescripcionExtendidaRole){
+ return mantenimientos.articulosUsaDescripcionExtendida();
+    }
+    else if (role == articulosUsaCheckActivoRole){
+ return mantenimientos.articulosUsaCheckActivo();
+    }
+    else if (role == articulosUsaCargaBatchRole){
+ return mantenimientos.articulosUsaCargaBatch();
+    }
+    else if (role == clientesUsaProcedenciaRole){
+ return mantenimientos.clientesUsaProcedencia();
+    }
+    else if (role == clientesUsaFormaDePagoRole){
+ return mantenimientos.clientesUsaFormaDePago();
+    }
+    else if (role == clientesUsaMonedaRole){
+ return mantenimientos.clientesUsaMoneda();
+    }
+    else if (role == articulosUsaTipoGarantiaRole){
+ return mantenimientos.articulosUsaTipoGarantia();
+    }
+
+
     return QVariant();
 }
 bool ControlesMantenimientos::retornaValorMantenimiento(QString _permisoDocumento) const{

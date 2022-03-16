@@ -134,6 +134,17 @@ QVariant ModuloTipoClientes::data(const QModelIndex & index, int role) const {
 }
 
 QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoCliente) const {
+
+    QString _valor="";
+    for (int var = 0; var < m_TipoDeClientes.size(); ++var) {
+        if(QString::number(m_TipoDeClientes[var].codigoTipoCliente())==_tipoCliente ){
+
+            _valor= m_TipoDeClientes[var].descripcionTipoCliente();
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -154,5 +165,5 @@ QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoClien
             return "";
         }
 
-    }
+    }*/
 }

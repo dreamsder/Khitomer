@@ -91,6 +91,8 @@ public:
 
     Q_INVOKABLE bool existenUsuariosConPerfilAsociado(QString) const;
 
+    Q_INVOKABLE QString retornaCodigoPerfil(QString _idUsuario) const;
+
 
 
 

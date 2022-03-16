@@ -113,8 +113,19 @@ QVariant ModuloTipoGarantia::data(const QModelIndex & index, int role) const {
 
     return QVariant();
 }
-QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoIva) const{
+QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoTipoGarantia) const{
 
+    QString _valor="";
+    for (int var = 0; var < m_TipoGarantia.size(); ++var) {
+        if(QString::number(m_TipoGarantia[var].codigoTipoGarantia())==_codigoTipoGarantia ){
+
+            _valor= m_TipoGarantia[var].descripcionTipoGarantia();
+
+        }
+    }
+    return _valor;
+
+/*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -129,7 +140,7 @@ QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoIva) c
         QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigoIva+"'")) {
+        if(query.exec("select descripcionTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigoTipoGarantia+"'")) {
             if(query.first()){
                 if(query.value(0).toString()!=""){
                     return query.value(0).toString();
@@ -142,7 +153,7 @@ QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoIva) c
         }
     }else{
         return "";
-    }
+    }*/
 }
 QString ModuloTipoGarantia::retornaUltimoCodigo() const{
     bool conexion=true;

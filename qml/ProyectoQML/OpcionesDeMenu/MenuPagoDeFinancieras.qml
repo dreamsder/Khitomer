@@ -157,7 +157,7 @@ Rectangle {
 
                     cargarTarjetasACobrar()
                     if(seGuardoRegistro){
-                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarFacturacion")){
+                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarFacturacion")){
                                if(funcionesmysql.mensajeAdvertencia("Se actualizaron tarjetas pendientes de pago.\nDesea hacer el ingreso del comprobante asociado a estas tarjetas?\n\nPresione [ Sí ] para confirmar.")){
                                    mostrarMantenimientos(0,"derecha")
                                    setearTipoDocumentoEnMantenimientoFacturacion("16",razonClientesCobrados)

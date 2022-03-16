@@ -312,7 +312,7 @@ Rectangle {
                     txtCodigoTipoDocumento.tomarElFoco()
 
                     modeloListaTipoDocumentosComboBox.limpiarListaTipoDocumentos()
-                    modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloListaPerfilesComboBox.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                    modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
 
                 }else if(resultadoConsulta==2){
@@ -326,7 +326,7 @@ Rectangle {
                     listaDeTiposDeDocumentos.currentIndex=0;
 
                     modeloListaTipoDocumentosComboBox.limpiarListaTipoDocumentos()
-                    modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloListaPerfilesComboBox.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                    modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                 }else if(resultadoConsulta==-1){
                     txtMensajeInformacion.color="#d93e3e"
@@ -378,7 +378,7 @@ Rectangle {
                             txtCodigoTipoDocumento.tomarElFoco()
 
                             modeloListaTipoDocumentosComboBox.limpiarListaTipoDocumentos()
-                            modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloListaPerfilesComboBox.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                            modeloListaTipoDocumentosComboBox.buscarTipoDocumentos("1=","1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                         }else{
                             txtMensajeInformacion.color="#d93e3e"

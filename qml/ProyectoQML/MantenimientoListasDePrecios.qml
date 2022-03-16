@@ -477,7 +477,7 @@ Rectangle {
                 checkBoxActivoTexto: "Incluir artículos inactivos"
 
                 botonNuevoVisible:{
-                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos")){
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos")){
                         true
                     }else{
                         false
@@ -1051,7 +1051,7 @@ Rectangle {
             botoncargardato1.enabled=true
             txtArticuloParaLista.tomarElFocoP()
             //   rowMenusDelSistema.z=0
-            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
         }
 
         Rectangle {
@@ -1390,7 +1390,7 @@ Rectangle {
                     rowBarraDeHerramientasListaDePrecios.enabled=true
                     botoncargardato1.enabled=true
                     txtArticuloParaLista.tomarElFocoP()
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                 }
             }
@@ -1416,7 +1416,7 @@ Rectangle {
             botoncargardato1.enabled=true
             btnCargaRapidaDePrecios.enabled=true
             txtArticuloParaLista.tomarElFocoP()
-            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
         }
 
 
@@ -1620,7 +1620,7 @@ Rectangle {
                     botoncargardato1.enabled=true
                     btnCargaRapidaDePrecios.enabled=true
                     txtArticuloParaLista.tomarElFocoP()
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                 }
             }
 
@@ -1807,7 +1807,7 @@ Rectangle {
                     textoTitulo: "Desde artículo:"
                     colorDeTitulo: "#dbd8d8"
                     botonNuevoVisible:{
-                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos")){
+                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos")){
                             true
                         }else{
                             false
@@ -1872,7 +1872,7 @@ Rectangle {
                     textoTitulo: "Hasta artículo:"
                     colorDeTitulo: "#dbd8d8"
                     botonNuevoVisible:{
-                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos")){
+                        if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos")){
                             true
                         }else{
                             false

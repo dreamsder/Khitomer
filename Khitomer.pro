@@ -111,7 +111,9 @@ SOURCES += main.cpp \
     QrCode/qrcode.cpp \
     Utilidades/waitingdlg.cpp \
     Utilidades/wsdatabase.cpp \
-    modulotipogarantia.cpp
+    modulotipogarantia.cpp \
+    moduloreportesperfilesusuarios.cpp \
+    modulotipodocumentoperfilesusuarios.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -192,7 +194,9 @@ HEADERS += \
     QrCode/qrcode.hpp \
     Utilidades/waitingdlg.h \
     Utilidades/wsdatabase.h \
-    modulotipogarantia.h
+    modulotipogarantia.h \
+    moduloreportesperfilesusuarios.h \
+    modulotipodocumentoperfilesusuarios.h
 
 RESOURCES += \
     Imagenes.qrc \

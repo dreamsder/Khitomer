@@ -233,7 +233,7 @@ Rectangle {
             if(llamado=="LATERAL"){
                 rectOpcionesExtrasArticulosFacturacionAparecer.stop()
                 rectOpcionesExtrasArticulosFacturacionDesaparecer.start()
-                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
             }
             cuadroListaArticulosACambiarElPrecio.cargarPrecioDeArticulo(codigoArticuloAModificar)
 
@@ -1058,7 +1058,7 @@ Rectangle {
             botonGuardarFacturaEmitir.enabled=true
             botonGuardarFacturaPendiente.enabled=true
             if(indicadorDeNuevoDocumento==""){
-                botonEliminarFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteBorrarFacturas");
+                botonEliminarFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteBorrarFacturas");
             }
             botonAnularFactura.visible=false
             botonReimprimirFactura.visible=false
@@ -1190,14 +1190,14 @@ Rectangle {
             if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")){
                 botonAnularFactura.visible=false;
             }else if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")===false){
-                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteAnularFacturas");
+                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteAnularFacturas");
             }else{
-                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteAnularFacturas");
+                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteAnularFacturas");
             }
 
 
 
-            if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteReimprimirFacturas")){
+            if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteReimprimirFacturas")){
                 if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteEnImpresora"))
                 {
                     botonReimprimirFactura.visible=true;
@@ -1291,15 +1291,15 @@ Rectangle {
             if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")){
                 botonAnularFactura.visible=false;
             }else if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")===false){
-                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteAnularFacturas");
+                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteAnularFacturas");
             }else{
-                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteAnularFacturas");
+                botonAnularFactura.visible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteAnularFacturas");
             }
 
 
 
 
-            if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteReimprimirFacturas")){
+            if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteReimprimirFacturas")){
                 if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteEnImpresora"))
                 {
                     botonReimprimirFactura.visible=true;
@@ -2968,7 +2968,7 @@ Rectangle {
                 }
 
                 botonNuevoVisible: {
-                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearClientes")){
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarClientes") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearClientes")){
                         true
                     }else{
                         false
@@ -3183,7 +3183,7 @@ Rectangle {
                 checkBoxActivoVisible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulosInactivos")
                 checkBoxActivoTexto: "Incluir artículos inactivos"
                 botonNuevoVisible:{
-                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteCrearArticulos")){
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarArticulos") && modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearArticulos")){
                         true
                     }else{
                         false
@@ -7359,7 +7359,7 @@ Rectangle {
             btnBuscarMasArticulos.enabled=true
 
 
-            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
             txtArticuloParaFacturacion.tomarElFocoP()
         }
 
@@ -7404,7 +7404,7 @@ Rectangle {
                     btnBuscarMasClientes.enabled=true
                     btnBuscarMasArticulos.enabled=true
 
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     txtArticuloParaFacturacion.tomarElFocoP()
                 }
             }
@@ -7738,7 +7738,7 @@ Rectangle {
             btnBuscarMasArticulos.enabled=true
 
 
-            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+            menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
             txtArticuloParaFacturacion.tomarElFocoP()
         }
 
@@ -7965,7 +7965,7 @@ Rectangle {
                                 btnBuscarMasClientes.enabled=true
                                 btnBuscarMasArticulos.enabled=true
 
-                                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                                 txtCantidadArticulosFacturacion.tomarElFoco()
 
@@ -7995,7 +7995,7 @@ Rectangle {
                                 btnBuscarMasClientes.enabled=true
                                 btnBuscarMasArticulos.enabled=true
 
-                                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                                menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
 
                                 txtCodigoDeBarrasADemanda.tomarElFoco()
 
@@ -8318,7 +8318,7 @@ Rectangle {
                     btnBuscarMasArticulos.enabled=true
 
 
-                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(txtNombreDeUsuario.textoInputBox.trim(),"permiteUsarMenuAvanzado")
+                    menulista1.enabled=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarMenuAvanzado")
                     txtArticuloParaFacturacion.tomarElFocoP()
 
 

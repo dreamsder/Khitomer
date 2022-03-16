@@ -443,6 +443,15 @@ QVariant ModuloPerfiles::data(const QModelIndex & index, int role) const {
     return QVariant();
 }
 QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
+
+    QString _valor="";
+    for (int var = 0; var < m_Perfiles.size(); ++var) {
+        if(QString::number(m_Perfiles[var].codigoPerfil())==_codigoPerfil){
+            _valor = m_Perfiles[var].descripcionPerfil();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -470,10 +479,60 @@ QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
         }else{
             return "";
         }
-    }else{return "";}
+    }else{return "";}*/
 }
 
-bool ModuloPerfiles::retornaValorDePermiso(QString _idUsuario,QString _permiso) const{
+bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permiso) const{
+
+   /// QString valorPerfil=retornaCodigoPerfil(_idUsuario);
+
+    bool _valor=false;
+    for (int var = 0; var < m_Perfiles.size(); ++var) {
+        if(QString::number(m_Perfiles[var].codigoPerfil())==_codigoPerfil){
+            if(_permiso=="permiteUsarLiquidaciones"){if(m_Perfiles[var].permiteUsarLiquidaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarFacturacion"){if(m_Perfiles[var].permiteUsarFacturacion()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarArticulos"){if(m_Perfiles[var].permiteUsarArticulos()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarListaPrecios"){if(m_Perfiles[var].permiteUsarListaPrecios()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarClientes"){if(m_Perfiles[var].permiteUsarClientes()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzado"){if(m_Perfiles[var].permiteUsarMenuAvanzado()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarDocumentos"){if(m_Perfiles[var].permiteUsarDocumentos()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarReportes"){if(m_Perfiles[var].permiteUsarReportes()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarCuentaCorriente"){if(m_Perfiles[var].permiteUsarCuentaCorriente()=="1"){_valor=true;}}
+            if(_permiso=="permiteCrearLiquidaciones"){if(m_Perfiles[var].permiteCrearLiquidaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteBorrarLiquidaciones"){if(m_Perfiles[var].permiteBorrarLiquidaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteCerrarLiquidaciones"){if(m_Perfiles[var].permiteCerrarLiquidaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteAutorizarCierreLiquidaciones"){if(m_Perfiles[var].permiteAutorizarCierreLiquidaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteCrearFacturas"){if(m_Perfiles[var].permiteCrearFacturas()=="1"){_valor=true;}}
+            if(_permiso=="permiteBorrarFacturas"){if(m_Perfiles[var].permiteBorrarFacturas()=="1"){_valor=true;}}
+            if(_permiso=="permiteAnularFacturas"){if(m_Perfiles[var].permiteAnularFacturas()=="1"){_valor=true;}}
+            if(_permiso=="permiteCrearClientes"){if(m_Perfiles[var].permiteCrearClientes()=="1"){_valor=true;}}
+            if(_permiso=="permiteBorrarClientes"){if(m_Perfiles[var].permiteBorrarClientes()=="1"){_valor=true;}}
+            if(_permiso=="permiteCrearArticulos"){if(m_Perfiles[var].permiteCrearArticulos()=="1"){_valor=true;}}
+            if(_permiso=="permiteBorrarArticulos"){if(m_Perfiles[var].permiteBorrarArticulos()=="1"){_valor=true;}}
+            if(_permiso=="permiteCrearListaDePrecios"){if(m_Perfiles[var].permiteCrearListaDePrecios()=="1"){_valor=true;}}
+            if(_permiso=="permiteBorrarListaDePrecios"){if(m_Perfiles[var].permiteBorrarListaDePrecios()=="1"){_valor=true;}}
+            if(_permiso=="permiteAutorizarDescuentosArticulo"){if(m_Perfiles[var].permiteAutorizarDescuentosArticulo()=="1"){_valor=true;}}
+            if(_permiso=="permiteAutorizarDescuentosTotal"){if(m_Perfiles[var].permiteAutorizarDescuentosTotal()=="1"){_valor=true;}}
+            if(_permiso=="permiteAutorizarAnulaciones"){if(m_Perfiles[var].permiteAutorizarAnulaciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteExportarAPDF"){if(m_Perfiles[var].permiteExportarAPDF()=="1"){_valor=true;}}
+            if(_permiso=="permiteReimprimirFacturas"){if(m_Perfiles[var].permiteReimprimirFacturas()=="1"){_valor=true;}}
+            if(_permiso=="permiteCambioRapidoDePrecios"){if(m_Perfiles[var].permiteCambioRapidoDePrecios()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoConfiguraciones"){if(m_Perfiles[var].permiteUsarMenuAvanzadoConfiguraciones()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoIvas"){if(m_Perfiles[var].permiteUsarMenuAvanzadoIvas()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoTiposDeDocumentos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoTiposDeDocumentos()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoLocalidades"){if(m_Perfiles[var].permiteUsarMenuAvanzadoLocalidades()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoBancos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoBancos()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoPagoDeFinacieras"){if(m_Perfiles[var].permiteUsarMenuAvanzadoPagoDeFinacieras()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoCuentasBancarias"){if(m_Perfiles[var].permiteUsarMenuAvanzadoCuentasBancarias()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoRubros"){if(m_Perfiles[var].permiteUsarMenuAvanzadoRubros()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoMonedas"){if(m_Perfiles[var].permiteUsarMenuAvanzadoMonedas()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoPermisos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoPermisos()=="1"){_valor=true;}}
+            if(_permiso=="permiteUsarMenuAvanzadoUsuarios"){if(m_Perfiles[var].permiteUsarMenuAvanzadoUsuarios()=="1"){_valor=true;}}
+
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -485,7 +544,6 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _idUsuario,QString _permiso) 
     if(conexion){
         QSqlQuery query(Database::connect());
 
-        QString valorPerfil=retornaCodigoPerfil(_idUsuario);
 
         if(valorPerfil=="0")
             return false;
@@ -512,40 +570,9 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _idUsuario,QString _permiso) 
         }else{
             return false;
         }
-    }else{return false;}
+    }else{return false;}*/
 }
 
-QString ModuloPerfiles::retornaCodigoPerfil(QString _idUsuario) const{
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select codigoPerfil from Usuarios where idUsuario='"+_idUsuario+"'")) {
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "0";
-                }
-            }else{return "0";}
-
-        }else{
-            return "0";
-        }
-    }else{return "0";}
-
-}
 int ModuloPerfiles::ultimoRegistroDePerfil()const {
     Database::chequeaStatusAccesoMysql();
     bool conexion=true;

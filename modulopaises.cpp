@@ -237,6 +237,15 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloPaises::retornaDescripcionPais(QString _codigoPais) const{
 
+
+    QString _valor="";
+    for (int var = 0; var < m_Paises.size(); ++var) {
+        if(QString::number(m_Paises[var].codigoPais())==_codigoPais){
+            _valor = m_Paises[var].descripcionPais();
+        }
+    }
+    return _valor;
+    /*
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -264,5 +273,5 @@ Database::chequeaStatusAccesoMysql();
         }
     }else{
         return "";
-    }
+    }*/
 }

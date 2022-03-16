@@ -253,7 +253,7 @@ Rectangle {
                             Keys.onReturnPressed: {
 
                                 modeloReportes.limpiarListaReportes()
-                                modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                                modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                                 if(rectPrincipalSubMenu.visible==false){
                                     listview2.forceActiveFocus()
@@ -273,7 +273,7 @@ Rectangle {
 //
 
                                     modeloReportes.limpiarListaReportes()
-                                    modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloListaPerfiles.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                                    modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                                     if(rectPrincipalSubMenu.visible==false){
                                         listview2.forceActiveFocus()

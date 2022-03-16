@@ -94,7 +94,6 @@ public:
 
     Q_INVOKABLE bool retornaSiReportaEstaHabilitadoEnPerfil(QString ,QString ) const;
 
-    Q_INVOKABLE bool retornaReporteActivoPorPerfil(QString ,QString );
 
     Q_INVOKABLE void eliminarReportesPerfil(QString ,QString ) const;
 
