@@ -793,7 +793,7 @@ bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _p
                 if(m_Reportes[var].utilizaCoincidenciaCodigoCliente()=="1"){_valor=true;}
             }
             else if(_permisoReporte=="utilizaOrdenEnReporte"){
-                 if(m_Reportes[var].utilizaOrdenEnReporte()=="1"){_valor=true;}
+                if(m_Reportes[var].utilizaOrdenEnReporte()=="1"){_valor=true;}
             }
             else if(_permisoReporte=="utilizaTipoClasificacionCliente"){
                 if(m_Reportes[var].utilizaTipoClasificacionCliente()=="1"){_valor=true;}
@@ -1085,7 +1085,7 @@ QString ModuloReportes::retornaConfiguracionTipoDeDatoDeColumnaDelReporte(QStrin
 
 QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    QString _valor="TEXTO";
+    QString _valor="-1";
     for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
         if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
 
