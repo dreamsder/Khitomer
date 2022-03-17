@@ -143,27 +143,35 @@ QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoClien
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery q = Database::consultaSql("select descripcionTipoCliente from TipoCliente where codigoTipoCliente='"+_tipoCliente+"'");
-        QSqlRecord rec = q.record();
 
-        if(q.record().count()>0){
-            while (q.next()){
-                return q.value(rec.indexOf("descripcionTipoCliente")).toString();
+
+    if(m_TipoDeClientes.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
             }
-        }else{
-            return "";
         }
+        if(conexion){
+            QSqlQuery q = Database::consultaSql("select descripcionTipoCliente from TipoCliente where codigoTipoCliente='"+_tipoCliente+"'");
+            QSqlRecord rec = q.record();
 
-    }*/
+            if(q.record().count()>0){
+                while (q.next()){
+                    return q.value(rec.indexOf("descripcionTipoCliente")).toString();
+                }
+            }else{
+                return "";
+            }
+
+        }
+    }else{
+        return _valor;
+    }
+
+
+    /*
+   */
 }

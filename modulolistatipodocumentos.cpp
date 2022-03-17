@@ -526,118 +526,137 @@ void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QStr
 
 QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codigoTipoDocumento) const {
 
-    QString _descripcionTipoDocumento="";
+    QString _valor="";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
-            _descripcionTipoDocumento = m_TipoDocumentos[var].descripcionTipoDocumento();
+            _valor = m_TipoDocumentos[var].descripcionTipoDocumento();
         }
     }
-    return _descripcionTipoDocumento;
 
 
-    /*  bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_TipoDocumentos.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionTipoDocumento from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+
+            }else{
+                return "";
+            }
+        }else{return "";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionTipoDocumento from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
 
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else{return "";}
-
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+    /*  */
 }
 
 QString ModuloListaTipoDocumentos::retornaSerieTipoDocumento(QString _codigoTipoDocumento) const {
 
-    QString _valorARetornar="A";
+    QString _valor="A";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
-            _valorARetornar = m_TipoDocumentos[var].serieDocumento();
+            _valor = m_TipoDocumentos[var].serieDocumento();
         }
     }
-    return _valorARetornar;
+
+    if(m_TipoDocumentos.size()==0 && _valor=="A"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select serieDocumento from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "A";
+                    }
+                }else{return "A";}
+            }else{
+                return "A";
+            }
+        }else{return "A";}
+    }else{
+        return _valor;
+    }
 
     /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select serieDocumento from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "A";
-                }
-            }else{return "A";}
-        }else{
-            return "A";
-        }
-    }else{return "A";}*/
+    */
 }
 QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _codigoTipoDocumento) const {
 
-    QString _valorARetornar="A";
+    QString _valor="A";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
-            _valorARetornar = m_TipoDocumentos[var].descripcionCodigoBarrasADemanda();
+            _valor = m_TipoDocumentos[var].descripcionCodigoBarrasADemanda();
         }
     }
-    return _valorARetornar;
 
-    /* bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_TipoDocumentos.size()==0 && _valor=="A"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionCodigoBarrasADemanda from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
+        }else{return "";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionCodigoBarrasADemanda from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else{return "";}
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+    /* */
 }
 
 
@@ -722,42 +741,49 @@ bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoD
 
         }
     }
-    return _valorARetornar;
+
+
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select  "+_permisoDocumento+"  from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
+
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+
+                        if(query.value(0).toString()=="1"){
+                            return true;
+                        }else{
+                            return  false;
+                        }
+                    }else{
+                        return false;
+                    }
+                }else{return false;}
+
+
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valorARetornar;
+    }
+
 
     /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select  "+_permisoDocumento+"  from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
-
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-
-                    if(query.value(0).toString()=="1"){
-                        return true;
-                    }else{
-                        return  false;
-                    }
-                }else{
-                    return false;
-                }
-            }else{return false;}
-
-
-        }else{
-            return false;
-        }
-    }else{return false;}*/
+    */
 }
 
 
@@ -993,37 +1019,44 @@ int ModuloListaTipoDocumentos::cantidadMaximaLineasTipoDocumento(QString _codigo
             _valorARetornar = m_TipoDocumentos[var].cantidadMaximaLineasEnDocumento().toInt();
         }
     }
-    return _valorARetornar;
 
-    /*
-    Database::chequeaStatusAccesoMysql();
-    bool conexion=true;
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==0){
+        Database::chequeaStatusAccesoMysql();
+        bool conexion=true;
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select cantidadMaximaLineasEnDocumento  from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")){
+            if(query.exec("select cantidadMaximaLineasEnDocumento  from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")){
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return query.value(0).toInt();
+                        return query.value(0).toInt();
 
-                }else{
+                    }else{
+                        return 0;
+                    }
+                }else {
                     return 0;
                 }
-            }else {
+            }else{
                 return 0;
             }
-        }else{
-            return 0;
         }
-    }*/
+    }else{
+        return _valorARetornar;
+    }
+
+
+
+    /*
+    */
 }
 
 
@@ -1410,38 +1443,45 @@ QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codig
 
         }
     }
-    return _valorARetornar;
+
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==""){
+        Database::chequeaStatusAccesoMysql();
+        bool conexion=true;
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select "+_permisoDocumento+" from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")){
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else {
+                    return "";
+                }
+            }else{
+                return "";
+            }
+        }
+    }else{
+        return _valorARetornar;
+
+    }
+
 
 
     /*
-    Database::chequeaStatusAccesoMysql();
-    bool conexion=true;
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select "+_campoTipoDocumento+" from TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"' ")){
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else {
-                return "";
-            }
-        }else{
-            return "";
-        }
-    }*/
+    */
 }
 
 

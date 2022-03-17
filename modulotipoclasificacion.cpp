@@ -135,15 +135,15 @@ QString ModuloTipoClasificacion::primerRegistroDeTipoClasificacionEnBase() const
     }
     if(conexion){
         QSqlQuery q = Database::consultaSql("select descripcionTipoClasificacion from TipoClasificacion order by codigoTipoClasificacion asc limit 1");
-            QSqlRecord rec = q.record();
+        QSqlRecord rec = q.record();
 
-            if(q.record().count()>0){
-                while (q.next()){
-                    return q.value(rec.indexOf("descripcionTipoClasificacion")).toString();
-                }
-            }else{
-                return "";
+        if(q.record().count()>0){
+            while (q.next()){
+                return q.value(rec.indexOf("descripcionTipoClasificacion")).toString();
             }
+        }else{
+            return "";
+        }
 
 
 

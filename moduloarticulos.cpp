@@ -405,119 +405,170 @@ QString ModuloArticulos::existeArticulo(QString _codigoArticulo) const {
 
 
 QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) const {
-    bool conexion=true;
 
-    Database::chequeaStatusAccesoMysql();
+    QString _valor="";
 
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    for (int var = 0; var < m_Articulos.size(); ++var) {
+        if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
+
+            _valor=m_Articulos[var].descripcionArticulo() ;
+
         }
     }
 
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
+    if(m_Articulos.size()==0 && _valor==""){
+        bool conexion=true;
 
-        if(query.exec("select descripcionArticulo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        Database::chequeaStatusAccesoMysql();
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
 
-                    return query.value(0).toString();
+        if(conexion){
 
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionArticulo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
 
 
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
+        return _valor;
     }
 }
 
 QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArticulo) const {
 
-
     if(func_configuracionArticulos.retornaValorConfiguracion("MUESTRA_DESCRIPCION_ARTICULO_EXTENDIDA_FACTURACION")=="0"){
         return "";
     }
 
-    bool conexion=true;
+    QString _valor="";
+    for (int var = 0; var < m_Articulos.size(); ++var) {
+        if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
-    Database::chequeaStatusAccesoMysql();
+            _valor=m_Articulos[var].descripcionExtendida() ;
 
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
         }
     }
 
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
+    if(m_Articulos.size()==0 && _valor==""){
 
-        if(query.exec("select descripcionExtendida from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        bool conexion=true;
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+        Database::chequeaStatusAccesoMysql();
 
-                    return query.value(0).toString();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
 
-                }else{
-                    return "";
-                }
-            }else{return "";}
+        if(conexion){
+
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionExtendida from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
 
 
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
+
     }else{
-        return "";
+        return _valor;
     }
+
+
+
 }
 
 
 bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    bool _valor=false;
+    for (int var = 0; var < m_Articulos.size(); ++var) {
+        if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
+            if(m_Articulos[var].activo()=="1"){
+                _valor=true;
+            }
         }
     }
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select activo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+    if(m_Articulos.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+            QSqlQuery query(Database::connect());
 
-                    if(query.value(0).toString()=="1"){
-                        return true;
+            if(query.exec("select activo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        if(query.value(0).toString()=="1"){
+                            return true;
+                        }else{
+                            return false;
+                        }
                     }else{
                         return false;
                     }
-                }else{
-                    return false;
-                }
-            }else{return false;}
+                }else{return false;}
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
     }else{
-        return false;
+        return _valor;
     }
+
+
 }
 
 qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) const {
@@ -676,39 +727,54 @@ bool ModuloArticulos::reemplazaCantidadArticulosSinStock(QString _codigoArticulo
     }
 }
 qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArticulo) const {
-    bool conexion=true;
 
-    Database::chequeaStatusAccesoMysql();
+    qlonglong _valor=0;
+    for (int var = 0; var < m_Articulos.size(); ++var) {
+        if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+            _valor= m_Articulos[var].cantidadMinimaStock().toLongLong();
+
         }
     }
 
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
+    if(m_Articulos.size()==0 && _valor==0){
+        bool conexion=true;
 
-        if(query.exec("select cantidadMinimaStock from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        Database::chequeaStatusAccesoMysql();
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
 
-                    return query.value(0).toLongLong();
+        if(conexion){
 
-                }else{
-                    return 0;
-                }
-            }else{return 0;}
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select cantidadMinimaStock from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toLongLong();
+
+                    }else{
+                        return 0;
+                    }
+                }else{return 0;}
 
 
+            }else{
+                return 0;
+            }
         }else{
             return 0;
         }
     }else{
-        return 0;
+        return _valor;
     }
 }
 
@@ -729,7 +795,7 @@ bool ModuloArticulos::retornaSiPuedeVenderSinStock(qlonglong _cantidad, QString 
 
 
 
-        if(cantidadStockPrevisto<0){            
+        if(cantidadStockPrevisto<0){
             func.mensajeAdvertenciaOk("Atención:\n\nNo hay Stock(Previsto) suficiente para agregar el artículo a la venta.");
             return false;
         }else{
@@ -741,40 +807,55 @@ bool ModuloArticulos::retornaSiPuedeVenderSinStock(qlonglong _cantidad, QString 
     }
 }
 QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) const {
-    bool conexion=true;
 
-    Database::chequeaStatusAccesoMysql();
+    QString _valor="0";
+    for (int var = 0; var < m_Articulos.size(); ++var) {
+        if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+            _valor= QString::number(m_Articulos[var].codigoTipoGarantia());
+
         }
     }
 
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
+     if(m_Articulos.size()==0 && _valor=="0"){
+         bool conexion=true;
 
-        if(query.exec("select codigoTipoGarantia from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+         Database::chequeaStatusAccesoMysql();
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+         if(!Database::connect().isOpen()){
+             if(!Database::connect().open()){
+                 qDebug() << "No conecto";
+                 conexion=false;
+             }
+         }
 
-                    return query.value(0).toString();
+         if(conexion){
 
-                }else{
-                    return "0";
-                }
-            }else{return "0";}
+             QSqlQuery query(Database::connect());
+
+             if(query.exec("select codigoTipoGarantia from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+
+                 if(query.first()){
+                     if(query.value(0).toString()!=""){
+
+                         return query.value(0).toString();
+
+                     }else{
+                         return "0";
+                     }
+                 }else{return "0";}
 
 
-        }else{
-            return "0";
-        }
-    }else{
-        return "0";
-    }
+             }else{
+                 return "0";
+             }
+         }else{
+             return "0";
+         }
+     }else{
+         return _valor;
+     }
 }
 
 

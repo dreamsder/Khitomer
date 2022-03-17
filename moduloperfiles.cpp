@@ -450,41 +450,45 @@ QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
             _valor = m_Perfiles[var].descripcionPerfil();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Perfiles.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionPerfil from PerfilesUsuarios where codigoPerfil='"+_codigoPerfil+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+
+
+            }else{
+                return "";
+            }
+        }else{return "";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select descripcionPerfil from PerfilesUsuarios where codigoPerfil='"+_codigoPerfil+"'")) {
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else{return "";}
-
-
-        }else{
-            return "";
-        }
-    }else{return "";}*/
 }
 
 bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permiso) const{
 
-   /// QString valorPerfil=retornaCodigoPerfil(_idUsuario);
+    /// QString valorPerfil=retornaCodigoPerfil(_idUsuario);
 
     bool _valor=false;
     for (int var = 0; var < m_Perfiles.size(); ++var) {
@@ -531,46 +535,53 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permis
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Perfiles.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
 
-        if(valorPerfil=="0")
-            return false;
+            if(_codigoPerfil=="0")
+                return false;
 
-        if(query.exec("select "+_permiso+" from PerfilesUsuarios where codigoPerfil ='"+valorPerfil+"'" )) {
+            if(query.exec("select "+_permiso+" from PerfilesUsuarios where codigoPerfil ='"+_codigoPerfil+"'" )) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    if(query.value(0).toString()=="0"){
-                        return false;
-                    }else if(query.value(0).toString()=="1"){
+                        if(query.value(0).toString()=="0"){
+                            return false;
+                        }else if(query.value(0).toString()=="1"){
 
-                        return true;
+                            return true;
+                        }else{
+
+                            return false;
+                        }
                     }else{
-
                         return false;
                     }
-                }else{
-                    return false;
-                }
-            }else{return false;}
+                }else{return false;}
 
-        }else{
-            return false;
-        }
-    }else{return false;}*/
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valor;
+    }
+
+    /*
+   */
 }
 
 int ModuloPerfiles::ultimoRegistroDePerfil()const {

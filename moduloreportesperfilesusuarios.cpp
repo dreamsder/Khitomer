@@ -97,34 +97,37 @@ bool ModuloReportesPerfilesUsuarios::retornaReporteActivoPorPerfil(QString _codi
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_ReportesPerfilesUsuarios.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("SELECT codigoReporte FROM ReportesPerfilesUsuarios where codigoReporte='"+_codigoReporte+"' and codigoPerfil='"+_codigoPerfil+"' ")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return true;
+
+                    }else{
+                        return false;
+                    }
+                }else{return false;}
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("SELECT codigoReporte FROM ReportesPerfilesUsuarios where codigoReporte='"+_codigoReporte+"' and codigoPerfil='"+_codigoPerfil+"' ")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return true;
-
-                }else{
-                    return false;
-                }
-            }else{return false;}
-        }else{
-            return false;
-        }
-    }else{return false;}*/
-
 }
 
 
@@ -150,9 +153,9 @@ void ModuloReportesPerfilesUsuarios::buscarReportesPerfilesUsuarios(){
 
             while (q.next()){
                 ModuloReportesPerfilesUsuarios::agregar(ReportesPerfilesUsuarios(
-                                                                                    q.value(rec.indexOf("codigoReporte")).toString(),
-                                                                                    q.value(rec.indexOf("codigoPerfil")).toString()
-                                                                                    ));
+                                                            q.value(rec.indexOf("codigoReporte")).toString(),
+                                                            q.value(rec.indexOf("codigoPerfil")).toString()
+                                                            ));
             }
         }
     }

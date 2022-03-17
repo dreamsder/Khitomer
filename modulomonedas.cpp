@@ -321,82 +321,94 @@ bool ModuloMonedas::eliminarMonedas(QString _codigoMoneda) const {
 
 QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
 
-    QString _descripcionMoneda="";
+    QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
-            _descripcionMoneda = m_Monedas[var].descripcionMoneda();
+            _valor = m_Monedas[var].descripcionMoneda();
         }
     }
-    return _descripcionMoneda;
 
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_Monedas.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
+            if(query.exec("select descripcionMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 
 QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
 
-    QString _simboloMoneda="";
+    QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
-            _simboloMoneda = m_Monedas[var].simboloMoneda();
+            _valor = m_Monedas[var].simboloMoneda();
         }
     }
-    return _simboloMoneda;
 
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_Monedas.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select simboloMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
+            if(query.exec("select simboloMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return query.value(0).toString();
+                        return query.value(0).toString();
 
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
     bool conexion=true;
@@ -431,45 +443,45 @@ QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
 
 double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
 
+    double _valor=1;
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
-            return m_Monedas[var].cotizacionMoneda();
-        }else{
-            return 1;
+            _valor = m_Monedas[var].cotizacionMoneda();
         }
     }
 
-
-
-    /*
-
-     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Monedas.size()==0 && _valor==1){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select cotizacionMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+            if(query.exec("select cotizacionMoneda from Monedas where codigoMoneda='"+_codigoMoneda+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return query.value(0).toDouble();
+                        return query.value(0).toDouble();
 
+                    }else{
+                        return 1;
+                    }
                 }else{
                     return 1;
                 }
             }else{
                 return 1;
             }
-        }else{
-            return 1;
-        }
-    }else{return 1;}*/
+        }else{return 1;}
+    }else{
+        return _valor;
+    }
+
 
 }
 
@@ -523,42 +535,46 @@ int ModuloMonedas::actualizarCotizacion(QString _codigoMoneda, QString _cotizaci
 }
 QString ModuloMonedas::retornaMonedaReferenciaSistema() const{
 
-    QString _codigoMoneda="";
+    QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(m_Monedas[var].esMonedaReferenciaSistema()=="1"){
-            _codigoMoneda= QString::number(m_Monedas[var].codigoMoneda());
+            _valor= QString::number(m_Monedas[var].codigoMoneda());
         }
     }
-    return _codigoMoneda;
-    /*
 
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Monedas.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select codigoMoneda from Monedas where esMonedaReferenciaSistema=1 limit 1")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+            if(query.exec("select codigoMoneda from Monedas where esMonedaReferenciaSistema=1 limit 1")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return query.value(0).toString();
+                        return query.value(0).toString();
 
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+
 }
 
 

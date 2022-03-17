@@ -32,6 +32,8 @@ Rectangle {
     color: "#00000000"
 
 
+
+
     property alias botonBuscarTextoVisible : imageBuscar.visible
     property alias textoTitulo: txtTitulo.text
     property alias textoComboBox: txtTextoSeleccionado.text
@@ -82,7 +84,7 @@ Rectangle {
         rectPrincipalComboBoxAparecerYIn.stop()
         mouse_area1.enabled=true
         rectPrincipalComboBox.visible=false
-        modeloReportes.limpiarListaReportes()
+        modeloReportesDinamicos.limpiarListaReportes()
         rectPrincipalSubMenu.visible=false
         txtTextoSeleccionado.enabled=true
 
@@ -252,8 +254,8 @@ Rectangle {
 
                             Keys.onReturnPressed: {
 
-                                modeloReportes.limpiarListaReportes()
-                                modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                                modeloReportesDinamicos.limpiarListaReportes()
+                                modeloReportesDinamicos.buscarReportesSegunMenu("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                                 if(rectPrincipalSubMenu.visible==false){
                                     listview2.forceActiveFocus()
@@ -272,8 +274,8 @@ Rectangle {
 
 //
 
-                                    modeloReportes.limpiarListaReportes()
-                                    modeloReportes.buscarReportes("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                                    modeloReportesDinamicos.limpiarListaReportes()
+                                    modeloReportesDinamicos.buscarReportesSegunMenu("codigoMenuReporte=",codigoMenuReporte,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
 
                                     if(rectPrincipalSubMenu.visible==false){
                                         listview2.forceActiveFocus()
@@ -377,7 +379,7 @@ Rectangle {
             anchors.right: parent.right
 
             onClic: {
-                modeloReportes.limpiarListaReportes()
+                modeloReportesDinamicos.limpiarListaReportes()
                 cerrarComboBox()
 
             }
@@ -614,7 +616,7 @@ Rectangle {
         duration: 50
     }
 
-    Rectangle {
+    Rectangle {        
         id: rectPrincipalSubMenu
         x: 501
         y: 49
@@ -632,7 +634,6 @@ Rectangle {
             y: -34
             color: "#1e646262"
             radius: 6
-            //
             anchors.fill: parent
             anchors.topMargin: 5
             visible: true
@@ -647,6 +648,7 @@ Rectangle {
             clip: true
             anchors.fill: parent
             ListView {
+
                 id: listview2
                 x: 0
                 y: 30
@@ -656,12 +658,15 @@ Rectangle {
                 anchors.topMargin: 30
                 anchors.rightMargin: 20
                 anchors.bottomMargin: 10
+
                 delegate: FocusScope {
                     x: childrenRect.x
                     y: childrenRect.y
                     width: childrenRect.width
                     height: childrenRect.height
                     Rectangle {
+
+
                         id: rect2
                         width: rectPrincipalSubMenu.width
                         height: texto2.implicitHeight
@@ -680,7 +685,7 @@ Rectangle {
                                 if(consultaSqlGraficas==""){
                                     false
                                 }else{
-                                    modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaGraficas")
+                                    modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaGraficas")                                    
                                 }
                             }
                             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Grafica.png"
@@ -808,10 +813,11 @@ Rectangle {
                         }
                     }
                 }
-                model: modeloReportes
+                model: modeloReportesDinamicos
                 z: 1
                 focus: true
                 anchors.leftMargin: 0
+
             }
 
             BotonBarraDeHerramientas {

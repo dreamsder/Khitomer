@@ -68,7 +68,7 @@ void ModuloBancos::limpiarListaBancos(){
 void ModuloBancos::buscarBancos(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -125,24 +125,26 @@ QString ModuloBancos::retornaDescripcionBanco(QString _codigoBanco) const{
 
         }
     }
-    return _valor;
 
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Bancos.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionBanco from Bancos where codigoBanco='"+_codigoBanco+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+            if(query.exec("select descripcionBanco from Bancos where codigoBanco='"+_codigoBanco+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
@@ -153,8 +155,12 @@ Database::chequeaStatusAccesoMysql();
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+
+    /*
+   */
 }
 
 QString ModuloBancos::retornaUltimoCodigoBanco() const{
@@ -233,7 +239,7 @@ int ModuloBancos::insertarBanco(QString _codigoBanco,QString _nombreBanco){
 
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -247,29 +253,29 @@ Database::chequeaStatusAccesoMysql();
 
 
 
-            if(query.exec("select codigoBanco from Bancos where codigoBanco='"+_codigoBanco+"'")) {
+        if(query.exec("select codigoBanco from Bancos where codigoBanco='"+_codigoBanco+"'")) {
 
-                if(query.first()){
-                    if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                        if(query.exec("update Bancos set descripcionBanco='"+_nombreBanco+"'  where codigoBanco='"+_codigoBanco+"'")){
-                            return 2;
-                        }else{
-                            return -2;
-                        }
+                    if(query.exec("update Bancos set descripcionBanco='"+_nombreBanco+"'  where codigoBanco='"+_codigoBanco+"'")){
+                        return 2;
                     }else{
-                        return -4;
+                        return -2;
                     }
                 }else{
-                    if(query.exec("insert INTO Bancos (codigoBanco,descripcionBanco) values('"+_codigoBanco+"','"+_nombreBanco+"')")){
-                        return 1;
-                    }else{
-                        return -3;
-                    }
+                    return -4;
                 }
             }else{
-                return -4;
+                if(query.exec("insert INTO Bancos (codigoBanco,descripcionBanco) values('"+_codigoBanco+"','"+_nombreBanco+"')")){
+                    return 1;
+                }else{
+                    return -3;
+                }
             }
+        }else{
+            return -4;
+        }
     }else{
         return -1;
     }

@@ -129,33 +129,36 @@ bool ModuloMediosDePago::utilizaCuotas(QString _codigoMedioPago) const{
             }
         }
     }
-    return _valor;
 
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_MediosDePago.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()=="2"){
+                        return true;
+
+                    }else{
+                        return false;
+                    }
+                }else{return false;}
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
-
-        if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()=="2"){
-                    return true;
-
-                }else{
-                    return false;
-                }
-            }else{return false;}
-        }else{
-            return false;
-        }
-    }else{return false;}*/
 }
 bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
     bool _valor=false;
@@ -167,36 +170,42 @@ bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
             }
         }
     }
-    return _valor;
 
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_MediosDePago.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()=="2" || query.value(0).toString()=="3"){
+            if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()=="2" || query.value(0).toString()=="3"){
 
-                    return true;
+                        return true;
 
+                    }else{
+                        return false;
+                    }
                 }else{
                     return false;
                 }
             }else{
                 return false;
             }
-        }else{
-            return false;
-        }
-    }else{return false;}*/
+        }else{return false;}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
 
@@ -209,35 +218,42 @@ bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
             }
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_MediosDePago.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()=="4"){
+            if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()=="4"){
 
-                    return true;
+                        return true;
 
+                    }else{
+                        return false;
+                    }
                 }else{
                     return false;
                 }
             }else{
                 return false;
             }
-        }else{
-            return false;
-        }
-    }else{return false;}*/
+        }else{return false;}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
 
@@ -250,33 +266,42 @@ bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
             }
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_MediosDePago.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()=="3"){
+
+                        return true;
+
+                    }else{
+                        return false;
+                    }
+                }else{return false;}
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select codigoTipoMedioDePago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()=="3"){
 
-                    return true;
 
-                }else{
-                    return false;
-                }
-            }else{return false;}
-        }else{
-            return false;
-        }
-    }else{return false;}*/
+    /*
+    */
 }
 
 QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPago) const{
@@ -286,33 +311,40 @@ QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPa
             _valor=m_MediosDePago[var].descripcionMedioPago();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_MediosDePago.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionMedioPago  from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
+        }else{return "";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionMedioPago  from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else{return "";}
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+    /*
+    */
 }
 
 QString ModuloMediosDePago::retornaMonedaMedioDePago(QString _codigoMedioPago) const{
@@ -325,33 +357,41 @@ QString ModuloMediosDePago::retornaMonedaMedioDePago(QString _codigoMedioPago) c
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_MediosDePago.size()==0 && _valor==""){
+        bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select monedaMedioPago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
+        }else{return "";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select monedaMedioPago from MediosDePago where codigoMedioPago='"+_codigoMedioPago+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
 
-                    return query.value(0).toString();
-
-                }else{
-                    return "";
-                }
-            }else{return "";}
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+    /*
+    */
 }
 
 

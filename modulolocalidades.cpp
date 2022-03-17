@@ -137,36 +137,40 @@ QString ModuloLocalidades::retornaDescripcionLocalidad(QString _codigoPais,QStri
             _valor = m_Localidades[var].descripcionLocalidad();
         }
     }
-    return _valor;
 
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Localidades.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionLocalidad from Localidades where codigoPais='"+_codigoPais+"' and codigoDepartamento='"+_codigoDepartamento+"' and codigoLocalidad='"+_codigoLocalidad+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            if(query.exec("select descripcionLocalidad from Localidades where codigoPais='"+_codigoPais+"' and codigoDepartamento='"+_codigoDepartamento+"' and codigoLocalidad='"+_codigoLocalidad+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+
 }
 QString ModuloLocalidades::retornaUltimoCodigoLocalidad(QString _codigoPais,QString _codigoDepartamento) const{
     bool conexion=true;

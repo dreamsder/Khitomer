@@ -56,6 +56,8 @@ http://www.codeproject.com/Articles/42504/ExcelFormat-Library
 
 #include <Utilidades/moduloconfiguracion.h>
 
+#include <moduloreportesconfiguracion.h>
+
 ModuloConfiguracion func_configuracionReportes;
 
 
@@ -63,7 +65,7 @@ Funciones funcion_reporte;
 
 ModuloReportesMenu func_moduloReportesMenu;
 
-
+ModuloReportesConfiguracion moduloReportesConfiguracion;
 
 using namespace YExcel;
 
@@ -80,15 +82,102 @@ ModuloReportes::ModuloReportes(QObject *parent)
     roles[ConsultaSqlRole] = "consultaSql";
     roles[ConsultaSqlGraficasRole] = "consultaSqlGraficas";
     roles[ConsultaSqlCabezalRole] = "consultaSqlCabezal";
+    roles[utilizaCodigoClienteRole]="utilizaCodigoCliente";
+    roles[utilizaCodigoProveedorRole]="utilizaCodigoProveedor";
+    roles[utilizaCodigoArticuloRole]="utilizaCodigoArticulo";
+    roles[utilizaCantidadItemRankingRole]="utilizaCantidadItemRanking";
+    roles[utilizaFechaRole]="utilizaFecha";
+    roles[utilizaFechaDesdeRole]="utilizaFechaDesde";
+    roles[utilizaFechaHastaRole]="utilizaFechaHasta";
+    roles[utilizaVendedorRole]="utilizaVendedor";
+    roles[utilizaTipoDocumentoRole]="utilizaTipoDocumento";
+    roles[utilizaSubRubrosRole]="utilizaSubRubros";
+    roles[utilizaCodigoLiquidacionCajaRole]="utilizaCodigoLiquidacionCaja";
+    roles[utilizaRubrosRole]="utilizaRubros";
+    roles[utilizaDesdeCodigoArticuloRole]="utilizaDesdeCodigoArticulo";
+    roles[utilizaHastaCodigoArticuloRole]="utilizaHastaCodigoArticulo";
+    roles[utilizaListaPrecioRole]="utilizaListaPrecio";
+    roles[utilizaGraficasRole]="utilizaGraficas";
+    roles[utilizaCuentaBancariaRole]="utilizaCuentaBancaria";
+    roles[utilizaMonedasRole]="utilizaMonedas";
+    roles[utilizaPaisRole]="utilizaPais";
+    roles[utilizaDepartamentoRole]="utilizaDepartamento";
+    roles[utilizaLocalidadRole]="utilizaLocalidad";
+    roles[utilizaCoincidenciaCodigoClienteRole]="utilizaCoincidenciaCodigoCliente";
+    roles[utilizaOrdenEnReporteRole]="utilizaOrdenEnReporte";
+    roles[utilizaTipoClasificacionClienteRole]="utilizaTipoClasificacionCliente";
+    roles[utilizaListaPrecio2Role]="utilizaListaPrecio2";
+    roles[utilizaProcedenciaEnReporteRole]="utilizaProcedenciaEnReporte";
+    roles[utilizaAbrirDocumentosRole]="utilizaAbrirDocumentos";
 
     setRoleNames(roles);
+
+
 }
 
 
 Reportes::Reportes(const qlonglong &codigoReporte, const int &codigoMenuReporte,const QString &descripcionReporte,const QString &consultaSql,const QString &consultaSqlGraficas
-                   ,const QString &consultaSqlCabezal)
+                   ,const QString &consultaSqlCabezal,
+                   const QString &utilizaCodigoCliente,
+                   const QString &utilizaCodigoProveedor,
+                   const QString &utilizaCodigoArticulo,
+                   const QString &utilizaCantidadItemRanking,
+                   const QString &utilizaFecha,
+                   const QString &utilizaFechaDesde,
+                   const QString &utilizaFechaHasta,
+                   const QString &utilizaVendedor,
+                   const QString &utilizaTipoDocumento,
+                   const QString &utilizaSubRubros,
+                   const QString &utilizaCodigoLiquidacionCaja,
+                   const QString &utilizaRubros,
+                   const QString &utilizaDesdeCodigoArticulo,
+                   const QString &utilizaHastaCodigoArticulo,
+                   const QString &utilizaListaPrecio,
+                   const QString &utilizaGraficas,
+                   const QString &utilizaCuentaBancaria,
+                   const QString &utilizaMonedas,
+                   const QString &utilizaPais,
+                   const QString &utilizaDepartamento,
+                   const QString &utilizaLocalidad,
+                   const QString &utilizaCoincidenciaCodigoCliente,
+                   const QString &utilizaOrdenEnReporte,
+                   const QString &utilizaTipoClasificacionCliente,
+                   const QString &utilizaListaPrecio2,
+                   const QString &utilizaProcedenciaEnReporte,
+                   const QString &utilizaAbrirDocumentos
+
+
+
+                   )
     : m_codigoReporte(codigoReporte), m_codigoMenuReporte(codigoMenuReporte), m_descripcionReporte(descripcionReporte), m_consultaSql(consultaSql), m_consultaSqlGraficas(consultaSqlGraficas)
-    , m_consultaSqlCabezal(consultaSqlCabezal)
+    , m_consultaSqlCabezal(consultaSqlCabezal),
+      m_utilizaCodigoCliente(utilizaCodigoCliente),
+      m_utilizaCodigoProveedor(utilizaCodigoProveedor),
+      m_utilizaCodigoArticulo(utilizaCodigoArticulo),
+      m_utilizaCantidadItemRanking(utilizaCantidadItemRanking),
+      m_utilizaFecha(utilizaFecha),
+      m_utilizaFechaDesde(utilizaFechaDesde),
+      m_utilizaFechaHasta(utilizaFechaHasta),
+      m_utilizaVendedor(utilizaVendedor),
+      m_utilizaTipoDocumento(utilizaTipoDocumento),
+      m_utilizaSubRubros(utilizaSubRubros),
+      m_utilizaCodigoLiquidacionCaja(utilizaCodigoLiquidacionCaja),
+      m_utilizaRubros(utilizaRubros),
+      m_utilizaDesdeCodigoArticulo(utilizaDesdeCodigoArticulo),
+      m_utilizaHastaCodigoArticulo(utilizaHastaCodigoArticulo),
+      m_utilizaListaPrecio(utilizaListaPrecio),
+      m_utilizaGraficas(utilizaGraficas),
+      m_utilizaCuentaBancaria(utilizaCuentaBancaria),
+      m_utilizaMonedas(utilizaMonedas),
+      m_utilizaPais(utilizaPais),
+      m_utilizaDepartamento(utilizaDepartamento),
+      m_utilizaLocalidad(utilizaLocalidad),
+      m_utilizaCoincidenciaCodigoCliente(utilizaCoincidenciaCodigoCliente),
+      m_utilizaOrdenEnReporte(utilizaOrdenEnReporte),
+      m_utilizaTipoClasificacionCliente(utilizaTipoClasificacionCliente),
+      m_utilizaListaPrecio2(utilizaListaPrecio2),
+      m_utilizaProcedenciaEnReporte(utilizaProcedenciaEnReporte),
+      m_utilizaAbrirDocumentos(utilizaAbrirDocumentos)
 {
 }
 
@@ -116,6 +205,63 @@ QString Reportes::consultaSqlCabezal() const
 {
     return m_consultaSqlCabezal;
 }
+QString Reportes::utilizaCodigoCliente()const{
+    return m_utilizaCodigoCliente;}
+QString Reportes::utilizaCodigoProveedor()const{
+    return m_utilizaCodigoProveedor;}
+QString Reportes::utilizaCodigoArticulo()const{
+    return m_utilizaCodigoArticulo;}
+QString Reportes::utilizaCantidadItemRanking()const{
+    return m_utilizaCantidadItemRanking;}
+QString Reportes::utilizaFecha()const{
+    return m_utilizaFecha;}
+QString Reportes::utilizaFechaDesde()const{
+    return m_utilizaFechaDesde;}
+QString Reportes::utilizaFechaHasta()const{
+    return m_utilizaFechaHasta;}
+QString Reportes::utilizaVendedor()const{
+    return m_utilizaVendedor;}
+QString Reportes::utilizaTipoDocumento()const{
+    return m_utilizaTipoDocumento;}
+QString Reportes::utilizaSubRubros()const{
+    return m_utilizaSubRubros;}
+QString Reportes::utilizaCodigoLiquidacionCaja()const{
+    return m_utilizaCodigoLiquidacionCaja;}
+QString Reportes::utilizaRubros()const{
+    return m_utilizaRubros;}
+QString Reportes::utilizaDesdeCodigoArticulo()const{
+    return m_utilizaDesdeCodigoArticulo;}
+QString Reportes::utilizaHastaCodigoArticulo()const{
+    return m_utilizaHastaCodigoArticulo;}
+QString Reportes::utilizaListaPrecio()const{
+    return m_utilizaListaPrecio;}
+QString Reportes::utilizaGraficas()const{
+    return m_utilizaGraficas;}
+QString Reportes::utilizaCuentaBancaria()const{
+    return m_utilizaCuentaBancaria;}
+QString Reportes::utilizaMonedas()const{
+    return m_utilizaMonedas;}
+QString Reportes::utilizaPais()const{
+    return m_utilizaPais;}
+QString Reportes::utilizaDepartamento()const{
+    return m_utilizaDepartamento;}
+QString Reportes::utilizaLocalidad()const{
+    return m_utilizaLocalidad;}
+QString Reportes::utilizaCoincidenciaCodigoCliente()const{
+    return m_utilizaCoincidenciaCodigoCliente;}
+QString Reportes::utilizaOrdenEnReporte()const{
+    return m_utilizaOrdenEnReporte;}
+QString Reportes::utilizaTipoClasificacionCliente()const{
+    return m_utilizaTipoClasificacionCliente;}
+QString Reportes::utilizaListaPrecio2()const{
+    return m_utilizaListaPrecio2;}
+QString Reportes::utilizaProcedenciaEnReporte()const{
+    return m_utilizaProcedenciaEnReporte;}
+QString Reportes::utilizaAbrirDocumentos()const{
+    return m_utilizaAbrirDocumentos;}
+
+
+
 
 
 void ModuloReportes::agregarReportes(const Reportes &reportes)
@@ -130,6 +276,8 @@ void ModuloReportes::limpiarListaReportes(){
 }
 
 void ModuloReportes::buscarReportes(QString campo, QString datoABuscar,QString _codigoPerfil){
+
+    moduloReportesConfiguracion.buscarReportesConfiguracion();
 
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -161,7 +309,34 @@ void ModuloReportes::buscarReportes(QString campo, QString datoABuscar,QString _
                                                              , q.value(rec.indexOf("descripcionReporte")).toString()
                                                              , q.value(rec.indexOf("consultaSql")).toString()
                                                              , q.value(rec.indexOf("consultaSqlGraficas")).toString()
-                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoProveedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaCantidadItemRanking")).toString(),
+                                                             q.value(rec.indexOf("utilizaFecha")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaDesde")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaHasta")).toString(),
+                                                             q.value(rec.indexOf("utilizaVendedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoDocumento")).toString(),
+                                                             q.value(rec.indexOf("utilizaSubRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoLiquidacionCaja")).toString(),
+                                                             q.value(rec.indexOf("utilizaRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaDesdeCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaHastaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio")).toString(),
+                                                             q.value(rec.indexOf("utilizaGraficas")).toString(),
+                                                             q.value(rec.indexOf("utilizaCuentaBancaria")).toString(),
+                                                             q.value(rec.indexOf("utilizaMonedas")).toString(),
+                                                             q.value(rec.indexOf("utilizaPais")).toString(),
+                                                             q.value(rec.indexOf("utilizaDepartamento")).toString(),
+                                                             q.value(rec.indexOf("utilizaLocalidad")).toString(),
+                                                             q.value(rec.indexOf("utilizaCoincidenciaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaOrdenEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoClasificacionCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio2")).toString(),
+                                                             q.value(rec.indexOf("utilizaProcedenciaEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaAbrirDocumentos")).toString()
                                                              ));
                 }
             }
@@ -178,13 +353,152 @@ void ModuloReportes::buscarReportes(QString campo, QString datoABuscar,QString _
                                                              , q.value(rec.indexOf("descripcionReporte")).toString()
                                                              , q.value(rec.indexOf("consultaSql")).toString()
                                                              , q.value(rec.indexOf("consultaSqlGraficas")).toString()
-                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoProveedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaCantidadItemRanking")).toString(),
+                                                             q.value(rec.indexOf("utilizaFecha")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaDesde")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaHasta")).toString(),
+                                                             q.value(rec.indexOf("utilizaVendedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoDocumento")).toString(),
+                                                             q.value(rec.indexOf("utilizaSubRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoLiquidacionCaja")).toString(),
+                                                             q.value(rec.indexOf("utilizaRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaDesdeCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaHastaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio")).toString(),
+                                                             q.value(rec.indexOf("utilizaGraficas")).toString(),
+                                                             q.value(rec.indexOf("utilizaCuentaBancaria")).toString(),
+                                                             q.value(rec.indexOf("utilizaMonedas")).toString(),
+                                                             q.value(rec.indexOf("utilizaPais")).toString(),
+                                                             q.value(rec.indexOf("utilizaDepartamento")).toString(),
+                                                             q.value(rec.indexOf("utilizaLocalidad")).toString(),
+                                                             q.value(rec.indexOf("utilizaCoincidenciaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaOrdenEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoClasificacionCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio2")).toString(),
+                                                             q.value(rec.indexOf("utilizaProcedenciaEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaAbrirDocumentos")).toString()
                                                              ));
                 }
             }
         }
     }
 }
+
+void ModuloReportes::buscarReportesSegunMenu(QString campo, QString datoABuscar,QString _codigoPerfil){
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+
+
+
+        QSqlQuery q;
+        QSqlRecord rec;
+
+        if(func_moduloReportesMenu.listaCodigoMenusPorPerfil(_codigoPerfil)==""){
+
+            q = Database::consultaSql("select * from Reportes where "+campo+"'"+datoABuscar+"' order by descripcionReporte");
+            rec = q.record();
+            ModuloReportes::reset();
+            if(q.record().count()>0){
+
+                while (q.next()){
+                    ModuloReportes::agregarReportes(Reportes(q.value(rec.indexOf("codigoReporte")).toLongLong()
+                                                             , q.value(rec.indexOf("codigoMenuReporte")).toInt()
+                                                             , q.value(rec.indexOf("descripcionReporte")).toString()
+                                                             , q.value(rec.indexOf("consultaSql")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlGraficas")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoProveedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaCantidadItemRanking")).toString(),
+                                                             q.value(rec.indexOf("utilizaFecha")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaDesde")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaHasta")).toString(),
+                                                             q.value(rec.indexOf("utilizaVendedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoDocumento")).toString(),
+                                                             q.value(rec.indexOf("utilizaSubRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoLiquidacionCaja")).toString(),
+                                                             q.value(rec.indexOf("utilizaRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaDesdeCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaHastaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio")).toString(),
+                                                             q.value(rec.indexOf("utilizaGraficas")).toString(),
+                                                             q.value(rec.indexOf("utilizaCuentaBancaria")).toString(),
+                                                             q.value(rec.indexOf("utilizaMonedas")).toString(),
+                                                             q.value(rec.indexOf("utilizaPais")).toString(),
+                                                             q.value(rec.indexOf("utilizaDepartamento")).toString(),
+                                                             q.value(rec.indexOf("utilizaLocalidad")).toString(),
+                                                             q.value(rec.indexOf("utilizaCoincidenciaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaOrdenEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoClasificacionCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio2")).toString(),
+                                                             q.value(rec.indexOf("utilizaProcedenciaEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaAbrirDocumentos")).toString()
+                                                             ));
+                }
+            }
+        }else{
+            q = Database::consultaSql("select RE.* from Reportes RE join ReportesPerfilesUsuarios RPU on RPU.codigoReporte=RE.codigoReporte where "+campo+"'"+datoABuscar+"' and RPU.codigoPerfil='"+_codigoPerfil+"' order by RE.descripcionReporte");
+
+            rec = q.record();
+            ModuloReportes::reset();
+            if(q.record().count()>0){
+
+                while (q.next()){
+                    ModuloReportes::agregarReportes(Reportes(q.value(rec.indexOf("codigoReporte")).toLongLong()
+                                                             , q.value(rec.indexOf("codigoMenuReporte")).toInt()
+                                                             , q.value(rec.indexOf("descripcionReporte")).toString()
+                                                             , q.value(rec.indexOf("consultaSql")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlGraficas")).toString()
+                                                             , q.value(rec.indexOf("consultaSqlCabezal")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoProveedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaCantidadItemRanking")).toString(),
+                                                             q.value(rec.indexOf("utilizaFecha")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaDesde")).toString(),
+                                                             q.value(rec.indexOf("utilizaFechaHasta")).toString(),
+                                                             q.value(rec.indexOf("utilizaVendedor")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoDocumento")).toString(),
+                                                             q.value(rec.indexOf("utilizaSubRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaCodigoLiquidacionCaja")).toString(),
+                                                             q.value(rec.indexOf("utilizaRubros")).toString(),
+                                                             q.value(rec.indexOf("utilizaDesdeCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaHastaCodigoArticulo")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio")).toString(),
+                                                             q.value(rec.indexOf("utilizaGraficas")).toString(),
+                                                             q.value(rec.indexOf("utilizaCuentaBancaria")).toString(),
+                                                             q.value(rec.indexOf("utilizaMonedas")).toString(),
+                                                             q.value(rec.indexOf("utilizaPais")).toString(),
+                                                             q.value(rec.indexOf("utilizaDepartamento")).toString(),
+                                                             q.value(rec.indexOf("utilizaLocalidad")).toString(),
+                                                             q.value(rec.indexOf("utilizaCoincidenciaCodigoCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaOrdenEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaTipoClasificacionCliente")).toString(),
+                                                             q.value(rec.indexOf("utilizaListaPrecio2")).toString(),
+                                                             q.value(rec.indexOf("utilizaProcedenciaEnReporte")).toString(),
+                                                             q.value(rec.indexOf("utilizaAbrirDocumentos")).toString()
+                                                             ));
+                }
+            }
+        }
+    }
+}
+
 
 
 bool ModuloReportes::retornaSiReportaEstaHabilitadoEnPerfil(QString _codigoReporte,QString _codigoPerfil) const {
@@ -272,23 +586,133 @@ QVariant ModuloReportes::data(const QModelIndex & index, int role) const {
 
     }
 
-    const Reportes &reportes = m_Reportes[index.row()];
+    const Reportes &variable = m_Reportes[index.row()];
 
     if (role == CodigoReporteRole){
-        return reportes.codigoReporte();
+        return variable.codigoReporte();
 
     }else if (role == CodigoMenuReporteRole){
-        return reportes.codigoMenuReporte();
+        return variable.codigoMenuReporte();
 
     }else if (role == DescripcionReporteRole){
-        return reportes.descripcionReporte();
+        return variable.descripcionReporte();
 
     }else if (role == ConsultaSqlRole){
-        return reportes.consultaSql();
+        return variable.consultaSql();
     }else if (role == ConsultaSqlGraficasRole){
-        return reportes.consultaSqlGraficas();
+        return variable.consultaSqlGraficas();
     }else if (role == ConsultaSqlCabezalRole){
-        return reportes.consultaSqlCabezal();
+        return variable.consultaSqlCabezal();
+    }
+    else if (role == utilizaCodigoClienteRole)
+    {
+        return variable.utilizaCodigoCliente();
+    }
+    else if (role == utilizaCodigoProveedorRole)
+    {
+        return variable.utilizaCodigoProveedor();
+    }
+    else if (role == utilizaCodigoArticuloRole)
+    {
+        return variable.utilizaCodigoArticulo();
+    }
+    else if (role == utilizaCantidadItemRankingRole)
+    {
+        return variable.utilizaCantidadItemRanking();
+    }
+    else if (role == utilizaFechaRole)
+    {
+        return variable.utilizaFecha();
+    }
+    else if (role == utilizaFechaDesdeRole)
+    {
+        return variable.utilizaFechaDesde();
+    }
+    else if (role == utilizaFechaHastaRole)
+    {
+        return variable.utilizaFechaHasta();
+    }
+    else if (role == utilizaVendedorRole)
+    {
+        return variable.utilizaVendedor();
+    }
+    else if (role == utilizaTipoDocumentoRole)
+    {
+        return variable.utilizaTipoDocumento();
+    }
+    else if (role == utilizaSubRubrosRole)
+    {
+        return variable.utilizaSubRubros();
+    }
+
+    else if (role == utilizaCodigoLiquidacionCajaRole)
+    {
+        return variable.utilizaCodigoLiquidacionCaja();
+    }
+    else if (role == utilizaRubrosRole)
+    {
+        return variable.utilizaRubros();
+    }
+    else if (role == utilizaDesdeCodigoArticuloRole)
+    {
+        return variable.utilizaDesdeCodigoArticulo();
+    }
+    else if (role == utilizaHastaCodigoArticuloRole)
+    {
+        return variable.utilizaHastaCodigoArticulo();
+    }
+    else if (role == utilizaListaPrecioRole)
+    {
+        return variable.utilizaListaPrecio();
+    }
+    else if (role == utilizaGraficasRole)
+    {
+        return variable.utilizaGraficas();
+    }
+    else if (role == utilizaCuentaBancariaRole)
+    {
+        return variable.utilizaCuentaBancaria();
+    }
+    else if (role == utilizaMonedasRole)
+    {
+        return variable.utilizaMonedas();
+    }
+    else if (role == utilizaPaisRole)
+    {
+        return variable.utilizaPais();
+    }
+    else if (role == utilizaDepartamentoRole)
+    {
+        return variable.utilizaDepartamento();
+    }
+
+    else if (role == utilizaLocalidadRole)
+    {
+        return variable.utilizaLocalidad();
+    }
+    else if (role == utilizaCoincidenciaCodigoClienteRole)
+    {
+        return variable.utilizaCoincidenciaCodigoCliente();
+    }
+    else if (role == utilizaOrdenEnReporteRole)
+    {
+        return variable.utilizaOrdenEnReporte();
+    }
+    else if (role == utilizaTipoClasificacionClienteRole)
+    {
+        return variable.utilizaTipoClasificacionCliente();
+    }
+    else if (role == utilizaListaPrecio2Role)
+    {
+        return variable.utilizaListaPrecio2();
+    }
+    else if (role == utilizaProcedenciaEnReporteRole)
+    {
+        return variable.utilizaProcedenciaEnReporte();
+    }
+    else if (role == utilizaAbrirDocumentosRole)
+    {
+        return variable.utilizaAbrirDocumentos();
     }
 
 
@@ -297,37 +721,127 @@ QVariant ModuloReportes::data(const QModelIndex & index, int role) const {
 
 bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _permisoReporte) const {
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    bool _valor=false;
+
+    for (int var = 0; var < m_Reportes.size(); ++var) {
+        if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
+            if(_permisoReporte=="utilizaCodigoCliente"){
+                if(m_Reportes[var].utilizaCodigoCliente()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCodigoProveedor"){
+                if(m_Reportes[var].utilizaCodigoProveedor()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCodigoArticulo"){
+                if(m_Reportes[var].utilizaCodigoArticulo()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCantidadItemRanking"){
+                if(m_Reportes[var].utilizaCantidadItemRanking()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaFecha"){
+                if(m_Reportes[var].utilizaFecha()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaFechaDesde"){
+                if(m_Reportes[var].utilizaFechaDesde()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaFechaHasta"){
+                if(m_Reportes[var].utilizaFechaHasta()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaVendedor"){
+                if(m_Reportes[var].utilizaVendedor()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaTipoDocumento"){
+                if(m_Reportes[var].utilizaTipoDocumento()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaSubRubros"){
+                if(m_Reportes[var].utilizaSubRubros()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCodigoLiquidacionCaja"){
+                if(m_Reportes[var].utilizaCodigoLiquidacionCaja()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaRubros"){
+                if(m_Reportes[var].utilizaRubros()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaDesdeCodigoArticulo"){
+                if(m_Reportes[var].utilizaDesdeCodigoArticulo()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaHastaCodigoArticulo"){
+                if(m_Reportes[var].utilizaHastaCodigoArticulo()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaListaPrecio"){
+                if(m_Reportes[var].utilizaListaPrecio()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaGraficas"){
+                if(m_Reportes[var].utilizaGraficas()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCuentaBancaria"){
+                if(m_Reportes[var].utilizaCuentaBancaria()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaMonedas"){
+                if(m_Reportes[var].utilizaMonedas()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaPais"){
+                if(m_Reportes[var].utilizaPais()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaDepartamento"){
+                if(m_Reportes[var].utilizaDepartamento()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaLocalidad"){
+                if(m_Reportes[var].utilizaLocalidad()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaCoincidenciaCodigoCliente"){
+                if(m_Reportes[var].utilizaCoincidenciaCodigoCliente()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaOrdenEnReporte"){
+                 if(m_Reportes[var].utilizaOrdenEnReporte()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaTipoClasificacionCliente"){
+                if(m_Reportes[var].utilizaTipoClasificacionCliente()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaListaPrecio2"){
+                if(m_Reportes[var].utilizaListaPrecio2()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaProcedenciaEnReporte"){
+                if(m_Reportes[var].utilizaProcedenciaEnReporte()=="1"){_valor=true;}
+            }
+            else if(_permisoReporte=="utilizaAbrirDocumentos"){
+                if(m_Reportes[var].utilizaAbrirDocumentos()=="1"){_valor=true;}
+            }
+
         }
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select  "+_permisoReporte+"  from Reportes where codigoReporte='"+_codigoReporte+"'")) {
-
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    if(query.value(0).toString()=="1"){
-                        return true;
-                    }else{
-                        return  false;
-                    }
-                }else{
-                    return false;
-                }
-            }else{return false;}
-
-
-        }else{
-            return false;
+    if(m_Reportes.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }else{return false;}
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select  "+_permisoReporte+"  from Reportes where codigoReporte='"+_codigoReporte+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        if(query.value(0).toString()=="1"){
+                            return true;
+                        }else{
+                            return  false;
+                        }
+                    }else{
+                        return false;
+                    }
+                }else{return false;}
+            }else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return _valor;
+    }
 }
 
 QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) const {
@@ -338,29 +852,35 @@ QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) con
             _valor = m_Reportes[var].descripcionReporte();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionReporte from Reportes where codigoReporte='"+_codigoReporte+"'")) {
-            if(query.first()){
-                return query.value(0).toString();
+    if(m_Reportes.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select descripcionReporte from Reportes where codigoReporte='"+_codigoReporte+"'")) {
+                if(query.first()){
+                    return query.value(0).toString();
+                }else{
+                    return "";
+                }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+    /*
+   */
 }
 
 QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
@@ -371,29 +891,36 @@ QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
             _valor = m_Reportes[var].consultaSql();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select consultaSql from Reportes where codigoReporte='"+_codigoReporte+"'")) {
-            if(query.first()){
-                return query.value(0).toString();
+
+    if(m_Reportes.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select consultaSql from Reportes where codigoReporte='"+_codigoReporte+"'")) {
+                if(query.first()){
+                    return query.value(0).toString();
+                }else{
+                    return "";
+                }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const {
 
@@ -403,29 +930,32 @@ QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const 
             _valor = m_Reportes[var].consultaSqlGraficas();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
-        }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select consultaSqlGraficas from Reportes where codigoReporte='"+_codigoReporte+"'")) {
-            if(query.first()){
-                return query.value(0).toString();
+    if(m_Reportes.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select consultaSqlGraficas from Reportes where codigoReporte='"+_codigoReporte+"'")) {
+                if(query.first()){
+                    return query.value(0).toString();
+                }else{
+                    return "";
+                }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
 }
 
 QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
@@ -436,120 +966,165 @@ QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
             _valor = m_Reportes[var].consultaSqlCabezal();
         }
     }
-    return _valor;
 
 
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Reportes.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select consultaSqlCabezal from Reportes where codigoReporte='"+_codigoReporte+"'")) {
-            if(query.first()){
-                return query.value(0).toString();
+            if(query.exec("select consultaSqlCabezal from Reportes where codigoReporte='"+_codigoReporte+"'")) {
+                if(query.first()){
+                    return query.value(0).toString();
+                }else{
+                    return "";
+                }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
 }
 
 QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    QString _valor="-1";
+    for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
+        if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
+
+            _valor= moduloReportesConfiguracion.m_ReportesConfiguracion[var].alineacionColumna();
+
         }
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select alineacionColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select alineacionColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "-1";
+                    }
                 }else{
                     return "-1";
                 }
             }else{
                 return "-1";
             }
-        }else{
-            return "-1";
-        }
-    }else{return "-1";}
+        }else{return "-1";}
+
+    }else{
+        return _valor;
+    }
+
+
+
 }
 
 QString ModuloReportes::retornaConfiguracionTipoDeDatoDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    QString _valor="TEXTO";
+    for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
+        if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
+
+            _valor= moduloReportesConfiguracion.m_ReportesConfiguracion[var].tipoDatoColumna();
+
         }
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select tipoDatoColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="TEXTO"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select tipoDatoColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "TEXTO";
+                    }
                 }else{
                     return "TEXTO";
                 }
             }else{
                 return "TEXTO";
             }
-        }else{
-            return "TEXTO";
-        }
-    }else{return "TEXTO";}
+        }else{return "TEXTO";}
+    }else{
+        return _valor;
+    }
 }
 
 QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    QString _valor="TEXTO";
+    for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
+        if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
+
+            _valor= moduloReportesConfiguracion.m_ReportesConfiguracion[var].totalizacionColumna();
+
         }
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select totalizacionColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+            if(query.exec("select totalizacionColumna from ReportesConfiguracion where codigoReporte='"+_codigoReporte+"' and columnaReporte='"+_columnaReporte+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "-1";
+                    }
                 }else{
                     return "-1";
                 }
+
             }else{
                 return "-1";
             }
-
-        }else{
-            return "-1";
-        }
-    }else{return "-1";}
+        }else{return "-1";}
+    }else{
+        return _valor;
+    }
 }
 
 QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoReporte, QString _consultaSqlGraficas, bool _incluirGrafica,QString _consultaSqlCabezal) const {
@@ -732,7 +1307,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                 if(query.exec(listaConsultas.at(j))) {
 
                     query.next();
-                  //  qDebug()<< QDateTime::currentDateTime();
+                    //  qDebug()<< QDateTime::currentDateTime();
                     if(query.value(0).toString()!=""){
 
                         out << "\n<section>";
@@ -769,8 +1344,8 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                             //if(query.record().fieldName(0)=="LINK_CLI"){
                             //    out << "\n<tr hidden>";
                             //}else{
-                                out << "\n<tr>";
-                           // }
+                            out << "\n<tr>";
+                            // }
 
 
                             cantidadLineas++;
@@ -926,7 +1501,7 @@ QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoRepor
                             return "0";
 
                     }
-                  //  qDebug()<< QDateTime::currentDateTime();
+                    //  qDebug()<< QDateTime::currentDateTime();
                 }else{
                     return "-1";
                 }

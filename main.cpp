@@ -207,6 +207,7 @@ int main(int argc, char *argv[])
     ModuloMediosDePago moduloMediosDePago;
     ModuloReportesMenu moduloReportesMenu;
     ModuloReportes moduloReportes;
+    ModuloReportes moduloReportesDinamicos;
     ModuloRubros moduloRubros;
     ModuloRubros moduloRubrosComboBox;
 
@@ -381,6 +382,7 @@ inicio:
                 moduloDepartamentos.buscarDepartamentos(" codigoPais=","1");
                 moduloDepartamentosComboBox.buscarDepartamentos(" codigoPais=","1");
 
+                moduloReportes.buscarReportes("1=","1","");
 
 
 
@@ -488,6 +490,8 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloMediosDePago", &moduloMediosDePago );
     viewer.rootContext()->setContextProperty("modeloReportesMenuComboBox", &moduloReportesMenu );
     viewer.rootContext()->setContextProperty("modeloReportes", &moduloReportes );
+    viewer.rootContext()->setContextProperty("modeloReportesDinamicos", &moduloReportesDinamicos );
+
 
 
     viewer.rootContext()->setContextProperty("modeloListaRubros", &moduloRubros );
@@ -597,7 +601,7 @@ inicio:
 
 
 
-    moduloReportes.buscarReportes("1=","1","");
+
 
     moduloListaImpresoras.limpiarListaImpresoras();
     moduloListaImpresoras.buscarImpresoras();
@@ -621,6 +625,7 @@ inicio:
 
     moduloFormasDePago.buscarFormaDePago("1=","1");
 
+    moduloReportesDinamicos.agregarReportes(Reportes(0,0,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
 
     //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
 

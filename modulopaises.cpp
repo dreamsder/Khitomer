@@ -122,7 +122,7 @@ QVariant ModuloPaises::data(const QModelIndex & index, int role) const {
 }
 QString ModuloPaises::retornaUltimoCodigoPais() const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -150,7 +150,7 @@ Database::chequeaStatusAccesoMysql();
     }
 }
 bool ModuloPaises::eliminarPais(QString _codigoPais) const {
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     bool conexion=true;
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -194,7 +194,7 @@ int ModuloPaises::insertarPais(QString _codigoPais,QString _nombrePais){
     }
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -244,34 +244,38 @@ QString ModuloPaises::retornaDescripcionPais(QString _codigoPais) const{
             _valor = m_Paises[var].descripcionPais();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Paises.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionPais from Pais where codigoPais='"+_codigoPais+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            if(query.exec("select descripcionPais from Pais where codigoPais='"+_codigoPais+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
 }

@@ -128,43 +128,46 @@ QString ModuloTipoProcedenciaCliente::retornaDescripcionTipoProcedenciaCliente(Q
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
+
+    if(m_lista.size()==0 && _valor==""){
+        bool conexion=true;
 
 
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("select descripcionTipoProcedenciaCliente from TipoProcedenciaCliente   where codigoTipoProcedenciaCliente='"+codigoTipoProcedenciaCliente+"'")) {
+            if(query.exec("select descripcionTipoProcedenciaCliente from TipoProcedenciaCliente   where codigoTipoProcedenciaCliente='"+codigoTipoProcedenciaCliente+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
 
-                    return query.value(0).toString();
 
-                }else{
-                    return "";
-                }
-            }else{return "";}
+                        return query.value(0).toString();
 
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
 }
 
 

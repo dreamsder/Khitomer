@@ -72,7 +72,7 @@ void ModuloDepartamentos::limpiarListaDepartamentos(){
 void ModuloDepartamentos::buscarDepartamentos(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -124,7 +124,7 @@ QVariant ModuloDepartamentos::data(const QModelIndex & index, int role) const {
 }
 QString ModuloDepartamentos::retornaUltimoCodigoDepartamento(QString _codigoPais) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -165,7 +165,7 @@ int ModuloDepartamentos::insertarDepartamento(QString _codigoDepartamento,QStrin
     }
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -248,34 +248,42 @@ QString ModuloDepartamentos::retornaDescripcionDepartamento(QString _codigoDepar
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Departamentos.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionDepartamento from Departamentos where codigoDepartamento='"+_codigoDepartamento+"' and codigoPais='"+_codigoPais+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            if(query.exec("select descripcionDepartamento from Departamentos where codigoDepartamento='"+_codigoDepartamento+"' and codigoPais='"+_codigoPais+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+
+    /*
+    */
 }

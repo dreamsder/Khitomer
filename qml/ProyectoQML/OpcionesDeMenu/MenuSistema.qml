@@ -278,6 +278,7 @@ Rectangle {
         ///         :Se finalizo el agregado de tipo de documento, moneda y forma de pago por defecto para los clientes.
         /// 1.16.23 :Correcciones varias.
         /// 1.16.24 :Corrección en reporte Stock bajo minimo.
+        /// 1.17.0  :Se optimiza el sistema para mejorar la intensidad de consultas a la base de datos.
 
 
 

@@ -167,10 +167,10 @@ bool ModuloUsuarios::conexionUsuario(QString usuario, QString password) const {
     QString claveValida = QString(QCryptographicHash::hash((password.toAscii()),QCryptographicHash::Sha1).toHex());
 
 
-  //  qDebug()<< WSDatabase::wsSelect("select * from Usuarios").typeName();
+    //  qDebug()<< WSDatabase::wsSelect("select * from Usuarios").typeName();
 
 
-   // qDebug()<< WSDatabase::wsSelect("select * from Usuarios");
+    // qDebug()<< WSDatabase::wsSelect("select * from Usuarios");
 
 
     //qDebug()<< UtilidadesXml::getUrl();
@@ -352,43 +352,49 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
 
         }
     }
-    return _valor;
 
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_Usuarios.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
-
-
-        if(query.exec("select concat(nombreUsuario,' ',apellidoUsuario) from Usuarios where idUsuario='"+_idUsuario+"' and esVendedor=1")) {
+            QSqlQuery query(Database::connect());
 
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+            if(query.exec("select concat(nombreUsuario,' ',apellidoUsuario) from Usuarios where idUsuario='"+_idUsuario+"' and esVendedor=1")) {
 
-                    return query.value(0).toString();
 
-                }else{
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return "";
-                }
-            }else{return "";}
+                        return query.value(0).toString();
 
+                    }else{
+
+                        return "";
+                    }
+                }else{return "";}
+
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+    /*
+    */
 }
 QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
 
@@ -401,41 +407,47 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_Usuarios.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select concat(nombreUsuario,' ',(case when apellidoUsuario is null then '' else apellidoUsuario end)) from Usuarios where idUsuario='"+_idUsuario+"'")) {
+            if(query.exec("select concat(nombreUsuario,' ',(case when apellidoUsuario is null then '' else apellidoUsuario end)) from Usuarios where idUsuario='"+_idUsuario+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                    return query.value(0).toString();
+                        return query.value(0).toString();
 
-                }else{
+                    }else{
 
-                    return "";
-                }
-            }else{return "";}
+                        return "";
+                    }
+                }else{return "";}
 
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+    /*
+   */
 }
 int ModuloUsuarios::actualizarClave(QString _idUsuario, QString _claveUsuario ) const {
 
@@ -498,33 +510,35 @@ bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) con
 
         }
     }
-    return _valor;
 
-    /*
 
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_Usuarios.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
-        QSqlQuery query(Database::connect());
-        if(query.exec("select idUsuario from Usuarios where codigoPerfil='"+_codigoPerfil+"'")) {
-            if(query.first()){
-                return true;
+        if(conexion){
+            QSqlQuery query(Database::connect());
+            if(query.exec("select idUsuario from Usuarios where codigoPerfil='"+_codigoPerfil+"'")) {
+                if(query.first()){
+                    return true;
+                }else{
+                    return false;
+                }
             }else{
-                return false;
+                return true;
             }
         }else{
             return true;
         }
     }else{
-        return true;
-    }*/
+        return _valor;
+    }
 }
 
 QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
@@ -537,34 +551,40 @@ QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Usuarios.size()==0 && _valor=="0"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
+        if(conexion){
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select codigoPerfil from Usuarios where idUsuario='"+_idUsuario+"'")) {
+
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+
+                        return query.value(0).toString();
+
+                    }else{
+                        return "0";
+                    }
+                }else{return "0";}
+
+            }else{
+                return "0";
+            }
+        }else{return "0";}
+    }else{
+        return _valor;
     }
-    if(conexion){
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select codigoPerfil from Usuarios where idUsuario='"+_idUsuario+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-
-                    return query.value(0).toString();
-
-                }else{
-                    return "0";
-                }
-            }else{return "0";}
-
-        }else{
-            return "0";
-        }
-    }else{return "0";}*/
 
 }

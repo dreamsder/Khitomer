@@ -70,7 +70,7 @@ void ModuloSubRubros::limpiarListaSubRubros(){
 void ModuloSubRubros::buscarSubRubros(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -133,45 +133,51 @@ QString ModuloSubRubros::retornaDescripcionSubRubro(QString _codigoSubRubro){
 
         }
     }
-    return _valor;
 
-/*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_SubRubros.size()==0 && _valor=="Error BD"){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
-        if(query.exec("SELECT descripcionSubRubro FROM SubRubros where codigoSubRubro='"+_codigoSubRubro+"'")) {
+            if(query.exec("SELECT descripcionSubRubro FROM SubRubros where codigoSubRubro='"+_codigoSubRubro+"'")) {
 
-            if(query.first()){
-                if(query.value(0).toString()!=""){
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
 
-                   return query.value(0).toString();
+                        return query.value(0).toString();
 
+                    }else{
+                        return "Error BD";
+                    }
                 }else{
-                    return "Error BD";
+                    return "Error: No existe el registro";
                 }
             }else{
-                return "Error: No existe el registro";
+                return "Error BD";
             }
         }else{
             return "Error BD";
         }
     }else{
-        return "Error BD";
-    }*/
+        return _valor;
+    }
+
+    /*
+   */
 
 }
 int ModuloSubRubros::ultimoRegistroDeSubRubro()const {
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     bool conexion=true;
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
@@ -200,7 +206,7 @@ Database::chequeaStatusAccesoMysql();
 }
 bool ModuloSubRubros::eliminarSubRubro(QString _codigoSubRubro) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -249,7 +255,7 @@ int ModuloSubRubros::insertarSubRubro(QString _codigoSubRubro,QString _codigoRub
     }
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";

@@ -113,7 +113,8 @@ SOURCES += main.cpp \
     Utilidades/wsdatabase.cpp \
     modulotipogarantia.cpp \
     moduloreportesperfilesusuarios.cpp \
-    modulotipodocumentoperfilesusuarios.cpp
+    modulotipodocumentoperfilesusuarios.cpp \
+    moduloreportesconfiguracion.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -196,7 +197,8 @@ HEADERS += \
     Utilidades/wsdatabase.h \
     modulotipogarantia.h \
     moduloreportesperfilesusuarios.h \
-    modulotipodocumentoperfilesusuarios.h
+    modulotipodocumentoperfilesusuarios.h \
+    moduloreportesconfiguracion.h
 
 RESOURCES += \
     Imagenes.qrc \

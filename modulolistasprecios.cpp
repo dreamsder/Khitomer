@@ -330,34 +330,40 @@ QString ModuloListasPrecios::retornaDescripcionListaPrecio(QString _codigoListaP
 
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    if(m_ListasPrecio.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
-    if(conexion){
-        QSqlQuery query(Database::connect());
+        if(conexion){
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionListaPrecio from ListaPrecio where codigoListaPrecio='"+_codigoListaPrecio+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+            if(query.exec("select descripcionListaPrecio from ListaPrecio where codigoListaPrecio='"+_codigoListaPrecio+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
             }else{
                 return "";
             }
-        }else{
-            return "";
-        }
-    }else{return "";}*/
+        }else{return "";}
+    }else{
+        return _valor;
+    }
+
+    /*
+    */
 }
 QString ModuloListasPrecios::retornaListaPrecioDeCliente(QString _fechaDePrecios,QString _codigoCliente,QString _tipoCliente) const{
     bool conexion=true;
@@ -559,7 +565,7 @@ bool ModuloListasPrecios::emitirListaPrecioDuplex(QString _codigoListaPrecio, QS
         QSqlQuery query(Database::connect());
         if(query.exec("SELECT LPA.codigoArticulo,AR.descripcionArticulo,MON.simboloMoneda,LPA.precioArticulo FROM ListaPrecioArticulos LPA join Articulos AR on AR.codigoArticulo=LPA.codigoArticulo join Monedas MON on MON.codigoMoneda=AR.codigoMoneda where LPA.codigoListaPrecio='"+_codigoListaPrecio+"'   "+_stringFiltroArticulos+"   and (SELECT  sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad'  FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0  and DOC.codigoEstadoDocumento in ('E','G') and DOCL.codigoArticulo=AR.codigoArticulo  and DOC.fechaHoraGuardadoDocumentoSQL>= (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) group by DOCL.codigoArticulo)>0    order by CAST(LPA.codigoArticulo AS SIGNED) asc ;")) {
 
-        //    qDebug()<< query.lastQuery();
+            //    qDebug()<< query.lastQuery();
 
             if(query.first()){
                 if(query.value(0).toString()==""){
@@ -892,7 +898,7 @@ bool ModuloListasPrecios::emitirListaPrecioDuplex(QString _codigoListaPrecio, QS
                 }
 
                 if(paginaSegundaCara){
-                       painterSegundaTirada.drawText(cuadroTexto(21,30.5,3,1,true),2,"Pagina #"+QString::number(cantidadPaginas));
+                    painterSegundaTirada.drawText(cuadroTexto(21,30.5,3,1,true),2,"Pagina #"+QString::number(cantidadPaginas));
                 }
 
                 painterSegundaTirada.end();

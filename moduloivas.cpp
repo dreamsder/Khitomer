@@ -78,7 +78,7 @@ void ModuloIvas::limpiarListaIvas(){
 void ModuloIvas::buscarIvas(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -137,43 +137,50 @@ QString ModuloIvas::retornaDescripcionIva(QString _codigoIva) const{
             _valor = m_Ivas[var].descripcionIva();
         }
     }
-    return _valor;
-    /*
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+
+    if(m_Ivas.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionIva from Ivas where codigoIva='"+_codigoIva+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            if(query.exec("select descripcionIva from Ivas where codigoIva='"+_codigoIva+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+    /*
+    */
 }
 
 
 double ModuloIvas::retornaFactorMultiplicador(QString _codigoArticulo) const{
     bool conexion=true;
     QString _codigoIva;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -196,19 +203,27 @@ Database::chequeaStatusAccesoMysql();
                             _valor = m_Ivas[var].factorMultiplicador();
                         }
                     }
-                    return _valor;
 
-                    /*if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
-                        if(query.first()){
-                            if(query.value(0).toString()!=""){
-                                return query.value(0).toDouble();
-                            }else{
-                                return 1;
-                            }
-                        }else{return 1;}
+
+                    if(m_Ivas.size()==0 && _valor==1){
+                        if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
+                            if(query.first()){
+                                if(query.value(0).toString()!=""){
+                                    return query.value(0).toDouble();
+                                }else{
+                                    return 1;
+                                }
+                            }else{return 1;}
+                        }else{
+                            return 1;
+                        }
                     }else{
-                        return 1;
+                        return _valor;
                     }
+
+
+
+                    /*
 
 
                     */
@@ -228,7 +243,7 @@ Database::chequeaStatusAccesoMysql();
 double ModuloIvas::retornaFactorMultiplicadorIVAPorDefecto() const{
     bool conexion=true;
     QString _codigoIva;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -252,20 +267,27 @@ Database::chequeaStatusAccesoMysql();
                             _valor = m_Ivas[var].factorMultiplicador();
                         }
                     }
-                    return _valor;
 
 
-                    /*if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
-                        if(query.first()){
-                            if(query.value(0).toString()!=""){
-                                return query.value(0).toDouble();
-                            }else{
-                                return 1;
-                            }
-                        }else{return 1;}
+                    if(m_Ivas.size()==0 && _valor==1){
+                        if(query.exec("select factorMultiplicador from Ivas where codigoIva='"+_codigoIva+"'")) {
+                            if(query.first()){
+                                if(query.value(0).toString()!=""){
+                                    return query.value(0).toDouble();
+                                }else{
+                                    return 1;
+                                }
+                            }else{return 1;}
+                        }else{
+                            return 1;
+                        }
                     }else{
-                        return 1;
-                    }*/
+                        return _valor;
+                    }
+
+
+
+                    /**/
 
 
 
@@ -285,7 +307,7 @@ Database::chequeaStatusAccesoMysql();
 
 QString ModuloIvas::retornaCodigoIva(QString _codigoArticulo) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";

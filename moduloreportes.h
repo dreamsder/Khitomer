@@ -30,7 +30,40 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class Reportes
 {
 public:
-    Q_INVOKABLE Reportes(const qlonglong &codigoReporte, const int &codigoMenuReporte,const QString &descripcionReporte,const QString &consultaSql,const QString &consultaSqlGraficas,const QString &consultaSqlCabezal);
+    Q_INVOKABLE Reportes(const qlonglong &codigoReporte, const int &codigoMenuReporte,const QString &descripcionReporte,const QString &consultaSql,const QString &consultaSqlGraficas,
+                         const QString &consultaSqlCabezal,
+
+                         const QString &utilizaCodigoCliente,
+                         const QString &utilizaCodigoProveedor,
+                         const QString &utilizaCodigoArticulo,
+                         const QString &utilizaCantidadItemRanking,
+                         const QString &utilizaFecha,
+                         const QString &utilizaFechaDesde,
+                         const QString &utilizaFechaHasta,
+                         const QString &utilizaVendedor,
+                         const QString &utilizaTipoDocumento,
+                         const QString &utilizaSubRubros,
+                         const QString &utilizaCodigoLiquidacionCaja,
+                         const QString &utilizaRubros,
+                         const QString &utilizaDesdeCodigoArticulo,
+                         const QString &utilizaHastaCodigoArticulo,
+                         const QString &utilizaListaPrecio,
+                         const QString &utilizaGraficas,
+                         const QString &utilizaCuentaBancaria,
+                         const QString &utilizaMonedas,
+                         const QString &utilizaPais,
+                         const QString &utilizaDepartamento,
+                         const QString &utilizaLocalidad,
+                         const QString &utilizaCoincidenciaCodigoCliente,
+                         const QString &utilizaOrdenEnReporte,
+                         const QString &utilizaTipoClasificacionCliente,
+                         const QString &utilizaListaPrecio2,
+                         const QString &utilizaProcedenciaEnReporte,
+                         const QString &utilizaAbrirDocumentos
+
+
+
+                         );
 
     qlonglong codigoReporte() const;
     int codigoMenuReporte() const;
@@ -40,6 +73,34 @@ public:
     QString consultaSqlCabezal() const;
 
 
+    QString utilizaCodigoCliente() const;
+    QString utilizaCodigoProveedor() const;
+    QString utilizaCodigoArticulo() const;
+    QString utilizaCantidadItemRanking() const;
+    QString utilizaFecha() const;
+    QString utilizaFechaDesde() const;
+    QString utilizaFechaHasta() const;
+    QString utilizaVendedor() const;
+    QString utilizaTipoDocumento() const;
+    QString utilizaSubRubros() const;
+    QString utilizaCodigoLiquidacionCaja() const;
+    QString utilizaRubros() const;
+    QString utilizaDesdeCodigoArticulo() const;
+    QString utilizaHastaCodigoArticulo() const;
+    QString utilizaListaPrecio() const;
+    QString utilizaGraficas() const;
+    QString utilizaCuentaBancaria() const;
+    QString utilizaMonedas() const;
+    QString utilizaPais() const;
+    QString utilizaDepartamento() const;
+    QString utilizaLocalidad() const;
+    QString utilizaCoincidenciaCodigoCliente() const;
+    QString utilizaOrdenEnReporte() const;
+    QString utilizaTipoClasificacionCliente() const;
+    QString utilizaListaPrecio2() const;
+    QString utilizaProcedenciaEnReporte() const;
+    QString utilizaAbrirDocumentos() const;
+
 private:
     qlonglong m_codigoReporte;
     int m_codigoMenuReporte;
@@ -47,6 +108,34 @@ private:
     QString m_consultaSql;
     QString m_consultaSqlGraficas;
     QString m_consultaSqlCabezal;
+
+    QString m_utilizaCodigoCliente;
+    QString m_utilizaCodigoProveedor;
+    QString m_utilizaCodigoArticulo;
+    QString m_utilizaCantidadItemRanking;
+    QString m_utilizaFecha;
+    QString m_utilizaFechaDesde;
+    QString m_utilizaFechaHasta;
+    QString m_utilizaVendedor;
+    QString m_utilizaTipoDocumento;
+    QString m_utilizaSubRubros;
+    QString m_utilizaCodigoLiquidacionCaja;
+    QString m_utilizaRubros;
+    QString m_utilizaDesdeCodigoArticulo;
+    QString m_utilizaHastaCodigoArticulo;
+    QString m_utilizaListaPrecio;
+    QString m_utilizaGraficas;
+    QString m_utilizaCuentaBancaria;
+    QString m_utilizaMonedas;
+    QString m_utilizaPais;
+    QString m_utilizaDepartamento;
+    QString m_utilizaLocalidad;
+    QString m_utilizaCoincidenciaCodigoCliente;
+    QString m_utilizaOrdenEnReporte;
+    QString m_utilizaTipoClasificacionCliente;
+    QString m_utilizaListaPrecio2;
+    QString m_utilizaProcedenciaEnReporte;
+    QString m_utilizaAbrirDocumentos;
 };
 
 class ModuloReportes : public QAbstractListModel
@@ -59,7 +148,36 @@ public:
         DescripcionReporteRole,
         ConsultaSqlRole,
         ConsultaSqlGraficasRole,
-        ConsultaSqlCabezalRole
+        ConsultaSqlCabezalRole,
+
+        utilizaCodigoClienteRole,
+        utilizaCodigoProveedorRole,
+        utilizaCodigoArticuloRole,
+        utilizaCantidadItemRankingRole,
+        utilizaFechaRole,
+        utilizaFechaDesdeRole,
+        utilizaFechaHastaRole,
+        utilizaVendedorRole,
+        utilizaTipoDocumentoRole,
+        utilizaSubRubrosRole,
+        utilizaCodigoLiquidacionCajaRole,
+        utilizaRubrosRole,
+        utilizaDesdeCodigoArticuloRole,
+        utilizaHastaCodigoArticuloRole,
+        utilizaListaPrecioRole,
+        utilizaGraficasRole,
+        utilizaCuentaBancariaRole,
+        utilizaMonedasRole,
+        utilizaPaisRole,
+        utilizaDepartamentoRole,
+        utilizaLocalidadRole,
+        utilizaCoincidenciaCodigoClienteRole,
+        utilizaOrdenEnReporteRole,
+        utilizaTipoClasificacionClienteRole,
+        utilizaListaPrecio2Role,
+        utilizaProcedenciaEnReporteRole,
+        utilizaAbrirDocumentosRole
+
     };
 
     ModuloReportes(QObject *parent = 0);
@@ -73,6 +191,9 @@ public:
     Q_INVOKABLE QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     Q_INVOKABLE void buscarReportes(QString , QString , QString );
+
+    Q_INVOKABLE void buscarReportesSegunMenu(QString campo, QString datoABuscar,QString _codigoPerfil);
+
 
     Q_INVOKABLE bool retornaPermisosDelReporte(QString ,QString ) const;
 

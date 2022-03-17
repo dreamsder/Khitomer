@@ -123,37 +123,42 @@ QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoTipoGa
 
         }
     }
-    return _valor;
 
-/*
-    bool conexion=true;
-    Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+    if(m_TipoGarantia.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
         }
-    }
 
-    if(conexion){
+        if(conexion){
 
-        QSqlQuery query(Database::connect());
+            QSqlQuery query(Database::connect());
 
 
-        if(query.exec("select descripcionTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigoTipoGarantia+"'")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
-                }else{
-                    return "";
-                }
-            }else{return "";}
+            if(query.exec("select descripcionTipoGarantia from TipoGarantia where codigoTipoGarantia='"+_codigoTipoGarantia+"'")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
+                }else{return "";}
+            }else{
+                return "";
+            }
         }else{
             return "";
         }
     }else{
-        return "";
-    }*/
+        return _valor;
+    }
+
+    /*
+    */
 }
 QString ModuloTipoGarantia::retornaUltimoCodigo() const{
     bool conexion=true;

@@ -95,7 +95,7 @@ Mantenimientos::Mantenimientos(
 
 
         )
-      :m_idConfiguracionMantenimiento(idConfiguracionMantenimiento),
+    :m_idConfiguracionMantenimiento(idConfiguracionMantenimiento),
       m_clientesUsaTelefono(clientesUsaTelefono),
       m_clientesUsaTelefono2(clientesUsaTelefono2),
       m_clientesUsaCodigoPostal(clientesUsaCodigoPostal),
@@ -205,88 +205,88 @@ QVariant ControlesMantenimientos::data(const QModelIndex & index, int role) cons
         return mantenimientos.idConfiguracionMantenimiento();
     }
     else if (role == clientesUsaTelefonoRole){
- return mantenimientos.clientesUsaTelefono();
+        return mantenimientos.clientesUsaTelefono();
     }
     else if (role == clientesUsaTelefono2Role){
- return mantenimientos.clientesUsaTelefono2();
+        return mantenimientos.clientesUsaTelefono2();
     }
     else if (role == clientesUsaCodigoPostalRole){
- return mantenimientos.clientesUsaCodigoPostal();
+        return mantenimientos.clientesUsaCodigoPostal();
     }
     else if (role == clientesUsaEmailRole){
- return mantenimientos.clientesUsaEmail();
+        return mantenimientos.clientesUsaEmail();
     }
     else if (role == clientesUsaContactoRole){
- return mantenimientos.clientesUsaContacto();
+        return mantenimientos.clientesUsaContacto();
     }
     else if (role == clientesUsaObservacionesRole){
- return mantenimientos.clientesUsaObservaciones();
+        return mantenimientos.clientesUsaObservaciones();
     }
     else if (role == clientesUsaHorarioRole){
- return mantenimientos.clientesUsaHorario();
+        return mantenimientos.clientesUsaHorario();
     }
     else if (role == clientesUsaLocalidadRole){
- return mantenimientos.clientesUsaLocalidad();
+        return mantenimientos.clientesUsaLocalidad();
     }
     else if (role == clientesUsaEsquinaRole){
- return mantenimientos.clientesUsaEsquina();
+        return mantenimientos.clientesUsaEsquina();
     }
     else if (role == clientesUsaNumeroPuertaRole){
- return mantenimientos.clientesUsaNumeroPuerta();
+        return mantenimientos.clientesUsaNumeroPuerta();
     }
     else if (role == clientesUsaSitioWebRole){
- return mantenimientos.clientesUsaSitioWeb();
+        return mantenimientos.clientesUsaSitioWeb();
     }
     else if (role == clientesUsaValoracionRole){
- return mantenimientos.clientesUsaValoracion();
+        return mantenimientos.clientesUsaValoracion();
     }
     else if (role == clientesUsaAgregarListaPrecioRole){
- return mantenimientos.clientesUsaAgregarListaPrecio();
+        return mantenimientos.clientesUsaAgregarListaPrecio();
     }
     else if (role == clientesUsaCuentaBancariaRole){
- return mantenimientos.clientesUsaCuentaBancaria();
+        return mantenimientos.clientesUsaCuentaBancaria();
     }
     else if (role == clientesUsaCargaBatchRole){
- return mantenimientos.clientesUsaCargaBatch();
+        return mantenimientos.clientesUsaCargaBatch();
     }
     else if (role == articulosUsaTipoIVARole){
- return mantenimientos.articulosUsaTipoIVA();
+        return mantenimientos.articulosUsaTipoIVA();
     }
     else if (role == articulosUsaMonedaRole){
- return mantenimientos.articulosUsaMoneda();
+        return mantenimientos.articulosUsaMoneda();
     }
     else if (role == articulosUsaSubRubroRole){
- return mantenimientos.articulosUsaSubRubro();
+        return mantenimientos.articulosUsaSubRubro();
     }
     else if (role == articulosUsaListaDePrecioRole){
- return mantenimientos.articulosUsaListaDePrecio();
+        return mantenimientos.articulosUsaListaDePrecio();
     }
     else if (role == articulosUsaCodigoBarrasRole){
- return mantenimientos.articulosUsaCodigoBarras();
+        return mantenimientos.articulosUsaCodigoBarras();
     }
     else if (role == articulosUsaCantidadMinimaRole){
- return mantenimientos.articulosUsaCantidadMinima();
+        return mantenimientos.articulosUsaCantidadMinima();
     }
     else if (role == articulosUsaDescripcionExtendidaRole){
- return mantenimientos.articulosUsaDescripcionExtendida();
+        return mantenimientos.articulosUsaDescripcionExtendida();
     }
     else if (role == articulosUsaCheckActivoRole){
- return mantenimientos.articulosUsaCheckActivo();
+        return mantenimientos.articulosUsaCheckActivo();
     }
     else if (role == articulosUsaCargaBatchRole){
- return mantenimientos.articulosUsaCargaBatch();
+        return mantenimientos.articulosUsaCargaBatch();
     }
     else if (role == clientesUsaProcedenciaRole){
- return mantenimientos.clientesUsaProcedencia();
+        return mantenimientos.clientesUsaProcedencia();
     }
     else if (role == clientesUsaFormaDePagoRole){
- return mantenimientos.clientesUsaFormaDePago();
+        return mantenimientos.clientesUsaFormaDePago();
     }
     else if (role == clientesUsaMonedaRole){
- return mantenimientos.clientesUsaMoneda();
+        return mantenimientos.clientesUsaMoneda();
     }
     else if (role == articulosUsaTipoGarantiaRole){
- return mantenimientos.articulosUsaTipoGarantia();
+        return mantenimientos.articulosUsaTipoGarantia();
     }
 
 
@@ -297,117 +297,125 @@ bool ControlesMantenimientos::retornaValorMantenimiento(QString _permisoDocument
     bool _valorARetornar=false;
     for (int var = 0; var < m_Mantenimientos.size(); ++var) {
 
-            if (_permisoDocumento == "clientesUsaTelefono"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaTelefono());}
-            else if(_permisoDocumento == "clientesUsaTelefono2"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaTelefono2());
-            }
-            else if(_permisoDocumento == "clientesUsaCodigoPostal"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCodigoPostal());
-            }
-            else if(_permisoDocumento == "clientesUsaEmail"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaEmail());
-            }
-            else if(_permisoDocumento == "clientesUsaContacto"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaContacto());
-            }
-            else if(_permisoDocumento == "clientesUsaObservaciones"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaObservaciones());
-            }
-            else if(_permisoDocumento == "clientesUsaHorario"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaHorario());
-            }
-            else if(_permisoDocumento == "clientesUsaLocalidad"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaLocalidad());
-            }
-            else if(_permisoDocumento == "clientesUsaEsquina"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaEsquina());
-            }
-            else if(_permisoDocumento == "clientesUsaNumeroPuerta"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaNumeroPuerta());
-            }
-            else if(_permisoDocumento == "clientesUsaSitioWeb"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaSitioWeb());
-            }
-            else if(_permisoDocumento == "clientesUsaValoracion"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaValoracion());
-            }
-            else if(_permisoDocumento == "clientesUsaAgregarListaPrecio"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaAgregarListaPrecio());
-            }
-            else if(_permisoDocumento == "clientesUsaCuentaBancaria"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCuentaBancaria());
-            }
-            else if(_permisoDocumento == "clientesUsaCargaBatch"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCargaBatch());
-            }
-            else if(_permisoDocumento == "articulosUsaTipoIVA"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaTipoIVA());
-            }
-            else if(_permisoDocumento == "articulosUsaMoneda"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaMoneda());
-            }
-            else if(_permisoDocumento == "articulosUsaSubRubro"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaSubRubro());
-            }
-            else if(_permisoDocumento == "articulosUsaListaDePrecio"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaListaDePrecio());
-            }
-            else if(_permisoDocumento == "articulosUsaCodigoBarras"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCodigoBarras());
-            }
-            else if(_permisoDocumento == "articulosUsaCantidadMinima"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCantidadMinima());
-            }
-            else if(_permisoDocumento == "articulosUsaDescripcionExtendida"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaDescripcionExtendida());
-            }
-            else if(_permisoDocumento == "articulosUsaCheckActivo"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCheckActivo());
-            }
-            else if(_permisoDocumento == "articulosUsaCargaBatch"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCargaBatch());
-            }
-            else if(_permisoDocumento == "clientesUsaProcedencia"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaProcedencia());
-            }
-            else if(_permisoDocumento == "clientesUsaFormaDePago"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaFormaDePago());
-            }
-            else if(_permisoDocumento == "clientesUsaMoneda"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaMoneda());
-            }
-            else if(_permisoDocumento == "articulosUsaTipoGarantia"){
-                _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaTipoGarantia());
-            }
-
-    }
-    return _valorARetornar;
-    /*
-    Database::chequeaStatusAccesoMysql();
-
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            return false;
+        if (_permisoDocumento == "clientesUsaTelefono"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaTelefono());}
+        else if(_permisoDocumento == "clientesUsaTelefono2"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaTelefono2());
         }
+        else if(_permisoDocumento == "clientesUsaCodigoPostal"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCodigoPostal());
+        }
+        else if(_permisoDocumento == "clientesUsaEmail"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaEmail());
+        }
+        else if(_permisoDocumento == "clientesUsaContacto"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaContacto());
+        }
+        else if(_permisoDocumento == "clientesUsaObservaciones"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaObservaciones());
+        }
+        else if(_permisoDocumento == "clientesUsaHorario"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaHorario());
+        }
+        else if(_permisoDocumento == "clientesUsaLocalidad"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaLocalidad());
+        }
+        else if(_permisoDocumento == "clientesUsaEsquina"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaEsquina());
+        }
+        else if(_permisoDocumento == "clientesUsaNumeroPuerta"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaNumeroPuerta());
+        }
+        else if(_permisoDocumento == "clientesUsaSitioWeb"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaSitioWeb());
+        }
+        else if(_permisoDocumento == "clientesUsaValoracion"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaValoracion());
+        }
+        else if(_permisoDocumento == "clientesUsaAgregarListaPrecio"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaAgregarListaPrecio());
+        }
+        else if(_permisoDocumento == "clientesUsaCuentaBancaria"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCuentaBancaria());
+        }
+        else if(_permisoDocumento == "clientesUsaCargaBatch"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaCargaBatch());
+        }
+        else if(_permisoDocumento == "articulosUsaTipoIVA"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaTipoIVA());
+        }
+        else if(_permisoDocumento == "articulosUsaMoneda"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaMoneda());
+        }
+        else if(_permisoDocumento == "articulosUsaSubRubro"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaSubRubro());
+        }
+        else if(_permisoDocumento == "articulosUsaListaDePrecio"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaListaDePrecio());
+        }
+        else if(_permisoDocumento == "articulosUsaCodigoBarras"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCodigoBarras());
+        }
+        else if(_permisoDocumento == "articulosUsaCantidadMinima"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCantidadMinima());
+        }
+        else if(_permisoDocumento == "articulosUsaDescripcionExtendida"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaDescripcionExtendida());
+        }
+        else if(_permisoDocumento == "articulosUsaCheckActivo"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCheckActivo());
+        }
+        else if(_permisoDocumento == "articulosUsaCargaBatch"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaCargaBatch());
+        }
+        else if(_permisoDocumento == "clientesUsaProcedencia"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaProcedencia());
+        }
+        else if(_permisoDocumento == "clientesUsaFormaDePago"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaFormaDePago());
+        }
+        else if(_permisoDocumento == "clientesUsaMoneda"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].clientesUsaMoneda());
+        }
+        else if(_permisoDocumento == "articulosUsaTipoGarantia"){
+            _valorARetornar = convertirStringABool(m_Mantenimientos[var].articulosUsaTipoGarantia());
+        }
+
     }
-    QSqlQuery query(Database::connect());
-    if(query.exec("select "+_codigoMantenimiento+" from Mantenimientos")) {
-        if(query.first()){
-            if(query.value(0).toString()!=""){
-                if(query.value(0).toString()=="1"){
-                    return true;
-                }else{
-                    return false;
-                }
-            }else{
+
+    if(m_Mantenimientos.size()==0 && _valorARetornar==false){
+        Database::chequeaStatusAccesoMysql();
+
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
                 return false;
             }
         }
+        QSqlQuery query(Database::connect());
+        if(query.exec("select "+_permisoDocumento+" from Mantenimientos")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+                    if(query.value(0).toString()=="1"){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
     }else{
-        return false;
-    }*/
+        return _valorARetornar;
+
+    }
+
+
+    /*
+   */
 }
 
 
