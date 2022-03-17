@@ -346,6 +346,7 @@ inicio:
                 moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
                 moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
                 moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
+                moduloListaTipoDocumentosMantenimiento.buscarTodosLosTipoDocumentos("1=","1");
 
                 moduloControlesMantenimiento.buscarMantenimiento();                
                 moduloListaIvas.buscarIvas("1=","1");
