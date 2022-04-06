@@ -139,7 +139,8 @@ Rectangle{
                     modeloListaPrecioArticulosAlternativa.append({
 
                                                                      itemCodigoAgregado:modeloListaPrecioArticulos.retornarArticulosEnLista(i,codigoListaPrecio),
-                                                                     itemDescripcion:modeloArticulos.retornaDescripcionArticulo(modeloListaPrecioArticulos.retornarArticulosEnLista(i,codigoListaPrecio)),
+                                                                     itemDescripcion:modeloListaPrecioArticulos.retornarDescripcionArticulosEnLista(i,codigoListaPrecio),
+                                                                     //modeloArticulos.retornaDescripcionArticulo(modeloListaPrecioArticulos.retornarArticulosEnLista(i,codigoListaPrecio)),
                                                                      itemPrecioAgregado:modeloListaPrecioArticulos.retornarPrecioEnLista(i,codigoListaPrecio),
                                                                      precioModificado:false,
                                                                      eliminarPrecioArticulo:false

@@ -385,7 +385,7 @@ inicio:
 
                 moduloReportes.buscarReportes("1=","1","");
 
-
+                moduloArticulos.buscarArticulo("1=","1",0);
 
 
 
@@ -608,7 +608,6 @@ inicio:
     moduloListaImpresoras.buscarImpresoras();
     moduloRubrosComboBox.buscarRubros("1=","1");
     moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
-    // moduloMonedasTotales.buscarMonedas("1=","1");
     moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
     moduloTipoChequesComboBox.buscarCheques("1=","1");
     moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");

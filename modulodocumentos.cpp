@@ -601,8 +601,6 @@ void ModuloDocumentos::buscarDocumentos(QString campo, QString datoABuscar){
 }
 void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacion, QString _codigoVendedorLiquidacion, QString _codigoPerfil, QString _estadoDocumento){
 
-
-
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -617,11 +615,15 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
         QSqlQuery q;
         // Si es -1 el estado del documeto, cargo todos
         if(_estadoDocumento=="-1"){
-             q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+           //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+            q = Database::consultaSql("select * from VDocumentosLiquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  order by fechaHoraGuardadoDocumentoSQL desc");
         }else{
             // Cargo el estado del documento que me pasaron
-             q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoEstadoDocumento='"+_estadoDocumento+"'   and   D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+           //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoEstadoDocumento='"+_estadoDocumento+"'   and   D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+             q = Database::consultaSql("select * from VDocumentosLiquidaciones where codigoEstadoDocumento='"+_estadoDocumento+"'   and   codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  order by fechaHoraGuardadoDocumentoSQL desc");
         }
+
+
 
         QSqlRecord rec = q.record();
 

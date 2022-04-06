@@ -35,6 +35,7 @@ ModuloListaPrecioArticulos::ModuloListaPrecioArticulos(QObject *parent)
     QHash<int, QByteArray> roles;
     roles[CodigoListaPrecioRole] = "codigoListaPrecio";
     roles[CodigoArticuloRole] = "codigoArticulo";
+    roles[DescripcionArticuloRole] = "descripcionArticulo";
     roles[PrecioArticuloRole] = "precioArticulo";
 
     setRoleNames(roles);
@@ -228,6 +229,23 @@ QString ModuloListaPrecioArticulos::retornarArticulosEnLista(int indice, QString
         if(m_ArticulosListaPrecio[i].codigoListaPrecio()==_codigoListaPrecio){
             if(contador==indice){
                 return m_ArticulosListaPrecio[i].codigoArticulo();
+            }
+            contador++;
+        }
+    }
+    return "";
+}
+
+QString ModuloListaPrecioArticulos::retornarDescripcionArticulosEnLista(int indice, QString  _codigoListaPrecio) const{
+
+    int contador=0;
+    int totalm_ArticulosListaPrecio=m_ArticulosListaPrecio.count();
+
+
+    for(int i=0;i<totalm_ArticulosListaPrecio;i++){
+        if(m_ArticulosListaPrecio[i].codigoListaPrecio()==_codigoListaPrecio){
+            if(contador==indice){
+                return m_ArticulosListaPrecio[i].descripcionArticulo();
             }
             contador++;
         }
@@ -544,3 +562,4 @@ Database::chequeaStatusAccesoMysql();
 QString ModuloListaPrecioArticulos::retornaCodigoListaPrecio(int index){return m_ArticulosListaPrecio[index].codigoListaPrecio();}
 QString ModuloListaPrecioArticulos::retornaCodigoArticulo(int index){return m_ArticulosListaPrecio[index].codigoArticulo();}
 QString ModuloListaPrecioArticulos::retornaPrecioArticulo(int index){return m_ArticulosListaPrecio[index].precioArticulo();}
+QString ModuloListaPrecioArticulos::retornaDescripcionArticulo(int index){return m_ArticulosListaPrecio[index].descripcionArticulo();}

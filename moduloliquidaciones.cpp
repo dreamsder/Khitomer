@@ -100,7 +100,7 @@ void ModuloLiquidaciones::clearLiquidaciones(){
 void ModuloLiquidaciones::buscarLiquidacion(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -194,7 +194,7 @@ int ModuloLiquidaciones::insertarLiquidacion(QString _codigoVendedor, QString _f
     }
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -219,7 +219,7 @@ Database::chequeaStatusAccesoMysql();
 
 bool ModuloLiquidaciones::eliminarLiquidacion(QString _codigoLiquidacion,QString _codigoVendedor) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -268,7 +268,7 @@ Database::chequeaStatusAccesoMysql();
 
 int ModuloLiquidaciones::ultimoRegistroDeLiquidacionEnBase(QString _codigoVendedor) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -302,7 +302,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedorPorDefault(QString _codigoVendedor) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -330,24 +330,38 @@ Database::chequeaStatusAccesoMysql();
     }
 }
 QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedor(QString _codigoLiquidacion,QString _codigoVendedor) const{
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    QString _valor="";
+    for (int var = 0; var < m_Liquidaciones.size(); ++var) {
+        if(m_Liquidaciones[var].codigoLiquidacion()==_codigoLiquidacion && m_Liquidaciones[var].codigoVendedor()==_codigoVendedor){
+
+            _valor= m_Liquidaciones[var].codigoLiquidacion()+" - "+m_Liquidaciones[var].nombreCompletoVendedor()+" - "+m_Liquidaciones[var].fechaLiquidacion();
+
         }
     }
 
-    if(conexion){
+    if(m_Liquidaciones.size()==0 && _valor==""){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
 
-        QSqlQuery query(Database::connect());
+        if(conexion){
 
-        ///and L.estadoLiquidacion='A'
-        if(query.exec("select concat(L.codigoLiquidacion,' - ',U.nombreUsuario,' ',U.apellidoUsuario,' - ',L.fechaLiquidacion) from Liquidaciones L join Usuarios U on U.idUsuario=L.codigoVendedor where L.codigoVendedor='"+_codigoVendedor+"' and L.codigoLiquidacion='"+_codigoLiquidacion+"'   limit 1")) {
-            if(query.first()){
-                if(query.value(0).toString()!=""){
-                    return query.value(0).toString();
+            QSqlQuery query(Database::connect());
+
+            ///and L.estadoLiquidacion='A'
+            if(query.exec("select concat(L.codigoLiquidacion,' - ',U.nombreUsuario,' ',U.apellidoUsuario,' - ',L.fechaLiquidacion) from Liquidaciones L join Usuarios U on U.idUsuario=L.codigoVendedor where L.codigoVendedor='"+_codigoVendedor+"' and L.codigoLiquidacion='"+_codigoLiquidacion+"'   limit 1")) {
+                if(query.first()){
+                    if(query.value(0).toString()!=""){
+                        return query.value(0).toString();
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
@@ -358,12 +372,14 @@ Database::chequeaStatusAccesoMysql();
             return "";
         }
     }else{
-        return "";
+        return _valor;
     }
+
+
 }
 QString ModuloLiquidaciones::retornaNumeroLiquidacionDeVendedor(QString _codigoVendedor) const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -394,7 +410,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloLiquidaciones::retornaNumeroPrimeraLiquidacionActiva() const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -424,7 +440,7 @@ Database::chequeaStatusAccesoMysql();
 }
 QString ModuloLiquidaciones::retornaCodigoVendedorPrimeraLiquidacionActiva() const{
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -456,8 +472,10 @@ Database::chequeaStatusAccesoMysql();
 
 
 QString ModuloLiquidaciones::retornaValorTotalDocumentosEnLiquidaciones(QString _codigoLiquidacion,QString _codigoVendedor,QString _codigoMoneda) const{
+
+
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -476,10 +494,16 @@ Database::chequeaStatusAccesoMysql();
             consultaOtrasMonedas="";
         }else if(modoAfectacionCaja=="1"){
             consultaMonedaReferencia="SELECT ROUND(sum(case when  D.codigoMonedaDocumento='"+_codigoMoneda+"' then D.precioTotalVenta*T.afectaTotales else 0 end),2)  FROM Documentos D join Monedas M on M.codigoMoneda=D.codigoMonedaDocumento join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"' and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A')";
-            consultaOtrasMonedas="select ROUND(sum(case when  D.codigoMonedaDocumento='"+_codigoMoneda+"' then D.precioTotalVenta*T.afectaTotales else (D.precioTotalVenta/(select MON.cotizacionMoneda from Monedas MON  where codigoMoneda='"+_codigoMoneda+"'))*T.afectaTotales end),2)  FROM Documentos D join Monedas M on M.codigoMoneda=D.codigoMonedaDocumento join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'and D.codigoMonedaDocumento='"+_codigoMoneda+"' and T.afectaTotales!=0 and D.codigoEstadoDocumento not in ('C','A','P')";
+            consultaOtrasMonedas="    select ROUND(sum(case when  D.codigoMonedaDocumento='"+_codigoMoneda+"' then D.precioTotalVenta*T.afectaTotales else (D.precioTotalVenta/(select MON.cotizacionMoneda from Monedas MON  where codigoMoneda='"+_codigoMoneda+"'))*T.afectaTotales end),2)  FROM Documentos D join Monedas M on M.codigoMoneda=D.codigoMonedaDocumento join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'and D.codigoMonedaDocumento='"+_codigoMoneda+"' and T.afectaTotales!=0 and D.codigoEstadoDocumento not in ('C','A','P')";
         }else if(modoAfectacionCaja=="2"){
-            consultaMonedaReferencia="select ROUND(sum(DLP.importePago*T.afectaTotales),2) FROM Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento join MediosDePago MP on MP.codigoMedioPago=DLP.codigoMedioPago join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"' and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P') and MP.codigoTipoMedioDePago=1 and MP.monedaMedioPago='"+_codigoMoneda+"'";
-            consultaOtrasMonedas="select ROUND(sum(DLP.importePago*T.afectaTotales),2) FROM Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento join MediosDePago MP on MP.codigoMedioPago=DLP.codigoMedioPago join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"' and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P') and MP.codigoTipoMedioDePago=1 and MP.monedaMedioPago='"+_codigoMoneda+"'";
+
+            //VTotalesEnLiquidacion
+
+          //consultaMonedaReferencia="select ROUND(sum(DLP.importePago*T.afectaTotales),2) FROM Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento join MediosDePago MP on MP.codigoMedioPago=DLP.codigoMedioPago join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"' and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P') and MP.codigoTipoMedioDePago=1 and MP.monedaMedioPago='"+_codigoMoneda+"'";
+
+            consultaMonedaReferencia="select sum(monto) FROM VTotalesEnLiquidacion  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and monedaMedioPago='"+_codigoMoneda+"'";
+
+            consultaOtrasMonedas=consultaMonedaReferencia;
         }else{
             consultaMonedaReferencia="";
             consultaOtrasMonedas="";
@@ -489,9 +513,8 @@ Database::chequeaStatusAccesoMysql();
         QSqlQuery query(Database::connect());
 
         if(func_moneda.retornaMonedaReferenciaSistema()==_codigoMoneda){
-            //if(query.exec("SELECT ROUND(sum(case when  D.codigoMonedaDocumento='"+_codigoMoneda+"' then D.precioTotalVenta*T.afectaTotales else 0 end),2)  FROM Documentos D join Monedas M on M.codigoMoneda=D.codigoMonedaDocumento join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"' and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A') ;")) {
-            if(query.exec(consultaMonedaReferencia)) {
 
+            if(query.exec(consultaMonedaReferencia)) {
                 if(query.first()){
                     if(query.value(0).toString()!=""){
                         return query.value(0).toString();
@@ -502,13 +525,11 @@ Database::chequeaStatusAccesoMysql();
                     return "0";
                 }
             }else{
+                qDebug()<< query.lastError();
                 return "0";
             }
         }else{
-
-            //if(query.exec("select ROUND(sum(case when  D.codigoMonedaDocumento='"+_codigoMoneda+"' then D.precioTotalVenta*T.afectaTotales else (D.precioTotalVenta/(select MON.cotizacionMoneda from Monedas MON  where codigoMoneda='"+_codigoMoneda+"'))*T.afectaTotales end),2)  FROM Documentos D join Monedas M on M.codigoMoneda=D.codigoMonedaDocumento join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'and D.codigoMonedaDocumento='"+_codigoMoneda+"' and T.afectaTotales!=0 and D.codigoEstadoDocumento not in ('C','A','P');")) {
             if(query.exec(consultaOtrasMonedas)) {
-
                 if(query.first()){
                     if(query.value(0).toString()!=""){
                         return query.value(0).toString();
@@ -525,8 +546,10 @@ Database::chequeaStatusAccesoMysql();
     }
 }
 QString ModuloLiquidaciones::retornaCantidadDocumentosEnLiquidacionSegunEstado(QString _codigoLiquidacion,QString _codigoVendedor,QString _estadoDocumento) const{
+
+
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -539,7 +562,8 @@ Database::chequeaStatusAccesoMysql();
         QSqlQuery query(Database::connect());
 
         if(_estadoDocumento=="P"){
-            if(query.exec("select count(*) from Documentos where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento='P'")) {
+            //if(query.exec("select count(*) from Documentos where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento='P'")) {
+              if(query.exec("select sum(cantidad) from VCantidadDocumentosEnLiquidaciones where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento='P'")) {
                 if(query.first()){
                     if(query.value(0).toString()!=""){
                         return query.value(0).toString();
@@ -551,9 +575,11 @@ Database::chequeaStatusAccesoMysql();
                 return "";
             }
 
+            //VCantidadDocumentosEnLiquidaciones
 
         }else{
-            if(query.exec("select count(*) from Documentos where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento not in ('C','A','P')")) {
+            //if(query.exec("select count(*) from Documentos where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento not in ('C','A','P')")) {
+            if(query.exec("select sum(cantidad) from VCantidadDocumentosEnLiquidaciones where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedor+"' and codigoEstadoDocumento not in ('C','A','P')")) {
                 if(query.first()){
                     if(query.value(0).toString()!=""){
                         return query.value(0).toString();
@@ -571,7 +597,7 @@ Database::chequeaStatusAccesoMysql();
 }
 bool ModuloLiquidaciones::cerrarLiquidacion(QString _codigoLiquidacion,QString _codigoVendedor) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -606,22 +632,39 @@ Database::chequeaStatusAccesoMysql();
 
 
 bool ModuloLiquidaciones::liquidacionActiva(QString _codigoLiquidacion,QString _codigoVendedor) const{
-    bool conexion=true;
-Database::chequeaStatusAccesoMysql();
-    if(!Database::connect().isOpen()){
-        if(!Database::connect().open()){
-            qDebug() << "No conecto";
-            conexion=false;
+
+    bool _valor=false;
+    for (int var = 0; var < m_Liquidaciones.size(); ++var) {
+        if(m_Liquidaciones[var].codigoLiquidacion()==_codigoLiquidacion && m_Liquidaciones[var].codigoVendedor()==_codigoVendedor){
+
+            if(m_Liquidaciones[var].estadoLiquidacion()=="A"){
+                _valor=true;
+            }
+
         }
     }
-    if(conexion){
 
-        QSqlQuery query(Database::connect());
 
-        if(query.exec("select estadoLiquidacion from Liquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedor='"+_codigoVendedor+"' ")) {
-            if(query.first()){
-                if(query.value(0).toString()=="A"){
-                    return true;
+    if(m_Liquidaciones.size()==0 && _valor==false){
+        bool conexion=true;
+        Database::chequeaStatusAccesoMysql();
+        if(!Database::connect().isOpen()){
+            if(!Database::connect().open()){
+                qDebug() << "No conecto";
+                conexion=false;
+            }
+        }
+        if(conexion){
+
+            QSqlQuery query(Database::connect());
+
+            if(query.exec("select estadoLiquidacion from Liquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedor='"+_codigoVendedor+"' ")) {
+                if(query.first()){
+                    if(query.value(0).toString()=="A"){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }else{
                     return false;
                 }
@@ -632,6 +675,8 @@ Database::chequeaStatusAccesoMysql();
             return false;
         }
     }else{
-        return false;
+        return _valor;
     }
+
+
 }

@@ -279,7 +279,7 @@ Rectangle {
         /// 1.16.23 :Correcciones varias.
         /// 1.16.24 :Corrección en reporte Stock bajo minimo.
         /// 1.17.0  :Se optimiza el sistema para mejorar la intensidad de consultas a la base de datos.
-
+        ///         :Se agrega el reporte "Listado de clientes x lista precio y fecha de alta" para digital world.
 
 
         Text {

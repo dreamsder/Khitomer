@@ -75,7 +75,6 @@ Database::chequeaStatusAccesoMysql();
     if(conexion){
         QSqlQuery q = Database::consultaSql("SELECT   MP.monedaMedioPago'codigoMoneda',  case when   (select  sum(DLP.importePago*T.afectaTotales)   FROM  Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento  join MediosDePago MPO on MPO.codigoMedioPago=DLP.codigoMedioPago  join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento  where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'   and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P')  and MPO.codigoTipoMedioDePago=3 and DLP.codigoTipoCheque=2 and DLP.monedaMedioPago=MP.monedaMedioPago  and DLP.montoCobrado<DLP.importePago and DLP.documentoChequeDiferido=0 and DLP.tipoDocumentoChequeDiferido=0) is null then 0 else    (select    sum(DLP.importePago*T.afectaTotales)  FROM  Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento  and DLP.serieDocumento=D.serieDocumento join MediosDePago MPO on MPO.codigoMedioPago=DLP.codigoMedioPago   join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento  where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'  and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P')  and MPO.codigoTipoMedioDePago=3 and DLP.codigoTipoCheque=2 and DLP.monedaMedioPago=MP.monedaMedioPago and DLP.montoCobrado<DLP.importePago and DLP.documentoChequeDiferido=0 and DLP.tipoDocumentoChequeDiferido=0) end'importeTotalChequesDiferidos' FROM   MediosDePago MP  where MP.codigoTipoMedioDePago=3 group by MP.codigoMedioPago ");
         QSqlRecord rec = q.record();
-
         ModuloTotalChequesDiferidos::reset();
         if(q.record().count()>0){
 
@@ -99,14 +98,16 @@ Database::chequeaStatusAccesoMysql();
         QSqlQuery q = Database::consultaSql("SELECT   MP.monedaMedioPago'codigoMoneda',  case when   (select  sum(DLP.importePago*T.afectaTotales)   FROM  Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento join MediosDePago MPO on MPO.codigoMedioPago=DLP.codigoMedioPago  join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento  where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'   and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P')  and MPO.codigoTipoMedioDePago=3 and DLP.codigoTipoCheque!=2 and DLP.monedaMedioPago=MP.monedaMedioPago  and DLP.montoCobrado<DLP.importePago and DLP.documentoChequeDiferido=0 and DLP.tipoDocumentoChequeDiferido=0) is null then 0 else    (select    sum(DLP.importePago*T.afectaTotales)  FROM  Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento   join MediosDePago MPO on MPO.codigoMedioPago=DLP.codigoMedioPago   join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento  where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedor+"'  and T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P')  and MPO.codigoTipoMedioDePago=3 and DLP.codigoTipoCheque!=2 and DLP.monedaMedioPago=MP.monedaMedioPago and DLP.montoCobrado<DLP.importePago and DLP.documentoChequeDiferido=0 and DLP.tipoDocumentoChequeDiferido=0) end'importeTotalChequesDiferidos' FROM   MediosDePago MP  where MP.codigoTipoMedioDePago=3 group by MP.codigoMedioPago ");
         QSqlRecord rec = q.record();
 
+
         ModuloTotalChequesDiferidos::reset();
         if(q.record().count()>0){
-
             while (q.next()){
                 ModuloTotalChequesDiferidos::agregarTotalCheques(TotalCheques(q.value(rec.indexOf("codigoMoneda")).toInt(), q.value(rec.indexOf("importeTotalChequesDiferidos")).toString()));
             }
         }
     }
+
+
 }
 
 

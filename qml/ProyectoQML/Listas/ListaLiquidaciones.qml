@@ -143,8 +143,6 @@ Rectangle{
                 modeloTotalOtrosCheques.buscarTotalOtrosCheques(codigoLiquidacion,codigoVendedor)
 
 
-                modeloMonedasTotales.limpiarListaMonedas()
-                modeloMonedasTotales.buscarMonedas("1=","1")
 
                 focus_scope1.focus=true
 

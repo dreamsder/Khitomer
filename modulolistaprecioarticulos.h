@@ -81,6 +81,8 @@ public:
 
     Q_INVOKABLE QString retornarArticulosEnLista(int,QString) const;
     Q_INVOKABLE QString retornarPrecioEnLista(int,QString) const;
+    Q_INVOKABLE QString retornarDescripcionArticulosEnLista(int indice, QString  _codigoListaPrecio) const;
+
 
     Q_INVOKABLE double retornarPrecioDeArticuloEnBaseDeDatos(QString,QString) const;
 
@@ -98,6 +100,7 @@ public:
     Q_INVOKABLE QString retornaCodigoListaPrecio(int );
     Q_INVOKABLE QString retornaCodigoArticulo(int );
     Q_INVOKABLE QString retornaPrecioArticulo(int );
+    Q_INVOKABLE QString retornaDescripcionArticulo(int index);
 
 
 
