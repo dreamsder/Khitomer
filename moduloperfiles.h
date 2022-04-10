@@ -71,7 +71,14 @@ public:
                          const QString &permiteUsarMenuAvanzadoRubros,
                          const QString &permiteUsarMenuAvanzadoMonedas,
                          const QString &permiteUsarMenuAvanzadoPermisos,
-                         const QString &permiteUsarMenuAvanzadoUsuarios
+                         const QString &permiteUsarMenuAvanzadoUsuarios,
+
+                         const QString &permiteUsarMenuAvanzadoFacturaElectronica,
+                         const QString &permiteUsarMenuAvanzadoLogDelSistema,
+                         const QString &permiteUsarMenuAvanzadoGarantia,
+                         const QString &permiteUsarPromociones
+
+
 
 
 
@@ -123,6 +130,14 @@ public:
     QString permiteUsarMenuAvanzadoPermisos() const;
     QString permiteUsarMenuAvanzadoUsuarios() const;
 
+    QString permiteUsarMenuAvanzadoFacturaElectronica() const;
+    QString permiteUsarMenuAvanzadoLogDelSistema() const;
+    QString permiteUsarMenuAvanzadoGarantia() const;
+    QString permiteUsarPromociones() const;
+
+
+
+
 
 
 private:
@@ -170,6 +185,13 @@ private:
     QString m_permiteUsarMenuAvanzadoMonedas;
     QString m_permiteUsarMenuAvanzadoPermisos;
     QString m_permiteUsarMenuAvanzadoUsuarios;
+
+    QString m_permiteUsarMenuAvanzadoFacturaElectronica;
+    QString m_permiteUsarMenuAvanzadoLogDelSistema;
+    QString m_permiteUsarMenuAvanzadoGarantia;
+    QString m_permiteUsarPromociones;
+
+
 
 };
 
@@ -222,7 +244,14 @@ public:
         permiteUsarMenuAvanzadoRubrosRole,
         permiteUsarMenuAvanzadoMonedasRole,
         permiteUsarMenuAvanzadoPermisosRole,
-        permiteUsarMenuAvanzadoUsuariosRole
+        permiteUsarMenuAvanzadoUsuariosRole,
+
+
+
+        permiteUsarMenuAvanzadoFacturaElectronicaRole,
+        permiteUsarMenuAvanzadoLogDelSistemaRole,
+        permiteUsarMenuAvanzadoGarantiaRole,
+        permiteUsarPromocionesRole
 
 
     };

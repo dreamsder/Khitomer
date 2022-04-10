@@ -31,6 +31,8 @@ Rectangle {
     color: "#14ffffff"
     radius: 1
 
+
+
     property alias source: imageTextMenu.source
 
 
@@ -49,6 +51,7 @@ Rectangle {
     }
 
     function mostrarMenu(codigoDelMenu){
+
 
         if(codigoDelMenu==1){
             menusistema1.visible=true
@@ -311,6 +314,7 @@ Rectangle {
 
     //
     border.color: "#272525"
+
 
     Rectangle {
         id: rectCapaTransparente
@@ -871,4 +875,7 @@ Rectangle {
 
         }
     }
+
+
+
 }

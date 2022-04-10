@@ -29,19 +29,19 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 ModuloPerfiles::ModuloPerfiles(QObject *parent)
     : QAbstractListModel(parent)
 {
-    QHash<int, QByteArray> roles;
+    QHash<int, QByteArray> roles;       
     roles[CodigoPerfilRole] = "codigoPerfil";
     roles[DescripcionPerfilRole] = "descripcionPerfil";
-
     roles[permiteUsarLiquidacionesRole] = "permiteUsarLiquidaciones";
     roles[permiteUsarFacturacionRole] = "permiteUsarFacturacion";
     roles[permiteUsarArticulosRole] = "permiteUsarArticulos";
     roles[permiteUsarListaPreciosRole] = "permiteUsarListaPrecios";
     roles[permiteUsarClientesRole] = "permiteUsarClientes";
-    roles[permiteUsarMenuAvanzadoRole] = "permiteUsarMenuAvanzado";
     roles[permiteUsarDocumentosRole] = "permiteUsarDocumentos";
     roles[permiteUsarReportesRole] = "permiteUsarReportes";
     roles[permiteUsarCuentaCorrienteRole] = "permiteUsarCuentaCorriente";
+    roles[permiteUsarMenuAvanzadoRole] = "permiteUsarMenuAvanzado";
+    roles[permiteExportarAPDFRole] = "permiteExportarAPDF";
     roles[permiteCrearLiquidacionesRole] = "permiteCrearLiquidaciones";
     roles[permiteBorrarLiquidacionesRole] = "permiteBorrarLiquidaciones";
     roles[permiteCerrarLiquidacionesRole] = "permiteCerrarLiquidaciones";
@@ -49,33 +49,32 @@ ModuloPerfiles::ModuloPerfiles(QObject *parent)
     roles[permiteCrearFacturasRole] = "permiteCrearFacturas";
     roles[permiteBorrarFacturasRole] = "permiteBorrarFacturas";
     roles[permiteAnularFacturasRole] = "permiteAnularFacturas";
+    roles[permiteReimprimirFacturasRole] = "permiteReimprimirFacturas";
     roles[permiteCrearClientesRole] = "permiteCrearClientes";
     roles[permiteBorrarClientesRole] = "permiteBorrarClientes";
     roles[permiteCrearArticulosRole] = "permiteCrearArticulos";
     roles[permiteBorrarArticulosRole] = "permiteBorrarArticulos";
     roles[permiteCrearListaDePreciosRole] = "permiteCrearListaDePrecios";
     roles[permiteBorrarListaDePreciosRole] = "permiteBorrarListaDePrecios";
+    roles[permiteCambioRapidoDePreciosRole] = "permiteCambioRapidoDePrecios";
     roles[permiteAutorizarDescuentosArticuloRole] = "permiteAutorizarDescuentosArticulo";
     roles[permiteAutorizarDescuentosTotalRole] = "permiteAutorizarDescuentosTotal";
     roles[permiteAutorizarAnulacionesRole] = "permiteAutorizarAnulaciones";
-    roles[permiteExportarAPDFRole] = "permiteExportarAPDF";
-    roles[permiteReimprimirFacturasRole] = "permiteReimprimirFacturas";
-
-    roles[permiteCambioRapidoDePreciosRole] = "permiteCambioRapidoDePrecios";
-
-
-    roles[permiteUsarMenuAvanzadoConfiguracionesRole]="permiteUsarMenuAvanzadoConfiguraciones";
-    roles[permiteUsarMenuAvanzadoIvasRole]="permiteUsarMenuAvanzadoIvas";
-    roles[permiteUsarMenuAvanzadoTiposDeDocumentosRole]="permiteUsarMenuAvanzadoTiposDeDocumentos";
-    roles[permiteUsarMenuAvanzadoLocalidadesRole]="permiteUsarMenuAvanzadoLocalidades";
-    roles[permiteUsarMenuAvanzadoBancosRole]="permiteUsarMenuAvanzadoBancos";
-    roles[permiteUsarMenuAvanzadoPagoDeFinacierasRole]="permiteUsarMenuAvanzadoPagoDeFinacieras";
-    roles[permiteUsarMenuAvanzadoCuentasBancariasRole]="permiteUsarMenuAvanzadoCuentasBancarias";
-    roles[permiteUsarMenuAvanzadoRubrosRole]="permiteUsarMenuAvanzadoRubros";
-    roles[permiteUsarMenuAvanzadoMonedasRole]="permiteUsarMenuAvanzadoMonedas";
-    roles[permiteUsarMenuAvanzadoPermisosRole]="permiteUsarMenuAvanzadoPermisos";
-    roles[permiteUsarMenuAvanzadoUsuariosRole]="permiteUsarMenuAvanzadoUsuarios";
-
+    roles[permiteUsarMenuAvanzadoConfiguracionesRole] = "permiteUsarMenuAvanzadoConfiguraciones";
+    roles[permiteUsarMenuAvanzadoIvasRole] = "permiteUsarMenuAvanzadoIvas";
+    roles[permiteUsarMenuAvanzadoTiposDeDocumentosRole] = "permiteUsarMenuAvanzadoTiposDeDocumentos";
+    roles[permiteUsarMenuAvanzadoLocalidadesRole] = "permiteUsarMenuAvanzadoLocalidades";
+    roles[permiteUsarMenuAvanzadoBancosRole] = "permiteUsarMenuAvanzadoBancos";
+    roles[permiteUsarMenuAvanzadoPagoDeFinacierasRole] = "permiteUsarMenuAvanzadoPagoDeFinacieras";
+    roles[permiteUsarMenuAvanzadoCuentasBancariasRole] = "permiteUsarMenuAvanzadoCuentasBancarias";
+    roles[permiteUsarMenuAvanzadoRubrosRole] = "permiteUsarMenuAvanzadoRubros";
+    roles[permiteUsarMenuAvanzadoMonedasRole] = "permiteUsarMenuAvanzadoMonedas";
+    roles[permiteUsarMenuAvanzadoPermisosRole] = "permiteUsarMenuAvanzadoPermisos";
+    roles[permiteUsarMenuAvanzadoUsuariosRole] = "permiteUsarMenuAvanzadoUsuarios";
+    roles[permiteUsarMenuAvanzadoFacturaElectronicaRole] = "permiteUsarMenuAvanzadoFacturaElectronica";
+    roles[permiteUsarMenuAvanzadoLogDelSistemaRole] = "permiteUsarMenuAvanzadoLogDelSistema";
+    roles[permiteUsarMenuAvanzadoGarantiaRole] = "permiteUsarMenuAvanzadoGarantia";
+    roles[permiteUsarPromocionesRole] = "permiteUsarPromociones";
 
 
 
@@ -84,51 +83,52 @@ ModuloPerfiles::ModuloPerfiles(QObject *parent)
 }
 
 
-Perfiles::Perfiles(const int &codigoPerfil, const QString &descripcionPerfil
-                   ,const QString &permiteUsarLiquidaciones
-                   ,const QString &permiteUsarFacturacion
-                   ,const QString &permiteUsarArticulos
-                   ,const QString &permiteUsarListaPrecios
-                   ,const QString &permiteUsarClientes
-                   ,const QString &permiteUsarMenuAvanzado
-
-                   ,const QString &permiteUsarDocumentos
-                   ,const QString &permiteUsarReportes
-                   ,const QString &permiteUsarCuentaCorriente
-                   ,const QString &permiteCrearLiquidaciones
-                   ,const QString &permiteBorrarLiquidaciones
-                   ,const QString &permiteCerrarLiquidaciones
-                   ,const QString &permiteAutorizarCierreLiquidaciones
-                   ,const QString &permiteCrearFacturas
-                   ,const QString &permiteBorrarFacturas
-                   ,const QString &permiteAnularFacturas
-                   ,const QString &permiteCrearClientes
-                   ,const QString &permiteBorrarClientes
-                   ,const QString &permiteCrearArticulos
-                   ,const QString &permiteBorrarArticulos
-                   ,const QString &permiteCrearListaDePrecios
-                   ,const QString &permiteBorrarListaDePrecios
-                   ,const QString &permiteAutorizarDescuentosArticulo
-                   ,const QString &permiteAutorizarDescuentosTotal
-                   ,const QString &permiteAutorizarAnulaciones
-                   ,const QString &permiteExportarAPDF
-                   ,const QString &permiteReimprimirFacturas
-                   ,const QString &permiteCambioRapidoDePrecios,
-
-
-                   const QString &permiteUsarMenuAvanzadoConfiguraciones,
-                   const QString &permiteUsarMenuAvanzadoIvas,
-                   const QString &permiteUsarMenuAvanzadoTiposDeDocumentos,
-                   const QString &permiteUsarMenuAvanzadoLocalidades,
-                   const QString &permiteUsarMenuAvanzadoBancos,
-                   const QString &permiteUsarMenuAvanzadoPagoDeFinacieras,
-                   const QString &permiteUsarMenuAvanzadoCuentasBancarias,
-                   const QString &permiteUsarMenuAvanzadoRubros,
-                   const QString &permiteUsarMenuAvanzadoMonedas,
-                   const QString &permiteUsarMenuAvanzadoPermisos,
-                   const QString &permiteUsarMenuAvanzadoUsuarios
-
-
+Perfiles::Perfiles(
+        const int &codigoPerfil,
+        const QString &descripcionPerfil,
+        const QString &permiteUsarLiquidaciones,
+        const QString &permiteUsarFacturacion,
+        const QString &permiteUsarArticulos,
+        const QString &permiteUsarListaPrecios,
+        const QString &permiteUsarClientes,
+        const QString &permiteUsarDocumentos,
+        const QString &permiteUsarReportes,
+        const QString &permiteUsarCuentaCorriente,
+        const QString &permiteUsarMenuAvanzado,
+        const QString &permiteExportarAPDF,
+        const QString &permiteCrearLiquidaciones,
+        const QString &permiteBorrarLiquidaciones,
+        const QString &permiteCerrarLiquidaciones,
+        const QString &permiteAutorizarCierreLiquidaciones,
+        const QString &permiteCrearFacturas,
+        const QString &permiteBorrarFacturas,
+        const QString &permiteAnularFacturas,
+        const QString &permiteReimprimirFacturas,
+        const QString &permiteCrearClientes,
+        const QString &permiteBorrarClientes,
+        const QString &permiteCrearArticulos,
+        const QString &permiteBorrarArticulos,
+        const QString &permiteCrearListaDePrecios,
+        const QString &permiteBorrarListaDePrecios,
+        const QString &permiteCambioRapidoDePrecios,
+        const QString &permiteAutorizarDescuentosArticulo,
+        const QString &permiteAutorizarDescuentosTotal,
+        const QString &permiteAutorizarAnulaciones,
+        const QString &permiteUsarMenuAvanzadoConfiguraciones,
+        const QString &permiteUsarMenuAvanzadoIvas,
+        const QString &permiteUsarMenuAvanzadoTiposDeDocumentos,
+        const QString &permiteUsarMenuAvanzadoLocalidades,
+        const QString &permiteUsarMenuAvanzadoBancos,
+        const QString &permiteUsarMenuAvanzadoPagoDeFinacieras,
+        const QString &permiteUsarMenuAvanzadoCuentasBancarias,
+        const QString &permiteUsarMenuAvanzadoRubros,
+        const QString &permiteUsarMenuAvanzadoMonedas,
+        const QString &permiteUsarMenuAvanzadoPermisos,
+        const QString &permiteUsarMenuAvanzadoUsuarios,
+        const QString &permiteUsarMenuAvanzadoFacturaElectronica,
+        const QString &permiteUsarMenuAvanzadoLogDelSistema,
+        const QString &permiteUsarMenuAvanzadoGarantia,
+        const QString &permiteUsarPromociones
                    )
 
 
@@ -173,7 +173,13 @@ Perfiles::Perfiles(const int &codigoPerfil, const QString &descripcionPerfil
       m_permiteUsarMenuAvanzadoRubros(permiteUsarMenuAvanzadoRubros),
       m_permiteUsarMenuAvanzadoMonedas(permiteUsarMenuAvanzadoMonedas),
       m_permiteUsarMenuAvanzadoPermisos(permiteUsarMenuAvanzadoPermisos),
-      m_permiteUsarMenuAvanzadoUsuarios(permiteUsarMenuAvanzadoUsuarios)
+      m_permiteUsarMenuAvanzadoUsuarios(permiteUsarMenuAvanzadoUsuarios),
+
+    m_permiteUsarMenuAvanzadoFacturaElectronica(permiteUsarMenuAvanzadoFacturaElectronica),
+    m_permiteUsarMenuAvanzadoLogDelSistema(permiteUsarMenuAvanzadoLogDelSistema),
+    m_permiteUsarMenuAvanzadoGarantia(permiteUsarMenuAvanzadoGarantia),
+    m_permiteUsarPromociones(permiteUsarPromociones)
+
 
 
 {
@@ -257,6 +263,11 @@ QString Perfiles::permiteUsarMenuAvanzadoUsuarios()const{
     return m_permiteUsarMenuAvanzadoUsuarios;}
 
 
+QString Perfiles::permiteUsarMenuAvanzadoFacturaElectronica() const { return m_permiteUsarMenuAvanzadoFacturaElectronica; }
+QString Perfiles::permiteUsarMenuAvanzadoLogDelSistema() const { return m_permiteUsarMenuAvanzadoLogDelSistema; }
+QString Perfiles::permiteUsarMenuAvanzadoGarantia() const { return m_permiteUsarMenuAvanzadoGarantia; }
+QString Perfiles::permiteUsarPromociones() const { return m_permiteUsarPromociones; }
+
 
 void ModuloPerfiles::agregarPerfil(const Perfiles &perfiles)
 {
@@ -332,7 +343,14 @@ void ModuloPerfiles::buscarPerfiles(QString campo, QString datoABuscar){
                                                        q.value(rec.indexOf("permiteUsarMenuAvanzadoRubros")).toString(),
                                                        q.value(rec.indexOf("permiteUsarMenuAvanzadoMonedas")).toString(),
                                                        q.value(rec.indexOf("permiteUsarMenuAvanzadoPermisos")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarMenuAvanzadoUsuarios")).toString()
+                                                       q.value(rec.indexOf("permiteUsarMenuAvanzadoUsuarios")).toString(),
+
+                                                       q.value(rec.indexOf("permiteUsarMenuAvanzadoFacturaElectronica")).toString(),
+                                                       q.value(rec.indexOf("permiteUsarMenuAvanzadoLogDelSistema")).toString(),
+                                                       q.value(rec.indexOf("permiteUsarMenuAvanzadoGarantia")).toString(),
+                                                       q.value(rec.indexOf("permiteUsarPromociones")).toString()
+
+
 
 
 
@@ -434,9 +452,23 @@ QVariant ModuloPerfiles::data(const QModelIndex & index, int role) const {
         return perfiles.permiteUsarMenuAvanzadoPermisos();
     }
     else if (role == permiteUsarMenuAvanzadoUsuariosRole)
-    {
-        return perfiles.permiteUsarMenuAvanzadoUsuarios();
-    }
+    {return perfiles.permiteUsarMenuAvanzadoUsuarios();}
+
+    else if (role == permiteUsarMenuAvanzadoFacturaElectronicaRole)
+    {return perfiles.permiteUsarMenuAvanzadoFacturaElectronica();}
+
+    else if (role == permiteUsarMenuAvanzadoLogDelSistemaRole)
+    {return perfiles.permiteUsarMenuAvanzadoLogDelSistema();}
+
+    else if (role == permiteUsarMenuAvanzadoGarantiaRole)
+    {return perfiles.permiteUsarMenuAvanzadoGarantia();}
+
+    else if (role == permiteUsarPromocionesRole)
+    {return perfiles.permiteUsarPromociones();}
+
+
+
+
 
 
 
@@ -532,6 +564,18 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permis
             if(_permiso=="permiteUsarMenuAvanzadoMonedas"){if(m_Perfiles[var].permiteUsarMenuAvanzadoMonedas()=="1"){_valor=true;}}
             if(_permiso=="permiteUsarMenuAvanzadoPermisos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoPermisos()=="1"){_valor=true;}}
             if(_permiso=="permiteUsarMenuAvanzadoUsuarios"){if(m_Perfiles[var].permiteUsarMenuAvanzadoUsuarios()=="1"){_valor=true;}}
+
+
+
+            if(_permiso=="permiteUsarMenuAvanzadoFacturaElectronica"){if(m_Perfiles[var].permiteUsarMenuAvanzadoFacturaElectronica()=="1"){_valor=true;}}
+
+            if(_permiso=="permiteUsarMenuAvanzadoLogDelSistema"){if(m_Perfiles[var].permiteUsarMenuAvanzadoLogDelSistema()=="1"){_valor=true;}}
+
+            if(_permiso=="permiteUsarMenuAvanzadoGarantia"){if(m_Perfiles[var].permiteUsarMenuAvanzadoGarantia()=="1"){_valor=true;}}
+
+            if(_permiso=="permiteUsarPromociones"){if(m_Perfiles[var].permiteUsarPromociones()=="1"){_valor=true;}}
+
+
 
         }
     }
