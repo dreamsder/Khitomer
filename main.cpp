@@ -389,6 +389,7 @@ inicio:
 
 
 
+
             }else{
                 QMessageBox men;
                 men.setText(qtTrId("ATENCIÓN: No se pudo acceder a la base de datos.\n\nConfiguración actual:\nIP: '")+UtilidadesXml::getHostLocal()+qtTrId("'\nBase de datos: '")+UtilidadesXml::getBaseLocal()+qtTrId("'\nUsuario: '")+UtilidadesXml::getUsuarioLocal()+qtTrId("'\n\nSOLUCIÓN: Precione el boton \"Configurar\" para abrir el configurador.\nEl configurador le pedira información de ubicación y acceso a la base de datos khitomer en el servidor de base de datos MySql.\n\nDisculpe las molestias.\n\n\nSoporte facebook: https://www.facebook.com/KhitomerDreamsder\nSoporte mail: info@dreamsder.com\nSoporte ventas: ventas@dreamsder.com"));
