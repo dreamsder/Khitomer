@@ -294,7 +294,7 @@ QVariant ControlesMantenimientos::data(const QModelIndex & index, int role) cons
 }
 bool ControlesMantenimientos::retornaValorMantenimiento(QString _permisoDocumento) const{
 
-    bool _valorARetornar=false;
+   /* bool _valorARetornar=false;
     for (int var = 0; var < m_Mantenimientos.size(); ++var) {
 
         if (_permisoDocumento == "clientesUsaTelefono"){
@@ -383,7 +383,7 @@ bool ControlesMantenimientos::retornaValorMantenimiento(QString _permisoDocument
 
     }
 
-    if(m_Mantenimientos.size()==0 && _valorARetornar==false){
+    if(m_Mantenimientos.size()==0 && _valorARetornar==false){*/
         Database::chequeaStatusAccesoMysql();
 
         if(!Database::connect().isOpen()){
@@ -408,10 +408,10 @@ bool ControlesMantenimientos::retornaValorMantenimiento(QString _permisoDocument
         }else{
             return false;
         }
-    }else{
+  /*  }else{
         return _valorARetornar;
 
-    }
+    }*/
 
 
     /*

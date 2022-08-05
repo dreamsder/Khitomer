@@ -344,7 +344,7 @@ bool ModuloUsuarios::eliminarUsuario(QString _idUsuario) const {
 }
 QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Usuarios.size(); ++var) {
         if(m_Usuarios[var].idUsuario()==_idUsuario && m_Usuarios[var].esVendedor()=="1"){
 
@@ -354,7 +354,7 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
     }
 
 
-    if(m_Usuarios.size()==0 && _valor==""){
+    if(m_Usuarios.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -389,9 +389,9 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
         }else{
             return "";
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
@@ -399,7 +399,7 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
 QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
 
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_Usuarios.size(); ++var) {
         if(m_Usuarios[var].idUsuario()==_idUsuario){
 
@@ -408,7 +408,7 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
         }
     }
 
-    if(m_Usuarios.size()==0 && _valor==""){
+    if(m_Usuarios.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -442,9 +442,9 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
         }else{
             return "";
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
    */
@@ -502,7 +502,7 @@ int ModuloUsuarios::actualizarClave(QString _idUsuario, QString _claveUsuario ) 
 }
 bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) const{
 
-    bool _valor=false;
+ /*   bool _valor=false;
     for (int var = 0; var < m_Usuarios.size(); ++var) {
         if(QString::number(m_Usuarios[var].codigoPerfil())==_codigoPerfil){
 
@@ -512,7 +512,7 @@ bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) con
     }
 
 
-    if(m_Usuarios.size()==0 && _valor==false){
+    if(m_Usuarios.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -536,14 +536,14 @@ bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) con
         }else{
             return true;
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
 
-    QString _valor="0";
+   /* QString _valor="0";
     for (int var = 0; var < m_Usuarios.size(); ++var) {
         if(m_Usuarios[var].idUsuario()==_idUsuario){
 
@@ -553,7 +553,7 @@ QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
     }
 
 
-    if(m_Usuarios.size()==0 && _valor=="0"){
+    if(m_Usuarios.size()==0 && _valor=="0"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -581,9 +581,9 @@ QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
                 return "0";
             }
         }else{return "0";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 

@@ -125,7 +125,7 @@ QVariant ModuloSubRubros::data(const QModelIndex & index, int role) const {
 }
 QString ModuloSubRubros::retornaDescripcionSubRubro(QString _codigoSubRubro){
 
-    QString _valor="Error BD";
+   /* QString _valor="Error BD";
     for (int var = 0; var < m_SubRubros.size(); ++var) {
         if(QString::number(m_SubRubros[var].codigoSubRubro())==_codigoSubRubro){
 
@@ -135,7 +135,7 @@ QString ModuloSubRubros::retornaDescripcionSubRubro(QString _codigoSubRubro){
     }
 
 
-    if(m_SubRubros.size()==0 && _valor=="Error BD"){
+    if(m_SubRubros.size()==0 && _valor=="Error BD"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -168,9 +168,9 @@ QString ModuloSubRubros::retornaDescripcionSubRubro(QString _codigoSubRubro){
         }else{
             return "Error BD";
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
    */

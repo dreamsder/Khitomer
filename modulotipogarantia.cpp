@@ -115,7 +115,7 @@ QVariant ModuloTipoGarantia::data(const QModelIndex & index, int role) const {
 }
 QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoTipoGarantia) const{
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_TipoGarantia.size(); ++var) {
         if(QString::number(m_TipoGarantia[var].codigoTipoGarantia())==_codigoTipoGarantia ){
 
@@ -124,7 +124,7 @@ QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoTipoGa
         }
     }
 
-    if(m_TipoGarantia.size()==0 && _valor==""){
+    if(m_TipoGarantia.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -153,9 +153,9 @@ QString ModuloTipoGarantia::retornaDescripcionTipoGarantia(QString _codigoTipoGa
         }else{
             return "";
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */

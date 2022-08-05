@@ -131,7 +131,7 @@ QVariant ModuloIvas::data(const QModelIndex & index, int role) const {
 }
 QString ModuloIvas::retornaDescripcionIva(QString _codigoIva) const{
 
-    QString _valor="";
+    /*QString _valor="";
     for (int var = 0; var < m_Ivas.size(); ++var) {
         if(QString::number(m_Ivas[var].codigoIva())==_codigoIva){
             _valor = m_Ivas[var].descripcionIva();
@@ -139,7 +139,7 @@ QString ModuloIvas::retornaDescripcionIva(QString _codigoIva) const{
     }
 
 
-    if(m_Ivas.size()==0 && _valor==""){
+    if(m_Ivas.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -168,9 +168,9 @@ QString ModuloIvas::retornaDescripcionIva(QString _codigoIva) const{
         }else{
             return "";
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */

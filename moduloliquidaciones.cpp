@@ -331,7 +331,7 @@ QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedorPorDefault(Q
 }
 QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedor(QString _codigoLiquidacion,QString _codigoVendedor) const{
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_Liquidaciones.size(); ++var) {
         if(m_Liquidaciones[var].codigoLiquidacion()==_codigoLiquidacion && m_Liquidaciones[var].codigoVendedor()==_codigoVendedor){
 
@@ -340,7 +340,7 @@ QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedor(QString _co
         }
     }
 
-    if(m_Liquidaciones.size()==0 && _valor==""){
+    if(m_Liquidaciones.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -371,9 +371,9 @@ QString ModuloLiquidaciones::retornaDescripcionLiquidacionDeVendedor(QString _co
         }else{
             return "";
         }
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
 
 }
@@ -633,7 +633,7 @@ bool ModuloLiquidaciones::cerrarLiquidacion(QString _codigoLiquidacion,QString _
 
 bool ModuloLiquidaciones::liquidacionActiva(QString _codigoLiquidacion,QString _codigoVendedor) const{
 
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_Liquidaciones.size(); ++var) {
         if(m_Liquidaciones[var].codigoLiquidacion()==_codigoLiquidacion && m_Liquidaciones[var].codigoVendedor()==_codigoVendedor){
 
@@ -645,7 +645,7 @@ bool ModuloLiquidaciones::liquidacionActiva(QString _codigoLiquidacion,QString _
     }
 
 
-    if(m_Liquidaciones.size()==0 && _valor==false){
+    if(m_Liquidaciones.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -674,9 +674,9 @@ bool ModuloLiquidaciones::liquidacionActiva(QString _codigoLiquidacion,QString _
         }else{
             return false;
         }
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
 
 }

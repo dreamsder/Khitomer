@@ -406,7 +406,7 @@ QString ModuloArticulos::existeArticulo(QString _codigoArticulo) const {
 
 QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) const {
 
-    QString _valor="";
+   /* QString _valor="";
 
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
@@ -414,10 +414,10 @@ QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) con
             _valor=m_Articulos[var].descripcionArticulo() ;
 
         }
-    }
+    }*/
 
 
-    if(m_Articulos.size()==0 && _valor==""){
+  // if(m_Articulos.size()==0 && _valor==""){
         bool conexion=true;
 
         Database::chequeaStatusAccesoMysql();
@@ -452,9 +452,9 @@ QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) con
         }else{
             return "";
         }
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArticulo) const {
@@ -463,7 +463,7 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
         return "";
     }
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -473,7 +473,7 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
     }
 
 
-    if(m_Articulos.size()==0 && _valor==""){
+    if(m_Articulos.size()==0 && _valor==""){*/
 
         bool conexion=true;
 
@@ -510,9 +510,9 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
             return "";
         }
 
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
 
 
@@ -521,7 +521,7 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
 
 bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
 
-    bool _valor=false;
+  /*  bool _valor=false;
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
             if(m_Articulos[var].activo()=="1"){
@@ -531,7 +531,7 @@ bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
     }
 
 
-    if(m_Articulos.size()==0 && _valor==false){
+    if(m_Articulos.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -564,9 +564,9 @@ bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
         }else{
             return false;
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 }
@@ -728,7 +728,7 @@ bool ModuloArticulos::reemplazaCantidadArticulosSinStock(QString _codigoArticulo
 }
 qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArticulo) const {
 
-    qlonglong _valor=0;
+ /*   qlonglong _valor=0;
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -738,7 +738,7 @@ qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArt
     }
 
 
-    if(m_Articulos.size()==0 && _valor==0){
+    if(m_Articulos.size()==0 && _valor==0){*/
         bool conexion=true;
 
         Database::chequeaStatusAccesoMysql();
@@ -773,9 +773,9 @@ qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArt
         }else{
             return 0;
         }
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 
@@ -808,7 +808,7 @@ bool ModuloArticulos::retornaSiPuedeVenderSinStock(qlonglong _cantidad, QString 
 }
 QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) const {
 
-    QString _valor="0";
+   /* QString _valor="0";
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -818,7 +818,7 @@ QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) cons
     }
 
 
-     if(m_Articulos.size()==0 && _valor=="0"){
+     if(m_Articulos.size()==0 && _valor=="0"){*/
          bool conexion=true;
 
          Database::chequeaStatusAccesoMysql();
@@ -853,9 +853,9 @@ QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) cons
          }else{
              return "0";
          }
-     }else{
+  /*  }else{
          return _valor;
-     }
+     }*/
 }
 
 

@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.0"
+    property string versionKhitomer: "1.17.1"
 
 
 

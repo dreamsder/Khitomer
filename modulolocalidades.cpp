@@ -130,7 +130,7 @@ QVariant ModuloLocalidades::data(const QModelIndex & index, int role) const {
 }
 QString ModuloLocalidades::retornaDescripcionLocalidad(QString _codigoPais,QString _codigoDepartamento,QString _codigoLocalidad) const{
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Localidades.size(); ++var) {
         if(QString::number(m_Localidades[var].codigoLocalidad())==_codigoLocalidad && QString::number(m_Localidades[var].codigoPais())==_codigoPais
                 && QString::number(m_Localidades[var].codigoDepartamento())==_codigoDepartamento){
@@ -138,7 +138,7 @@ QString ModuloLocalidades::retornaDescripcionLocalidad(QString _codigoPais,QStri
         }
     }
 
-    if(m_Localidades.size()==0 && _valor==""){
+    if(m_Localidades.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -166,9 +166,9 @@ QString ModuloLocalidades::retornaDescripcionLocalidad(QString _codigoPais,QStri
         }else{
             return "";
         }
-    }else{
+ /*   }else{
         return _valor;
-    }
+    }*/
 
 
 }

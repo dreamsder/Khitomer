@@ -150,7 +150,7 @@ void ModuloMonedas::buscarMonedas(QString campo, QString datoABuscar){
 
 
 
-                Monedas mon = Monedas(q.value(rec.indexOf("codigoMoneda")).toInt()
+            /*    Monedas mon = Monedas(q.value(rec.indexOf("codigoMoneda")).toInt()
                                       ,q.value(rec.indexOf("descripcionMoneda")).toString()
                                       ,q.value(rec.indexOf("simboloMoneda")).toString()
                                       ,q.value(rec.indexOf("cotizacionMoneda")).toDouble()
@@ -159,10 +159,10 @@ void ModuloMonedas::buscarMonedas(QString campo, QString datoABuscar){
                                       ,q.value(rec.indexOf("codigoISO3166")).toString()
                                       ,q.value(rec.indexOf("codigoISO4217")).toString());
                 //m_Monedas.append(mon);
-                ModuloMonedas::agregarMonedas(mon);
+                ModuloMonedas::agregarMonedas(mon);*/
 
 
-                /*       ModuloMonedas::agregarMonedas(Monedas(q.value(rec.indexOf("codigoMoneda")).toInt(),
+                       ModuloMonedas::agregarMonedas(Monedas(q.value(rec.indexOf("codigoMoneda")).toInt(),
 
                                                       q.value(rec.indexOf("descripcionMoneda")).toString(),
 
@@ -178,7 +178,7 @@ void ModuloMonedas::buscarMonedas(QString campo, QString datoABuscar){
 
                                                       q.value(rec.indexOf("codigoISO4217")).toString()
 
-                                                      ));    */
+                                                      ));
             }
         }
     }
@@ -321,7 +321,7 @@ bool ModuloMonedas::eliminarMonedas(QString _codigoMoneda) const {
 
 QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
             _valor = m_Monedas[var].descripcionMoneda();
@@ -329,7 +329,7 @@ QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
     }
 
 
-    if(m_Monedas.size()==0 && _valor==""){
+    if(m_Monedas.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -356,9 +356,9 @@ QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
@@ -366,7 +366,7 @@ QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
 
 QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
             _valor = m_Monedas[var].simboloMoneda();
@@ -374,7 +374,7 @@ QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
     }
 
 
-    if(m_Monedas.size()==0 && _valor==""){
+    if(m_Monedas.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -403,9 +403,9 @@ QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
@@ -443,6 +443,9 @@ QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
 
 double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
 
+   /* qDebug()<<_codigoMoneda ;
+
+
     double _valor=1;
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
@@ -450,7 +453,7 @@ double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
         }
     }
 
-    if(m_Monedas.size()==0 && _valor==1){
+    if(m_Monedas.size()==0 && _valor==1){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -478,9 +481,9 @@ double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
                 return 1;
             }
         }else{return 1;}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 }
@@ -535,14 +538,14 @@ int ModuloMonedas::actualizarCotizacion(QString _codigoMoneda, QString _cotizaci
 }
 QString ModuloMonedas::retornaMonedaReferenciaSistema() const{
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(m_Monedas[var].esMonedaReferenciaSistema()=="1"){
             _valor= QString::number(m_Monedas[var].codigoMoneda());
         }
     }
 
-    if(m_Monedas.size()==0 && _valor==""){
+    if(m_Monedas.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -570,9 +573,9 @@ QString ModuloMonedas::retornaMonedaReferenciaSistema() const{
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 }

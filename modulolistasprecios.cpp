@@ -322,7 +322,7 @@ int ModuloListasPrecios::ultimoRegistroDeListasPrecioEnBase() const{
 
 QString ModuloListasPrecios::retornaDescripcionListaPrecio(QString _codigoListaPrecio) const{
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_ListasPrecio.size(); ++var) {
         if(m_ListasPrecio[var].codigoListaPrecio()==_codigoListaPrecio ){
 
@@ -331,7 +331,7 @@ QString ModuloListasPrecios::retornaDescripcionListaPrecio(QString _codigoListaP
         }
     }
 
-    if(m_ListasPrecio.size()==0 && _valor==""){
+    if(m_ListasPrecio.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -358,9 +358,9 @@ QString ModuloListasPrecios::retornaDescripcionListaPrecio(QString _codigoListaP
                 return "";
             }
         }else{return "";}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
     /*
     */

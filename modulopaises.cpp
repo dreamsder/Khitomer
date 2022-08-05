@@ -238,7 +238,7 @@ int ModuloPaises::insertarPais(QString _codigoPais,QString _nombrePais){
 QString ModuloPaises::retornaDescripcionPais(QString _codigoPais) const{
 
 
-    QString _valor="";
+    /*QString _valor="";
     for (int var = 0; var < m_Paises.size(); ++var) {
         if(QString::number(m_Paises[var].codigoPais())==_codigoPais){
             _valor = m_Paises[var].descripcionPais();
@@ -246,7 +246,7 @@ QString ModuloPaises::retornaDescripcionPais(QString _codigoPais) const{
     }
 
 
-    if(m_Paises.size()==0 && _valor==""){
+    if(m_Paises.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -275,7 +275,7 @@ QString ModuloPaises::retornaDescripcionPais(QString _codigoPais) const{
         }else{
             return "";
         }
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 }

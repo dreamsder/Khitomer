@@ -135,7 +135,7 @@ QVariant ModuloTipoClientes::data(const QModelIndex & index, int role) const {
 
 QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoCliente) const {
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_TipoDeClientes.size(); ++var) {
         if(QString::number(m_TipoDeClientes[var].codigoTipoCliente())==_tipoCliente ){
 
@@ -145,7 +145,7 @@ QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoClien
     }
 
 
-    if(m_TipoDeClientes.size()==0 && _valor==""){
+    if(m_TipoDeClientes.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -167,9 +167,9 @@ QString ModuloTipoClientes::primerRegistroDeTipoClienteEnBase(QString _tipoClien
             }
 
         }
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
 
     /*

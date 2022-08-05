@@ -476,7 +476,7 @@ QVariant ModuloPerfiles::data(const QModelIndex & index, int role) const {
 }
 QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_Perfiles.size(); ++var) {
         if(QString::number(m_Perfiles[var].codigoPerfil())==_codigoPerfil){
             _valor = m_Perfiles[var].descripcionPerfil();
@@ -484,7 +484,7 @@ QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
     }
 
 
-    if(m_Perfiles.size()==0 && _valor==""){
+    if(m_Perfiles.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -513,16 +513,16 @@ QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
                 return "";
             }
         }else{return "";}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 }
 
 bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permiso) const{
 
     /// QString valorPerfil=retornaCodigoPerfil(_idUsuario);
 
-    bool _valor=false;
+    /*bool _valor=false;
     for (int var = 0; var < m_Perfiles.size(); ++var) {
         if(QString::number(m_Perfiles[var].codigoPerfil())==_codigoPerfil){
             if(_permiso=="permiteUsarLiquidaciones"){if(m_Perfiles[var].permiteUsarLiquidaciones()=="1"){_valor=true;}}
@@ -581,7 +581,7 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permis
     }
 
 
-    if(m_Perfiles.size()==0 && _valor==false){
+    if(m_Perfiles.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -620,9 +620,9 @@ bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permis
                 return false;
             }
         }else{return false;}
-    }else{
+ /*   }else{
         return _valor;
-    }
+    }*/
 
     /*
    */

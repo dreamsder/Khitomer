@@ -722,7 +722,7 @@ QVariant ModuloReportes::data(const QModelIndex & index, int role) const {
 bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _permisoReporte) const {
 
 
-    bool _valor=false;
+   /* bool _valor=false;
 
     for (int var = 0; var < m_Reportes.size(); ++var) {
         if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
@@ -811,7 +811,7 @@ bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _p
         }
     }
 
-    if(m_Reportes.size()==0 && _valor==false){
+    if(m_Reportes.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -839,21 +839,21 @@ bool ModuloReportes::retornaPermisosDelReporte(QString _codigoReporte,QString _p
                 return false;
             }
         }else{return false;}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) const {
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Reportes.size(); ++var) {
         if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
             _valor = m_Reportes[var].descripcionReporte();
         }
     }
 
-    if(m_Reportes.size()==0 && _valor==""){
+    if(m_Reportes.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -875,9 +875,9 @@ QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) con
                 return "";
             }
         }else{return "";}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
     /*
    */
@@ -885,7 +885,7 @@ QString ModuloReportes::retornaDescripcionDelReporte(QString _codigoReporte) con
 
 QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Reportes.size(); ++var) {
         if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
             _valor = m_Reportes[var].consultaSql();
@@ -893,7 +893,7 @@ QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
     }
 
 
-    if(m_Reportes.size()==0 && _valor==""){
+    if(m_Reportes.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -915,23 +915,23 @@ QString ModuloReportes::retornaSqlReporte(QString _codigoReporte) const {
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
 }
 QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const {
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Reportes.size(); ++var) {
         if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
             _valor = m_Reportes[var].consultaSqlGraficas();
         }
     }
 
-    if(m_Reportes.size()==0 && _valor==""){
+    if(m_Reportes.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -953,14 +953,14 @@ QString ModuloReportes::retornaSqlReporteGraficas(QString _codigoReporte) const 
                 return "";
             }
         }else{return "";}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
 
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_Reportes.size(); ++var) {
         if(QString::number(m_Reportes[var].codigoReporte())==_codigoReporte){
             _valor = m_Reportes[var].consultaSqlCabezal();
@@ -968,7 +968,7 @@ QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
     }
 
 
-    if(m_Reportes.size()==0 && _valor==""){
+    if(m_Reportes.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -990,14 +990,14 @@ QString ModuloReportes::retornaSqlReporteCabezal(QString _codigoReporte) const {
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    QString _valor="-1";
+   /* QString _valor="-1";
     for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
         if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
 
@@ -1006,7 +1006,7 @@ QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QStrin
         }
     }
 
-    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -1033,9 +1033,9 @@ QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QStrin
             }
         }else{return "-1";}
 
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 
@@ -1043,7 +1043,7 @@ QString ModuloReportes::retornaConfiguracionAlineacionDeColumnaDelReporte(QStrin
 
 QString ModuloReportes::retornaConfiguracionTipoDeDatoDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    QString _valor="TEXTO";
+   /* QString _valor="TEXTO";
     for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
         if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
 
@@ -1052,7 +1052,7 @@ QString ModuloReportes::retornaConfiguracionTipoDeDatoDeColumnaDelReporte(QStrin
         }
     }
 
-    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="TEXTO"){
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="TEXTO"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -1078,14 +1078,14 @@ QString ModuloReportes::retornaConfiguracionTipoDeDatoDeColumnaDelReporte(QStrin
                 return "TEXTO";
             }
         }else{return "TEXTO";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QString _codigoReporte,QString _columnaReporte) const {
 
-    QString _valor="-1";
+    /*QString _valor="-1";
     for (int var = 0; var < moduloReportesConfiguracion.m_ReportesConfiguracion.size(); ++var) {
         if(moduloReportesConfiguracion.m_ReportesConfiguracion[var].codigoReporte()==_codigoReporte && moduloReportesConfiguracion.m_ReportesConfiguracion[var].columnaReporte()==_columnaReporte){
 
@@ -1094,7 +1094,7 @@ QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QStri
         }
     }
 
-    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){
+    if(moduloReportesConfiguracion.m_ReportesConfiguracion.size()==0 && _valor=="-1"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -1122,9 +1122,9 @@ QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QStri
                 return "-1";
             }
         }else{return "-1";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoReporte, QString _consultaSqlGraficas, bool _incluirGrafica,QString _consultaSqlCabezal) const {

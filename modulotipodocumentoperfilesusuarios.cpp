@@ -92,7 +92,7 @@ QVariant ModuloTipoDocumentoPerfilesUsuarios::data(const QModelIndex & index, in
 bool ModuloTipoDocumentoPerfilesUsuarios::retornaTipoDocumentoActivoPorPerfil(QString _codigoTipoDocumento,QString _codigoPerfil){
 
 
-    bool _valor=false;
+  /*  bool _valor=false;
     for (int var = 0; var < m_TipoDocumentoPerfilesUsuarios.size(); ++var) {
         if(m_TipoDocumentoPerfilesUsuarios[var].codigoTipoDocumento()==_codigoTipoDocumento && m_TipoDocumentoPerfilesUsuarios[var].codigoPerfil()==_codigoPerfil){
 
@@ -102,7 +102,7 @@ bool ModuloTipoDocumentoPerfilesUsuarios::retornaTipoDocumentoActivoPorPerfil(QS
     }
 
 
-    if(m_TipoDocumentoPerfilesUsuarios.size()==0 && _valor==false){
+    if(m_TipoDocumentoPerfilesUsuarios.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -128,9 +128,9 @@ bool ModuloTipoDocumentoPerfilesUsuarios::retornaTipoDocumentoActivoPorPerfil(QS
                 return false;
             }
         }else{return false;}
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
 
 

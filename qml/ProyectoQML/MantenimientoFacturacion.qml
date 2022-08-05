@@ -389,6 +389,8 @@ Rectangle {
 
             montoDelMedioDePago=txtMontoMedioDePago.textoInputBox.trim()
 
+
+
             if(txtCodigoMedioDePago.text.trim()!="" && montoDelMedioDePago!=0){
 
                 modeloListaMediosDePagoAgregados.append({

@@ -120,7 +120,7 @@ void ModuloMediosDePago::buscarMediosDePago(QString campo, QString datoABuscar){
 }
 
 bool ModuloMediosDePago::utilizaCuotas(QString _codigoMedioPago) const{
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
 
@@ -131,7 +131,7 @@ bool ModuloMediosDePago::utilizaCuotas(QString _codigoMedioPago) const{
     }
 
 
-    if(m_MediosDePago.size()==0 && _valor==false){
+    if(m_MediosDePago.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -156,12 +156,12 @@ bool ModuloMediosDePago::utilizaCuotas(QString _codigoMedioPago) const{
                 return false;
             }
         }else{return false;}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 }
 bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
 
@@ -172,7 +172,7 @@ bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
     }
 
 
-    if(m_MediosDePago.size()==0 && _valor==false){
+    if(m_MediosDePago.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -200,16 +200,16 @@ bool ModuloMediosDePago::utilizaBanco(QString _codigoMedioPago) const{
                 return false;
             }
         }else{return false;}
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
     /*
     */
 }
 bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
 
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
 
@@ -220,7 +220,7 @@ bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
     }
 
 
-    if(m_MediosDePago.size()==0 && _valor==false){
+    if(m_MediosDePago.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -248,16 +248,16 @@ bool ModuloMediosDePago::utilizaCuentaBancaria(QString _codigoMedioPago) const{
                 return false;
             }
         }else{return false;}
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
     /*
     */
 }
 bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
 
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
 
@@ -268,7 +268,7 @@ bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
     }
 
 
-    if(m_MediosDePago.size()==0 && _valor==false){
+    if(m_MediosDePago.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -294,9 +294,9 @@ bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
                 return false;
             }
         }else{return false;}
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
 
 
@@ -305,7 +305,7 @@ bool ModuloMediosDePago::utilizaNumeroCheque(QString _codigoMedioPago) const{
 }
 
 QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPago) const{
-    QString _valor="";
+   /* QString _valor="";
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
             _valor=m_MediosDePago[var].descripcionMedioPago();
@@ -313,7 +313,7 @@ QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPa
     }
 
 
-    if(m_MediosDePago.size()==0 && _valor==""){
+    if(m_MediosDePago.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -339,9 +339,9 @@ QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPa
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
@@ -349,17 +349,19 @@ QString ModuloMediosDePago::retornaDescripcionMedioDePago(QString _codigoMedioPa
 
 QString ModuloMediosDePago::retornaMonedaMedioDePago(QString _codigoMedioPago) const{
 
-    QString _valor="";
+//    qDebug()<<"Codigo medio de pago en c++: "+_codigoMedioPago ;
+
+    /*QString _valor="";
     for (int var = 0; var < m_MediosDePago.size(); ++var) {
         if(QString::number(m_MediosDePago[var].codigoMedioPago())==_codigoMedioPago){
 
             _valor= m_MediosDePago[var].monedaMedioPago();
 
         }
-    }
+    }*/
 
 
-    if(m_MediosDePago.size()==0 && _valor==""){
+   // if(m_MediosDePago.size()==0 && _valor==""){
         bool conexion=true;
     Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -385,9 +387,9 @@ QString ModuloMediosDePago::retornaMonedaMedioDePago(QString _codigoMedioPago) c
                 return "";
             }
         }else{return "";}
-    }else{
+    /*}else{
         return _valor;
-    }
+    }*/
 
 
     /*

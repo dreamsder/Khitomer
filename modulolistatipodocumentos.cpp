@@ -526,7 +526,7 @@ void ModuloListaTipoDocumentos::buscarTodosLosTipoDocumentos(QString campo, QStr
 
 QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codigoTipoDocumento) const {
 
-    QString _valor="";
+  /*  QString _valor="";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
             _valor = m_TipoDocumentos[var].descripcionTipoDocumento();
@@ -534,7 +534,7 @@ QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codi
     }
 
 
-    if(m_TipoDocumentos.size()==0 && _valor==""){
+    if(m_TipoDocumentos.size()==0 && _valor==""){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -562,9 +562,9 @@ QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codi
                 return "";
             }
         }else{return "";}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 
 
 
@@ -573,14 +573,14 @@ QString ModuloListaTipoDocumentos::retornaDescripcionTipoDocumento(QString _codi
 
 QString ModuloListaTipoDocumentos::retornaSerieTipoDocumento(QString _codigoTipoDocumento) const {
 
-    QString _valor="A";
+   /* QString _valor="A";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
             _valor = m_TipoDocumentos[var].serieDocumento();
         }
     }
 
-    if(m_TipoDocumentos.size()==0 && _valor=="A"){
+    if(m_TipoDocumentos.size()==0 && _valor=="A"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -607,16 +607,16 @@ QString ModuloListaTipoDocumentos::retornaSerieTipoDocumento(QString _codigoTipo
                 return "A";
             }
         }else{return "A";}
-    }else{
+  /*  }else{
         return _valor;
-    }
+    }*/
 
     /*
     */
 }
 QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _codigoTipoDocumento) const {
 
-    QString _valor="A";
+  /*  QString _valor="A";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
             _valor = m_TipoDocumentos[var].descripcionCodigoBarrasADemanda();
@@ -624,7 +624,7 @@ QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _cod
     }
 
 
-    if(m_TipoDocumentos.size()==0 && _valor=="A"){
+    if(m_TipoDocumentos.size()==0 && _valor=="A"){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -651,9 +651,9 @@ QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _cod
                 return "";
             }
         }else{return "";}
-    }else{
+/*    }else{
         return _valor;
-    }
+    }*/
 
 
     /* */
@@ -662,7 +662,7 @@ QString ModuloListaTipoDocumentos::retornaDescripcionCodigoADemanda(QString _cod
 
 bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoDocumento,QString _permisoDocumento) const {
 
-    bool _valorARetornar=false;
+   /* bool _valorARetornar=false;
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
 
@@ -743,7 +743,7 @@ bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoD
     }
 
 
-    if(m_TipoDocumentos.size()==0 && _valorARetornar==false){
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -777,9 +777,9 @@ bool ModuloListaTipoDocumentos::retornaPermisosDelDocumento(QString _codigoTipoD
                 return false;
             }
         }else{return false;}
-    }else{
+   /* }else{
         return _valorARetornar;
-    }
+    }*/
 
 
     /*
@@ -1013,14 +1013,14 @@ bool ModuloListaTipoDocumentos::eliminarTipoDocumento(QString _codigoTipoDocumen
 
 int ModuloListaTipoDocumentos::cantidadMaximaLineasTipoDocumento(QString _codigoTipoDocumento)const {
 
-    int _valorARetornar=0;
+  /*  int _valorARetornar=0;
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
             _valorARetornar = m_TipoDocumentos[var].cantidadMaximaLineasEnDocumento().toInt();
         }
     }
 
-    if(m_TipoDocumentos.size()==0 && _valorARetornar==0){
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==0){*/
         Database::chequeaStatusAccesoMysql();
         bool conexion=true;
         if(!Database::connect().isOpen()){
@@ -1049,9 +1049,9 @@ int ModuloListaTipoDocumentos::cantidadMaximaLineasTipoDocumento(QString _codigo
                 return 0;
             }
         }
-    }else{
+  /*  }else{
         return _valorARetornar;
-    }
+    }*/
 
 
 
@@ -1366,7 +1366,7 @@ bool ModuloListaTipoDocumentos::permiteDevolucionTipoDocumento(QString _codigoTi
 QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codigoTipoDocumento ,QString _permisoDocumento) const{
 
 
-    QString _valorARetornar="";
+   /* QString _valorARetornar="";
     for (int var = 0; var < m_TipoDocumentos.size(); ++var) {
         if(QString::number(m_TipoDocumentos[var].codigoTipoDocumento())==_codigoTipoDocumento){
 
@@ -1444,7 +1444,7 @@ QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codig
         }
     }
 
-    if(m_TipoDocumentos.size()==0 && _valorARetornar==""){
+    if(m_TipoDocumentos.size()==0 && _valorARetornar==""){*/
         Database::chequeaStatusAccesoMysql();
         bool conexion=true;
         if(!Database::connect().isOpen()){
@@ -1473,10 +1473,10 @@ QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codig
                 return "";
             }
         }
-    }else{
+   /*}else{
         return _valorARetornar;
 
-    }
+    }*/
 
 
 

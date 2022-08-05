@@ -337,10 +337,10 @@ inicio:
 
 
                 moduloconfiguracion.cargarConfiguracion();
-                modulo_CFE_ParametrosGenerales.cargar();
+              /*  modulo_CFE_ParametrosGenerales.cargar();
                 moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
                 moduloListaPerfiles.buscarPerfiles("1=","1");
-                moduloListaMonedas.buscarMonedas("1=","1");
+
                 moduloMonedasTotales.buscarMonedas("1=","1");
 
                 moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
@@ -385,7 +385,7 @@ inicio:
 
                 moduloReportes.buscarReportes("1=","1","");
 
-                moduloArticulos.buscarArticulo("1=","1",0);
+                moduloArticulos.buscarArticulo("1=","1",0);*/
 
 
 
@@ -583,53 +583,75 @@ inicio:
 
 
 
-    moduloListaMenues.buscarMenus("1=","1");
-    moduloTipoClasificacion.buscarTipoClasificacion("1=","1");
-    // moduloListaMonedas.buscarMonedas("1=","1");
-    moduloListaProveedor.buscarCliente("tipoCliente=","2");
-
-
-    moduloLiquidacionesComboBox.buscarLiquidacion( "1=","1");
-    moduloLiquidaciones.buscarLiquidacion("1=","1");
-
-
-
-    // moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
-
-    //moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
-
-    //moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
 
 
 
 
 
 
-    moduloListaImpresoras.limpiarListaImpresoras();
-    moduloListaImpresoras.buscarImpresoras();
-    moduloRubrosComboBox.buscarRubros("1=","1");
-    moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
-    moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
-    moduloTipoChequesComboBox.buscarCheques("1=","1");
-    moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");
-    moduloTotalChequesDiferidos.buscarTotalCheques("1","1");
-    moduloTotalOtrosCheques.buscarTotalOtrosCheques("1","1");
-
-    moduloModelosDeImpresion.buscarModeloImpresion("1=","1");
-    moduloGenericoCombobox.buscarModuloGenerico();
-    moduloGenericoComboboxTipoDocumento.buscarTodosLosTipoDocumentos();
-    moduloGenericoComboboxReportesPermisos.buscarTodosLosReportes();
-
-    moduloGenericoTipoPromocion.buscarTodosLosTiposPromocion();
+    moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
 
 
 
-    moduloFormasDePago.buscarFormaDePago("1=","1");
+
+
+
+
+
 
     moduloReportesDinamicos.agregarReportes(Reportes(0,0,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
 
-    //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
 
+
+
+
+    //Carga de datos a ComboBox
+      moduloTipoClientes.buscarTipoCliente("1=","1");
+      moduloTipoDocumentoCliente.buscar();
+
+      moduloListaMenues.buscarMenus("1=","1");
+      moduloTipoClasificacion.buscarTipoClasificacion("1=","1");
+      moduloListaMonedas.buscarMonedas("1=","1");
+      moduloListaProveedor.buscarCliente("tipoCliente=","2");
+      moduloListaVendedores.buscarUsuarios("esVendedor=","1");
+      moduloListaIvas.buscarIvas("1=","1");
+      moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
+      moduloListasPreciosComboBox.buscarListasPrecio("1=","1");
+      moduloLiquidacionesComboBox.buscarLiquidacion( "1=","1");
+      moduloLiquidaciones.buscarLiquidacion("1=","1");
+      moduloMediosDePago.buscarMediosDePago("1=","1");
+      moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
+      moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
+      moduloReportesMenu.buscarReportesMenu("1=","1","");
+
+      moduloReportes.buscarReportes("1=","1","");
+
+      moduloListaImpresoras.limpiarListaImpresoras();
+      moduloListaImpresoras.buscarImpresoras();
+      moduloSubRubrosComboBox.buscarSubRubros("1=","1");
+      moduloRubrosComboBox.buscarRubros("1=","1");
+      moduloBancosComboBox.buscarBancos("1=","1");
+      moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
+      moduloMonedasTotales.buscarMonedas("1=","1");
+      moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
+      moduloTipoChequesComboBox.buscarCheques("1=","1");
+      moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");
+      moduloTotalChequesDiferidos.buscarTotalCheques("1","1");
+      moduloTotalOtrosCheques.buscarTotalOtrosCheques("1","1");
+      moduloPaisesComboBox.buscarPaises("1=","1","descripcionPais");
+      moduloDepartamentosComboBox.buscarDepartamentos(" codigoPais=","1");
+      moduloLocalidadesComboBox.buscarLocalidades(" codigoPais=1 and codigoDepartamento=","1");
+      moduloModelosDeImpresion.buscarModeloImpresion("1=","1");
+      moduloGenericoCombobox.buscarModuloGenerico();
+      moduloGenericoComboboxTipoDocumento.buscarTodosLosTipoDocumentos();
+      moduloGenericoComboboxReportesPermisos.buscarTodosLosReportes();
+
+      moduloGenericoTipoPromocion.buscarTodosLosTiposPromocion();
+
+      moduloTipoProcedenciaCliente.buscar();
+
+      moduloFormasDePago.buscarFormaDePago("1=","1");
+      //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
 
 
 

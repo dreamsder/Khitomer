@@ -89,7 +89,7 @@ QVariant ModuloReportesPerfilesUsuarios::data(const QModelIndex & index, int rol
 bool ModuloReportesPerfilesUsuarios::retornaReporteActivoPorPerfil(QString _codigoReporte,QString _codigoPerfil){
 
 
-    bool _valor=false;
+   /* bool _valor=false;
     for (int var = 0; var < m_ReportesPerfilesUsuarios.size(); ++var) {
         if(m_ReportesPerfilesUsuarios[var].codigoReporte()==_codigoReporte && m_ReportesPerfilesUsuarios[var].codigoPerfil()==_codigoPerfil){
 
@@ -99,7 +99,7 @@ bool ModuloReportesPerfilesUsuarios::retornaReporteActivoPorPerfil(QString _codi
     }
 
 
-    if(m_ReportesPerfilesUsuarios.size()==0 && _valor==false){
+    if(m_ReportesPerfilesUsuarios.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -125,9 +125,9 @@ bool ModuloReportesPerfilesUsuarios::retornaReporteActivoPorPerfil(QString _codi
                 return false;
             }
         }else{return false;}
-    }else{
+   /* }else{
         return _valor;
-    }
+    }*/
 }
 
 
