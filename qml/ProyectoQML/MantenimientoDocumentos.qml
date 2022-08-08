@@ -63,7 +63,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtNumeroDocumento
-             //   width: 130
+                //   width: 130
                 enFocoSeleccionarTodo: true
                 textoDeFondo: ""
                 largoMaximo: 9
@@ -84,7 +84,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtSerieDocumento
-              //  width: 90
+                //  width: 90
                 enFocoSeleccionarTodo: true
                 textoInputBox: ""
                 botonBuscarTextoVisible: true
@@ -105,7 +105,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtNumeroDocumentoCFE
-             //   width: 130
+                //   width: 130
                 enFocoSeleccionarTodo: true
                 textoDeFondo: ""
                 largoMaximo: 9
@@ -127,7 +127,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtNumeroLiquidacionDelDocumento
-              //  width: 130
+                //  width: 130
                 enFocoSeleccionarTodo: true
                 textoInputBox: ""
                 botonBuscarTextoVisible: true
@@ -157,13 +157,32 @@ Rectangle {
                     modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
+                onEnter:txtVendedorComisionaDelDocumento.tomarElFoco()
+                onTabulacion: txtVendedorComisionaDelDocumento.tomarElFoco()
+            }
+
+
+            ComboBoxListaVendedores {
+                id: txtVendedorComisionaDelDocumento
+                width: 170
+                codigoValorSeleccion: "-1"
+                textoComboBox: ""
+                botonBuscarTextoVisible: true
+                textoTitulo: "Vendedor del documento:"
+                z: 2
+                onClicEnBusqueda: {
+                    modeloDocumentosMantenimiento.limpiarListaDocumentos()
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()))
+                    listaDeDocumentosFiltrados.currentIndex=0
+                }
                 onEnter:txtFechaDocumento.tomarElFoco()
                 onTabulacion: txtFechaDocumento.tomarElFoco()
             }
 
+
             TextInputSimple {
                 id: txtFechaDocumento
-               // width: 130
+                // width: 130
                 enFocoSeleccionarTodo: true
                 textoInputBox: ""
                 validaFormato: validacionFecha
@@ -189,7 +208,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtCodigoClienteDocumento
-              //  width: 150
+                //  width: 150
                 enFocoSeleccionarTodo: true
                 textoInputBox: ""
                 botonBuscarTextoVisible: true
@@ -222,7 +241,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtCodigoArticuloEnDocumento
-               // width: 280
+                // width: 280
                 enFocoSeleccionarTodo: true
                 botonBuscarTextoVisible: true
                 largoMaximo: 30
@@ -253,7 +272,7 @@ Rectangle {
 
             TextInputSimple {
                 id: txtObservacionesEnDocumento
-               // width: 370
+                // width: 370
                 enFocoSeleccionarTodo: true
                 textoInputBox: ""
                 botonBuscarTextoVisible: true
@@ -275,7 +294,7 @@ Rectangle {
 
 
 
-           /* ComboBoxCheckBoxGenerico{
+            /* ComboBoxCheckBoxGenerico{
                 id:cbListaEstadoDocumentosEnMantenimiento3
                 width: 150
                 textoTitulo: "Estado del documento:"
@@ -706,13 +725,20 @@ Rectangle {
 
                 if(txtNumeroLiquidacionDelDocumento.textoInputBox.trim()!=""){
                     consultaSql+="D.codigoLiquidacion = '"+txtNumeroLiquidacionDelDocumento.textoInputBox.trim()+"' and "
-                }                
+                }
                 if(txtObservacionesEnDocumento.textoInputBox.trim()!=""){
                     consultaSql+="D.observaciones rlike '"+txtObservacionesEnDocumento.textoInputBox.trim()+"' and "
                 }
                 if(txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()!="" && txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()!="-1"){
                     consultaSql+="D.codigoVendedorLiquidacion = '"+txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()+"' and "
                 }
+
+                if(txtVendedorComisionaDelDocumento.codigoValorSeleccion.trim()!="" && txtVendedorComisionaDelDocumento.codigoValorSeleccion.trim()!="-1"){
+                    consultaSql+="D.codigoVendedorComisiona = '"+txtVendedorComisionaDelDocumento.codigoValorSeleccion.trim()+"' and "
+                }
+
+
+
                 if(txtFechaDocumento.textoInputBox.trim()!="--"){
                     consultaSql+="D.fechaEmisionDocumento = '"+txtFechaDocumento.textoInputBox.trim()+"' and "
                 }
@@ -798,6 +824,11 @@ Rectangle {
                 txtNumeroLiquidacionDelDocumento.textoInputBox=""
                 txtVendedorLiquidacionDelDocumento.codigoValorSeleccion="-1"
                 txtVendedorLiquidacionDelDocumento.textoComboBox=""
+                txtVendedorComisionaDelDocumento.codigoValorSeleccion="-1"
+                txtVendedorComisionaDelDocumento.textoComboBox=""
+
+
+
                 txtFechaDocumento.textoInputBox=funcionesmysql.fechaDeHoy()
                 txtCodigoClienteDocumento.textoInputBox=""
                 txtTipoClienteDocumento.codigoValorSeleccion=""

@@ -281,6 +281,8 @@ Rectangle {
         /// 1.17.0  :Se optimiza el sistema para mejorar la intensidad de consultas a la base de datos.
         ///         :Se agrega el reporte "Listado de clientes x lista precio y fecha de alta" para digital world.
         /// 1.17.1  :Corrección del sistema general.
+        /// 1.17.2  :Se agrega comentario a la lista de documentos del mantenimiento.
+        ///         :Se agrega busqueda por vendedor del documento o el que comisiona.
 
 
         Text {

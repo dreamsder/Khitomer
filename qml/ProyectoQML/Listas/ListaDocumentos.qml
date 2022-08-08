@@ -362,6 +362,29 @@ Rectangle{
 
 
     Text {
+        id: txtComentarios
+        text: {
+            if(comentarios==""){
+                ""
+            }else{
+                qsTr("Comentario:  "+comentarios)
+            }
+        }
+        anchors.right: txtTipoDeDocumentoListado.left
+        anchors.rightMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        clip: true
+        anchors.bottom: txtObservaciones.top
+        anchors.bottomMargin: 1
+        font.pixelSize: 10
+        font.family: "Arial"
+        opacity: 0.800
+        color: "purple"
+    }
+
+
+    Text {
         id: txtObservaciones
         text: {
             if(observaciones==""){

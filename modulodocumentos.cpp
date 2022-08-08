@@ -684,6 +684,8 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
 void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString datoABuscar, QString _codigoPerfil){
 
 
+   // qDebug()<< campo;
+
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -699,7 +701,7 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
         QSqlRecord rec = q.record();
 
 
-        //  qDebug()<<q.lastQuery() ;
+      //  qDebug()<<q.lastQuery() ;
 
         ModuloDocumentos::reset();
         if(q.record().count()>0){
