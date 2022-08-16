@@ -606,6 +606,11 @@ inicio:
 
 
     //Carga de datos a ComboBox
+
+    modulo_CFE_ParametrosGenerales.cargar();
+    moduloTipoGarantia.buscarTipoGarantia("1=","1");
+    moduloTipoGarantiaMantenimiento.buscarTipoGarantia("1=","1");
+
       moduloTipoClientes.buscarTipoCliente("1=","1");
       moduloTipoDocumentoCliente.buscar();
 

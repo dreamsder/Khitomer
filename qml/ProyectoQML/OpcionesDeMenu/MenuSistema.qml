@@ -283,6 +283,7 @@ Rectangle {
         /// 1.17.1  :Corrección del sistema general.
         /// 1.17.2  :Se agrega comentario a la lista de documentos del mantenimiento.
         ///         :Se agrega busqueda por vendedor del documento o el que comisiona.
+        /// 1.17.3  :Correcciones varias.
 
 
         Text {
