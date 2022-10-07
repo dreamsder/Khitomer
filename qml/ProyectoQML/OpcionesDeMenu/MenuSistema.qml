@@ -284,6 +284,7 @@ Rectangle {
         /// 1.17.2  :Se agrega comentario a la lista de documentos del mantenimiento.
         ///         :Se agrega busqueda por vendedor del documento o el que comisiona.
         /// 1.17.3  :Correcciones varias.
+        /// 1.17.4  :Se agrega soporte para impresión de envios en las facturas pendientes.
 
 
         Text {

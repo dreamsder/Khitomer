@@ -151,7 +151,9 @@ public:
         return m_UTILIZA_CONTROL_CLIENTE_CREDITO;
     }
 
-
+    static QString getIMPRESION_ENVIOS(){
+        return m_IMPRESION_ENVIOS;
+    }
 
 
 
@@ -184,6 +186,8 @@ private:
     static QString m_CODIGO_BARRAS_A_DEMANDA_EXTENDIDO;
     static QString m_DISTANCIAENTREBOTONESMENU;
     static QString m_UTILIZA_CONTROL_CLIENTE_CREDITO;
+
+    static QString m_IMPRESION_ENVIOS;
 
 
 
@@ -260,6 +264,10 @@ private:
     static void setUTILIZA_CONTROL_CLIENTE_CREDITO(QString value){
         m_UTILIZA_CONTROL_CLIENTE_CREDITO=value;
     }
+    static void setIMPRESION_ENVIOS(QString value){
+        m_IMPRESION_ENVIOS=value;
+    }
+
 
 
 

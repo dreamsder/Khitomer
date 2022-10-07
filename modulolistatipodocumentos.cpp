@@ -1463,6 +1463,8 @@ QString ModuloListaTipoDocumentos::retornaValorCampoTipoDocumento(QString _codig
 
                         return query.value(0).toString();
 
+
+
                     }else{
                         return "";
                     }

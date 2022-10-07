@@ -1980,6 +1980,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 413:
             if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;REPLACE INTO `Reportes` VALUES (81,2,'Listado de clientes x lista precio y fecha de alta','select * from  ( SELECT   CLI.codigoCliente\\'CODIGO\\', CLI.razonSocial\\'Razón Social\\', CLI.nombreCliente\\'Nombre Fantasía\\', CLI.direccion\\'Dirección\\', CLI.telefono\\'Telefono\\', CLI.email\\'Email\\', case when LPC.codigoListaPrecio is null then \\'Sin lista precio, asume la 1\\' else LPC.codigoListaPrecio end AS CodigoListaPrecio FROM Clientes CLI  left join ListaPrecioClientes LPC on LPC.tipoCliente=CLI.tipoCliente and LPC.codigoCliente=CLI.codigoCliente  where  	CLI.tipoCliente=1  and  CLI.fechaAlta  between \\'@_desde\\' and \\'@_hasta\\'    order by CLI.razonSocial) Sub  where (((Sub.CodigoListaPrecio=\\'Sin lista precio, asume la 1\\' or Sub.CodigoListaPrecio=1) and \\'1\\'=\\'@_codigoListaPrecio\\') or  Sub.CodigoListaPrecio=\\'@_codigoListaPrecio\\');','','','0','0','0','0','0','1','1','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0');SET FOREIGN_KEY_CHECKS=1;","414")){
                 _iterador=false; return false; } break;
+        case 414:
+            if(!impactoCambioEnBD("insert into Configuracion values('IMPRESION_ENVIOS','0','Esta configuracion indica si aparece durante el guardado pendiente de la factura la posibilidad de imprimir informacion del cliente en una impresora');","415")){
+                _iterador=false; return false; } break;
 
             //
             //

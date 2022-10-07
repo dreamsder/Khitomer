@@ -55,6 +55,8 @@ QString ModuloConfiguracion::m_DISTANCIAENTREBOTONESMENU;
 
 QString ModuloConfiguracion::m_UTILIZA_CONTROL_CLIENTE_CREDITO;
 
+QString ModuloConfiguracion::m_IMPRESION_ENVIOS;
+
 
 
 
@@ -234,6 +236,11 @@ void ModuloConfiguracion::cargarConfiguracion(){
                 else if(q.value(rec.indexOf("codigoConfiguracion")).toString()=="UTILIZA_CONTROL_CLIENTE_CREDITO"){
                     ModuloConfiguracion::setUTILIZA_CONTROL_CLIENTE_CREDITO(q.value(rec.indexOf("valorConfiguracion")).toString());
                 }
+                else if(q.value(rec.indexOf("codigoConfiguracion")).toString()=="IMPRESION_ENVIOS"){
+                    ModuloConfiguracion::setIMPRESION_ENVIOS(q.value(rec.indexOf("valorConfiguracion")).toString());
+                }
+
+
 
 
 
@@ -366,6 +373,9 @@ QString ModuloConfiguracion::retornaValorConfiguracion(QString _codigoConfigurac
     }
     else if(_codigoConfiguracion=="UTILIZA_CONTROL_CLIENTE_CREDITO"){
         return ModuloConfiguracion::getUTILIZA_CONTROL_CLIENTE_CREDITO();
+    }
+    else if(_codigoConfiguracion=="IMPRESION_ENVIOS"){
+        return ModuloConfiguracion::getIMPRESION_ENVIOS();
     }
 
 

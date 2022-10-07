@@ -192,7 +192,6 @@ int main(int argc, char *argv[])
 
 
     moduloListaImpresoras.buscarImpresoras();
-    moduloListaImpresoras.buscarImpresoras();
 
 
     ModuloDocumentos moduloDocumentos;
