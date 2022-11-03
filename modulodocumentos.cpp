@@ -2332,9 +2332,9 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   fuente.setPointSize(10);
                   fuente.setUnderline(true);
                   painter.setFont(fuente);
-                  painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"¡ABRIR EL PAQUETE EN AGENCIA");
+                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"¡ABRIR EL PAQUETE EN AGENCIA");
                   desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
+                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
 
                   fuente.setPointSize(8);
                   fuente.setUnderline(false);
@@ -2342,9 +2342,9 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   painter.setFont(fuente);
 
                   desplazamientoLogo+=0.5;
-                  fuente.setPointSize(10);
+                  fuente.setPointSize(8);
                   painter.setFont(fuente);
-                  painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"ANTE POSIBLES RECLAMOS POR ROTURA");
+                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"ANTE POSIBLES RECLAMOS POR ROTURA");
                   desplazamientoLogo+=1.0;
 
                   fuente.setBold(true);
@@ -2352,7 +2352,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   fuente.setUnderline(true);
                   painter.setFont(fuente);
 
-                  painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"  ESTE LADO HACIA ARRIBA SIEMPRE  ");
+                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"  ESTE LADO HACIA ARRIBA SIEMPRE  ");
 
                   fuente.setBold(false);
                   fuente.setUnderline(false);
@@ -2370,37 +2370,39 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   desplazamientoLogo+=0.7;
 
                   // Codigo cliente
-                  painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
+                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
                   // Nombre cliente
-                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
+                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
 
                   desplazamientoLogo+=0.5;
+
+                  // Cadeteria
                   if(_codigoTipoImpresion=="2"){
 
-                       painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
+                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
                        desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
+                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
                        desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
+                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
                        desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
+                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
                   }else if(_codigoTipoImpresion=="3"){
 
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Rut: "+rut);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Rut: "+rut);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Ciudad: "+localidad);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Ciudad: "+localidad);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Departamento: "+departamento);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Departamento: "+departamento);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
                       desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
 
                   }
 
@@ -2422,7 +2424,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   //Imprimo imagen fragil
                   QImage imagenLogoFragil;
                   imagenLogoFragil.loadFromData(QByteArray::fromBase64(fragilImagen.toAscii()));
-                  painter.drawImage(cuadro(0.2,2.0+desplazamientoLogo,7.0,3.0,false), imagenLogoFragil);
+                  painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoFragil);
 
                   desplazamientoLogo+=4;
 
@@ -2433,17 +2435,35 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                   //Imprimo detalle de ivas
                   QImage imagenLogoEmpresa;
                   imagenLogoEmpresa.loadFromData(QByteArray::fromBase64(logoEmpresa.toAscii()));
-                  painter.drawImage(cuadro(0.2,2.0+desplazamientoLogo,7.0,3.0,false), imagenLogoEmpresa);
+                  painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoEmpresa);
                   desplazamientoLogo+=4.5;
 
-                  painter.drawText(cuadroTicketRight(8.7,1.0+desplazamientoLogo,8.0,0.5,"29021052 / 29082199"),"29021052 / 29082199");
+                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,7.0,0.5,"29021052 / 29082199"),"29021052 / 29082199");
                   desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
+                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
                   desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
+                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
 
 
 
+                  if(_codigoTipoImpresion=="2"){
+                      desplazamientoLogo+=1;
+                      // Se imprime una linea separadora
+                      fuente.setBold(true);
+                      painter.setFont(fuente);
+                      painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                      fuente.setBold(true);
+                      painter.setFont(fuente);
+                      desplazamientoLogo+=0.8;
+                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Constancia de recepción: ");
+                      desplazamientoLogo+=1;
+                      // Se imprime una linea separadora
+                      fuente.setBold(true);
+                      painter.setFont(fuente);
+                      painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+                      fuente.setBold(false);
+                      painter.setFont(fuente);
+                  }
 
 
 
