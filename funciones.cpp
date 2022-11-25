@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -1983,8 +1983,15 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 414:
             if(!impactoCambioEnBD("insert into Configuracion values('IMPRESION_ENVIOS','0','Esta configuracion indica si aparece durante el guardado pendiente de la factura la posibilidad de imprimir informacion del cliente en una impresora');","415")){
                 _iterador=false; return false; } break;
-
-            //
+        case 415:
+            if(!impactoCambioEnBD("ALTER TABLE Clientes ADD porcentajeDescuento decimal(45,4) unsigned DEFAULT 0 NOT NULL;","416")){
+                _iterador=false; return false; } break;
+        case 416:
+            if(!impactoCambioEnBD("ALTER TABLE TipoDocumento ADD imprimeEnFormatoRecibo  char(1) NOT NULL DEFAULT '0';","417")){
+                _iterador=false; return false; } break;
+        case 417:
+            if(!impactoCambioEnBD("insert into Configuracion values('NOMBRE_EMPRESA','','Nombre de la empresa que se usa para facturas o recibos, al pie de firma');","418")){
+                _iterador=false; return false; } break;
             //
 
 

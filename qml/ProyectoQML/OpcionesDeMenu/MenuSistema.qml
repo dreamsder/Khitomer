@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -286,13 +286,14 @@ Rectangle {
         /// 1.17.3  :Correcciones varias.
         /// 1.17.4  :Se agrega soporte para impresión de envios en las facturas pendientes.
         /// 1.17.5  :Corrección en impresión de envios.
+        /// 1.17.6  :Se agrega el modo de impresión para recibos, apedido de Jaime de likaren. SOLO sirve para recibos, no para otro documento.
 
         Text {
             id: txtCopyright
             x: 0
             y: 138
             color: "#2b2a2a"
-            text: qsTr("Copyright (C) <2012-2022>  Dreamsder")
+            text: qsTr("Copyright (C) <2012-2023>  Dreamsder")
             wrapMode: Text.NoWrap
             font.family: "Arial"
             font.bold: false

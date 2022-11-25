@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -56,6 +56,9 @@ QString ModuloConfiguracion::m_DISTANCIAENTREBOTONESMENU;
 QString ModuloConfiguracion::m_UTILIZA_CONTROL_CLIENTE_CREDITO;
 
 QString ModuloConfiguracion::m_IMPRESION_ENVIOS;
+QString ModuloConfiguracion::m_NOMBRE_EMPRESA;
+
+
 
 
 
@@ -239,7 +242,9 @@ void ModuloConfiguracion::cargarConfiguracion(){
                 else if(q.value(rec.indexOf("codigoConfiguracion")).toString()=="IMPRESION_ENVIOS"){
                     ModuloConfiguracion::setIMPRESION_ENVIOS(q.value(rec.indexOf("valorConfiguracion")).toString());
                 }
-
+                else if(q.value(rec.indexOf("codigoConfiguracion")).toString()=="NOMBRE_EMPRESA"){
+                    ModuloConfiguracion::setNOMBRE_EMPRESA(q.value(rec.indexOf("valorConfiguracion")).toString());
+                }
 
 
 
@@ -377,7 +382,9 @@ QString ModuloConfiguracion::retornaValorConfiguracion(QString _codigoConfigurac
     else if(_codigoConfiguracion=="IMPRESION_ENVIOS"){
         return ModuloConfiguracion::getIMPRESION_ENVIOS();
     }
-
+    else if(_codigoConfiguracion=="NOMBRE_EMPRESA"){
+        return ModuloConfiguracion::getNOMBRE_EMPRESA();
+    }
 
 
 

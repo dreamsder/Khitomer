@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -615,12 +615,12 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
         QSqlQuery q;
         // Si es -1 el estado del documeto, cargo todos
         if(_estadoDocumento=="-1"){
-           //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+            //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
             q = Database::consultaSql("select * from VDocumentosLiquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  order by fechaHoraGuardadoDocumentoSQL desc");
         }else{
             // Cargo el estado del documento que me pasaron
-           //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoEstadoDocumento='"+_estadoDocumento+"'   and   D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
-             q = Database::consultaSql("select * from VDocumentosLiquidaciones where codigoEstadoDocumento='"+_estadoDocumento+"'   and   codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  order by fechaHoraGuardadoDocumentoSQL desc");
+            //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoEstadoDocumento='"+_estadoDocumento+"'   and   D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
+            q = Database::consultaSql("select * from VDocumentosLiquidaciones where codigoEstadoDocumento='"+_estadoDocumento+"'   and   codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  order by fechaHoraGuardadoDocumentoSQL desc");
         }
 
 
@@ -684,7 +684,7 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
 void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString datoABuscar, QString _codigoPerfil){
 
 
-   // qDebug()<< campo;
+    // qDebug()<< campo;
 
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -701,7 +701,7 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
         QSqlRecord rec = q.record();
 
 
-      //  qDebug()<<q.lastQuery() ;
+        //  qDebug()<<q.lastQuery() ;
 
         ModuloDocumentos::reset();
         if(q.record().count()>0){
@@ -1440,7 +1440,7 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
         QSqlQuery query(Database::connect());
 
         ///Actualizo el documento de venta(factura credito, ajuste cuenta corriente +)
-        if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+"  and serieDocumento='"+_serieDocumentoAPagar+"'   and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+"")){                        
+        if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+"  and serieDocumento='"+_serieDocumentoAPagar+"'   and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+"")){
             qDebug() << query.lastQuery();
             qDebug() << "1";
             query.clear();
@@ -1469,7 +1469,7 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
                 query.clear();
                 if(query.exec("update Documentos set saldoClienteCuentaCorriente="+_montoDelSaldo+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumentoAPagar+"' and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+";")){
                     qDebug()<< "update 1";
-                    qDebug()<< query.lastError();                 
+                    qDebug()<< query.lastError();
                     return -2;
                 }else{
                     qDebug()<< "update 2";
@@ -1894,7 +1894,7 @@ qlonglong ModuloDocumentos::retornoCodigoUltimoDocumentoDisponible(QString _codi
         }
     }
     if(conexion){
-        QSqlQuery query(Database::connect());                    
+        QSqlQuery query(Database::connect());
         if(query.exec("SELECT DOC.codigoDocumento FROM Documentos DOC join TipoDocumento TD on TD.codigoTipoDocumento=DOC.codigoTipoDocumento where DOC.codigoTipoDocumento='"+_codigoTipoDocumento+"' and DOC.serieDocumento=TD.serieDocumento order by DOC.codigoDocumento desc limit 1")) {
 
             if(query.first()){
@@ -2291,198 +2291,198 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
     fuente.setPointSize(8);
 
 
-     QString consultaSql = "select C.codigoCliente,C.nombreCliente,C.direccion, C.esquina,C.numeroPuerta,C.telefono, C.telefono2,C.horario,D.descripcionDepartamento,L.descripcionLocalidad, C.rut from Clientes C  join Departamentos D on D.codigoDepartamento=C.codigoDepartamento and D.codigoPais=C.codigoPais  join Localidades L on L.codigoDepartamento=C.codigoDepartamento and L.codigoPais=C.codigoPais and L.codigoLocalidad=C.codigoLocalidad  where C.codigoCliente="+_codigoCliente+" and C.tipoCliente="+_tipoCliente+";";
+    QString consultaSql = "select C.codigoCliente,C.nombreCliente,C.direccion, C.esquina,C.numeroPuerta,C.telefono, C.telefono2,C.horario,D.descripcionDepartamento,L.descripcionLocalidad, C.rut from Clientes C  join Departamentos D on D.codigoDepartamento=C.codigoDepartamento and D.codigoPais=C.codigoPais  join Localidades L on L.codigoDepartamento=C.codigoDepartamento and L.codigoPais=C.codigoPais and L.codigoLocalidad=C.codigoLocalidad  where C.codigoCliente="+_codigoCliente+" and C.tipoCliente="+_tipoCliente+";";
 
 
-     bool conexion=true;
-     Database::chequeaStatusAccesoMysql();
-     if(!Database::connect().isOpen()){
-         if(!Database::connect().open()){
-             qDebug() << "No conecto";
-             conexion=false;
-         }
-     }
-     if(conexion){
-         QSqlQuery query(Database::connect());
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
 
-         if(query.exec(consultaSql)) {
-             if(query.first()){
+        if(query.exec(consultaSql)) {
+            if(query.first()){
 
-                 QString codigoCliente=query.value(0).toString();
-                 QString nombreCliente=query.value(1).toString();
-                 QString direccion=query.value(2).toString();
-                 QString esquina=query.value(3).toString();
-                 QString numeroPuerta=query.value(4).toString();
-                 QString telefono=query.value(5).toString();
-                 QString telefono2=query.value(6).toString();
-                 QString horario=query.value(7).toString();
-                 QString departamento=query.value(8).toString();
-                 QString localidad=query.value(9).toString();
-                 QString rut=query.value(10).toString();
+                QString codigoCliente=query.value(0).toString();
+                QString nombreCliente=query.value(1).toString();
+                QString direccion=query.value(2).toString();
+                QString esquina=query.value(3).toString();
+                QString numeroPuerta=query.value(4).toString();
+                QString telefono=query.value(5).toString();
+                QString telefono2=query.value(6).toString();
+                QString horario=query.value(7).toString();
+                QString departamento=query.value(8).toString();
+                QString localidad=query.value(9).toString();
+                QString rut=query.value(10).toString();
 
-                 if (!painter.begin(&printer)) {
-                     return false;
-                 }
-                 painter.setFont(fuente);
-
-
-                  double desplazamientoLogo=0.0;
-
-                  fuente.setBold(true);
-                  fuente.setPointSize(10);
-                  fuente.setUnderline(true);
-                  painter.setFont(fuente);
-                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"¡ABRIR EL PAQUETE EN AGENCIA");
-                  desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
-
-                  fuente.setPointSize(8);
-                  fuente.setUnderline(false);
-                  fuente.setBold(false);
-                  painter.setFont(fuente);
-
-                  desplazamientoLogo+=0.5;
-                  fuente.setPointSize(8);
-                  painter.setFont(fuente);
-                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"ANTE POSIBLES RECLAMOS POR ROTURA");
-                  desplazamientoLogo+=1.0;
-
-                  fuente.setBold(true);
-                  fuente.setPointSize(10);
-                  fuente.setUnderline(true);
-                  painter.setFont(fuente);
-
-                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"  ESTE LADO HACIA ARRIBA SIEMPRE  ");
-
-                  fuente.setBold(false);
-                  fuente.setUnderline(false);
-                  painter.setFont(fuente);
-
-                  desplazamientoLogo+=0.7;
-
-                  // Se imprime una linea separadora
-                  fuente.setBold(true);
-                  painter.setFont(fuente);
-                  painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-                  fuente.setBold(false);
-                  painter.setFont(fuente);
-
-                  desplazamientoLogo+=0.7;
-
-                  // Codigo cliente
-                  painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
-                  // Nombre cliente
-                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
-
-                  desplazamientoLogo+=0.5;
-
-                  // Cadeteria
-                  if(_codigoTipoImpresion=="2"){
-
-                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
-                       desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
-                       desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
-                       desplazamientoLogo+=0.5;
-                       painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
-                  }else if(_codigoTipoImpresion=="3"){
-
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Rut: "+rut);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Ciudad: "+localidad);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Departamento: "+departamento);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
-                      desplazamientoLogo+=0.5;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
-
-                  }
+                if (!painter.begin(&printer)) {
+                    return false;
+                }
+                painter.setFont(fuente);
 
 
+                double desplazamientoLogo=0.0;
 
+                fuente.setBold(true);
+                fuente.setPointSize(10);
+                fuente.setUnderline(true);
+                painter.setFont(fuente);
+                painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"¡ABRIR EL PAQUETE EN AGENCIA");
+                desplazamientoLogo+=0.5;
+                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
 
+                fuente.setPointSize(8);
+                fuente.setUnderline(false);
+                fuente.setBold(false);
+                painter.setFont(fuente);
 
+                desplazamientoLogo+=0.5;
+                fuente.setPointSize(8);
+                painter.setFont(fuente);
+                painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"ANTE POSIBLES RECLAMOS POR ROTURA");
+                desplazamientoLogo+=1.0;
 
-                  desplazamientoLogo+=1;
-                  // Se imprime una linea separadora
-                  fuente.setBold(true);
-                  painter.setFont(fuente);
-                  painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-                  fuente.setBold(false);
-                  painter.setFont(fuente);
+                fuente.setBold(true);
+                fuente.setPointSize(10);
+                fuente.setUnderline(true);
+                painter.setFont(fuente);
 
+                painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"  ESTE LADO HACIA ARRIBA SIEMPRE  ");
 
-                  QString fragilImagen="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";
-                  //Imprimo imagen fragil
-                  QImage imagenLogoFragil;
-                  imagenLogoFragil.loadFromData(QByteArray::fromBase64(fragilImagen.toAscii()));
-                  painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoFragil);
+                fuente.setBold(false);
+                fuente.setUnderline(false);
+                painter.setFont(fuente);
 
-                  desplazamientoLogo+=4;
+                desplazamientoLogo+=0.7;
 
+                // Se imprime una linea separadora
+                fuente.setBold(true);
+                painter.setFont(fuente);
+                painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                fuente.setBold(false);
+                painter.setFont(fuente);
 
-                  QString logoEmpresa="iVBORw0KGgoAAAANSUhEUgAAAKAAAABFCAYAAADNRu0cAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAfr0lEQVR4nO2df5xU1ZHov3VnGFnCYkP4kAnhscgzLKtti4m6hvCQZdVl24mgEWMkamx/0xA1QhLiY/24aogxCRppf6xx0KwJIaJrtG1d5SkxyEaiqM1o1FWWGJY1hGgHCSLO3Hp/nHNvn3v7dk8PYMTdKT7NdJ9Tp6rOuXWq6vy8AB5V8JwPCenxtPh3L/a9Hl5tftn/ImX/acr+lZT9cXXx+sa3tzJ9KfunSovL2azM9egk0WuE/17RS0xLIlIP/CaE8Ovg9Q4Z7wfAZyzNJyn7j1D2p1Hubla2ON++yNJM2b6kNStfb3KAaY9m69ZMfZOeuZ+QnsS3WWhWNl/qEOgr8yh+odvj494YPkIaYTxwADAcaAO6gW3AJuDfgWdBXyDTUtW0sj8MWAjMAZ4C5pPx1iTItCeN1A/7ANRTwL5DwR9BGyfwvzieFJMYxPAqBwFVkBi7IE21AjwELAMeIuPtAqDsZ4DbgMOBHwCXkPHe2Gsy98P7DnumgIUeD+Q4hDwfZRqjpZU2QOtRVlC2AVswljAFtEcUU3UzcD1wMxlvG2W/DbgamAdsBmaR8Vbtkdz9sM+AkBwTNIYl3SBeB3AlAyXDeODPqSpdXAFVy0ABWIn6Gzm0tZpX9gdhLNzfA6eCjEYA1S3AQtDvk2mBsn8KcIeV91JUl3BoS59F74d9C3pTwNrgtOCPAwoIUxkicJDCgJiLrbrWbmAB6HVkWnqP1cq+B5yGsXijLI3VwOlkvNco+1OBnwKDgG+iPZdx6IC+1rkf9iFwFTBpJFRNK/QAMge4BpGB/DlwCBAYIdfqKYD6wEwy3r19lqrsDwGWIjLD0NMK8Dky3krK/jHA/QhtKN8g4y3sM/1+2GegOfdb8AeB3IWJzQayn8LBCp4aa6eKie+c7/DNOsrX+xA9420DnYlqydAjBTxA2T+VjLcSyBsWfJ2yf05TdXj/YHengpop2/R0x27i98bX7yWtVx69W8CC3w48iDDBoCukgaERc+eABPHbAWS8HYk0g7TnekDkNOCzwIvAtWS8SohX9kcB/4HQaul2AyeS8UqU/aWInGHTPkbG21q3DtXpmvqyJOcn4TVbtll6jeTbHVk+UGVbE5CrCAV/JPAYiFmZUGCo/YSQOPK4k4y3s1chRLLAPztTNTMo+39HxttkSPqbEW8rSLtl1YryQ8r+J4GLUE1butuaqHCz+bujWM3i9/WB7Y4sH6iy9RWw4A8DHgHGRazcxwhivIRCYdojdelG4ehqMQUYDzxD2b8ReA44Fmi3bjiAIcCtqP+3HNp6RLxC7xPsCzJ8ICFZAQt+K3A3cFCYpkCbwNBAGaw7rgEB9JUm+T9dpRPSGwbyfxNdezVtCuIdA6xskk8/7KNQzwJejTDF6IXjYlNxtLgShi447n7rwT2gXZiosgG9eJoCnEWggGX/NGAjGW91k3xroeDfhDCiJt2w3o5ZNlwFuoZ8g/nHgv91hMNs2a3kvfMb4KaALwDHY9pgCKbtNmGWIJeBv4p8a7zcMIRbnJRlzPbuAeBG/1ZgWH0BE0D5N/LedxPkuwDhLIsDcCJ5b3NDWgX/GoQD7a+NzPbmN0IPauas4/pTgHloMKdn00XMZHPNEkfikscIzKpFQDvZPWW8XZT9zwP/BgyuT08S/uokB8EHbqPsH0zG29214WmojElkHTX6L1PwF/CH9ffy9UOT6HwaZJoNKzYlcip0e+DlgGtBUrF+NxgYjjAB5RzwVlPwzybvvexQGARyUtVx6DME7axkERkZnRarszQlQR4eEFVA4wUXoDKqWlQvBC5LqJHb5lNBDrd8yw3wAPz4JPNA4FbLLPpRhUFam574YRJRqL+bI+O9AHwWdIdTPqhwIx7DHcR7MEp/RiKPptMS+Gj8O+OAu9n/kAIFP3kzhMbr4fAodAPeYkw7p+zyZAO+TMJMfyXz0BifUJndabGwUAKPiIwunACMislyntWRRuUS+NbBo9YFzwPG1nZ7K/wAJz2y6mGTq2knAksS+CXPB2W8hyn7f4OJO0dVsxzeIk5PVoBnqSrxTsr+w8BllP0fJFjBJuemQtqbgPvsTw+j7FNAhjvx6gUY1xy4GD+BTgJ4s4EvRcML7cJsxNhseR0NZDGWaRNYN5jIo4bXvYgOi1ntGUCgOJuBx2PRzS+d8j5LdnjA3ARew0FPwWwM6aVNQ7ka4rWGPwr+cGC+EUyrwolTOS/Wm2ra2BkklP0DyUTcRmPIeGsp+4cC14DmAC/CIOxRCrADuCRG4efAKcDJwI+b5uuChPV+kbyXj+QV/IGg84ArEPUs3jwK/l3kvbV16BCjMRK4JtbG/wh6JfkWd+Pjtyn4E4BbgAvJe68nyhp/PgCzY3Ibvr9FdKDlt4689/mE2ju0B2aAyY413WLiYwVlLoV37yQ/oH6oE9SvXh90oOqCd3ERwuCol4t971t0taBP2AAZ7w0y3rnAwcD3gNfCPNNju4H7gCPIeL+IlX7R/r2wz3wDqPGcDuS9neS9q4CFMbyv9oHO+cAgp41vR3quiClfwO9Z1P8UeW9dXVn7Ao3qVgt5h8cG4BKn/OHQcuTe4mUU8CJ/ID1cUE2uM9B4N5Ye398XLXsGZf8TzYkRg4z3IhnvIlQPAD4K/DXKEcCHyXjTbdwYh2Cf4GTK/tjd4tscfBtwLVKWgt/WZNkTnPbxgYXMbmBJ5rQ2sDLOgKyph93kzjsz/3uag34LJsbeYmgIRNxzHVaJulELrYDHu3TQxnCQ2Daq2O+3sUtwzqgqWMWQmjQP1aWU/b8ON5j2Fcx2qy32E0D9Cd/qispJxEd1zYDYumkDPnmvm4L/KMJpNmUgyoFULbATrzp0Cj0ewbyqYdNlpzSqfAr+OQifTeSr/At575+S5W4gbxSncd0M5BAGWSF3AZ3kvV0U/NsRvmJpnEzBv5S8t6UBnabkMpkD+DwtEhskOdMwwe/tSXnBd3dTadg7M8D1lN9tKOdeguEhX5/pu0XBrU9j2IIK4cfM30Xp1HqRgSBt1XySHt5foXJc4kf4q0Qezbq7ZupmOkne1AuAFeTDHei3oOpbvm3AefV5NWuVweNiv5UWjguta6NPJVa6mWclnAct82i8W2JvQNrhOZE7/Zpp814h9DC9wrBIu8TXohPp6E7Qbsc9DY9jRMrGP43wmoGmcCWLyBgH918p+AdS8A/EeMu1Tt6Fdq5wN3kZ8HiHI/EYHBtlUtu1FN4BtiekJ87fuX+5hrJ/Mas2xvk3u62nmbRjQzkEj6FMjjNLgITOkNh1nYn6Hg+Y6syl7QASlh5jdPItPiagD/LSdubBrcdylHNRPdf+3ZFAripL7Vybm99b3ZLw5kbwhDsQXkLkJfv3qDBfpB04KYFetXySzDG+HsqRUZV1g1tXja1Z/W1cvZO6okTzTI9fzLDRiyj3NNqBs3tQ9kcDx0RkET5lcxspbwJEum7SXOEFiIxyGvch8mGM6yhHZLARwMNVMmJWGlzIe2vJSyd57/vkpRN3STPRokiDvD5CwR8PHBMl6OqA6+5DhnNZknRstnm5PODQpp2iAL/FTIbEeNXFD78LiHwF5H577HLvwPqdHnA1Iq0RvfeZsNd4ABR8j4I/B1hseIRxzrV9oHITqm5rX0zBn534EM2Kw17urA01It/ryLXWtU5EvD1q51bgQLo1RtiOBmvkEfAVfgOMdUaMSWWxI8HqyNQqIdNQ1lP2z6enp8hhe3imQ9vOMyNSRxYFesIF8b4SBBhHwb/GJgQrIVMRGRULL75bMwkd5AVyuJD3XqDgLwG+BASj7gJ4syj4y4CNmPMunwS+gASDmzqTulLT+M3UrRYK/hDgDOe53Y6omQuMk1dpB15CaLV1nAucXctHQBlJwV/cQCC/FRjFLuxSds3ILbnYZoGPAB+SWs/t/hDnKUStYTuqP6Wl5V7K/qVkvA0NhEyGco8H8jXg6hqTLwrvMpLrd8JF8aXLJkBkNDAvqtGxiirfB62dhA5x6g4D56OMQ5gW4goTQSdGyznflW7gyRpKSi+smoYzEBlsY1qAArNbAvcf32i6kYJfBJlhcU+l4H+1zpTMcES+FG2/iHHq9oAUCLzj+PhgyB757aT7mM1J8RWTOLjxgsYeoLGGM4BfUfZvo+x/gueamC4s90DZnwLyBCJXRzQ7lEVgFwNpHdD7wrmbXlNvSUjTjajO4t2d59uBRXK960155L1uYDqq30K1O5lXhN9a4NPkvR/V8Ajisvr1q26CiMoUH1TNdfKfwu9eFylbS/Om6rOVgUAuKptE5UvSJZvXCgxCFf5Idbm6GdgG/BoY0wCnZlyS0F1F2kBzIDlofYWyvxKzOL4BCM55DAHGAkcAHYjrXh16ro6/DbZxqiPJZAh69irQ9jo424GXgceAVeS9eg8H4ClHpq0OjyqYQcsCCv5NoGdjgv/xmK1YOzF1XwMsB/9x8uGKSPB3J+hDDsVXGsgD8ChoMC31y2iWjDflw03EtzK3rXFHRVdi1tsDmgdw/tMet3wSI7duTSwdQtg+3cIF/jsobQwBDrCmscYVBIVi6YI5Fzws7qaSaCS5s91NS6LrVOxd4EkB1aHkvfjsZQBJW6n+FHfN1Od7wzseb74K/3DQeyHD+1XfhrK0AjsQ2tgO9Kg95+vO4zgxnLv1KgiMXwIyCh9ycKn3Pclf7+004E0rK9poZ3aTW7T2OtTnO3e/95L/+1XfJAj5esBW1CYl2YraoXf0dzfQhXV5vUGzI7YkvD6M9n4HwHbyLc0eDeiH9wlaMRseTUy1VWCYRkevQKL7c8+KvAuUMTclDGrkKl16tmxkoyn18WpkoVo2nJNT0xHeBNytXB8AqOQO8sAbBrRjzMGmVGdX/LjpfztoBV5GmAKYpbY/iHP4KJxyIDpJ6Yy+gvRdmIOUBwH7B9MzTc4R9GrckkxwfDBj//t1IDAv04ejkpVc+nDMvTMB/DjV2XVpHdwC5jARwFOpzq6/rYN3DnCFk3RWqrPr4RjOKOAi4CSBMYjY2Q2lkkuXMTulb66njJVc+iu2fD3oxhiZ1cCtqc6ummXDSi79HNW16YdTnV1nNaDnllsGdZc8d2DmNVcDy1KdXYmbkz3gmYiffR3roZ2HnjjHF08HejDu+D9x9CM+Udibe22kjQl4bsd4AzvuFDA2uS+wzpZsF6EdOLWSS9cgVXLpVuBkgcEiMlhgilWiJPicoSftmBHu40HGm19MU8ml5wAviciXjfIFNVNEBEEyIrII+FUllz6uDo/9RQwPEdoDfkE9RBglwlEiMg94vpJLX5xAY0RYXpo/USfIsAZ8xwpMFZF/sPLfUcmla2h7eKyJzM/sojp50BvUm/vbADyPsai9VGH38hJgB2ZAVJXpCfu3qbXgVGeXD6ywjx+72H54AqfJIjJcox3gpDhSJZceAkzWaj2Kqc6uHQC//+JBiMc1iFxvp4pQy9edrqs6GWkHHqjk0qck1UPVlkNQ2yGr9ATVUNZW4DuVXHpGvF3MlGPIs7cBS7WMwwvnN04aCCLyBeDJSi492qXh8WfahejriB3homa9d6cSPW/g5Lsj4+jsok1XE4c9rbA5qNXeHO1q9PsfgfUQLimq7sSY/t4g3qjLEVcVwn2FLt5M0xaROs9MwJsmIq1SxVseZLR43qkizBOgmq8rUZ2J6sEon1TVi0A3hnUVPGBpJZc+iBiIK7PqhajOAp2F6ixULwF9Kmgrq5/ujWIeGHUJZtaIhi4+tWmGL7hqvlVVZwnMQnWWqs4FXaGq3WL1SISxwP2VXLotoNfKd1rgAr8Ick5IVjHrvf9bHLb1XGgDl9oj8CrmHNZfiI0ypBZVE8om8nD/2kK/EzMN2xMpu5J8zd00zcAaVTYJYl2qnoDzsCq5tAfMQCUu5cRKLj0y1dnlngOe7sxmbcNcQUwllx4ILHZXhhRdoOi3hnY+H5T1gWcruXSnKv8iyDE2xB2oqt/BHGSvQnTV5Z79O9dHLmqq5NI3quqTgtiNAzqhkkunbFzpBzQCJXTLOpCU5vLenupc/+MY3pJKLp1R5X6B0SAIpBW9GPgm4S35wg/Ds5zBGdAdwH+51q0PH439flvhRYWnMRaxO2bBwr9hb6+T5vx+CxNvvqRm/jJqiX9Y01BNQKqzC2CF0x/SlVx6jIMyGWSEkcT8wzYgjhu2ceI0gycA96U6u4J1xpNBRlRrrfeo+t8a2vl8UliwHZip6BbHiUyLyRTzP7VxkeX9cFVagYQNsZrY+etDE8NLUp1dXcCJau6LDMrMtZ3ZaupAfRzh5erAwtri3wO/F5LXRCX6GyedJFyMUr+KWVZ/QYyrf8e1arHgJ0y3aTsxGyGexYy43yRBLrYCfb8UswrLRSLu6AQnb2Y1VKELWGXEViBylmMyQsqEklH3C/wd2NDR0Ll26NKkM1YGrJW6OWge60KnujgiLr26SmRiLyHoONHL3sMO3jyE7JIGpA6kOrvWAaVqHWQkdge7UcDFLT6wuJaSmBHtW9SmR77XG+kmSSbgi1Hul4G1mNXJX2EG7ZswLvs/gdesC+8So7S/xPx+C9NWkQYPed24m+43gLWqbKwG03wGHPcbRIdmesQolul0kyq59EhLY3qAp0oFdyMqjAuiHFXdhbkDphH4wM/ADfD5SxchGoVHlaiSSw+s5NKzgVMCvsALqc6uN+I0EImrYMOVkhq/07jsEzGfNw7cDY+t3E63XkbkZgI7gPg1MIbw9pYadkFI5h7IrontbH6NpGos206N0nF8TsijhkYNsW3ADfZ7cszSC6Q6u/xKLr1ClHnWUky20wdpQdq1Omn+E6CiqjcArYJ4is6o5NI3Ax2omUpRuDfV2eXuOB3o1G3Xrnea2qm9LaRnJgnbIri2GWzzvVrJHeI7bTMYxDNjszDt6jgD06yR9ux16c7QTHzUSWW3BTxstNkG7t0wS7ydSBBwO1YroL4ReEtqsutDksVskOb4pF7xJSHNwCLnFBc02p7UOG25oSqImbqYhh3pmvhJn/J7ZEOqs2srsNLhPxOjqGOctOUxHm9IQBsGt+3X1Lzb6ICejd9+52ZGW04GCwwBGSLmE9/leRW+1rk5omZw1Qto4pOqA38Rw9wK8d0Q++kPMNuAIkKFI+ONVOOu0KG7ROsEAzVeWJqS2JBrukleBK6j+UX3RmnrFN3gDDROBE6i+nvZsDvWB7jLHCc0GThX7W9V3Qo8GuOxLqBrrcbJTch3YnXYoxBz25rwLyF1E/B/Up1dC1O3hwMe36VRYwMbtxVmAiYiV2I9bPhygiOXj534j7qo61p8hLNBd1Sdu+PhVU2M9rphX50njI9kg3yqwW38L02UDdIkjke8rA+cvYexXwh2UvonIIiJ704CGWkFsXkh3AfstHkeMFuqFb/HGf0GcHfQMNbeXF7JpevtQ6SSS08ETnNk2QqsimJJ+A9kuogcDfwNsNGRZSQNQEKZmgZfrDut8q4LXxZkvCPLSus9EmKkm7wXEeY2pLcFs9rxnp03T2LeMO1y8t6aBIQ9geWOxfOc72vc+b5UZ1cFeMixHZ5WO9NyYqBmw+bjDr124LFKLh053PNm7mCvkkufANwf439tqrNrZ5yqY/l+sf9t6x9PdXatAs52ZPGAOyq59GASILROfdDAuJ2NQyWXbq/k0tcD17qWGWd9PPnU1Ye5na0cgXBBVaLYyOKPYkaxI7W6ecHFVTc0lVj5BLxIWZxyELF6Ll3z5x7QbyTWY09AtYzIiwLjY7VYloC9TGBGrIW24Kz9BjDUDHLOxYzph1i64xWeqeTSqzFr2G3AUbiH7Q2swYQZDaCqQanOrkcrufSNwGwr11jgO5hLkurUm0mVXPqXdfPNLp0Tq7zCZzOykks/4eANw4x0vRjmP6Y6u0Jj4Tmf6u+rPBjAXKCYVLHwew/wG4H/EDOfF1pYNzZ04j03XmxiXBLJSKKBrgFOt1fmenvzk1r6PMCKYHBkR7TdwIoE/KLC9tC1mrh1hXXltbTNjpTjgYogODwmichsQc4RkbQdBAX01gLT7Yg68tyieKG1Cz5fBTY4g7zzKrn0tBoaVRlSghwuYj4Q/SuQCcqJLWc3TrSJyERBJorIRBEZD+LZPNSELpdjrF/Iu/40xQ2eTyszEefsQUS5HAhOTGzCbGZw8UPFkdo0V6viaRL7RPCBnazlLY7fW3FfHVhupj/C348GsYsL1iXeFxnIJ7jfWJk1wGGK3qfh8VULTrOo6g5VvQo4Oj53V4OfzGcHcHbAwyrzbZVcuvbG72aMQj1edcqqqq/ow8CnU51dV9nVphAaH3xe4u1kjj+dbl0KclqYHvOi4fc3MKPk/YEPY064NoopGlW43mj6HWCrPswfmMkSbzt9WbeshYZlfXpe8Gj5Nhoe6LmrAa2CVq/S2EV1NsHlEeGX6ux6DZheyaXHozpDzXngERhL+xrm0s17bZxZr06PKPzRCV22xxFSnV2rKrn06cAY5zaP8UBwx+IiVR1c3YgchEXYCRCxPxWcFRSFpaj+DCBS1jAJ9gOuSXV2vV5HdqRe4+AOqS/p8XhbvgZciVoc94repNgOMafsUgpDBAZqVEgXL+lFhy6eKuwQ+L3CNq6jlfl8zwtcUdID7k/7gKQ1p4BB+oX+JJQ7UBnTl/E6YGzthzBWcSCwHzDAKplLSy3nXQpvi+lHbwHv6haEc7nJC+LSfaIB+9P+lAoIPnl/MD1cjrleoi1i0OJQY+wioyYDLZZ6kNUT42x+fZ8WFlDw3ngvGqE/7YOkgAHM9sfisxA4DcVeURsPDJuYhqmXJuoD9+BxBTd6XftCY/Wn7UsKGKTN9tvxOQc4E2QsLkT0yonzahAiiJuAH+FxCzd6G5usCLH8fa2h3wv5kujuK/VtWj5JQMZBxEl3f8fTPOb1wA7J4DMN856Lw3E3PcaNIgQ6tw2ztrka4UH+TNfy3RZX0LjQ8Ur9d8Jz4X9EWlwBg0wSCjWCWibnP+0x4LDh9DAWM7WQQvEQfIzSbcHjNYb6m7mq5jb4JKGb49s8XrNl94TvntDb2/Lt6/T6oR/6oR/6oR/6oR/64X8INJqGqZfWD/3QFGSzHR7gl0rFujj9ytUP7wlksx2TgQK96FhkN0w223EHsKhUKr5ofy8DtpZKxYuy2Y5pIBeBXlEqFdcAXjbbUcBsctwKXFEqFV+x5doxry+YgDk/O79UKr5my0wCuQy0G3hk27Y/fG/16p/72WzHV0CcW6Z0eqlU3GXpXQG8XSoVvxFUKJv9zCeAq+12/C7g2lKpuMXyALNUeDrmzN3iUqm4olq24y7MGb9NwMJSqfg64GezHYtA7AsWdVGpVFxl6c3G3AS/ETizVCrGd+H42WzHHJDPYC7F/FfgZtvz/Wy24+sgR1u615dKxRIxz5PNdiwFsVvz9ZVSqTjXlr0W88ozYm0/Hlhk238lcGmpVCSb7TgVc0b5dGAKMCFoN2uRFgIzMLtari6ViittXhvIT0FnlkrFbU5bHWT5jMHs8Jkf5Ft6l2POTm8FFpRKxbW2bAZ4olQq+k4ds5h3H3+uVCp2Q2w/oIhMobq/2bcVyGWzHSOB80EnizCiis9EzJVmu4i+tvQOzK7eWZitRcucMu2gw4ArgWuHDNl/lE2/F/QXIjoC9Apbjmy2YwTmvWTzs9mOlENnOOgYp3Hc/XcnYV4tPx/ztvEfZrMdGaeeUzHHN4cTvJrUwOGgPxfRyzFKHbiRxbZ+i23jJ4AcAvoa5k3olwBznMzDQNdZusmvX4XrRXQ75sTNLU76kaD/z5YNDIOH2ar/GnAm8Jjj5sZiFOwyYJSIHObQmoO5Vu5CTHvdb58tGGN0nEjVKFk+D2B2e56J2cLlvnbhy5h3NJ+NsXbuFWyHiMjHgx/HHnssVqZJQEeQHlHA5Dc/8RBmC/cE4qexDP6FmLd7P+ZkHQXcUCoVn7UCH2krE8A4TCOvxh5xeuCB4ivAS6psK5WKv7A9BOAczOtCVwFfrPJWgO2lUvFxjBIe5dD/FPBwqVRcVSoVf4JRpiOrZQGzM/cTwIOx+l6iyl2YB4ntwTdi9gKeZSxFXfi1tW4/sjK4cJ6lW3O5kOWzTpXXgc2lUjF+tdx8W3a0/d0uImOBa0ql4rOlUvG+GP4KTLv9ZeyZfgpYYdv3ZsyCQIb60A4y2vJZh+lcbjt/GnMNyjCQRcDseoQGDNhvAuZg1GU4nT5mARM1cBnwNYwS+G6F7NLuYuDjpVLxTqdMGfh8NtsxDGMFux588AFi+c8CLziK5tIEIJvtaMUo/8mYI48XWvca7Oxty2Y7xmJ64LMOmfXA5Gy2Y2w223EU5qGHD9XW8yaMlY7fi7EAcxu/m/7PmNsITsWe6K8D+2ezHWmMS3omlrfI0q17E4KpUuIzmG/LBpdLblHVLcBp2WzH8Gy2Y0oMfwumg82JPdPngGnZbMfIbLajA3Nuw6mnosrI44/vaK/S0S3AF7LZjuGYc89u5ygDf2/+6o9F+Ei9umGULvB8U7PZjnFQawE3EH2twQbMWYTHgaWYmGm7g78R2GBjIhfOwhyo+Q2mx5yu9hVVqmzDxFILMUoyxim3XTVyte5EK8NHgI9Z2SYYOrod89rQB2zFPueUuxNzdPJJ4G7gq6o94YNX5RVM3FQk+o6LTcClID/DKBvW7V+PufGwiPte4Ajo6yAnYJS1SPTw0GaQczFXbOSSSlu5fkvs0DnGzS6wZU8CsJ12JibOexXIOx7mDUvjn4BHVdns0LoOEwI8jwlBzrSxOZiQ62WQu1XlthifszD3Y7RhwosArsF0il9hLPx6J+91Vf0dQDbbMQjjbY4olYoftbJ1APx/uu5LNnMdK/gAAAAASUVORK5CYII=";
+                desplazamientoLogo+=0.7;
 
+                // Codigo cliente
+                painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
+                // Nombre cliente
+                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
 
-                  //Imprimo detalle de ivas
-                  QImage imagenLogoEmpresa;
-                  imagenLogoEmpresa.loadFromData(QByteArray::fromBase64(logoEmpresa.toAscii()));
-                  painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoEmpresa);
-                  desplazamientoLogo+=4.5;
+                desplazamientoLogo+=0.5;
 
-                  painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,7.0,0.5,"29021052 / 29082199"),"29021052 / 29082199");
-                  desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
-                  desplazamientoLogo+=0.5;
-                  painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
+                // Cadeteria
+                if(_codigoTipoImpresion=="2"){
 
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
+                }else if(_codigoTipoImpresion=="3"){
 
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Rut: "+rut);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Dirección: "+direccion);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono: "+telefono);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Telefono 2: "+telefono2);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Ciudad: "+localidad);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Departamento: "+departamento);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
+                    desplazamientoLogo+=0.5;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
 
-                  if(_codigoTipoImpresion=="2"){
-                      desplazamientoLogo+=1;
-                      // Se imprime una linea separadora
-                      fuente.setBold(true);
-                      painter.setFont(fuente);
-                      painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-                      fuente.setBold(true);
-                      painter.setFont(fuente);
-                      desplazamientoLogo+=0.8;
-                      painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Constancia de recepción: ");
-                      desplazamientoLogo+=1;
-                      // Se imprime una linea separadora
-                      fuente.setBold(true);
-                      painter.setFont(fuente);
-                      painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
-                      fuente.setBold(false);
-                      painter.setFont(fuente);
-                  }
+                }
 
 
 
 
-                   return painter.end();
 
 
-             }else{
+                desplazamientoLogo+=1;
+                // Se imprime una linea separadora
+                fuente.setBold(true);
+                painter.setFont(fuente);
+                painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                fuente.setBold(false);
+                painter.setFont(fuente);
 
-                 return false;
-             }
-         }else{
 
-             return false;
-         }
-     }else{
+                QString fragilImagen="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";
+                //Imprimo imagen fragil
+                QImage imagenLogoFragil;
+                imagenLogoFragil.loadFromData(QByteArray::fromBase64(fragilImagen.toAscii()));
+                painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoFragil);
 
-         return false;
-     }
+                desplazamientoLogo+=4;
+
+
+                QString logoEmpresa="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";
+
+
+                //Imprimo detalle de ivas
+                QImage imagenLogoEmpresa;
+                imagenLogoEmpresa.loadFromData(QByteArray::fromBase64(logoEmpresa.toAscii()));
+                painter.drawImage(cuadro(0.5,2.0+desplazamientoLogo,6.5,2.8,false), imagenLogoEmpresa);
+                desplazamientoLogo+=4.5;
+
+                painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,7.0,0.5,"29021052 / 29082199"),"29021052 / 29082199");
+                desplazamientoLogo+=0.5;
+                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
+                desplazamientoLogo+=0.5;
+                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
+
+
+
+                if(_codigoTipoImpresion=="2"){
+                    desplazamientoLogo+=1;
+                    // Se imprime una linea separadora
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    desplazamientoLogo+=0.8;
+                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Constancia de recepción: ");
+                    desplazamientoLogo+=1;
+                    // Se imprime una linea separadora
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false), "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
+                }
+
+
+
+
+                return painter.end();
+
+
+            }else{
+
+                return false;
+            }
+        }else{
+
+            return false;
+        }
+    }else{
+
+        return false;
+    }
 }
 
 
@@ -2502,7 +2502,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     fuente.setPointSize(8);
 
 
-    QString logoConsumoFinal = "iVBORw0KGgoAAAANSUhEUgAAC54AAAGpCAYAAABfrAieAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAACl8AAApfABIWuNQgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAABjiSURBVHic7NoxrqZjAIbhx++IRKbRmOgUCnRiB5Yw1ZQ6K1CSWIXCAugswESsQlQqjVBRTqOYkGOGm5F8/z9nznWV3/fmfd4F3BsAAAAAAAAAAAAAAIQX4t+b29440zsAAAAAAAAAAAAAALi877f9+PjHfwrP39v29bZXj3wRAAAAAAAAAAAAAADPlJ+2vb/tu+sf/y48F50DAAAAAAAAAAAAANxeT8Tnj4fnonMAAAAAAAAAAAAAAP4Sn18Pz0XnAAAAAAAAAAAAAAD84c/4/HTt40cTnQMAAAAAAAAAAAAA8MjdbR9s26nPAQAAAAAAAAAAAABw2wnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAANLVU5z9YduHRz0EAAAAAAAAAAAAAICz+2rbnX879DTh+W/bHvzv5wAAAAAAAAAAAAAA8Kx5+F8OnY5+BQAAAAAAAAAAAAAAN5vwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgXZ1p5/VtH2978Ux7AAAAAAAAAAAAAADPu5+3fbrt4dFD5wjP7257sO2dM2wBAAAAAAAAAAAAANwmb2+7v4Pj89ORl+9RdP7NROcAAAAAAAAAAAAAAEe4t+3LbS8dOXJkeC46BwAAAAAAAAAAAAA43uHx+VHh+cvbvp3oHAAAAAAAAAAAAADgHO5t+/yoy48Kz1/Z9tZBdwMAAAAAAAAAAAAA8KR3j7r4qPAcAAAAAAAAAAAAAIDnhPAcAAAAAAAAAAAAAIB0dcHtX7b9esF9AAAAAAAAAAAAAICb5LVtdy4xfMnw/JNtn11wHwAAAAAAAAAAAADgJvli2/1LDJ8uMQoAAAAAAAAAAAAAwM0hPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAA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";        
+    QString logoConsumoFinal = "iVBORw0KGgoAAAANSUhEUgAAC54AAAGpCAYAAABfrAieAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAACl8AAApfABIWuNQgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAABjiSURBVHic7NoxrqZjAIbhx++IRKbRmOgUCnRiB5Yw1ZQ6K1CSWIXCAugswESsQlQqjVBRTqOYkGOGm5F8/z9nznWV3/fmfd4F3BsAAAAAAAAAAAAAAIQX4t+b29440zsAAAAAAAAAAAAAALi877f9+PjHfwrP39v29bZXj3wRAAAAAAAAAAAAAADPlJ+2vb/tu+sf/y48F50DAAAAAAAAAAAAANxeT8Tnj4fnonMAAAAAAAAAAAAAAP4Sn18Pz0XnAAAAAAAAAAAAAAD84c/4/HTt40cTnQMAAAAAAAAAAAAA8MjdbR9s26nPAQAAAAAAAAAAAABw2wnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAANLVU5z9YduHRz0EAAAAAAAAAAAAAICz+2rbnX879DTh+W/bHvzv5wAAAAAAAAAAAAAA8Kx5+F8OnY5+BQAAAAAAAAAAAAAAN5vwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgXZ1p5/VtH2978Ux7AAAAAAAAAAAAAADPu5+3fbrt4dFD5wjP7257sO2dM2wBAAAAAAAAAAAAANwmb2+7v4Pj89ORl+9RdP7NROcAAAAAAAAAAAAAAEe4t+3LbS8dOXJkeC46BwAAAAAAAAAAAAA43uHx+VHh+cvbvp3oHAAAAAAAAAAAAADgHO5t+/yoy48Kz1/Z9tZBdwMAAAAAAAAAAAAA8KR3j7r4qPAcAAAAAAAAAAAAAIDnhPAcAAAAAAAAAAAAAIB0dcHtX7b9esF9AAAAAAAAAAAAAICb5LVtdy4xfMnw/JNtn11wHwAAAAAAAAAAAADgJvli2/1LDJ8uMQoAAAAAAAAAAAAAwM0hPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAAAAAAAAAAACAJzwEAAAAAAAAAAAAASMJzAAAAAAAAAAAAAACS8BwAAAAAAAAAAAAAgCQ8BwAAAAAAAAAAAAAgCc8BAAAAAAAAAAAAAEjCcwAAAAAAAAAAAAAAkvAcAAAAAAAAAAAAAIAkPAcAAAAAAAAAAAAAIAnPAQAAAAAAAAAAAABIwnMAAAAAAAAAAAAAAJLwHAAAAAAAAAAAAACAJDwHAAAA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";
     QString logoDetalleIva="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";
 
 
@@ -2619,7 +2619,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     }
     if(conexion){
         QSqlQuery query(Database::connect());
-        QSqlQuery queryDesgloseIva(Database::connect());        
+        QSqlQuery queryDesgloseIva(Database::connect());
         QSqlQuery queryCantidadCopias(Database::connect());
 
         if(queryCantidadCopias.exec("SELECT cantidadCopias FROM TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
@@ -2635,475 +2635,475 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
         bool seImprimioTodoOk=false;
 
         for (int var = 0; var < MaximoCopias; ++var) {
-                 query.first();
-                 query.previous();
-                 queryDesgloseIva.first();
-                 queryDesgloseIva.previous();
-                 seImprimioTodoOk=false;
+            query.first();
+            query.previous();
+            queryDesgloseIva.first();
+            queryDesgloseIva.previous();
+            seImprimioTodoOk=false;
 
-        if(query.exec(consultaSql)) {
-            if(query.first()){
+            if(query.exec(consultaSql)) {
+                if(query.first()){
 
-                if(queryDesgloseIva.exec(consultaDesgloseIVA)){
-                    if(!queryDesgloseIva.first()){
+                    if(queryDesgloseIva.exec(consultaDesgloseIVA)){
+                        if(!queryDesgloseIva.first()){
+                            return false;
+                        }
+                    }else{
                         return false;
                     }
-                }else{
-                    return false;
-                }
 
 
-                if (!painter.begin(&printer)) {
-                    return false;
-                }
-                painter.setFont(fuente);
-                QString logoImpresora=func_CFE_ParametrosGenerales.retornaValor("logoImpresoraTicket").trimmed();
+                    if (!painter.begin(&printer)) {
+                        return false;
+                    }
+                    painter.setFont(fuente);
+                    QString logoImpresora=func_CFE_ParametrosGenerales.retornaValor("logoImpresoraTicket").trimmed();
 
-              //  qDebug()<< logoImpresora;              
+                    //  qDebug()<< logoImpresora;
 
-                // Alto en centimetros que ocupa el logo
-                double desplazamientoLogo=2.0;
+                    // Alto en centimetros que ocupa el logo
+                    double desplazamientoLogo=2.0;
 
-                if(logoImpresora!=""){
-                    // Si esta cargado el logo lo imprimo
-                    QByteArray imagenQrString = logoImpresora.toAscii();
-                    QImage imagenQr;
-                    imagenQr.loadFromData(QByteArray::fromBase64(imagenQrString));
-                    painter.drawImage(cuadro(0.7,0.3,6.0,desplazamientoLogo,false), imagenQr);
-                    //painter.drawText(cuadro(0.5,2.5,7.0,0.5,false),"__________________________________________");
+                    if(logoImpresora!=""){
+                        // Si esta cargado el logo lo imprimo
+                        QByteArray imagenQrString = logoImpresora.toAscii();
+                        QImage imagenQr;
+                        imagenQr.loadFromData(QByteArray::fromBase64(imagenQrString));
+                        painter.drawImage(cuadro(0.7,0.3,6.0,desplazamientoLogo,false), imagenQr);
+                        //painter.drawText(cuadro(0.5,2.5,7.0,0.5,false),"__________________________________________");
 
-                }else{
-                    // Si no existe un logo para imprimir seteo el desplazamiento en cero, para que el texto se imprima al principio del ticket
-                    desplazamientoLogo=0.0;
-                }
+                    }else{
+                        // Si no existe un logo para imprimir seteo el desplazamiento en cero, para que el texto se imprima al principio del ticket
+                        desplazamientoLogo=0.0;
+                    }
 
-                //Cabezal
-                QString codigoCliente=query.value(55).toString();
-                QString fecha=query.value(0).toString();
-                QString iso_moneda=query.value(1).toString().replace("\n","");
-                QString montos_brutos=query.value(2).toString();
-                QString razon_social=query.value(5).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","")+"("+codigoCliente+")";
-                QString nombreCliente=query.value(5).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
-                QString ciudad=query.value(8).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
-                QString direccion=query.value(9).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
-                QString tipoDocumento=query.value(12).toString().replace("\n","");
-                QString numeroDocumento=query.value(13).toString().replace("\n","");
-                QString simbolo_moneda=query.value(56).toString().replace("\n","");
+                    //Cabezal
+                    QString codigoCliente=query.value(55).toString();
+                    QString fecha=query.value(0).toString();
+                    QString iso_moneda=query.value(1).toString().replace("\n","");
+                    QString montos_brutos=query.value(2).toString();
+                    QString razon_social=query.value(5).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","")+"("+codigoCliente+")";
+                    QString nombreCliente=query.value(5).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                    QString ciudad=query.value(8).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                    QString direccion=query.value(9).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                    QString tipoDocumento=query.value(12).toString().replace("\n","");
+                    QString numeroDocumento=query.value(13).toString().replace("\n","");
+                    QString simbolo_moneda=query.value(56).toString().replace("\n","");
 
-                QString isoPais=query.value(6).toString().replace("\n","");
+                    QString isoPais=query.value(6).toString().replace("\n","");
 
-                QString descripcionTipoDocumentoCliente= query.value(46).toString();
-
-
-                //totales
-                QString subtotal=QString::number(query.value(23).toFloat()+query.value(32).toFloat(),'f',3);
-                float exento=query.value(24).toFloat();
-                float minima=query.value(25).toFloat();
-                float basica=query.value(26).toFloat();
-                float otro=query.value(27).toFloat();
-                float total=query.value(28).toFloat();
-                QString tipoDocumentoCFE=query.value(29).toString();
-                QString ui=query.value(30).toString();
-                float redondeo=query.value(32).toFloat();
-                float totalSinRedondeo= query.value(47).toFloat();
-
-                //Desglose de iva
-                float netoBasico= queryDesgloseIva.value(0).toFloat();
-                float netoMinimo= queryDesgloseIva.value(1).toFloat();
-                float netoExento= queryDesgloseIva.value(2).toFloat();
-                float netoOtro=   queryDesgloseIva.value(3).toFloat();
-
-                // Si es un documento sin iva, muestro todo el campo de iva en 0.
-                if(func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"noAfectaIva")=="1"){
-                    netoBasico= 0.00;
-                    netoMinimo= 0.00;
-                    netoExento= 0.00;
-                    netoOtro=   0.00;
-                }
-
-                //Datos CFE
-                QString caeTipoDocumentoCFEDescripcionV=query.value(44).toString();
-                QString esDocumentoCFE=query.value(34).toString();
-                QString cae_numeroCae =query.value(35).toString();
-                QString cae_serie =query.value(36).toString();
-                QString cae_fechaVencimiento =query.value(37).toString();
-                QString cae_codigoSeguridad =query.value(38).toString();
-                QString cae_Cae =query.value(39).toString();
-                QString cae_rangoDesde =query.value(40).toString();
-                QString cae_rangoHasta =query.value(41).toString();
-                QString cae_urlCode =query.value(42).toString();
-                QString cae_QrCode =query.value(43).toString();
-
-                // Usario que emitio el documento
-                QString emisorDelDocumento = query.value(48).toString().toUpper().trimmed();
+                    QString descripcionTipoDocumentoCliente= query.value(46).toString();
 
 
-                if(emisorDelDocumento.trimmed()=="")
-                    emisorDelDocumento=query.value(50).toString().toUpper().trimmed();
+                    //totales
+                    QString subtotal=QString::number(query.value(23).toFloat()+query.value(32).toFloat(),'f',3);
+                    float exento=query.value(24).toFloat();
+                    float minima=query.value(25).toFloat();
+                    float basica=query.value(26).toFloat();
+                    float otro=query.value(27).toFloat();
+                    float total=query.value(28).toFloat();
+                    QString tipoDocumentoCFE=query.value(29).toString();
+                    QString ui=query.value(30).toString();
+                    float redondeo=query.value(32).toFloat();
+                    float totalSinRedondeo= query.value(47).toFloat();
 
-                QString horaEmisionDocumento = query.value(49).toString();
+                    //Desglose de iva
+                    float netoBasico= queryDesgloseIva.value(0).toFloat();
+                    float netoMinimo= queryDesgloseIva.value(1).toFloat();
+                    float netoExento= queryDesgloseIva.value(2).toFloat();
+                    float netoOtro=   queryDesgloseIva.value(3).toFloat();
 
-                QString serieInterna = query.value(45).toString();
+                    // Si es un documento sin iva, muestro todo el campo de iva en 0.
+                    if(func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"noAfectaIva")=="1"){
+                        netoBasico= 0.00;
+                        netoMinimo= 0.00;
+                        netoExento= 0.00;
+                        netoOtro=   0.00;
+                    }
+
+                    //Datos CFE
+                    QString caeTipoDocumentoCFEDescripcionV=query.value(44).toString();
+                    QString esDocumentoCFE=query.value(34).toString();
+                    QString cae_numeroCae =query.value(35).toString();
+                    QString cae_serie =query.value(36).toString();
+                    QString cae_fechaVencimiento =query.value(37).toString();
+                    QString cae_codigoSeguridad =query.value(38).toString();
+                    QString cae_Cae =query.value(39).toString();
+                    QString cae_rangoDesde =query.value(40).toString();
+                    QString cae_rangoHasta =query.value(41).toString();
+                    QString cae_urlCode =query.value(42).toString();
+                    QString cae_QrCode =query.value(43).toString();
+
+                    // Usario que emitio el documento
+                    QString emisorDelDocumento = query.value(48).toString().toUpper().trimmed();
 
 
-                QString descripcionTipoDocumentoImpresora=query.value(52).toString().trimmed();
+                    if(emisorDelDocumento.trimmed()=="")
+                        emisorDelDocumento=query.value(50).toString().toUpper().trimmed();
+
+                    QString horaEmisionDocumento = query.value(49).toString();
+
+                    QString serieInterna = query.value(45).toString();
 
 
-                QString observacionesDelDocumento=query.value(53).toString().trimmed();
+                    QString descripcionTipoDocumentoImpresora=query.value(52).toString().trimmed();
 
 
-                // Información si es e-ticket o cualquiera de ellos
-                if(esDocumentoCFE=="0"){
-                    caeTipoDocumentoCFEDescripcionV=query.value(54).toString().trimmed();
-                }
-                painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),caeTipoDocumentoCFEDescripcionV);
-                //Fecha
-                painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,fecha),fecha);
+                    QString observacionesDelDocumento=query.value(53).toString().trimmed();
 
 
-                // Serie y numero de e-ticket
-                QString serieYNumero=cae_serie+" -"+cae_numeroCae;
-                if(esDocumentoCFE=="0"){
-                    serieYNumero=query.value(45).toString()+" - "+_codigoDocumento;
-                }
-                painter.drawText(cuadro(0.0,1.3+desplazamientoLogo,8.0,0.5,false),serieYNumero);
+                    // Información si es e-ticket o cualquiera de ellos
+                    if(esDocumentoCFE=="0"){
+                        caeTipoDocumentoCFEDescripcionV=query.value(54).toString().trimmed();
+                    }
+                    painter.drawText(cuadro(0.0,1.0+desplazamientoLogo,8.0,0.5,false),caeTipoDocumentoCFEDescripcionV);
+                    //Fecha
+                    painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,8.0,0.5,fecha),fecha);
+
+
+                    // Serie y numero de e-ticket
+                    QString serieYNumero=cae_serie+" -"+cae_numeroCae;
+                    if(esDocumentoCFE=="0"){
+                        serieYNumero=query.value(45).toString()+" - "+_codigoDocumento;
+                    }
+                    painter.drawText(cuadro(0.0,1.3+desplazamientoLogo,8.0,0.5,false),serieYNumero);
 
 
 
-                //Información sobre cliente, consumo final o rut
-                //Verifico si es cliente con RUT
-                QString textoConsumoFinalRut="CONSUMO FINAL";
-                double leftTextoConsumoFinalRut=2.4;
-                if(tipoDocumento=="2"){
-                    textoConsumoFinalRut="RUT COMPRADOR: "+ numeroDocumento;
-                    leftTextoConsumoFinalRut=1.2;
-                    direccion=direccion+" - "+ciudad;
-                }else{
-                    razon_social="NRO. DOCUMENTO: "+numeroDocumento;
-                    direccion="CODIGO PAIS: "+isoPais;
-                }
-                QImage imagenLogoConsumoFinal;
-                imagenLogoConsumoFinal.loadFromData(QByteArray::fromBase64(logoConsumoFinal.toAscii()));
-                painter.drawImage(cuadro(0.2,1.8+desplazamientoLogo,7.0,1.0,false), imagenLogoConsumoFinal);
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                //Texto del cuadro consumo final
-                painter.drawText( cuadro(leftTextoConsumoFinalRut,2.1+desplazamientoLogo,8.0,0.5,false), textoConsumoFinalRut);
-                fuente.setBold(false);
-                painter.setFont(fuente);
+                    //Información sobre cliente, consumo final o rut
+                    //Verifico si es cliente con RUT
+                    QString textoConsumoFinalRut="CONSUMO FINAL";
+                    double leftTextoConsumoFinalRut=2.4;
+                    if(tipoDocumento=="2"){
+                        textoConsumoFinalRut="RUT COMPRADOR: "+ numeroDocumento;
+                        leftTextoConsumoFinalRut=1.2;
+                        direccion=direccion+" - "+ciudad;
+                    }else{
+                        razon_social="NRO. DOCUMENTO: "+numeroDocumento;
+                        direccion="CODIGO PAIS: "+isoPais;
+                    }
+                    QImage imagenLogoConsumoFinal;
+                    imagenLogoConsumoFinal.loadFromData(QByteArray::fromBase64(logoConsumoFinal.toAscii()));
+                    painter.drawImage(cuadro(0.2,1.8+desplazamientoLogo,7.0,1.0,false), imagenLogoConsumoFinal);
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    //Texto del cuadro consumo final
+                    painter.drawText( cuadro(leftTextoConsumoFinalRut,2.1+desplazamientoLogo,8.0,0.5,false), textoConsumoFinalRut);
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
 
 
-                //Datos del cliente
-                if(tipoDocumento!="2"){
-                    if(numeroDocumento.trimmed()==""){
-                        desplazamientoLogo=desplazamientoLogo-0.9;
+                    //Datos del cliente
+                    if(tipoDocumento!="2"){
+                        if(numeroDocumento.trimmed()==""){
+                            desplazamientoLogo=desplazamientoLogo-0.9;
+                        }else{
+                            painter.drawText( cuadro(0.4,3.0+desplazamientoLogo,8.0,0.5,false), razon_social);
+                            painter.drawText( cuadro(0.4,3.3+desplazamientoLogo,8.0,0.5,false), direccion);
+                            painter.drawText( cuadro(0.4,3.6+desplazamientoLogo,8.0,0.5,false), "TIPO DOC: "+ tipoDocumento + " - " + descripcionTipoDocumentoCliente);
+                        }
                     }else{
                         painter.drawText( cuadro(0.4,3.0+desplazamientoLogo,8.0,0.5,false), razon_social);
                         painter.drawText( cuadro(0.4,3.3+desplazamientoLogo,8.0,0.5,false), direccion);
                         painter.drawText( cuadro(0.4,3.6+desplazamientoLogo,8.0,0.5,false), "TIPO DOC: "+ tipoDocumento + " - " + descripcionTipoDocumentoCliente);
                     }
-                }else{
-                    painter.drawText( cuadro(0.4,3.0+desplazamientoLogo,8.0,0.5,false), razon_social);
-                    painter.drawText( cuadro(0.4,3.3+desplazamientoLogo,8.0,0.5,false), direccion);
-                    painter.drawText( cuadro(0.4,3.6+desplazamientoLogo,8.0,0.5,false), "TIPO DOC: "+ tipoDocumento + " - " + descripcionTipoDocumentoCliente);
-                }
 
 
 
 
-                // Se imprime una linea separadora
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                painter.drawText( cuadro(0.0,3.8+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-                fuente.setBold(false);
-                painter.setFont(fuente);
-
-
-                // Se imprime la moneda de la transacción
-                painter.drawText( cuadro(0.0,4.2+desplazamientoLogo,8.0,0.5,false), "MONEDA: "+ iso_moneda);
-
-
-                // Carga de articulos en el ticket
-                query.previous();
-                double desplazamientoArticulos=4.7;
-                QString codigoArticuloLinea="";
-                while (query.next()){
-
-                    painter.drawText( cuadro(0.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),query.value(15).toString().replace("\n",""));
-                    painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,QString::number(query.value(22).toFloat(),'f',2)),QString::number(query.value(22).toFloat(),'f',2));
-
-                    desplazamientoArticulos+=0.3;
-                    codigoArticuloLinea = "[ "+query.value(51).toString().toUpper().trimmed()+" ]  ";
-
-
-                    if(QString::number(query.value(18).toFloat(),'f',2)==QString::number(0.000000,'f',2)){
-                        painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2));
-                    }else{
-                        painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2) +"  -  "+ QString::number(query.value(18).toFloat(),'f',2) + " % Dto.");
-                    }
-                    desplazamientoArticulos+=0.3;
-                }
-
-                double desplazamientoRestoTicket=desplazamientoArticulos;
-
-                // Se imprime una linea separadora
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                painter.drawText( cuadro(0.0,desplazamientoRestoTicket+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-
-
-                desplazamientoLogo=desplazamientoRestoTicket+desplazamientoLogo;
-
-
-                // Imprimo el total del ticket
-                fuente.setPointSize(12);
-                painter.setFont(fuente);
-                painter.drawText(cuadro(0.0,0.4+desplazamientoLogo,8.0,0.5,false), "T O T A L "+simbolo_moneda+":");
-
-                painter.drawText(cuadroTicketRight(8.0,0.4+desplazamientoLogo,8.0,0.5,QString::number(total,'f',2)),QString::number(total,'f',2));
-
-
-                fuente.setPointSize(8);
-                fuente.setBold(false);
-                painter.setFont(fuente);
-
-
-                //Imprimo pago total real
-                painter.drawText(cuadro(0.0,0.9+desplazamientoLogo,8.0,0.5,false), "Pago total");                
-                painter.drawText(cuadroTicketRight(8.0,0.9+desplazamientoLogo,8.0,0.5,QString::number(totalSinRedondeo,'f',2)),QString::number(totalSinRedondeo,'f',2));
-
-                //Imprimo el redondeo
-                painter.drawText(cuadro(0.0,1.2+desplazamientoLogo,8.0,0.5,false), "Redondeo");
-                painter.drawText(cuadroTicketRight(8.0,1.2+desplazamientoLogo,8.0,0.5,QString::number(redondeo,'f',2)),QString::number(redondeo,'f',2));
-
-                // Se imprime una linea separadora de adenda
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                painter.drawText( cuadro(0.0,1.6+desplazamientoLogo,8.0,0.5,false), "__________________ ADENDA __________________");
-                fuente.setBold(false);
-                painter.setFont(fuente);
-
-
-                //Imprimo detalle de ivas
-                QImage imagenLogoDetalleIva;
-                imagenLogoDetalleIva.loadFromData(QByteArray::fromBase64(logoDetalleIva.toAscii()));
-                painter.drawImage(cuadro(0.2,2.0+desplazamientoLogo,7.0,1.0,false), imagenLogoDetalleIva);
-
-
-
-                int largoCampo=QString::number(netoBasico,'f',2).length();
-
-                // Iva 22%
-                if(largoCampo==6){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                       " + QString::number(netoBasico,'f',2)+"           "+QString::number(basica,'f',2));
-                }else if(largoCampo==7){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                    " + QString::number(netoBasico,'f',2)+"           "+QString::number(basica,'f',2));
-                }else if(largoCampo==8){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                 " + QString::number(netoBasico,'f',2)+"            "+QString::number(basica,'f',2));
-                }else if(largoCampo==9){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %            " + QString::number(netoBasico,'f',2)+"          "+QString::number(basica,'f',2));
-                }else if(largoCampo==10){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %              " + QString::number(netoBasico,'f',2)+"    "+QString::number(basica,'f',2));
-                }
-                else if(largoCampo==5){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                        " + QString::number(netoBasico,'f',2)+"            "+QString::number(basica,'f',2));
-                }
-                else if(largoCampo==4){
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                          " + QString::number(netoBasico,'f',2)+"              "+QString::number(basica,'f',2));
-                }else{
-                    painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %          " + QString::number(netoBasico,'f',2)+"       "+QString::number(basica,'f',2));
-                }
-                painter.drawText(cuadroTicketRight(8.0,3.0+desplazamientoLogo,8.0,0.5,QString::number(netoBasico+basica,'f',2)),QString::number(netoBasico+basica,'f',2));
-
-
-
-                largoCampo=QString::number(netoMinimo,'f',2).length();
-
-
-                // Iva 10%
-                if(largoCampo==6){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                       " + QString::number(netoMinimo,'f',2)+"          "+QString::number(minima,'f',2));
-                }else if(largoCampo==7){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                    " + QString::number(netoMinimo,'f',2)+"           "+QString::number(minima,'f',2));
-                }else if(largoCampo==8){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                 " + QString::number(netoMinimo,'f',2)+"            "+QString::number(minima,'f',2));
-                }else if(largoCampo==9){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %            " + QString::number(netoMinimo,'f',2)+"          "+QString::number(minima,'f',2));
-                }else if(largoCampo==10){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %              " + QString::number(netoMinimo,'f',2)+"    "+QString::number(minima,'f',2));
-                }
-                else if(largoCampo==5){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                        " + QString::number(netoMinimo,'f',2)+"              "+QString::number(minima,'f',2));
-                }
-                else if(largoCampo==4){
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                          " + QString::number(netoMinimo,'f',2)+"              "+QString::number(minima,'f',2));
-                }else{
-                    painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %          " + QString::number(netoMinimo,'f',2)+"       "+QString::number(minima,'f',2));
-                }
-                painter.drawText(cuadroTicketRight(8.0,3.3+desplazamientoLogo,8.0,0.5,QString::number(netoMinimo+minima,'f',2)),QString::number(netoMinimo+minima,'f',2));
-
-
-                largoCampo=QString::number(exento,'f',2).length();
-
-                // Iva 0%
-                if(largoCampo==6){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                               " + QString::number(exento,'f',2)+"            "+QString::number(0,'f',2));
-                }else if(largoCampo==7){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                            " + QString::number(exento,'f',2)+"             "+QString::number(0,'f',2));
-                }else if(largoCampo==8){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                         " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
-                }else if(largoCampo==9){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                     " + QString::number(exento,'f',2)+"            "+QString::number(0,'f',2));
-                }else if(largoCampo==10){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                       " + QString::number(exento,'f',2)+"      "+QString::number(0,'f',2));
-                }else if(largoCampo==5){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                        " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
-                }else if(largoCampo==4){
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                          " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
-                }else{
-                    painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                   " + QString::number(exento,'f',2)+"         "+QString::number(0,'f',2));
-                }
-                painter.drawText(cuadroTicketRight(8.0,3.6+desplazamientoLogo,8.0,0.5,QString::number(exento,'f',2)),QString::number(exento,'f',2));
-
-
-
-                largoCampo=QString::number(netoOtro,'f',2).length();
-
-                // Otro iva
-                if(largoCampo==6){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                          " + QString::number(netoOtro,'f',2)+"          "+QString::number(otro,'f',2));
-                }else if(largoCampo==7){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                      " + QString::number(netoOtro,'f',2)+"           "+QString::number(otro,'f',2));
-                }else if(largoCampo==8){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                   " + QString::number(netoOtro,'f',2)+"            "+QString::number(otro,'f',2));
-                }else if(largoCampo==9){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro              " + QString::number(netoOtro,'f',2)+"          "+QString::number(otro,'f',2));
-                }else if(largoCampo==10){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                " + QString::number(netoOtro,'f',2)+"    "+QString::number(otro,'f',2));
-                }else if(largoCampo==5){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                       " + QString::number(netoOtro,'f',2)+"            "+QString::number(otro,'f',2));
-                }else if(largoCampo==4){
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                           " + QString::number(netoOtro,'f',2)+"              "+QString::number(otro,'f',2));
-                }else{
-                    painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro            " + QString::number(netoOtro,'f',2)+"       "+QString::number(otro,'f',2));
-                }
-                painter.drawText(cuadroTicketRight(8.0,3.9+desplazamientoLogo,8.0,0.5,QString::number(netoOtro+otro,'f',2)),QString::number(netoOtro+otro,'f',2));
-
-
-
-                // Se imprime una linea separadora
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                painter.drawText( cuadro(0.0,4.1+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
-                fuente.setBold(false);
-                painter.setFont(fuente);
-
-                // información del que emitio el documento, nro transacción, fecha y hora
-                painter.drawText(cuadro(0.0,4.5+desplazamientoLogo,8.0,0.5,false),"N° Trans.");
-                painter.drawText(cuadro(3.0,4.5+desplazamientoLogo,8.0,0.5,false),"Fecha/Hora");
-                painter.drawText(cuadroTicketRight(8.0,4.5+desplazamientoLogo,8.0,0.5,"Vend."),"Vend.");
-                painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),serieInterna+" - "+_codigoDocumento);
-                painter.drawText(cuadro(2.4,4.8+desplazamientoLogo,8.0,0.5,false),fecha+" - "+horaEmisionDocumento);
-                painter.drawText(cuadroTicketRight(7.7,4.8+desplazamientoLogo,8.0,0.5,emisorDelDocumento),emisorDelDocumento);
-
-
-
-                // Imprimo el modo de pago, contado,credito, etc.
-                if(descripcionTipoDocumentoImpresora.trimmed()!=""){
-                    desplazamientoLogo=desplazamientoLogo+0.3;
-                    painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),descripcionTipoDocumentoImpresora);
-                }
-
-
-                // Imprimo las observaciones del documento, si el mismo esta configurado para ello
-                if(func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"imprimeObservacionesEnTicket")=="1"){
-
-                    if(observacionesDelDocumento!=""){
-                        desplazamientoLogo=desplazamientoLogo+0.3;
-                        painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),observacionesDelDocumento);
-                    }
-                }
-
-
-                if(tipoDocumento!="2"){
-                    // Información de cliente
-                    desplazamientoLogo=desplazamientoLogo+0.3;
-                    painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),nombreCliente+"("+codigoCliente+")");
-                }
-
-
-                // Se imprime linea fin de adenda
-                fuente.setBold(true);
-                painter.setFont(fuente);
-                painter.drawText( cuadro(0.0,5.2+desplazamientoLogo,8.0,0.5,false), "_________________ FIN ADENDA ________________");
-                fuente.setBold(false);
-                painter.setFont(fuente);
-
-
-
-                // Si el documento es un CFE, imprimo información de factura electronica que este disponible en la base
-                if(esDocumentoCFE!="0"){
-
-
-                    // Imprimo codigo QR
-                    QImage imagenLogoQr;
-                    imagenLogoQr.loadFromData(QByteArray::fromBase64(cae_QrCode.toAscii()));
-                    painter.drawImage(cuadro(2.3,5.7+desplazamientoLogo,2.8,2.8,false), imagenLogoQr);
-
-
-
-                    // Imprrimo codigo de seguridad
-                    painter.drawText(cuadro(1.8,8.5+desplazamientoLogo,8.0,0.5,false),"Cod. de Seguridad: "+cae_codigoSeguridad.trimmed());
-
-                    // Imprimo Resolución DGI
-                    painter.drawText(cuadro(2.2,8.8+desplazamientoLogo,8.0,0.5,false),func_CFE_ParametrosGenerales.retornaValor("resolucionDGINro"));
-
-                    // Imprimo texto verificar comprobante
-                    painter.drawText(cuadro(1.3,9.1+desplazamientoLogo,8.0,0.5,false),"Puede verificar el comprobante en:");
-
-                    // Imprimo url
-                    painter.drawText(cuadro(2.5,9.4+desplazamientoLogo,8.0,0.5,false),func_CFE_ParametrosGenerales.retornaValor("urlDGI"));
-
-                    // Imprimo iva al dia
-                    painter.drawText(cuadro(3.0,9.7+desplazamientoLogo,8.0,0.5,false),"IVA al día.");
-
-
-                    // Imprimo palabra DGI
+                    // Se imprime una linea separadora
                     fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,3.8+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
+
+
+                    // Se imprime la moneda de la transacción
+                    painter.drawText( cuadro(0.0,4.2+desplazamientoLogo,8.0,0.5,false), "MONEDA: "+ iso_moneda);
+
+
+                    // Carga de articulos en el ticket
+                    query.previous();
+                    double desplazamientoArticulos=4.7;
+                    QString codigoArticuloLinea="";
+                    while (query.next()){
+
+                        painter.drawText( cuadro(0.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),query.value(15).toString().replace("\n",""));
+                        painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,QString::number(query.value(22).toFloat(),'f',2)),QString::number(query.value(22).toFloat(),'f',2));
+
+                        desplazamientoArticulos+=0.3;
+                        codigoArticuloLinea = "[ "+query.value(51).toString().toUpper().trimmed()+" ]  ";
+
+
+                        if(QString::number(query.value(18).toFloat(),'f',2)==QString::number(0.000000,'f',2)){
+                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2));
+                        }else{
+                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2) +"  -  "+ QString::number(query.value(18).toFloat(),'f',2) + " % Dto.");
+                        }
+                        desplazamientoArticulos+=0.3;
+                    }
+
+                    double desplazamientoRestoTicket=desplazamientoArticulos;
+
+                    // Se imprime una linea separadora
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,desplazamientoRestoTicket+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+
+
+                    desplazamientoLogo=desplazamientoRestoTicket+desplazamientoLogo;
+
+
+                    // Imprimo el total del ticket
                     fuente.setPointSize(12);
                     painter.setFont(fuente);
-                    painter.drawText(cuadro(3.2,10.2+desplazamientoLogo,8.0,0.5,false),"DGI");
-                    fuente.setBold(false);
+                    painter.drawText(cuadro(0.0,0.4+desplazamientoLogo,8.0,0.5,false), "T O T A L "+simbolo_moneda+":");
+
+                    painter.drawText(cuadroTicketRight(8.0,0.4+desplazamientoLogo,8.0,0.5,QString::number(total,'f',2)),QString::number(total,'f',2));
+
+
                     fuente.setPointSize(8);
+                    fuente.setBold(false);
                     painter.setFont(fuente);
 
 
-                    // Imprimo texto CAE   Inicio   Fin
-                    painter.drawText(cuadro(0.5,10.7+desplazamientoLogo,8.0,0.5,false),"CAE                          Inicio                               Fin");
+                    //Imprimo pago total real
+                    painter.drawText(cuadro(0.0,0.9+desplazamientoLogo,8.0,0.5,false), "Pago total");
+                    painter.drawText(cuadroTicketRight(8.0,0.9+desplazamientoLogo,8.0,0.5,QString::number(totalSinRedondeo,'f',2)),QString::number(totalSinRedondeo,'f',2));
+
+                    //Imprimo el redondeo
+                    painter.drawText(cuadro(0.0,1.2+desplazamientoLogo,8.0,0.5,false), "Redondeo");
+                    painter.drawText(cuadroTicketRight(8.0,1.2+desplazamientoLogo,8.0,0.5,QString::number(redondeo,'f',2)),QString::number(redondeo,'f',2));
+
+                    // Se imprime una linea separadora de adenda
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,1.6+desplazamientoLogo,8.0,0.5,false), "__________________ ADENDA __________________");
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
 
 
-                    painter.drawText(cuadro(0.0,11.0+desplazamientoLogo,8.0,0.5,false),cae_Cae);
-                    painter.drawText(cuadro(3.2,11.0+desplazamientoLogo,8.0,0.5,false),cae_rangoDesde);
-                    painter.drawText(cuadroTicketRight(8.0,11.0+desplazamientoLogo,8.0,0.5,cae_rangoHasta),cae_rangoHasta);
+                    //Imprimo detalle de ivas
+                    QImage imagenLogoDetalleIva;
+                    imagenLogoDetalleIva.loadFromData(QByteArray::fromBase64(logoDetalleIva.toAscii()));
+                    painter.drawImage(cuadro(0.2,2.0+desplazamientoLogo,7.0,1.0,false), imagenLogoDetalleIva);
 
 
-                    imagenLogoConsumoFinal.loadFromData(QByteArray::fromBase64(logoConsumoFinal.toAscii()));
-                    painter.drawImage(cuadro(0.2,11.4+desplazamientoLogo,7.0,1.0,false), imagenLogoConsumoFinal);
 
-                    painter.drawText(cuadro(1.4,11.7+desplazamientoLogo,8.0,0.5,false),"Fecha de vencimiento:  "+cae_fechaVencimiento);
+                    int largoCampo=QString::number(netoBasico,'f',2).length();
 
+                    // Iva 22%
+                    if(largoCampo==6){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                       " + QString::number(netoBasico,'f',2)+"           "+QString::number(basica,'f',2));
+                    }else if(largoCampo==7){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                    " + QString::number(netoBasico,'f',2)+"           "+QString::number(basica,'f',2));
+                    }else if(largoCampo==8){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                 " + QString::number(netoBasico,'f',2)+"            "+QString::number(basica,'f',2));
+                    }else if(largoCampo==9){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %            " + QString::number(netoBasico,'f',2)+"          "+QString::number(basica,'f',2));
+                    }else if(largoCampo==10){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %              " + QString::number(netoBasico,'f',2)+"    "+QString::number(basica,'f',2));
+                    }
+                    else if(largoCampo==5){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                        " + QString::number(netoBasico,'f',2)+"            "+QString::number(basica,'f',2));
+                    }
+                    else if(largoCampo==4){
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %                          " + QString::number(netoBasico,'f',2)+"              "+QString::number(basica,'f',2));
+                    }else{
+                        painter.drawText(cuadro(0.0,3.0+desplazamientoLogo,8.0,0.5,false), "22 %          " + QString::number(netoBasico,'f',2)+"       "+QString::number(basica,'f',2));
+                    }
+                    painter.drawText(cuadroTicketRight(8.0,3.0+desplazamientoLogo,8.0,0.5,QString::number(netoBasico+basica,'f',2)),QString::number(netoBasico+basica,'f',2));
+
+
+
+                    largoCampo=QString::number(netoMinimo,'f',2).length();
+
+
+                    // Iva 10%
+                    if(largoCampo==6){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                       " + QString::number(netoMinimo,'f',2)+"          "+QString::number(minima,'f',2));
+                    }else if(largoCampo==7){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                    " + QString::number(netoMinimo,'f',2)+"           "+QString::number(minima,'f',2));
+                    }else if(largoCampo==8){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                 " + QString::number(netoMinimo,'f',2)+"            "+QString::number(minima,'f',2));
+                    }else if(largoCampo==9){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %            " + QString::number(netoMinimo,'f',2)+"          "+QString::number(minima,'f',2));
+                    }else if(largoCampo==10){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %              " + QString::number(netoMinimo,'f',2)+"    "+QString::number(minima,'f',2));
+                    }
+                    else if(largoCampo==5){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                        " + QString::number(netoMinimo,'f',2)+"              "+QString::number(minima,'f',2));
+                    }
+                    else if(largoCampo==4){
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %                          " + QString::number(netoMinimo,'f',2)+"              "+QString::number(minima,'f',2));
+                    }else{
+                        painter.drawText(cuadro(0.0,3.3+desplazamientoLogo,8.0,0.5,false), "10 %          " + QString::number(netoMinimo,'f',2)+"       "+QString::number(minima,'f',2));
+                    }
+                    painter.drawText(cuadroTicketRight(8.0,3.3+desplazamientoLogo,8.0,0.5,QString::number(netoMinimo+minima,'f',2)),QString::number(netoMinimo+minima,'f',2));
+
+
+                    largoCampo=QString::number(exento,'f',2).length();
+
+                    // Iva 0%
+                    if(largoCampo==6){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                               " + QString::number(exento,'f',2)+"            "+QString::number(0,'f',2));
+                    }else if(largoCampo==7){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                            " + QString::number(exento,'f',2)+"             "+QString::number(0,'f',2));
+                    }else if(largoCampo==8){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                         " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
+                    }else if(largoCampo==9){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                     " + QString::number(exento,'f',2)+"            "+QString::number(0,'f',2));
+                    }else if(largoCampo==10){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                       " + QString::number(exento,'f',2)+"      "+QString::number(0,'f',2));
+                    }else if(largoCampo==5){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                        " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
+                    }else if(largoCampo==4){
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                          " + QString::number(exento,'f',2)+"              "+QString::number(0,'f',2));
+                    }else{
+                        painter.drawText(cuadro(0.0,3.6+desplazamientoLogo,8.0,0.5,false), "  0 %                   " + QString::number(exento,'f',2)+"         "+QString::number(0,'f',2));
+                    }
+                    painter.drawText(cuadroTicketRight(8.0,3.6+desplazamientoLogo,8.0,0.5,QString::number(exento,'f',2)),QString::number(exento,'f',2));
+
+
+
+                    largoCampo=QString::number(netoOtro,'f',2).length();
+
+                    // Otro iva
+                    if(largoCampo==6){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                          " + QString::number(netoOtro,'f',2)+"          "+QString::number(otro,'f',2));
+                    }else if(largoCampo==7){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                      " + QString::number(netoOtro,'f',2)+"           "+QString::number(otro,'f',2));
+                    }else if(largoCampo==8){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                   " + QString::number(netoOtro,'f',2)+"            "+QString::number(otro,'f',2));
+                    }else if(largoCampo==9){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro              " + QString::number(netoOtro,'f',2)+"          "+QString::number(otro,'f',2));
+                    }else if(largoCampo==10){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                " + QString::number(netoOtro,'f',2)+"    "+QString::number(otro,'f',2));
+                    }else if(largoCampo==5){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                       " + QString::number(netoOtro,'f',2)+"            "+QString::number(otro,'f',2));
+                    }else if(largoCampo==4){
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro                           " + QString::number(netoOtro,'f',2)+"              "+QString::number(otro,'f',2));
+                    }else{
+                        painter.drawText(cuadro(0.0,3.9+desplazamientoLogo,8.0,0.5,false), "Otro            " + QString::number(netoOtro,'f',2)+"       "+QString::number(otro,'f',2));
+                    }
+                    painter.drawText(cuadroTicketRight(8.0,3.9+desplazamientoLogo,8.0,0.5,QString::number(netoOtro+otro,'f',2)),QString::number(netoOtro+otro,'f',2));
+
+
+
+                    // Se imprime una linea separadora
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,4.1+desplazamientoLogo,8.0,0.5,false), "____________________________________________");
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
+
+                    // información del que emitio el documento, nro transacción, fecha y hora
+                    painter.drawText(cuadro(0.0,4.5+desplazamientoLogo,8.0,0.5,false),"N° Trans.");
+                    painter.drawText(cuadro(3.0,4.5+desplazamientoLogo,8.0,0.5,false),"Fecha/Hora");
+                    painter.drawText(cuadroTicketRight(8.0,4.5+desplazamientoLogo,8.0,0.5,"Vend."),"Vend.");
+                    painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),serieInterna+" - "+_codigoDocumento);
+                    painter.drawText(cuadro(2.4,4.8+desplazamientoLogo,8.0,0.5,false),fecha+" - "+horaEmisionDocumento);
+                    painter.drawText(cuadroTicketRight(7.7,4.8+desplazamientoLogo,8.0,0.5,emisorDelDocumento),emisorDelDocumento);
+
+
+
+                    // Imprimo el modo de pago, contado,credito, etc.
+                    if(descripcionTipoDocumentoImpresora.trimmed()!=""){
+                        desplazamientoLogo=desplazamientoLogo+0.3;
+                        painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),descripcionTipoDocumentoImpresora);
+                    }
+
+
+                    // Imprimo las observaciones del documento, si el mismo esta configurado para ello
+                    if(func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"imprimeObservacionesEnTicket")=="1"){
+
+                        if(observacionesDelDocumento!=""){
+                            desplazamientoLogo=desplazamientoLogo+0.3;
+                            painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),observacionesDelDocumento);
+                        }
+                    }
+
+
+                    if(tipoDocumento!="2"){
+                        // Información de cliente
+                        desplazamientoLogo=desplazamientoLogo+0.3;
+                        painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),nombreCliente+"("+codigoCliente+")");
+                    }
+
+
+                    // Se imprime linea fin de adenda
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+                    painter.drawText( cuadro(0.0,5.2+desplazamientoLogo,8.0,0.5,false), "_________________ FIN ADENDA ________________");
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
+
+
+
+                    // Si el documento es un CFE, imprimo información de factura electronica que este disponible en la base
+                    if(esDocumentoCFE!="0"){
+
+
+                        // Imprimo codigo QR
+                        QImage imagenLogoQr;
+                        imagenLogoQr.loadFromData(QByteArray::fromBase64(cae_QrCode.toAscii()));
+                        painter.drawImage(cuadro(2.3,5.7+desplazamientoLogo,2.8,2.8,false), imagenLogoQr);
+
+
+
+                        // Imprrimo codigo de seguridad
+                        painter.drawText(cuadro(1.8,8.5+desplazamientoLogo,8.0,0.5,false),"Cod. de Seguridad: "+cae_codigoSeguridad.trimmed());
+
+                        // Imprimo Resolución DGI
+                        painter.drawText(cuadro(2.2,8.8+desplazamientoLogo,8.0,0.5,false),func_CFE_ParametrosGenerales.retornaValor("resolucionDGINro"));
+
+                        // Imprimo texto verificar comprobante
+                        painter.drawText(cuadro(1.3,9.1+desplazamientoLogo,8.0,0.5,false),"Puede verificar el comprobante en:");
+
+                        // Imprimo url
+                        painter.drawText(cuadro(2.5,9.4+desplazamientoLogo,8.0,0.5,false),func_CFE_ParametrosGenerales.retornaValor("urlDGI"));
+
+                        // Imprimo iva al dia
+                        painter.drawText(cuadro(3.0,9.7+desplazamientoLogo,8.0,0.5,false),"IVA al día.");
+
+
+                        // Imprimo palabra DGI
+                        fuente.setBold(true);
+                        fuente.setPointSize(12);
+                        painter.setFont(fuente);
+                        painter.drawText(cuadro(3.2,10.2+desplazamientoLogo,8.0,0.5,false),"DGI");
+                        fuente.setBold(false);
+                        fuente.setPointSize(8);
+                        painter.setFont(fuente);
+
+
+                        // Imprimo texto CAE   Inicio   Fin
+                        painter.drawText(cuadro(0.5,10.7+desplazamientoLogo,8.0,0.5,false),"CAE                          Inicio                               Fin");
+
+
+                        painter.drawText(cuadro(0.0,11.0+desplazamientoLogo,8.0,0.5,false),cae_Cae);
+                        painter.drawText(cuadro(3.2,11.0+desplazamientoLogo,8.0,0.5,false),cae_rangoDesde);
+                        painter.drawText(cuadroTicketRight(8.0,11.0+desplazamientoLogo,8.0,0.5,cae_rangoHasta),cae_rangoHasta);
+
+
+                        imagenLogoConsumoFinal.loadFromData(QByteArray::fromBase64(logoConsumoFinal.toAscii()));
+                        painter.drawImage(cuadro(0.2,11.4+desplazamientoLogo,7.0,1.0,false), imagenLogoConsumoFinal);
+
+                        painter.drawText(cuadro(1.4,11.7+desplazamientoLogo,8.0,0.5,false),"Fecha de vencimiento:  "+cae_fechaVencimiento);
+
+                    }
+
+
+                    painter.end();
+                    seImprimioTodoOk=true;
+
+                }else{
+                    return false;
                 }
-
-
-                painter.end();
-                seImprimioTodoOk=true;
-
             }else{
                 return false;
             }
-        }else{
-            return false;
-        }
 
         }
 
@@ -3114,9 +3114,276 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     }else{
         return false;
     }
-     return false;
+    return false;
 
 }
+
+
+
+
+
+
+/// ##########################################################################################################################
+/// #        Imprime el documento en formato recibo          #################################################################
+/// ##########################################################################################################################
+bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QString _codigoTipoDocumento,QString _impresora, int cantidadDecimalesMonto, QString _serieDocumento){
+
+    //##################################################
+    // Preparo los seteos de la impresora ##############
+    QPrinter printer;
+    printer.setPrinterName(_impresora);
+
+    printer.setFullPage(true);
+    centimetro = printer.QPaintDevice::width()/(printer.QPaintDevice::widthMM()/10);
+    fuente.setPointSize(8);
+
+
+
+    QString consultaSql="select DATE_FORMAT(STR_TO_DATE(DOC.fechaEmisionDocumento, '%Y-%m-%d'),'%d/%m/%Y')'fecha', MO.codigoISO4217'iso_moneda',CAST(DOC.precioTotalVenta AS DECIMAL(20,3))'total',left(trim(CLI.razonSocial),30) 'razon_social',(select valorParametro from CFE_ParametrosGenerales where nombreParametro='rutEmpresa' limit 1)'rut',MO.descripcionMoneda,MO.simboloMoneda    from Documentos DOC join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente  join Monedas MO on MO.codigoMoneda = DOC.codigoMonedaDocumento  where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' ;";
+
+    QString consultaSqlMediosDePago="select MP.descripcionMedioPago,MO.simboloMoneda,DOC.importePago  from DocumentosLineasPago DOC join MediosDePago MP on MP.codigoMedioPago=DOC.codigoMedioPago join Monedas MO on MO.codigoMoneda=DOC.monedaMedioPago where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' ;";
+
+
+
+    QString consultaFacturasCanceladas = "select concat(DCCC.serieDocumento,' - ',DCCC.codigoDocumento),DCCC.montoDescontadoCuentaCorriente from DocumentosCanceladosCuentaCorriente DCCC where DCCC.codigoDocumentoQueCancela="+_codigoDocumento+" and DCCC.codigoTipoDocumentoQueCancela="+_codigoTipoDocumento+" and DCCC.serieDocumentoQueCancela='"+_serieDocumento+"';";
+
+    //Cantidad de copias por defecto del documento
+    int MaximoCopias=0;
+
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        qDebug()<<"Tengo conexión";
+        QSqlQuery query(Database::connect());
+        QSqlQuery queryCantidadCopias(Database::connect());
+        QSqlQuery queryMedeiosDePago(Database::connect());
+        QSqlQuery queryFacturasCanceladas(Database::connect());
+
+        if(queryCantidadCopias.exec("SELECT cantidadCopias FROM TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
+            if(queryCantidadCopias.first()){
+                if(queryCantidadCopias.value(0).toString()!=0){
+                    MaximoCopias = queryCantidadCopias.value(0).toInt();
+                }
+            }else{
+                return false;}
+        }else{
+            return false;
+        }
+
+        bool existeMediosDePago=false;
+        if(queryMedeiosDePago.exec(consultaSqlMediosDePago)){
+            if(queryMedeiosDePago.first()){
+                queryMedeiosDePago.previous();
+                existeMediosDePago=true;
+            }
+        }else{
+            return false;
+        }
+
+        bool existeFacturasCanceladas=false;
+        if(queryFacturasCanceladas.exec(consultaFacturasCanceladas)){
+            if(queryFacturasCanceladas.first()){
+                queryFacturasCanceladas.previous();
+                existeFacturasCanceladas=true;
+            }
+        }else{
+            return false;
+        }
+
+
+
+
+
+        bool seImprimioTodoOk=false;
+
+        for (int var = 0; var < MaximoCopias; ++var) {
+
+
+            if(query.first())
+                query.previous();
+
+            if(queryMedeiosDePago.first())
+                queryMedeiosDePago.previous();
+
+            if(queryFacturasCanceladas.first())
+                queryFacturasCanceladas.previous();
+
+
+            seImprimioTodoOk=false;
+
+            if(query.exec(consultaSql)) {
+                if(query.first()){
+
+                    if (!painter.begin(&printer)) {
+                        return false;
+                    }
+                    painter.setFont(fuente);
+                    QString logoImpresora=func_CFE_ParametrosGenerales.retornaValor("logoImpresoraTicket").trimmed();
+
+                    // qDebug()<< "logo imrpesora: " << logoImpresora;
+
+                    // Alto en centimetros que ocupa el logo
+                    double desplazamientoLogo=2.0;
+
+                    if(logoImpresora!=""){
+                        // Si esta cargado el logo lo imprimo
+                        QByteArray imagenQrString = logoImpresora.toAscii();
+                        QImage imagenQr;
+                        imagenQr.loadFromData(QByteArray::fromBase64(imagenQrString));
+                        painter.drawImage(cuadro(0.7,0.3,6.0,desplazamientoLogo,false), imagenQr);
+
+                    }else{
+                        // Si no existe un logo para imprimir seteo el desplazamiento en cero, para que el texto se imprima al principio del ticket
+                        desplazamientoLogo=0.0;
+                    }
+
+                    //Cabezal
+                    QString fecha=query.value(0).toString();
+                    QString iso_moneda=query.value(1).toString().replace("\n","");
+                    float total=query.value(2).toFloat();
+
+                    QString razon_social=query.value(3).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                    QString rutEmpresa=query.value(4).toString();
+                    QString descripcionMoneda=query.value(5).toString();
+                    QString simboloMoneda=query.value(6).toString();
+
+
+
+
+                    QString   serieYNumero=_serieDocumento+" - "+_codigoDocumento;
+
+
+
+                    fuente.setBold(false);
+                    painter.setFont(fuente);
+
+                    painter.setBrush(Qt::NoBrush);
+                    QPen pen;
+
+                    pen.setColor(Qt::darkCyan);
+                    pen.setWidth(1);
+
+                    painter.setPen(pen);
+                    painter.drawRect(QRect(290,20,120,50));// cuadro fecha
+                    painter.drawRect(QRect(290,20,120,20));
+
+
+
+
+
+
+                    painter.drawRect(QRect(430,20,50,50));// cuadro moneda
+                    painter.drawRect(QRect(480,20,90,50));
+
+                    painter.drawRect(QRect(30,120,735,100));// cuadro datos
+
+                    painter.drawRect(QRect(30,235,535,130));// cuadro medios de pago
+
+
+                    painter.drawRect(QRect(575,235,190,130));// cuadro facturas canceladas
+
+                    // Impresion de texto
+
+                    pen.setColor(Qt::darkGray);
+
+                    painter.setPen(pen);
+                    fuente.setPointSize(11);
+                    fuente.setBold(true);
+                    painter.setFont(fuente);
+
+                    painter.drawText(cuadro(8.7,0.6,8.0,1.0,false),"FECHA");
+                    // Fecha
+                    painter.drawText(cuadro(8.4,1.2,8.0,1.0,false),fecha);
+
+                    // iso moneda
+                    painter.drawText(cuadro(11.9,0.6,8.0,1.0,false),iso_moneda);
+                    painter.drawText(cuadro(11.9,1.2,8.0,1.0,false),simboloMoneda);
+
+                    // Total
+                    painter.drawText(cuadro(13.1,1.0,8.0,1.0,false),QString::number(total,'f',2));
+
+                    // Rut
+                    painter.drawText(cuadro(16.6,0.5,8.0,1.0,false),"RUT "+rutEmpresa);
+                    painter.drawText(cuadro(17.0,0.9,8.0,1.0,false),"RECIBO OFICIAL");
+
+                    // numero documento y serie
+                    painter.drawText(cuadroTicketRight(20.5,1.4,5.0,1.0,serieYNumero),serieYNumero);
+
+                    // Texto detalle
+                    painter.drawText(cuadro(1.5,3.5,20.0,1.0,false),"Recibimos de "+razon_social.trimmed()+" la suma de "+descripcionMoneda+" "+simboloMoneda+" "+QString::number(total,'f',2));
+                    painter.drawText(cuadro(1.5,4.0,20.0,1.0,false),"correspondiente al concepto adjunto.");
+
+
+                    painter.drawText(cuadro(1.5,6.5,5.0,1.0,false),"MEDIOS DE PAGO:");
+
+                    painter.drawText(cuadro(16.0,6.5,5.0,1.0,false),"Nº FACT./IMPORTE "+simboloMoneda);
+
+
+                    float incremento=0;
+                    float factorIncremento=0.4;
+                    if(existeMediosDePago){
+
+                        fuente.setPointSize(10);
+                        fuente.setBold(false);
+                        painter.setFont(fuente);
+
+                        while (queryMedeiosDePago.next()) {
+                            painter.drawText(cuadro(2.0,7.0+incremento,5.0,1.0,false),queryMedeiosDePago.value(0).toString());
+                            painter.drawText(cuadroTicketRight(14.0,7.0+incremento,5.0,1.0,QString::number(queryMedeiosDePago.value(2).toFloat(),'f',2)),QString::number(queryMedeiosDePago.value(2).toFloat(),'f',2));
+                            painter.drawText(cuadro(14.0,7.0+incremento,2.0,1.0,false),queryMedeiosDePago.value(1).toString());
+
+                            incremento=incremento+factorIncremento;
+                        }
+
+                    }
+
+
+                    incremento=0;
+                    if(existeFacturasCanceladas){
+                        while (queryFacturasCanceladas.next()) {
+                            painter.drawText(cuadro(16.0,7.0+incremento,3.0,1.0,false),queryFacturasCanceladas.value(0).toString());
+                            painter.drawText(cuadroTicketRight(21.0,7.0+incremento,3.0,1.0,QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2)),QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2));
+                            incremento=incremento+factorIncremento;
+                        }
+                    }
+                    // firma
+                    painter.drawLine(QLine(575,405,765,405));
+                    painter.drawText(cuadro(16.5,11.0,3.0,1.0,false),"por "+func_configuracion.retornaValorConfiguracion("NOMBRE_EMPRESA"));
+
+                    painter.end();
+                    seImprimioTodoOk=true;
+
+                }else{
+                    qDebug()<<"Error en consulta sql 1, no first ";
+                    return false;
+                }
+            }else{
+                qDebug()<<"Error en consulta sql 1 ";
+
+                return false;
+            }
+
+        }
+
+        return seImprimioTodoOk;
+
+
+
+    }else{
+        return false;
+    }
+    return false;
+
+}
+
+
 
 
 
@@ -3152,6 +3419,14 @@ bool ModuloDocumentos::emitirDocumentoEnImpresora(QString _codigoDocumento,QStri
             return emitirDocumentoEnImpresoraTicket(_codigoDocumento,_codigoTipoDocumento,_impresora,cantidadDecimalesMonto,_serieDocumento);
 
         }
+        // Chequeo si el documento se imprime en modo recibo en formato A4
+        if(func_tipoDocumentos.retornaPermisosDelDocumento(_codigoTipoDocumento,"imprimeEnFormatoRecibo")){
+
+            qDebug() << "Emite en modo recibo";
+            return emitirDocumentoEnModoRecibo(_codigoDocumento,_codigoTipoDocumento,_impresora,cantidadDecimalesMonto,_serieDocumento);
+
+        }
+
 
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
@@ -3810,22 +4085,22 @@ QRectF cuadroTicketRight(double x, double y, double ancho, double alto, QString 
         ancho =    (((double)QString(dato).length())*0.42)-frame + desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==4){
-            ancho =    (((double)QString(dato).length())*0.355)-frame + desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.355)-frame + desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==5){
-            ancho =    (((double)QString(dato).length())*0.321)-frame + desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.321)-frame + desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==6){
-            ancho =    (((double)QString(dato).length())*0.30)-frame + desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.30)-frame + desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==7){
-            ancho =    (((double)QString(dato).length())*0.28)-frame+ desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.28)-frame+ desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==8){
-            ancho =    (((double)QString(dato).length())*0.2679)-frame+ desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.2679)-frame+ desplazamientoIzquierdaFuente;
     }
     else if(QString(dato).length()==9){
-            ancho =    (((double)QString(dato).length())*0.26)-frame+ desplazamientoIzquierdaFuente;
+        ancho =    (((double)QString(dato).length())*0.26)-frame+ desplazamientoIzquierdaFuente;
     }
     else{
         ancho =    (((double)QString(dato).length())*0.28)-frame + desplazamientoIzquierdaFuente;
@@ -4000,7 +4275,7 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
     consultaSql +=" join Articulos AR on AR.codigoArticulo=DL.codigoArticulo ";
     consultaSql +=" join TipoDocumento TD on TD.codigoTipoDocumento=DOC.codigoTipoDocumento ";
     consultaSql +=" join Monedas MO on MO.codigoMoneda = DOC.codigoMonedaDocumento ";
-    consultaSql +=" join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente ";    
+    consultaSql +=" join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente ";
     consultaSql +=" join Localidades LO on LO.codigoPais=CLI.codigoPais and LO.codigoDepartamento=CLI.codigoDepartamento and LO.codigoLocalidad=CLI.codigoLocalidad join Departamentos DE on DE.codigoPais=CLI.codigoPais and DE.codigoDepartamento=CLI.codigoDepartamento ";
     consultaSql +=" join CFE_TipoDocumentoCliente CFETDC on CFETDC.codigoTipoDocumentoCliente=CLI.codigoTipoDocumentoCliente ";
     consultaSql +=" join Pais PA on PA.codigoPais=CLI.codigoPais ";
@@ -4226,7 +4501,7 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
         QByteArray produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").toLatin1();
 
 
-         const char *c_produccion;
+        const char *c_produccion;
 
         if(func_CFE_ParametrosGenerales.retornaValor("modoTrabajoCFE")=="0"){
             c_produccion=testing.data();
@@ -4274,7 +4549,7 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
                 return false;
             }
 
-            /*            
+            /*
             {
               "CaeDesde": 1,
               "CaeHasta": 1000,
@@ -4326,11 +4601,11 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
             QString QR ="";
             //"https://www.efactura.dgi.gub.uy/consultaQR/cfe?<Rut>,<TipoCfe>,<Serie>,<Numero>,<Total>,<FechaEmision>,<DigestValue>"
 
-            #if linux
-                QR = QrCode::obtengoQr("https://www.efactura.dgi.gub.uy/consultaQR/cfe?"+rut.trimmed()+","+TipoCfe.trimmed()+","+Serie.trimmed()+","+Numero.trimmed()+","+Total.trimmed()+","+fechaEmision.trimmed()+","+DigestValue.trimmed()+" ");
-            #else
-                QR ="";
-            #endif
+#if linux
+            QR = QrCode::obtengoQr("https://www.efactura.dgi.gub.uy/consultaQR/cfe?"+rut.trimmed()+","+TipoCfe.trimmed()+","+Serie.trimmed()+","+Numero.trimmed()+","+Total.trimmed()+","+fechaEmision.trimmed()+","+DigestValue.trimmed()+" ");
+#else
+            QR ="";
+#endif
 
 
             /// PRUEBA
@@ -4547,29 +4822,29 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
 
 
 
-                  if(TipoDocumento=="2"){
+                if(TipoDocumento=="2"){
 
-                      if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"  || Comprobante== "VENTA CONTADO EXENTA"){
+                    if(Comprobante=="Venta contado" || Comprobante=="Venta contado exenta"  || Comprobante== "VENTA CONTADO EXENTA"){
 
-                          caeTipoDocumentoCFEDescripcionV="e-Factura";
+                        caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta" || Comprobante=="VENTA CRÉDITO EXENTA"){
+                    }else if(Comprobante=="Venta credito" || Comprobante=="Venta crédito" || Comprobante=="Venta credito exenta" || Comprobante=="Venta crédito exenta" || Comprobante=="VENTA CRÉDITO EXENTA"){
 
-                          caeTipoDocumentoCFEDescripcionV="e-Factura";
+                        caeTipoDocumentoCFEDescripcionV="e-Factura";
 
-                      }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta" || Comprobante== "DV EXENTA"){
+                    }else if(Comprobante=="Devolucion venta" || Comprobante=="Devolución venta" || Comprobante=="Devolucion venta exenta" || Comprobante=="Dev venta exenta" || Comprobante=="Devolución venta exenta" || Comprobante== "DV EXENTA"){
 
-                          caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
+                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
-                      }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta" || Comprobante== "NC VTA EXENTA"){
+                    }else if(Comprobante=="Nota credito venta" || Comprobante=="Nota crédito venta" || Comprobante=="Nota credito venta exenta" || Comprobante=="NC crédito venta exenta" || Comprobante=="NC credito venta exenta" || Comprobante== "NC VTA EXENTA"){
 
-                          caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
+                        caeTipoDocumentoCFEDescripcionV="Nota de Crédito de e-Factura";
 
-                      }else{
-                          return "-1"; //Error en tipo documento CFE en khitomer.TipoDocumento
-                      }
+                    }else{
+                        return "-1"; //Error en tipo documento CFE en khitomer.TipoDocumento
+                    }
 
-                  }
+                }
 
 
 

@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -267,6 +267,9 @@ public:
     Q_INVOKABLE bool emitirDocumentoEnImpresora(QString , QString, QString, QString _serieDocumento);
 
     Q_INVOKABLE bool emitirDocumentoEnImpresoraTicket(QString _codigoDocumento, QString _codigoTipoDocumento, QString _impresora, int cantidadDecimalesMonto, QString _serieDocumento);
+
+    Q_INVOKABLE bool emitirDocumentoEnModoRecibo(QString _codigoDocumento, QString _codigoTipoDocumento, QString _impresora, int cantidadDecimalesMonto, QString _serieDocumento);
+
 
 
     Q_INVOKABLE bool emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion, QString _impresora, QString _codigoCliente, QString _tipoCliente, QString _observacion);

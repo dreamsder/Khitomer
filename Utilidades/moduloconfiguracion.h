@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2022>  <Cristian Montano>
+Copyright (C) <2012-2023>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -155,6 +155,9 @@ public:
         return m_IMPRESION_ENVIOS;
     }
 
+    static QString getNOMBRE_EMPRESA(){
+        return m_NOMBRE_EMPRESA;
+    }
 
 
 
@@ -188,6 +191,7 @@ private:
     static QString m_UTILIZA_CONTROL_CLIENTE_CREDITO;
 
     static QString m_IMPRESION_ENVIOS;
+    static QString m_NOMBRE_EMPRESA;
 
 
 
@@ -267,7 +271,9 @@ private:
     static void setIMPRESION_ENVIOS(QString value){
         m_IMPRESION_ENVIOS=value;
     }
-
+    static void setNOMBRE_EMPRESA(QString value){
+        m_NOMBRE_EMPRESA=value;
+    }
 
 
 
