@@ -3187,11 +3187,13 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
             return false;
         }
 
+        int cantidadFacturas=0;
         bool existeFacturasCanceladas=false;
         if(queryFacturasCanceladas.exec(consultaFacturasCanceladas)){
             if(queryFacturasCanceladas.first()){
                 queryFacturasCanceladas.previous();
                 existeFacturasCanceladas=true;
+                cantidadFacturas=queryFacturasCanceladas.size();
             }
         }else{
             return false;
@@ -3287,7 +3289,24 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
                     painter.drawRect(QRect(30,235,535,130));// cuadro medios de pago
 
 
-                    painter.drawRect(QRect(575,235,190,130));// cuadro facturas canceladas
+                    if(existeFacturasCanceladas){
+                        int cantidadRenglonesABajar=0;
+                        if(cantidadFacturas>7){
+                            if(cantidadFacturas>=50){
+                                cantidadRenglonesABajar=52;
+                            }else{
+                                cantidadRenglonesABajar=cantidadFacturas;
+                            }
+
+
+                            painter.drawRect(QRect(575,235,190,130+((cantidadRenglonesABajar-7)*15)));// cuadro facturas canceladas
+                        }else{
+                            painter.drawRect(QRect(575,235,190,130));// cuadro facturas canceladas
+                        }
+                    }else{
+                        painter.drawRect(QRect(575,235,190,130));// cuadro facturas canceladas
+                    }
+
 
                     // Impresion de texto
 
@@ -3346,16 +3365,34 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
 
 
                     incremento=0;
+                    int numeradorIncremento=0;
                     if(existeFacturasCanceladas){
                         while (queryFacturasCanceladas.next()) {
-                            painter.drawText(cuadro(16.0,7.0+incremento,3.0,1.0,false),queryFacturasCanceladas.value(0).toString());
-                            painter.drawText(cuadroTicketRight(21.0,7.0+incremento,3.0,1.0,QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2)),QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2));
+                            if(cantidadFacturas>=50){
+
+                                if(numeradorIncremento<51){
+                                    painter.drawText(cuadro(16.0,7.0+incremento,3.0,1.0,false),queryFacturasCanceladas.value(0).toString());
+                                    painter.drawText(cuadroTicketRight(21.0,7.0+incremento,3.0,1.0,QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2)),QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2));
+
+                                }
+
+
+                            }else{
+                                painter.drawText(cuadro(16.0,7.0+incremento,3.0,1.0,false),queryFacturasCanceladas.value(0).toString());
+                                painter.drawText(cuadroTicketRight(21.0,7.0+incremento,3.0,1.0,QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2)),QString::number(queryFacturasCanceladas.value(1).toFloat(),'f',2));
+                            }
+                            numeradorIncremento++;
                             incremento=incremento+factorIncremento;
+
                         }
+                        if(cantidadFacturas>=50){
+                            painter.drawText(cuadro(16.0,27.5,3.0,1.0,false),"+"+QString::number(cantidadFacturas-51)+" facturas");
+                        }
+
                     }
                     // firma
-                    painter.drawLine(QLine(575,405,765,405));
-                    painter.drawText(cuadro(16.5,11.0,3.0,1.0,false),"por "+func_configuracion.retornaValorConfiguracion("NOMBRE_EMPRESA"));
+                    painter.drawLine(QLine(275,405,465,405));
+                    painter.drawText(cuadro(8.5,11.0,3.0,1.0,false),"por "+func_configuracion.retornaValorConfiguracion("NOMBRE_EMPRESA"));
 
                     painter.end();
                     seImprimioTodoOk=true;

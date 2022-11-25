@@ -287,6 +287,9 @@ Rectangle {
         /// 1.17.4  :Se agrega soporte para impresión de envios en las facturas pendientes.
         /// 1.17.5  :Corrección en impresión de envios.
         /// 1.17.6  :Se agrega el modo de impresión para recibos, apedido de Jaime de likaren. SOLO sirve para recibos, no para otro documento.
+        /// 1.17.7  :SE corrige error en modo de impresión de recibos.
+
+
 
         Text {
             id: txtCopyright
