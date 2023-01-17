@@ -1992,8 +1992,14 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 417:
             if(!impactoCambioEnBD("insert into Configuracion values('NOMBRE_EMPRESA','','Nombre de la empresa que se usa para facturas o recibos, al pie de firma');","418")){
                 _iterador=false; return false; } break;
-            //
+        case 418:
+            if(!impactoCambioEnBD("ALTER TABLE Mantenimientos ADD clientesUsaDescuentoDeMantenimiento char(1) DEFAULT '0' NOT NULL","419")){
+                _iterador=false; return false; } break;
+        case 419:
+            if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql`='select Sub.* from  ( SELECT   CLI.codigoCliente\\'CODIGO\\', CLI.razonSocial\\'Razón Social\\',CLI.rut as RUT, CLI.nombreCliente\\'Nombre Fantasía\\', replace(CLI.direccion,\\'\\\\n\\',\\'\\')\\'Dirección\\',LO.descripcionLocalidad as Localidad, trim(CLI.telefono)\\'Telefono\\', CLI.email\\'Email\\', case when LPC.codigoListaPrecio is null then \\'Sin lista precio, asume la 1\\' else LPC.codigoListaPrecio end AS Lista, (select count(DOC.codigoDocumento) from Documentos DOC where DOC.codigoCliente=CLI.codigoCliente and DOC.tipoCliente=CLI.tipoCliente and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\'))\\'#Compras\\',(select sum(DOC.precioTotalVenta) from Documentos DOC where DOC.codigoCliente=CLI.codigoCliente and DOC.tipoCliente=CLI.tipoCliente and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\') and DOC.codigoMonedaDocumento=1)\\'Ventas $\\',(select sum(DOC.precioTotalVenta) from Documentos DOC where DOC.codigoCliente=CLI.codigoCliente and DOC.tipoCliente=CLI.tipoCliente and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\') and DOC.codigoMonedaDocumento=2)\\'Ventas U$S\\'  FROM Clientes CLI  left join ListaPrecioClientes LPC on LPC.tipoCliente=CLI.tipoCliente and LPC.codigoCliente=CLI.codigoCliente  join Localidades LO on LO.codigoLocalidad=CLI.codigoLocalidad and LO.codigoDepartamento=CLI.codigoDepartamento and LO.codigoPais=CLI.codigoPais where  CLI.tipoCliente=1  and  CLI.fechaAlta  between \\'@_desde\\' and \\'@_hasta\\'    order by CLI.razonSocial) Sub  where (((Sub.Lista=\\'Sin lista precio, asume la 1\\' or Sub.Lista=1) and \\'1\\'=\\'@_codigoListaPrecio\\') or  Sub.Lista=\\'@_codigoListaPrecio\\');' WHERE `codigoReporte`='81';","420")){
+                _iterador=false; return false; } break;
 
+            //
 
 
 

@@ -132,6 +132,7 @@ Rectangle{
             cbxListaLocalidades.codigoDeLocalidadSeleccionado=codigoLocalidad
             cbxListaLocalidades.codigoValorSeleccion=codigoLocalidad
             cbxListaLocalidades.textoComboBox=modeloLocalidadesComboBox.retornaDescripcionLocalidad(codigoPais,codigoDepartamento,codigoLocalidad)
+            txtDescuentoCliente.textoInputBox=porcentajeDescuento
 
             txtFechaNacimiento.textoInputBox=fechaNacimiento
 

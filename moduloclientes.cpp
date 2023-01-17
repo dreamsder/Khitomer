@@ -79,6 +79,7 @@ ModuloClientes::ModuloClientes(QObject *parent)
     roles[codigoFormasDePagoDefaultRole] = "codigoFormasDePagoDefault";
 
     roles[codigoTipoDocumentoDefaultRole] = "codigoTipoDocumentoDefault";
+    roles[porcentajeDescuentoRole] = "porcentajeDescuento";
 
 
 
@@ -91,7 +92,7 @@ ModuloClientes::ModuloClientes(QObject *parent)
 
 
 Cliente::Cliente(const QString &codigoCliente, const int &tipoCliente, const QString &rut, const QString &nombreCliente,const QString &razonSocial,const QString &direccion,const QString &esquina,const QString &numeroPuerta,const QString &telefono,const QString &telefono2,const QString &documento,const QString &codigoPostal, const QString &email,const QString &sitioWeb,const QString &usuarioAlta,const QString &observaciones,const int &tipoClasificacion,const int &codigoTipoCliente,const QString &descripcionTipoCliente,const int &codigoTipoClasificacion,const QString &descripcionTipoClasificacion,const QString &contacto,const QString &horario,const int &codigoPais,const int &codigoDepartamento,const int &codigoLocalidad,const int &codigoTipoDocumentoCliente,const int &codigoTipoProcedenciaCliente, const QString &fechaNacimiento, const QString &permiteFacturaCredito
-,const int &codigoMonedaDefault,const int &codigoFormasDePagoDefault, const int &codigoTipoDocumentoDefault)
+,const int &codigoMonedaDefault,const int &codigoFormasDePagoDefault, const int &codigoTipoDocumentoDefault, const QString &porcentajeDescuento)
 
     : m_codigoCliente(codigoCliente), m_tipoCliente(tipoCliente), m_rut(rut), m_nombreCliente(nombreCliente), m_razonSocial(razonSocial), m_direccion(direccion),  m_esquina(esquina), m_numeroPuerta(numeroPuerta), m_telefono(telefono), m_telefono2(telefono2), m_documento(documento), m_codigoPostal(codigoPostal), m_email(email),
 
@@ -103,7 +104,9 @@ Cliente::Cliente(const QString &codigoCliente, const int &tipoCliente, const QSt
       m_permiteFacturaCredito(permiteFacturaCredito),
       m_codigoMonedaDefault(codigoMonedaDefault),
       m_codigoFormasDePagoDefault(codigoFormasDePagoDefault),
-      m_codigoTipoDocumentoDefault(codigoTipoDocumentoDefault)
+      m_codigoTipoDocumentoDefault(codigoTipoDocumentoDefault),
+      m_porcentajeDescuento(porcentajeDescuento)
+
 
 {
 }
@@ -242,7 +245,10 @@ int Cliente::codigoTipoDocumentoDefault() const
 {
     return m_codigoTipoDocumentoDefault;
 }
-
+QString Cliente::porcentajeDescuento() const
+{
+    return m_porcentajeDescuento;
+}
 
 
 
@@ -292,6 +298,8 @@ void ModuloClientes::buscarCliente(QString campo, QString datoABuscar){
                                                    ,q.value(rec.indexOf("codigoMonedaDefault")).toInt()
                                                    ,q.value(rec.indexOf("codigoFormasDePagoDefault")).toInt()
                                                    ,q.value(rec.indexOf("codigoTipoDocumentoDefault")).toInt()
+                                                   ,q.value(rec.indexOf("porcentajeDescuento")).toString()
+
 
 
                                                    ));
@@ -413,7 +421,7 @@ QVariant ModuloClientes::data(const QModelIndex & index, int role) const {
 
     else if (role == codigoTipoDocumentoDefaultRole){ return cliente.codigoTipoDocumentoDefault(); }
 
-
+    else if (role == porcentajeDescuentoRole){ return cliente.porcentajeDescuento(); }
 
     return QVariant();
 }
@@ -470,7 +478,7 @@ qlonglong ModuloClientes::primerRegistroDeClienteEnBase() const {
     }
 }
 
-QString ModuloClientes::insertarCliente(QString _codigoCliente,QString _tipoCliente, QString _nombreCliente, QString _razonSocial, QString _rut, QString _tipoClasificacion,QString _direccion,QString _esquina, QString _numeroPuerta, QString _telefono, QString _telefono2, QString _codigoPostal, QString _email, QString _sitioWeb, QString _contacto,QString _observaciones,QString _usuarioAlta, QString _horario, QString _codigoPais, QString _codigoDepartamento, QString _codigoLocalidad, QString _codigoTipoDocumentoCliente, QString  _codigoTipoProcedenciaCliente, QString _fechaNacimiento,QString _permiteFacturaCredito,QString _codigoMonedaDefault, QString _codigoFormasDePagoDefault, QString _codigoTipoDocumentoDefault) const {
+QString ModuloClientes::insertarCliente(QString _codigoCliente,QString _tipoCliente, QString _nombreCliente, QString _razonSocial, QString _rut, QString _tipoClasificacion,QString _direccion,QString _esquina, QString _numeroPuerta, QString _telefono, QString _telefono2, QString _codigoPostal, QString _email, QString _sitioWeb, QString _contacto,QString _observaciones,QString _usuarioAlta, QString _horario, QString _codigoPais, QString _codigoDepartamento, QString _codigoLocalidad, QString _codigoTipoDocumentoCliente, QString  _codigoTipoProcedenciaCliente, QString _fechaNacimiento,QString _permiteFacturaCredito,QString _codigoMonedaDefault, QString _codigoFormasDePagoDefault, QString _codigoTipoDocumentoDefault,QString _porcentajeDescuento) const {
 
 
 
@@ -530,7 +538,7 @@ Database::chequeaStatusAccesoMysql();
             if(query.first()){
                 if(query.value(0).toString()!=""){
 
-                    if(query.exec("update Clientes set nombreCliente='"+_nombreCliente+"', razonSocial='"+_razonSocial+"',rut='"+_rut+"',tipoClasificacion='"+_tipoClasificacion+"', direccion='"+_direccion+"',esquina='"+_esquina+"', numeroPuerta='"+_numeroPuerta+"',telefono='"+_telefono+"',telefono2='"+_telefono2+"',codigoPostal='"+_codigoPostal+"',email='"+_email+"',sitioWeb='"+_sitioWeb+"',contacto='"+_contacto+"',observaciones='"+_observaciones+"',usuarioAlta='"+_usuarioAlta+"',horario='"+_horario+"',codigoPais='"+_codigoPais+"',codigoDepartamento='"+_codigoDepartamento+"',codigoLocalidad='"+_codigoLocalidad+"',sincronizadoWeb='0',codigoTipoDocumentoCliente='"+_codigoTipoDocumentoCliente+"',codigoTipoProcedenciaCliente='"+_codigoTipoProcedenciaCliente+"',fechaNacimiento='"+_fechaNacimiento+"',permiteFacturaCredito='"+_permiteFacturaCredito+"',codigoMonedaDefault='"+_codigoMonedaDefault+"',codigoFormasDePagoDefault='"+_codigoFormasDePagoDefault+"',codigoTipoDocumentoDefault='"+_codigoTipoDocumentoDefault+"'     where codigoCliente='"+_codigoCliente+"' and tipoCliente='"+_tipoCliente+"'")){
+                    if(query.exec("update Clientes set nombreCliente='"+_nombreCliente+"', razonSocial='"+_razonSocial+"',rut='"+_rut+"',tipoClasificacion='"+_tipoClasificacion+"', direccion='"+_direccion+"',esquina='"+_esquina+"', numeroPuerta='"+_numeroPuerta+"',telefono='"+_telefono+"',telefono2='"+_telefono2+"',codigoPostal='"+_codigoPostal+"',email='"+_email+"',sitioWeb='"+_sitioWeb+"',contacto='"+_contacto+"',observaciones='"+_observaciones+"',usuarioAlta='"+_usuarioAlta+"',horario='"+_horario+"',codigoPais='"+_codigoPais+"',codigoDepartamento='"+_codigoDepartamento+"',codigoLocalidad='"+_codigoLocalidad+"',sincronizadoWeb='0',codigoTipoDocumentoCliente='"+_codigoTipoDocumentoCliente+"',codigoTipoProcedenciaCliente='"+_codigoTipoProcedenciaCliente+"',fechaNacimiento='"+_fechaNacimiento+"',permiteFacturaCredito='"+_permiteFacturaCredito+"',codigoMonedaDefault='"+_codigoMonedaDefault+"',codigoFormasDePagoDefault='"+_codigoFormasDePagoDefault+"',codigoTipoDocumentoDefault='"+_codigoTipoDocumentoDefault+"',porcentajeDescuento='"+_porcentajeDescuento+"'     where codigoCliente='"+_codigoCliente+"' and tipoCliente='"+_tipoCliente+"'")){
 
                         return "-7";
                     }else{
@@ -539,7 +547,7 @@ Database::chequeaStatusAccesoMysql();
 
                 }
             }else{
-                if(query.exec("insert INTO Clientes (codigoCliente,tipoCliente,nombreCliente,razonSocial,rut,tipoClasificacion,direccion,esquina,numeroPuerta,telefono,telefono2,codigoPostal,email,sitioWeb,contacto,observaciones,usuarioAlta,horario,fechaAlta,codigoPais,codigoDepartamento,codigoLocalidad,sincronizadoWeb,codigoTipoDocumentoCliente,codigoTipoProcedenciaCliente,fechaNacimiento,permiteFacturaCredito,codigoMonedaDefault,codigoFormasDePagoDefault,codigoTipoDocumentoDefault ) values('"+_codigoCliente+"',"+_tipoCliente+",'"+_nombreCliente+"','"+_razonSocial+"','"+_rut+"','"+_tipoClasificacion+"','"+ _direccion +"','"+ _esquina +"','" + _numeroPuerta+"','"+_telefono+"','"+_telefono2+"','"+_codigoPostal+"','"+_email+"','"+_sitioWeb+"','"+_contacto+"','"+_observaciones+"','" +_usuarioAlta+"','"+_horario+"','"+func_Fecha.fechaHoraDeHoy()+"','"+_codigoPais+"','"+_codigoDepartamento+"','"+_codigoLocalidad+"','0','"+_codigoTipoDocumentoCliente+"','"+_codigoTipoProcedenciaCliente+"','"+_fechaNacimiento+"','"+_permiteFacturaCredito+"','"+_codigoMonedaDefault+"','"+_codigoFormasDePagoDefault+"','"+_codigoTipoDocumentoDefault+"' )")){
+                if(query.exec("insert INTO Clientes (codigoCliente,tipoCliente,nombreCliente,razonSocial,rut,tipoClasificacion,direccion,esquina,numeroPuerta,telefono,telefono2,codigoPostal,email,sitioWeb,contacto,observaciones,usuarioAlta,horario,fechaAlta,codigoPais,codigoDepartamento,codigoLocalidad,sincronizadoWeb,codigoTipoDocumentoCliente,codigoTipoProcedenciaCliente,fechaNacimiento,permiteFacturaCredito,codigoMonedaDefault,codigoFormasDePagoDefault,codigoTipoDocumentoDefault,porcentajeDescuento ) values('"+_codigoCliente+"',"+_tipoCliente+",'"+_nombreCliente+"','"+_razonSocial+"','"+_rut+"','"+_tipoClasificacion+"','"+ _direccion +"','"+ _esquina +"','" + _numeroPuerta+"','"+_telefono+"','"+_telefono2+"','"+_codigoPostal+"','"+_email+"','"+_sitioWeb+"','"+_contacto+"','"+_observaciones+"','" +_usuarioAlta+"','"+_horario+"','"+func_Fecha.fechaHoraDeHoy()+"','"+_codigoPais+"','"+_codigoDepartamento+"','"+_codigoLocalidad+"','0','"+_codigoTipoDocumentoCliente+"','"+_codigoTipoProcedenciaCliente+"','"+_fechaNacimiento+"','"+_permiteFacturaCredito+"','"+_codigoMonedaDefault+"','"+_codigoFormasDePagoDefault+"','"+_codigoTipoDocumentoDefault+"','"+_porcentajeDescuento+"' )")){
                     return _codigoCliente;
                 }else{
                     return "-3";

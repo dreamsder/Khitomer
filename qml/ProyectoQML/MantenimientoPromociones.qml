@@ -210,8 +210,7 @@ Rectangle {
                 highlightRangeMode: ListView.NoHighlightRange
                 flickableDirection: Flickable.VerticalFlick
                 //
-                delegate:  ListaDocumentos{}
-                model: modeloDocumentosMantenimiento
+
 
                 Rectangle {
                     id: scrollbarlistaDePromocionesFiltrados

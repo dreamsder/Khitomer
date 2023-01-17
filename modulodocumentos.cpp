@@ -2334,7 +2334,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                 painter.setFont(fuente);
                 painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"¡ABRIR EL PAQUETE EN AGENCIA");
                 desplazamientoLogo+=0.5;
-                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
+                painter.drawText(cuadroTicketRight(6.0,1.0+desplazamientoLogo,8.0,0.5,"O FRENTE AL CADETE!"),"O FRENTE AL CADETE!");
 
                 fuente.setPointSize(8);
                 fuente.setUnderline(false);
@@ -2348,7 +2348,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                 desplazamientoLogo+=1.0;
 
                 fuente.setBold(true);
-                fuente.setPointSize(10);
+                fuente.setPointSize(9);
                 fuente.setUnderline(true);
                 painter.setFont(fuente);
 
@@ -2372,7 +2372,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                 // Codigo cliente
                 painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
                 // Nombre cliente
-                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
+                painter.drawText(cuadroTicketRight(7.0,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
 
                 desplazamientoLogo+=0.5;
 
@@ -2402,7 +2402,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                     desplazamientoLogo+=0.5;
                     painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Hora entrega: "+horario);
                     desplazamientoLogo+=0.5;
-                    painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
+                    painter.drawText(cuadro(0.5,2.0+desplazamientoLogo,8.0,0.5,false),"Agencia: "+_observacion);
 
                 }
 
@@ -2411,7 +2411,7 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
 
 
 
-                desplazamientoLogo+=1;
+                desplazamientoLogo+=2;
                 // Se imprime una linea separadora
                 fuente.setBold(true);
                 painter.setFont(fuente);
@@ -2440,9 +2440,9 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
 
                 painter.drawText(cuadroTicketRight(8.0,1.0+desplazamientoLogo,7.0,0.5,"29021052 / 29082199"),"29021052 / 29082199");
                 desplazamientoLogo+=0.5;
-                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
+                painter.drawText(cuadroTicketRight(7.0,1.0+desplazamientoLogo,8.0,0.5,"PAYSANDÚ 1325"),"PAYSANDÚ 1325");
                 desplazamientoLogo+=0.5;
-                painter.drawText(cuadroTicketRight(7.5,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
+                painter.drawText(cuadroTicketRight(7.0,1.0+desplazamientoLogo,8.0,0.5,"MONTEVIDEO - UY"),"MONTEVIDEO - UY");
 
 
 

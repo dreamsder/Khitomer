@@ -164,7 +164,7 @@ Rectangle{
                             if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo)   )){
 
 
-
+                            precioArticuloDobleClic=calcularDescuentoPorCliente(precioArticuloDobleClic)
                             modeloItemsFactura.append({
                                                           codigoArticulo:codigoArticulo,
                                                           codigoBarrasArticulo:"",
@@ -240,7 +240,7 @@ Rectangle{
                         if(txtArticuloParaFacturacion.visible){
                             //Controlo si se peude vender sin stock previsto
                             if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo))){
-
+                            precioArticuloDobleClic=calcularDescuentoPorCliente(precioArticuloDobleClic)
                             modeloItemsFactura.append({
                                                           codigoArticulo:codigoArticulo,
                                                           codigoBarrasArticulo:"",
@@ -316,7 +316,7 @@ Rectangle{
                         funcionesmysql.loguear("QML::codigoArticulo: "+codigoArticulo)
                         funcionesmysql.loguear("QML::precioArticulo: "+precioArticuloDobleClic.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
 
-
+                        precioArticuloDobleClic=calcularDescuentoPorCliente(precioArticuloDobleClic)
                         modeloItemsFactura.append({
                                                       codigoArticulo:codigoArticulo,
                                                       codigoBarrasArticulo:"",

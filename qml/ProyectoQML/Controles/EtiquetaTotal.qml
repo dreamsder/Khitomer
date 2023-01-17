@@ -141,6 +141,17 @@ Rectangle {
     //Esta funciona setea el total, cuando en la configuración el MODO_CALCULOTOTAL esta seteado en 1
     function setearTotal(valor,articulo,tipoDocumento,consideraDescuento,indice){
 
+        /*if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(tipoDocumento,"esDocumentoDeVenta")){
+
+            var descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
+            console.log(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento"))
+            console.log(valor);
+
+            var nuevoDescuentoCliente=(valor*descuentoDelCliente)/100;
+            valor= valor-nuevoDescuentoCliente;
+        }*/
+
+
         /// Si articulo es -1 quiere decir que no voy a utilizar sub total ni ivas.
         if(articulo!=-1){
 
@@ -229,7 +240,7 @@ Rectangle {
             txtValorIva.text=valorIvaAcumulado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")).toString()
 
         }else{
-
+             // Acá se calculan medios de pago
 
             ///Acá se calcula el iva y sub total del medio de pago
             valorSubTotalSinDescuento=valor/modeloListaIvas.retornaFactorMultiplicadorIVAPorDefecto()

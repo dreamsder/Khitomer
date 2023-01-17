@@ -742,6 +742,19 @@ Rectangle {
             }
 
 
+            TextInputSimple {
+                id: txtDescuentoCliente
+                enFocoSeleccionarTodo: true
+                textoInputBox: "000.00"
+                inputMask: "000.00%; "
+                largoMaximo: 6
+                textoTitulo: "Descuento %"
+                validaFormato: validacionMontoPorcentaje
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaDescuentoDeMantenimiento")
+            }
+
+
+
 
 
         }
@@ -1054,6 +1067,7 @@ Rectangle {
                     txtHorario.textoInputBox=""
                     txtFechaNacimiento.textoInputBox=""
                     chbEsClienteCredito.setActivo(false)
+                    txtDescuentoCliente.textoInputBox="000.00"
 
                     /*if(nuevoCliente==""){
                         txtCodigoCliente.tomarElFoco()
@@ -1121,10 +1135,10 @@ Rectangle {
                             resultadoInsertarCliente="-6";
                         }else{
                             txtRut.textoInputBox=cedulaIdentidad;                            
-                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion);
+                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim());
                         }
                     }else{
-                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion);
+                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim());
                     }
 
 
@@ -1206,6 +1220,7 @@ Rectangle {
 
                         cbListaDocumentosCliente.codigoValorSeleccion="0"
                         cbListaDocumentosCliente.textoComboBox=""
+                        txtDescuentoCliente.textoInputBox="000.00"
 
                         cargarListasDePrecioCliente("","")
 
@@ -1265,7 +1280,7 @@ Rectangle {
 
                         cbListaDocumentosCliente.codigoValorSeleccion="0"
                         cbListaDocumentosCliente.textoComboBox=""
-
+                        txtDescuentoCliente.textoInputBox="000.00"
 
                         cargarListasDePrecioCliente("","")
 
@@ -1365,6 +1380,7 @@ Rectangle {
                                     txtContacto.textoInputBox=""
                                     txtHorario.textoInputBox=""
                                     txtFechaNacimiento.textoInputBox=""
+                                    txtDescuentoCliente.textoInputBox="000.00"
 
                                     cargarListasDePrecioCliente("","")
 
@@ -1468,6 +1484,12 @@ Rectangle {
         anchors.fill: parent
         visible: false
 
+    }
+
+
+    RegExpValidator{
+        id:validacionMontoPorcentaje
+        regExp: new RegExp( "([0-1, ][0-9, ][0-9, ]\.[0-9, ][0-9, ])\%" )
     }
 
 

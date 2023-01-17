@@ -78,6 +78,31 @@ Rectangle {
 
 
 
+    // funcion que calcula el descuento que tienen el cliente, para un articulo dado
+    function calcularDescuentoPorCliente(valorArticuloACalcular){
+        var nuevoValorArticulo=valorArticuloACalcular;
+        // El descuento desde el cliente se aplica solo en documentos de venta, por lo que una compra proveedor no puede descontarse
+        if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion.trim(),"esDocumentoDeVenta")){
+            // El descuento solo se calcula si existe un cliente logicamente.
+            if(txtCodigoClienteFacturacion.textoInputBox.trim()!==""){
+                var descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
+                // Si el porcentaje de descuento del cliente es diferente de 0, lo calculo
+                if(descuentoDelCliente!==0){
+                    console.log(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento"))
+                    console.log(valorArticuloACalcular);
+                    var nuevoDescuentoCliente=(valorArticuloACalcular*descuentoDelCliente)/100;
+                    nuevoValorArticulo= valorArticuloACalcular-nuevoDescuentoCliente;
+                }
+            }
+        }
+        console.log(nuevoValorArticulo);
+        return nuevoValorArticulo;
+
+    }
+
+
+
+
 
     function guardarFacturaPendiente(){
 
@@ -479,28 +504,6 @@ Rectangle {
         }
 
     }
-
-    //(valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))*cantidadItemsVendidos).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-
-
-    /*
-
-                                            modeloItemsFactura.append({
-                                                                          codigoArticulo:valorArticuloInterno,
-                                                                          codigoBarrasArticulo:"",
-                                                                          descripcionArticulo:modeloArticulos.retornaDescripcionArticulo(valorArticuloInterno),
-                                                                          descripcionArticuloExtendido:modeloArticulos.retornaDescripcionArticuloExtendida(valorArticuloInterno),
-                                                                          precioArticulo:valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-                                                                          precioArticuloSubTotal:(valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))*cantidadItemsVendidos).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-                                                                          cantidadItems:1,
-                                                                          costoArticuloMonedaReferencia:costoArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),
-                                                                          activo:true,
-                                                                          consideraDescuento:false,
-                                                                          indiceLinea:-1,
-                                                                          descuentoLineaItem:0,
-                                                                          codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno),
-                                                                          descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(valorArticuloInterno))
-                                                                      })*/
 
 
 
@@ -3630,7 +3633,7 @@ Rectangle {
                                                         funcionesmysql.loguear("QML::cantidadItems: 1")
 
 
-
+                                                       valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                         modeloItemsFactura.append({
                                                                                       codigoArticulo:valorArticuloInterno,
                                                                                       codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -3718,7 +3721,7 @@ Rectangle {
                                                         funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                         funcionesmysql.loguear("QML::cantidadItems: 1")
 
-
+                                                       valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                         modeloItemsFactura.append({
                                                                                       codigoArticulo:valorArticuloInterno,
                                                                                       codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -3798,7 +3801,7 @@ Rectangle {
                                                     funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                     funcionesmysql.loguear("QML::cantidadItems: 1")
 
-
+                                                   valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -4205,7 +4208,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
 
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:txtCodigoDeBarrasADemanda.textoInputBox.trim(),
@@ -4291,7 +4294,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:txtCodigoDeBarrasADemanda.textoInputBox.trim(),
@@ -4383,7 +4386,7 @@ Rectangle {
                                             funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                             funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                             funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
-
+                                           valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                             modeloItemsFactura.append({
                                                                           codigoArticulo:valorArticuloInterno,
                                                                           codigoBarrasArticulo:txtCodigoDeBarrasADemanda.textoInputBox.trim(),
@@ -4790,7 +4793,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -4878,7 +4881,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -4969,7 +4972,7 @@ Rectangle {
                                             funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                             funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
 
-
+                                           valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                             modeloItemsFactura.append({
                                                                           codigoArticulo:valorArticuloInterno,
                                                                           codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -5238,7 +5241,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -5326,7 +5329,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
-
+                                               valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -5417,7 +5420,7 @@ Rectangle {
                                             funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                             funcionesmysql.loguear("QML::cantidadItems: "+parseInt(cantidadArticulos))
 
-
+                                           valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                             modeloItemsFactura.append({
                                                                           codigoArticulo:valorArticuloInterno,
                                                                           codigoBarrasArticulo:codigoDeBarraArticulo,
@@ -5546,7 +5549,7 @@ Rectangle {
                                                         funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                         funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                         funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
-
+                                                    valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                         modeloItemsFactura.append({
                                                                                       codigoArticulo:valorArticuloInterno,
                                                                                       codigoBarrasArticulo:"",
@@ -5605,7 +5608,7 @@ Rectangle {
                                                         funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                         funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                         funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
-
+                                                        valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                         modeloItemsFactura.append({
                                                                                       codigoArticulo:valorArticuloInterno,
                                                                                       codigoBarrasArticulo:"",
@@ -5669,7 +5672,7 @@ Rectangle {
                                                     funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                     funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                     funcionesmysql.loguear("QML::cantidadItems: "+cantidadItemsVendidos)
-
+                                                    valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:"",
@@ -5740,7 +5743,7 @@ Rectangle {
                                                     funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                     funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                     funcionesmysql.loguear("QML::cantidadItems: 1")
-
+                                                    valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:"",
@@ -5798,7 +5801,7 @@ Rectangle {
                                                     funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                     funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                     funcionesmysql.loguear("QML::cantidadItems: 1")
-
+                                                    valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:"",
@@ -5858,7 +5861,7 @@ Rectangle {
                                                 funcionesmysql.loguear("QML::codigoArticulo: "+valorArticuloInterno)
                                                 funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo2.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                                 funcionesmysql.loguear("QML::cantidadItems: 1")
-
+                                                valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:"",
@@ -6006,7 +6009,7 @@ Rectangle {
 
                                                 //Controlo si se peude vender sin stock previsto
                                                 if(modeloArticulos.retornaSiPuedeVenderSinStock(cantidadItemsVendidos,cbListatipoDocumentos.codigoValorSeleccion,valorArticuloInterno,retornaCantidadDeUnArticuloEnFacturacion(valorArticuloInterno)   )){
-
+                                                    valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:"",
@@ -6061,6 +6064,7 @@ Rectangle {
 
                                                 //Controlo si se peude vender sin stock previsto
                                                 if(modeloArticulos.retornaSiPuedeVenderSinStock(cantidadItemsVendidos,cbListatipoDocumentos.codigoValorSeleccion,valorArticuloInterno,retornaCantidadDeUnArticuloEnFacturacion(valorArticuloInterno)   )){
+                                                   valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                     modeloItemsFactura.append({
                                                                                   codigoArticulo:valorArticuloInterno,
                                                                                   codigoBarrasArticulo:"",
@@ -6119,7 +6123,7 @@ Rectangle {
 
                                             //Controlo si se peude vender sin stock previsto
                                             if(modeloArticulos.retornaSiPuedeVenderSinStock(cantidadItemsVendidos,cbListatipoDocumentos.codigoValorSeleccion,valorArticuloInterno,retornaCantidadDeUnArticuloEnFacturacion(valorArticuloInterno)   )){
-
+                                                valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:"",
@@ -6184,6 +6188,7 @@ Rectangle {
 
                                                 cantidadItemsVendidos=1
                                                 costoArticulo=txtCostoArticuloMonedaReferencia.textoInputBox.trim();
+                                                 valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:"",
@@ -6239,7 +6244,7 @@ Rectangle {
                                             //Controlo si se peude vender sin stock previsto
                                             if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,valorArticuloInterno,retornaCantidadDeUnArticuloEnFacturacion(valorArticuloInterno)   )){
 
-
+                                                 valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                                 modeloItemsFactura.append({
                                                                               codigoArticulo:valorArticuloInterno,
                                                                               codigoBarrasArticulo:"",
@@ -6299,7 +6304,7 @@ Rectangle {
 
                                         //Controlo si se peude vender sin stock previsto
                                         if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,valorArticuloInterno,retornaCantidadDeUnArticuloEnFacturacion(valorArticuloInterno)   )){
-
+                                            valorPrecioArticulo2=calcularDescuentoPorCliente(valorPrecioArticulo2)
                                             modeloItemsFactura.append({
                                                                           codigoArticulo:valorArticuloInterno,
                                                                           codigoBarrasArticulo:"",
@@ -8126,7 +8131,7 @@ Rectangle {
                                         funcionesmysql.loguear("QML::precioArticulo: "+valorPrecioArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
                                         funcionesmysql.loguear("QML::costoArticuloMonedaReferencia: "+costoArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
 
-
+                                       valorPrecioArticulo=calcularDescuentoPorCliente(valorPrecioArticulo)
                                         modeloItemsFactura.append({
                                                                       codigoArticulo:txtCodigoArticuloParaAgregarFacturacion.textoInputBox.trim(),
                                                                       codigoBarrasArticulo:"",
