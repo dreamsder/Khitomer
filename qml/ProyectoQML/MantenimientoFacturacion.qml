@@ -8722,7 +8722,7 @@ Rectangle {
 
         onClicImprimir: {
 
-            if(modeloDocumentos.emitirEnvioEnImpresoraTicket(codigoTipoImpresion,nombreImpresora,txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),txtObservacionesFactura.textoInputBox.trim())){
+            if(modeloDocumentos.emitirEnvioEnImpresoraTicket(codigoTipoImpresion,nombreImpresora,txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),txtComentariosFactura.textoInputBox.trim())){
                 visible=false
                 guardarFacturaPendiente()
             }else{
