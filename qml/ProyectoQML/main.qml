@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.9"
+    property string versionKhitomer: "1.17.10"
 
 
 
@@ -1319,7 +1319,7 @@ Rectangle {
                 y: 19
                 width: 376
                 height: 200
-                radius: 4
+                radius: 6
                 clip: false
                 color: "#1d7195"
                 border.color: "#1d7195"
@@ -1385,12 +1385,15 @@ Rectangle {
                 TextInputSimple {
                     id: txtNombreDeUsuario
                     x: 20
-                    y: 83
-                    width: 230
-                 //   height: 35
-                    textoDeFondo: qsTr("login de usuario")
+                    y: 93
+                    width: 240
+                   // height: 50
+
+                    tamanioFuenteTitulo: 13
+                    textoDeFondo: qsTr("ingrese usuario...")
                     textoInputBox: ""
                     anchors.horizontalCenter: parent.horizontalCenter
+
                     echoMode: 0
                     textoTitulo: qsTr("Usuario:")
                     botonBorrarTextoVisible: true
@@ -1407,11 +1410,12 @@ Rectangle {
                 TextInputSimple {
                     id: txtContraseniaDeUsuario
                     x: 20
-                    y: 126
-                    width: 230
-                //    height: 35
+                    y: 136
+                    width: 240
+                    //height: 50
+tamanioFuenteTitulo: 13
                     largoMaximo: 25
-                    textoDeFondo: qsTr("clave privada de acceso")
+                    textoDeFondo: qsTr("ingrese contraseña...")
                     echoMode: 2
                     anchors.horizontalCenter: parent.horizontalCenter
                     textoTitulo: qsTr("Contraseña:")

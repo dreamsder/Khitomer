@@ -292,6 +292,7 @@ Rectangle {
         ///         :Corrección en el reporte Listado de clientes x lista precio y fecha de alta.
         ///         :Se agrega soporte para descuentos desde el cliente en base a un porcentaje definido en el cliente.
         /// 1.17.9  :Mas correcciónes en la impresión de envios.Se cambia el campo observacion de la factura por comentario.
+        /// 1.17.10 :Mas correcciónes en la impresión de envios.
 
         Text {
             id: txtCopyright

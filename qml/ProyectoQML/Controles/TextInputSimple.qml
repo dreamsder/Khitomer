@@ -26,6 +26,11 @@ import QtQuick 1.1
 Rectangle {
     id: rectangle1
     //width: 500
+
+    property int altoControl: 32
+    property int altoControlRecta: 18
+    property int tamanioFuente: 9
+    property int tamanioFuenteTitulo: 10
     width: {
 
 
@@ -70,7 +75,7 @@ Rectangle {
         }
     }
 
-    height: 32
+    height: altoControl
     color: "#00000000"
 
     property int fijoTamanioPersonalizado: 0
@@ -128,7 +133,7 @@ Rectangle {
 
     Rectangle {
         id:recTextInput
-        height: 18
+        height: altoControlRecta
         radius: 2
         anchors.right: parent.right
         anchors.rightMargin: 21
@@ -192,10 +197,11 @@ Rectangle {
             font.family: "Arial"
             //
             horizontalAlignment: TextInput.AlignHCenter
+
             inputMask: ""
             echoMode: TextInput.Normal
             z: 2
-            font.pointSize: 9
+            font.pointSize: tamanioFuente
             font.bold: false
             maximumLength: 45
             selectByMouse: true
@@ -309,7 +315,7 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: margenIzquierdo
-        font.pixelSize: 10
+        font.pixelSize: tamanioFuenteTitulo
     }
 
     Image {

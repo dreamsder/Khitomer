@@ -2372,7 +2372,9 @@ bool ModuloDocumentos::emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion
                 // Codigo cliente
                 painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),"Cliente: "+codigoCliente);
                 // Nombre cliente
-                painter.drawText(cuadroTicketRight(7.0,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
+                desplazamientoLogo+=0.5;
+                painter.drawText(cuadro(0.5,1.0+desplazamientoLogo,8.0,0.5,false),nombreCliente);
+                //painter.drawText(cuadroTicketRight(7.0,1.0+desplazamientoLogo,8.0,0.5,nombreCliente),nombreCliente);
 
                 desplazamientoLogo+=0.5;
 
