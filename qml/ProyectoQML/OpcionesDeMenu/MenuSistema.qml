@@ -294,7 +294,7 @@ Rectangle {
         /// 1.17.9  :Mas correcciónes en la impresión de envios.Se cambia el campo observacion de la factura por comentario.
         /// 1.17.10 :Mas correcciónes en la impresión de envios.
         /// 1.17.11 :Se modifican 3 reportes a pedido de Sandra de DW: Ventas entre fechas detallado / Ventas entre fechas detallo con iva / Ventas entre fechas detallo sin imp.
-
+        ///         :Se agrega telefono 2 a reporte Listado de clientes x lista precio y fecha de alta
         Text {
             id: txtCopyright
             x: 0
