@@ -296,6 +296,9 @@ Rectangle {
         /// 1.17.11 :Se modifican 3 reportes a pedido de Sandra de DW: Ventas entre fechas detallado / Ventas entre fechas detallo con iva / Ventas entre fechas detallo sin imp.
         ///         :Se agrega telefono 2 a reporte Listado de clientes x lista precio y fecha de alta
         /// 1.17.12 :Se modifican los reportes de Sandra para agregarle Fechas
+        /// 1.17.13 :Se modifica la busqueda de stock previsto y real para que se consulte desde las tablas vistas: vStockReal vStockPrevisto
+
+
         Text {
             id: txtCopyright
             x: 0

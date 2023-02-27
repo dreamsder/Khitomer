@@ -571,6 +571,8 @@ bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
 
 }
 
+
+// Ésta funcion devuelte el stock previsto, el cual incluye fascturas pendientes
 qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) const {
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -583,7 +585,8 @@ qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) co
     if(conexion){
         QSqlQuery query(Database::connect());
         //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G','P') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+        //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+        if(query.exec("SELECT * from vStockPrevisto where codigoArticulo='"+_codigoArticulo+"' ")) {
 
             if(query.first()){
                 if(query.value(1).toString()!=""){
@@ -595,12 +598,15 @@ qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) co
                 }
             }else{return 0;}
         }else{
+
             return 0;
         }
     }else{
         return 0;
     }
 }
+
+// DEvuelve el stock real, no incluye el previsto
 qlonglong ModuloArticulos::retornaStockTotalArticuloReal(QString _codigoArticulo) const {
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -614,7 +620,8 @@ qlonglong ModuloArticulos::retornaStockTotalArticuloReal(QString _codigoArticulo
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+        //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+           if(query.exec("select * from vStockReal where codigoArticulo='"+_codigoArticulo+"' ")) {
             if(query.first()){
                 if(query.value(1).toString()!=""){
 
