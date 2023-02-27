@@ -274,7 +274,7 @@ public:
 
     Q_INVOKABLE bool emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion, QString _impresora, QString _codigoCliente, QString _tipoCliente, QString _observacion);
 
-    Q_INVOKABLE void buscarDocumentosEnMantenimiento(QString , QString, QString);
+    Q_INVOKABLE void buscarDocumentosEnMantenimiento(QString , QString, QString,QString);
     Q_INVOKABLE void buscarDocumentosAPagarCuentaCorriente(QString , QString, QString);
     Q_INVOKABLE void buscarDocumentosDePagoCuentaCorriente(QString , QString, QString);
 

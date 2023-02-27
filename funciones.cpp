@@ -2025,9 +2025,11 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 428:
             if(!impactoCambioEnBD("CREATE VIEW vStockReal as  SELECT DOCL.codigoArticulo'codigoArticulo', sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1)   group by DOCL.codigoArticulo;","429")){
                 _iterador=false; return false; } break;
+        case 429:
+            if(!impactoCambioEnBD("insert into Configuracion values('CANTIDAD_ANIOS_DOCUMENTOS_EN_MANTENIMIENTO','20','Indica la cantidad de años hacia atras que se mostraran documentos en los mantenimientos y liquidaciones');","430")){
+                _iterador=false; return false; } break;
 
-
-            //
+            //;
 
 
 

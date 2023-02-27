@@ -681,7 +681,7 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
 }
 
 
-void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString datoABuscar, QString _codigoPerfil){
+void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString datoABuscar, QString _codigoPerfil,QString _aniosHaciaAtras){
 
 
     // qDebug()<< campo;
@@ -697,11 +697,10 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
 
     if(conexion){
 
-        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"' group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaHoraGuardadoDocumentoSQL desc");
+        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  AND YEAR(D.fechaHoraGuardadoDocumentoSQL) > (YEAR(NOW())-truncate("+_aniosHaciaAtras+",0))   group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaHoraGuardadoDocumentoSQL desc");
         QSqlRecord rec = q.record();
 
 
-        //  qDebug()<<q.lastQuery() ;
 
         ModuloDocumentos::reset();
         if(q.record().count()>0){
