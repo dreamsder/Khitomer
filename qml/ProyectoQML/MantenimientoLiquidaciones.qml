@@ -607,10 +607,64 @@ Rectangle {
 
             onClicEnBusqueda: {
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }
+        }
+
+
+
+        ComboBoxGenerico {
+            id: cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion
+            width: 170
+            anchors.bottom: rectListaDeDocumentos.top
+            anchors.bottomMargin: 10
+            anchors.left: cbListaEstadoDocumentosEnMantenimientoLiquidaciones.right
+            anchors.leftMargin: 20
+            textoTitulo: "Años hacia atrás"
+            modeloItems: modeloListaAniosHaciaAtrasEnDocumentosDeLiquidacion
+            codigoValorSeleccion: "1"
+            textoComboBox: "1 año hacia atrás"
+            botonBuscarTextoVisible: false
+
+            ListModel{
+                id:modeloListaAniosHaciaAtrasEnDocumentosDeLiquidacion
+                ListElement {
+                    codigoItem: "1"
+                    descripcionItem: "1 año hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "2"
+                    descripcionItem: "2 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "3"
+                    descripcionItem: "3 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "4"
+                    descripcionItem: "4 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "5"
+                    descripcionItem: "5 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "10"
+                    descripcionItem: "10 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "15"
+                    descripcionItem: "15 años hacia atrás"
+                }
+                ListElement {
+                    codigoItem: "30"
+                    descripcionItem: "30 años hacia atrás"
+                }
+            }
+
+
         }
 
 
@@ -978,7 +1032,7 @@ Rectangle {
 
             if(permisosAEvaluar=="permiteAutorizarCierreLiquidaciones"){
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1")
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                 modeloLiquidaciones.cerrarLiquidacion(codigoDeLiquidacion,vendedorDeLiquidacio)
                 modeloLiquidaciones.clearLiquidaciones()
                 modeloLiquidaciones.buscarLiquidacion("1=","1")
@@ -988,7 +1042,7 @@ Rectangle {
         onNoRequiereAutorizacion: {
             if(permisosAEvaluar=="permiteAutorizarCierreLiquidaciones"){
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1")
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                 modeloLiquidaciones.cerrarLiquidacion(codigoDeLiquidacion,vendedorDeLiquidacio)
                 modeloLiquidaciones.clearLiquidaciones()
                 modeloLiquidaciones.buscarLiquidacion("1=","1")

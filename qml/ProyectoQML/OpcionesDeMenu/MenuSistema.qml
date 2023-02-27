@@ -297,6 +297,7 @@ Rectangle {
         ///         :Se agrega telefono 2 a reporte Listado de clientes x lista precio y fecha de alta
         /// 1.17.12 :Se modifican los reportes de Sandra para agregarle Fechas
         /// 1.17.13 :Se modifica la busqueda de stock previsto y real para que se consulte desde las tablas vistas: vStockReal vStockPrevisto
+        ///         :Se agrega filtro por año para el mantenimieto de documentos y las liquidaciones.
 
 
         Text {

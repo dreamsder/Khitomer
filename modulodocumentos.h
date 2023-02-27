@@ -241,7 +241,7 @@ public:
     Q_INVOKABLE bool actualizoEstadoDocumentoCFE(QString _codigoDocumento, QString _codigoTipoDocumento, QString _estadoDocumento, QString) const;
 
 
-    Q_INVOKABLE void buscarDocumentosEnLiquidaciones(QString , QString,QString,QString);
+    Q_INVOKABLE void buscarDocumentosEnLiquidaciones(QString , QString, QString, QString, QString _aniosHaciaAtras);
 
     Q_INVOKABLE int retornaCantidadLineasDocumento(QString , QString, QString) const;
 

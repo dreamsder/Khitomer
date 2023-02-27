@@ -98,6 +98,9 @@ Database::chequeaStatusAccesoMysql();
         QSqlQuery q = Database::consultaSql("select LA.codigoListaPrecio, LA.codigoArticulo, A.descripcionArticulo, LA.precioArticulo from ListaPrecioArticulos LA join Articulos A on A.codigoArticulo=LA.codigoArticulo join SubRubros SRU on SRU.codigoSubRubro=A.codigoSubRubro join Rubros RU on RU.codigoRubro=SRU.codigoRubro where "+campo+"'"+datoABuscar+"'   "+orderArticulo+"  ");
         QSqlRecord rec = q.record();
 
+
+        qDebug()<< q.lastQuery();
+
         ModuloListaPrecioArticulos::reset();
         if(q.record().count()>0){
 

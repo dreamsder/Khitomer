@@ -158,7 +158,7 @@ Rectangle{
                 mantenimientoLiquidaciones.vendedorDeLiquidacio=codigoVendedor
 
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoLiquidacion,codigoVendedor,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim())
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoLiquidacion,codigoVendedor,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }
@@ -297,7 +297,7 @@ Rectangle{
             if(valorCierre=="0"){
 
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1")
+                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
 
                 modeloLiquidaciones.cerrarLiquidacion(codigoLiquidacion,codigoVendedor)
 
