@@ -622,14 +622,18 @@ Rectangle {
             anchors.bottomMargin: 10
             anchors.left: cbListaEstadoDocumentosEnMantenimientoLiquidaciones.right
             anchors.leftMargin: 20
-            textoTitulo: "Años hacia atrás"
+            textoTitulo: "Tiempo hacia atrás:"
             modeloItems: modeloListaAniosHaciaAtrasEnDocumentosDeLiquidacion
-            codigoValorSeleccion: "1"
-            textoComboBox: "1 año hacia atrás"
+            codigoValorSeleccion: "0"
+            textoComboBox: "1 mes hacia atras"
             botonBuscarTextoVisible: false
 
             ListModel{
                 id:modeloListaAniosHaciaAtrasEnDocumentosDeLiquidacion
+                ListElement {
+                    codigoItem: "0"
+                    descripcionItem: "1 mes hacia atras"
+                }
                 ListElement {
                     codigoItem: "1"
                     descripcionItem: "1 año hacia atrás"

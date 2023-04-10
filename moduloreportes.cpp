@@ -1130,6 +1130,7 @@ QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QStri
 QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoReporte, QString _consultaSqlGraficas, bool _incluirGrafica,QString _consultaSqlCabezal) const {
 
 
+    //qDebug()<<_consultaSql;
 
 
     int cantidadDecimalesMontoReportes=func_configuracionReportes.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO").toInt(0);

@@ -359,14 +359,18 @@ Rectangle {
             ComboBoxGenerico {
                 id: cbListaCantidadAniosHaciaAtras
                 width: 170
-                textoTitulo: "Años hacia atrás"
+                textoTitulo: "Tiempo hacia atrás:"
                 modeloItems: modeloListaAniosHaciaAtras
-                codigoValorSeleccion: "1"
-                textoComboBox: "1 año hacia atrás"
+                codigoValorSeleccion: "0"
+                textoComboBox: "1 mes hacia atrás"
                 botonBuscarTextoVisible: false
 
                 ListModel{
                     id:modeloListaAniosHaciaAtras
+                    ListElement {
+                        codigoItem: "0"
+                        descripcionItem: "1 mes hacia atrás"
+                    }
                     ListElement {
                         codigoItem: "1"
                         descripcionItem: "1 año hacia atrás"

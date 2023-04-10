@@ -610,20 +610,37 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
         }
     }
 
+    QString mesHaciaAtras="";
+
+    QString anioHaciaAtras=" AND fechaHoraGuardadoDocumentoSQL > DATE_SUB(CURDATE(), INTERVAL "+_aniosHaciaAtras+" YEAR) ";
+
+
+    // Si el año hacia atras es 0, pongo el mes en 1 hacia atras
+    if(_aniosHaciaAtras=="0"){
+
+        mesHaciaAtras=" AND fechaHoraGuardadoDocumentoSQL > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)  ";
+        anioHaciaAtras="";
+
+    }
+
+
     if(conexion){
 
         QSqlQuery q;
         // Si es -1 el estado del documeto, cargo todos
         if(_estadoDocumento=="-1"){
             //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
-            q = Database::consultaSql("select * from VDocumentosLiquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"' AND YEAR(fechaHoraGuardadoDocumentoSQL) > (YEAR(NOW())-truncate("+_aniosHaciaAtras+",0))  order by fechaHoraGuardadoDocumentoSQL desc");
+            q = Database::consultaSql("select * from VDocumentosLiquidaciones  where codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"' "+anioHaciaAtras+"  "+mesHaciaAtras+"   order by fechaHoraGuardadoDocumentoSQL desc");
         }else{
             // Cargo el estado del documento que me pasaron
             //  q = Database::consultaSql("select * from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento where D.codigoEstadoDocumento='"+_estadoDocumento+"'   and   D.codigoLiquidacion='"+_codigoLiquidacion+"' and D.codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  order by D.fechaHoraGuardadoDocumentoSQL desc");
-            q = Database::consultaSql("select * from VDocumentosLiquidaciones where codigoEstadoDocumento='"+_estadoDocumento+"'   and   codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  AND YEAR(fechaHoraGuardadoDocumentoSQL) > (YEAR(NOW())-truncate("+_aniosHaciaAtras+",0))  order by fechaHoraGuardadoDocumentoSQL desc");
+            q = Database::consultaSql("select * from VDocumentosLiquidaciones where codigoEstadoDocumento='"+_estadoDocumento+"'   and   codigoLiquidacion='"+_codigoLiquidacion+"' and codigoVendedorLiquidacion='"+_codigoVendedorLiquidacion+"' and codigoPerfil='"+_codigoPerfil+"'  "+anioHaciaAtras+"  "+mesHaciaAtras+"  order by fechaHoraGuardadoDocumentoSQL desc");
         }
 
 
+
+
+        qDebug()<< q.lastQuery();
 
         QSqlRecord rec = q.record();
 
@@ -695,9 +712,23 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
         }
     }
 
+
+
+
     if(conexion){
 
-        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"'  AND YEAR(D.fechaHoraGuardadoDocumentoSQL) > (YEAR(NOW())-truncate("+_aniosHaciaAtras+",0))   group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaHoraGuardadoDocumentoSQL desc");
+        QString mesHaciaAtras="";
+        QString anioHaciaAtras=" AND fechaHoraGuardadoDocumentoSQL > DATE_SUB(CURDATE(), INTERVAL "+_aniosHaciaAtras+" YEAR) ";
+
+        // Si el año hacia atras es 0, pongo el mes en 1 hacia atras
+        if(_aniosHaciaAtras=="0"){
+            mesHaciaAtras=" AND fechaHoraGuardadoDocumentoSQL > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)  ";
+            anioHaciaAtras="";
+
+        }
+
+
+        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"'   "+anioHaciaAtras+" "+mesHaciaAtras+"   group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaHoraGuardadoDocumentoSQL desc");
         QSqlRecord rec = q.record();
 
 

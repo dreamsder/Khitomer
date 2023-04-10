@@ -2028,8 +2028,11 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 429:
             if(!impactoCambioEnBD("insert into Configuracion values('CANTIDAD_ANIOS_DOCUMENTOS_EN_MANTENIMIENTO','20','Indica la cantidad de años hacia atras que se mostraran documentos en los mantenimientos y liquidaciones');","430")){
                 _iterador=false; return false; } break;
+        case 430:
+            if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql`='select   concat(DOC.codigoDocumento,\\' - \\',TDOC.descripcionTipoDocumento,\\' (\\',DOC.fechaEmisionDocumento,\\') - CFE: \\',DOC.cae_numeroCae,\\'(\\',DOC.cae_serie,\\')\\' )\\'Documento (Fecha)\\', sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'Total $\\',  sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'Total U$S\\', CLI.rut\\'RUT\\',DOC.codigoDocumento\\'#Documento\\', DOC.fechaEmisionDocumento\\'Fecha\\',concat(DOC.codigoDocumento,\\'-\\',DOC.codigoTipoDocumento,\\'-\\',DOC.serieDocumento)\\'\\'     from  Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\') and TDOC.esDocumentoDeVenta=\\'1\\'  and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\'  group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento;' WHERE `codigoReporte`='38';","431")){
+                _iterador=false; return false; } break;
 
-            //;
+            //
 
 
 
