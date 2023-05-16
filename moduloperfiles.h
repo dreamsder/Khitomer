@@ -57,10 +57,7 @@ public:
                          ,const QString &permiteAutorizarAnulaciones
                          ,const QString &permiteExportarAPDF
                          ,const QString &permiteReimprimirFacturas
-                         ,const QString &permiteCambioRapidoDePrecios
-
-
-                         ,
+                         ,const QString &permiteCambioRapidoDePrecios,
                          const QString &permiteUsarMenuAvanzadoConfiguraciones,
                          const QString &permiteUsarMenuAvanzadoIvas,
                          const QString &permiteUsarMenuAvanzadoTiposDeDocumentos,
@@ -72,30 +69,20 @@ public:
                          const QString &permiteUsarMenuAvanzadoMonedas,
                          const QString &permiteUsarMenuAvanzadoPermisos,
                          const QString &permiteUsarMenuAvanzadoUsuarios,
-
                          const QString &permiteUsarMenuAvanzadoFacturaElectronica,
                          const QString &permiteUsarMenuAvanzadoLogDelSistema,
                          const QString &permiteUsarMenuAvanzadoGarantia,
                          const QString &permiteUsarPromociones
-
-
-
-
-
-
-
                          );
 
     int codigoPerfil() const;
     QString descripcionPerfil() const;
-
     QString permiteUsarLiquidaciones() const;
     QString permiteUsarFacturacion() const;
     QString permiteUsarArticulos() const;
     QString permiteUsarListaPrecios() const;
     QString permiteUsarClientes() const;
     QString permiteUsarMenuAvanzado() const;
-
     QString permiteUsarDocumentos() const;
     QString permiteUsarReportes() const;
     QString permiteUsarCuentaCorriente() const;
@@ -129,21 +116,15 @@ public:
     QString permiteUsarMenuAvanzadoMonedas() const;
     QString permiteUsarMenuAvanzadoPermisos() const;
     QString permiteUsarMenuAvanzadoUsuarios() const;
-
     QString permiteUsarMenuAvanzadoFacturaElectronica() const;
     QString permiteUsarMenuAvanzadoLogDelSistema() const;
     QString permiteUsarMenuAvanzadoGarantia() const;
     QString permiteUsarPromociones() const;
 
 
-
-
-
-
 private:
     int m_codigoPerfil;
     QString m_descripcionPerfil;
-
     QString m_permiteUsarLiquidaciones;
     QString m_permiteUsarFacturacion;
     QString m_permiteUsarArticulos;

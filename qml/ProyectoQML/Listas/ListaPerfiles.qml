@@ -70,230 +70,238 @@ Rectangle{
             txtDescripcionPerfil.textoInputBox=descripcionPerfil
             menuPermisos.cargarTipoDocumentos(codigoPerfil)
 
-            if(permiteUsarClientes==0){
+            if(permiteUsarClientes==="0"){
                 cbxpermiteUsarClientes.setActivo(false)
             }else{
                 cbxpermiteUsarClientes.setActivo(true)
             }
 
-            if(permiteCrearClientes==0){
+            if(permiteCrearClientes==="0"){
                 cbxpermiteCrearClientes.setActivo(false)
             }else{
                 cbxpermiteCrearClientes.setActivo(true)
             }
 
-            if(permiteBorrarClientes==0){
+
+            console.log(permiteBorrarClientes);
+            console.log(typeof permiteBorrarClientes);
+
+            if(permiteBorrarClientes==="0"){
                 cbxpermiteBorrarClientes.setActivo(false)
             }else{
                 cbxpermiteBorrarClientes.setActivo(true)
             }
 
-            if(permiteUsarArticulos==0){
+            if(permiteUsarArticulos==="0"){
                 cbxpermiteUsarArticulos.setActivo(false)
             }else{
                 cbxpermiteUsarArticulos.setActivo(true)
             }
 
-            if(permiteUsarArticulos==0){
+            if(permiteUsarArticulos==="0"){
                 cbxpermiteUsarArticulos.setActivo(false)
             }else{
                 cbxpermiteUsarArticulos.setActivo(true)
             }
 
-            if(permiteCrearArticulos==0){
+            if(permiteCrearArticulos==="0"){
                 cbxpermiteCrearArticulos.setActivo(false)
             }else{
                 cbxpermiteCrearArticulos.setActivo(true)
             }
 
-            if(permiteBorrarArticulos==0){
+            if(permiteBorrarArticulos==="0"){
                 cbxpermiteBorrarArticulos.setActivo(false)
             }else{
                 cbxpermiteBorrarArticulos.setActivo(true)
             }
 
-            if(permiteUsarFacturacion==0){
+            if(permiteUsarFacturacion==="0"){
                 cbxpermiteUsarFacturacion.setActivo(false)
             }else{
                 cbxpermiteUsarFacturacion.setActivo(true)
             }
 
-            if(permiteCrearFacturas==0){
+            if(permiteCrearFacturas==="0"){
                 cbxpermiteCrearFacturas.setActivo(false)
             }else{
                 cbxpermiteCrearFacturas.setActivo(true)
             }
 
-            if(permiteBorrarFacturas==0){
+            if(permiteBorrarFacturas==="0"){
                 cbxpermiteBorrarFacturas.setActivo(false)
             }else{
                 cbxpermiteBorrarFacturas.setActivo(true)
             }
 
-            if(permiteAnularFacturas==0){
+            if(permiteAnularFacturas==="0"){
                 cbxpermiteAnularFacturas.setActivo(false)
             }else{
                 cbxpermiteAnularFacturas.setActivo(true)
             }
-            if(permiteReimprimirFacturas==0){
+
+            console.log(permiteReimprimirFacturas);
+            console.log(typeof permiteReimprimirFacturas);
+
+            if(permiteReimprimirFacturas==="0"){
                 cbxpermiteReimprimirFacturas.setActivo(false)
             }else{
                 cbxpermiteReimprimirFacturas.setActivo(true)
             }
 
-            if(permiteAutorizarAnulaciones==0){
+            if(permiteAutorizarAnulaciones==="0"){
                 cbxpermiteAutorizarAnulaciones.setActivo(false)
             }else{
                 cbxpermiteAutorizarAnulaciones.setActivo(true)
             }
 
-            if(permiteAutorizarDescuentosTotal==0){
+            if(permiteAutorizarDescuentosTotal==="0"){
                 cbxpermiteAutorizarDescuentoTotal.setActivo(false)
             }else{
                 cbxpermiteAutorizarDescuentoTotal.setActivo(true)
             }
 
-            if(permiteAutorizarDescuentosArticulo==0){
+            if(permiteAutorizarDescuentosArticulo==="0"){
                 cbxpermiteAutorizarDescuentoItem.setActivo(false)
             }else{
                 cbxpermiteAutorizarDescuentoItem.setActivo(true)
             }
 
-            if(permiteUsarLiquidaciones==0){
+            if(permiteUsarLiquidaciones==="0"){
                 cbxpermiteUsarLiquidaciones.setActivo(false)
             }else{
                 cbxpermiteUsarLiquidaciones.setActivo(true)
             }
 
-            if(permiteCrearLiquidaciones==0){
+            if(permiteCrearLiquidaciones==="0"){
                 cbxpermiteCrearLiquidaciones.setActivo(false)
             }else{
                 cbxpermiteCrearLiquidaciones.setActivo(true)
             }
 
-            if(permiteBorrarLiquidaciones==0){
+            if(permiteBorrarLiquidaciones==="0"){
                 cbxpermiteBorrarLiquidaciones.setActivo(false)
             }else{
                 cbxpermiteBorrarLiquidaciones.setActivo(true)
             }
 
-            if(permiteCerrarLiquidaciones==0){
+            if(permiteCerrarLiquidaciones==="0"){
                 cbxpermiteCerrarLiquidaciones.setActivo(false)
             }else{
                 cbxpermiteCerrarLiquidaciones.setActivo(true)
             }
 
-            if(permiteAutorizarCierreLiquidaciones==0){
+            if(permiteAutorizarCierreLiquidaciones==="0"){
                 cbxpermiteAutorizarCierreLiquidaciones.setActivo(false)
             }else{
                 cbxpermiteAutorizarCierreLiquidaciones.setActivo(true)
             }
 
-            if(permiteUsarListaPrecios==0){
+            if(permiteUsarListaPrecios==="0"){
                 cbxpermiteUsarListaPrecios.setActivo(false)
             }else{
                 cbxpermiteUsarListaPrecios.setActivo(true)
             }
 
-            if(permiteCrearListaDePrecios==0){
+            if(permiteCrearListaDePrecios==="0"){
                 cbxpermiteCrearListaDePrecios.setActivo(false)
             }else{
                 cbxpermiteCrearListaDePrecios.setActivo(true)
             }
 
-            if(permiteBorrarListaDePrecios==0){
+            if(permiteBorrarListaDePrecios==="0"){
                 cbxpermiteBorrarListaDePrecios.setActivo(false)
             }else{
                 cbxpermiteBorrarListaDePrecios.setActivo(true)
             }
 
-            if(permiteUsarReportes==0){
+            if(permiteUsarReportes==="0"){
                 cbxpermiteUsarReportes.setActivo(false)
             }else{
                 cbxpermiteUsarReportes.setActivo(true)
             }
 
-            if(permiteExportarAPDF==0){
+            if(permiteExportarAPDF==="0"){
                 cbxpermiteExportarAPDF.setActivo(false)
             }else{
                 cbxpermiteExportarAPDF.setActivo(true)
             }
 
-            if(permiteUsarMenuAvanzado==0){
+            if(permiteUsarMenuAvanzado==="0"){
                 cbxpermiteUsarMenuAdministracion.setActivo(false)
             }else{
                 cbxpermiteUsarMenuAdministracion.setActivo(true)
             }
 
-            if(permiteUsarDocumentos==0){
+            if(permiteUsarDocumentos==="0"){
                 cbxpermiteUsarDocumentos.setActivo(false)
             }else{
                 cbxpermiteUsarDocumentos.setActivo(true)
             }
-            if(permiteUsarCuentaCorriente==0){
+            if(permiteUsarCuentaCorriente==="0"){
                 cbxpermiteUsarCuentaCorriente.setActivo(false)
             }else{
                 cbxpermiteUsarCuentaCorriente.setActivo(true)
             }
-            if(permiteCambioRapidoDePrecios==0){
+            if(permiteCambioRapidoDePrecios==="0"){
                 cbxpermiteCargaRapidaDePrecioListaPrecio.setActivo(false)
             }else{
                 cbxpermiteCargaRapidaDePrecioListaPrecio.setActivo(true)
             }
 
 
-            if(permiteUsarMenuAvanzadoUsuarios==0){
+            if(permiteUsarMenuAvanzadoUsuarios==="0"){
                 cbxAccedeAlMenuUsuarios.setActivo(false)
             }else{
                 cbxAccedeAlMenuUsuarios.setActivo(true)
             }
 
-            if(permiteUsarMenuAvanzadoPermisos==0){
+            if(permiteUsarMenuAvanzadoPermisos==="0"){
                 cbxAccedeAlMenuPermisos.setActivo(false)
             }else{
                 cbxAccedeAlMenuPermisos.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoMonedas==0){
+            if(permiteUsarMenuAvanzadoMonedas==="0"){
                 cbxAccedeAlMenuMonedas.setActivo(false)
             }else{
                 cbxAccedeAlMenuMonedas.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoRubros==0){
+            if(permiteUsarMenuAvanzadoRubros==="0"){
                 cbxAccedeAlMenuRubros.setActivo(false)
             }else{
                 cbxAccedeAlMenuRubros.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoCuentasBancarias==0){
+            if(permiteUsarMenuAvanzadoCuentasBancarias==="0"){
                 cbxAccedeAlMenuCuentasBancarias.setActivo(false)
             }else{
                 cbxAccedeAlMenuCuentasBancarias.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoPagoDeFinacieras==0){
+            if(permiteUsarMenuAvanzadoPagoDeFinacieras==="0"){
                 cbxAccedeAlMenuPagoDeFinacieras.setActivo(false)
             }else{
                 cbxAccedeAlMenuPagoDeFinacieras.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoBancos==0){
+            if(permiteUsarMenuAvanzadoBancos==="0"){
                 cbxAccedeAlMenuBancos.setActivo(false)
             }else{
                 cbxAccedeAlMenuBancos.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoLocalidades==0){
+            if(permiteUsarMenuAvanzadoLocalidades==="0"){
                 cbxAccedeAlMenuLocalidades.setActivo(false)
             }else{
                 cbxAccedeAlMenuLocalidades.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoTiposDeDocumentos==0){
+            if(permiteUsarMenuAvanzadoTiposDeDocumentos==="0"){
                 cbxAccedeAlMenuTiposDeDocumentos.setActivo(false)
             }else{
                 cbxAccedeAlMenuTiposDeDocumentos.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoIvas==0){
+            if(permiteUsarMenuAvanzadoIvas==="0"){
                 cbxAccedeAlMenuIvas.setActivo(false)
             }else{
                 cbxAccedeAlMenuIvas.setActivo(true)
             }
-            if(permiteUsarMenuAvanzadoConfiguraciones==0){
+            if(permiteUsarMenuAvanzadoConfiguraciones==="0"){
                 cbxAccedeAlMenuConfiguraciones.setActivo(false)
             }else{
                 cbxAccedeAlMenuConfiguraciones.setActivo(true)

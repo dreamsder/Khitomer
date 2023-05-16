@@ -233,6 +233,7 @@ public:
     Q_INVOKABLE QString retornaDirectorioJs_highcharts_js() const;
     Q_INVOKABLE QString retornaDirectorioJs_modules_exporting_js() const;
 
+    Q_INVOKABLE QString retornaDirectorioReporteCSV()const;
 
 
 
@@ -245,6 +246,8 @@ public:
     QString totalizoContando(QSqlQuery ,int ) const;
 
     Q_INVOKABLE bool imprimirReporteEnPDF(QString) const;
+
+    Q_INVOKABLE QString generarCSV(QString sqlConsulta, QString, QString, QString fecha) const;
 
     Q_INVOKABLE QString retornaSqlReporte(QString) const;
     Q_INVOKABLE QString retornaSqlReporteGraficas(QString) const;

@@ -475,6 +475,7 @@ Rectangle {
             ListView {
                 id: listaDeDocumentosFiltrados
                 clip: true
+                cacheBuffer: 5000
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left

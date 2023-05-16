@@ -82,7 +82,7 @@ Rectangle {
 
                     var valorArticuloInterno=modeloArticulos.existeArticulo(txtCodigoArticulo.textoInputBox.trim());
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("codigoArticulo=",valorArticuloInterno,0)
+                    modeloArticulos.buscarArticulo("AR.codigoArticulo=",valorArticuloInterno,0)
 
                     if(valorArticuloInterno!=""){
                         txtCodigoArticulo.textoInputBox=valorArticuloInterno
@@ -101,7 +101,7 @@ Rectangle {
                     if(valorArticuloInterno!=""){
                         txtCodigoArticulo.textoInputBox=valorArticuloInterno
                         modeloArticulos.clearArticulos()
-                        modeloArticulos.buscarArticulo("codigoArticulo=",valorArticuloInterno,0)
+                        modeloArticulos.buscarArticulo("AR.codigoArticulo=",valorArticuloInterno,0)
 
                         listaDeArticulos.currentIndex=0;
 
@@ -126,7 +126,7 @@ Rectangle {
                 onClicEnBusqueda: {
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("descripcionArticulo rlike",txtDescripcionArticulo.textoInputBox.trim(),0)
+                    modeloArticulos.buscarArticulo("AR.descripcionArticulo rlike",txtDescripcionArticulo.textoInputBox.trim(),0)
 
                     listaDeArticulos.currentIndex=0;
                 }
@@ -147,7 +147,7 @@ Rectangle {
                 z:111
                 onClicEnBusqueda: {
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("codigoProveedor =",txtProveedorArticulo.codigoValorSeleccion.toString(),0)
+                    modeloArticulos.buscarArticulo("AR.codigoProveedor =",txtProveedorArticulo.codigoValorSeleccion.toString(),0)
 
                     listaDeArticulos.currentIndex=0;
                 }
@@ -169,7 +169,7 @@ Rectangle {
                 visible: modeloControlesMantenimientos.retornaValorMantenimiento("articulosUsaTipoIVA")
                 onClicEnBusqueda: {
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("codigoIva =",txtListaDeIvas.codigoValorSeleccion.trim(),0)
+                    modeloArticulos.buscarArticulo("AR.codigoIva =",txtListaDeIvas.codigoValorSeleccion.trim(),0)
 
                     listaDeArticulos.currentIndex=0;
                 }
@@ -189,7 +189,7 @@ Rectangle {
                 visible: modeloControlesMantenimientos.retornaValorMantenimiento("articulosUsaMoneda")
                 onClicEnBusqueda: {
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("codigoMoneda =",txtMonedaArticulo.codigoValorSeleccion.trim(),0)
+                    modeloArticulos.buscarArticulo("AR.codigoMoneda =",txtMonedaArticulo.codigoValorSeleccion.trim(),0)
 
                     listaDeArticulos.currentIndex=0;
                 }
@@ -217,7 +217,7 @@ Rectangle {
                 onClicEnBusqueda: {
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("descripcionExtendida rlike",txtDescripcionExtendidaArticulo.textoInputBox.trim(),0)
+                    modeloArticulos.buscarArticulo("AR.descripcionExtendida rlike",txtDescripcionExtendidaArticulo.textoInputBox.trim(),0)
 
                     listaDeArticulos.currentIndex=0;
                 }
@@ -322,7 +322,7 @@ Rectangle {
                 onClicEnBusqueda: {
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("cantidadMinimaStock =",txtCantidadMinimaStock.textoInputBox.trim(),0)
+                    modeloArticulos.buscarArticulo("AR.cantidadMinimaStock =",txtCantidadMinimaStock.textoInputBox.trim(),0)
                     listaDeArticulos.currentIndex=0;
                 }
             }
@@ -362,7 +362,7 @@ Rectangle {
 
                 onClicEnBusqueda: {
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("codigoSubRubro =",cbxListaSubRubrosArticulos.codigoValorSeleccion,0)
+                    modeloArticulos.buscarArticulo("AR.codigoSubRubro =",cbxListaSubRubrosArticulos.codigoValorSeleccion,0)
                     listaDeArticulos.currentIndex=0;
                 }
 
@@ -393,7 +393,7 @@ Rectangle {
                         _activo="1"
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo("activo =",_activo,0)
+                    modeloArticulos.buscarArticulo("AR.activo =",_activo,0)
                     listaDeArticulos.currentIndex=0;
 
                 }
@@ -428,6 +428,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.top: parent.top
+                cacheBuffer: 5000
                 anchors.bottomMargin: 25
                 boundsBehavior: Flickable.DragAndOvershootBounds
                 highlightFollowsCurrentItem: true
@@ -665,33 +666,33 @@ Rectangle {
                 var consultaSql="";
 
                if(txtCodigoArticulo.textoInputBox.trim()!=""){
-                    consultaSql+=" codigoArticulo = '"+txtCodigoArticulo.textoInputBox.trim()+"' and ";
+                    consultaSql+=" AR.codigoArticulo = '"+txtCodigoArticulo.textoInputBox.trim()+"' and ";
                 }
                 if(txtDescripcionArticulo.textoInputBox.trim()!=""){
-                    consultaSql+=" descripcionArticulo rlike '"+txtDescripcionArticulo.textoInputBox.trim()+"' and "
+                    consultaSql+=" AR.descripcionArticulo rlike '"+txtDescripcionArticulo.textoInputBox.trim()+"' and "
                 }
                 if(txtProveedorArticulo.codigoValorSeleccion.trim()!="" && txtProveedorArticulo.codigoValorSeleccion.trim()!='-1'){
-                    consultaSql+=" codigoProveedor = '"+txtProveedorArticulo.codigoValorSeleccion.trim()+"' and "
+                    consultaSql+=" AR.codigoProveedor = '"+txtProveedorArticulo.codigoValorSeleccion.trim()+"' and "
                }
                 if(txtListaDeIvas.codigoValorSeleccion.trim()!="" && txtListaDeIvas.codigoValorSeleccion.trim()!="-1"){
-                    consultaSql+=" codigoIva = '"+txtListaDeIvas.codigoValorSeleccion.trim()+"' and "
+                    consultaSql+=" AR.codigoIva = '"+txtListaDeIvas.codigoValorSeleccion.trim()+"' and "
                 }
                 if(txtMonedaArticulo.codigoValorSeleccion.trim()!="" && txtMonedaArticulo.codigoValorSeleccion.trim()!="-1"){
-                    consultaSql+=" codigoMoneda = '"+txtMonedaArticulo.codigoValorSeleccion.trim()+"' and "
+                    consultaSql+=" AR.codigoMoneda = '"+txtMonedaArticulo.codigoValorSeleccion.trim()+"' and "
                 }
                 if(txtDescripcionExtendidaArticulo.textoInputBox.trim()!=""){
-                    consultaSql+=" descripcionExtendida rlike '"+txtDescripcionExtendidaArticulo.textoInputBox.trim()+"' and "
+                    consultaSql+=" AR.descripcionExtendida rlike '"+txtDescripcionExtendidaArticulo.textoInputBox.trim()+"' and "
                 }
                 if(txtCantidadMinimaStock.textoInputBox.trim()!=""){
-                    consultaSql+=" cantidadMinimaStock = '"+txtCantidadMinimaStock.textoInputBox.trim()+"' and "
+                    consultaSql+=" AR.cantidadMinimaStock = '"+txtCantidadMinimaStock.textoInputBox.trim()+"' and "
                 }
                 if(cbxListaSubRubrosArticulos.codigoValorSeleccion.trim()!="" && cbxListaSubRubrosArticulos.codigoValorSeleccion.trim()!="-1"){
-                    consultaSql+=" codigoSubRubro = '"+cbxListaSubRubrosArticulos.codigoValorSeleccion.trim()+"' and "
+                    consultaSql+=" AR.codigoSubRubro = '"+cbxListaSubRubrosArticulos.codigoValorSeleccion.trim()+"' and "
                 }
                 if(chbArticuloActivo.chekActivo){
-                    consultaSql+=" activo = '1' and "
+                    consultaSql+=" AR.activo = '1' and "
                 }if(!chbArticuloActivo.chekActivo){
-                    consultaSql+=" activo = '0' and "
+                    consultaSql+=" AR.activo = '0' and "
                 }
 
                 if(consultaSql!=""){
@@ -840,7 +841,7 @@ Rectangle {
 
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo(" codigoArticulo=",txtCodigoArticulo.textoInputBox.trim(),0)
+                    modeloArticulos.buscarArticulo(" AR.codigoArticulo=",txtCodigoArticulo.textoInputBox.trim(),0)
                     listaDeArticulos.currentIndex=0;
 
                     txtCodigoArticulo.textoInputBox=""
@@ -877,7 +878,7 @@ Rectangle {
                     modeloListaPrecioArticulos.actualizarArticuloDeListaPrecio(txtCodigoArticulo.textoInputBox.trim(),cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion,txtPrecioArticuloSeleccionado.textoInputBox.trim())
 
                     modeloArticulos.clearArticulos()
-                    modeloArticulos.buscarArticulo(" codigoArticulo=",txtCodigoArticulo.textoInputBox.trim(),0)
+                    modeloArticulos.buscarArticulo(" AR.codigoArticulo=",txtCodigoArticulo.textoInputBox.trim(),0)
                     listaDeArticulos.currentIndex=0;
 
 

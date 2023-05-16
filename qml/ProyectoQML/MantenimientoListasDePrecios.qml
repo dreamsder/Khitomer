@@ -506,9 +506,9 @@ Rectangle {
                 onClicEnBusquedaFiltro: {
                     var consultaSqlArticulo="";
                     if(!checkBoxActivoEstado){
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                     }else{
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                     }
 
                     modeloArticulosFiltrosListaPrecio1.clearArticulos()
@@ -1089,13 +1089,13 @@ Rectangle {
                     var consultaSql="";
 
                     if(txtCodigoArticuloOpcionesExtras.textoInputBox.trim()!=""){
-                        consultaSql+="codigoArticulo rlike '"+txtCodigoArticuloOpcionesExtras.textoInputBox.trim()+"' and ";
+                        consultaSql+=" AR.codigoArticulo rlike '"+txtCodigoArticuloOpcionesExtras.textoInputBox.trim()+"' and ";
                     }
                     if(txtDescripcionArticuloOpcionesExtras.textoInputBox.trim()!=""){
-                        consultaSql+="descripcionArticulo rlike '"+txtDescripcionArticuloOpcionesExtras.textoInputBox.trim()+"' and "
+                        consultaSql+=" AR.descripcionArticulo rlike '"+txtDescripcionArticuloOpcionesExtras.textoInputBox.trim()+"' and "
                     }
                     if(cbxListaProveedoresOpcionesExtra.codigoValorSeleccion.trim()!=""){
-                        consultaSql+="codigoProveedor rlike '"+cbxListaProveedoresOpcionesExtra.codigoValorSeleccion.trim()+"' and "
+                        consultaSql+=" AR.codigoProveedor rlike '"+cbxListaProveedoresOpcionesExtra.codigoValorSeleccion.trim()+"' and "
                     }
                     if(consultaSql!=""){
                         modeloArticulosOpcionesExtra.clearArticulos()
@@ -1152,7 +1152,7 @@ Rectangle {
 
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtra.clearArticulos()
-                        modeloArticulosOpcionesExtra.buscarArticulo("codigoArticulo rlike",txtCodigoArticuloOpcionesExtras.textoInputBox,0)
+                        modeloArticulosOpcionesExtra.buscarArticulo(" AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtras.textoInputBox,0)
                     }
                     onEnter: {
                         txtDescripcionArticuloOpcionesExtras.tomarElFoco()
@@ -1177,7 +1177,7 @@ Rectangle {
                     visible: true
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtra.clearArticulos()
-                        modeloArticulosOpcionesExtra.buscarArticulo("descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtras.textoInputBox,0)
+                        modeloArticulosOpcionesExtra.buscarArticulo(" AR.descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtras.textoInputBox,0)
                     }
                     onEnter: {
                         cbxListaProveedoresOpcionesExtra.tomarElFoco()
@@ -1199,7 +1199,7 @@ Rectangle {
                     z: 2
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtra.clearArticulos()
-                        modeloArticulosOpcionesExtra.buscarArticulo("codigoProveedor rlike",cbxListaProveedoresOpcionesExtra.codigoValorSeleccion.trim(),0)
+                        modeloArticulosOpcionesExtra.buscarArticulo(" AR.codigoProveedor rlike",cbxListaProveedoresOpcionesExtra.codigoValorSeleccion.trim(),0)
                     }
                     onEnter: {
 
@@ -1842,9 +1842,9 @@ Rectangle {
                     onClicEnBusquedaFiltro: {
                         var consultaSqlArticulo="";
                         if(!checkBoxActivoEstado){
-                            consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                            consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                         }else{
-                            consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                            consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                         }
 
                         modeloArticulosFiltrosListaPrecio2.clearArticulos()
@@ -1907,9 +1907,9 @@ Rectangle {
                     onClicEnBusquedaFiltro: {
                         var consultaSqlArticulo="";
                         if(!checkBoxActivoEstado){
-                            consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                            consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                         }else{
-                            consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                            consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                         }
 
                         modeloArticulosFiltrosListaPrecio3.clearArticulos()

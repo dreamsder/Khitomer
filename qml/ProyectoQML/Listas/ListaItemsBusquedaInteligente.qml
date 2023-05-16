@@ -327,9 +327,9 @@ Rectangle{
         onClicEnBusquedaFiltro: {
             var consultaSqlArticulo="";
             if(!checkBoxActivoEstado){
-                consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
             }else{
-                consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
             }
 
             modeloArticulosFiltrosBusquedaInteligente.clearArticulos()

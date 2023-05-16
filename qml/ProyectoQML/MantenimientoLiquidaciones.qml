@@ -134,6 +134,7 @@ Rectangle {
             ListView {
                 id: listaDeLiquidaciones
                 clip: true
+                cacheBuffer: 5000
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
@@ -277,6 +278,7 @@ Rectangle {
             ListView {
                 id: listaDeDocumentosEnLiquidaciones
                 clip: true
+                cacheBuffer: 5000
                 highlightRangeMode: ListView.NoHighlightRange
                 anchors.top: parent.top
                 boundsBehavior: Flickable.DragAndOvershootBounds

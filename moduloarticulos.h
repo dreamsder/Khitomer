@@ -30,7 +30,7 @@ class Articulo
 {
 public:
    Q_INVOKABLE Articulo(const QString &codigoArticulo,const QString &descripcionArticulo,const QString &descripcionExtendida,const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda,const QString &activo,const QString &usuarioAlta ,const QString &cantidadMinimaStock,const QString &codigoSubRubro,
-                        const int &codigoTipoGarantia
+                        const int &codigoTipoGarantia,const int &stockReal,const int &stockPrevisto
                         );
 
     QString codigoArticulo() const;
@@ -44,7 +44,8 @@ public:
     QString cantidadMinimaStock() const;
     QString codigoSubRubro() const;
     int codigoTipoGarantia() const;
-
+    int stockReal() const;
+    int stockPrevisto() const;
 
 private:
     QString m_codigoArticulo;
@@ -58,6 +59,8 @@ private:
     QString m_cantidadMinimaStock;
     QString m_codigoSubRubro;
     int m_codigoTipoGarantia;
+    int m_stockReal;
+    int m_stockPrevisto;
 
 };
 
@@ -76,7 +79,9 @@ public:
         UsuarioAltaRole,
         CantidadMinimaStockRole,
         CodigoSubRubroRole,
-        codigoTipoGarantiaRole
+        codigoTipoGarantiaRole,
+        stockRealRole,
+        stockPrevistoRole
     };
 
     ModuloArticulos(QObject *parent = 0);

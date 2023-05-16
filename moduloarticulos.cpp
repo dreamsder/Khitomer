@@ -52,14 +52,17 @@ ModuloArticulos::ModuloArticulos(QObject *parent)
     roles[CantidadMinimaStockRole] = "cantidadMinimaStock";
     roles[CodigoSubRubroRole] = "codigoSubRubro";
     roles[codigoTipoGarantiaRole] = "codigoTipoGarantia";
+    roles[stockRealRole] = "stockReal";
+    roles[stockPrevistoRole] = "stockPrevisto";
+
 
     setRoleNames(roles);
 
 }
 Articulo::Articulo(const QString &codigoArticulo, const QString &descripcionArticulo, const QString &descripcionExtendida, const QString &codigoProveedor,const int &codigoIva,const int &codigoMoneda, const QString &activo, const QString &usuarioAlta,
-                   const QString &cantidadMinimaStock, const QString &codigoSubRubro, const int &codigoTipoGarantia)
+                   const QString &cantidadMinimaStock, const QString &codigoSubRubro, const int &codigoTipoGarantia,const int &stockReal, const int &stockPrevisto)
     : m_codigoArticulo(codigoArticulo), m_descripcionArticulo(descripcionArticulo), m_descripcionExtendida(descripcionExtendida), m_codigoProveedor(codigoProveedor),m_codigoIva(codigoIva),m_codigoMoneda(codigoMoneda), m_activo(activo), m_usuarioAlta(usuarioAlta), m_cantidadMinimaStock(cantidadMinimaStock)
-    , m_codigoSubRubro(codigoSubRubro),m_codigoTipoGarantia(codigoTipoGarantia)
+    , m_codigoSubRubro(codigoSubRubro),m_codigoTipoGarantia(codigoTipoGarantia),m_stockReal(stockReal),m_stockPrevisto(stockPrevisto)
 {
 }
 
@@ -109,6 +112,14 @@ QString Articulo::codigoSubRubro() const
 int Articulo::codigoTipoGarantia() const{
     return m_codigoTipoGarantia;
 }
+int Articulo::stockReal() const{
+    return m_stockReal;
+}
+int Articulo::stockPrevisto() const{
+    return m_stockPrevisto;
+}
+
+
 
 void ModuloArticulos::addArticulo(const Articulo &articulo)
 {
@@ -140,10 +151,14 @@ void ModuloArticulos::buscarArticulo(QString campo, QString datoABuscar, int ord
         QSqlQuery q;
 
         if(orden==0){
-            q = Database::consultaSql("select * from Articulos join Clientes on Articulos.codigoProveedor=Clientes.codigoCliente and Articulos.tipoCliente=Clientes.tipoCliente where  Clientes.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by cast(codigoArticulo as unsigned) ");
+            //q = Database::consultaSql("select * from Articulos join Clientes on Articulos.codigoProveedor=Clientes.codigoCliente and Articulos.tipoCliente=Clientes.tipoCliente where  Clientes.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by cast(codigoArticulo as unsigned) ");
+            q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join vStockReal S on S.codigoArticulo=AR.codigoArticulo  left join vStockPrevisto SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by cast(AR.codigoArticulo as unsigned)");
         }else{
-            q = Database::consultaSql("select * from Articulos join Clientes on Articulos.codigoProveedor=Clientes.codigoCliente and Articulos.tipoCliente=Clientes.tipoCliente where  Clientes.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by Articulos.descripcionArticulo ");
+            //q = Database::consultaSql("select * from Articulos join Clientes on Articulos.codigoProveedor=Clientes.codigoCliente and Articulos.tipoCliente=Clientes.tipoCliente where  Clientes.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by Articulos.descripcionArticulo ");
+        q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join vStockReal S on S.codigoArticulo=AR.codigoArticulo  left join vStockPrevisto SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by AR.descripcionArticulo ");
+
         }
+
 
 
         QSqlRecord rec = q.record();
@@ -162,7 +177,9 @@ void ModuloArticulos::buscarArticulo(QString campo, QString datoABuscar, int ord
                                                       q.value(rec.indexOf("usuarioAlta")).toString(),
                                                       q.value(rec.indexOf("cantidadMinimaStock")).toString(),
                                                       q.value(rec.indexOf("codigoSubRubro")).toString(),
-                                                      q.value(rec.indexOf("codigoTipoGarantia")).toInt()
+                                                      q.value(rec.indexOf("codigoTipoGarantia")).toInt(),
+                                                      q.value(rec.indexOf("stockReal")).toInt(),
+                                                      q.value(rec.indexOf("stockPrevisto")).toInt()
 
                                                       ));
             }
@@ -223,6 +240,14 @@ QVariant ModuloArticulos::data(const QModelIndex & index, int role) const {
     else if (role == codigoTipoGarantiaRole){
         return articulo.codigoTipoGarantia();
     }
+    else if (role == stockRealRole){
+        return articulo.stockReal();
+    }
+    else if (role == stockPrevistoRole){
+        return articulo.stockPrevisto();
+    }
+
+
 
     return QVariant();
 }
@@ -585,8 +610,8 @@ qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) co
     if(conexion){
         QSqlQuery query(Database::connect());
         //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G','P') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-        //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-        if(query.exec("SELECT * from vStockPrevisto where codigoArticulo='"+_codigoArticulo+"' ")) {
+        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+       // if(query.exec("SELECT * from vStockPrevisto where codigoArticulo='"+_codigoArticulo+"' ")) {
 
             if(query.first()){
                 if(query.value(1).toString()!=""){
@@ -620,8 +645,8 @@ qlonglong ModuloArticulos::retornaStockTotalArticuloReal(QString _codigoArticulo
 
         QSqlQuery query(Database::connect());
 
-        //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-           if(query.exec("select * from vStockReal where codigoArticulo='"+_codigoArticulo+"' ")) {
+        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+          // if(query.exec("select * from vStockReal where codigoArticulo='"+_codigoArticulo+"' ")) {
             if(query.first()){
                 if(query.value(1).toString()!=""){
 

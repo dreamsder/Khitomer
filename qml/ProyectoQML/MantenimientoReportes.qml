@@ -92,6 +92,8 @@ Rectangle {
         cbxTipoProcedenciaCliente.visible=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaProcedenciaEnReporte")
 
 
+        btnGenerarCSV.enabled=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaGeneracionCSV")
+        cbxSeparadorCSV.visible=btnGenerarCSV.enabled
     }
 
 
@@ -348,6 +350,53 @@ Rectangle {
     }
 
 
+    function formatFecha(fecha) {
+        var meses = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+        var partes = fecha.split("-");
+        return meses[parseInt(partes[1], 10) - 1] + partes[0];
+    }
+
+
+
+    function generarReporteCSV(){
+
+
+
+        var consultaSqlPrevia=consultaSqlRealizada
+
+        var fechaReporte="";
+        if(txtFechaDesdeReporte.visible){
+            fechaReporte=txtFechaDesdeReporte.textoInputBox.trim();
+            fechaReporte=formatFecha(fechaReporte);
+        }
+
+
+        var estadoGeneracionReporte=modeloReportes.generarCSV(consultaSqlPrevia,codigoReporteRealizado,cbxSeparadorCSV.codigoValorSeleccion,fechaReporte);
+
+        txtMensajeInformacionReportes.visible=true
+        txtMensajeInformacionTimer.stop()
+        txtMensajeInformacionTimer.start()
+
+        if(estadoGeneracionReporte=="1"){
+
+            txtMensajeInformacionReportes.color="#2f71a0"
+            txtMensajeInformacionReportes.text="CSV generado correctamente."
+
+        }else if(estadoGeneracionReporte=="0"){
+
+            txtMensajeInformacionReportes.color="#d93e3e"
+            txtMensajeInformacionReportes.text="El CSV no se pudo generar por falta de datos."
+
+        }else if(estadoGeneracionReporte=="-1"){
+
+            txtMensajeInformacionReportes.color="#d93e3e"
+            txtMensajeInformacionReportes.text="ATENCION: No se pudo generar el CSV, comuniquese con el administrador."
+
+        }
+    }
+
+
+
     Rectangle {
         id: rectContenedorReportes
         x: 0
@@ -521,9 +570,9 @@ Rectangle {
 
                     var consultaSqlArticulo="";
                     if(!checkBoxActivoEstado){
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                     }else{
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                     }
 
                     modeloArticulosFiltros.clearArticulos()
@@ -741,9 +790,9 @@ Rectangle {
 
                     var consultaSqlArticulo="";
                     if(!checkBoxActivoEstado){
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                     }else{
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                     }
 
                     modeloArticulosFiltros.clearArticulos()
@@ -812,9 +861,9 @@ Rectangle {
 
                     var consultaSqlArticulo="";
                     if(!checkBoxActivoEstado){
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                     }else{
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                     }
 
                     modeloArticulosFiltros.clearArticulos()
@@ -864,7 +913,6 @@ Rectangle {
 
             TextInputSimple {
                 id: txtPrincipioCodigoCliente
-             //   width: 150
                 botonBorrarTextoVisible: true
                 textoInputBox: ""
                 largoMaximo: 9
@@ -885,14 +933,39 @@ Rectangle {
                 id: cbxTipoClasificacionCliente
                 width: 230
                 visible: false
-                textoTitulo: "Clasificacion cliente"
+                textoTitulo: "Clasificacion cliente:"
             }
 
             ComboBoxListaTipoProcedenciaCliente {
                 id: cbxTipoProcedenciaCliente
                 width: 230
                 visible: false
-                textoTitulo: "Procedencia cliente"
+                textoTitulo: "Procedencia cliente:"
+            }
+
+            ComboBoxGenerico {
+                id: cbxSeparadorCSV
+                width: 230
+                visible: false
+                textoTitulo: qsTr("Separador CSV:")
+                modeloItems: modeloModoSeparacionCSV
+                codigoValorSeleccion: ";"
+                textoComboBox: qsTr("Separado por punto y comas(;)")
+                ListModel{
+                    id:modeloModoSeparacionCSV
+                    ListElement {
+                        codigoItem: ","
+                        descripcionItem: "Separado por comas(,)"
+                    }
+                    ListElement {
+                        codigoItem: ";"
+                        descripcionItem: "Separado por punto y comas(;)"
+                    }
+                    ListElement {
+                        codigoItem: "#"
+                        descripcionItem: "Separado por numeral(#)"
+                    }
+                }
             }
 
         }
@@ -1135,6 +1208,9 @@ Rectangle {
             }
         }
 
+
+
+
         BotonPaletaSistema {
             id: btnGenerarPDF
             text: "Exportar PDF"
@@ -1150,6 +1226,7 @@ Rectangle {
             }
         }
 
+
         BotonPaletaSistema {
             id: btnImprimirEnImpresora
             x: -6
@@ -1158,11 +1235,28 @@ Rectangle {
             anchors.bottom: rectangle2.top
             anchors.rightMargin: 10
             anchors.bottomMargin: 10
-            anchors.right: btnGenerarXls.left
+            anchors.right: btnGenerarCSV.left
             onClicked: {
 
                 if(web_view1.url!="")
                     modeloReportes.imprimirReporteEnImpresora(cbListaImpresorasReportes.textoComboBox.trim())
+
+            }
+        }
+
+
+        BotonPaletaSistema {
+            id: btnGenerarCSV
+            text: "Exportar CSV"
+            enabled: false
+            anchors.right:  btnGenerarXls.left
+            anchors.rightMargin: 10
+            anchors.bottom: rectangle2.top
+            anchors.bottomMargin: 10
+            onClicked:{
+
+                if(web_view1.url!="")
+                    generarReporteCSV()
 
             }
         }

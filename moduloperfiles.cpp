@@ -84,51 +84,51 @@ ModuloPerfiles::ModuloPerfiles(QObject *parent)
 
 
 Perfiles::Perfiles(
-        const int &codigoPerfil,
-        const QString &descripcionPerfil,
-        const QString &permiteUsarLiquidaciones,
-        const QString &permiteUsarFacturacion,
-        const QString &permiteUsarArticulos,
-        const QString &permiteUsarListaPrecios,
-        const QString &permiteUsarClientes,
-        const QString &permiteUsarDocumentos,
-        const QString &permiteUsarReportes,
-        const QString &permiteUsarCuentaCorriente,
-        const QString &permiteUsarMenuAvanzado,
-        const QString &permiteExportarAPDF,
-        const QString &permiteCrearLiquidaciones,
-        const QString &permiteBorrarLiquidaciones,
-        const QString &permiteCerrarLiquidaciones,
-        const QString &permiteAutorizarCierreLiquidaciones,
-        const QString &permiteCrearFacturas,
-        const QString &permiteBorrarFacturas,
-        const QString &permiteAnularFacturas,
-        const QString &permiteReimprimirFacturas,
-        const QString &permiteCrearClientes,
-        const QString &permiteBorrarClientes,
-        const QString &permiteCrearArticulos,
-        const QString &permiteBorrarArticulos,
-        const QString &permiteCrearListaDePrecios,
-        const QString &permiteBorrarListaDePrecios,
-        const QString &permiteCambioRapidoDePrecios,
-        const QString &permiteAutorizarDescuentosArticulo,
-        const QString &permiteAutorizarDescuentosTotal,
-        const QString &permiteAutorizarAnulaciones,
-        const QString &permiteUsarMenuAvanzadoConfiguraciones,
-        const QString &permiteUsarMenuAvanzadoIvas,
-        const QString &permiteUsarMenuAvanzadoTiposDeDocumentos,
-        const QString &permiteUsarMenuAvanzadoLocalidades,
-        const QString &permiteUsarMenuAvanzadoBancos,
-        const QString &permiteUsarMenuAvanzadoPagoDeFinacieras,
-        const QString &permiteUsarMenuAvanzadoCuentasBancarias,
-        const QString &permiteUsarMenuAvanzadoRubros,
-        const QString &permiteUsarMenuAvanzadoMonedas,
-        const QString &permiteUsarMenuAvanzadoPermisos,
-        const QString &permiteUsarMenuAvanzadoUsuarios,
-        const QString &permiteUsarMenuAvanzadoFacturaElectronica,
-        const QString &permiteUsarMenuAvanzadoLogDelSistema,
-        const QString &permiteUsarMenuAvanzadoGarantia,
-        const QString &permiteUsarPromociones
+        const int &codigoPerfil
+                                 ,const QString &descripcionPerfil
+                                 ,const QString &permiteUsarLiquidaciones
+                                 ,const QString &permiteUsarFacturacion
+                                 ,const QString &permiteUsarArticulos
+                                 ,const QString &permiteUsarListaPrecios
+                                 ,const QString &permiteUsarClientes
+                                 ,const QString &permiteUsarMenuAvanzado
+                                 ,const QString &permiteUsarDocumentos
+                                 ,const QString &permiteUsarReportes
+                                 ,const QString &permiteUsarCuentaCorriente
+                                 ,const QString &permiteCrearLiquidaciones
+                                 ,const QString &permiteBorrarLiquidaciones
+                                 ,const QString &permiteCerrarLiquidaciones
+                                 ,const QString &permiteAutorizarCierreLiquidaciones
+                                 ,const QString &permiteCrearFacturas
+                                 ,const QString &permiteBorrarFacturas
+                                 ,const QString &permiteAnularFacturas
+                                 ,const QString &permiteCrearClientes
+                                 ,const QString &permiteBorrarClientes
+                                 ,const QString &permiteCrearArticulos
+                                 ,const QString &permiteBorrarArticulos
+                                 ,const QString &permiteCrearListaDePrecios
+                                 ,const QString &permiteBorrarListaDePrecios
+                                 ,const QString &permiteAutorizarDescuentosArticulo
+                                 ,const QString &permiteAutorizarDescuentosTotal
+                                 ,const QString &permiteAutorizarAnulaciones
+                                 ,const QString &permiteExportarAPDF
+                                 ,const QString &permiteReimprimirFacturas
+                                 ,const QString &permiteCambioRapidoDePrecios,
+                                 const QString &permiteUsarMenuAvanzadoConfiguraciones,
+                                 const QString &permiteUsarMenuAvanzadoIvas,
+                                 const QString &permiteUsarMenuAvanzadoTiposDeDocumentos,
+                                 const QString &permiteUsarMenuAvanzadoLocalidades,
+                                 const QString &permiteUsarMenuAvanzadoBancos,
+                                 const QString &permiteUsarMenuAvanzadoPagoDeFinacieras,
+                                 const QString &permiteUsarMenuAvanzadoCuentasBancarias,
+                                 const QString &permiteUsarMenuAvanzadoRubros,
+                                 const QString &permiteUsarMenuAvanzadoMonedas,
+                                 const QString &permiteUsarMenuAvanzadoPermisos,
+                                 const QString &permiteUsarMenuAvanzadoUsuarios,
+                                 const QString &permiteUsarMenuAvanzadoFacturaElectronica,
+                                 const QString &permiteUsarMenuAvanzadoLogDelSistema,
+                                 const QString &permiteUsarMenuAvanzadoGarantia,
+                                 const QString &permiteUsarPromociones
                    )
 
 
@@ -273,7 +273,10 @@ void ModuloPerfiles::agregarPerfil(const Perfiles &perfiles)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_Perfiles << perfiles;
+
     endInsertRows();
+
+
 }
 
 void ModuloPerfiles::limpiarListaPerfiles(){
@@ -299,17 +302,18 @@ void ModuloPerfiles::buscarPerfiles(QString campo, QString datoABuscar){
         ModuloPerfiles::reset();
         if(q.record().count()>0){
 
+
             while (q.next()){
 
-                ModuloPerfiles::agregarPerfil(Perfiles(q.value(rec.indexOf("codigoPerfil")).toInt(),
-                                                       q.value(rec.indexOf("descripcionPerfil")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarLiquidaciones")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarFacturacion")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarArticulos")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarListaPrecios")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarClientes")).toString(),
-                                                       q.value(rec.indexOf("permiteUsarMenuAvanzado")).toString(),
-
+                ModuloPerfiles::agregarPerfil(
+                            Perfiles(q.value(rec.indexOf("codigoPerfil")).toInt(),
+                                     q.value(rec.indexOf("descripcionPerfil")).toString(),
+                                     q.value(rec.indexOf("permiteUsarLiquidaciones")).toString(),
+                                     q.value(rec.indexOf("permiteUsarFacturacion")).toString(),
+                                     q.value(rec.indexOf("permiteUsarArticulos")).toString(),
+                                     q.value(rec.indexOf("permiteUsarListaPrecios")).toString(),
+                                     q.value(rec.indexOf("permiteUsarClientes")).toString(),
+                                     q.value(rec.indexOf("permiteUsarMenuAvanzado")).toString(),
                                                        q.value(rec.indexOf("permiteUsarDocumentos")).toString(),
                                                        q.value(rec.indexOf("permiteUsarReportes")).toString(),
                                                        q.value(rec.indexOf("permiteUsarCuentaCorriente")).toString(),
@@ -349,10 +353,6 @@ void ModuloPerfiles::buscarPerfiles(QString campo, QString datoABuscar){
                                                        q.value(rec.indexOf("permiteUsarMenuAvanzadoLogDelSistema")).toString(),
                                                        q.value(rec.indexOf("permiteUsarMenuAvanzadoGarantia")).toString(),
                                                        q.value(rec.indexOf("permiteUsarPromociones")).toString()
-
-
-
-
 
                                                        ));
             }
@@ -406,7 +406,12 @@ QVariant ModuloPerfiles::data(const QModelIndex & index, int role) const {
     else if (role == permiteAutorizarDescuentosTotalRole){ return perfiles.permiteAutorizarDescuentosTotal();}
     else if (role == permiteAutorizarAnulacionesRole){ return perfiles.permiteAutorizarAnulaciones();}
     else if (role == permiteExportarAPDFRole){ return perfiles.permiteExportarAPDF();}
-    else if (role == permiteReimprimirFacturasRole){ return perfiles.permiteReimprimirFacturas();}
+    else if (role == permiteReimprimirFacturasRole){
+
+
+        return perfiles.permiteReimprimirFacturas();
+
+    }
     else if (role == permiteCambioRapidoDePreciosRole){ return perfiles.permiteCambioRapidoDePrecios();}
 
 
@@ -520,68 +525,7 @@ QString ModuloPerfiles::retornaDescripcionPerfil(QString _codigoPerfil) const{
 
 bool ModuloPerfiles::retornaValorDePermiso(QString _codigoPerfil,QString _permiso) const{
 
-    /// QString valorPerfil=retornaCodigoPerfil(_idUsuario);
 
-    /*bool _valor=false;
-    for (int var = 0; var < m_Perfiles.size(); ++var) {
-        if(QString::number(m_Perfiles[var].codigoPerfil())==_codigoPerfil){
-            if(_permiso=="permiteUsarLiquidaciones"){if(m_Perfiles[var].permiteUsarLiquidaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarFacturacion"){if(m_Perfiles[var].permiteUsarFacturacion()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarArticulos"){if(m_Perfiles[var].permiteUsarArticulos()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarListaPrecios"){if(m_Perfiles[var].permiteUsarListaPrecios()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarClientes"){if(m_Perfiles[var].permiteUsarClientes()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzado"){if(m_Perfiles[var].permiteUsarMenuAvanzado()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarDocumentos"){if(m_Perfiles[var].permiteUsarDocumentos()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarReportes"){if(m_Perfiles[var].permiteUsarReportes()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarCuentaCorriente"){if(m_Perfiles[var].permiteUsarCuentaCorriente()=="1"){_valor=true;}}
-            if(_permiso=="permiteCrearLiquidaciones"){if(m_Perfiles[var].permiteCrearLiquidaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteBorrarLiquidaciones"){if(m_Perfiles[var].permiteBorrarLiquidaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteCerrarLiquidaciones"){if(m_Perfiles[var].permiteCerrarLiquidaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteAutorizarCierreLiquidaciones"){if(m_Perfiles[var].permiteAutorizarCierreLiquidaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteCrearFacturas"){if(m_Perfiles[var].permiteCrearFacturas()=="1"){_valor=true;}}
-            if(_permiso=="permiteBorrarFacturas"){if(m_Perfiles[var].permiteBorrarFacturas()=="1"){_valor=true;}}
-            if(_permiso=="permiteAnularFacturas"){if(m_Perfiles[var].permiteAnularFacturas()=="1"){_valor=true;}}
-            if(_permiso=="permiteCrearClientes"){if(m_Perfiles[var].permiteCrearClientes()=="1"){_valor=true;}}
-            if(_permiso=="permiteBorrarClientes"){if(m_Perfiles[var].permiteBorrarClientes()=="1"){_valor=true;}}
-            if(_permiso=="permiteCrearArticulos"){if(m_Perfiles[var].permiteCrearArticulos()=="1"){_valor=true;}}
-            if(_permiso=="permiteBorrarArticulos"){if(m_Perfiles[var].permiteBorrarArticulos()=="1"){_valor=true;}}
-            if(_permiso=="permiteCrearListaDePrecios"){if(m_Perfiles[var].permiteCrearListaDePrecios()=="1"){_valor=true;}}
-            if(_permiso=="permiteBorrarListaDePrecios"){if(m_Perfiles[var].permiteBorrarListaDePrecios()=="1"){_valor=true;}}
-            if(_permiso=="permiteAutorizarDescuentosArticulo"){if(m_Perfiles[var].permiteAutorizarDescuentosArticulo()=="1"){_valor=true;}}
-            if(_permiso=="permiteAutorizarDescuentosTotal"){if(m_Perfiles[var].permiteAutorizarDescuentosTotal()=="1"){_valor=true;}}
-            if(_permiso=="permiteAutorizarAnulaciones"){if(m_Perfiles[var].permiteAutorizarAnulaciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteExportarAPDF"){if(m_Perfiles[var].permiteExportarAPDF()=="1"){_valor=true;}}
-            if(_permiso=="permiteReimprimirFacturas"){if(m_Perfiles[var].permiteReimprimirFacturas()=="1"){_valor=true;}}
-            if(_permiso=="permiteCambioRapidoDePrecios"){if(m_Perfiles[var].permiteCambioRapidoDePrecios()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoConfiguraciones"){if(m_Perfiles[var].permiteUsarMenuAvanzadoConfiguraciones()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoIvas"){if(m_Perfiles[var].permiteUsarMenuAvanzadoIvas()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoTiposDeDocumentos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoTiposDeDocumentos()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoLocalidades"){if(m_Perfiles[var].permiteUsarMenuAvanzadoLocalidades()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoBancos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoBancos()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoPagoDeFinacieras"){if(m_Perfiles[var].permiteUsarMenuAvanzadoPagoDeFinacieras()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoCuentasBancarias"){if(m_Perfiles[var].permiteUsarMenuAvanzadoCuentasBancarias()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoRubros"){if(m_Perfiles[var].permiteUsarMenuAvanzadoRubros()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoMonedas"){if(m_Perfiles[var].permiteUsarMenuAvanzadoMonedas()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoPermisos"){if(m_Perfiles[var].permiteUsarMenuAvanzadoPermisos()=="1"){_valor=true;}}
-            if(_permiso=="permiteUsarMenuAvanzadoUsuarios"){if(m_Perfiles[var].permiteUsarMenuAvanzadoUsuarios()=="1"){_valor=true;}}
-
-
-
-            if(_permiso=="permiteUsarMenuAvanzadoFacturaElectronica"){if(m_Perfiles[var].permiteUsarMenuAvanzadoFacturaElectronica()=="1"){_valor=true;}}
-
-            if(_permiso=="permiteUsarMenuAvanzadoLogDelSistema"){if(m_Perfiles[var].permiteUsarMenuAvanzadoLogDelSistema()=="1"){_valor=true;}}
-
-            if(_permiso=="permiteUsarMenuAvanzadoGarantia"){if(m_Perfiles[var].permiteUsarMenuAvanzadoGarantia()=="1"){_valor=true;}}
-
-            if(_permiso=="permiteUsarPromociones"){if(m_Perfiles[var].permiteUsarPromociones()=="1"){_valor=true;}}
-
-
-
-        }
-    }
-
-
-    if(m_Perfiles.size()==0 && _valor==false){*/
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -780,6 +724,7 @@ int ModuloPerfiles::insertarPerfil(QString _codigoPerfil,QString _descripcionPer
                 if(query.value(0).toString()!=""){
 
                     if(query.exec("update PerfilesUsuarios set  descripcionPerfil='"+_descripcionPerfil+"',  permiteUsarLiquidaciones ='"+_permiteUsarLiquidaciones+"',  permiteUsarFacturacion ='"+_permiteUsarFacturacion+"',  permiteUsarArticulos ='"+_permiteUsarArticulos+"',  permiteUsarListaPrecios ='"+_permiteUsarListaPrecios+"',  permiteUsarClientes ='"+_permiteUsarClientes+"',  permiteUsarDocumentos ='"+_permiteUsarDocumentos+"',  permiteUsarReportes ='"+_permiteUsarReportes+"',  permiteUsarCuentaCorriente ='"+_permiteUsarCuentaCorriente+"',  permiteUsarMenuAvanzado ='"+_permiteUsarMenuAvanzado+"',  permiteExportarAPDF ='"+_permiteExportarAPDF+"',  permiteCrearLiquidaciones ='"+_permiteCrearLiquidaciones+"',  permiteBorrarLiquidaciones ='"+_permiteBorrarLiquidaciones+"',  permiteCerrarLiquidaciones ='"+_permiteCerrarLiquidaciones+"',  permiteAutorizarCierreLiquidaciones ='"+_permiteAutorizarCierreLiquidaciones+"',  permiteCrearFacturas ='"+_permiteCrearFacturas+"',  permiteBorrarFacturas ='"+_permiteBorrarFacturas+"',  permiteAnularFacturas ='"+_permiteAnularFacturas+"',  permiteCrearClientes ='"+_permiteCrearClientes+"',  permiteBorrarClientes ='"+_permiteBorrarClientes+"',  permiteCrearArticulos ='"+_permiteCrearArticulos+"',  permiteBorrarArticulos ='"+_permiteBorrarArticulos+"',  permiteCrearListaDePrecios ='"+_permiteCrearListaDePrecios+"',  permiteBorrarListaDePrecios ='"+_permiteBorrarListaDePrecios+"',  permiteAutorizarDescuentosArticulo ='"+_permiteAutorizarDescuentosArticulo+"',  permiteAutorizarDescuentosTotal ='"+_permiteAutorizarDescuentosTotal+"',  permiteAutorizarAnulaciones ='"+_permiteAutorizarAnulaciones+"',  permiteReimprimirFacturas ='"+_permiteReimprimirFacturas+"',  permiteCambioRapidoDePrecios ='"+_permiteCambioRapidoDePrecios+"' , permiteUsarMenuAvanzadoUsuarios ='"+AccedeAlMenuUsuarios+"'  , permiteUsarMenuAvanzadoPermisos ='"+AccedeAlMenuPermisos+"'  , permiteUsarMenuAvanzadoMonedas ='"+AccedeAlMenuMonedas+"', permiteUsarMenuAvanzadoRubros ='"+AccedeAlMenuRubros+"'  , permiteUsarMenuAvanzadoCuentasBancarias ='"+AccedeAlMenuCuentasBancarias+"'  , permiteUsarMenuAvanzadoPagoDeFinacieras ='"+AccedeAlMenuPagoDeFinacieras+"' , permiteUsarMenuAvanzadoBancos ='"+AccedeAlMenuBancos+"' , permiteUsarMenuAvanzadoLocalidades ='"+AccedeAlMenuLocalidades+"' , permiteUsarMenuAvanzadoTiposDeDocumentos ='"+AccedeAlMenuTiposDeDocumentos+"'  , permiteUsarMenuAvanzadoIvas ='"+AccedeAlMenuIvas+"' , permiteUsarMenuAvanzadoConfiguraciones ='"+AccedeAlMenuConfiguraciones+"'     where codigoPerfil='"+_codigoPerfil+"'")){
+
 
                         return 2;
 

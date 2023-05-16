@@ -199,7 +199,8 @@ FocusScope {
         Text {
             id: txtStockActual
             color: "#d93e3e"
-            text: "Stock previsto: "+modeloArticulos.retornaStockTotalArticulo(codigoArticulo)
+           // text: "Stock previsto: "+modeloArticulos.retornaStockTotalArticulo(codigoArticulo)
+            text:"Stock previsto:  "+stockPrevisto
             anchors.right: parent.right
             anchors.rightMargin: 20
             //

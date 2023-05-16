@@ -3513,9 +3513,9 @@ Rectangle {
 
                     var consultaSqlArticulo="";
                     if(!checkBoxActivoEstado){
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=";
                     }else{
-                        consultaSqlArticulo="  ((Clientes.razonSocial rlike '"+textoAFiltrar+"'  or Clientes.nombreCliente rlike '"+textoAFiltrar+"')  or codigoIva=(SELECT codigoIva FROM Ivas where descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or codigoMoneda=(SELECT codigoMoneda FROM Monedas where descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or descripcionExtendida rlike '"+textoAFiltrar+"' or descripcionArticulo rlike'"+textoAFiltrar+"') and Articulos.activo=0 or Articulos.activo=";
+                        consultaSqlArticulo="  ((CLI.razonSocial rlike '"+textoAFiltrar+"'  or CLI.nombreCliente rlike '"+textoAFiltrar+"')  or AR.codigoIva=(SELECT I.codigoIva FROM Ivas I where I.descripcionIva rlike '"+textoAFiltrar+"' limit 1)  or AR.codigoMoneda=(SELECT M.codigoMoneda FROM Monedas M where M.descripcionMoneda rlike '"+textoAFiltrar+"' limit 1) or AR.descripcionExtendida rlike '"+textoAFiltrar+"' or AR.descripcionArticulo rlike'"+textoAFiltrar+"') and AR.activo=0 or AR.activo=";
                     }
 
                     modeloArticulosFiltros.clearArticulos()
@@ -7844,7 +7844,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -7857,7 +7857,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -7882,7 +7882,7 @@ Rectangle {
                     colorDeTitulo: "#ffffff"
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim(),1)
+                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim(),1)
                     }
                     onEnter: {
                         cbxListaProveedoresOpcionesExtraFacturacion.tomarElFoco()
@@ -7904,7 +7904,7 @@ Rectangle {
                     z: 2
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("codigoProveedor rlike",cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim(),1)
+                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoProveedor rlike",cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim(),1)
                     }
                     onEnter: {
 
@@ -8310,16 +8310,16 @@ Rectangle {
                     var consultaSql="";
 
                     if(txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox.trim()!=""){
-                        consultaSql+=" codigoArticulo rlike '"+txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox.trim()+"' and ";
+                        consultaSql+=" AR.codigoArticulo rlike '"+txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox.trim()+"' and ";
                     }
                     if(txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim()!=""){
-                        consultaSql+=" descripcionArticulo rlike '"+txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim()+"' and "
+                        consultaSql+=" AR.descripcionArticulo rlike '"+txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim()+"' and "
                     }
                     if(cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim()!=""){
-                        consultaSql+=" codigoProveedor rlike '"+cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim()+"' and "
+                        consultaSql+=" AR.codigoProveedor rlike '"+cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim()+"' and "
                     }
                     if(!chbIncluirArticulosInactivos.chekActivo){
-                        consultaSql+=" activo=1  and "
+                        consultaSql+=" AR.activo=1  and "
                     }
 
                     if(consultaSql!=""){

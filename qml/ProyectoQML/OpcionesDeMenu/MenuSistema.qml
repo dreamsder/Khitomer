@@ -299,6 +299,9 @@ Rectangle {
         /// 1.17.13 :Se modifica la busqueda de stock previsto y real para que se consulte desde las tablas vistas: vStockReal vStockPrevisto
         ///         :Se agrega filtro por año y mes para el mantenimieto de documentos y las liquidaciones.
         /// 1.17.14 :Se corrige reporte de ventas detalladas.
+        /// 1.17.15 :Se optimiza la busqueda de stock.
+        /// 1.17.16 :Se arregla error en carga de perfiles.
+        ///         :Se incorpora reporte Formulario 2181 para DGI y se incorpora soporte para exportar reportes como CSV.
 
 
         Text {
