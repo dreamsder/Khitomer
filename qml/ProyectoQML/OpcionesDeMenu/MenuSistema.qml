@@ -302,7 +302,8 @@ Rectangle {
         /// 1.17.15 :Se optimiza la busqueda de stock.
         /// 1.17.16 :Se arregla error en carga de perfiles.
         ///         :Se incorpora reporte Formulario 2181 para DGI y se incorpora soporte para exportar reportes como CSV.
-
+        /// 1.17.17 :Se implementa nueva forma de cargar el stock real y previsto para hacer mas rapido el programa, por medio de tablas de sumario.
+        ///         :Se habilitan los event schedule en mysql.
 
         Text {
             id: txtCopyright

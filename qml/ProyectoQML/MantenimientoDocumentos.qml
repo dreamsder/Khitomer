@@ -74,7 +74,7 @@ Rectangle {
                 textoInputBox: ""
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtSerieDocumento.tomarElFoco()
@@ -94,7 +94,7 @@ Rectangle {
                 textoTitulo: "Serie:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtNumeroDocumentoCFE.tomarElFoco()
@@ -116,7 +116,7 @@ Rectangle {
                 textoInputBox: ""
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtNumeroLiquidacionDelDocumento.tomarElFoco()
@@ -138,7 +138,7 @@ Rectangle {
                 textoTitulo: "Num. liquidación:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtVendedorLiquidacionDelDocumento.tomarElFoco()
@@ -154,7 +154,7 @@ Rectangle {
                 z: 2
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtVendedorComisionaDelDocumento.tomarElFoco()
@@ -172,7 +172,7 @@ Rectangle {
                 z: 2
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtFechaDocumento.tomarElFoco()
@@ -191,7 +191,7 @@ Rectangle {
                 textoTitulo: "Fecha emision:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtCodigoClienteDocumento.tomarElFoco()
@@ -218,7 +218,7 @@ Rectangle {
                 textoTitulo: "Cliente:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtTipoClienteDocumento.tomarElFoco()
@@ -232,7 +232,7 @@ Rectangle {
                 textoTitulo: "Tipo de Cliente:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtCodigoArticuloEnDocumento.tomarElFoco()
@@ -249,7 +249,7 @@ Rectangle {
                 textoTitulo: "Artículo en documento:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:cbListaTipoDeDocumentosEnMantenimiento.tomarElFoco()
@@ -265,7 +265,7 @@ Rectangle {
                 textoTitulo: "Tipos de documentos:"
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
             }
@@ -281,7 +281,7 @@ Rectangle {
 
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
                 onEnter:txtNumeroDocumento.tomarElFoco()
@@ -349,7 +349,7 @@ Rectangle {
 
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                    modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
             }
@@ -421,9 +421,9 @@ Rectangle {
 
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
                     if(chekActivo){
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     }else{
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     }
                     listaDeDocumentosFiltrados.currentIndex=0
 
@@ -441,9 +441,9 @@ Rectangle {
                 onClicEnBusqueda: {
                     modeloDocumentosMantenimiento.limpiarListaDocumentos()
                     if(chekActivo){
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     }else{
-                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                     }
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
@@ -893,7 +893,7 @@ Rectangle {
                 chbDocumentoSinLiquidacion.setActivo(false)
                 chbEsDocumentoWeb.setActivo(false)
                 modeloDocumentosMantenimiento.limpiarListaDocumentos()
-                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("-1","-1","null",cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
+                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("-1","-1","null","-1")
                 listaDeDocumentosFiltrados.currentIndex=0
             }
         }

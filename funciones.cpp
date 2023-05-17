@@ -2037,8 +2037,24 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 432:
             if(!impactoCambioEnBD("INSERT INTO `Reportes` (`codigoReporte`, `codigoMenuReporte`, `descripcionReporte`, `consultaSql`, `consultaSqlGraficas`, `consultaSqlCabezal`, `utilizaCodigoCliente`, `utilizaCodigoProveedor`, `utilizaFechaDesde`, `utilizaFechaHasta`, `utilizaGeneracionCSV`) VALUES ('82', '13', 'Formulario 2181', 'select  sub.RUT_INFORMANTE, sub.Formulario, sub.PERIODO, sub.RUT_INFORMADO, sub.FacturaAAAAMM, sub.Linea, CASE WHEN SIGN(sub.Importe) = -1 THEN concat(\\'-\\',lpad(replace(sub.Importe,\\'-\\',\\'\\'),\\'11\\',\\'0\\')) ELSE lpad(sub.Importe,12,\\'0\\') END AS \\'IMPORTE\\' from (select  (SELECT lpad(trim(CPG.valorParametro),12,\\'0\\') FROM CFE_ParametrosGenerales CPG where CPG.nombreParametro=\\'rutEmpresa\\')\\'RUT_INFORMANTE\\',\\n2181 \\'Formulario\\', REPLACE(LEFT(DOC.fechaEmisionDocumento,7),\\'-\\',\\'\\') \\'PERIODO\\', lpad(CLI.rut,12,\\'0\\') \\'RUT_INFORMADO\\',REPLACE(LEFT(DOC.fechaEmisionDocumento,7),\\'-\\',\\'\\') \\'FacturaAAAAMM\\',502\\'Linea\\',sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioSubTotalVenta*TDOC.afectaTotales,2)  else case when MON.codigoMoneda=2 then  ROUND((DOC.precioSubTotalVenta*TDOC.afectaTotales)*DOC.cotizacionMoneda,2)  else ROUND(0,2) end end)\\'Importe\\' from  Documentos DOC join TipoDocumento TDOC on  TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and  CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\')  and TDOC.esDocumentoDeVenta=\\'1\\'  and CLI.codigoTipoDocumentoCliente in (2,3,6)  and trim(CLI.rut)!=\\'\\'  and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\' group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento ) sub;', '', '', '0', '0', '1', '1', '1');","433")){
                 _iterador=false; return false; } break;
-
-
+        case 433:
+            if(!impactoCambioEnBD("CREATE TABLE StockRealSummary (codigoArticulo varchar(10) NOT NULL,cantidad int NOT NULL,PRIMARY KEY (codigoArticulo));","434")){
+                _iterador=false; return false; } break;
+        case 434:
+            if(!impactoCambioEnBD("CREATE TABLE StockPrevistoSummary (codigoArticulo varchar(10) NOT NULL,cantidad int NOT NULL,PRIMARY KEY (codigoArticulo));","435")){
+                _iterador=false; return false; } break;
+        case 435:
+            if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql`='select  sub.RUT_INFORMANTE, sub.Formulario, sub.PERIODO, sub.RUT_INFORMADO, sub.FacturaAAAAMM, sub.Linea, CASE WHEN SIGN(sub.Importe) = -1 THEN concat(\\'-\\',lpad(replace(sub.Importe,\\'-\\',\\'\\'),\\'11\\',\\'0\\')) ELSE lpad(sub.Importe,12,\\'0\\') END AS \\'IMPORTE\\' from (select  (SELECT lpad(trim(CPG.valorParametro),12,\\'0\\') FROM CFE_ParametrosGenerales CPG where CPG.nombreParametro=\\'rutEmpresa\\')\\'RUT_INFORMANTE\\',\\n\\'02181\\' as Formulario, REPLACE(LEFT(DOC.fechaEmisionDocumento,7),\\'-\\',\\'\\') \\'PERIODO\\', lpad(CLI.rut,12,\\'0\\') \\'RUT_INFORMADO\\',REPLACE(LEFT(DOC.fechaEmisionDocumento,7),\\'-\\',\\'\\') \\'FacturaAAAAMM\\',502\\'Linea\\',sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioSubTotalVenta*TDOC.afectaTotales,2)  else case when MON.codigoMoneda=2 then  ROUND((DOC.precioSubTotalVenta*TDOC.afectaTotales)*DOC.cotizacionMoneda,2)  else ROUND(0,2) end end)\\'Importe\\' from  Documentos DOC join TipoDocumento TDOC on  TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and  CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\')  and TDOC.esDocumentoDeVenta=\\'1\\'  and CLI.codigoTipoDocumentoCliente in (2,3,6)  and trim(CLI.rut)!=\\'\\'  and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\' group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento ) sub;' WHERE `codigoReporte`='82';","436")){
+                _iterador=false; return false; } break;
+        case 436:
+            if(!impactoCambioEnBD("CREATE EVENT UpdateStockRealSummary ON SCHEDULE EVERY 5 MINUTE  DO  INSERT INTO StockRealSummary (codigoArticulo, cantidad)               SELECT codigoArticulo, cantidad   FROM vStockReal   ON DUPLICATE KEY UPDATE cantidad = VALUES(cantidad);","437")){
+                _iterador=false; return false; } break;
+        case 437:
+            if(!impactoCambioEnBD("CREATE EVENT UpdateStockPrevistoSummary ON SCHEDULE EVERY 5 MINUTE  DO  INSERT INTO StockPrevistoSummary (codigoArticulo, cantidad)     SELECT codigoArticulo, cantidad   FROM vStockPrevisto   ON DUPLICATE KEY UPDATE cantidad = VALUES(cantidad);","438")){
+                _iterador=false; return false; } break;
+        case 438:
+            if(!impactoCambioEnBD("SET GLOBAL event_scheduler = ON;","439")){
+                _iterador=false; return false; } break;
 
         default:
             qDebug()<< "Se Finalizan las actualizaciones de base de datos.";

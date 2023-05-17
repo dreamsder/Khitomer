@@ -725,6 +725,9 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
             mesHaciaAtras=" AND fechaHoraGuardadoDocumentoSQL > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)  ";
             anioHaciaAtras="";
 
+        }else if(_aniosHaciaAtras=="-1"){
+            mesHaciaAtras="";
+            anioHaciaAtras="";
         }
 
 

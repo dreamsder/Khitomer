@@ -96,6 +96,9 @@ public:
 
     Q_INVOKABLE void buscarArticulo(QString , QString,int);
 
+
+
+
     Q_INVOKABLE ulong ultimoRegistroDeArticuloEnBase()const;
 
     Q_INVOKABLE int insertarArticulo( QString , QString, QString, QString, QString ,QString,QString ,QString, QString, QString,QString) const;
