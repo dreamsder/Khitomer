@@ -36,9 +36,11 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.17"
+    property string versionKhitomer: "1.17.18"
 
 
+    property bool mODO_DOCUMENTOS_VISIBLES: modeloconfiguracion.retornaValorConfiguracionBooleano("MODO_DOCUMENTOS_VISIBLES")
+    property bool visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES: false
 
     property int distanciaEntreBotonesBarraDeTareas: modeloconfiguracion.retornaValorConfiguracion("DISTANCIAENTREBOTONESMENU")
 

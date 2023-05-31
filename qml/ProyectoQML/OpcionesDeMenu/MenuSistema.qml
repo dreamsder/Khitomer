@@ -304,6 +304,7 @@ Rectangle {
         ///         :Se incorpora reporte Formulario 2181 para DGI y se incorpora soporte para exportar reportes como CSV.
         /// 1.17.17 :Se implementa nueva forma de cargar el stock real y previsto para hacer mas rapido el programa, por medio de tablas de sumario.
         ///         :Se habilitan los event schedule en mysql.
+        /// 1.17.18 :Se implementa nueva forma de controlar la cantidad de documentos, con la confguracion: MODO_DOCUMENTOS_VISIBLES
 
         Text {
             id: txtCopyright

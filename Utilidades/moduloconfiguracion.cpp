@@ -246,12 +246,6 @@ void ModuloConfiguracion::cargarConfiguracion(){
                     ModuloConfiguracion::setNOMBRE_EMPRESA(q.value(rec.indexOf("valorConfiguracion")).toString());
                 }
 
-
-
-
-
-
-
             }
             if(ModuloConfiguracion::getCANTIDAD_DIGITOS_DECIMALES_MONTO()=="0"){
                 ModuloConfiguracion::setCantidadDecimalesString("");
@@ -386,12 +380,6 @@ QString ModuloConfiguracion::retornaValorConfiguracion(QString _codigoConfigurac
         return ModuloConfiguracion::getNOMBRE_EMPRESA();
     }
 
-
-
-
-
-
-
 }
 QString ModuloConfiguracion::retornaCantidadDecimalesString() const{
 
@@ -404,5 +392,36 @@ bool ModuloConfiguracion::retornaModoAvisoDocumentosNuevoVisible() const{
     }
     else{
         return true;
+    }
+}
+
+
+
+bool ModuloConfiguracion::retornaValorConfiguracionBooleano(QString _codigoConfiguracion) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select valorConfiguracion from Configuracion where codigoConfiguracion='"+_codigoConfiguracion+"';")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+                    qDebug()<< query.value(0).toString();
+                    return (query.value(0).toString() == "1") ? true : false;
+
+                }else{return false;}
+            }
+            else{
+                return false;
+            }
+        }else{return false;}
+    }else{
+        return false;
     }
 }

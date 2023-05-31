@@ -2055,6 +2055,17 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 438:
             if(!impactoCambioEnBD("SET GLOBAL event_scheduler = ON;","439")){
                 _iterador=false; return false; } break;
+        case 439:
+            if(!impactoCambioEnBD("insert into Configuracion values('MODO_DOCUMENTOS_VISIBLES','0','Activa visualización de documentos extendidos');","440")){
+                _iterador=false; return false; } break;
+        case 440:
+            if(!impactoCambioEnBD("ALTER TABLE `PerfilesUsuarios` ADD COLUMN `permiteAutorizarConfiguraciones` CHAR(1) NOT NULL DEFAULT '0' AFTER `permiteAutorizarAnulaciones`;","441")){
+                _iterador=false; return false; } break;
+        case 441:
+            if(!impactoCambioEnBD("UPDATE PerfilesUsuarios SET permiteAutorizarConfiguraciones='1' WHERE codigoPerfil=1;","442")){
+                _iterador=false; return false; } break;
+
+
 
         default:
             qDebug()<< "Se Finalizan las actualizaciones de base de datos.";

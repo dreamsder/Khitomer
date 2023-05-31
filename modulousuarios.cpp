@@ -399,7 +399,7 @@ QString ModuloUsuarios::retornaVendedorSiEstaLogueado(QString _idUsuario) const{
 QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
 
 
-  /*  QString _valor="";
+    QString _valor="";
     for (int var = 0; var < m_Usuarios.size(); ++var) {
         if(m_Usuarios[var].idUsuario()==_idUsuario){
 
@@ -408,7 +408,7 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
         }
     }
 
-    if(m_Usuarios.size()==0 && _valor==""){*/
+    if(m_Usuarios.size()==0 && _valor==""){
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -442,12 +442,12 @@ QString ModuloUsuarios::retornaNombreUsuarioLogueado(QString _idUsuario) const{
         }else{
             return "";
         }
-   /* }else{
+    }else{
+        qDebug()<< _valor;
         return _valor;
-    }*/
+    }
 
-    /*
-   */
+
 }
 int ModuloUsuarios::actualizarClave(QString _idUsuario, QString _claveUsuario ) const {
 

@@ -58,6 +58,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -76,6 +77,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -92,6 +94,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=true
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -109,6 +112,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=true
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -125,6 +129,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=true
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -141,6 +146,7 @@ Rectangle {
             menucotizaciones1.visible=true
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -156,6 +162,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=true
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -171,6 +178,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=true
             menuPagoDeFinancieras.visible=false
@@ -186,6 +194,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=true
@@ -201,6 +210,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -216,6 +226,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -231,6 +242,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -246,6 +258,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -262,6 +275,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -278,6 +292,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -294,6 +309,7 @@ Rectangle {
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
+            menuConfiguraciones.visible=false
             menuRubros.visible=false
             menuCuentasBancarias.visible=false
             menuPagoDeFinancieras.visible=false
@@ -430,6 +446,12 @@ Rectangle {
                     anchors.fill: parent
                     visible: false
                 }
+                MenuConfiguraciones{
+                    id: menuConfiguraciones
+                    anchors.fill: parent
+                    visible: false
+                }
+
                 MenuRubros{
                     id: menuRubros
                     anchors.fill: parent

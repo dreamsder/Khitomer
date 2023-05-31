@@ -609,7 +609,17 @@ Rectangle {
 
             onClicEnBusqueda: {
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+
+                if(mODO_DOCUMENTOS_VISIBLES){
+                    if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                    }else{
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),"0")
+                    }
+                }else{
+                    modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                }
+
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }
@@ -1038,7 +1048,16 @@ Rectangle {
 
             if(permisosAEvaluar=="permiteAutorizarCierreLiquidaciones"){
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                if(mODO_DOCUMENTOS_VISIBLES){
+                    if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                    }else{
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","0")
+                    }
+                }else{
+                    modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                }
+
                 modeloLiquidaciones.cerrarLiquidacion(codigoDeLiquidacion,vendedorDeLiquidacio)
                 modeloLiquidaciones.clearLiquidaciones()
                 modeloLiquidaciones.buscarLiquidacion("1=","1")
@@ -1048,7 +1067,19 @@ Rectangle {
         onNoRequiereAutorizacion: {
             if(permisosAEvaluar=="permiteAutorizarCierreLiquidaciones"){
                 modeloDocumentosEnLiquidaciones.limpiarListaDocumentos()
-                modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+
+                if(mODO_DOCUMENTOS_VISIBLES){
+                    if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                    }else{
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","0")
+                    }
+                }else{
+                    modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
+                }
+
+
+
                 modeloLiquidaciones.cerrarLiquidacion(codigoDeLiquidacion,vendedorDeLiquidacio)
                 modeloLiquidaciones.clearLiquidaciones()
                 modeloLiquidaciones.buscarLiquidacion("1=","1")
