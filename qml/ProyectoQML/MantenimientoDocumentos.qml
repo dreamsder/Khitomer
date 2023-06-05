@@ -79,7 +79,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoDocumento =",txtNumeroDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -109,7 +109,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.serieDocumento =",txtSerieDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -142,7 +142,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.cae_numeroCae =",txtNumeroDocumentoCFE.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -174,7 +174,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoLiquidacion =",txtNumeroLiquidacionDelDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -200,7 +200,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorLiquidacion =",txtVendedorLiquidacionDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -229,7 +229,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoVendedorComisiona =",txtVendedorComisionaDelDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -258,7 +258,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.fechaEmisionDocumento =",txtFechaDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -296,7 +296,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoCliente =",txtCodigoClienteDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -320,7 +320,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.tipoCliente =",txtTipoClienteDocumento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -347,7 +347,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( DL.codigoArticulo='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"' or DL.codigoArticuloBarras='"+txtCodigoArticuloEnDocumento.textoInputBox.trim()+"') and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -373,7 +373,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoTipoDocumento =",cbListaTipoDeDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -400,7 +400,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.observaciones rlike ",txtObservacionesEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -479,7 +479,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.codigoEstadoDocumento =",cbListaEstadoDocumentosEnMantenimiento.codigoValorSeleccion,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -560,7 +560,7 @@ Rectangle {
                             if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                                 modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                             }else{
-                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                             }
                         }else{
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion=0 and (D.codigoVendedorLiquidacion is null or D.codigoVendedorLiquidacion='' or D.codigoVendedorLiquidacion='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -575,7 +575,7 @@ Rectangle {
                             if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                                 modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                             }else{
-                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                             }
                         }else{
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" ( D.codigoLiquidacion!=0 and (D.codigoVendedorLiquidacion is not null and D.codigoVendedorLiquidacion!='' and D.codigoVendedorLiquidacion!='0') ) and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -603,7 +603,7 @@ Rectangle {
                             if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                                 modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                             }else{
-                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                             }
                         }else{
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='1'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -617,7 +617,7 @@ Rectangle {
                             if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                                 modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
                             }else{
-                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                                modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                             }
                         }else{
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(" D.esDocumentoWeb='0'  and ","1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
@@ -1018,7 +1018,7 @@ Rectangle {
                         if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                             modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(consultaSql,"1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())
                         }else{
-                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(consultaSql,"1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"0")
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(consultaSql,"1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
                         }
                     }else{
                         modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento(consultaSql,"1=1",modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaCantidadAniosHaciaAtras.codigoValorSeleccion.trim())

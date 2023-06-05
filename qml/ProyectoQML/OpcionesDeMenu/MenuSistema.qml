@@ -305,6 +305,10 @@ Rectangle {
         /// 1.17.17 :Se implementa nueva forma de cargar el stock real y previsto para hacer mas rapido el programa, por medio de tablas de sumario.
         ///         :Se habilitan los event schedule en mysql.
         /// 1.17.18 :Se implementa nueva forma de controlar la cantidad de documentos, con la confguracion: MODO_DOCUMENTOS_VISIBLES
+        /// 1.17.19 :Se reconfigura la opción de MODO_DOCUMENTOS_VISIBLES para que por defecto puedan ver hasta 1 años hacia atras.
+        ///         :Se modifica el reporte Listado de clientes x lista precio y fecha de alta para agrgarle información del cumpleaños del cliente.
+        ///         :Se agrega reporte Documentos que afectan en negativo por fecha, a pedido de Digital World
+
 
         Text {
             id: txtCopyright

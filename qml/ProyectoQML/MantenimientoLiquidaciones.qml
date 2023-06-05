@@ -614,7 +614,7 @@ Rectangle {
                     if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                         modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                     }else{
-                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),"0")
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),"1")
                     }
                 }else{
                     modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoDeLiquidacion,vendedorDeLiquidacio,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
@@ -1052,7 +1052,7 @@ Rectangle {
                     if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                         modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                     }else{
-                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","0")
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","1")
                     }
                 }else{
                     modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
@@ -1072,7 +1072,7 @@ Rectangle {
                     if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
                         modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                     }else{
-                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","0")
+                        modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1","1")
                     }
                 }else{
                     modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones("null","null","null","-1",cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())

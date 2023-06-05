@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.18"
+    property string versionKhitomer: "1.17.19"
 
 
     property bool mODO_DOCUMENTOS_VISIBLES: modeloconfiguracion.retornaValorConfiguracionBooleano("MODO_DOCUMENTOS_VISIBLES")
