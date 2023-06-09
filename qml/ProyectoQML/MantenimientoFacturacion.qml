@@ -3519,7 +3519,7 @@ Rectangle {
                     }
 
                     modeloArticulosFiltros.clearArticulos()
-                    modeloArticulosFiltros.buscarArticulo(consultaSqlArticulo,"1",0)
+                    modeloArticulosFiltros.buscarArticuloStockOnline(consultaSqlArticulo,"1",0)
 
                     if(modeloArticulosFiltros.rowCount()!=0){
                         tomarElFocoResultado()
@@ -7844,7 +7844,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -7857,7 +7857,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -7882,7 +7882,7 @@ Rectangle {
                     colorDeTitulo: "#ffffff"
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim(),1)
+                        modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.descripcionArticulo rlike",txtDescripcionArticuloOpcionesExtrasFacturacion.textoInputBox.trim(),1)
                     }
                     onEnter: {
                         cbxListaProveedoresOpcionesExtraFacturacion.tomarElFoco()
@@ -7904,7 +7904,7 @@ Rectangle {
                     z: 2
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo("AR.codigoProveedor rlike",cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim(),1)
+                        modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoProveedor rlike",cbxListaProveedoresOpcionesExtraFacturacion.codigoValorSeleccion.trim(),1)
                     }
                     onEnter: {
 
@@ -8324,7 +8324,7 @@ Rectangle {
 
                     if(consultaSql!=""){
                         modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                        modeloArticulosOpcionesExtraFacturacion.buscarArticulo(consultaSql,"1=1",1)
+                        modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline(consultaSql,"1=1",1)
                     }
                 }
             }

@@ -298,7 +298,7 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 5
-        font.pixelSize: 11
+        font.pixelSize: sizeTitulosControles
     }
 
     Image {
@@ -394,7 +394,7 @@ Rectangle {
         font.family: "Arial"
         //
         visible: false
-        font.pixelSize: 10
+        font.pixelSize: 11
         anchors.bottom: recTextInput.top
         anchors.bottomMargin: 1
         font.bold: true
@@ -618,7 +618,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 7
                 //
-                font.pixelSize: 9
+                font.pixelSize: 10
                 visible: true
                 font.bold: false
                 z: 2

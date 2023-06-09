@@ -135,7 +135,7 @@ Rectangle {
                 font.family: "Verdana"
                 anchors.top: parent.top
                 anchors.topMargin: 20
-                font.pixelSize: 14
+                font.pixelSize: sizeTitulosControles
             }
 
 
@@ -215,7 +215,7 @@ Rectangle {
                 font.underline: false
                 anchors.top: lblListaListaPrecios.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 12
+                font.pixelSize: sizeTitulosControles
                 font.family: "Verdana"
                 font.bold: false
                 anchors.topMargin: 5
@@ -309,7 +309,7 @@ Rectangle {
                 text: "Nuevo precio:"
                 horizontalAlignment: Text.AlignRight
                 clip: true
-                font.pixelSize: 12
+                font.pixelSize: sizeTitulosControles
                 anchors.topMargin: 7
                 font.family: "Verdana"
                 font.bold: true

@@ -487,7 +487,7 @@ property alias colorRectangulo: rectPrincipalComboBox.color
         font.family: "Arial"
         //
         verticalAlignment: Text.AlignBottom
-        font.pixelSize: 10
+        font.pixelSize: sizeTitulosControles
         anchors.top: parent.top
         anchors.topMargin: 0
         font.bold: true

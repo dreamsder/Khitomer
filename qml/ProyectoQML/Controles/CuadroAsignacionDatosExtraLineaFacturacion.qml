@@ -91,7 +91,7 @@ import QtQuick 1.1
                     font.family: "Verdana"
                     anchors.top: parent.top
                     anchors.topMargin: 20
-                    font.pixelSize: 14
+                    font.pixelSize: sizeTitulosControles
                 }
 
 

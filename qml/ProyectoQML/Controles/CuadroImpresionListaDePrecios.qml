@@ -90,7 +90,7 @@ Rectangle {
                 font.family: "Verdana"
                 anchors.top: parent.top
                 anchors.topMargin: 20
-                font.pixelSize: 14
+                font.pixelSize: sizeTitulosControles
             }
 
 
@@ -108,7 +108,7 @@ Rectangle {
                 font.underline: false
                 anchors.top: lblTituloImpresionListaPrecios.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 12
+                font.pixelSize: sizeTitulosControles
                 font.family: "Verdana"
                 font.bold: false
                 anchors.topMargin: 5

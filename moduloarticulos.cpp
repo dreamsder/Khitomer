@@ -156,7 +156,7 @@ void ModuloArticulos::buscarArticulo(QString campo, QString datoABuscar, int ord
             q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join StockRealSummary S on S.codigoArticulo=AR.codigoArticulo  left join StockPrevistoSummary  SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by cast(AR.codigoArticulo as unsigned)");
         }else{
             //q = Database::consultaSql("select * from Articulos join Clientes on Articulos.codigoProveedor=Clientes.codigoCliente and Articulos.tipoCliente=Clientes.tipoCliente where  Clientes.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by Articulos.descripcionArticulo ");
-        q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join StockRealSummary S on S.codigoArticulo=AR.codigoArticulo  left join StockPrevistoSummary SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by AR.descripcionArticulo ");
+            q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join StockRealSummary S on S.codigoArticulo=AR.codigoArticulo  left join StockPrevistoSummary SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by AR.descripcionArticulo ");
 
         }
 
@@ -181,6 +181,57 @@ void ModuloArticulos::buscarArticulo(QString campo, QString datoABuscar, int ord
                                                       q.value(rec.indexOf("codigoTipoGarantia")).toInt(),
                                                       q.value(rec.indexOf("stockReal")).toInt(),
                                                       q.value(rec.indexOf("stockPrevisto")).toInt()
+
+                                                      ));
+            }
+        }
+    }
+}
+
+
+void ModuloArticulos::buscarArticuloStockOnline(QString campo, QString datoABuscar, int orden){
+
+
+    bool conexion=true;
+
+    Database::chequeaStatusAccesoMysql();
+
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery q;
+
+        if(orden==0){
+            q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join StockRealSummary S on S.codigoArticulo=AR.codigoArticulo  left join StockPrevistoSummary  SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by cast(AR.codigoArticulo as unsigned)");
+        }else{
+            q = Database::consultaSql("select AR.codigoArticulo,AR.descripcionArticulo,AR.descripcionExtendida,AR.codigoProveedor,AR.codigoIva,AR.codigoMoneda,AR.activo,AR.usuarioAlta,AR.cantidadMinimaStock,AR.codigoSubRubro,AR.codigoTipoGarantia, case when S.cantidad is null then 0 else S.cantidad  end'stockReal', case when SP.cantidad  is null then 0 else SP.cantidad end'stockPrevisto' from Articulos AR  left join StockRealSummary S on S.codigoArticulo=AR.codigoArticulo  left join StockPrevistoSummary SP on SP.codigoArticulo=AR.codigoArticulo  join Clientes CLI on AR.codigoProveedor=CLI.codigoCliente and AR.tipoCliente=CLI.tipoCliente where  CLI.tipoCliente=2  and "+campo+"'"+datoABuscar+"' order by AR.descripcionArticulo ");
+
+        }
+        QSqlRecord rec = q.record();
+
+        ModuloArticulos::reset();
+        if(q.record().count()>0){
+
+            while (q.next()){
+                ModuloArticulos::addArticulo(Articulo(q.value(rec.indexOf("codigoArticulo")).toString(),
+                                                      q.value(rec.indexOf("descripcionArticulo")).toString(),
+                                                      q.value(rec.indexOf("descripcionExtendida")).toString(),
+                                                      q.value(rec.indexOf("codigoProveedor")).toString(),
+                                                      q.value(rec.indexOf("codigoIva")).toInt(),
+                                                      q.value(rec.indexOf("codigoMoneda")).toInt(),
+                                                      q.value(rec.indexOf("activo")).toString(),
+                                                      q.value(rec.indexOf("usuarioAlta")).toString(),
+                                                      q.value(rec.indexOf("cantidadMinimaStock")).toString(),
+                                                      q.value(rec.indexOf("codigoSubRubro")).toString(),
+                                                      q.value(rec.indexOf("codigoTipoGarantia")).toInt(),
+                                                      retornaStockTotalArticuloRealOriginal(q.value(rec.indexOf("codigoArticulo")).toString()),
+                                                      retornaStockTotalPrevistoArticuloOriginal(q.value(rec.indexOf("codigoArticulo")).toString())
 
                                                       ));
             }
@@ -432,7 +483,7 @@ QString ModuloArticulos::existeArticulo(QString _codigoArticulo) const {
 
 QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) const {
 
-   /* QString _valor="";
+    /* QString _valor="";
 
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
@@ -443,41 +494,41 @@ QString ModuloArticulos::retornaDescripcionArticulo(QString _codigoArticulo) con
     }*/
 
 
-  // if(m_Articulos.size()==0 && _valor==""){
-        bool conexion=true;
+    // if(m_Articulos.size()==0 && _valor==""){
+    bool conexion=true;
 
-        Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
 
-        if(!Database::connect().isOpen()){
-            if(!Database::connect().open()){
-                qDebug() << "No conecto";
-                conexion=false;
-            }
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
         }
+    }
 
-        if(conexion){
+    if(conexion){
 
-            QSqlQuery query(Database::connect());
+        QSqlQuery query(Database::connect());
 
-            if(query.exec("select descripcionArticulo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        if(query.exec("select descripcionArticulo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
 
-                if(query.first()){
-                    if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                        return query.value(0).toString();
+                    return query.value(0).toString();
 
-                    }else{
-                        return "";
-                    }
-                }else{return "";}
+                }else{
+                    return "";
+                }
+            }else{return "";}
 
 
-            }else{
-                return "";
-            }
         }else{
             return "";
         }
+    }else{
+        return "";
+    }
     /*}else{
         return _valor;
     }*/
@@ -489,7 +540,7 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
         return "";
     }
 
-   /* QString _valor="";
+    /* QString _valor="";
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -501,40 +552,40 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
 
     if(m_Articulos.size()==0 && _valor==""){*/
 
-        bool conexion=true;
+    bool conexion=true;
 
-        Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
 
-        if(!Database::connect().isOpen()){
-            if(!Database::connect().open()){
-                qDebug() << "No conecto";
-                conexion=false;
-            }
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
         }
+    }
 
-        if(conexion){
+    if(conexion){
 
-            QSqlQuery query(Database::connect());
+        QSqlQuery query(Database::connect());
 
-            if(query.exec("select descripcionExtendida from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        if(query.exec("select descripcionExtendida from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
 
-                if(query.first()){
-                    if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                        return query.value(0).toString();
+                    return query.value(0).toString();
 
-                    }else{
-                        return "";
-                    }
-                }else{return "";}
+                }else{
+                    return "";
+                }
+            }else{return "";}
 
 
-            }else{
-                return "";
-            }
         }else{
             return "";
         }
+    }else{
+        return "";
+    }
 
     /*}else{
         return _valor;
@@ -547,7 +598,7 @@ QString ModuloArticulos::retornaDescripcionArticuloExtendida(QString _codigoArti
 
 bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
 
-  /*  bool _valor=false;
+    /*  bool _valor=false;
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
             if(m_Articulos[var].activo()=="1"){
@@ -558,39 +609,39 @@ bool ModuloArticulos::retornaArticuloActivo(QString _codigoArticulo) const {
 
 
     if(m_Articulos.size()==0 && _valor==false){*/
-        bool conexion=true;
-        Database::chequeaStatusAccesoMysql();
-        if(!Database::connect().isOpen()){
-            if(!Database::connect().open()){
-                qDebug() << "No conecto";
-                conexion=false;
-            }
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
         }
-        if(conexion){
+    }
+    if(conexion){
 
-            QSqlQuery query(Database::connect());
+        QSqlQuery query(Database::connect());
 
-            if(query.exec("select activo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        if(query.exec("select activo from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
 
-                if(query.first()){
-                    if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                        if(query.value(0).toString()=="1"){
-                            return true;
-                        }else{
-                            return false;
-                        }
+                    if(query.value(0).toString()=="1"){
+                        return true;
                     }else{
                         return false;
                     }
-                }else{return false;}
-            }else{
-                return false;
-            }
+                }else{
+                    return false;
+                }
+            }else{return false;}
         }else{
             return false;
         }
-   /* }else{
+    }else{
+        return false;
+    }
+    /* }else{
         return _valor;
     }*/
 
@@ -611,7 +662,7 @@ qlonglong ModuloArticulos::retornaStockTotalArticulo(QString _codigoArticulo) co
     if(conexion){
         QSqlQuery query(Database::connect());
         //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G','P') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-       // if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+        // if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
         if(query.exec("SELECT * from StockPrevistoSummary where codigoArticulo='"+_codigoArticulo+"' ")) {
 
             if(query.first()){
@@ -647,7 +698,7 @@ qlonglong ModuloArticulos::retornaStockTotalArticuloReal(QString _codigoArticulo
         QSqlQuery query(Database::connect());
 
         //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
-           if(query.exec("select * from StockRealSummary  where codigoArticulo='"+_codigoArticulo+"' ")) {
+        if(query.exec("select * from StockRealSummary  where codigoArticulo='"+_codigoArticulo+"' ")) {
             if(query.first()){
                 if(query.value(1).toString()!=""){
 
@@ -665,6 +716,75 @@ qlonglong ModuloArticulos::retornaStockTotalArticuloReal(QString _codigoArticulo
         return 0;
     }
 }
+
+
+
+// DEvuelve el stock real, no incluye el previsto
+int ModuloArticulos::retornaStockTotalArticuloRealOriginal(QString _codigoArticulo) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+            if(query.first()){
+                if(query.value(1).toString()!=""){
+
+                    return query.value(1).toInt();
+
+                }else{
+                    return 0;
+                }
+            }else{return 0;}
+
+        }else{
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}
+
+// Ésta funcion devuelte el stock previsto, el cual incluye fascturas pendientes
+int ModuloArticulos::retornaStockTotalPrevistoArticuloOriginal(QString _codigoArticulo) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+        //if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and DOC.codigoEstadoDocumento in ('E','G','P') and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos where codigoTipoDocumento=8 and codigoEstadoDocumento in ('E','G') order by codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+        if(query.exec("SELECT DOCL.codigoArticulo, sum(case when TDOC.afectaStock=1 then DOCL.cantidad else (DOCL.cantidad*-1) end) 'cantidad' FROM Documentos DOC join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where TDOC.afectaStock!=0 and (DOC.codigoEstadoDocumento in ('E','G') or  (DOC.codigoEstadoDocumento='P' and DOC.codigoTipoDocumento!=5)  ) and DOC.fechaHoraGuardadoDocumentoSQL>=  (SELECT fechaHoraGuardadoDocumentoSQL FROM Documentos DOCS where DOCS.codigoTipoDocumento=8 and DOCS.codigoEstadoDocumento in ('E','G') order by DOCS.codigoDocumento desc limit 1) and DOCL.codigoArticulo='"+_codigoArticulo+"'  group by DOCL.codigoArticulo")) {
+
+            if(query.first()){
+                if(query.value(1).toString()!=""){
+
+                    return query.value(1).toInt();
+
+                }else{
+                    return 0;
+                }
+            }else{return 0;}
+        }else{
+
+            return 0;
+        }
+    }else{
+        return 0;
+    }
+}
+
 
 bool ModuloArticulos::existeArticuloEnDocumentos(QString _codigoArticulo) const {
     bool conexion=true;
@@ -761,7 +881,7 @@ bool ModuloArticulos::reemplazaCantidadArticulosSinStock(QString _codigoArticulo
 }
 qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArticulo) const {
 
- /*   qlonglong _valor=0;
+    /*   qlonglong _valor=0;
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -772,41 +892,41 @@ qlonglong ModuloArticulos::retornaCantidadMinimaAvisoArticulo(QString _codigoArt
 
 
     if(m_Articulos.size()==0 && _valor==0){*/
-        bool conexion=true;
+    bool conexion=true;
 
-        Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
 
-        if(!Database::connect().isOpen()){
-            if(!Database::connect().open()){
-                qDebug() << "No conecto";
-                conexion=false;
-            }
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
         }
+    }
 
-        if(conexion){
+    if(conexion){
 
-            QSqlQuery query(Database::connect());
+        QSqlQuery query(Database::connect());
 
-            if(query.exec("select cantidadMinimaStock from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        if(query.exec("select cantidadMinimaStock from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
 
-                if(query.first()){
-                    if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                        return query.value(0).toLongLong();
+                    return query.value(0).toLongLong();
 
-                    }else{
-                        return 0;
-                    }
-                }else{return 0;}
+                }else{
+                    return 0;
+                }
+            }else{return 0;}
 
 
-            }else{
-                return 0;
-            }
         }else{
             return 0;
         }
-   /* }else{
+    }else{
+        return 0;
+    }
+    /* }else{
         return _valor;
     }*/
 }
@@ -841,7 +961,7 @@ bool ModuloArticulos::retornaSiPuedeVenderSinStock(qlonglong _cantidad, QString 
 }
 QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) const {
 
-   /* QString _valor="0";
+    /* QString _valor="0";
     for (int var = 0; var < m_Articulos.size(); ++var) {
         if(m_Articulos[var].codigoArticulo()==_codigoArticulo ){
 
@@ -852,41 +972,41 @@ QString ModuloArticulos::retornaCodigoTipoGarantia(QString _codigoArticulo) cons
 
 
      if(m_Articulos.size()==0 && _valor=="0"){*/
-         bool conexion=true;
+    bool conexion=true;
 
-         Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
 
-         if(!Database::connect().isOpen()){
-             if(!Database::connect().open()){
-                 qDebug() << "No conecto";
-                 conexion=false;
-             }
-         }
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
 
-         if(conexion){
+    if(conexion){
 
-             QSqlQuery query(Database::connect());
+        QSqlQuery query(Database::connect());
 
-             if(query.exec("select codigoTipoGarantia from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
+        if(query.exec("select codigoTipoGarantia from Articulos where codigoArticulo='"+_codigoArticulo+"'")) {
 
-                 if(query.first()){
-                     if(query.value(0).toString()!=""){
+            if(query.first()){
+                if(query.value(0).toString()!=""){
 
-                         return query.value(0).toString();
+                    return query.value(0).toString();
 
-                     }else{
-                         return "0";
-                     }
-                 }else{return "0";}
+                }else{
+                    return "0";
+                }
+            }else{return "0";}
 
 
-             }else{
-                 return "0";
-             }
-         }else{
-             return "0";
-         }
-  /*  }else{
+        }else{
+            return "0";
+        }
+    }else{
+        return "0";
+    }
+    /*  }else{
          return _valor;
      }*/
 }

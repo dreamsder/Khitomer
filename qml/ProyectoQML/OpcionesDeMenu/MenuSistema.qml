@@ -308,7 +308,8 @@ Rectangle {
         /// 1.17.19 :Se reconfigura la opción de MODO_DOCUMENTOS_VISIBLES para que por defecto puedan ver hasta 1 años hacia atras.
         ///         :Se modifica el reporte Listado de clientes x lista precio y fecha de alta para agrgarle información del cumpleaños del cliente.
         ///         :Se agrega reporte Documentos que afectan en negativo por fecha, a pedido de Digital World
-
+        /// 1.17.20 :Se ajusta el event schelude del stock a 1 minuto. Se modifica la busqueda de articulos en la facturación para que el stock se muestre el real, como era originalmente.
+        ///         :Se ajusta el tamaño de los font para trabajarlos desde una variable unica en el main.qml
 
         Text {
             id: txtCopyright

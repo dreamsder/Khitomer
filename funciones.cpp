@@ -2070,6 +2070,18 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 443:
             if(!impactoCambioEnBD("INSERT INTO `Reportes` (`codigoReporte`, `codigoMenuReporte`, `descripcionReporte`, `consultaSql`, `consultaSqlGraficas`, `consultaSqlCabezal`, `utilizaFechaDesde`, `utilizaFechaHasta`, `utilizaAbrirDocumentos`, `utilizaGeneracionCSV`) VALUES ('83', '7', 'Documentos que afectan en negativo por fecha', 'select   concat(DOC.codigoDocumento,\\' - \\',TDOC.descripcionTipoDocumento,\\' - CFE: \\',DOC.cae_numeroCae,\\'(\\',DOC.cae_serie,\\')\\' )\\'Documento (Fecha)\\',   sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'Total $\\',     sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'Total U$S\\',     DOC.fechaEmisionDocumento\\'Fecha\\',    DOC.observaciones,  concat(DOC.codigoDocumento,\\'-\\',DOC.codigoTipoDocumento,\\'-\\',DOC.serieDocumento)\\'\\'        from  Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente       where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\') and   TDOC.afectaTotales=\\'-1\\' and   DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\'     group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento;', '', '', '1', '1', '1', '0');","444")){
                 _iterador=false; return false; } break;
+        case 444:
+            if(!impactoCambioEnBD("DROP EVENT IF EXISTS UpdateStockRealSummary","445")){
+                _iterador=false; return false; } break;
+        case 445:
+            if(!impactoCambioEnBD("DROP EVENT IF EXISTS UpdateStockPrevistoSummary","446")){
+                _iterador=false; return false; } break;
+        case 446:
+            if(!impactoCambioEnBD("CREATE EVENT UpdateStockRealSummary ON SCHEDULE EVERY 1 MINUTE  DO  INSERT INTO StockRealSummary (codigoArticulo, cantidad)               SELECT codigoArticulo, cantidad   FROM vStockReal   ON DUPLICATE KEY UPDATE cantidad = VALUES(cantidad);","447")){
+                _iterador=false; return false; } break;
+        case 447:
+            if(!impactoCambioEnBD("CREATE EVENT UpdateStockPrevistoSummary ON SCHEDULE EVERY 1 MINUTE  DO  INSERT INTO StockPrevistoSummary (codigoArticulo, cantidad)     SELECT codigoArticulo, cantidad   FROM vStockPrevisto   ON DUPLICATE KEY UPDATE cantidad = VALUES(cantidad);","448")){
+                _iterador=false; return false; } break;
 
 
         default:

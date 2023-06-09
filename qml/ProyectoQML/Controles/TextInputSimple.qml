@@ -30,7 +30,7 @@ Rectangle {
     property int altoControl: 32
     property int altoControlRecta: 18
     property int tamanioFuente: 9
-    property int tamanioFuenteTitulo: 10
+    property int tamanioFuenteTitulo: sizeTitulosControles
     width: {
 
 

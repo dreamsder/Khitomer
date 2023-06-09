@@ -96,7 +96,7 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 13
+                font.pixelSize: sizeTitulosControles
 
                 MouseArea {
                     id: mouse_area1

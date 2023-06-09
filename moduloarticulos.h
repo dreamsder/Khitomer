@@ -134,6 +134,11 @@ public:
 
 
 
+    Q_INVOKABLE int retornaStockTotalArticuloRealOriginal(QString _codigoArticulo) const;
+    Q_INVOKABLE int retornaStockTotalPrevistoArticuloOriginal(QString _codigoArticulo) const;
+    Q_INVOKABLE void buscarArticuloStockOnline(QString campo, QString datoABuscar, int orden);
+
+
 private:
     QList<Articulo> m_Articulos;
 

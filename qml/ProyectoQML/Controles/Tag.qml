@@ -13,7 +13,7 @@ Rectangle {
     property alias texto: txtTextoTag.text
     property alias toolTip: toolTipText.text
     property alias source: imageTag.source
-    property double opacidadPorDefecto: 0.3
+    property double opacidadPorDefecto: 0.5
     property color _gradietMedioIndicador: "#f7960e"
 
     property alias  indicadorColor: rectangle4.color
@@ -46,7 +46,7 @@ Rectangle {
         anchors.topMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        font.pixelSize: 12
+        font.pixelSize: sizeTagsInferiores
     }
 
     MouseArea {

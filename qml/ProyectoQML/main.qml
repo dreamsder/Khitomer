@@ -36,7 +36,12 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.19"
+    property string versionKhitomer: "1.17.20"
+
+
+    ///property para tamaño de fuentes
+    property int sizeTagsInferiores: 15
+    property int sizeTitulosControles: 13
 
 
     property bool mODO_DOCUMENTOS_VISIBLES: modeloconfiguracion.retornaValorConfiguracionBooleano("MODO_DOCUMENTOS_VISIBLES")
@@ -1731,7 +1736,7 @@ tamanioFuenteTitulo: 13
             _gradietMedioIndicador:"#4c6bb5"
             indicadorColor: "#4a68b5"
             toolTip: ""
-            opacidadPorDefecto: mantenimientoLiquidaciones.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoLiquidaciones.visible ? "1" : "0.5"
             onClic: {
                 mostrarMantenimientos(0,"home")
             }
@@ -1742,7 +1747,7 @@ tamanioFuenteTitulo: 13
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaFacturacion.png"
             texto: qsTr("Facturación")
             _gradietMedioIndicador:"#db4d4d"
-            opacidadPorDefecto: mantenimientoFactura.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoFactura.visible ? "1" : "0.5"
             toolTip: ""
             indicadorColor: "#db4d4d"
             onClic: {
@@ -1755,7 +1760,7 @@ tamanioFuenteTitulo: 13
             texto: qsTr("Cliente/Proveedor")
             toolTip: ""
             indicadorColor: "#3ca239"
-            opacidadPorDefecto: mantenimientoClientes.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoClientes.visible ? "1" : "0.5"
             _gradietMedioIndicador:"#3ca239"
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoCliente.png"
             onClic: {
@@ -1767,7 +1772,7 @@ tamanioFuenteTitulo: 13
             id: tagArticulos
             visible: true
             texto: qsTr("Artículos")
-            opacidadPorDefecto: mantenimientoArticulos.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoArticulos.visible ? "1" : "0.5"
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevoArticulo.png"
             toolTip: ""
             indicadorColor: "#27abb4"
@@ -1782,7 +1787,7 @@ tamanioFuenteTitulo: 13
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaListaDePrecios.png"
             texto: qsTr("Lista de precios")
             _gradietMedioIndicador:"#f8a218"
-            opacidadPorDefecto: mantenimientoListaPrecios.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoListaPrecios.visible ? "1" : "0.5"
             toolTip: ""
             indicadorColor: "#f89e16"
             onClic: {
@@ -1797,7 +1802,7 @@ tamanioFuenteTitulo: 13
             _gradietMedioIndicador:"#7a14be"
             indicadorColor: "#7e0cc5"
             toolTip: ""
-            opacidadPorDefecto: mantenimientoDocumentos.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoDocumentos.visible ? "1" : "0.5"
 
             onClic: {
 
@@ -1815,7 +1820,7 @@ tamanioFuenteTitulo: 13
             toolTip: ""
             _gradietMedioIndicador:"#e235dd"
             indicadorColor: "#e235dd"
-            opacidadPorDefecto: mantenimientoReportes.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoReportes.visible ? "1" : "0.5"
             onClic: {
 
                 mostrarMantenimientos(5,"derecha")
@@ -1830,7 +1835,7 @@ tamanioFuenteTitulo: 13
             toolTip: ""
             _gradietMedioIndicador: "#4c6bb5"
             indicadorColor: "#880000"
-            opacidadPorDefecto: mantenimientoCuentasCorriente.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoCuentasCorriente.visible ? "1" : "0.5"
 
             onClic: {
 
@@ -2026,7 +2031,7 @@ tamanioFuenteTitulo: 13
             toolTip: ""
             _gradietMedioIndicador: "#4c6bb5"
             indicadorColor: "#880000"
-            opacidadPorDefecto: mantenimientoCuentasCorriente.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoCuentasCorriente.visible ? "1" : "0.5"
 
             onClic: {
 
@@ -2042,7 +2047,7 @@ tamanioFuenteTitulo: 13
             toolTip: ""
             _gradietMedioIndicador: "#CDDC39"
             indicadorColor: "#CDDC39"
-            opacidadPorDefecto: mantenimientoPromociones.visible ? "1" : "0.3"
+            opacidadPorDefecto: mantenimientoPromociones.visible ? "1" : "0.5"
 
             onClic: {
 
