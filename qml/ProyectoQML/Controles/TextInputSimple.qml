@@ -26,11 +26,10 @@ import QtQuick 1.1
 Rectangle {
     id: rectangle1
     //width: 500
-
     property int altoControl: 32
     property int altoControlRecta: 18
     property int tamanioFuente: 9
-    property int tamanioFuenteTitulo: sizeTitulosControles
+    property int tamanioFuenteTitulo: 13
     width: {
 
 
