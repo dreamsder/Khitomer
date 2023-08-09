@@ -69,7 +69,7 @@ public:
 
     Q_INVOKABLE QString retornaValorConfiguracion(QString ) const;
     Q_INVOKABLE bool retornaValorConfiguracionBooleano(QString _codigoConfiguracion) const;
-
+    Q_INVOKABLE QString retornaValorConfiguracionValorString(QString _codigoConfiguracion) const;
 
     Q_INVOKABLE QString retornaCantidadDecimalesString() const;
 

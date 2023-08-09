@@ -81,23 +81,22 @@ Rectangle {
     // funcion que calcula el descuento que tienen el cliente, para un articulo dado
     function calcularDescuentoPorCliente(valorArticuloACalcular){
         var nuevoValorArticulo=valorArticuloACalcular;
-        // El descuento desde el cliente se aplica solo en documentos de venta, por lo que una compra proveedor no puede descontarse
-        if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion.trim(),"esDocumentoDeVenta")){
-            // El descuento solo se calcula si existe un cliente logicamente.
-            if(txtCodigoClienteFacturacion.textoInputBox.trim()!==""){
-                var descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
-                // Si el porcentaje de descuento del cliente es diferente de 0, lo calculo
-                if(descuentoDelCliente!==0){
-                    console.log(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento"))
-                    console.log(valorArticuloACalcular);
-                    var nuevoDescuentoCliente=(valorArticuloACalcular*descuentoDelCliente)/100;
-                    nuevoValorArticulo= valorArticuloACalcular-nuevoDescuentoCliente;
+
+        if(modeloconfiguracion.retornaValorConfiguracionValorString("MODO_DESCUENTO_CLIENTE_DIRECTO")==="1"){
+            // El descuento desde el cliente se aplica solo en documentos de venta, por lo que una compra proveedor no puede descontarse
+            if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion.trim(),"esDocumentoDeVenta")){
+                // El descuento solo se calcula si existe un cliente logicamente.
+                if(txtCodigoClienteFacturacion.textoInputBox.trim()!==""){
+                    var descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
+                    // Si el porcentaje de descuento del cliente es diferente de 0, lo calculo
+                    if(descuentoDelCliente!==0){
+                        var nuevoDescuentoCliente=(valorArticuloACalcular*descuentoDelCliente)/100;
+                        nuevoValorArticulo= valorArticuloACalcular-nuevoDescuentoCliente;
+                    }
                 }
             }
         }
-        console.log(nuevoValorArticulo);
         return nuevoValorArticulo;
-
     }
 
 
@@ -3361,6 +3360,8 @@ Rectangle {
 
 
 
+
+
                         if(modeloconfiguracion.retornaValorConfiguracion("UTILIZA_CONTROL_CLIENTE_CREDITO")=="1"){
                             if(txtCodigoClienteFacturacion.textoInputBox.trim()!="" && lblRazonSocialCliente.text.trim()!=""){
                                 if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
@@ -3375,6 +3376,13 @@ Rectangle {
                                 }
                             }
                         }
+                        if(modeloconfiguracion.retornaValorConfiguracionValorString("MODO_DESCUENTO_CLIENTE_DIRECTO")==="2"){
+                            var  descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
+                            etiquetaTotal.setearPorcenjeDescuento(descuentoDelCliente)
+                            recalcularTotales()
+                        }
+
+
 
                     }
                 }// fin onEnter

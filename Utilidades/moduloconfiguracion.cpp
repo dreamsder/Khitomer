@@ -425,3 +425,29 @@ bool ModuloConfiguracion::retornaValorConfiguracionBooleano(QString _codigoConfi
         return false;
     }
 }
+QString ModuloConfiguracion::retornaValorConfiguracionValorString(QString _codigoConfiguracion) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select valorConfiguracion from Configuracion where codigoConfiguracion='"+_codigoConfiguracion+"';")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+                    return query.value(0).toString();
+                }else{return "0";}
+            }
+            else{
+                return "0";
+            }
+        }else{return "0";}
+    }else{
+        return "0";
+    }
+}
