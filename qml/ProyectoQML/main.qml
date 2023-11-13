@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.24"
+    property string versionKhitomer: "1.17.25"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -280,6 +280,8 @@ Rectangle {
     /// 1.17.22 :Se corrige reporte Informaciòn de clientes entre fechas, agregado telefono 2.
     /// 1.17.23 :Se modifica el orden de información de documentos en el mantenimiento de documentos a fecha de emision del documento. Antes estaba por fecha de ultima modificación.
     /// 1.17.24 :Se agrega configuración para manejar los descuentos directos del cliente.
+    /// 1.17.25 :Se corrgie situación donde los articulos no quedaban marcado para sincronizar cuando se cambiaba el precio desde lista de precios.
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

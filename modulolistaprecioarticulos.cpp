@@ -213,12 +213,36 @@ Database::chequeaStatusAccesoMysql();
 
         if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb) values('"+_codigoListaPrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0')")){
 
+            marcarArticuloParaSincronizar(_codigoArticulo);
 
             return 1;
         }else{
             return -3;
         }
     }else{return -1;}
+}
+
+
+
+void ModuloListaPrecioArticulos::marcarArticuloParaSincronizar(QString _codigoArticulo) const {
+
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+        query.exec("update Articulos set sincronizadoWeb=0 where codigoArticulo='"+_codigoArticulo+"' ");
+
+    }
 }
 
 

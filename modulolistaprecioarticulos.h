@@ -102,6 +102,7 @@ public:
     Q_INVOKABLE QString retornaPrecioArticulo(int );
     Q_INVOKABLE QString retornaDescripcionArticulo(int index);
 
+    void marcarArticuloParaSincronizar(QString _codigoArticulo) const;
 
 
 
