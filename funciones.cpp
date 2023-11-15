@@ -2100,7 +2100,20 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 453:
             if(!impactoCambioEnBD("INSERT INTO `Configuracion` (`codigoConfiguracion`, `valorConfiguracion`, `descripcionConfiguracion`) VALUES ('MODO_DESCUENTO_CLIENTE_DIRECTO', '1', '0 - No se usa descuento del cliente. 1 - Se toma el porcentaje seteado en el cliente. 2 - El porcentaje del cliente se carga en el bloque de Descuento al inciar la factura. ');","454")){
                 _iterador=false; return false; } break;
-
+        case 454:
+            if(impactoCambioEnBD("DROP VIEW IF EXISTS VDocumentosLiquidaciones","454")){
+                if(!impactoCambioEnBD("create view VDocumentosLiquidaciones as  select D.codigoDocumento,D.codigoTipoDocumento,D.serieDocumento,D.codigoEstadoDocumento,D.codigoCliente,D.tipoCliente,D.codigoMonedaDocumento,D.fechaEmisionDocumento,D.precioTotalVenta,D.precioSubTotalVenta,D.precioIvaVenta,D.codigoLiquidacion,D.codigoVendedorLiquidacion,D.codigoVendedorComisiona,C.nombreCliente,C.razonSocial,TD.descripcionTipoDocumento,TED.descripcionEstadoDocumento,D.totalIva1,D.totalIva2,D.totalIva3,D.observaciones,D.numeroCuentaBancaria,D.codigoBanco,D.esDocumentoWeb,D.montoDescuentoTotal,D.saldoClienteCuentaCorriente,D.formaDePago,D.porcentajeDescuentoAlTotal,D.esDocumentoCFE,D.cae_numeroCae,D.cae_serie,D.comentarios,D.fechaHoraGuardadoDocumentoSQL,TDP.codigoPerfil   from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento    left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento join Liquidaciones LI on LI.codigoLiquidacion=D.codigoLiquidacion and LI.codigoVendedor=D.codigoVendedorLiquidacion where LI.estadoLiquidacion='A'; ","455")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
+        case 455:
+                    if(impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;ALTER TABLE `DocumentosLineas` DROP FOREIGN KEY `fk_DocumentoExiste`; ALTER TABLE `khitomer`.`DocumentosLineas` ADD CONSTRAINT `fk_DocumentoExiste`  FOREIGN KEY (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)   REFERENCES `khitomer`.`Documentos` (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  ON DELETE NO ACTION  ON UPDATE NO ACTION;SET FOREIGN_KEY_CHECKS=1;","455")){
+                        if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;ALTER TABLE `DocumentosLineasPago` DROP FOREIGN KEY `fk_DocumentosMediosDePago`; ALTER TABLE `khitomer`.`DocumentosLineasPago` ADD CONSTRAINT `fk_DocumentosMediosDePago`   FOREIGN KEY (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  REFERENCES `khitomer`.`Documentos` (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  ON DELETE NO ACTION ON UPDATE NO ACTION; SET FOREIGN_KEY_CHECKS=1;","456")){
+                            _iterador=false; return false;
+                        }
+                    }else{_iterador=false; return false;}
+            break;
 
 
         default:

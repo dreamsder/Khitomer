@@ -640,7 +640,7 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
 
 
 
-        qDebug()<< q.lastQuery();
+       // qDebug()<< q.lastQuery();
 
         QSqlRecord rec = q.record();
 
@@ -1464,7 +1464,7 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
-            qDebug() << "No conecto";
+            //qDebug() << "No conecto";
             conexion=false;
         }
     }
@@ -1474,23 +1474,23 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
 
         ///Actualizo el documento de venta(factura credito, ajuste cuenta corriente +)
         if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+"  and serieDocumento='"+_serieDocumentoAPagar+"'   and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+"")){
-            qDebug() << query.lastQuery();
-            qDebug() << "1";
+            //qDebug() << query.lastQuery();
+            //qDebug() << "1";
             query.clear();
             ///Actualizo el documento de pago(recibo, nota de credito, ajuste cuenta corriente -)
             if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoDePago+" and codigoTipoDocumento="+_codigoTipoDocumentoDePago+" and serieDocumento='"+_serieDocumentoDePago+"'   and codigoCliente='"+_codigoClienteDePago+"' and tipoCliente="+_codigoTipoClienteDePago+" and codigoMonedaDocumento="+_codigoMonedaDePago+"")){
-                qDebug() << query.lastQuery();
-                qDebug() << "2";
+                //qDebug() << query.lastQuery();
+                //qDebug() << "2";
                 query.clear();
                 ///Inserto las referencias de pago en la base de datos
                 if(query.exec("insert into DocumentosCanceladosCuentaCorriente(codigoDocumento,codigoTipoDocumento,serieDocumento ,codigoDocumentoQueCancela,codigoTipoDocumentoQueCancela,serieDocumentoQueCancela,montoDescontadoCuentaCorriente)values('"+_codigoDocumentoAPagar+"','"+_codigoTipoDocumentoAPagar+"','"+_serieDocumentoAPagar+"','"+_codigoDocumentoDePago+"','"+_codigoTipoDocumentoDePago+"','"+_serieDocumentoDePago+"',"+_montoADebitar+");")){
                     funcion.loguear("Inserto DocumentosCanceladosCuentaCorriente: "+query.lastQuery());
-                    qDebug() << query.lastQuery();
-                    qDebug() << "3";
+                 //   qDebug() << query.lastQuery();
+                  //  qDebug() << "3";
                     return 1;
                 }else{
-                    qDebug()<< "Insert";
-                    qDebug()<< query.lastError();
+                  //  qDebug()<< "Insert";
+                  //  qDebug()<< query.lastError();
                     funcion.mensajeAdvertencia(query.lastError().text());
                     funcion.mensajeAdvertencia(query.lastQuery());
                     return -5;
@@ -1498,29 +1498,29 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
             }else{
 
                 funcion.mensajeAdvertencia(query.lastQuery());
-                qDebug()<< query.lastError();
+                //qDebug()<< query.lastError();
                 query.clear();
                 if(query.exec("update Documentos set saldoClienteCuentaCorriente="+_montoDelSaldo+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumentoAPagar+"' and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+";")){
-                    qDebug()<< "update 1";
-                    qDebug()<< query.lastError();
+                  //  qDebug()<< "update 1";
+                   // qDebug()<< query.lastError();
                     return -2;
                 }else{
-                    qDebug()<< "update 2";
-                    qDebug()<< query.lastError();
+                   // qDebug()<< "update 2";
+                   // qDebug()<< query.lastError();
                     funcion.mensajeAdvertencia(query.lastError().text());
                     funcion.mensajeAdvertencia(query.lastQuery());
                     return -5;
                 }
             }
         }else{
-            qDebug()<< "update 3";
-            qDebug()<< query.lastError();
+          //  qDebug()<< "update 3";
+          //  qDebug()<< query.lastError();
             funcion.mensajeAdvertencia(query.lastError().text());
             funcion.mensajeAdvertencia(query.lastQuery());
             return -1;
         }
     }else{
-        qDebug()<<"No se puede conectar a mysql server";
+        //qDebug()<<"No se puede conectar a mysql server";
         return 0;
     }
 }
@@ -2599,7 +2599,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     consultaSql +=" (CAST(DOC.precioSubTotalVenta AS DECIMAL(20,3))+CAST(DOC.precioIvaVenta AS DECIMAL(20,3))) 'totalSinRedondeo',"; // indice 47
     consultaSql +=" DOC.usuarioUltimaModificacion,";         // indice 48
 
-    consultaSql +=" DATE_FORMAT(fechaHoraGuardadoDocumentoSQL,'%H:%m:%s'),"; // indice 49
+    consultaSql +=" DATE_FORMAT(fechaHoraGuardadoDocumentoSQL,'%H:%i:%s'),"; // indice 49
     consultaSql +=" DOC.usuarioAlta,";                       // indice 50
     consultaSql +=" DL.codigoArticulo,";                     // indice 51
     consultaSql +=" TD.descripcionTipoDocumentoImpresora,";  // indice 52
@@ -3038,6 +3038,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
                     painter.drawText(cuadro(3.0,4.5+desplazamientoLogo,8.0,0.5,false),"Fecha/Hora");
                     painter.drawText(cuadroTicketRight(8.0,4.5+desplazamientoLogo,8.0,0.5,"Vend."),"Vend.");
                     painter.drawText(cuadro(0.0,4.8+desplazamientoLogo,8.0,0.5,false),serieInterna+" - "+_codigoDocumento);
+
                     painter.drawText(cuadro(2.4,4.8+desplazamientoLogo,8.0,0.5,false),fecha+" - "+horaEmisionDocumento);
                     painter.drawText(cuadroTicketRight(7.7,4.8+desplazamientoLogo,8.0,0.5,emisorDelDocumento),emisorDelDocumento);
 
