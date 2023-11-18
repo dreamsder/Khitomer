@@ -99,7 +99,7 @@ public:
 
 private:
     QList<Usuarios> m_Usuarios;
-
+    QMap<QString, int> cacheCodigosPerfil;
 
     
 };

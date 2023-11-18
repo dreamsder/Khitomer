@@ -123,6 +123,7 @@ Rectangle {
                 botonBuscarTextoVisible: true
                 textoTitulo: "Descripción:"
                 textoInputBox: ""
+                largoMaximo: 65
                 onClicEnBusqueda: {
 
                     modeloArticulos.clearArticulos()
@@ -201,7 +202,7 @@ Rectangle {
                 x: 29
                 y: 86
             //    width: 450
-                largoMaximo: 80
+                largoMaximo: 90
                 botonBorrarTextoVisible: true
                 textoDeFondo: "descripcion extendida del articulo"
                 enFocoSeleccionarTodo: true

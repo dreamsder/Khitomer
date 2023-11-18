@@ -2114,6 +2114,20 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
                         }
                     }else{_iterador=false; return false;}
             break;
+        case 456:
+                    if(impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;ALTER TABLE `DocumentosLineas` DROP FOREIGN KEY `fk_DocumentoExiste`; ALTER TABLE `khitomer`.`DocumentosLineas` ADD CONSTRAINT `fk_DocumentoExiste`  FOREIGN KEY (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)   REFERENCES `khitomer`.`Documentos` (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  ON DELETE CASCADE  ON UPDATE NO ACTION;SET FOREIGN_KEY_CHECKS=1;","456")){
+                        if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;ALTER TABLE `DocumentosLineasPago` DROP FOREIGN KEY `fk_DocumentosMediosDePago`; ALTER TABLE `khitomer`.`DocumentosLineasPago` ADD CONSTRAINT `fk_DocumentosMediosDePago`   FOREIGN KEY (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  REFERENCES `khitomer`.`Documentos` (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  ON DELETE CASCADE ON UPDATE NO ACTION; SET FOREIGN_KEY_CHECKS=1;","457")){
+                            _iterador=false; return false;
+                        }
+                    }else{_iterador=false; return false;}
+            break;
+        case 457:
+            if(!impactoCambioEnBD("SET FOREIGN_KEY_CHECKS=0;ALTER TABLE `DocumentosLineasPago` DROP  KEY `fk_DocumentosMediosDePago`;ALTER TABLE `DocumentosLineasPago` DROP FOREIGN KEY `fk_DocumentosMediosDePago`; ALTER TABLE `khitomer`.`DocumentosLineasPago` ADD CONSTRAINT `fk_DocumentosMediosDePago`   FOREIGN KEY (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  REFERENCES `khitomer`.`Documentos` (`codigoDocumento` , `codigoTipoDocumento`,serieDocumento)  ON DELETE CASCADE ON UPDATE NO ACTION; SET FOREIGN_KEY_CHECKS=1;","458")){
+                _iterador=false; return false; } break;
+        case 458:
+            if(!impactoCambioEnBD("INSERT INTO TipoEstadoDocumento values('N','No usado por el sistema')","459")){
+                _iterador=false; return false; } break;
+
 
 
         default:

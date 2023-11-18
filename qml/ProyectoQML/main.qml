@@ -283,6 +283,10 @@ Rectangle {
     /// 1.17.25 :Se corrgie situación donde los articulos no quedaban marcado para sincronizar cuando se cambiaba el precio desde lista de precios.
     /// 1.17.26 :Corrección en Vista VDocumentosLoquidacion, se le agrega un where por liquidaciones abiertas. Se corrige las foreing key de DocumentosLineas y DocumentosLineasPagos agregando serie del documento.
     ///         :Se corrige la hora en la impresión por ticket.
+    ///         :Se aumento el largo maximo de la descripcion del artículo.
+    ///         :Se cambia la forma de tomar el stock online, ahora desde la vista para que sea mas rapido.
+    ///         :Se modifican DocumentosLineas y DocumentosLineasPago para que se borren si se borra un Documento.
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

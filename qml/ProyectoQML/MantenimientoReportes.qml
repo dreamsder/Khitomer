@@ -1021,7 +1021,7 @@ Rectangle {
                     focus: false
                     preferredHeight: rectangle2.height
                     preferredWidth: rectangle2.width
-                    settings.javaEnabled: true
+                    settings.javaEnabled: false
                     settings.javascriptEnabled: true
                     settings.standardFontFamily: "Arial"
                     settings.defaultFontSize: 13

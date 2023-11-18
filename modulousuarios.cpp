@@ -27,6 +27,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <Utilidades/wsdatabase.h>
 
 
+
 ModuloUsuarios::ModuloUsuarios(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -46,6 +47,8 @@ Usuarios::Usuarios(const QString &idUsuario,const QString &nombreUsuario,const Q
 
     : m_idUsuario(idUsuario),m_nombreUsuario(nombreUsuario),m_apellidoUsuario(apellidoUsuario),m_tipoUsuario(tipoUsuario),m_esVendedor(esVendedor),m_codigoPerfil(codigoPerfil)
 {
+
+
 }
 
 
@@ -76,12 +79,19 @@ int Usuarios::codigoPerfil() const
     return m_codigoPerfil;
 }
 
-void ModuloUsuarios::addUsuarios(const Usuarios &usuarios)
+/*void ModuloUsuarios::addUsuarios(const Usuarios &usuarios)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_Usuarios << usuarios;
     endInsertRows();
 
+}*/
+
+void ModuloUsuarios::addUsuarios(const Usuarios &usuarios) {
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_Usuarios << usuarios;
+    cacheCodigosPerfil[usuarios.idUsuario()] = usuarios.codigoPerfil(); // Añadir a la caché
+    endInsertRows();
 }
 
 void ModuloUsuarios::clearUsuarios(){
@@ -541,19 +551,22 @@ bool ModuloUsuarios::existenUsuariosConPerfilAsociado(QString _codigoPerfil) con
     }*/
 }
 
+
+
+
 QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
 
-   /* QString _valor="0";
-    for (int var = 0; var < m_Usuarios.size(); ++var) {
-        if(m_Usuarios[var].idUsuario()==_idUsuario){
-
-            _valor = QString::number(m_Usuarios[var].codigoPerfil());
-
+    // Comprobar si _idUsuario es vacío o tiene menos de 3 dígitos
+        if (_idUsuario.isEmpty() || _idUsuario.length() < 3) {
+            return "0";
         }
-    }
 
 
-    if(m_Usuarios.size()==0 && _valor=="0"){*/
+    // Primero revisa en la caché
+        if (cacheCodigosPerfil.contains(_idUsuario)) {
+            return QString::number(cacheCodigosPerfil.value(_idUsuario));
+        }
+
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -581,10 +594,5 @@ QString ModuloUsuarios::retornaCodigoPerfil(QString _idUsuario) const{
                 return "0";
             }
         }else{return "0";}
-   /* }else{
-        return _valor;
-    }*/
-
-
 
 }

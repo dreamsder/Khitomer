@@ -1126,6 +1126,9 @@ QString ModuloReportes::retornaConfiguracionTotalizadorDeColumnaDelReporte(QStri
     /* }else{
         return _valor;
     }*/
+
+
+
 }
 
 QString ModuloReportes::generarReporte(QString _consultaSql,QString _codigoReporte, QString _consultaSqlGraficas, bool _incluirGrafica,QString _consultaSqlCabezal) const {
