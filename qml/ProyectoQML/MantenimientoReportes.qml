@@ -1021,7 +1021,7 @@ Rectangle {
                     focus: false
                     preferredHeight: rectangle2.height
                     preferredWidth: rectangle2.width
-                    settings.javaEnabled: false
+                    settings.javaEnabled: true
                     settings.javascriptEnabled: true
                     settings.standardFontFamily: "Arial"
                     settings.defaultFontSize: 13
@@ -1029,29 +1029,22 @@ Rectangle {
                     settings.defaultFixedFontSize: 13
                     smooth: false
                     visible: true                    
+                    enabled: true
+
 
                     javaScriptWindowObjects: QtObject {
                         WebView.windowObjectName: "qml"
 
                         function qmlCall(codigo) {
-                            var arrayDeCadenas = codigo.split("-");
+                            var arrayDeCadenas = codigo.split("-");"select   concat(DOC.codigoDocumento,' - ',TDOC.descripcionTipoDocumento,' (',DOC.fechaEmisionDocumento,') - CFE: ',DOC.cae_numeroCae,'(',DOC.cae_serie,')' )'Documento (Fecha)', sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total $',  sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total U$S', CLI.rut'RUT',DOC.codigoDocumento'#Documento', DOC.fechaEmisionDocumento'Fecha',concat(DOC.codigoDocumento,'-',DOC.codigoTipoDocumento,'-',DOC.serieDocumento)''     from  Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in ('G','E') and TDOC.esDocumentoDeVenta='1'  and DOC.fechaEmisionDocumento between '2023-10-31' and '2023-11-18'  group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento;"
                             mantenimientoFactura.cargoFacturaEnMantenimiento(arrayDeCadenas[0],arrayDeCadenas[1],arrayDeCadenas[2])
                         }
                     }
 
 
-                    /*WebView {
-                        javaScriptWindowObjects: QtObject {
-                            WebView.windowObjectName: "qml"
 
-                            function qmlCall() {
-                                console.log("This call is in QML!");
-                            }
-                        }
-                        html: "<script>window.qml.qmlCall();</script>"
-                    }*/
 
-                    enabled: true
+
 
                     onLoadFinished: {
 
