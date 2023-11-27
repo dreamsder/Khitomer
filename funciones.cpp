@@ -2127,8 +2127,23 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 458:
             if(!impactoCambioEnBD("INSERT INTO TipoEstadoDocumento values('N','No usado por el sistema')","459")){
                 _iterador=false; return false; } break;
-
-
+        case 459:
+            if(!impactoCambioEnBD("alter table Clientes modify fechaAlta  TIMESTAMP  DEFAULT CURRENT_TIMESTAMP","460")){
+                _iterador=false; return false; } break;
+        case 460:
+            if(impactoCambioEnBD("DROP VIEW IF EXISTS VCantidadDocumentosEnLiquidaciones","460")){
+                if(!impactoCambioEnBD("create view VCantidadDocumentosEnLiquidaciones as select DOC.codigoLiquidacion,DOC.codigoVendedorLiquidacion,DOC.codigoEstadoDocumento,count(*)'cantidad'  from Documentos DOC join Liquidaciones LI on LI.codigoLiquidacion=DOC.codigoLiquidacion and LI.codigoVendedor=DOC.codigoVendedorLiquidacion where LI.estadoLiquidacion='A'  group by DOC.codigoLiquidacion,DOC.codigoVendedorLiquidacion,DOC.codigoEstadoDocumento; ","461")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
+        case 461:
+            if(impactoCambioEnBD("DROP VIEW IF EXISTS VTotalesEnLiquidacion","461")){
+                if(!impactoCambioEnBD("create view VTotalesEnLiquidacion as select D.codigoLiquidacion,D.codigoVendedorLiquidacion,D.codigoEstadoDocumento,MP.monedaMedioPago,ROUND(sum(DLP.importePago*T.afectaTotales),2)'monto' FROM Documentos D  join DocumentosLineasPago DLP on DLP.codigoDocumento=D.codigoDocumento and  DLP.codigoTipoDocumento=D.codigoTipoDocumento and DLP.serieDocumento=D.serieDocumento join MediosDePago MP on MP.codigoMedioPago=DLP.codigoMedioPago join TipoDocumento T on T.codigoTipoDocumento=D.codigoTipoDocumento join Liquidaciones LI on LI.codigoLiquidacion=D.codigoLiquidacion and LI.codigoVendedor=D.codigoVendedorLiquidacion   where LI.estadoLiquidacion='A' and  T.afectaTotales!=0  and D.codigoEstadoDocumento not in ('C','A','P') and MP.codigoTipoMedioDePago=1 group by D.codigoLiquidacion,D.codigoVendedorLiquidacion,D.codigoEstadoDocumento,MP.monedaMedioPago;","462")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
 
         default:
             qDebug()<< "Se Finalizan las actualizaciones de base de datos.";

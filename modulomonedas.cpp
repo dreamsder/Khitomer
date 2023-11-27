@@ -366,7 +366,7 @@ QString ModuloMonedas::retornaDescripcionMoneda(QString _codigoMoneda) const{
 
 QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
 
-  /*  QString _valor="";
+    QString _valor="";
     for (int var = 0; var < m_Monedas.size(); ++var) {
         if(QString::number(m_Monedas[var].codigoMoneda())==_codigoMoneda){
             _valor = m_Monedas[var].simboloMoneda();
@@ -374,7 +374,7 @@ QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
     }
 
 
-    if(m_Monedas.size()==0 && _valor==""){*/
+    if(m_Monedas.size()==0 && _valor==""){
         bool conexion=true;
         Database::chequeaStatusAccesoMysql();
         if(!Database::connect().isOpen()){
@@ -403,12 +403,12 @@ QString ModuloMonedas::retornaSimboloMoneda(QString _codigoMoneda) const{
                 return "";
             }
         }else{return "";}
-   /* }else{
+    }else{
         return _valor;
-    }*/
+    }
 
-    /*
-    */
+
+
 }
 QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
     bool conexion=true;

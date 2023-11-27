@@ -640,7 +640,7 @@ void ModuloDocumentos::buscarDocumentosEnLiquidaciones(QString _codigoLiquidacio
 
 
 
-       // qDebug()<< q.lastQuery();
+        //qDebug()<< q.lastQuery();
 
         QSqlRecord rec = q.record();
 

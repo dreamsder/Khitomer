@@ -117,6 +117,15 @@ QVariant ModuloTipoCheques::data(const QModelIndex & index, int role) const {
 }
 QString ModuloTipoCheques::retornaDescripcionCheque(QString _codigoTipoCheque) const{
 
+    QString _valor="";
+    for (int var = 0; var < m_Cheques.size(); ++var) {
+        if(QString::number(m_Cheques[var].codigoTipoCheque())==_codigoTipoCheque){
+            _valor = m_Cheques[var].descripcionTipoCheque();
+        }
+    }
+    if(m_Cheques.size()==0 && _valor==""){
+
+
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -143,5 +152,10 @@ Database::chequeaStatusAccesoMysql();
         }
     }else{
         return "";
+    }
+
+    }else{
+        return _valor;
+
     }
 }

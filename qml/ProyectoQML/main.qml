@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.26"
+    property string versionKhitomer: "1.17.28"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -286,7 +286,8 @@ Rectangle {
     ///         :Se aumento el largo maximo de la descripcion del artículo.
     ///         :Se cambia la forma de tomar el stock online, ahora desde la vista para que sea mas rapido.
     ///         :Se modifican DocumentosLineas y DocumentosLineasPago para que se borren si se borra un Documento.
-
+    /// 1.17.27 :Se modifica el campo fechaAlta de la tabla Clientes para que la fecha se guarde de manera automatica.
+    /// 1.17.28 :Se corrigen varias vistas y se cargan descripciones de cheques y monedas en memoria.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

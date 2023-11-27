@@ -136,13 +136,13 @@ Rectangle{
             }
 
             onClicked: {
+
+
                 modeloTotalChequesDiferidos.limpiarListaTotalCheques()
                 modeloTotalChequesDiferidos.buscarTotalCheques(codigoLiquidacion,codigoVendedor)
 
                 modeloTotalOtrosCheques.limpiarListaTotalCheques()
                 modeloTotalOtrosCheques.buscarTotalOtrosCheques(codigoLiquidacion,codigoVendedor)
-
-
 
                 focus_scope1.focus=true
 
@@ -168,8 +168,6 @@ Rectangle{
                 }else{
                     modeloDocumentosEnLiquidaciones.buscarDocumentosEnLiquidaciones(codigoLiquidacion,codigoVendedor,modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),cbListaEstadoDocumentosEnMantenimientoLiquidaciones.codigoValorSeleccion.trim(),cbListaCantidadAniosHaciaAtrasEnDocumentosDeLiquidacion.codigoValorSeleccion.trim())
                 }
-
-
                 listaDeDocumentosEnLiquidaciones.currentIndex=0;
 
             }

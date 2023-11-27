@@ -339,10 +339,12 @@ inicio:
               /*  modulo_CFE_ParametrosGenerales.cargar();
                 moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
                 moduloListaPerfiles.buscarPerfiles("1=","1");
-
+*/
                 moduloMonedasTotales.buscarMonedas("1=","1");
+                 moduloListaMonedas.buscarMonedas("1=","1");
+                 moduloBancos.buscarBancos("1=","1");
 
-                moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
+               /* moduloListaTipoDocumentos.buscarTipoDocumentos("1=","1","1");
                 moduloListaTipoDocumentosComboBoxClienteDefault.buscarTipoDocumentosDefault();
                 moduloListaTipoDocumentosPerfiles.buscarTodosLosTipoDocumentos("1=","1");
                 moduloListaTipoDocumentosMantenimiento.buscarTodosLosTipoDocumentos("1=","1");
@@ -359,7 +361,7 @@ inicio:
                 moduloMediosDePago.buscarMediosDePago("1=","1");
                 moduloReportesMenu.buscarReportesMenu("1=","1","");
                 moduloBancosComboBox.buscarBancos("1=","1");
-                moduloBancos.buscarBancos("1=","1");
+
 
 
                 moduloListasPrecios.buscarListasPrecio("1=","1");
@@ -615,7 +617,7 @@ inicio:
 
       moduloListaMenues.buscarMenus("1=","1");
       moduloTipoClasificacion.buscarTipoClasificacion("1=","1");
-      moduloListaMonedas.buscarMonedas("1=","1");
+     // moduloListaMonedas.buscarMonedas("1=","1");
       moduloListaProveedor.buscarCliente("tipoCliente=","2");
       moduloListaVendedores.buscarUsuarios("esVendedor=","1");
       moduloListaIvas.buscarIvas("1=","1");
@@ -636,7 +638,7 @@ inicio:
       moduloRubrosComboBox.buscarRubros("1=","1");
       moduloBancosComboBox.buscarBancos("1=","1");
       moduloTarjetasCredito.buscarTarjetasCredito("1=","1");
-      moduloMonedasTotales.buscarMonedas("1=","1");
+     // moduloMonedasTotales.buscarMonedas("1=","1");
       moduloCuentasBancariasComboBox.buscarCuentasBancarias("1=","1");
       moduloTipoChequesComboBox.buscarCheques("1=","1");
       moduloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1");
