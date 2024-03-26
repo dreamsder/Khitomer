@@ -94,6 +94,9 @@ Rectangle {
 
         btnGenerarCSV.enabled=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaGeneracionCSV")
         cbxSeparadorCSV.visible=btnGenerarCSV.enabled
+
+
+       cbxUsaControlDeStockPrevisto.visible=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaControlStockPrevisto")
     }
 
 
@@ -264,6 +267,22 @@ Rectangle {
         }
 
 
+
+        while(consultaSqlPrevia.match("@_modo_Stock_Previsto")){
+            if(cbxUsaControlDeStockPrevisto.codigoValorSeleccion=="1"){
+                consultaSqlPrevia=consultaSqlPrevia.replace("@_modo_Stock_Previsto"," and SPS.cantidad>0 ")
+                consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_modo_Stock_Previsto"," and SPS.cantidad>0 ")
+                consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_modo_Stock_Previsto"," and SPS.cantidad>0 ")
+            }else if(cbxUsaControlDeStockPrevisto.codigoValorSeleccion=="2"){
+                consultaSqlPrevia=consultaSqlPrevia.replace("@_modo_Stock_Previsto"," and SPS.cantidad<1 ")
+                consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_modo_Stock_Previsto"," and SPS.cantidad<1 ")
+                consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_modo_Stock_Previsto"," and SPS.cantidad<1 ")
+            }else{
+                consultaSqlPrevia=consultaSqlPrevia.replace("@_modo_Stock_Previsto","  ")
+                consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_modo_Stock_Previsto","  ")
+                consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_modo_Stock_Previsto","  ")
+            }
+        }
 
 
         while(consultaSqlPrevia.match("@_codigoLocalidadPais")){
@@ -968,6 +987,32 @@ Rectangle {
                 }
             }
 
+            ComboBoxGenerico {
+                id: cbxUsaControlDeStockPrevisto
+                width: 250
+                visible: false
+                textoTitulo: qsTr("Modo Stock Previsto:")
+                modeloItems: modeloUsaControlDeStockPrevisto
+                codigoValorSeleccion: "1"
+                textoComboBox: qsTr("Muestra artículos con Stock Previsto")
+                ListModel{
+                    id:modeloUsaControlDeStockPrevisto
+                    ListElement {
+                        codigoItem: "1"
+                        descripcionItem: "Muestra artículos con Stock Previsto"
+                    }
+                    ListElement {
+                        codigoItem: "2"
+                        descripcionItem: "Muestra artículos sin Stock Previsto"
+                    }
+                    ListElement {
+                        codigoItem: "3"
+                        descripcionItem: "No controla stock"
+                    }
+                }
+            }
+
+
         }
 
         Rectangle{
@@ -1036,7 +1081,8 @@ Rectangle {
                         WebView.windowObjectName: "qml"
 
                         function qmlCall(codigo) {
-                            var arrayDeCadenas = codigo.split("-");"select   concat(DOC.codigoDocumento,' - ',TDOC.descripcionTipoDocumento,' (',DOC.fechaEmisionDocumento,') - CFE: ',DOC.cae_numeroCae,'(',DOC.cae_serie,')' )'Documento (Fecha)', sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total $',  sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total U$S', CLI.rut'RUT',DOC.codigoDocumento'#Documento', DOC.fechaEmisionDocumento'Fecha',concat(DOC.codigoDocumento,'-',DOC.codigoTipoDocumento,'-',DOC.serieDocumento)''     from  Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in ('G','E') and TDOC.esDocumentoDeVenta='1'  and DOC.fechaEmisionDocumento between '2023-10-31' and '2023-11-18'  group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento;"
+                            var arrayDeCadenas = codigo.split("-");
+                            //"select   concat(DOC.codigoDocumento,' - ',TDOC.descripcionTipoDocumento,' (',DOC.fechaEmisionDocumento,') - CFE: ',DOC.cae_numeroCae,'(',DOC.cae_serie,')' )'Documento (Fecha)', sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total $',  sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) 'Total U$S', CLI.rut'RUT',DOC.codigoDocumento'#Documento', DOC.fechaEmisionDocumento'Fecha',concat(DOC.codigoDocumento,'-',DOC.codigoTipoDocumento,'-',DOC.serieDocumento)''     from  Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente    where DOC.codigoEstadoDocumento in ('G','E') and TDOC.esDocumentoDeVenta='1'  and DOC.fechaEmisionDocumento between '2023-10-31' and '2023-11-18'  group by DOC.codigoDocumento,DOC.serieDocumento,DOC.codigoTipoDocumento order by DOC.fechaHoraGuardadoDocumentoSQL,DOC.codigoDocumento;"
                             mantenimientoFactura.cargoFacturaEnMantenimiento(arrayDeCadenas[0],arrayDeCadenas[1],arrayDeCadenas[2])
                         }
                     }
@@ -1352,6 +1398,10 @@ Rectangle {
                 cbxDepartamentoRepote.textoComboBox=""
 
                 txtPrincipioCodigoCliente.textoInputBox=""
+
+                cbxUsaControlDeStockPrevisto.codigoValorSeleccion="1"
+
+
 
             }
         }

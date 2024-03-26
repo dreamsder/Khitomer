@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.29"
+    property string versionKhitomer: "1.17.30"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -289,6 +289,10 @@ Rectangle {
     /// 1.17.27 :Se modifica el campo fechaAlta de la tabla Clientes para que la fecha se guarde de manera automatica.
     /// 1.17.28 :Se corrigen varias vistas y se cargan descripciones de cheques y monedas en memoria.
     /// 1.17.29 :Se agrega el codigo de vendedor en 2 reportes de ventas por rubro y cliente de digitalworld.
+    /// 1.17.30 :Se crea un evento para activar los artículos cuando tienen stock previsto mayor a 0.
+    ///         :Esto depende de que este activa la configuración: ACTIVAR_ARTICULOS_CON_STOCK
+    ///         :Se crean 2 nuevos reportes para Digital World: Precio de articulos por lista de precio y rubros segun stock, Precio de articulos por lista de precio y sub rubros segun stock
+    ///         :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle el total de la linea del articulo.
 
 
     ///property para tamaño de fuentes
