@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.30"
+    property string versionKhitomer: "1.17.31"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -293,7 +293,7 @@ Rectangle {
     ///         :Esto depende de que este activa la configuración: ACTIVAR_ARTICULOS_CON_STOCK
     ///         :Se crean 2 nuevos reportes para Digital World: Precio de articulos por lista de precio y rubros segun stock, Precio de articulos por lista de precio y sub rubros segun stock
     ///         :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle el total de la linea del articulo.
-
+    /// 1.17.31 :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle la moneda del documento.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

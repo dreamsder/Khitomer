@@ -2533,6 +2533,10 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     printer.setPrinterName(_impresora);
 
     printer.setFullPage(true);
+
+    printer.setPageMargins(0,0,0,0,QPrinter::Millimeter);
+
+
     centimetro = printer.QPaintDevice::width()/(printer.QPaintDevice::widthMM()/10);
     fuente.setPointSize(8);
 
