@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2023>  <Cristian Montano>
+Copyright (C) <2012-2024>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.31"
+    property string versionKhitomer: "1.17.32"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -294,6 +294,8 @@ Rectangle {
     ///         :Se crean 2 nuevos reportes para Digital World: Precio de articulos por lista de precio y rubros segun stock, Precio de articulos por lista de precio y sub rubros segun stock
     ///         :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle el total de la linea del articulo.
     /// 1.17.31 :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle la moneda del documento.
+    /// 1.17.32 :Corrección en el campo fechaHoraGuardadoDocumentoSQL de la tabla Documentos para que grabe de manera correcta la fecha y no se sobre escriba cuando hacen uan modificación. Y si se guarda un documento de pendiente a emitido, si lo haga.
+    ///         :También se corrigio el campo fechaHoraGuardadoLineaSQL de la tabla DocumentosLineas.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

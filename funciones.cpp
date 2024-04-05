@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2023>  <Cristian Montano>
+Copyright (C) <2012-2024>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -2183,6 +2183,12 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
             if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql` = 'select  CONCAT(C.nombreCliente,\\'(\\', C.codigoCliente,\\')\\')\\'Nombre\\', C.razonSocial\\'Razon Social\\', L.descripcionLocalidad\\'Localidad\\', tpc.descripcionTipoProcedenciaCliente\\'Procedencia\\', DOC.fechaEmisionDocumento\\'Fecha compra\\', C.telefono\\'Telefono\\', C.email\\'Correo\\', concat(lp.descripcionListaPrecio,\\'(\\',lp.codigoListaPrecio,\\')\\')\\'Lista precio\\', CONCAT(r.descripcionRubro,\\'(\\',r.codigoRubro,\\')\\')\\'Rubro\\',  sum(case when TDOC.afectaStock=1 then DOCL.cantidad*-1 else  case when TDOC.afectaStock=-1 then DOCL.cantidad else 0 end  end)\\'# ventas\\', CONCAT(AR.descripcionArticulo,\\'(\\',AR.codigoArticulo,\\')\\')\\'Artículo\\',DOC.codigoVendedorComisiona\\'Vendedor\\'  ,sum(case when TDOC.afectaTotales=-1 then DOCL.precioTotalVenta*-1 else  case when TDOC.afectaTotales=1 then DOCL.precioTotalVenta else 0 end  end)\\'Monto Items\\' ,upper(MON.descripcionMoneda)\\'Moneda\\'   from Documentos DOC  join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento   join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento   join Articulos AR on AR.codigoArticulo=DOCL.codigoArticulo     join Clientes C on C.codigoCliente=DOC.codigoCliente and C.tipoCliente=DOC.tipoCliente   join TipoProcedenciaCliente tpc on tpc.codigoTipoProcedenciaCliente = C.codigoTipoProcedenciaCliente   join Localidades L on L.codigoPais = C.codigoPais  and L.codigoDepartamento =C.codigoDepartamento and L.codigoLocalidad =C.codigoLocalidad   join SubRubros sr on sr.codigoSubRubro = AR.codigoSubRubro  join Rubros r on r.codigoRubro = sr.codigoRubro  left join ListaPrecioClientes lpc on lpc.codigoCliente =C.codigoCliente and lpc.tipoCliente =C.tipoCliente  left join ListaPrecio lp on lp.codigoListaPrecio =lpc.codigoListaPrecio join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento  where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\') and TDOC.esDocumentoDeVenta=\\'1\\'    and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\'    and r.codigoRubro=\\'@_codigoRubro\\'  group by C.codigoCliente,C.tipocliente,DOC.fechaEmisionDocumento,DOCL.codigoArticulo,lp.descripcionListaPrecio,lp.codigoListaPrecio order by DOC.fechaEmisionDocumento asc, C.codigoCliente, sr.codigoRubro;' WHERE (`codigoReporte` = '80');","473")){
                 _iterador=false; return false; } break;
 
+        case 473:
+            if(!impactoCambioEnBD("ALTER TABLE Documentos MODIFY fechaHoraGuardadoDocumentoSQL TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;","474")){
+                _iterador=false; return false; } break;
+        case 474:
+            if(!impactoCambioEnBD("ALTER TABLE DocumentosLineas MODIFY fechaHoraGuardadoLineaSQL TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;","475")){
+                _iterador=false; return false; } break;
 
 
         default:
