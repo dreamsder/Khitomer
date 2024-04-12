@@ -153,7 +153,7 @@ Rectangle {
         }
     }
 
-    Image {
+   /* Image {
         id: imgFacebook
         x: 243
         y: 338
@@ -165,36 +165,14 @@ Rectangle {
         asynchronous: true
         anchors.right: parent.right
         anchors.rightMargin: 50
-        //
+        smooth: true
+
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Facebook.png"
 
-        /*MouseArea {
-            id: mouse_areaFacebook
-            hoverEnabled: true
-            anchors.fill: parent
-            onEntered: {
-                opacidadOff.from=imgYouTube.opacity
-                opacidadOff.target=imgYouTube
-                opacidadOff.start()
-                opacidadIn.target=imgFacebook
-                opacidadOff.target=imgFacebook
-                opacidadOff.stop()
-                opacidadIn.from=imgFacebook.opacity
-                opacidadIn.start()
-            }
-            onExited: {
-                opacidadIn.target=imgFacebook
-                opacidadOff.target=imgFacebook
-                opacidadIn.stop()
-                opacidadOff.start()
-            }
-            onClicked: {
-                funcionesmysql.abrirPaginaWeb("https://www.facebook.com/KhitomerDreamsder")
-            }
-        }*/
-    }
 
-    Image {
+    }*/
+
+   /* Image {
         id: imgYouTube
         x: 240
         y: 336
@@ -202,37 +180,14 @@ Rectangle {
         height: 100
         opacity: 0.600
         asynchronous: true
-        //
-       /* MouseArea {
-            id: mouse_areaYouTube
-            hoverEnabled: true
-            anchors.fill: parent
-            onEntered: {
-                opacidadOff.from=imgFacebook.opacity
-                opacidadOff.target=imgFacebook
-                opacidadOff.start()
-                opacidadIn.target=imgYouTube
-                opacidadOff.target=imgYouTube
-                opacidadOff.stop()
-                opacidadIn.from=imgYouTube.opacity
-                opacidadIn.start()
-            }
-            onExited: {
-                opacidadIn.target=imgYouTube
-                opacidadOff.target=imgYouTube
-                opacidadIn.stop()
-                opacidadOff.start()
-            }
-            onClicked: {
-                funcionesmysql.abrirPaginaWeb("http://www.youtube.com/user/DREAMSDERdotCOM")
-            }
-        }*/
+
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/YouTube.png"
         anchors.bottom: parent.bottom
         anchors.rightMargin: 25
         anchors.bottomMargin: 40
         anchors.right: imgFacebook.left
-    }
+        smooth: true
+    }*/
 
     PropertyAnimation{
         id:opacidadIn
@@ -283,8 +238,8 @@ Rectangle {
         asynchronous: true
         anchors.right: parent.right
         anchors.rightMargin: 50
-        //
-        opacity: 0.600
+        smooth: true
+        opacity: 1
         source:
 
         {
@@ -358,7 +313,7 @@ Rectangle {
         }
         anchors.bottom: parent.bottom
         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Built_with_Qt_logo_RGB_vertical.png"
-        //
+        smooth: true
     }
 
 

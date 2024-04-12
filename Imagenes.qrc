@@ -79,5 +79,10 @@
         <file>qml/ProyectoQML/Imagenes/Nuevo.png</file>
         <file>qml/ProyectoQML/Imagenes/SinGarantia.png</file>
         <file>qml/ProyectoQML/Imagenes/Comentarios.png</file>
+        <file>qml/ProyectoQML/Imagenes/LogoKhitomerCFE-20-03-2018_512px.old.png</file>
+        <file>qml/ProyectoQML/Imagenes/LogoKhitomerCFE-20-03-2018_128px.old.png</file>
+        <file>qml/ProyectoQML/Imagenes/LogoKhitomer-19-07-2016_512px.old.png</file>
+        <file>qml/ProyectoQML/Imagenes/iconoOLD.png</file>
+        <file>qml/ProyectoQML/Imagenes/LogoKhitomer-19-07-2016_128px.OLD.png</file>
     </qresource>
 </RCC>

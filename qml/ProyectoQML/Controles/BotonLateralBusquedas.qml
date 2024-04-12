@@ -205,13 +205,13 @@ Item {
     Rectangle {
         id: rectPrincipalBusqueda
         x: 39
-        width: 900
-        height: 550
+        width: 1124
+        height: 700
         color: "#eceeee"
         radius: 6
         clip: true
         anchors.top: parent.top
-        anchors.topMargin: -6
+        anchors.topMargin: -140
         //
         border.color: "#a8a0a0"
 
@@ -256,7 +256,7 @@ Item {
                 anchors.leftMargin: 1
                 anchors.left: parent.left
             }
-
+/*
             Rectangle {
                 id: rectangle1
                 x: -69
@@ -304,6 +304,8 @@ Item {
                 }
             }
 
+
+            */
             TextInputSimple {
                 id: txtBusquedaInteligente
                 height: 42
@@ -315,7 +317,7 @@ Item {
                 opacidadPorDefecto: 0.700
                 rectanguloTextoAlto: 25
                 anchors.top: parent.top
-                anchors.topMargin: 140
+                anchors.topMargin: 110
                 anchors.left: parent.left
                 anchors.leftMargin: 5
                 anchors.right: parent.right
@@ -420,7 +422,7 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
                 anchors.top: parent.top
-                anchors.topMargin: 100
+                anchors.topMargin: 80
                 anchors.left: parent.left
                 anchors.leftMargin: 150
 
@@ -510,11 +512,13 @@ Item {
                 id: lblInformacionBusquedaInteligente
                 x: 360
                 y: 10
-                width: 654
+                //width: 654
                 text: "Tips: La busqueda inteligente  evaluara los resultados entre artículos, clientes y proveedores, y presentará la información que obtenga mas registros. El resto de busquedas es especifica para artículos, clientes y proveedores. Si se equivoco de filtro de busqueda, alcanza con que precione el filtro correcto, y se cargaran los resultados esperados."
                 horizontalAlignment: TextEdit.AlignLeft
                 anchors.right: parent.right
                 anchors.rightMargin: 40
+                anchors.left: parent.left
+                anchors.leftMargin: 40
                 //
                 anchors.top: parent.top
                 anchors.topMargin: 10

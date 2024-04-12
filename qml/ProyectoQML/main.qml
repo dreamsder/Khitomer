@@ -29,14 +29,14 @@ Rectangle {
     id: rectPrincipal
     width: 900; height: 600
     //color: "#041c24"
-    color: "#000000"
+    color: "#1B2430"
     clip: true
 
     property int   opcionEnCurso: 0
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.32"
+    property string versionKhitomer: "1.17.33"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -296,6 +296,10 @@ Rectangle {
     /// 1.17.31 :Se modifican 2 reportes a pedido de Cynthia de Digital World: Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente, para agregarle la moneda del documento.
     /// 1.17.32 :Corrección en el campo fechaHoraGuardadoDocumentoSQL de la tabla Documentos para que grabe de manera correcta la fecha y no se sobre escriba cuando hacen uan modificación. Y si se guarda un documento de pendiente a emitido, si lo haga.
     ///         :También se corrigio el campo fechaHoraGuardadoLineaSQL de la tabla DocumentosLineas.
+    /// 1.17.33 :Se modifican los reportes Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente para agregarle información de descuentos.
+    ///         :Se realizan modificaciones esteticas simples.
+
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
@@ -1582,12 +1586,12 @@ Rectangle {
                 id: rectAcceso
                 x: 184
                 y: 19
-                width: 376
-                height: 200
+                width: 500
+                height: 300
                 radius: 6
                 clip: false
-                color: "#1d7195"
-                border.color: "#1d7195"
+                color: "#4d0068"
+                border.color: "#4d0068"
                 focus: false
                 opacity: 1
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -1604,7 +1608,7 @@ Rectangle {
                         id: rectangle2
                         width: 3
                         height: parent.height/1.50
-                        color: "#1e7597"
+                        color: "#4d0068"
                         radius: 5
                         opacity: 0.8
                         anchors.leftMargin: 5
@@ -1615,12 +1619,12 @@ Rectangle {
                     gradient: Gradient {
                         GradientStop {
                             position: 0
-                            color: "#0f4c7d"
+                            color: "#ae00df"
                         }
 
                         GradientStop {
                             position: 1
-                            color: "#1a2329"
+                            color: "#4d0068"
                         }
                     }
                     anchors.leftMargin: 15
@@ -1634,7 +1638,7 @@ Rectangle {
                 Text {
                     id: txtAcceso
                     color: "#fdfbfb"
-                    text: qsTr("Acceso")
+                    text: qsTr("Iniciar sesión")
                     font.family: "Arial"
                     style: Text.Normal
                     font.italic: false
@@ -1650,11 +1654,14 @@ Rectangle {
                 TextInputSimple {
                     id: txtNombreDeUsuario
                     x: 20
-                    y: 93
-                    width: 240
+                    y: 110
+                    width: 350
                    // height: 50
-
-                    tamanioFuenteTitulo: 13
+                    altoControlRecta: 30
+                    altoControl: 50
+                    largoMaximo: 25
+                    tamanioFuente: 18
+                    tamanioFuenteTitulo: 14
                     textoDeFondo: qsTr("ingrese usuario...")
                     textoInputBox: ""
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1675,11 +1682,13 @@ Rectangle {
                 TextInputSimple {
                     id: txtContraseniaDeUsuario
                     x: 20
-                    y: 136
-                    width: 240
-                    //height: 50
-tamanioFuenteTitulo: 13
+                    y: 180
+                    width: 350
+                    tamanioFuenteTitulo: 14
+                    altoControlRecta: 30
+                    altoControl: 50
                     largoMaximo: 25
+                    tamanioFuente: 18
                     textoDeFondo: qsTr("ingrese contraseña...")
                     echoMode: 2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1776,9 +1785,9 @@ tamanioFuenteTitulo: 13
 
                         }else{
                             timeReajustarGradient.stop()
-                            rectAcceso.color="#ba3e2b"
-                            rectAcceso.border.color="#ba3e2b"
-                            rectangle2.color="#ba3e2b"
+                            rectAcceso.color="#d40000"
+                            rectAcceso.border.color="#d40000"
+                            rectangle2.color="#d40000"
                             timeReajustarGradient.start()
 
                         }
@@ -1870,14 +1879,8 @@ tamanioFuenteTitulo: 13
                 property string fechaImportante:funcionesmysql.retornaFechaImportante()
                 id: imgLogoKhitomer
                 smooth: true
-                width: {
-                    if(fechaImportante=="reyes_magos"){
-                        150
-                    }else{
-                        96
-                    }
-                }
-                
+                width: 96
+
                 height: 96
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 30
@@ -1889,11 +1892,8 @@ tamanioFuenteTitulo: 13
                 source:   {
                     
                     if(fechaImportante=="navidad"){
-                        if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1"){
-                            "qrc:/imagenes/qml/ProyectoQML/Imagenes/LogoKhitomerCFE-20-03-2018_128pxNavidad.png"
-                        }else{
-                            "qrc:/imagenes/qml/ProyectoQML/Imagenes/navidad.png"
-                        }
+
+                        "qrc:/imagenes/qml/ProyectoQML/Imagenes/navidad.png"
                     }
                     else if(fechaImportante=="reyes_magos"){
                         "qrc:/imagenes/qml/ProyectoQML/Imagenes/reyesmagos.png"
@@ -1964,9 +1964,11 @@ tamanioFuenteTitulo: 13
             running:false
             onTriggered: {
 
-                rectAcceso.color="#1d7195"
-                rectAcceso.border.color="#1d7195"
-                rectangle2.color="#1d7195"
+                rectAcceso.color="#4d0068"
+                rectAcceso.border.color="#4d0068"
+                rectangle2.color="#4d0068"
+
+
 
 
             }

@@ -1120,7 +1120,7 @@ Rectangle {
                 id: botonNuevoReporteEnWebview
                 x: 376
                 y: 242
-                text: "Nuevo reporte"
+                text: "Ver reportes"
                 z: 3
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -1132,7 +1132,7 @@ Rectangle {
                 x: 101
                 y: 188
                 color: "#ee900c"
-                text: qsTr("Comience a explorar los reportes, dando clic en el botón")
+                text: qsTr("Explore aquí sus datos")
                 z: 2
                 font.family: "Arial"
                 //
@@ -1144,7 +1144,7 @@ Rectangle {
                 anchors.verticalCenterOffset: -80
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 24
+                font.pixelSize: 32
             }
 
             Rectangle {
@@ -1224,6 +1224,7 @@ Rectangle {
             height: 25
             z: 2
             textoTitulo: ""
+            textoComboBox: "Lista de reportes"
             onSenialAlAceptarOClick: {
 
                 seleccionarReporte(cbxListaReportes.codigoValorSeleccion)
