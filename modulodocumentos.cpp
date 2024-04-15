@@ -130,7 +130,7 @@ bool ModuloDocumentos::actualizarNumeroCFEDocumento(QString _codigoDocumento,QSt
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("update Documentos set cae_numeroCae='"+_numeroCae+"' where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos  set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',cae_numeroCae='"+_numeroCae+"' where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
 
             return true;
 
@@ -731,7 +731,7 @@ void ModuloDocumentos::buscarDocumentosEnMantenimiento(QString campo, QString da
         }
 
 
-        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"'   "+anioHaciaAtras+" "+mesHaciaAtras+"   group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaEmisionDocumento desc");
+        QSqlQuery q = Database::consultaSql("select D.*, TD.descripcionTipoDocumento, TED.descripcionEstadoDocumento, C.nombreCliente,C.razonSocial from Documentos D join TipoDocumentoPerfilesUsuarios TDP on TDP.codigoTipoDocumento=D.codigoTipoDocumento left join Clientes C on D.codigoCliente=C.codigoCliente and D.tipoCliente=C.tipoCliente join TipoDocumento TD on TD.codigoTipoDocumento=D.codigoTipoDocumento join TipoEstadoDocumento TED on TED.codigoEstadoDocumento=D.codigoEstadoDocumento left join DocumentosLineas DL on DL.codigoDocumento=D.codigoDocumento and DL.codigoTipoDocumento=D.codigoTipoDocumento where "+campo+"'"+datoABuscar+"' and TDP.codigoPerfil='"+_codigoPerfil+"'   "+anioHaciaAtras+" "+mesHaciaAtras+"   group by D.codigoDocumento,D.codigoTipoDocumento   order by D.fechaUltimaModificacionDocumento desc");
         QSqlRecord rec = q.record();
 
 
@@ -1425,7 +1425,7 @@ bool ModuloDocumentos::restauroMontoDeudaCuentaCorrienteDocumento(QString _codig
         QSqlQuery query(Database::connect());
 
         ///Actualizo el documento de venta(factura credito, ajuste cuenta corriente +)
-        if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente+"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumento+"'  ")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClienteCuentaCorriente=saldoClienteCuentaCorriente+"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumento+"'  ")){
             return true;
         }else{
             qDebug()<< query.lastError();
@@ -1473,12 +1473,12 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
         QSqlQuery query(Database::connect());
 
         ///Actualizo el documento de venta(factura credito, ajuste cuenta corriente +)
-        if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+"  and serieDocumento='"+_serieDocumentoAPagar+"'   and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+"")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+"  and serieDocumento='"+_serieDocumentoAPagar+"'   and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+"")){
             //qDebug() << query.lastQuery();
             //qDebug() << "1";
             query.clear();
             ///Actualizo el documento de pago(recibo, nota de credito, ajuste cuenta corriente -)
-            if(query.exec("update Documentos set saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoDePago+" and codigoTipoDocumento="+_codigoTipoDocumentoDePago+" and serieDocumento='"+_serieDocumentoDePago+"'   and codigoCliente='"+_codigoClienteDePago+"' and tipoCliente="+_codigoTipoClienteDePago+" and codigoMonedaDocumento="+_codigoMonedaDePago+"")){
+            if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClienteCuentaCorriente=saldoClienteCuentaCorriente-"+_montoADebitar+" where codigoDocumento="+_codigoDocumentoDePago+" and codigoTipoDocumento="+_codigoTipoDocumentoDePago+" and serieDocumento='"+_serieDocumentoDePago+"'   and codigoCliente='"+_codigoClienteDePago+"' and tipoCliente="+_codigoTipoClienteDePago+" and codigoMonedaDocumento="+_codigoMonedaDePago+"")){
                 //qDebug() << query.lastQuery();
                 //qDebug() << "2";
                 query.clear();
@@ -1500,7 +1500,7 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
                 funcion.mensajeAdvertencia(query.lastQuery());
                 //qDebug()<< query.lastError();
                 query.clear();
-                if(query.exec("update Documentos set saldoClienteCuentaCorriente="+_montoDelSaldo+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumentoAPagar+"' and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+";")){
+                if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClienteCuentaCorriente="+_montoDelSaldo+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumentoAPagar+"' and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+";")){
                   //  qDebug()<< "update 1";
                    // qDebug()<< query.lastError();
                     return -2;
@@ -1543,7 +1543,7 @@ bool ModuloDocumentos::actualizoEstadoDocumento(QString _codigoDocumento,QString
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("update Documentos set codigoEstadoDocumento='"+_estadoDocumento+"' ,usuarioUltimaModificacion='"+_usuarioAlta+"' where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',codigoEstadoDocumento='"+_estadoDocumento+"' ,usuarioUltimaModificacion='"+_usuarioAlta+"' where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;
@@ -1572,7 +1572,7 @@ bool ModuloDocumentos::actualizoEstadoDocumentoCFE(QString _codigoDocumento,QStr
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("update Documentos set codigoEstadoDocumento='"+_estadoDocumento+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',codigoEstadoDocumento='"+_estadoDocumento+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;
@@ -1600,7 +1600,7 @@ bool ModuloDocumentos::actualizoSaldoClientePagoContadoDocumento(QString _codigo
     if(conexion){
 
         QSqlQuery query(Database::connect());
-        if(query.exec("update Documentos set saldoClientePagoContado='"+_saldoClientePagoContado+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClientePagoContado='"+_saldoClientePagoContado+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;
@@ -1630,7 +1630,7 @@ bool ModuloDocumentos::actualizoComentarios(QString _codigoDocumento,QString _co
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("update Documentos set comentarios='"+_comentarios+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',comentarios='"+_comentarios+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;
@@ -2151,7 +2151,7 @@ bool ModuloDocumentos::actualizarInformacionCFEDocumentoDynamia(QString _codigoD
     if(conexion){
 
         QSqlQuery query(Database::connect());
-        if(query.exec("update Documentos set cae_numeroCae='"+_nro+"',cae_serie='"+_serie+"',cae_fechaVencimiento='"+_vencimiento+"',cae_codigoSeguridad='"+_cod_seguridad+"',cae_Cae='"+_cae_id+"',cae_rangoDesde='"+_desde+"',cae_rangoHasta='"+_hasta+"',cae_QrCode='"+_qr+"',cae_idDocGaia='"+_idDocGaia+"',caeTipoDocumentoCFEDescripcion='"+_caeTipoDocumentoCFEDescripcion+"'   where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+        if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',cae_numeroCae='"+_nro+"',cae_serie='"+_serie+"',cae_fechaVencimiento='"+_vencimiento+"',cae_codigoSeguridad='"+_cod_seguridad+"',cae_Cae='"+_cae_id+"',cae_rangoDesde='"+_desde+"',cae_rangoHasta='"+_hasta+"',cae_QrCode='"+_qr+"',cae_idDocGaia='"+_idDocGaia+"',caeTipoDocumentoCFEDescripcion='"+_caeTipoDocumentoCFEDescripcion+"'   where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
             return true;
         }else{
             return false;

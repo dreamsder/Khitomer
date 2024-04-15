@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.33"
+    property string versionKhitomer: "1.17.34"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -298,6 +298,7 @@ Rectangle {
     ///         :También se corrigio el campo fechaHoraGuardadoLineaSQL de la tabla DocumentosLineas.
     /// 1.17.33 :Se modifican los reportes Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente para agregarle información de descuentos.
     ///         :Se realizan modificaciones esteticas simples.
+    /// 1.17.34 :Se modifica los update de Documentos para que reflejen la fecha de ultima modificación de manera correcta.
 
 
 
