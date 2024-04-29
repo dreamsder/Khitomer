@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.36"
+    property string versionKhitomer: "1.17.37"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -301,6 +301,7 @@ Rectangle {
     /// 1.17.34 :Se modifica los update de Documentos para que reflejen la fecha de ultima modificación de manera correcta.
     /// 1.17.35 :Se corrigen los reportes Ventas entre fechas por subrubro por cliente y Venta entre fechas por rubro y cliente ya que mostraban mal el calculo de descuento.
     /// 1.17.36 :Se agrega en la inserción de documentos el grabado de la fecha de ultima modificación.
+    /// 1.17.37 :Se corrige la activación de artículos para que marque para sincronizar los artículos que se activan.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
