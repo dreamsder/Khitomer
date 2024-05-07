@@ -2207,6 +2207,12 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 480:
             if(!impactoCambioEnBD("CREATE EVENT ActivarArticulosConStock ON SCHEDULE EVERY 2 MINUTE DO BEGIN IF EXISTS (select * from Configuracion where codigoConfiguracion= 'ACTIVAR_ARTICULOS_CON_STOCK' and valorConfiguracion='1') THEN  UPDATE Articulos AR JOIN StockPrevistoSummary S ON S.codigoArticulo = AR.codigoArticulo SET AR.activo = 1,AR.sincronizadoWeb=0 WHERE AR.activo = 0 AND S.cantidad > 0; END IF;  END","481")){
                 _iterador=false; return false; } break;
+        case 481:
+            if(!impactoCambioEnBD("CREATE EVENT DeleteStockPrevistoSummary ON SCHEDULE EVERY 24 HOUR ENABLE DO TRUNCATE TABLE StockPrevistoSummary;","482")){
+                _iterador=false; return false; } break;
+        case 482:
+            if(!impactoCambioEnBD("CREATE EVENT DeleteStockRealSummary ON SCHEDULE EVERY 24 HOUR ENABLE DO TRUNCATE TABLE StockRealSummary;","483")){
+                _iterador=false; return false; } break;
 
         default:
             qDebug()<< "Se Finalizan las actualizaciones de base de datos.";

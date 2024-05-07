@@ -549,7 +549,7 @@ Database::chequeaStatusAccesoMysql();
 
         if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb) values('"+_codigoListaDePrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0')"))
         {
-
+            marcarArticuloParaSincronizar(_codigoArticulo);
             return true;
         }else{
             return false;
