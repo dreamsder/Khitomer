@@ -2213,6 +2213,15 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 482:
             if(!impactoCambioEnBD("CREATE EVENT DeleteStockRealSummary ON SCHEDULE EVERY 24 HOUR ENABLE DO TRUNCATE TABLE StockRealSummary;","483")){
                 _iterador=false; return false; } break;
+        case 483:
+            if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql` = 'SELECT AR.codigoArticulo\\'Código\\',AR.descripcionArticulo\\'Nombre\\',AR.descripcionExtendida\\'Descripción extendida\\' ,   case when SREAL.cantidad is null then 0 else SREAL.cantidad end \\'Stock Real\\', case when SPREVISTO.cantidad is null then 0 else SPREVISTO.cantidad end \\'Stock Previsto\\'    FROM Articulos AR join SubRubros SUBRUB on SUBRUB.codigoSubRubro=AR.codigoSubRubro   LEFT JOIN StockRealSummary SREAL on SREAL.codigoArticulo=AR.codigoArticulo   LEFT JOIN StockPrevistoSummary SPREVISTO on SPREVISTO.codigoArticulo=AR.codigoArticulo     where   SUBRUB.codigoRubro=\\'@_codigoRubro\\'   order by CAST(AR.codigoArticulo AS SIGNED);' WHERE (`codigoReporte` = '29');","484")){
+                _iterador=false; return false; } break;
+        case 484:
+            if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql` = 'SELECT AR.codigoArticulo\\'Código\\',AR.descripcionArticulo\\'Nombre\\',AR.descripcionExtendida\\'Descripción extendida\\', case when SREAL.cantidad is null then 0 else SREAL.cantidad end \\'Stock Real\\',  case when SPREVISTO.cantidad is null then 0 else SPREVISTO.cantidad end \\'Stock Previsto\\'   FROM Articulos AR   LEFT JOIN StockRealSummary SREAL on SREAL.codigoArticulo=AR.codigoArticulo   LEFT JOIN StockPrevistoSummary SPREVISTO on SPREVISTO.codigoArticulo=AR.codigoArticulo   where   AR.codigoSubRubro=\\'@_codigoSubRubro\\'     order by CAST(AR.codigoArticulo AS SIGNED)  ;' WHERE (`codigoReporte` = '23');","485")){
+                _iterador=false; return false; } break;
+
+
+
 
         default:
             qDebug()<< "Se Finalizan las actualizaciones de base de datos.";
