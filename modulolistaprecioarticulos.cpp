@@ -183,7 +183,7 @@ QVariant ModuloListaPrecioArticulos::data(const QModelIndex & index, int role) c
     return QVariant();
 }
 
-int ModuloListaPrecioArticulos::insertarArticulosListaPrecio(QString _codigoListaPrecio, QString _codigoArticulo, QString _precioArticulo) const {
+int ModuloListaPrecioArticulos::insertarArticulosListaPrecio(QString _codigoListaPrecio, QString _codigoArticulo, QString _precioArticulo, QString usuarioUltimaModificacion) const {
 
     // -1  No se pudo conectar a la base de datos
     // -2  No se pudo actualizar el articulo
@@ -211,7 +211,7 @@ Database::chequeaStatusAccesoMysql();
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb) values('"+_codigoListaPrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0')")){
+        if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb,tiene_cambio,usuarioUltimaModificacion) values('"+_codigoListaPrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0',0,'"+usuarioUltimaModificacion+"')")){
 
             marcarArticuloParaSincronizar(_codigoArticulo);
 
@@ -532,7 +532,7 @@ Database::chequeaStatusAccesoMysql();
     }else{return false;}
 }
 
-bool ModuloListaPrecioArticulos::actualizarArticuloDeListaPrecio(QString _codigoArticulo,QString _codigoListaDePrecio,QString _precioArticulo) const {
+bool ModuloListaPrecioArticulos::actualizarArticuloDeListaPrecio(QString _codigoArticulo,QString _codigoListaDePrecio,QString _precioArticulo, QString usuarioUltimaModificacion) const {
 
     bool conexion=true;
 Database::chequeaStatusAccesoMysql();
@@ -547,7 +547,7 @@ Database::chequeaStatusAccesoMysql();
 
         QSqlQuery query(Database::connect());
 
-        if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb) values('"+_codigoListaDePrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0')"))
+        if(query.exec("replace into ListaPrecioArticulos (codigoListaPrecio,codigoArticulo,precioArticulo,sincronizadoWeb,tiene_cambio,usuarioUltimaModificacion) values('"+_codigoListaDePrecio+"','"+_codigoArticulo+"','"+_precioArticulo+"','0',0,'"+usuarioUltimaModificacion+"')"))
         {
             marcarArticuloParaSincronizar(_codigoArticulo);
             return true;

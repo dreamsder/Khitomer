@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
 
 
 
+
     ////Codificacion del sistema para aceptar tildes y ñ
     QTextCodec *linuxCodec=QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForTr(linuxCodec);
@@ -658,6 +659,10 @@ inicio:
 
       moduloFormasDePago.buscarFormaDePago("1=","1");
       //  moduloComboBoxDocumentosConSaldoCuentaCorriente.agregarDocumento(Documentos(0,0,"","","",0,0,"","","","","","","","","","","","","","","","","","","","","",""));
+
+
+
+
 
 
 

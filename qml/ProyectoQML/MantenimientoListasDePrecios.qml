@@ -791,7 +791,7 @@ Rectangle {
                     for(var i=0; i<modeloListaPrecioArticulosAlternativa.count;i++){
 
                         if(modeloListaPrecioArticulosAlternativa.get(i).precioModificado==true && modeloListaPrecioArticulosAlternativa.get(i).eliminarPrecioArticulo==false){
-                            modeloListaPrecioArticulos.insertarArticulosListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado, modeloListaPrecioArticulosAlternativa.get(i).itemPrecioAgregado)
+                            modeloListaPrecioArticulos.insertarArticulosListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado, modeloListaPrecioArticulosAlternativa.get(i).itemPrecioAgregado,txtNombreDeUsuario.textoInputBox)
                         }else if(modeloListaPrecioArticulosAlternativa.get(i).eliminarPrecioArticulo==true){
                             modeloListaPrecioArticulos.eliminarArticuloPorListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado);
                         }
@@ -825,7 +825,7 @@ Rectangle {
                     for(var i=0; i<modeloListaPrecioArticulosAlternativa.count;i++){
 
                         if(modeloListaPrecioArticulosAlternativa.get(i).precioModificado==true  && modeloListaPrecioArticulosAlternativa.get(i).eliminarPrecioArticulo==false){
-                            modeloListaPrecioArticulos.insertarArticulosListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado, modeloListaPrecioArticulosAlternativa.get(i).itemPrecioAgregado)
+                            modeloListaPrecioArticulos.insertarArticulosListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado, modeloListaPrecioArticulosAlternativa.get(i).itemPrecioAgregado,txtNombreDeUsuario.textoInputBox)
                         }else if(modeloListaPrecioArticulosAlternativa.get(i).eliminarPrecioArticulo==true){
                             modeloListaPrecioArticulos.eliminarArticuloPorListaPrecio(txtCodigoListaDePrecio.textoInputBox.trim(),modeloListaPrecioArticulosAlternativa.get(i).itemCodigoAgregado);
                         }
@@ -1670,7 +1670,7 @@ Rectangle {
                             // if(modeloListaPrecioArticulos.eliminarArticulosListaPrecio(cbListaDePrecioModificacionPrecios.codigoValorSeleccion.trim())){
 
                             for(var i=0; i<modeloArticulosACambiarDePrecio.count;i++){
-                                modeloListaPrecioArticulos.insertarArticulosListaPrecio(cbListaDePrecioModificacionPrecios.codigoValorSeleccion.trim(),modeloArticulosACambiarDePrecio.get(i).codigoArticulo, modeloArticulosACambiarDePrecio.get(i).nuevoPrecio)
+                                modeloListaPrecioArticulos.insertarArticulosListaPrecio(cbListaDePrecioModificacionPrecios.codigoValorSeleccion.trim(),modeloArticulosACambiarDePrecio.get(i).codigoArticulo, modeloArticulosACambiarDePrecio.get(i).nuevoPrecio,txtNombreDeUsuario.textoInputBox)
                             }
 
                             txtMensajeInformacionFiltros.color="#2f71a0"

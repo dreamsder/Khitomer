@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.39"
+    property string versionKhitomer: "1.17.40"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -304,7 +304,8 @@ Rectangle {
     /// 1.17.37 :Se corrige la activación de artículos para que marque para sincronizar los artículos que se activan.
     /// 1.17.38 :Se agregan 2 eventos para que se borren cada 24 horas las tablas de stock previsto y real.
     /// 1.17.39 :Se modifican los reprotes stock por rubro y stock por subrubro para agregar la columan de stock pendiente.
-
+    /// 1.17.40 :Se modifican el reporte Artículos sin venta por rubro entre fechas a pedido de DogotalWorld para que solo muestre artículos con stock.
+    ///         :Modificaciones para incorporar clickhouse y metabase.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

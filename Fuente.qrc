@@ -124,5 +124,6 @@
         <file>qml/ProyectoQML/Controles/CuadroListaGarantias.qml</file>
         <file>qml/ProyectoQML/Controles/ComboBoxListaTipoDocumentosClientesFacturacion.qml</file>
         <file>qml/ProyectoQML/Controles/CuadroImprimirEnvios.qml</file>
+        <file>qml/ProyectoQML/consultarest.js</file>
     </qresource>
 </RCC>

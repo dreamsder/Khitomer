@@ -838,7 +838,7 @@ Rectangle {
                         }
                     }
 
-                    modeloListaPrecioArticulos.actualizarArticuloDeListaPrecio(txtCodigoArticulo.textoInputBox.trim(),cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion,txtPrecioArticuloSeleccionado.textoInputBox.trim())
+                    modeloListaPrecioArticulos.actualizarArticuloDeListaPrecio(txtCodigoArticulo.textoInputBox.trim(),cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion,txtPrecioArticuloSeleccionado.textoInputBox.trim(),txtNombreDeUsuario.textoInputBox)
 
 
                     modeloArticulos.clearArticulos()
@@ -876,7 +876,7 @@ Rectangle {
                         }
                     }
 
-                    modeloListaPrecioArticulos.actualizarArticuloDeListaPrecio(txtCodigoArticulo.textoInputBox.trim(),cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion,txtPrecioArticuloSeleccionado.textoInputBox.trim())
+                    modeloListaPrecioArticulos.actualizarArticuloDeListaPrecio(txtCodigoArticulo.textoInputBox.trim(),cbListaDePrecioDeArticuloSeleccionado.codigoValorSeleccion,txtPrecioArticuloSeleccionado.textoInputBox.trim(),txtNombreDeUsuario.textoInputBox)
 
                     modeloArticulos.clearArticulos()
                     modeloArticulos.buscarArticulo(" AR.codigoArticulo=",txtCodigoArticulo.textoInputBox.trim(),0)

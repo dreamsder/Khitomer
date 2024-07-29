@@ -70,7 +70,7 @@ public:
     Q_INVOKABLE void buscarArticulosListaPrecioParaModificar(QString);
 
 
-    Q_INVOKABLE int insertarArticulosListaPrecio( QString , QString ,QString ) const;
+    Q_INVOKABLE int insertarArticulosListaPrecio(QString , QString , QString, QString usuarioUltimaModificacion) const;
 
     Q_INVOKABLE bool eliminarArticulosListaPrecio(QString) const;
 
@@ -93,7 +93,7 @@ public:
 
 
 
-    Q_INVOKABLE bool actualizarArticuloDeListaPrecio(QString,QString,QString) const;
+    Q_INVOKABLE bool actualizarArticuloDeListaPrecio(QString, QString, QString, QString usuarioUltimaModificacion) const;
 
     Q_INVOKABLE qlonglong retornaCantidadArticulosEnListaPrecio(QString) const;
 

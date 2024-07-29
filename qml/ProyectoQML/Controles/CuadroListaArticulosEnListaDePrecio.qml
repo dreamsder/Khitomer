@@ -72,7 +72,7 @@ Rectangle {
                 ///Verifico que el nuevo precio no sea 0, en ese caso no hago nada.
                 if(modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).precioArticulo!=0.00){
 
-                    var resultado = modeloListaPrecioArticulos.insertarArticulosListaPrecio(modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).codigoListaDePrecio,modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).codigoArticulo,modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).precioArticulo)
+                    var resultado = modeloListaPrecioArticulos.insertarArticulosListaPrecio(modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).codigoListaDePrecio,modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).codigoArticulo,modeloListasPreciosCuadroArticulosASetearPrecioGenerica.get(j).precioArticulo,txtNombreDeUsuario.textoInputBox)
 
                     if(resultado==-1){
                         funcionesmysql.mensajeAdvertencia("ERROR: No hay conexión con la base de datos, no se pudo actualizar la lista de precios.")

@@ -25,7 +25,7 @@ import QtWebKit 1.1
 import "Controles"
 import "Listas"
 import "Listas/Delegates"
-
+import "consultarest.js" as Service
 
 
 Rectangle {
@@ -56,6 +56,28 @@ Rectangle {
   /*  function randomNumber(from, to) {
        return Math.floor(Math.random(10) * (to - from + 1) + from);
     }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function seleccionarReporte(codigoReporte){
 
