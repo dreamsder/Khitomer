@@ -523,6 +523,8 @@ Rectangle {
                 onEnter: {
                     var valorArticuloInterno=modeloArticulos.existeArticulo(txtArticuloParaLista.textoInputBox.trim());
 
+                    console.log(valorArticuloInterno)
+
                     if(valorArticuloInterno!=""){
                         txtArticuloParaLista.textoInputBox=valorArticuloInterno
                         txtPrecioArticuloParaLista.textoTitulo="Precio en "+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(valorArticuloInterno))
