@@ -5,7 +5,12 @@
       "type": "Feature",
       "properties": {
         "IDENTIFICADOR": "UY.MO",
-        "NOMBRE": "Montevideo"
+        "NOMBRE": "Montevideo",
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5
       },
       "geometry": {
         "coordinates": [
@@ -288,7 +293,12 @@
       "type": "Feature",
       "properties": {
         "IDENTIFICADOR": "UY.CA",
-        "NOMBRE": "Canelones"
+        "NOMBRE": "Canelones",
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5
       },
       "geometry": {
         "coordinates": [
