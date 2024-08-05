@@ -4,8 +4,8 @@
     {
       "type": "Feature",
       "properties": {
-        "id": "UY.MO",
-        "nombre": "Montevideo"
+        "IDENTIFICADOR": "UY.MO",
+        "NOMBRE": "Montevideo"
       },
       "geometry": {
         "coordinates": [
@@ -287,8 +287,8 @@
     {
       "type": "Feature",
       "properties": {
-        "id": "UY.CA",
-        "nombre": "Canelones"
+        "IDENTIFICADOR": "UY.CA",
+        "NOMBRE": "Canelones"
       },
       "geometry": {
         "coordinates": [
