@@ -399,6 +399,9 @@ Rectangle {
 
                 }
             }
+
+
+
         }
 
         Rectangle{
@@ -705,6 +708,8 @@ Rectangle {
 
         }
 
+
+
         BotonPaletaSistema {
             id: btnCargarArticulosBatch
             text: "Carga de artículos"
@@ -722,6 +727,46 @@ Rectangle {
             visible: modeloControlesMantenimientos.retornaValorMantenimiento("articulosUsaCargaBatch")
             onClicked: {
                 modeloDialogoQT.cargarArchivoMantenimiento("articulos")
+            }
+        }
+
+        BotonPaletaSistema {
+            id: btnCargarArticulosConsultado
+            text: "Consultado"
+            anchors.left: btnFiltrarArticulos.right
+            anchors.leftMargin: 30
+            anchors.bottom: rectangle2.top
+            anchors.bottomMargin: 10
+            enabled: {
+                if(txtCodigoArticulo.textoInputBox.trim()!=="" && txtDescripcionArticulo.textoInputBox.trim()!==""){
+                    true
+                }else{
+                    false
+                }
+            }
+
+            height: {
+                if(visible){
+                    btnFiltrarArticulos.height
+                }else{
+                    0
+                }
+            }
+            visible:{
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarReporteDeConsultasEnArticulos")){
+                        true
+                    }else{
+                        false
+                    }
+                }
+
+           // visible: modeloControlesMantenimientos.retornaValorMantenimiento("articulosUsaCargaBatch")
+            onClicked: {
+                if(txtCodigoArticulo.textoInputBox.trim()!=="" && txtDescripcionArticulo.textoInputBox.trim()!==""){
+                    if(funcionesmysql.mensajeAdvertencia("Desea reportar el artículo "+txtDescripcionArticulo.textoInputBox.trim()+" como consultado?\n\nPresione [ Sí ] para confirmar.")){
+                        modeloArticulos.reportarConsultaDeArticulo(txtCodigoArticulo.textoInputBox.trim(),txtNombreDeUsuario.textoInputBox.trim());
+                    }
+                }
             }
         }
 

@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.40"
+    property string versionKhitomer: "1.17.41"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -306,6 +306,9 @@ Rectangle {
     /// 1.17.39 :Se modifican los reprotes stock por rubro y stock por subrubro para agregar la columan de stock pendiente.
     /// 1.17.40 :Se modifican el reporte Artículos sin venta por rubro entre fechas a pedido de DogotalWorld para que solo muestre artículos con stock.
     ///         :Modificaciones para incorporar clickhouse y metabase.
+    /// 1.17.41 :Se agregan campos de sincronización en la tabla Documentos(marcaSyncClickhouse y marcaSyncClickhouseArticulos) para crear nuevos modelos para clickhouse y el analisis de datos en Metabase.
+    ///         :Se crea la tabla ArticulosConsultados para ingresar los artículos que son consultados por los clientes, para luego analizarlos en clickhouse con Metabase.
+    ///         :Se agrega el boton Consultado en el mantenimiento de Artículos. Se agrega el control de permitir consultados en los perfiles de usuario.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

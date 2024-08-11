@@ -240,7 +240,7 @@ bool Funciones::mensajeAdvertencia(QString mensaje) const{
     QMessageBox msgBox;
     msgBox.setText(mensaje);
     msgBox.setModal(true);
-    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setIcon(QMessageBox::Question);
     msgBox.setWindowTitle("ATENCIÓN!!!: ");
     msgBox.setWindowIcon(QIcon("qrc:/qml/ProyectoQML/Imagenes/icono.png"));
     msgBox.setMinimumHeight(100);
@@ -2225,6 +2225,19 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 486:
             if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSql` = 'select AR.codigoArticulo\\'Codigo Artículo\\', AR.descripcionArticulo\\'Nombre Arículo\\', SRS.cantidad\\'Stock Real\\'  from Articulos AR  join SubRubros SUR on SUR.codigoSubRubro=AR.codigoSubRubro  join Rubros RUB on RUB.codigoRubro=SUR.codigoRubro  join StockRealSummary SRS on SRS.codigoArticulo=AR.codigoArticulo   where   RUB.codigoRubro=\\'@_codigoRubro\\'  and SRS.cantidad>0  and ((select sum(case when TDOC.afectaStock=1 then DOCL.cantidad*-1 else  case when TDOC.afectaStock=-1 then DOCL.cantidad else 0 end  end)\\'Cantidad ventas\\'   from Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento  and DOCL.serieDocumento=DOC.serieDocumento   where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\')  and TDOC.afectaTotales!=0  and DOCL.codigoArticulo=AR.codigoArticulo and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\' ) is null or (select sum(case when TDOC.afectaStock=1 then DOCL.cantidad*-1 else  case when TDOC.afectaStock=-1 then DOCL.cantidad else 0 end  end)\\'Cantidad ventas\\'   from Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento  and DOCL.serieDocumento=DOC.serieDocumento   where DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\')  and TDOC.afectaTotales!=0  and DOCL.codigoArticulo=AR.codigoArticulo      and DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\' )=0)  order by CONVERT(AR.codigoArticulo, SIGNED INTEGER);' WHERE (`codigoReporte` = '57');","487")){
                 _iterador=false; return false; } break;
+        case 487:
+            if(!impactoCambioEnBD("ALTER TABLE `Documentos` ADD COLUMN `marcaSyncClickhouse` TINYINT(3) NOT NULL DEFAULT 0 AFTER `estadoInformarWeb`,  ADD COLUMN `marcaSyncClickhouseArticulos` TINYINT(3) NOT NULL DEFAULT 0 AFTER `marcaSyncClickhouse`;","488")){
+                _iterador=false; return false; } break;
+        case 488:
+            if(!impactoCambioEnBD("CREATE TABLE ArticulosConsultados (codigoArticulo VARCHAR(10) NOT NULL, usuarioAlta VARCHAR(45) NOT NULL,  fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, marcaSyncClickhouse TINYINT(3) NOT NULL DEFAULT 0   );","489")){
+                _iterador=false; return false; } break;
+        case 489:
+            if(!impactoCambioEnBD("ALTER TABLE `PerfilesUsuarios` ADD COLUMN `permiteUsarReporteDeConsultasEnArticulos` CHAR(1) NOT NULL DEFAULT '0' AFTER `permiteUsarPromociones`;","490")){
+                _iterador=false; return false; } break;
+        case 490:
+            if(!impactoCambioEnBD("update PerfilesUsuarios set permiteUsarReporteDeConsultasEnArticulos='1' where codigoPerfil=1","491")){
+                _iterador=false; return false; } break;
+
 
 
 

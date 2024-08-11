@@ -1032,3 +1032,21 @@ void ModuloArticulos::actualizarGarantia(QString _codigoArticulo, QString _codig
         query.exec("update Articulos set codigoTipoGarantia='"+_codigoTipoGarantia+"'  where codigoArticulo='"+_codigoArticulo+"'");
     }
 }
+
+
+void ModuloArticulos::reportarConsultaDeArticulo(QString _codigoArticulo, QString _usuario) const {
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+        QSqlQuery query(Database::connect());
+        query.exec("INSERT INTO ArticulosConsultados (codigoArticulo,usuarioAlta) VALUES ('"+_codigoArticulo+"','"+_usuario+"');");
+    }
+}

@@ -132,6 +132,7 @@ public:
 
     Q_INVOKABLE void actualizarGarantia(QString _codigoArticulo, QString _codigoTipoGarantia) const;
 
+    Q_INVOKABLE void reportarConsultaDeArticulo(QString _codigoArticulo, QString _usuario) const;
 
 
     Q_INVOKABLE int retornaStockTotalArticuloRealOriginal(QString _codigoArticulo) const;
