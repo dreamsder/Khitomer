@@ -309,6 +309,7 @@ Rectangle {
     /// 1.17.41 :Se agregan campos de sincronización en la tabla Documentos(marcaSyncClickhouse y marcaSyncClickhouseArticulos) para crear nuevos modelos para clickhouse y el analisis de datos en Metabase.
     ///         :Se crea la tabla ArticulosConsultados para ingresar los artículos que son consultados por los clientes, para luego analizarlos en clickhouse con Metabase.
     ///         :Se agrega el boton Consultado en el mantenimiento de Artículos. Se agrega el control de permitir consultados en los perfiles de usuario.
+    ///         :Se agrega nuevo reporte Artículos consultados entre fechas por Rubro.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
