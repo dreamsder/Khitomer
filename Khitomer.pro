@@ -32,9 +32,6 @@ QT       += core gui svg
 QT       += network
 QT       += sql
 
-# Añadir soporte para OpenSSL
-CONFIG += link_pkgconfig
-PKGCONFIG += openssl
 
 #symbian:TARGET.UID3 = 0xEFEB4275
 
