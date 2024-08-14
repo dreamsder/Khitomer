@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.41"
+    property string versionKhitomer: "1.17.43"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -310,6 +310,9 @@ Rectangle {
     ///         :Se crea la tabla ArticulosConsultados para ingresar los artículos que son consultados por los clientes, para luego analizarlos en clickhouse con Metabase.
     ///         :Se agrega el boton Consultado en el mantenimiento de Artículos. Se agrega el control de permitir consultados en los perfiles de usuario.
     ///         :Se agrega nuevo reporte Artículos consultados entre fechas por Rubro.
+    /// 1.17.42 :Se agrega soporte para cargar facturas de compra proveedor desde un archivo csv: codigoArticulo,cantidad,costo
+    ///         :La funcionalidad se habilita por tipo de documento.
+    /// 1.17.43 :Se agrega soporte para carga de Listas de precios desde archivos CSV y carga de factura compra proveedor desde mantenimiento de facturación para documentos configurados.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

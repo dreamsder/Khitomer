@@ -114,6 +114,9 @@ public:
 
     Q_INVOKABLE int ultimoRegistroDeMoneda()const;
 
+    Q_INVOKABLE QString retornaSimboloMonedaPorArticulo(QString _codigoArticulo) const;
+
+
 
     static int getCodigoMoneda(){
         return m_codigoMoneda;

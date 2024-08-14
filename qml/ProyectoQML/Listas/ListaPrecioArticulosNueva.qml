@@ -35,7 +35,7 @@ Rectangle{
     border.color: "#aaaaaa"
     opacity: 1
 
-    property double precioItem: parseFloat(itemPrecioAgregado)
+    property double precioItem: parseFloat(precioArticulo)
 
 
 
@@ -54,7 +54,7 @@ Rectangle{
         anchors.top: parent.top
         anchors.topMargin: 0
         color: "#212121"
-        text: itemDescripcion + " ("+itemCodigoAgregado+")"
+        text: descripcionArticulo + " ("+codigoArticulo+")"
         font.family: "Arial"
         opacity: 0.900
     }
@@ -99,9 +99,9 @@ Rectangle{
         }
         onClicked: {
 
-            txtArticuloParaLista.textoInputBox=itemCodigoAgregado
-            txtPrecioArticuloParaLista.textoInputBox=itemPrecioAgregado
-            txtPrecioArticuloParaLista.textoTitulo="Precio en "+simboloMoneda   //+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(itemCodigoAgregado))
+            txtArticuloParaLista.textoInputBox=codigoArticulo
+            txtPrecioArticuloParaLista.textoInputBox=precioArticulo
+            txtPrecioArticuloParaLista.textoTitulo="Precio en "+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(codigoArticulo))
             txtPrecioArticuloParaLista.tomarElFoco()
 
 
@@ -134,7 +134,7 @@ Rectangle{
         x: 9
         y: 7
         color: "#212121"
-        text: simboloMoneda//modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaCodigoMoneda(itemCodigoAgregado))
+        text: simboloMoneda
         font.family: "Arial"
         //
         anchors.top: parent.top
@@ -147,13 +147,13 @@ Rectangle{
         verticalAlignment: Text.AlignVCenter
         anchors.left: txtItemArticulo.right
     }
-    Item {
+    /*Item {
         id: modificado
         visible: false
         enabled: precioModificado
         focus: eliminarPrecioArticulo
 
-    }
+    }*/
 
     Rectangle {
         id: rectangle1
@@ -202,7 +202,7 @@ Rectangle{
             id: mouse_area1
             anchors.fill: parent
 
-            onClicked: {
+           /* onClicked: {
 
                 if(modeloListaPrecioArticulosAlternativa.get(index).eliminarPrecioArticulo){
                     txtEliminarItem.text=qsTr("<x")
@@ -217,7 +217,7 @@ Rectangle{
 
                     modeloListaPrecioArticulosAlternativa.setProperty(index,"eliminarPrecioArticulo",true)
                 }
-            }
-            }
+            }*/
+        }
     }
 }

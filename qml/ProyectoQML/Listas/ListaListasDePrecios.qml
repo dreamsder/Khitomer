@@ -132,20 +132,28 @@ Rectangle{
 
                 modeloListaPrecioArticulosAlternativa.clear()
                 modeloListaPrecioArticulos.clearArticulosListaPrecio()
+              /*  var currentDate = new Date();
+                console.log(currentDate)*/
                 modeloListaPrecioArticulos.buscarArticulosListaPrecio("codigoListaPrecio=",codigoListaPrecio)
+
 
                 for(var i=0; i<modeloListaPrecioArticulos.rowCount();i++){
 
                     modeloListaPrecioArticulosAlternativa.append({
-
                                                                      itemCodigoAgregado:modeloListaPrecioArticulos.retornarArticulosEnLista(i,codigoListaPrecio),
                                                                      itemDescripcion:modeloListaPrecioArticulos.retornarDescripcionArticulosEnLista(i,codigoListaPrecio),
+                                                                     simboloMoneda:modeloListaPrecioArticulos.retornarSimboloMonedaEnLista(i,codigoListaPrecio),
                                                                      //modeloArticulos.retornaDescripcionArticulo(modeloListaPrecioArticulos.retornarArticulosEnLista(i,codigoListaPrecio)),
                                                                      itemPrecioAgregado:modeloListaPrecioArticulos.retornarPrecioEnLista(i,codigoListaPrecio),
                                                                      precioModificado:false,
                                                                      eliminarPrecioArticulo:false
                                                                  })
                 }
+
+
+              /*  console.log("Fin carga lista de articulos de lista de precio en QML")
+                currentDate = new Date();
+                                console.log(currentDate)*/
 
                 txtNombreListaDePrecio.tomarElFoco()
                 txtArticuloParaLista.textoInputBox=""

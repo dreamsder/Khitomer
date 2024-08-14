@@ -37,13 +37,15 @@ ModuloListaPrecioArticulos::ModuloListaPrecioArticulos(QObject *parent)
     roles[CodigoArticuloRole] = "codigoArticulo";
     roles[DescripcionArticuloRole] = "descripcionArticulo";
     roles[PrecioArticuloRole] = "precioArticulo";
+    roles[SimboloMonedaRole] = "simboloMoneda";
+
 
     setRoleNames(roles);
 }
 
 
-ArticulosListaPrecio::ArticulosListaPrecio(const QString &codigoListaPrecio, const QString &codigoArticulo, const QString &descripcionArticulo,const QString &precioArticulo)
-    : m_codigoListaPrecio(codigoListaPrecio), m_codigoArticulo(codigoArticulo), m_descripcionArticulo(descripcionArticulo),m_precioArticulo(precioArticulo)
+ArticulosListaPrecio::ArticulosListaPrecio(const QString &codigoListaPrecio, const QString &codigoArticulo, const QString &descripcionArticulo,const QString &precioArticulo, const QString &simboloMoneda)
+    : m_codigoListaPrecio(codigoListaPrecio), m_codigoArticulo(codigoArticulo), m_descripcionArticulo(descripcionArticulo),m_precioArticulo(precioArticulo),m_simboloMoneda(simboloMoneda)
 {
 }
 
@@ -63,6 +65,11 @@ QString ArticulosListaPrecio::precioArticulo() const
 {
     return m_precioArticulo;
 }
+QString ArticulosListaPrecio::simboloMoneda() const
+{
+    return m_simboloMoneda;
+}
+
 
 
 void ModuloListaPrecioArticulos::addArticulosListaPrecio(const ArticulosListaPrecio &articulosListaPrecio)
@@ -95,11 +102,10 @@ Database::chequeaStatusAccesoMysql();
         }
 
 
-        QSqlQuery q = Database::consultaSql("select LA.codigoListaPrecio, LA.codigoArticulo, A.descripcionArticulo, LA.precioArticulo from ListaPrecioArticulos LA join Articulos A on A.codigoArticulo=LA.codigoArticulo join SubRubros SRU on SRU.codigoSubRubro=A.codigoSubRubro join Rubros RU on RU.codigoRubro=SRU.codigoRubro where "+campo+"'"+datoABuscar+"'   "+orderArticulo+"  ");
+        QSqlQuery q = Database::consultaSql("select LA.codigoListaPrecio, LA.codigoArticulo, A.descripcionArticulo, LA.precioArticulo,MON.simboloMoneda from ListaPrecioArticulos LA join Articulos A on A.codigoArticulo=LA.codigoArticulo join SubRubros SRU on SRU.codigoSubRubro=A.codigoSubRubro join Rubros RU on RU.codigoRubro=SRU.codigoRubro  join Monedas MON on MON.codigoMoneda=A.codigoMoneda  where "+campo+"'"+datoABuscar+"'   "+orderArticulo+"  ");
         QSqlRecord rec = q.record();
 
 
-        qDebug()<< q.lastQuery();
 
         ModuloListaPrecioArticulos::reset();
         if(q.record().count()>0){
@@ -111,7 +117,12 @@ Database::chequeaStatusAccesoMysql();
 
                                                                                          q.value(rec.indexOf("descripcionArticulo")).toString(),
 
-                                                                                         q.value(rec.indexOf("precioArticulo")).toString()));
+                                                                                         q.value(rec.indexOf("precioArticulo")).toString(),
+
+                                                                                         q.value(rec.indexOf("simboloMoneda")).toString()
+
+
+                                                                                         ));
             }
         }
     }
@@ -132,8 +143,17 @@ Database::chequeaStatusAccesoMysql();
     if(conexion){
 
 
-        QSqlQuery q = Database::consultaSql("SELECT LP.codigoListaPrecio'codigoListaPrecio','"+_codigoArticulo+"' as 'codigoArticulo',(select AR.descripcionArticulo from Articulos AR  where AR.codigoArticulo='"+_codigoArticulo+"')'descripcionArticulo',case when (select LPA.precioArticulo from ListaPrecioArticulos LPA where LPA.codigoListaPrecio=LP.codigoListaPrecio and LPA.codigoArticulo='"+_codigoArticulo+"') is null then '0.00' else (select LPA.precioArticulo from ListaPrecioArticulos LPA where LPA.codigoListaPrecio=LP.codigoListaPrecio and LPA.codigoArticulo='"+_codigoArticulo+"') end 'precioArticulo'  FROM  ListaPrecio LP order by LP.codigoListaPrecio asc");
+
+        QString sql = "SELECT  LP.codigoListaPrecio, '"+_codigoArticulo+"' as codigoArticulo,   AR.descripcionArticulo,     COALESCE(LPA.precioArticulo, '0.00') as precioArticulo,MON.simboloMoneda FROM      ListaPrecio LP LEFT JOIN      ListaPrecioArticulos LPA      ON LPA.codigoListaPrecio = LP.codigoListaPrecio      AND LPA.codigoArticulo = '"+_codigoArticulo+"' LEFT JOIN      Articulos AR      ON AR.codigoArticulo = '"+_codigoArticulo+"'  join Monedas MON on MON.codigoMoneda=AR.codigoMoneda  ORDER BY  LP.codigoListaPrecio ASC;";
+        QSqlQuery q = Database::consultaSql(sql);
+
+        //QSqlQuery q = Database::consultaSql("SELECT LP.codigoListaPrecio,'"+_codigoArticulo+"' as 'codigoArticulo',(select AR.descripcionArticulo from Articulos AR  where AR.codigoArticulo='"+_codigoArticulo+"')'descripcionArticulo',case when (select LPA.precioArticulo from ListaPrecioArticulos LPA where LPA.codigoListaPrecio=LP.codigoListaPrecio and LPA.codigoArticulo='"+_codigoArticulo+"') is null then '0.00' else (select LPA.precioArticulo from ListaPrecioArticulos LPA where LPA.codigoListaPrecio=LP.codigoListaPrecio and LPA.codigoArticulo='"+_codigoArticulo+"') end 'precioArticulo'  FROM  ListaPrecio LP order by LP.codigoListaPrecio asc");
+
+
+
         QSqlRecord rec = q.record();
+
+
 
         ModuloListaPrecioArticulos::reset();
         if(q.record().count()>0){
@@ -145,7 +165,10 @@ Database::chequeaStatusAccesoMysql();
 
                                                                                          q.value(rec.indexOf("descripcionArticulo")).toString(),
 
-                                                                                         q.value(rec.indexOf("precioArticulo")).toString()));
+                                                                                         q.value(rec.indexOf("precioArticulo")).toString(),
+
+                                                                                         q.value(rec.indexOf("simboloMoneda")).toString()
+                                                                                         ));
             }
         }
     }
@@ -178,6 +201,9 @@ QVariant ModuloListaPrecioArticulos::data(const QModelIndex & index, int role) c
     }
     else if (role == PrecioArticuloRole){
         return articulosListaPrecio.precioArticulo();
+    }
+    else if (role == SimboloMonedaRole){
+        return articulosListaPrecio.simboloMoneda();
     }
 
     return QVariant();
@@ -293,6 +319,24 @@ QString ModuloListaPrecioArticulos::retornarPrecioEnLista(int indice, QString  _
         if(m_ArticulosListaPrecio[i].codigoListaPrecio()==_codigoListaPrecio){
             if(contador==indice){
                 return m_ArticulosListaPrecio[i].precioArticulo();
+            }
+            contador++;
+        }
+    }
+    return "";
+}
+
+
+QString ModuloListaPrecioArticulos::retornarSimboloMonedaEnLista(int indice, QString  _codigoListaPrecio) const{
+
+    int contador=0;
+
+    int totalm_ArticulosListaPrecio=m_ArticulosListaPrecio.count();
+
+    for(int i=0;i<totalm_ArticulosListaPrecio;i++){
+        if(m_ArticulosListaPrecio[i].codigoListaPrecio()==_codigoListaPrecio){
+            if(contador==indice){
+                return m_ArticulosListaPrecio[i].simboloMoneda();
             }
             contador++;
         }

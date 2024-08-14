@@ -86,6 +86,10 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <Utilidades/database.h>
 
 #include <QUuid>
+#include <QtDeclarative>
+#include "csvreader.h"
+#include "fileselector.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -120,6 +124,8 @@ int main(int argc, char *argv[])
     // traducirIngles.load("Traducciones/main_qml_en");
     //  app->installTranslator(&traducirIngles);
 
+    qmlRegisterType<CsvReader>("CsvReader", 1, 0, "CsvReader");
+    qmlRegisterType<FileSelector>("FileSelector", 1, 0, "FileSelector");
 
 
     //Seteo Icono de la aplicacion
@@ -129,7 +135,7 @@ int main(int argc, char *argv[])
         viewer.setWindowIcon(QIcon("icono.png"));
     }
 
-    viewer.setMinimumWidth(1200);
+    viewer.setMinimumWidth(1280);
     viewer.setMinimumHeight(720);
 
     ModuloClientes moduloClientes;

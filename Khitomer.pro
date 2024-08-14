@@ -114,7 +114,9 @@ SOURCES += main.cpp \
     modulotipogarantia.cpp \
     moduloreportesperfilesusuarios.cpp \
     modulotipodocumentoperfilesusuarios.cpp \
-    moduloreportesconfiguracion.cpp
+    moduloreportesconfiguracion.cpp \
+    csvreader.cpp \
+    fileselector.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -198,7 +200,9 @@ HEADERS += \
     modulotipogarantia.h \
     moduloreportesperfilesusuarios.h \
     modulotipodocumentoperfilesusuarios.h \
-    moduloreportesconfiguracion.h
+    moduloreportesconfiguracion.h \
+    csvreader.h \
+    fileselector.h
 
 RESOURCES += \
     Imagenes.qrc \
@@ -273,7 +277,8 @@ DISTFILES += \
     qml/ProyectoQML/Listas/ListaGenerica.qml \
     qml/ProyectoQML/Controles/CuadroListaGarantias.qml \
     qml/ProyectoQML/Controles/ComboBoxListaTipoDocumentosClientesFacturacion.qml \
-    qml/ProyectoQML/consultarest.js
+    qml/ProyectoQML/consultarest.js \
+    qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml
 
 
 

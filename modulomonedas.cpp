@@ -441,6 +441,37 @@ QString ModuloMonedas::retornaCodigoMoneda(QString _codigoArticulo) const{
     }else{return "";}
 }
 
+QString ModuloMonedas::retornaSimboloMonedaPorArticulo(QString _codigoArticulo) const{
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select MO.simboloMoneda from Articulos AR join Monedas MO on MO.codigoMoneda=AR.codigoMoneda where AR.codigoArticulo='"+_codigoArticulo+"'")) {
+
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+
+                    return query.value(0).toString();
+
+                }else{
+                    return "";
+                }
+            }else{
+                return "";
+            }
+        }else{
+            return "";
+        }
+    }else{return "";}
+}
+
 double ModuloMonedas::retornaCotizacionMoneda(QString _codigoMoneda) const{
 
    /* qDebug()<<_codigoMoneda ;

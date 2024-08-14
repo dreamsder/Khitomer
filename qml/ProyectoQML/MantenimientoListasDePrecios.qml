@@ -25,6 +25,8 @@ import QtQuick 1.1
 import "Controles"
 import "Listas"
 import "Listas/Delegates"
+import CsvReader 1.0
+import FileSelector 1.0
 
 Rectangle {
     id: rectPrincipalMantenimientoListasDePrecios
@@ -50,6 +52,117 @@ Rectangle {
     property double nuevoPrecioAAcomodar:0.00
 
     property alias codigoArticuloDesdeHastaCuadroListaPrecioInputMask: cuadroImpresionListaDePrecios.codigoArticuloDesdeHastaInputMask
+
+
+    // Instancia para la carga de compras por medio de archivos CSV
+    CsvReader {
+        id: csvReaderListaDePrecios
+    }
+
+    FileSelector {
+        id: fileSelectorListaDePrecios
+    }
+
+
+
+    function cargarArchivoCSVListaDePrecios() {
+        var filePath = fileSelectorListaDePrecios.openFileDialog();
+        if (filePath !== "") {
+            var csvData = csvReaderListaDePrecios.readCsvFile(filePath);
+            //console.log("Original CSV Data: " + csvData);
+
+            var filteredData = [];
+            var letterPattern = /[a-zA-Z]/;  // Expresión regular para detectar letras
+
+            for (var i = 0; i < csvData.length; i++) {
+                var row = csvData[i];
+                var containsLetters = false;
+
+                // Verificar cada campo en la fila
+                for (var j = 0; j < row.length; j++) {
+                    if (letterPattern.test(row[j])) {
+                        containsLetters = true;
+                        break;
+                    }
+                }
+
+                // Si la fila no contiene letras, añadirla a filteredData
+                if (!containsLetters) {
+                    filteredData.push(row);
+                }
+            }
+
+            var statusCarga=true;
+            // Verifico que haya por lo menos 1 registro a cargar
+            if(filteredData.length!==0){
+                // Iterar sobre los datos filtrados y mostrar cada registro
+                for (var k = 0; k < filteredData.length; k++) {
+
+                    var record = filteredData[k];
+                    if(record[0].trim()===""){
+                        statusCarga=false;
+                        funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV de precios, la linea "+k.toString()+" tiene un error.\nEl artículo esta vacio.\n\nSe cancela la carga");
+                        break;
+                    }
+
+                    // Chequedo que la cantidad de campos sea 3: codigo lista precio, codigo articulo, precio
+                    if(record.length===3){
+                        // console.log("Record " + k + ": " + record.join(", "));
+
+
+                        const articuloAConsultar=modeloArticulos.existeArticulo(record[1]);
+                        // Reviso si el artículo existe, sino, aviso y cancelo.
+                        if(articuloAConsultar===record[1] && record[1]!="" && record[2]!=""){
+                            //const cantidad = record[1];
+                            // montoArticuloCargado = record[2];
+                            const listaDePrecioACargar = record[0];
+                            const codigoArticuloACargar = record[1];
+                            const nuevoPrecioACargar = record[2];
+                            if(modeloListaPrecioArticulos.insertarArticulosListaPrecio(listaDePrecioACargar,codigoArticuloACargar,nuevoPrecioACargar,txtNombreDeUsuario.textoInputBox.trim())!==1){
+                                const descripcionListaPrecioACargar= modeloListasPrecios.retornaDescripcionListaPrecio(listaDePrecioACargar);
+                                if(descripcionListaPrecioACargar===""){
+                                    funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.\n\n La lista de precios parece que no existe aún en el sistema.");
+                                }else{
+                                    funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.");
+                                }
+                                statusCarga=false;
+                                break;
+                            }
+
+                        }else{
+                            funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+" no existe.\n\nSe cancela la carga");
+                            statusCarga=false;
+                            break;
+                        }
+                    }else{
+                        funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+"\nDEBEN SER 3 COLUMNAS: codigo lista de precio, codigo artículo, nuevo precio\n\nSe cancela la carga");
+                        statusCarga=false;
+                        break;
+                    }
+                }
+                if(statusCarga){
+                    modeloListasPrecios.clearListasPrecio()
+                    modeloListasPrecios.buscarListasPrecio("1=","1")
+                    listaListaDePrecios.currentIndex=0;
+                    modeloListaPrecioArticulos.clearArticulosListaPrecio()
+                    modeloListaPrecioArticulosAlternativa.clear()
+                    txtPrecioArticuloParaLista.textoTitulo="Precio:"
+                    funcionesmysql.mensajeAdvertenciaOk("Nuevos precios cargados ok.\n\nSe cargaron "+k+" registros.")
+                }
+            }else{
+                funcionesmysql.mensajeAdvertenciaOk("Error, no hay registros validos para cargar.")
+            }
+
+
+        }
+    }
+
+
+
+
+
+
+
 
     function cargarArticulosAModificarElPrecio(){
 
@@ -394,6 +507,7 @@ Rectangle {
                 highlightFollowsCurrentItem: true
                 anchors.right: parent.right
                 delegate: ListaPreciosArticulos{}
+                // delegate: ListaPrecioArticulosNueva{}
                 snapMode: ListView.NoSnap
                 anchors.bottomMargin: 25
                 spacing: 1
@@ -415,6 +529,8 @@ Rectangle {
                 anchors.rightMargin: 1
 
                 model: modeloListaPrecioArticulosAlternativa
+                //  model:modeloListaPrecioArticulos
+
 
 
 
@@ -565,6 +681,7 @@ Rectangle {
                             modeloListaPrecioArticulosAlternativa.append({
                                                                              itemDescripcion:modeloArticulos.retornaDescripcionArticulo(valorArticuloInterno),
                                                                              itemCodigoAgregado:valorArticuloInterno,
+                                                                             simboloMoneda:modeloMonedas.retornaSimboloMonedaPorArticulo(valorArticuloInterno),
                                                                              itemPrecioAgregado:txtPrecioArticuloParaLista.textoInputBox.trim(),
                                                                              precioModificado:true,
                                                                              eliminarPrecioArticulo:false
@@ -657,7 +774,7 @@ Rectangle {
             id: btnCargaRapidaDePrecios
             visible: true
             textoColor: "#dbd8d8"
-            anchors.right: parent.right
+            anchors.right: btnCargarListaDePreciosDesdeCSV.left
             anchors.rightMargin: 20
             anchors.bottom: rectListasDePrecioArticulos.top
             anchors.bottomMargin: 10
@@ -684,6 +801,33 @@ Rectangle {
 
             }
         }
+
+        BotonCargarDato {
+            id: btnCargarListaDePreciosDesdeCSV
+            textoColor:{
+                if(enabled){
+                    "#dbd8d8"
+                }else{
+                    "#6d6c6c"
+                }
+            }
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.bottom: rectListasDePrecioArticulos.top
+            anchors.bottomMargin: 10
+            texto: "Cargar lista de precios desde CSV..."
+            imagen: "qrc:/imagenes/qml/ProyectoQML/Imagenes/SumaBlanca.png"
+            visible: true
+            enabled: btnCargaRapidaDePrecios.visible
+
+            onClic: {
+
+                cargarArchivoCSVListaDePrecios()
+
+            }
+
+        }
+
 
         BotonPaletaSistema {
             id: btnEmitirListaDePrecio
@@ -1303,6 +1447,7 @@ Rectangle {
                             modeloListaPrecioArticulosAlternativa.append({
                                                                              itemDescripcion:modeloArticulos.retornaDescripcionArticulo(codigoArticuloEnOpcionesExtras),
                                                                              itemCodigoAgregado:codigoArticuloEnOpcionesExtras,
+                                                                             simboloMoneda:modeloMonedas.retornaSimboloMonedaPorArticulo(codigoArticuloEnOpcionesExtras),
                                                                              itemPrecioAgregado:txtPrecioArticuloParaLista1.textoInputBox.trim(),
                                                                              precioModificado:true,
                                                                              eliminarPrecioArticulo:false

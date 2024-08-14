@@ -29,18 +29,20 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class ArticulosListaPrecio
 {
 public:
-   Q_INVOKABLE ArticulosListaPrecio(const QString &codigoListaPrecio,const QString &codigoArticulo,const QString &descripcionArticulo,const QString &precioArticulo);
+   Q_INVOKABLE ArticulosListaPrecio(const QString &codigoListaPrecio,const QString &codigoArticulo,const QString &descripcionArticulo,const QString &precioArticulo,const QString &simboloMoneda);
 
     QString codigoListaPrecio() const;
     QString codigoArticulo() const;
     QString descripcionArticulo() const;
     QString precioArticulo() const;
+    QString simboloMoneda()const;
 
 private:
     QString m_codigoListaPrecio;
     QString m_codigoArticulo;
     QString m_descripcionArticulo;
     QString m_precioArticulo;
+    QString m_simboloMoneda;
 };
 
 class ModuloListaPrecioArticulos : public QAbstractListModel
@@ -51,7 +53,8 @@ public:
         CodigoListaPrecioRole = Qt::UserRole + 1,
         CodigoArticuloRole,
         DescripcionArticuloRole,
-        PrecioArticuloRole
+        PrecioArticuloRole,
+        SimboloMonedaRole
 
     };
 
@@ -82,6 +85,7 @@ public:
     Q_INVOKABLE QString retornarArticulosEnLista(int,QString) const;
     Q_INVOKABLE QString retornarPrecioEnLista(int,QString) const;
     Q_INVOKABLE QString retornarDescripcionArticulosEnLista(int indice, QString  _codigoListaPrecio) const;
+    Q_INVOKABLE QString retornarSimboloMonedaEnLista(int indice, QString  _codigoListaPrecio) const;
 
 
     Q_INVOKABLE double retornarPrecioDeArticuloEnBaseDeDatos(QString,QString) const;
@@ -101,6 +105,7 @@ public:
     Q_INVOKABLE QString retornaCodigoArticulo(int );
     Q_INVOKABLE QString retornaPrecioArticulo(int );
     Q_INVOKABLE QString retornaDescripcionArticulo(int index);
+
 
     void marcarArticuloParaSincronizar(QString _codigoArticulo) const;
 
