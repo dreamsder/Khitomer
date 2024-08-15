@@ -81,6 +81,8 @@ public:
 
     Q_INVOKABLE bool eliminarArticuloPorListaPrecio(QString , QString ) const;
 
+    Q_INVOKABLE bool respaldarPrecios() const;
+
 
     Q_INVOKABLE QString retornarArticulosEnLista(int,QString) const;
     Q_INVOKABLE QString retornarPrecioEnLista(int,QString) const;

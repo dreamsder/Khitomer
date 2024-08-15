@@ -86,7 +86,7 @@ void ModuloListaPrecioArticulos::clearArticulosListaPrecio(){
 void ModuloListaPrecioArticulos::buscarArticulosListaPrecio(QString campo, QString datoABuscar){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -132,7 +132,7 @@ Database::chequeaStatusAccesoMysql();
 void ModuloListaPrecioArticulos::buscarArticulosListaPrecioParaModificar(QString _codigoArticulo){
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -225,7 +225,7 @@ int ModuloListaPrecioArticulos::insertarArticulosListaPrecio(QString _codigoList
     }
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -348,7 +348,7 @@ QString ModuloListaPrecioArticulos::retornarSimboloMonedaEnLista(int indice, QSt
 double ModuloListaPrecioArticulos::retornarPrecioDeArticuloEnBaseDeDatos(QString _codigoArticulo,QString _codigoListaPrecio) const {
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -381,7 +381,7 @@ Database::chequeaStatusAccesoMysql();
 double ModuloListaPrecioArticulos::retornarCostoMonedaReferenciaDelSistema(QString _codigoArticulo) const {
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -412,7 +412,7 @@ Database::chequeaStatusAccesoMysql();
 double ModuloListaPrecioArticulos::retornarCostoEnMonedaExtrangera(QString _codigoArticulo) const {
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -443,7 +443,7 @@ Database::chequeaStatusAccesoMysql();
 QString ModuloListaPrecioArticulos::retornarSimboloMonedaDocumentoArticuloCosto(QString _codigoArticulo) const {
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -475,7 +475,7 @@ Database::chequeaStatusAccesoMysql();
 
 bool ModuloListaPrecioArticulos::eliminarArticulosListaPrecio(QString _codigoListaPrecio) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -513,7 +513,7 @@ Database::chequeaStatusAccesoMysql();
 }
 bool ModuloListaPrecioArticulos::eliminarArticuloPorListaPrecio(QString _codigoListaPrecio, QString _codigoArticulo) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -552,7 +552,7 @@ Database::chequeaStatusAccesoMysql();
 
 bool ModuloListaPrecioArticulos::eliminarArticuloDeListaPrecio(QString _codigoArticulo) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -576,10 +576,45 @@ Database::chequeaStatusAccesoMysql();
     }else{return false;}
 }
 
+
+bool ModuloListaPrecioArticulos::respaldarPrecios() const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+
+        if(query.exec("TRUNCATE TABLE ListaPrecioArticulosBackup;")){
+
+            if(query.exec("Insert into ListaPrecioArticulosBackup select * from ListaPrecioArticulos;")){
+
+                return true;
+
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+    }else{return false;}
+}
+
+
+
 bool ModuloListaPrecioArticulos::actualizarArticuloDeListaPrecio(QString _codigoArticulo,QString _codigoListaDePrecio,QString _precioArticulo, QString usuarioUltimaModificacion) const {
 
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";
@@ -603,7 +638,7 @@ Database::chequeaStatusAccesoMysql();
 }
 qlonglong ModuloListaPrecioArticulos::retornaCantidadArticulosEnListaPrecio(QString _codigoListaPrecio) const {
     bool conexion=true;
-Database::chequeaStatusAccesoMysql();
+    Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
         if(!Database::connect().open()){
             qDebug() << "No conecto";

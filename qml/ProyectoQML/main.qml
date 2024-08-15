@@ -313,6 +313,8 @@ Rectangle {
     /// 1.17.42 :Se agrega soporte para cargar facturas de compra proveedor desde un archivo csv: codigoArticulo,cantidad,costo
     ///         :La funcionalidad se habilita por tipo de documento.
     /// 1.17.43 :Se agrega soporte para carga de Listas de precios desde archivos CSV y carga de factura compra proveedor desde mantenimiento de facturación para documentos configurados.
+    ///         :Se agrega soporte para cagra de listas de precio desde archivos.csv: codigoArticulo,precioLista1, precioLista2, precioLista3...etc
+    ///         :Se crea una tabla auxiliar para respaldar los precios antes de que se cargue el archivo de precios: ListaPrecioArticulosBackup
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

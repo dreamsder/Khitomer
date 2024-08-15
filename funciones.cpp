@@ -2244,6 +2244,11 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 492:
             if(!impactoCambioEnBD("ALTER TABLE `TipoDocumento` ADD COLUMN `utilizaCargaDeArticulosPorCSV` CHAR(1) NOT NULL DEFAULT '0' AFTER `imprimeEnFormatoRecibo`;","493")){
                 _iterador=false; return false; } break;
+        case 493:
+            if(!impactoCambioEnBD("CREATE TABLE `ListaPrecioArticulosBackup` (`codigoListaPrecio` int(10) unsigned NOT NULL, `codigoArticulo` varchar(10) NOT NULL, `precioArticulo` decimal(45,4) DEFAULT NULL, `sincronizadoWeb` char(1) NOT NULL DEFAULT '0', `tiene_cambio` tinyint(3) NOT NULL DEFAULT 0, `usuarioUltimaModificacion` varchar(45) NOT NULL DEFAULT 'admin', PRIMARY KEY (`codigoListaPrecio`,`codigoArticulo`)) ENGINE=InnoDB;","494")){
+                _iterador=false; return false; } break;
+
+
 
 
 

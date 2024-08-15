@@ -95,51 +95,73 @@ Rectangle {
             var statusCarga=true;
             // Verifico que haya por lo menos 1 registro a cargar
             if(filteredData.length!==0){
-                // Iterar sobre los datos filtrados y mostrar cada registro
-                for (var k = 0; k < filteredData.length; k++) {
+                // Procedo a respaldar los precios actuales en caso de un problema grave en la tabla ListaPrecioArticulosBackup
+                if(modeloListaPrecioArticulos.respaldarPrecios()){
 
-                    var record = filteredData[k];
-                    if(record[0].trim()===""){
-                        statusCarga=false;
-                        funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV de precios, la linea "+k.toString()+" tiene un error.\nEl artículo esta vacio.\n\nSe cancela la carga");
-                        break;
-                    }
-
-                    // Chequedo que la cantidad de campos sea 3: codigo lista precio, codigo articulo, precio
-                    if(record.length===3){
-                        // console.log("Record " + k + ": " + record.join(", "));
+                    // Iterar sobre los datos filtrados y mostrar cada registro
+                    for (var k = 0; k < filteredData.length; k++) {
 
 
-                        const articuloAConsultar=modeloArticulos.existeArticulo(record[1]);
-                        // Reviso si el artículo existe, sino, aviso y cancelo.
-                        if(articuloAConsultar===record[1] && record[1]!="" && record[2]!=""){
-                            //const cantidad = record[1];
-                            // montoArticuloCargado = record[2];
-                            const listaDePrecioACargar = record[0];
-                            const codigoArticuloACargar = record[1];
-                            const nuevoPrecioACargar = record[2];
-                            if(modeloListaPrecioArticulos.insertarArticulosListaPrecio(listaDePrecioACargar,codigoArticuloACargar,nuevoPrecioACargar,txtNombreDeUsuario.textoInputBox.trim())!==1){
-                                const descripcionListaPrecioACargar= modeloListasPrecios.retornaDescripcionListaPrecio(listaDePrecioACargar);
-                                if(descripcionListaPrecioACargar===""){
-                                    funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.\n\n La lista de precios parece que no existe aún en el sistema.");
-                                }else{
-                                    funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.");
+
+                        var record = filteredData[k];
+                        if(record[0].trim()===""){
+                            statusCarga=false;
+                            funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV de precios, la linea "+k.toString()+" tiene un error.\nEl artículo esta vacio.\n\nSe cancela la carga");
+                            break;
+                        }
+
+                        // Chequedo que la cantidad de campos sea mayor a 1, o sea que tenga el articulo y por lo menos 1 precio:
+                        // Codigo de articulo, precio lista 1, precio lista 2, precio lista 3....precio lista 99
+                        if(record.length>1){
+                            // console.log("Record " + k + ": " + record.join(", "));
+
+
+                            const articuloAConsultar=modeloArticulos.existeArticulo(record[0]);
+                            // Reviso si el artículo existe, sino, aviso y cancelo.
+                            if(articuloAConsultar===record[0]){
+
+                                // console.log(record);
+                                for (var jj = 1; jj < record.length; jj++) {
+                                    var precioLista = record[jj];
+
+                                    // Si el campo no está vacío, mostrarlo en el console.log
+                                    if (precioLista.trim() !== "") {
+                                        //  console.log("codigoArticulo: " + articuloAConsultar + ", lista" + jj + ": " + precioLista);
+                                        const listaDePrecioACargar = jj;
+                                        const codigoArticuloACargar = articuloAConsultar;
+                                        const nuevoPrecioACargar = precioLista;
+
+                                        if(modeloListaPrecioArticulos.insertarArticulosListaPrecio(listaDePrecioACargar,codigoArticuloACargar,nuevoPrecioACargar,txtNombreDeUsuario.textoInputBox.trim())!==1){
+                                            const descripcionListaPrecioACargar= modeloListasPrecios.retornaDescripcionListaPrecio(listaDePrecioACargar);
+                                            if(descripcionListaPrecioACargar===""){
+                                                funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.\n\n La lista de precios parece que no existe aún en el sistema.");
+                                            }else{
+                                                funcionesmysql.mensajeAdvertenciaOk("Hubo un error al querer cargar el siguiente artículo:\n\nArtículo: "+codigoArticuloACargar+"\nLista de precio: "+listaDePrecioACargar+" ("+descripcionListaPrecioACargar+")\nNuevo Precio: "+nuevoPrecioACargar+"\n\nSe cancela la carga, solo se actualizarón los primeros "+k+" registros.");
+                                            }
+                                            statusCarga=false;
+                                            break;
+                                        }
+                                    }
                                 }
+                            }else{
+                                funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+" no existe.\n\nSe cancela la carga");
                                 statusCarga=false;
                                 break;
                             }
-
                         }else{
-                            funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+" no existe.\n\nSe cancela la carga");
+                            funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+"\nDEBEN SER AL MENOS 2 COLUMNAS:codigo artículo, precioLista1...\n\nSe cancela la carga");
                             statusCarga=false;
                             break;
                         }
-                    }else{
-                        funcionesmysql.mensajeAdvertenciaOk("Error,en carga de archivo CSV, la linea "+k.toString()+" tiene un error.\nArtículo: "+record+"\nDEBEN SER 3 COLUMNAS: codigo lista de precio, codigo artículo, nuevo precio\n\nSe cancela la carga");
-                        statusCarga=false;
-                        break;
                     }
+
+                }else{
+                    funcionesmysql.mensajeAdvertenciaOk("Error al realizar el respaldo de los precios actuales.\n\nSe cancela la carga");
+                    statusCarga=false;
+                    break;
                 }
+
+
                 if(statusCarga){
                     modeloListasPrecios.clearListasPrecio()
                     modeloListasPrecios.buscarListasPrecio("1=","1")
