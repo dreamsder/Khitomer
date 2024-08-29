@@ -1079,6 +1079,7 @@ Rectangle {
 
                 clip: false
                 focus: false
+
                 WebView {
                     id: web_view1
                     anchors.bottomMargin: 0
@@ -1134,6 +1135,7 @@ Rectangle {
 
 
                 }
+
             }
 
 

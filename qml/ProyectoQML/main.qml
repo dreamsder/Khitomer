@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.43"
+    property string versionKhitomer: "1.17.44"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -315,6 +315,9 @@ Rectangle {
     /// 1.17.43 :Se agrega soporte para carga de Listas de precios desde archivos CSV y carga de factura compra proveedor desde mantenimiento de facturación para documentos configurados.
     ///         :Se agrega soporte para cagra de listas de precio desde archivos.csv: codigoArticulo,precioLista1, precioLista2, precioLista3...etc
     ///         :Se crea una tabla auxiliar para respaldar los precios antes de que se cargue el archivo de precios: ListaPrecioArticulosBackup
+    /// 1.17.44 :Se agrega nuevo reporte para digital world a pedido de Sandra sobre cuenta corrientes: Estado de cuenta por cliente entre fechas y moneda
+
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
