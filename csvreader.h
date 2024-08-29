@@ -8,7 +8,7 @@
 class CsvReader : public QObject {
     Q_OBJECT
 public:
-    explicit CsvReader(QObject *parent = nullptr);
+    explicit CsvReader(QObject *parent = 0);
 
     // Declaración de la función que siempre ignora el encabezado
     Q_INVOKABLE QVariantList readCsvFile(const QString &filePath);

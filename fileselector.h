@@ -8,11 +8,11 @@
 class FileSelector : public QObject {
     Q_OBJECT
 public:
-    explicit FileSelector(QObject *parent = nullptr) : QObject(parent) {}  // Constructor definido en línea
+    explicit FileSelector(QObject *parent = 0) : QObject(parent) {}  // Reemplazado nullptr por 0
 
     Q_INVOKABLE QString openFileDialog() {
         QString fileName = QFileDialog::getOpenFileName(
-            nullptr,
+            0,  // Reemplazado nullptr por 0
             "Seleccione el archivo .CSV a cargar",
             "",
             "CSV Files (*.csv)"
