@@ -6951,7 +6951,12 @@ Rectangle {
 
                                 //Si guardo las lineas de venta correctamente proceso a actualizar el estado del documento a G - Guardado, sin imprimir
                                 if(estatusProcesoLineas){
-                                    if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"G",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+
+
+
+
+
+                                    if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"G",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
                                         var continuarVenta = true;
 
@@ -7061,7 +7066,7 @@ Rectangle {
 
                                                     if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
 
-                                                        if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"E",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                                                        if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"E",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
 
                                                             for(var i=0; i<modeloItemsFactura.count;i++){
@@ -8736,7 +8741,7 @@ Rectangle {
                         terminaAnulacionOk=false
                     }
                 }
-                if(terminaAnulacionOk && modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"C",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                if(terminaAnulacionOk && modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"C",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
                     for(var j=0; j<modeloListaMediosDePagoAgregados.count;j++){
                         if(!modeloLineasDePagoListaChequesDiferidosComboBox.actualizarLineaDePagoChequeDiferido(modeloListaMediosDePagoAgregados.get(j).codigoDoc, modeloListaMediosDePagoAgregados.get(j).codigoTipoDoc,  modeloListaMediosDePagoAgregados.get(j).numeroLineaDocumento,"0"+modeloconfiguracion.retornaCantidadDecimalesString()+"",modeloListaMediosDePagoAgregados.get(j).serieDoc)){
@@ -8801,7 +8806,7 @@ Rectangle {
                         terminaAnulacionOk=false
                     }
                 }
-                if(terminaAnulacionOk && modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"C",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                if(terminaAnulacionOk && modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"C",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
                     for(var j=0; j<modeloListaMediosDePagoAgregados.count;j++){
                         if(!modeloLineasDePagoListaChequesDiferidosComboBox.actualizarLineaDePagoChequeDiferido(modeloListaMediosDePagoAgregados.get(j).codigoDoc, modeloListaMediosDePagoAgregados.get(j).codigoTipoDoc,  modeloListaMediosDePagoAgregados.get(j).numeroLineaDocumento,"0"+modeloconfiguracion.retornaCantidadDecimalesString()+"",modeloListaMediosDePagoAgregados.get(j).serieDoc)){

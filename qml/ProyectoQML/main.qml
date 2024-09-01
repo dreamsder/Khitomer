@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.44"
+    property string versionKhitomer: "1.17.45"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -316,8 +316,8 @@ Rectangle {
     ///         :Se agrega soporte para cagra de listas de precio desde archivos.csv: codigoArticulo,precioLista1, precioLista2, precioLista3...etc
     ///         :Se crea una tabla auxiliar para respaldar los precios antes de que se cargue el archivo de precios: ListaPrecioArticulosBackup
     /// 1.17.44 :Se agrega nuevo reporte para digital world a pedido de Sandra sobre cuenta corrientes: Estado de cuenta por cliente entre fechas y moneda
-
-
+    /// 1.17.45 :Se agrega un sistema de busqueda de reportes que aprende a medida que se usa mas y mas y pone primeros los reportes mas usados.
+    ///         :Se crea un nuevo campo en la tabla Documentos para guardar el saldo(nuevoSaldo), y se modifica el sistema para que los saldos se acumulen documento a documento.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
@@ -1798,6 +1798,10 @@ Rectangle {
                                     btnAvisoFaltaStock.timerRuning=false
                                 }
                             }
+
+
+                            mantenimientoReportes.busquedaDeReportesControl.cargarModeloListaReportesEnBusqueda()
+
 
 
 

@@ -190,10 +190,14 @@ public:
 
     Q_INVOKABLE QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
+
     Q_INVOKABLE void buscarReportes(QString , QString , QString );
 
     Q_INVOKABLE void buscarReportesSegunMenu(QString campo, QString datoABuscar,QString _codigoPerfil);
 
+    Q_INVOKABLE qlonglong retornarCodigoReporte(int indice) const;
+
+    Q_INVOKABLE QString retornarDescripcionReporte(int indice) const;
 
     Q_INVOKABLE bool retornaPermisosDelReporte(QString ,QString ) const;
 
@@ -203,6 +207,9 @@ public:
 
     Q_INVOKABLE QString retornaDirectorioReporteXLS(QString )const;
 
+    Q_INVOKABLE void insertarReportesMasUsados(QString _codigoReporte,QString _idUsuario);
+
+    Q_INVOKABLE void buscarReportesDeBusquedas(QString campo, QString datoABuscar, QString _codigoPerfil, QString _usuario);
 
 
     Q_INVOKABLE QString retornaDescripcionDelReporte(QString) const;

@@ -236,7 +236,7 @@ public:
 
     Q_INVOKABLE bool eliminarLineaDocumento(QString , QString, QString)const;
 
-    Q_INVOKABLE bool actualizoEstadoDocumento(QString , QString, QString,QString,QString )const;
+    Q_INVOKABLE bool actualizoEstadoDocumento(QString , QString, QString,QString,QString,QString _codigoCliente,QString _tipoCliente, QString _codigoMoneda )const;
 
     Q_INVOKABLE bool actualizoEstadoDocumentoCFE(QString _codigoDocumento, QString _codigoTipoDocumento, QString _estadoDocumento, QString) const;
 

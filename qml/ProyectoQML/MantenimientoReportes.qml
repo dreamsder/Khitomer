@@ -36,6 +36,7 @@ Rectangle {
     radius: 8
     //
 
+    property alias  busquedaDeReportesControl: busquedaDeReportes
 
     property alias botonGenerarPDFVisible: btnGenerarPDF.visible
 
@@ -326,6 +327,8 @@ Rectangle {
 
 
 
+        modeloReportes.insertarReportesMasUsados(cbxListaReportes.codigoValorSeleccion.trim(),txtNombreDeUsuario.textoInputBox.trim());
+
         var estadoGeneracionReporte=modeloReportes.generarReporte(consultaSqlPrevia,cbxListaReportes.codigoValorSeleccion.trim(),consultaSqlPreviaGrafica,cbxIncluirGrafica.chekActivo,consultaSqlPreviaCabezal);
 
         txtMensajeInformacionReportes.visible=true
@@ -334,9 +337,10 @@ Rectangle {
 
         if(estadoGeneracionReporte=="1"){
 
-            botonNuevoReporteEnWebview.visible=false
+           // botonNuevoReporteEnWebview.visible=false
             botonAbrirCarpetaReportes.visible=true
-            txtNuevoReporte.visible=false
+          //  txtNuevoReporte.visible=false
+            busquedaDeReportes.visible=false
 
             web_view1.url="file://"+modeloReportes.retornaDirectorioReporteWeb()
             web_view1.reload.trigger()
@@ -1140,7 +1144,7 @@ Rectangle {
 
 
 
-            BotonPaletaSistema {
+          /*  BotonPaletaSistema {
                 id: botonNuevoReporteEnWebview
                 x: 376
                 y: 242
@@ -1149,9 +1153,9 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: cbxListaReportes.tomarElFoco()
-            }
+            }*/
 
-            Text {
+           /* Text {
                 id: txtNuevoReporte
                 x: 101
                 y: 188
@@ -1169,7 +1173,14 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 32
+            }*/
+
+            BusquedaReportes{
+                id: busquedaDeReportes
+                anchors.fill: parent
+
             }
+
 
             Rectangle {
                 id: scrollbar
@@ -1249,6 +1260,7 @@ Rectangle {
             z: 2
             textoTitulo: ""
             textoComboBox: "Lista de reportes"
+
             onSenialAlAceptarOClick: {
 
                 seleccionarReporte(cbxListaReportes.codigoValorSeleccion)
@@ -1268,6 +1280,7 @@ Rectangle {
 
                 if(cbxListaReportes.codigoSql!="" && cbxListaReportes.codigoValorSeleccion!="")
                 cargarReporte("")
+
 
             }
         }
@@ -1427,6 +1440,9 @@ Rectangle {
                 cbxUsaControlDeStockPrevisto.codigoValorSeleccion="1"
 
 
+                busquedaDeReportes.cargarModeloListaReportesEnBusqueda()
+
+                busquedaDeReportes.visible=true
 
             }
         }

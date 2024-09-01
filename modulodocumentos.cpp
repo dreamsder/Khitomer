@@ -1525,7 +1525,7 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
     }
 }
 
-bool ModuloDocumentos::actualizoEstadoDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _estadoDocumento ,QString _usuarioAlta, QString _serieDocumento   ) const {
+bool ModuloDocumentos::actualizoEstadoDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _estadoDocumento ,QString _usuarioAlta, QString _serieDocumento , QString _codigoCliente,QString _tipoCliente, QString _codigoMoneda  ) const {
 
 
     if(_codigoDocumento.trimmed()=="" || _codigoTipoDocumento.trimmed()=="" ){
@@ -1544,6 +1544,38 @@ bool ModuloDocumentos::actualizoEstadoDocumento(QString _codigoDocumento,QString
         QSqlQuery query(Database::connect());
 
         if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',codigoEstadoDocumento='"+_estadoDocumento+"' ,usuarioUltimaModificacion='"+_usuarioAlta+"' where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+
+            // Aca me preparo para actualizar el saldo del documento
+            if(_estadoDocumento=="G" || _estadoDocumento=="E"){
+                QString  afectaCuentaCorriente = func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"afectaCuentaCorriente");
+                if(afectaCuentaCorriente!="0" && afectaCuentaCorriente!=""){
+                    // Obtengo el saldo del cliente
+                    if(query.exec("select  sum(case when TDOC.afectaCuentaCorriente=1 then ROUND(DOC.precioTotalVenta,2) else ROUND(DOC.precioTotalVenta*-1,2) end) AS Saldo            from Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where  DOC.tipoCliente='"+_tipoCliente+"' and DOC.codigoEstadoDocumento in ('E','G')  and TDOC.afectaCuentaCorriente!=0  and DOC.codigoCliente='"+_codigoCliente+"'  and DOC.codigoMonedaDocumento='"+_codigoMoneda+"' ;")) {
+                        if(query.first()){
+                            if(query.value(0).toString()!=""){
+                                if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', nuevoSaldo='"+query.value(0).toString()+"'  where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and serieDocumento='"+_serieDocumento+"'")){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }else if(_estadoDocumento=="C"){
+                // Si cancelo una factura, tengo que modificar el saldo en el ultimo documento del cliente que afecta la cuenta corriente
+                QString  afectaCuentaCorriente = func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,"afectaCuentaCorriente");
+                if(afectaCuentaCorriente!="0" && afectaCuentaCorriente!=""){
+                    // Obtengo el saldo del cliente
+                    if(query.exec("select  sum(case when TDOC.afectaCuentaCorriente=1 then ROUND(DOC.precioTotalVenta,2) else ROUND(DOC.precioTotalVenta*-1,2) end) AS Saldo            from Documentos DOC join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where  DOC.tipoCliente='"+_tipoCliente+"' and DOC.codigoEstadoDocumento in ('E','G')  and TDOC.afectaCuentaCorriente!=0  and DOC.codigoCliente='"+_codigoCliente+"'  and DOC.codigoMonedaDocumento='"+_codigoMoneda+"' ;")) {
+                        if(query.first()){
+                            if(query.value(0).toString()!=""){
+                                if(query.exec("update Documentos DOC join TipoDocumento TD on TD.codigoTipoDocumento=DOC.codigoTipoDocumento  set DOC.fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"', DOC.nuevoSaldo='"+query.value(0).toString()+"' where DOC.codigoCliente='"+_codigoCliente+"' and DOC.tipoCliente='"+_tipoCliente+"' and DOC.codigoMonedaDocumento='"+_codigoMoneda+"' and DOC.codigoEstadoDocumento in ('E','G')   and   TD.afectaCuentaCorriente!=0  order by DOC.fechaHoraGuardadoDocumentoSQL DESC limit 1;")){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             return true;
         }else{
             return false;

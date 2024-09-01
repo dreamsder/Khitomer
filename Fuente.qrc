@@ -126,5 +126,6 @@
         <file>qml/ProyectoQML/Controles/CuadroImprimirEnvios.qml</file>
         <file>qml/ProyectoQML/consultarest.js</file>
         <file>qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml</file>
+        <file>qml/ProyectoQML/Controles/BusquedaReportes.qml</file>
     </qresource>
 </RCC>

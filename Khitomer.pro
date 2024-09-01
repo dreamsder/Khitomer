@@ -278,7 +278,8 @@ DISTFILES += \
     qml/ProyectoQML/Controles/CuadroListaGarantias.qml \
     qml/ProyectoQML/Controles/ComboBoxListaTipoDocumentosClientesFacturacion.qml \
     qml/ProyectoQML/consultarest.js \
-    qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml
+    qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml \
+    qml/ProyectoQML/Controles/BusquedaReportes.qml
 
 
 

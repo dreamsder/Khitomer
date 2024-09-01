@@ -30,6 +30,8 @@ Rectangle {
     property int altoControlRecta: 18
     property int tamanioFuente: 9
     property int tamanioFuenteTitulo: 13
+
+    property int radioControl : 2
     width: {
 
 
@@ -110,6 +112,8 @@ Rectangle {
     signal clicEnBusqueda
     signal pierdoFoco
 
+    signal textoCambia
+
     function tomarElFoco(){
         txtTextInput.focus=true
         if(enFocoSeleccionarTodo){
@@ -133,7 +137,8 @@ Rectangle {
     Rectangle {
         id:recTextInput
         height: altoControlRecta
-        radius: 2
+        radius: radioControl
+        smooth: true
         anchors.right: parent.right
         anchors.rightMargin: 21
         anchors.left: parent.left
@@ -234,6 +239,8 @@ Rectangle {
                     txtTextoSombra.visible=false
 
                 }
+
+                textoCambia()
             }
 
 

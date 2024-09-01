@@ -213,6 +213,8 @@ int main(int argc, char *argv[])
     ModuloMediosDePago moduloMediosDePago;
     ModuloReportesMenu moduloReportesMenu;
     ModuloReportes moduloReportes;
+
+    ModuloReportes  moduloReportesBusquedas;
     ModuloReportes moduloReportesDinamicos;
     ModuloRubros moduloRubros;
     ModuloRubros moduloRubrosComboBox;
@@ -500,6 +502,7 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloMediosDePago", &moduloMediosDePago );
     viewer.rootContext()->setContextProperty("modeloReportesMenuComboBox", &moduloReportesMenu );
     viewer.rootContext()->setContextProperty("modeloReportes", &moduloReportes );
+    viewer.rootContext()->setContextProperty("modeloReportesBusqueda", &moduloReportesBusquedas );
     viewer.rootContext()->setContextProperty("modeloReportesDinamicos", &moduloReportesDinamicos );
 
 
@@ -638,6 +641,7 @@ inicio:
       moduloReportesMenu.buscarReportesMenu("1=","1","");
 
       moduloReportes.buscarReportes("1=","1","");
+      moduloReportesBusquedas.buscarReportes("1=","2","");
 
       moduloListaImpresoras.limpiarListaImpresoras();
       moduloListaImpresoras.buscarImpresoras();
