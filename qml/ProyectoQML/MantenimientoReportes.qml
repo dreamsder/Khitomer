@@ -146,7 +146,7 @@ Rectangle {
             consultaSqlPreviaCabezal=cbxListaReportes.codigoSqlCabezal.trim()
         }
 
-        while(consultaSqlPrevia.match("@_codigoCliente")){
+        while(consultaSqlPrevia.match("@_codigoCliente") || consultaSqlPreviaGrafica.match("@_codigoCliente") || consultaSqlPreviaCabezal.match("@_codigoCliente")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoCliente",txtCodigoClienteReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoCliente",txtCodigoClienteReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoCliente",txtCodigoClienteReporte.textoInputBox.trim())
@@ -155,43 +155,43 @@ Rectangle {
 
         }
 
-        while(consultaSqlPrevia.match("@_codigoProveedor")){
+        while(consultaSqlPrevia.match("@_codigoProveedor") || consultaSqlPreviaGrafica.match("@_codigoProveedor") || consultaSqlPreviaCabezal.match("@_codigoProveedor") ){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoProveedor",txtCodigoProveedorReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoProveedor",txtCodigoProveedorReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoProveedor",txtCodigoProveedorReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoArticulo")){
+        while(consultaSqlPrevia.match("@_codigoArticulo") || consultaSqlPreviaGrafica.match("@_codigoArticulo") || consultaSqlPreviaCabezal.match("@_codigoArticulo") ){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoArticulo",txtCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoArticulo",txtCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoArticulo",txtCodigoArticuloReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_fecha")){
+        while(consultaSqlPrevia.match("@_fecha") || consultaSqlPreviaGrafica.match("@_fecha") || consultaSqlPreviaCabezal.match("@_fecha")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_fecha",txtFechaReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_fecha",txtFechaReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_fecha",txtFechaReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_desde")){
+        while(consultaSqlPrevia.match("@_desde")  || consultaSqlPreviaGrafica.match("@_desde") || consultaSqlPreviaCabezal.match("@_desde")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_desde",txtFechaDesdeReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_desde",txtFechaDesdeReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_desde",txtFechaDesdeReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_hasta")){
+        while(consultaSqlPrevia.match("@_hasta") || consultaSqlPreviaGrafica.match("@_hasta") || consultaSqlPreviaCabezal.match("@_hasta")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_hasta",txtFechaHastaReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_hasta",txtFechaHastaReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_hasta",txtFechaHastaReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_cantidad")){
+        while(consultaSqlPrevia.match("@_cantidad")|| consultaSqlPreviaGrafica.match("@_cantidad") || consultaSqlPreviaCabezal.match("@_cantidad")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_cantidad",txtCantidadRankingReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_cantidad",txtCantidadRankingReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_cantidad",txtCantidadRankingReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoVendedor")){
+        while(consultaSqlPrevia.match("@_codigoVendedor") || consultaSqlPreviaGrafica.match("@_codigoVendedor") || consultaSqlPreviaCabezal.match("@_codigoVendedor")){
             if(txtVendedorReporte.codigoValorSeleccion.trim()=="-1" || txtVendedorReporte.codigoValorSeleccion.trim()=="0" || txtVendedorReporte.codigoValorSeleccion.trim()==""){
                 consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoVendedor","null")
                 consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoVendedor","null")
@@ -203,24 +203,24 @@ Rectangle {
             }
         }
 
-        while(consultaSqlPrevia.match("@_codigoSubRubro")){
+        while(consultaSqlPrevia.match("@_codigoSubRubro") || consultaSqlPreviaGrafica.match("@_codigoSubRubro") || consultaSqlPreviaCabezal.match("@_codigoSubRubro")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoSubRubro",cbxSubRubrosReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoSubRubro",cbxSubRubrosReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoSubRubro",cbxSubRubrosReporte.codigoValorSeleccion.trim())
         }
-        while(consultaSqlPrevia.match("@_codigoRubro")){
+        while(consultaSqlPrevia.match("@_codigoRubro") || consultaSqlPreviaGrafica.match("@_codigoRubro") || consultaSqlPreviaCabezal.match("@_codigoRubro")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoRubro",cbxRubrosReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoRubro",cbxRubrosReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoRubro",cbxRubrosReporte.codigoValorSeleccion.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoDocumento")){
+        while(consultaSqlPrevia.match("@_codigoDocumento")  || consultaSqlPreviaGrafica.match("@_codigoDocumento") || consultaSqlPreviaCabezal.match("@_codigoDocumento")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoDocumento",txtTipoDocumentoReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoDocumento",txtTipoDocumentoReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoDocumento",txtTipoDocumentoReporte.codigoValorSeleccion.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoLiquidacionCaja")){
+        while(consultaSqlPrevia.match("@_codigoLiquidacionCaja")|| consultaSqlPreviaGrafica.match("@_codigoLiquidacionCaja") || consultaSqlPreviaCabezal.match("@_codigoLiquidacionCaja")){
             if(txtCodigoLiquidacionReporte.textoInputBox.trim()!=""){
                 consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoLiquidacionCaja",txtCodigoLiquidacionReporte.textoInputBox.trim())
                 consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoLiquidacionCaja",txtCodigoLiquidacionReporte.textoInputBox.trim())
@@ -232,58 +232,58 @@ Rectangle {
             }
         }
 
-        while(consultaSqlPrevia.match("@_ArticulodesdeCodigoArticulo")){
+        while(consultaSqlPrevia.match("@_ArticulodesdeCodigoArticulo")|| consultaSqlPreviaGrafica.match("@_ArticulodesdeCodigoArticulo") || consultaSqlPreviaCabezal.match("@_ArticulodesdeCodigoArticulo")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_ArticulodesdeCodigoArticulo",txtDesdeCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_ArticulodesdeCodigoArticulo",txtDesdeCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_ArticulodesdeCodigoArticulo",txtDesdeCodigoArticuloReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_ArticulohastaCodigoArticulo")){
+        while(consultaSqlPrevia.match("@_ArticulohastaCodigoArticulo")|| consultaSqlPreviaGrafica.match("@_ArticulohastaCodigoArticulo") || consultaSqlPreviaCabezal.match("@_ArticulohastaCodigoArticulo")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_ArticulohastaCodigoArticulo",txtHastaCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_ArticulohastaCodigoArticulo",txtHastaCodigoArticuloReporte.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_ArticulohastaCodigoArticulo",txtHastaCodigoArticuloReporte.textoInputBox.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoListaPrecio")){
+        while(consultaSqlPrevia.match("@_codigoListaPrecio") || consultaSqlPreviaGrafica.match("@_codigoListaPrecio") || consultaSqlPreviaCabezal.match("@_codigoListaPrecio")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoListaPrecio",cbxListaPrecioReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoListaPrecio",cbxListaPrecioReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoListaPrecio",cbxListaPrecioReporte.codigoValorSeleccion.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoLista2Precio")){
+        while(consultaSqlPrevia.match("@_codigoLista2Precio")  || consultaSqlPreviaGrafica.match("@_codigoLista2Precio") || consultaSqlPreviaCabezal.match("@_codigoLista2Precio")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoLista2Precio",cbxListaPrecio2Reporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoLista2Precio",cbxListaPrecio2Reporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoLista2Precio",cbxListaPrecio2Reporte.codigoValorSeleccion.trim())
         }
 
 
-        while(consultaSqlPrevia.match("@_numeroCuentaBancaria")){
+        while(consultaSqlPrevia.match("@_numeroCuentaBancaria") || consultaSqlPreviaGrafica.match("@_numeroCuentaBancaria") || consultaSqlPreviaCabezal.match("@_numeroCuentaBancaria")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_numeroCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_numeroCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_numeroCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion.trim())
         }
-        while(consultaSqlPrevia.match("@_numeroBancoCuentaBancaria")){
+        while(consultaSqlPrevia.match("@_numeroBancoCuentaBancaria")|| consultaSqlPreviaGrafica.match("@_numeroBancoCuentaBancaria") || consultaSqlPreviaCabezal.match("@_numeroBancoCuentaBancaria")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_numeroBancoCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion2.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_numeroBancoCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion2.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_numeroBancoCuentaBancaria",cbxCuentasBancariasReporte.codigoValorSeleccion2.trim())
         }
-        while(consultaSqlPrevia.match("@_codigoMonedaReporte")){
+        while(consultaSqlPrevia.match("@_codigoMonedaReporte") ||  consultaSqlPreviaGrafica.match("@_codigoMonedaReporte") || consultaSqlPreviaCabezal.match("@_codigoMonedaReporte")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoMonedaReporte",cbxMonedasReportes.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoMonedaReporte",cbxMonedasReportes.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoMonedaReporte",cbxMonedasReportes.codigoValorSeleccion.trim())
         }
-        while(consultaSqlPrevia.match("@_codigoOrdenReporte")){
+        while(consultaSqlPrevia.match("@_codigoOrdenReporte")|| consultaSqlPreviaGrafica.match("@_codigoOrdenReporte") || consultaSqlPreviaCabezal.match("@_codigoOrdenReporte")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoOrdenReporte",cbxOrdenReportes.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoOrdenReporte",cbxOrdenReportes.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoOrdenReporte",cbxOrdenReportes.codigoValorSeleccion.trim())
         }
-        while(consultaSqlPrevia.match("@_codigoClasificacionClienteReporte")){
+        while(consultaSqlPrevia.match("@_codigoClasificacionClienteReporte")|| consultaSqlPreviaGrafica.match("@_codigoClasificacionClienteReporte") || consultaSqlPreviaCabezal.match("@_codigoClasificacionClienteReporte")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoClasificacionClienteReporte",cbxTipoClasificacionCliente.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoClasificacionClienteReporte",cbxTipoClasificacionCliente.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoClasificacionClienteReporte",cbxTipoClasificacionCliente.codigoValorSeleccion.trim())
         }
 
-        while(consultaSqlPrevia.match("@_codigoProcedenciaClienteReporte")){
+        while(consultaSqlPrevia.match("@_codigoProcedenciaClienteReporte") || consultaSqlPreviaGrafica.match("@_codigoProcedenciaClienteReporte") || consultaSqlPreviaCabezal.match("@_codigoProcedenciaClienteReporte")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoProcedenciaClienteReporte",cbxTipoProcedenciaCliente.codigoValorSeleccion.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoProcedenciaClienteReporte",cbxTipoProcedenciaCliente.codigoValorSeleccion.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoProcedenciaClienteReporte",cbxTipoProcedenciaCliente.codigoValorSeleccion.trim())
@@ -291,7 +291,7 @@ Rectangle {
 
 
 
-        while(consultaSqlPrevia.match("@_modo_Stock_Previsto")){
+        while(consultaSqlPrevia.match("@_modo_Stock_Previsto") || consultaSqlPreviaGrafica.match("@_modo_Stock_Previsto") || consultaSqlPreviaCabezal.match("@_modo_Stock_Previsto")){
             if(cbxUsaControlDeStockPrevisto.codigoValorSeleccion=="1"){
                 consultaSqlPrevia=consultaSqlPrevia.replace("@_modo_Stock_Previsto"," and SPS.cantidad>0 ")
                 consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_modo_Stock_Previsto"," and SPS.cantidad>0 ")
@@ -308,18 +308,18 @@ Rectangle {
         }
 
 
-        while(consultaSqlPrevia.match("@_codigoLocalidadPais")){
+        while(consultaSqlPrevia.match("@_codigoLocalidadPais")|| consultaSqlPreviaGrafica.match("@_codigoLocalidadPais") || consultaSqlPreviaCabezal.match("@_codigoLocalidadPais")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoLocalidadPais",cbxDepartamentoRepote.codigoDePaisSeleccionado.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoLocalidadPais",cbxDepartamentoRepote.codigoDePaisSeleccionado.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoLocalidadPais",cbxDepartamentoRepote.codigoDePaisSeleccionado.trim())
         }
-        while(consultaSqlPrevia.match("@_codigoLocalidadDepartamento")){
+        while(consultaSqlPrevia.match("@_codigoLocalidadDepartamento") || consultaSqlPreviaGrafica.match("@_codigoLocalidadDepartamento") || consultaSqlPreviaCabezal.match("@_codigoLocalidadDepartamento")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_codigoLocalidadDepartamento",cbxDepartamentoRepote.codigoDeDepartamentoSeleccionado.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigoLocalidadDepartamento",cbxDepartamentoRepote.codigoDeDepartamentoSeleccionado.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigoLocalidadDepartamento",cbxDepartamentoRepote.codigoDeDepartamentoSeleccionado.trim())
         }
 
-        while(consultaSqlPrevia.match("@_principioCodigoDelCliente")){
+        while(consultaSqlPrevia.match("@_principioCodigoDelCliente") || consultaSqlPreviaGrafica.match("@_principioCodigoDelCliente") || consultaSqlPreviaCabezal.match("@_principioCodigoDelCliente")){
             consultaSqlPrevia=consultaSqlPrevia.replace("@_principioCodigoDelCliente",txtPrincipioCodigoCliente.textoInputBox.trim())
             consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_principioCodigoDelCliente",txtPrincipioCodigoCliente.textoInputBox.trim())
             consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_principioCodigoDelCliente",txtPrincipioCodigoCliente.textoInputBox.trim())
