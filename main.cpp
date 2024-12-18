@@ -345,7 +345,7 @@ inicio:
 
 
                 moduloconfiguracion.cargarConfiguracion();
-              /*  modulo_CFE_ParametrosGenerales.cargar();
+                modulo_CFE_ParametrosGenerales.cargar();/*
                 moduloListaPerfilesComboBox.buscarPerfiles("1=","1");
                 moduloListaPerfiles.buscarPerfiles("1=","1");
 */

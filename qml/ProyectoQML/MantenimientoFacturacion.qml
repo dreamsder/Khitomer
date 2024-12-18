@@ -98,6 +98,12 @@ Rectangle {
 
 
 
+    LoadingQML {
+           id: loadingIndicator
+           anchors.fill: parent
+           z: 9999
+    }
+
 
     function cargarArchivoCSVFacturaCompra() {
         var filePath = fileSelector.openFileDialog();
@@ -6692,6 +6698,8 @@ Rectangle {
             onClic: {
 
 
+                loadingIndicator.start()
+
                 txtMensajeInformacion.text="";
                 var resultadoInsertDocumento=0;
                 var estatusProcesoMedioDePago=true;
@@ -7265,6 +7273,8 @@ Rectangle {
 
 
                 }
+
+                loadingIndicator.stop()
             }
 
         }

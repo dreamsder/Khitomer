@@ -34,6 +34,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <Utilidades/moduloconfiguracion.h>
 #include <modulolistatipodocumentos.h>
 #include <CFE/modulo_cfe_parametrosgenerales.h>
+#include <proxy/modulo_configuracionproxy.h>
 #include <curl/curl.h>
 #include <QImage>
 #include <openssl/pem.h>
@@ -41,7 +42,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <openssl/err.h>
 #include <QByteArray>
 #include <iostream>
-
+#include <QThread>
 #include <algorithm>
 #include <json/json.h>
 
@@ -51,15 +52,20 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 using qrcodegen::QrCode;
 #endif
 
-
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
 
 
 ModuloConfiguracion func_configuracion;
 
 Modulo_CFE_ParametrosGenerales func_CFE_ParametrosGenerales;
 
-ModuloListaTipoDocumentos func_tipoDocumentos;
+Modulo_ConfiguracionProxy func_configuracionProxy;
 
+ModuloListaTipoDocumentos func_tipoDocumentos;
 
 Funciones funcion;
 
@@ -93,6 +99,10 @@ bool procesarImix_Nube(QString, QString, QString, QString, QString, QString _ser
 
 bool procesarDynamia(QString, QString, QString, QString, QString, QString _serieDocumento );
 
+bool enviarYConsultarRespuesta(const QByteArray &jsonAEnviar);
+bool httpGet(const QString &url, QString &respuesta);
+bool httpPostJson(const QString &url, const QByteArray &jsonData, QString &respuesta);
+
 
 QString numeroDocumentoV="";
 QString codigoTipoDocumentoV="";
@@ -113,7 +123,15 @@ QPainter painter;
 QFont fuente("Arial");
 
 
-
+// Función auxiliar para pausar en segundos:
+static inline void esperarSegundos(unsigned int segundos)
+{
+#ifdef Q_OS_WIN
+    Sleep(segundos * 1000); // Sleep en Windows mide milisegundos
+#else
+    sleep(segundos);        // sleep en Linux/Unix mide segundos
+#endif
+}
 
 
 bool ModuloDocumentos::actualizarNumeroCFEDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _numeroCae, QString _serieDocumento) const{
@@ -230,8 +248,6 @@ static int writerImix_Nube(char *data, size_t size, size_t nmemb, std::string *b
     {
         QString resultado = ((QString)data).trimmed();
 
-        //        qDebug()<< resultado;
-
         if(resultado.contains("CaeDesde",Qt::CaseSensitive)){
             funcion.loguear("Respuesta Imix_nube OK:\n"+resultado);
             resultadoFinal=resultado;
@@ -241,6 +257,22 @@ static int writerImix_Nube(char *data, size_t size, size_t nmemb, std::string *b
             funcion.mensajeAdvertenciaOk("ERROR GRAVE: \n\n"+resultado+"\n\n Anote la información del documento y ponganse en contacto\ncon su proveedor del sistema");
             return 0;
         }
+    }else{
+        return 0;
+    }
+
+}
+
+
+static int writerProxy(char *data, size_t size, size_t nmemb, std::string *buffer_in)
+{
+
+    if (buffer_in != NULL)
+    {
+            QString resultado = ((QString)data).trimmed();
+            funcion.loguear("Respuesta Proxy OK:\n"+resultado);
+            resultadoFinal=resultado;
+            return size * nmemb;
     }else{
         return 0;
     }
@@ -1485,12 +1517,12 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
                 ///Inserto las referencias de pago en la base de datos
                 if(query.exec("insert into DocumentosCanceladosCuentaCorriente(codigoDocumento,codigoTipoDocumento,serieDocumento ,codigoDocumentoQueCancela,codigoTipoDocumentoQueCancela,serieDocumentoQueCancela,montoDescontadoCuentaCorriente)values('"+_codigoDocumentoAPagar+"','"+_codigoTipoDocumentoAPagar+"','"+_serieDocumentoAPagar+"','"+_codigoDocumentoDePago+"','"+_codigoTipoDocumentoDePago+"','"+_serieDocumentoDePago+"',"+_montoADebitar+");")){
                     funcion.loguear("Inserto DocumentosCanceladosCuentaCorriente: "+query.lastQuery());
-                 //   qDebug() << query.lastQuery();
-                  //  qDebug() << "3";
+                    //   qDebug() << query.lastQuery();
+                    //  qDebug() << "3";
                     return 1;
                 }else{
-                  //  qDebug()<< "Insert";
-                  //  qDebug()<< query.lastError();
+                    //  qDebug()<< "Insert";
+                    //  qDebug()<< query.lastError();
                     funcion.mensajeAdvertencia(query.lastError().text());
                     funcion.mensajeAdvertencia(query.lastQuery());
                     return -5;
@@ -1501,20 +1533,20 @@ int ModuloDocumentos::actualizarCuentaCorriente(QString _codigoDocumentoAPagar, 
                 //qDebug()<< query.lastError();
                 query.clear();
                 if(query.exec("update Documentos set fechaUltimaModificacionDocumento='"+funcion.fechaHoraDeHoy()+"',saldoClienteCuentaCorriente="+_montoDelSaldo+" where codigoDocumento="+_codigoDocumentoAPagar+" and codigoTipoDocumento="+_codigoTipoDocumentoAPagar+" and serieDocumento='"+_serieDocumentoAPagar+"' and codigoCliente='"+_codigoClienteAPagar+"' and tipoCliente="+_codigoTipoClienteAPagar+" and codigoMonedaDocumento="+_codigoMonedaAPagar+";")){
-                  //  qDebug()<< "update 1";
-                   // qDebug()<< query.lastError();
+                    //  qDebug()<< "update 1";
+                    // qDebug()<< query.lastError();
                     return -2;
                 }else{
-                   // qDebug()<< "update 2";
-                   // qDebug()<< query.lastError();
+                    // qDebug()<< "update 2";
+                    // qDebug()<< query.lastError();
                     funcion.mensajeAdvertencia(query.lastError().text());
                     funcion.mensajeAdvertencia(query.lastQuery());
                     return -5;
                 }
             }
         }else{
-          //  qDebug()<< "update 3";
-          //  qDebug()<< query.lastError();
+            //  qDebug()<< "update 3";
+            //  qDebug()<< query.lastError();
             funcion.mensajeAdvertencia(query.lastError().text());
             funcion.mensajeAdvertencia(query.lastQuery());
             return -1;
@@ -4556,8 +4588,6 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
 
     QString str1 = crearJsonImix_Nube(_codigoDocumento, _codigoTipoDocumento,_numeroDocumentoCFEADevolver,_fechaDocumentoCFEADevolver, tipoDocumentoCFEADevolver, _serieDocumento);
 
-    funcion.loguear("Modo CFE Imix: \n\nEnvio a Imix en la Nube:\n"+str1+"\n\n");
-
 
     if(str1=="-1"){
         funcion.mensajeAdvertenciaOk("ERROR: \nNo existe documento para enviar como CFE");
@@ -4586,174 +4616,202 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
     }
 
 
-    numeroDocumentoV=_codigoDocumento;
-    codigoTipoDocumentoV=_codigoTipoDocumento;
-    serieDocumentoV=_serieDocumento;
-
-    qDebug()<<str1;
-
-    QByteArray baddddd = str1.toUtf8();
-    const char *mensajeAEnviarPost = baddddd.data();
-
-    struct curl_slist *headers=NULL; // init to NULL is important
-    headers = curl_slist_append(headers, "Accept: application/json");
-    headers = curl_slist_append(headers, "Content-Type: application/json");
-    headers = curl_slist_append(headers, "charsets: utf-8");
-
-    curl = curl_easy_init();
-
-    if(curl) {
-
-        resultadoFinal="";
-
-        QByteArray testing =    func_CFE_ParametrosGenerales.retornaValor("urlImixTesting").toLatin1();
-        QByteArray produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").toLatin1();
+    // Consulto si voy a pasar por el proxy
+    if(func_configuracion.retornaValorConfiguracionValorString("UTILIZA_PROXY_PARA_CFE")=="1"){
+        funcion.loguear("Modo CFE Imix: \n\nEnvio a Imix en la Nube a travez del proxy:\n"+str1+"\n\n");
 
 
-        const char *c_produccion;
+        QString nuevoSegmento = ",\"Documento\":{\"codigo\":"+_codigoDocumento+",\"tipo\":"+_codigoTipoDocumento+",\"serie\":\""+_serieDocumento+"\",\"caeTipoDocumentoCFEDescripcionV\":\""+caeTipoDocumentoCFEDescripcionV+"\"}";
 
-        if(func_CFE_ParametrosGenerales.retornaValor("modoTrabajoCFE")=="0"){
-            c_produccion=testing.data();
-        }else{
-            c_produccion=produccion.data();
+
+        str1 = QString(R"({"Informacion":%1})").arg(str1);
+
+        int posicionCierre = str1.lastIndexOf('}');
+        if (posicionCierre != -1) {
+            str1.insert(posicionCierre, nuevoSegmento);
         }
 
-        curl_easy_setopt(curl, CURLOPT_URL, c_produccion);
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        curl_easy_setopt(curl, CURLOPT_HTTPPOST,1);
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(mensajeAEnviarPost));
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, mensajeAEnviarPost);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writerImix_Nube);
+        qDebug() << str1;
+        bool resultado = enviarYConsultarRespuesta(str1.toUtf8());
+
+        return resultado;
+    }else{
+
+        funcion.loguear("Modo CFE Imix: \n\nEnvio a Imix en la Nube:\n"+str1+"\n\n");
+
+        numeroDocumentoV=_codigoDocumento;
+        codigoTipoDocumentoV=_codigoTipoDocumento;
+        serieDocumentoV=_serieDocumento;
+
+        qDebug()<<str1;
+
+        QByteArray baddddd = str1.toUtf8();
+        const char *mensajeAEnviarPost = baddddd.data();
+
+        struct curl_slist *headers=NULL; // init to NULL is important
+        headers = curl_slist_append(headers, "Accept: application/json");
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+        headers = curl_slist_append(headers, "charsets: utf-8");
+
+        curl = curl_easy_init();
+
+        if(curl) {
+
+            resultadoFinal="";
+
+            QByteArray testing =    func_CFE_ParametrosGenerales.retornaValor("urlImixTesting").toLatin1();
+            QByteArray produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").toLatin1();
 
 
+            const char *c_produccion;
 
-        res = curl_easy_perform(curl);
-
-        if(res != CURLE_OK){
-
-            QString resultadoError=curl_easy_strerror(res);
-
-            funcion.loguear("RESULTADO: "+resultadoError.trimmed());
-
-
-            if(resultadoError.trimmed()=="Couldn't resolve host name" || resultadoError.trimmed()=="Couldn't connect to server"){
-                funcion.mensajeAdvertenciaOk("ERROR: No hay conexión con Imix_Nube: \n\n"+(QString)produccion.data());
+            if(func_CFE_ParametrosGenerales.retornaValor("modoTrabajoCFE")=="0"){
+                c_produccion=testing.data();
             }else{
-                funcion.mensajeAdvertenciaOk("ERROR: "+resultadoError+"\n\nConexión: \n\n"+(QString)produccion.data());
+                c_produccion=produccion.data();
             }
 
-            return false;
-        }
-        else {
+            curl_easy_setopt(curl, CURLOPT_URL, c_produccion);
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+            curl_easy_setopt(curl, CURLOPT_HTTPPOST,1);
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(mensajeAEnviarPost));
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, mensajeAEnviarPost);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writerImix_Nube);
 
 
-            bool ok;
-            // json is a QString containing the JSON data
-            QtJson::JsonObject result = QtJson::parse(resultadoFinal, ok).toMap();
 
-            if(!ok) {
-                funcion.loguear("Respuesta Imix_nube:\n"+resultadoFinal);
-                funcion.mensajeAdvertenciaOk("Error en parseo de información desde Imix_nube:\n\nMensaje devuelto: "+resultadoFinal);
+            res = curl_easy_perform(curl);
+
+            if(res != CURLE_OK){
+
+                QString resultadoError=curl_easy_strerror(res);
+
+                funcion.loguear("RESULTADO: "+resultadoError.trimmed());
+
+
+                if(resultadoError.trimmed()=="Couldn't resolve host name" || resultadoError.trimmed()=="Couldn't connect to server"){
+                    funcion.mensajeAdvertenciaOk("ERROR: No hay conexión con Imix_Nube: \n\n"+(QString)produccion.data());
+                }else{
+                    funcion.mensajeAdvertenciaOk("ERROR: "+resultadoError+"\n\nConexión: \n\n"+(QString)produccion.data());
+                }
+
                 return false;
             }
-
-            /*
-            {
-              "CaeDesde": 1,
-              "CaeHasta": 1000,
-              "CaeNumero": "123",
-              "DigestValue": "EqRa5c7yHYspqqq9cLaXNkaLzbI=",
-              "Id": 1048198,
-              "Numero": 50,
-              "Serie": "A",
-              "TextoVencimiento": "2020-12-26",
-              "TipoCfe": 111,
-              "Total": 100.00,
-              "Vencimiento": "\/Date(1608951600000-0300)\/"
-            }
-
-            */
+            else {
 
 
-            QString TipoCfe=result["TipoCfe"].toString();
-            QString Numero=result["Numero"].toString();
-            QString Serie=result["Serie"].toString();
-            QString Total=result["Total"].toString();
-            QString DigestValue=result["DigestValue"].toString();
-            QString Vencimiento=result["TextoVencimiento"].toString();
+                bool ok;
+                // json is a QString containing the JSON data
+                QtJson::JsonObject result = QtJson::parse(resultadoFinal, ok).toMap();
 
-            QString CaeDesde=result["CaeDesde"].toString();
-            QString CaeHasta=result["CaeHasta"].toString();
-            QString CaeNumero=result["CaeNumero"].toString();
+                if(!ok) {
+                    funcion.loguear("Respuesta Imix_nube:\n"+resultadoFinal);
+                    funcion.mensajeAdvertenciaOk("Error en parseo de información desde Imix_nube:\n\nMensaje devuelto: "+resultadoFinal);
+                    return false;
+                }
 
-            QString Id=result["Id"].toString();
+                /*
+                {
+                  "CaeDesde": 1,
+                  "CaeHasta": 1000,
+                  "CaeNumero": "123",
+                  "DigestValue": "EqRa5c7yHYspqqq9cLaXNkaLzbI=",
+                  "Id": 1048198,
+                  "Numero": 50,
+                  "Serie": "A",
+                  "TextoVencimiento": "2020-12-26",
+                  "TipoCfe": 111,
+                  "Total": 100.00,
+                  "Vencimiento": "\/Date(1608951600000-0300)\/"
+                }
 
-
-            QString codigoSeguridad = DigestValue.mid(0,6);
-
-
-            /*qDebug()<< result["CaeDesde"].toString();
-            qDebug()<< result["CaeHasta"].toString();
-            qDebug()<< result["CaeNumero"].toString();
-            qDebug()<< result["DigestValue"].toString();
-            qDebug()<< result["Id"].toString();
-            qDebug()<< result["TipoCfe"].toString();
-            qDebug()<< result["Total"].toString();
-            qDebug()<< result["TextoVencimiento"].toString();*/
-
-            QString rut = func_CFE_ParametrosGenerales.retornoValorPatrametro("rutEmpresa");
-
-            QString fechaEmision=   funcion.fechaDeHoyCFE();
+                */
 
 
-            QString QR ="";
-            //"https://www.efactura.dgi.gub.uy/consultaQR/cfe?<Rut>,<TipoCfe>,<Serie>,<Numero>,<Total>,<FechaEmision>,<DigestValue>"
+                QString TipoCfe=result["TipoCfe"].toString();
+                QString Numero=result["Numero"].toString();
+                QString Serie=result["Serie"].toString();
+                QString Total=result["Total"].toString();
+                QString DigestValue=result["DigestValue"].toString();
+                QString Vencimiento=result["TextoVencimiento"].toString();
+
+                QString CaeDesde=result["CaeDesde"].toString();
+                QString CaeHasta=result["CaeHasta"].toString();
+                QString CaeNumero=result["CaeNumero"].toString();
+
+                QString Id=result["Id"].toString();
+
+
+                QString codigoSeguridad = DigestValue.mid(0,6);
+
+
+                /*qDebug()<< result["CaeDesde"].toString();
+                qDebug()<< result["CaeHasta"].toString();
+                qDebug()<< result["CaeNumero"].toString();
+                qDebug()<< result["DigestValue"].toString();
+                qDebug()<< result["Id"].toString();
+                qDebug()<< result["TipoCfe"].toString();
+                qDebug()<< result["Total"].toString();
+                qDebug()<< result["TextoVencimiento"].toString();*/
+
+                QString rut = func_CFE_ParametrosGenerales.retornoValorPatrametro("rutEmpresa");
+
+                QString fechaEmision=   funcion.fechaDeHoyCFE();
+
+
+                QString QR ="";
+                //"https://www.efactura.dgi.gub.uy/consultaQR/cfe?<Rut>,<TipoCfe>,<Serie>,<Numero>,<Total>,<FechaEmision>,<DigestValue>"
 
 #if linux
-            QR = QrCode::obtengoQr("https://www.efactura.dgi.gub.uy/consultaQR/cfe?"+rut.trimmed()+","+TipoCfe.trimmed()+","+Serie.trimmed()+","+Numero.trimmed()+","+Total.trimmed()+","+fechaEmision.trimmed()+","+DigestValue.trimmed()+" ");
+                QR = QrCode::obtengoQr("https://www.efactura.dgi.gub.uy/consultaQR/cfe?"+rut.trimmed()+","+TipoCfe.trimmed()+","+Serie.trimmed()+","+Numero.trimmed()+","+Total.trimmed()+","+fechaEmision.trimmed()+","+DigestValue.trimmed()+" ");
 #else
-            QR ="";
+                QR ="";
 #endif
 
 
-            /// PRUEBA
-            //return false;
+                /// PRUEBA
+                //return false;
 
 
-            if(result["CaeDesde"].toString().trimmed()!="" && result["CaeDesde"].toString().trimmed()!="0"){
+                if(result["CaeDesde"].toString().trimmed()!="" && result["CaeDesde"].toString().trimmed()!="0"){
 
-                ModuloDocumentos modeloDocumento;
+                    ModuloDocumentos modeloDocumento;
 
-                if(modeloDocumento.actualizarInformacionCFEDocumentoDynamia(_codigoDocumento, _codigoTipoDocumento,
-                                                                            Numero.trimmed(),
-                                                                            Serie.trimmed(),
-                                                                            Vencimiento.trimmed(),
-                                                                            codigoSeguridad.trimmed(),
-                                                                            CaeNumero.trimmed(),
-                                                                            CaeDesde.trimmed(),
-                                                                            CaeHasta.trimmed(),
-                                                                            QR.trimmed(),
-                                                                            Id.trimmed(),
-                                                                            caeTipoDocumentoCFEDescripcionV,
-                                                                            _serieDocumento
-                                                                            )){
-                    return true;
+                    if(modeloDocumento.actualizarInformacionCFEDocumentoDynamia(_codigoDocumento, _codigoTipoDocumento,
+                                                                                Numero.trimmed(),
+                                                                                Serie.trimmed(),
+                                                                                Vencimiento.trimmed(),
+                                                                                codigoSeguridad.trimmed(),
+                                                                                CaeNumero.trimmed(),
+                                                                                CaeDesde.trimmed(),
+                                                                                CaeHasta.trimmed(),
+                                                                                QR.trimmed(),
+                                                                                Id.trimmed(),
+                                                                                caeTipoDocumentoCFEDescripcionV,
+                                                                                _serieDocumento
+                                                                                )){
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }else{
+
+                    funcion.mensajeAdvertenciaOk("ERROR: \n Respuesta con error desde Imix_nube.");
                     return false;
                 }
-            }else{
-
-                funcion.mensajeAdvertenciaOk("ERROR: \n Respuesta con error desde Imix_nube.");
-                return false;
             }
+            curl_easy_cleanup(curl);
         }
-        curl_easy_cleanup(curl);
+        else{
+            return false;
+        }
+        curl_global_cleanup();
+
     }
-    else{
-        return false;
-    }
-    curl_global_cleanup();
+
+
+
 }
 
 
@@ -5766,4 +5824,178 @@ bool ModuloDocumentos::emitirDocumentoCFEDynamia(QString _codigoDocumento,QStrin
     }
 
 
+}
+
+
+
+
+
+
+// Función principal que implementa la lógica solicitada
+bool enviarYConsultarRespuesta(const QByteArray &jsonAEnviar)
+{
+
+    QString ipServidor = func_configuracionProxy.retornoValorPatrametro("ipServidor");
+    QString puerto = func_configuracionProxy.retornoValorPatrametro("puerto");
+    QString endpointMensaje = func_configuracionProxy.retornoValorPatrametro("endpointMensaje");
+    QString endpointRespuesta = func_configuracionProxy.retornoValorPatrametro("endpointRespuesta");
+    QString timeoutCola = func_configuracionProxy.retornoValorPatrametro("timeoutCola");
+
+
+
+    // 1) Enviar POST al endpoint factura
+    QString urlPost = ipServidor+":"+puerto+endpointMensaje;
+
+    qDebug()<< urlPost;
+
+    QString respuestaPost;
+    if(!httpPostJson(urlPost, jsonAEnviar, respuestaPost)) {
+        funcion.loguear("Error realizando POST contra el Proxy: " + respuestaPost);
+        funcion.mensajeAdvertenciaOk("Error en POST contra el Proxy:\n" + respuestaPost);
+        return false;
+    }
+
+    // Parsear la respuesta del POST
+    bool ok;
+    QtJson::JsonObject result = QtJson::parse(respuestaPost, ok).toMap();
+    if(!ok) {
+        funcion.loguear("Error parseando respuesta POST del proxy: " + respuestaPost);
+        funcion.mensajeAdvertenciaOk("Error parseando respuesta POST del proxy:\n" + respuestaPost);
+        return false;
+    }
+
+    if(!result.contains("id")) {
+        funcion.loguear("La respuesta no contiene 'id'. Respuesta: " + respuestaPost);
+        funcion.mensajeAdvertenciaOk("La respuesta del servidor no contiene 'id'.");
+        return false;
+    }
+
+    QString id = result["id"].toString();
+    if(id.isEmpty()) {
+        funcion.loguear("El 'id' devuelto está vacío. Respuesta: " + respuestaPost);
+        funcion.mensajeAdvertenciaOk("El 'id' devuelto está vacío.");
+        return false;
+    }
+
+    // 2) Iniciar el polling (60s en total, cada 2s)
+    QString urlGetBase = ipServidor+":"+puerto+endpointRespuesta;
+    int totalTime = timeoutCola.toInt(); // segundos totales
+    int interval = 2;   // segundos entre consultas
+    int attempts = totalTime / interval;
+
+    bool success = false;
+    for (int i = 0; i < attempts; ++i) {
+        // Construir URL con el id
+        QString urlGet = urlGetBase + "?id=" + id;
+        QString respuestaGet;
+        if(!httpGet(urlGet, respuestaGet)) {
+            // Error en GET, se reintenta luego de 2s
+            esperarSegundos(interval);
+            continue;
+        }
+
+        // Parsear respuesta GET
+        QtJson::JsonObject getResult = QtJson::parse(respuestaGet, ok).toMap();
+        if(!ok) {
+            funcion.loguear("Error parseando respuesta GET: " + respuestaGet);
+            esperarSegundos(interval);
+            continue;
+        }
+
+        // Chequear si la respuesta es "OK"
+        // Se asume que getResult["status"] == "OK" significa éxito
+        if (getResult.contains("status") && getResult["status"].toString().toUpper()=="OK") {
+            success = true;
+            break;
+        }
+
+        // Esperar 2s antes de reintentar
+        esperarSegundos(interval);
+
+    }
+
+    if(!success) {
+        funcion.loguear("No se obtuvo respuesta del Proxy en "+timeoutCola+"s.");
+        funcion.mensajeAdvertenciaOk("No se obtuvo respuesta del Proxy en el tiempo esperado ("+timeoutCola+"s).");
+    }
+
+    return success;
+}
+
+
+
+
+
+// Función auxiliar para realizar POST con JSON
+bool httpPostJson(const QString &url, const QByteArray &jsonData, QString &respuesta)
+{
+
+
+    respuesta.clear();
+    resultadoFinal.clear();
+
+    CURL *curl = curl_easy_init();
+    if(!curl) return false;
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Accept: application/json");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+    headers = curl_slist_append(headers, "charsets: utf-8");
+
+    curl_easy_setopt(curl, CURLOPT_URL, url.toLatin1().data());
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_POST, 1L);
+    curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonData.constData());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)jsonData.size());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writerProxy);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&resultadoFinal);
+
+    CURLcode res = curl_easy_perform(curl);
+
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+
+    if (res != CURLE_OK) {
+        respuesta = curl_easy_strerror(res);
+        return false;
+    }
+
+    respuesta = resultadoFinal;
+    return true;
+}
+
+// Función auxiliar para realizar GET
+bool httpGet(const QString &url, QString &respuesta)
+{
+    respuesta.clear();
+    resultadoFinal.clear();
+
+    CURL *curl = curl_easy_init();
+    if(!curl) return false;
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Accept: application/json");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+    headers = curl_slist_append(headers, "charsets: utf-8");
+
+    curl_easy_setopt(curl, CURLOPT_URL, url.toLatin1().data());
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+    curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writerProxy);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&resultadoFinal);
+
+    CURLcode res = curl_easy_perform(curl);
+
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+
+    if (res != CURLE_OK) {
+        respuesta = curl_easy_strerror(res);
+        return false;
+    }
+
+    respuesta = resultadoFinal;
+    return true;
 }

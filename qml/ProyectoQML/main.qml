@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.45"
+    property string versionKhitomer: "1.17.46"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -318,6 +318,8 @@ Rectangle {
     /// 1.17.44 :Se agrega nuevo reporte para digital world a pedido de Sandra sobre cuenta corrientes: Estado de cuenta por cliente entre fechas y moneda
     /// 1.17.45 :Se agrega un sistema de busqueda de reportes que aprende a medida que se usa mas y mas y pone primeros los reportes mas usados.
     ///         :Se crea un nuevo campo en la tabla Documentos para guardar el saldo(nuevoSaldo), y se modifica el sistema para que los saldos se acumulen documento a documento.
+    /// 1.17.46 :Se agrega soporte para la factura electronia a través de la apliación proxy. Esta app encola los mensajes para que no se generen problemas con el sistema en la nube de Imix.
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

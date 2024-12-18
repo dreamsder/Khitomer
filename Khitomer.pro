@@ -116,7 +116,8 @@ SOURCES += main.cpp \
     modulotipodocumentoperfilesusuarios.cpp \
     moduloreportesconfiguracion.cpp \
     csvreader.cpp \
-    fileselector.cpp
+    fileselector.cpp \
+    proxy/modulo_configuracionproxy.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -202,7 +203,8 @@ HEADERS += \
     modulotipodocumentoperfilesusuarios.h \
     moduloreportesconfiguracion.h \
     csvreader.h \
-    fileselector.h
+    fileselector.h \
+    proxy/modulo_configuracionproxy.h
 
 RESOURCES += \
     Imagenes.qrc \
@@ -279,7 +281,8 @@ DISTFILES += \
     qml/ProyectoQML/Controles/ComboBoxListaTipoDocumentosClientesFacturacion.qml \
     qml/ProyectoQML/consultarest.js \
     qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml \
-    qml/ProyectoQML/Controles/BusquedaReportes.qml
+    qml/ProyectoQML/Controles/BusquedaReportes.qml \
+    qml/ProyectoQML/Controles/LoadingQML.qml
 
 
 

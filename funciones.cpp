@@ -2265,7 +2265,27 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 499:
             if(!impactoCambioEnBD("UPDATE `Reportes` SET `consultaSqlCabezal` = 'select  \\'Estado de cuenta:\\',  concat(\\'Cliente: \\',CLI.nombreCliente,\\'(\\',CLI.codigoCliente,\\')\\'),   concat(\\'Moneda: \\', (select descripcionMoneda from Monedas where codigoMoneda=\\'@_codigoMonedaReporte\\') ),  concat(\\'Periodo: desde el \\',\\'@_desde\\', \\' hasta el \\', \\'@_hasta\\'  ),    convert(concat(\\'Saldo: \\',(select  sum(case when TDOC.afectaCuentaCorriente=1 then ROUND(DOC.precioTotalVenta,2) else ROUND(DOC.precioTotalVenta*-1,2) end)   from Documentos DOC  join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  where  DOC.tipoCliente=1  and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\')  and TDOC.afectaCuentaCorriente!=0  and DOC.codigoCliente=\\'@_codigoCliente\\'   and DOC.codigoMonedaDocumento=\\'@_codigoMonedaReporte\\')) using utf8)     from Clientes CLI  where CLI.codigoCliente=\\'@_codigoCliente\\' and CLI.tipoCliente=1;' WHERE (`codigoReporte` = '88');","500")){
                 _iterador=false; return false; } break;
+        case 500:
+            if(!impactoCambioEnBD("INSERT INTO `Configuracion` (`codigoConfiguracion`, `valorConfiguracion`, `descripcionConfiguracion`) VALUES ('UTILIZA_PROXY_PARA_CFE', '0', 'Indica si se usa conexión a un proxy para enviar cfe. 0 NO, 1 SI');","501")){
+                _iterador=false; return false; } break;
+        case 501:
+            if(impactoCambioEnBD("CREATE TABLE if not exists `ConfiguracionProxy` (       `codigoConfiguracion` VARCHAR(300) NOT NULL,  `valorConfiguracion` VARCHAR(45) NOT NULL DEFAULT '0',  `descripcionConfiguracion` VARCHAR(300) NOT NULL,  PRIMARY KEY (`codigoConfiguracion`));","501")){
+                if(!impactoCambioEnBD("INSERT INTO `ConfiguracionProxy` (`codigoConfiguracion`, `valorConfiguracion`, `descripcionConfiguracion`) VALUES ('ipServidor', 'http://localhost', 'Ip donde corre el proxy'),('puerto', '3689', 'Puerto donde atiende el proxy'),('endpointMensaje', '/api/v1/factura', 'Endpoint a donde se mandan las facturas'),('endpointRespuesta', '/api/v1/respuesta', 'Endpoint donde se consultan las respuestas'),('modoOperacion', '1', '1 - El proxy encola los mensajes y los procesa de a uno, 0 - El proxy procesa y responde todo en el mismo momento');","502")){
+                    _iterador=false; return false;
+                }
+            }else{_iterador=false; return false;}
+            break;
+        case 502:
+            if(!impactoCambioEnBD("INSERT INTO `ConfiguracionProxy` (`codigoConfiguracion`, `valorConfiguracion`, `descripcionConfiguracion`) VALUES ('timeoutCola', '60', 'Timeout de cola para esperar respuesta del proxy');","503")){
+                _iterador=false; return false; } break;
+        case 503:
+            if(!impactoCambioEnBD("ALTER TABLE Documentos MODIFY COLUMN cae_QrCode LONGTEXT;","504")){
+                _iterador=false; return false; } break;
+        case 504:
+            if(!impactoCambioEnBD("CREATE TABLE `FacturasParaImprimir` (`id` varchar(36) NOT NULL,`jsonFactura` text DEFAULT NULL,      `status` varchar(10) DEFAULT NULL,  `fecha` datetime DEFAULT NULL,           `codigoDocumento` bigint(20) unsigned NOT NULL,             `codigoTipoDocumento` int(10) unsigned NOT NULL,             `serieDocumento` varchar(5) NOT NULL,           `caeTipoDocumentoCFEDescripcionV` varchar(45) NOT NULL,     PRIMARY KEY (`id`)          ); ","505")){
+                _iterador=false; return false; } break;
 
+            //
 
 
         default:
