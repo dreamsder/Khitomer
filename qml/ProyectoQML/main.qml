@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.46"
+    property string versionKhitomer: "1.17.47"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -319,6 +319,9 @@ Rectangle {
     /// 1.17.45 :Se agrega un sistema de busqueda de reportes que aprende a medida que se usa mas y mas y pone primeros los reportes mas usados.
     ///         :Se crea un nuevo campo en la tabla Documentos para guardar el saldo(nuevoSaldo), y se modifica el sistema para que los saldos se acumulen documento a documento.
     /// 1.17.46 :Se agrega soporte para la factura electronia a través de la apliación proxy. Esta app encola los mensajes para que no se generen problemas con el sistema en la nube de Imix.
+    /// 1.17.47 :El programa ahora aparece maximizado por defecto y la resolucion minima es 1024 x 720.
+
+
 
 
     ///property para tamaño de fuentes

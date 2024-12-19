@@ -135,8 +135,9 @@ int main(int argc, char *argv[])
         viewer.setWindowIcon(QIcon("icono.png"));
     }
 
-    viewer.setMinimumWidth(1280);
+    viewer.setMinimumWidth(1024);
     viewer.setMinimumHeight(720);
+
 
     ModuloClientes moduloClientes;
     ModuloClientes moduloClientesOpcionesExtra;
@@ -572,8 +573,8 @@ inicio:
     viewer.setSource(QUrl("qrc:/qml/ProyectoQML/main.qml"));
 
 
-    viewer.showExpanded();
-    //  viewer.showMaximized();
+    //viewer.showExpanded();
+      viewer.showMaximized();
     // viewer.showFullScreen();
     viewer.setWindowTitle(qtTrId("Khitomer - Sistema de facturación"));
 
