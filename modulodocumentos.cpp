@@ -5884,6 +5884,7 @@ bool enviarYConsultarRespuesta(const QByteArray &jsonAEnviar)
     int attempts = totalTime / interval;
 
     bool success = false;
+    bool errorEnRespuesta=false;
     for (int i = 0; i < attempts; ++i) {
         // Construir URL con el id
         QString urlGet = urlGetBase + "?id=" + id;
@@ -5907,6 +5908,14 @@ bool enviarYConsultarRespuesta(const QByteArray &jsonAEnviar)
         if (getResult.contains("status") && getResult["status"].toString().toUpper()=="OK") {
             success = true;
             break;
+        }else if(getResult.contains("status") && getResult["status"].toString().toUpper()=="ERROR"){
+            if(getResult.contains("error") && getResult["error"].toString().toUpper().trimmed() !=""){
+                funcion.loguear("Respuesta de error: "+getResult["error"].toString().toUpper().trimmed());
+                funcion.mensajeAdvertenciaOk("Respuesta de error: "+getResult["error"].toString().toUpper().trimmed());
+                success = false;
+                errorEnRespuesta = true;
+                break;
+            }
         }
 
         // Esperar 2s antes de reintentar
@@ -5914,7 +5923,7 @@ bool enviarYConsultarRespuesta(const QByteArray &jsonAEnviar)
 
     }
 
-    if(!success) {
+    if(!success && !errorEnRespuesta) {
         funcion.loguear("No se obtuvo respuesta del Proxy en "+timeoutCola+"s.");
         funcion.mensajeAdvertenciaOk("No se obtuvo respuesta del Proxy en el tiempo esperado ("+timeoutCola+"s).");
     }

@@ -2284,8 +2284,12 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 504:
             if(!impactoCambioEnBD("CREATE TABLE `FacturasParaImprimir` (`id` varchar(36) NOT NULL,`jsonFactura` text DEFAULT NULL,      `status` varchar(10) DEFAULT NULL,  `fecha` datetime DEFAULT NULL,           `codigoDocumento` bigint(20) unsigned NOT NULL,             `codigoTipoDocumento` int(10) unsigned NOT NULL,             `serieDocumento` varchar(5) NOT NULL,           `caeTipoDocumentoCFEDescripcionV` varchar(45) NOT NULL,     PRIMARY KEY (`id`)          ); ","505")){
                 _iterador=false; return false; } break;
+        case 505:
+            if(!impactoCambioEnBD("ALTER TABLE `FacturasParaImprimir` ADD COLUMN `error` VARCHAR(5000) NOT NULL DEFAULT '' AFTER `caeTipoDocumentoCFEDescripcionV`;","506")){
+                _iterador=false; return false; } break;
 
             //
+
 
 
         default:
