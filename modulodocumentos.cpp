@@ -3243,7 +3243,7 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
 
 
 
-    QString consultaSql="select DATE_FORMAT(STR_TO_DATE(DOC.fechaEmisionDocumento, '%Y-%m-%d'),'%d/%m/%Y')'fecha', MO.codigoISO4217'iso_moneda',CAST(DOC.precioTotalVenta AS DECIMAL(20,3))'total',left(trim(CLI.razonSocial),30) 'razon_social',(select valorParametro from CFE_ParametrosGenerales where nombreParametro='rutEmpresa' limit 1)'rut',MO.descripcionMoneda,MO.simboloMoneda    from Documentos DOC join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente  join Monedas MO on MO.codigoMoneda = DOC.codigoMonedaDocumento  where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' ;";
+    QString consultaSql="select DATE_FORMAT(STR_TO_DATE(DOC.fechaEmisionDocumento, '%Y-%m-%d'),'%d/%m/%Y')'fecha', MO.codigoISO4217'iso_moneda',CAST(DOC.precioTotalVenta AS DECIMAL(20,3))'total',left(trim(CLI.razonSocial),30) 'razon_social',(select valorParametro from CFE_ParametrosGenerales where nombreParametro='rutEmpresa' limit 1)'rut',MO.descripcionMoneda,MO.simboloMoneda,CLI.codigoCliente    from Documentos DOC join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente  join Monedas MO on MO.codigoMoneda = DOC.codigoMonedaDocumento  where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' ;";
 
     QString consultaSqlMediosDePago="select MP.descripcionMedioPago,MO.simboloMoneda,DOC.importePago  from DocumentosLineasPago DOC join MediosDePago MP on MP.codigoMedioPago=DOC.codigoMedioPago join Monedas MO on MO.codigoMoneda=DOC.monedaMedioPago where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' ;";
 
@@ -3359,7 +3359,7 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
                     QString rutEmpresa=query.value(4).toString();
                     QString descripcionMoneda=query.value(5).toString();
                     QString simboloMoneda=query.value(6).toString();
-
+                    QString codigo_cliente=query.value(7).toString();
 
 
 
@@ -3440,7 +3440,7 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
                     painter.drawText(cuadroTicketRight(20.5,1.4,5.0,1.0,serieYNumero),serieYNumero);
 
                     // Texto detalle
-                    painter.drawText(cuadro(1.5,3.5,20.0,1.0,false),"Recibimos de "+razon_social.trimmed()+" la suma de "+descripcionMoneda+" "+simboloMoneda+" "+QString::number(total,'f',2));
+                    painter.drawText(cuadro(1.5,3.5,20.0,1.0,false),"Recibimos de "+razon_social.trimmed()+"("+codigo_cliente.trimmed()+") la suma de "+descripcionMoneda+" "+simboloMoneda+" "+QString::number(total,'f',2));
                     painter.drawText(cuadro(1.5,4.0,20.0,1.0,false),"correspondiente al concepto adjunto.");
 
 

@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.48"
+    property string versionKhitomer: "1.17.49"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -321,7 +321,7 @@ Rectangle {
     /// 1.17.46 :Se agrega soporte para la factura electronia a través de la apliación proxy. Esta app encola los mensajes para que no se generen problemas con el sistema en la nube de Imix.
     /// 1.17.47 :El programa ahora aparece maximizado por defecto y la resolucion minima es 1024 x 720.
     /// 1.17.48 :Se agrega un campo error en la mensajeria de respuesta del proxyCFE para imix. Se muestra en khitomer ahora el mensaje de error de reportado por imix.
-
+    /// 1.17.48 :Se agrego en la impresión del recibo el número de cliente entre parentesis luego de la razón social.
 
 
     ///property para tamaño de fuentes
