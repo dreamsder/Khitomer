@@ -3555,6 +3555,8 @@ bool ModuloDocumentos::emitirDocumentoEnImpresora(QString _codigoDocumento,QStri
 
         // Chequeo si el documento se imprime en modo ticket
         if(func_tipoDocumentos.retornaPermisosDelDocumento(_codigoTipoDocumento,"imprimeEnFormatoTicket")){
+            funcion.loguear("Impresora seleccionada para formato ticket: "+_impresora);
+
 
             qDebug() << "Emite en ticket";
             return emitirDocumentoEnImpresoraTicket(_codigoDocumento,_codigoTipoDocumento,_impresora,cantidadDecimalesMonto,_serieDocumento);
@@ -3562,7 +3564,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresora(QString _codigoDocumento,QStri
         }
         // Chequeo si el documento se imprime en modo recibo en formato A4
         if(func_tipoDocumentos.retornaPermisosDelDocumento(_codigoTipoDocumento,"imprimeEnFormatoRecibo")){
-
+            funcion.loguear("Impresora seleccionada para formato recibo: "+_impresora);
             qDebug() << "Emite en modo recibo";
             return emitirDocumentoEnModoRecibo(_codigoDocumento,_codigoTipoDocumento,_impresora,cantidadDecimalesMonto,_serieDocumento);
 
@@ -4321,8 +4323,7 @@ bool procesarImix(QString _codigoDocumento,QString _codigoTipoDocumento, QString
         }
 
         curl_easy_setopt(curl, CURLOPT_URL, c_conexion);
-
-
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 120L);
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
         curl_easy_setopt(curl, CURLOPT_HTTPPOST,1);
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
@@ -4616,6 +4617,10 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
     }
 
 
+    numeroDocumentoV=_codigoDocumento;
+    codigoTipoDocumentoV=_codigoTipoDocumento;
+    serieDocumentoV=_serieDocumento;
+
     // Consulto si voy a pasar por el proxy
     if(func_configuracion.retornaValorConfiguracionValorString("UTILIZA_PROXY_PARA_CFE")=="1"){
         funcion.loguear("Modo CFE Imix: \n\nEnvio a Imix en la Nube a travez del proxy:\n"+str1+"\n\n");
@@ -4639,9 +4644,7 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
 
         funcion.loguear("Modo CFE Imix: \n\nEnvio a Imix en la Nube:\n"+str1+"\n\n");
 
-        numeroDocumentoV=_codigoDocumento;
-        codigoTipoDocumentoV=_codigoTipoDocumento;
-        serieDocumentoV=_serieDocumento;
+
 
         qDebug()<<str1;
 
@@ -4672,6 +4675,7 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
             }
 
             curl_easy_setopt(curl, CURLOPT_URL, c_produccion);
+            curl_easy_setopt(curl, CURLOPT_TIMEOUT, 120L);
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
             curl_easy_setopt(curl, CURLOPT_HTTPPOST,1);
             curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
@@ -5237,6 +5241,7 @@ bool procesarDynamia(QString _codigoDocumento,QString _codigoTipoDocumento,QStri
 
         curl_easy_setopt(curl, CURLOPT_URL, c_produccion);
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 120L);
         curl_easy_setopt(curl, CURLOPT_HTTPPOST,1);
         curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
         curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(mensajeAEnviarPost));
