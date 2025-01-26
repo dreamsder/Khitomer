@@ -48,6 +48,9 @@ public:
     static QString getHostLocal(){
         return m_hostLocal;
     }
+    static int getPrimario(){
+        return m_primario;
+    }
     static int getTipoConexion(){
         return m_tipoConexion;
     }
@@ -69,6 +72,7 @@ private:
     static QString m_claveLocal;
     static QString m_baseLocal;
     static int m_puertoLocal;
+    static int m_primario;
     static QString m_hostLocal;
     static int m_tipoConexion;
     static QString m_url;
@@ -85,6 +89,9 @@ private:
     }
     static void setPuertoLocal(int value){
         m_puertoLocal=value;
+    }
+    static void setPrimario(int value){
+        m_primario=value;
     }
     static void setHostLocal(QString value){
         m_hostLocal=value;

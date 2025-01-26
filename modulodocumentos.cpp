@@ -4309,10 +4309,23 @@ bool procesarImix(QString _codigoDocumento,QString _codigoTipoDocumento, QString
     if(curl) {
 
         resultadoFinal="";
+        QByteArray testing;
+        QByteArray produccion;
 
 
-        QByteArray testing =    func_CFE_ParametrosGenerales.retornaValor("urlImixTesting").toLatin1();
-        QByteArray produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").toLatin1();
+        if(func_configuracion.retornaValorConfiguracionValorString("USA_PRINCIPAL_LOGUEO_IP")=="1" && func_configuracion.retornaValorConfiguracionValorString("USA_IP_IMIX_LOCAL")=="1"){
+            QString ipPcPrincipal=func_configuracion.retornaValorConfiguracionValorString("IP_PRINCIPAL_PC");
+
+            testing =    func_CFE_ParametrosGenerales.retornaValor("urlImixTesting").replace("localhost", ipPcPrincipal).toLatin1();
+            produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").replace("localhost", ipPcPrincipal).toLatin1();
+
+        }else{
+
+            testing =    func_CFE_ParametrosGenerales.retornaValor("urlImixTesting").toLatin1();
+            produccion = func_CFE_ParametrosGenerales.retornaValor("urlImixProduccion").toLatin1();
+
+        }
+
 
 
         const char *c_conexion;

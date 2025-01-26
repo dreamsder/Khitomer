@@ -32,6 +32,7 @@ QString UtilidadesXml::m_baseLocal;
 QString UtilidadesXml::m_claveLocal;
 QString UtilidadesXml::m_hostLocal;
 int UtilidadesXml::m_puertoLocal;
+int UtilidadesXml::m_primario;
 int UtilidadesXml::m_tipoConexion;
 QString UtilidadesXml::m_url;
 QString UtilidadesXml::m_hash;
@@ -100,6 +101,14 @@ bool UtilidadesXml::leerConfiguracionXml(){
                 }else if(read.name() == "puerto"){
 
                     UtilidadesXml::setPuertoLocal(read.readElementText().toInt());
+
+                }else if(read.name() == "primario"){
+
+                    if(read.readElementText().toInt()==1){
+                        UtilidadesXml::setPrimario(1);
+                    }else{
+                        UtilidadesXml::setPrimario(0);
+                    }
 
                 }else if(read.name() == "tipoConexion"){
 

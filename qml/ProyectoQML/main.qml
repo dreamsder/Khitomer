@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.50"
+    property string versionKhitomer: "1.17.51"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -323,6 +323,10 @@ Rectangle {
     /// 1.17.48 :Se agrega un campo error en la mensajeria de respuesta del proxyCFE para imix. Se muestra en khitomer ahora el mensaje de error de reportado por imix.
     /// 1.17.49 :Se agrego en la impresión del recibo el número de cliente entre parentesis luego de la razón social.
     /// 1.17.50 :Se agrega traza para loguear la impresora donde se va a enviar el documento. Se sube a 120 segundos el timeout contra imix nube y demas proveedores.
+    /// 1.17.51 :Se agrega soporte para identificar la pc principal en una instalación de un local, para obtener su ip y usarla en la conexión con imix local.
+    ///         :Se crearon para tal fin los parametros IP_PRINCIPAL_PC, USA_PRINCIPAL_LOGUEO_IP y USA_IP_IMIX_LOCAL.
+    ///         :Ademas se soporta en el archivo conf.xml la variable "primario" que indica si el pc es el primario o no. Por defecto es no.
+
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

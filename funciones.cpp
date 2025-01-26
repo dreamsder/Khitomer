@@ -40,7 +40,12 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <QTextStream>
 #include <QFileInfo>
 #include <QDebug>
+#include <Utilidades/moduloconfiguracion.h>
 
+
+#include <QNetworkInterface>
+#include <QHostAddress>
+#include <QAbstractSocket>
 
 
 #if linux
@@ -80,6 +85,7 @@ QThread* thread = new QThread;
 
 CkMailMan ok();
 
+ModuloConfiguracion func_configuracionEnFunciones;
 
 
 
@@ -2287,9 +2293,15 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 505:
             if(!impactoCambioEnBD("ALTER TABLE `FacturasParaImprimir` ADD COLUMN `error` VARCHAR(5000) NOT NULL DEFAULT '' AFTER `caeTipoDocumentoCFEDescripcionV`;","506")){
                 _iterador=false; return false; } break;
-
-            //
-
+        case 506:
+            if(!impactoCambioEnBD("REPLACE into Configuracion values('USA_PRINCIPAL_LOGUEO_IP','0','Indica si se usa una pc como principal, y se graba su ip en la base de datos, para usarla con imix local');","507")){
+                _iterador=false; return false; } break;
+        case 507:
+            if(!impactoCambioEnBD("REPLACE into Configuracion values('IP_PRINCIPAL_PC','','IP de la pc marcada como principal en la coniguración de la misma, si el parametro USA_PRINCIPAL_LOGUEO_IP esta prendido.');","508")){
+                _iterador=false; return false; } break;
+        case 508:
+            if(!impactoCambioEnBD("REPLACE into Configuracion values('USA_IP_IMIX_LOCAL','0','Indica si se usa la funcionalidad de traslación en la url de localhost de imix a una ip del pc principal.');","509")){
+                _iterador=false; return false; } break;
 
 
         default:
@@ -2422,5 +2434,72 @@ QString Funciones::verificarCedula(QString pNumero){
     }else{
         mensajeAdvertenciaOk("ATENCION:...Cedula con cantidad de digitos incorrectos.");
         return "-1ERROR";
+    }
+}
+
+
+
+
+
+
+QString Funciones::obtenerIPPrincipal()
+{
+
+
+
+    QString ipPrincipal="";
+    if(func_configuracionEnFunciones.retornaValorConfiguracionValorString("USA_PRINCIPAL_LOGUEO_IP")=="1" && UtilidadesXml::getPrimario()==1){
+        // Obtenemos la lista de todas las interfaces de red
+        QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
+
+        // Iteramos por cada interfaz
+        for (int i = 0; i < interfaces.size(); ++i) {
+            QNetworkInterface interfaz = interfaces.at(i);
+
+            // Verificamos que la interfaz esté activa, corriendo y no sea loopback
+            if (interfaz.flags().testFlag(QNetworkInterface::IsUp) &&
+                interfaz.flags().testFlag(QNetworkInterface::IsRunning) &&
+                !interfaz.flags().testFlag(QNetworkInterface::IsLoopBack))
+            {
+                // Obtenemos la lista de direcciones asociadas a la interfaz
+                QList<QNetworkAddressEntry> entradas = interfaz.addressEntries();
+                for (int j = 0; j < entradas.size(); ++j) {
+                    QHostAddress ip = entradas.at(j).ip();
+
+                    // Verificamos que sea IPv4 y que no sea localhost
+                    if (ip.protocol() == QAbstractSocket::IPv4Protocol && ip != QHostAddress::LocalHost)
+                    {
+                        if(ip.toString().trimmed()!=""){
+                           ipPrincipal=ip.toString().trimmed();
+
+
+
+                           bool conexion=true;
+                           Database::chequeaStatusAccesoMysql();
+                           if(!Database::connect().isOpen()){
+                               if(!Database::connect().open()){
+                                   qDebug() << "No conecto";
+                                   conexion=false;
+                               }
+                           }
+
+                           if(conexion){
+                               QSqlQuery query(Database::connect());
+                               query.exec("update Configuracion set valorConfiguracion='"+ipPrincipal+"' where codigoConfiguracion='IP_PRINCIPAL_PC'   ");
+                           }
+
+
+
+                          return "La ip de este PC es: "+ipPrincipal;
+                        }
+                    }
+                }
+            }
+        }
+
+       return "La ip de este PC es: "+ipPrincipal;
+
+    }else{
+        return "La configuración de USA_PRINCIPAL_LOGUEO_IP no existe o no esta activa.";
     }
 }

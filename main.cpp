@@ -674,10 +674,10 @@ inicio:
 
 
 
+      qDebug()<< funcionesMysql.obtenerIPPrincipal();
 
 
-
-    return app->exec();
+      return app->exec();
 
 }
 

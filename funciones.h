@@ -80,6 +80,8 @@ public slots:
     Q_INVOKABLE QString verificarCedula(QString);
 
 
+    Q_INVOKABLE QString obtenerIPPrincipal();
+
 
     Q_INVOKABLE void loguear(QString);
 
