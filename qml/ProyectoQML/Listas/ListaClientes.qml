@@ -93,6 +93,7 @@ Rectangle{
             txtCodigoPostal.textoInputBox=codigoPostal
             txtDireccion.textoInputBox=direccion
             txtEmail.textoInputBox=email
+            txtEmail2.textoInputBox=email2
             txtEsquina.textoInputBox=esquina
             txtNombre.textoInputBox=nombreCliente
             txtNumeroPuerta.textoInputBox=numeroPuerta

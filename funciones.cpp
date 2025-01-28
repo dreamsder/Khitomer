@@ -2302,6 +2302,11 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 508:
             if(!impactoCambioEnBD("REPLACE into Configuracion values('USA_IP_IMIX_LOCAL','0','Indica si se usa la funcionalidad de traslación en la url de localhost de imix a una ip del pc principal.');","509")){
                 _iterador=false; return false; } break;
+        case 509:
+            if(!impactoCambioEnBD("ALTER TABLE `Clientes`  ADD COLUMN `email2` VARCHAR(100) NOT NULL AFTER `porcentajeDescuento`;","510")){
+                _iterador=false; return false; } break;
+
+
 
 
         default:

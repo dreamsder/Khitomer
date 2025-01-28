@@ -26,19 +26,19 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class Cliente
 {
 public:
-   Q_INVOKABLE Cliente(const QString &codigoCliente, const int &tipoCliente, const QString &rut, const QString &nombreCliente,const QString &razonSocial,const QString &direccion,
+   Q_INVOKABLE Cliente(const QString &codigoCliente, const int &tipoCliente, const QString &rut, const QString &nombreCliente, const QString &razonSocial, const QString &direccion,
 
-                       const QString &esquina,const QString &numeroPuerta,const QString &telefono,const QString &telefono2,const QString &documento,const QString &codigoPostal,
+                       const QString &esquina, const QString &numeroPuerta, const QString &telefono, const QString &telefono2, const QString &documento, const QString &codigoPostal,
 
-                       const QString &email,const QString &sitioWeb,const QString &usuarioAlta,const QString &observaciones,const int &tipoClasificacion,
+                       const QString &email, const QString &sitioWeb, const QString &usuarioAlta, const QString &observaciones, const int &tipoClasificacion,
 
-                       const int &codigoTipoCliente,const QString &descripcionTipoCliente,
+                       const int &codigoTipoCliente, const QString &descripcionTipoCliente,
 
-                       const int &codigoTipoClasificacion,const QString &descripcionTipoClasificacion,
+                       const int &codigoTipoClasificacion, const QString &descripcionTipoClasificacion,
 
-                       const QString &contacto,const QString &horario,
+                       const QString &contacto, const QString &horario,
 
-                       const int &codigoPais,const int &codigoDepartamento,const int &codigoLocalidad, const int &codigoTipoDocumentoCliente
+                       const int &codigoPais, const int &codigoDepartamento, const int &codigoLocalidad, const int &codigoTipoDocumentoCliente
                        , const int &codigoTipoProcedenciaCliente,
 
                        const QString &fechaNacimiento,
@@ -47,7 +47,7 @@ public:
                        const int &codigoFormasDePagoDefault,
                        const int &codigoTipoDocumentoDefault,
                        const QString &porcentajeDescuento
-                       );
+                       , const QString &email2);
 
 
 
@@ -90,6 +90,7 @@ public:
    int codigoFormasDePagoDefault() const;
    int codigoTipoDocumentoDefault() const;
    QString porcentajeDescuento()const;
+   QString email2() const;
 
 private:
     QString m_codigoCliente;
@@ -129,6 +130,7 @@ private:
     int m_codigoFormasDePagoDefault;
     int m_codigoTipoDocumentoDefault;
     QString m_porcentajeDescuento;
+    QString m_email2;
 
 };
 
@@ -170,7 +172,8 @@ public:
         codigoMonedaDefaultRole,
         codigoFormasDePagoDefaultRole,
         codigoTipoDocumentoDefaultRole,
-        porcentajeDescuentoRole
+        porcentajeDescuentoRole,
+        Email2Role,
 
 
 
@@ -200,7 +203,7 @@ public:
             , QString , QString, QString
 
             , QString , QString, QString
-            , QString, QString, QString, QString, QString, QString, QString _codigoTipoDocumentoDefault,QString) const;
+            , QString, QString, QString, QString, QString, QString, QString _codigoTipoDocumentoDefault, QString, QString _email2) const;
 
     Q_INVOKABLE bool eliminarCliente(QString , QString) const;
 

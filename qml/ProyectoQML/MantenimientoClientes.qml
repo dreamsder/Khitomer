@@ -484,6 +484,41 @@ Rectangle {
                 }
 
                 onEnter: {
+                    if(txtEmail2.visible){
+                        txtEmail2.tomarElFoco()
+
+                    }else{
+                        txtSitioWeb.tomarElFoco()
+                    }
+                }
+                onTabulacion: {
+                    if(txtEmail2.visible){
+                        txtEmail2.tomarElFoco()
+
+                    }else{
+                        txtSitioWeb.tomarElFoco()
+                    }
+                }
+            }
+
+            TextInputSimple {
+                id: txtEmail2
+                x: 45
+                y: 130
+                //  width: 250
+                textoDeFondo: "email@empresa.com"
+                largoMaximo: 70
+                botonBuscarTextoVisible: true
+                textoTitulo: "E-mail 2:"
+                textoInputBox: ""
+                visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaEmail")
+                onClicEnBusqueda: {
+                    modeloClientes.clearClientes()
+                    modeloClientes.buscarCliente(" email2 rlike ",txtEmail2.textoInputBox.trim())
+                    listaDeClientes.currentIndex=0;
+                }
+
+                onEnter: {
                     if(txtSitioWeb.visible){
                         txtSitioWeb.tomarElFoco()
 
@@ -939,6 +974,9 @@ Rectangle {
                 if(txtEmail.textoInputBox.trim()!=""){
                     consultaSql+=" email rlike '"+txtEmail.textoInputBox.trim()+"' and ";
                 }
+                if(txtEmail2.textoInputBox.trim()!=""){
+                    consultaSql+=" email2 rlike '"+txtEmail2.textoInputBox.trim()+"' and ";
+                }
                 if(txtSitioWeb.textoInputBox.trim()!=""){
                     consultaSql+=" sitioWeb rlike '"+txtSitioWeb.textoInputBox.trim()+"' and ";
                 }
@@ -1048,6 +1086,7 @@ Rectangle {
                     txtCodigoPostal.textoInputBox=""
                     txtDireccion.textoInputBox=""
                     txtEmail.textoInputBox=""
+                    txtEmail2.textoInputBox=""
                     txtEsquina.textoInputBox=""
                     txtNombre.textoInputBox=""
                     txtNumeroPuerta.textoInputBox=""
@@ -1135,10 +1174,10 @@ Rectangle {
                             resultadoInsertarCliente="-6";
                         }else{
                             txtRut.textoInputBox=cedulaIdentidad;                            
-                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim());
+                            resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim(),txtEmail2.textoInputBox);
                         }
                     }else{
-                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim());
+                        resultadoInsertarCliente = modeloClientes.insertarCliente(txtCodigoCliente.textoInputBox,txtTipoCliente.codigoValorSeleccion,txtNombre.textoInputBox,txtRazonSocial.textoInputBox,txtRut.textoInputBox,txtTipoValoracion.codigoValorSeleccion,txtDireccion.textoInputBox,txtEsquina.textoInputBox,txtNumeroPuerta.textoInputBox,txtTelefono.textoInputBox,txtTelefono2.textoInputBox,txtCodigoPostal.textoInputBox,txtEmail.textoInputBox,txtSitioWeb.textoInputBox,txtContacto.textoInputBox,txtObservaciones.textoInputBox,txtNombreDeUsuario.textoInputBox,txtHorario.textoInputBox,cbxListaLocalidades.codigoDePaisSeleccionado,cbxListaLocalidades.codigoDeDepartamentoSeleccionado,cbxListaLocalidades.codigoDeLocalidadSeleccionado,txtTipoDocumentoCliente.codigoValorSeleccion,txtTipoProcedenciaCliente.codigoValorSeleccion,txtFechaNacimiento.textoInputBox,esClienteCredito,cbListaMonedaCliente.codigoValorSeleccion,cbListaFormasDePagoCliente.codigoValorSeleccion,cbListaDocumentosCliente.codigoValorSeleccion,txtDescuentoCliente.textoInputBox.trim(),txtEmail2.textoInputBox);
                     }
 
 
@@ -1192,6 +1231,7 @@ Rectangle {
                         txtCodigoPostal.textoInputBox=""
                         txtDireccion.textoInputBox=""
                         txtEmail.textoInputBox=""
+                        txtEmail2.textoInputBox=""
                         txtEsquina.textoInputBox=""
                         txtNombre.textoInputBox=""
                         txtNumeroPuerta.textoInputBox=""
@@ -1252,6 +1292,7 @@ Rectangle {
                         txtCodigoPostal.textoInputBox=""
                         txtDireccion.textoInputBox=""
                         txtEmail.textoInputBox=""
+                        txtEmail2.textoInputBox=""
                         txtEsquina.textoInputBox=""
                         txtNombre.textoInputBox=""
                         txtNumeroPuerta.textoInputBox=""
@@ -1364,6 +1405,7 @@ Rectangle {
                                     txtCodigoPostal.textoInputBox=""
                                     txtDireccion.textoInputBox=""
                                     txtEmail.textoInputBox=""
+                                    txtEmail2.textoInputBox=""
                                     txtEsquina.textoInputBox=""
                                     txtNombre.textoInputBox=""
                                     txtNumeroPuerta.textoInputBox=""

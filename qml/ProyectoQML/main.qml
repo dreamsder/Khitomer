@@ -326,6 +326,7 @@ Rectangle {
     /// 1.17.51 :Se agrega soporte para identificar la pc principal en una instalación de un local, para obtener su ip y usarla en la conexión con imix local.
     ///         :Se crearon para tal fin los parametros IP_PRINCIPAL_PC, USA_PRINCIPAL_LOGUEO_IP y USA_IP_IMIX_LOCAL.
     ///         :Ademas se soporta en el archivo conf.xml la variable "primario" que indica si el pc es el primario o no. Por defecto es no.
+    ///         :Se agrega soporte para email2 en el cliente.
 
 
     ///property para tamaño de fuentes
