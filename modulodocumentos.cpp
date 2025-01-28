@@ -4642,7 +4642,13 @@ bool procesarImix_Nube(QString _codigoDocumento,QString _codigoTipoDocumento,QSt
         QString nuevoSegmento = ",\"Documento\":{\"codigo\":"+_codigoDocumento+",\"tipo\":"+_codigoTipoDocumento+",\"serie\":\""+_serieDocumento+"\",\"caeTipoDocumentoCFEDescripcionV\":\""+caeTipoDocumentoCFEDescripcionV+"\"}";
 
 
-        str1 = QString(R"({"Informacion":%1})").arg(str1);
+        #ifdef Q_OS_WIN
+            // En Windows usas la sintaxis tradicional (sin raw string literal)
+            str1 = QString("{\"Informacion\":%1}").arg(str1);
+        #else
+            // En Linux o cualquier otro SO
+            str1 = QString(R"({"Informacion":%1})").arg(str1);
+        #endif
 
         int posicionCierre = str1.lastIndexOf('}');
         if (posicionCierre != -1) {

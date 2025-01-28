@@ -7,7 +7,7 @@ class Modulo_ConfiguracionProxy : public QObject
 {
     Q_OBJECT
 public:
-    explicit Modulo_ConfiguracionProxy(QObject *parent = nullptr);
+    explicit Modulo_ConfiguracionProxy(QObject *parent = 0);
 
 
     static QString retornoValorPatrametro(QString _codigoConfiguracion);
