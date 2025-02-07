@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.51"
+    property string versionKhitomer: "1.17.52"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -327,7 +327,7 @@ Rectangle {
     ///         :Se crearon para tal fin los parametros IP_PRINCIPAL_PC, USA_PRINCIPAL_LOGUEO_IP y USA_IP_IMIX_LOCAL.
     ///         :Ademas se soporta en el archivo conf.xml la variable "primario" que indica si el pc es el primario o no. Por defecto es no.
     ///         :Se agrega soporte para email2 en el cliente.
-
+    /// 1.17.52 :Se realiza una modificación sobre el formulario 2181
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
