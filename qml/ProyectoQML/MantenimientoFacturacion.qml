@@ -900,6 +900,7 @@ Rectangle {
 
     function setearEstadoActivoBotonesGuardar(activos){
         botonGuardarFacturaEmitir.visible=activos
+
         botonGuardarFacturaPendiente.visible=activos
     }
 
@@ -6653,8 +6654,8 @@ Rectangle {
 
         BotonBarraDeHerramientas {
             id: botonNuevaFactura
-            toolTip: "Nueva factura"
-            z: 8
+            toolTip: "Nuevo documento"
+            z: 9
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Nuevo.png"
             //source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/NuevaFacturacion.png"
 
@@ -6692,8 +6693,8 @@ Rectangle {
 
         BotonBarraDeHerramientas {
             id: botonGuardarFacturaEmitir
-            toolTip: "Guardar factura"
-            z: 7
+            toolTip: "Guardar documento"
+            z: 8
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/GuardarCliente.png"
             onClic: {
 
@@ -7279,11 +7280,619 @@ Rectangle {
 
         }
 
+
+
+
+        BotonBarraDeHerramientas {
+            id: separadorGurdarBotonSinImrimir
+            toolTip: ""
+            source: ""
+            enabled: false
+            visible: botonGuardarFacturaEmitir_SinImprimir.visible
+        }
+
+
+        BotonBarraDeHerramientas {
+            id: botonGuardarFacturaEmitir_SinImprimir
+            toolTip: "Guardar documento(No imprime)"
+            z: 7
+            enabled: botonGuardarFacturaEmitir.enabled
+            visible: botonGuardarFacturaEmitir.visible
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/guardarSinImprimir.png"
+            onClic: {
+
+
+                loadingIndicator.start()
+
+                txtMensajeInformacion.text="";
+                var resultadoInsertDocumento=0;
+                var estatusProcesoMedioDePago=true;
+
+                var estadoDocumento=modeloDocumentos.retornacodigoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim())
+
+                ///Funcionalidad incorporada en versión 1.10.0
+                ///Chequeo si el documento que se intenta guardar ya fue guardado, si es así, es porque es un documento que tiene marcada
+                ///la opcion de deuda para contados en tipo de documentos documentoAceptaIngresoDeMediosDePagoLuegoDeEmitido
+                if((estadoDocumento=="E" || estadoDocumento=="G") && nuevoDocumento==""){
+                    txtMensajeInformacion.visible=true
+                    txtMensajeInformacionTimer.stop()
+                    txtMensajeInformacionTimer.start()
+                    // Comienzo el guardado de los medios de pago seleccionados.
+                    if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")){
+                        if(modeloListaMediosDePagoAgregados.count==0){
+                            estatusProcesoMedioDePago=true;
+                        }else{
+
+                            if(modeloMediosDePago.eliminarLineaMedioDePagoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim())){
+                                for(var i=0; i<modeloListaMediosDePagoAgregados.count;i++){
+
+                                    if(modeloMediosDePago.guardarLineaMedioDePago(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,
+                                                                                  i.toString(),modeloListaMediosDePagoAgregados.get(i).codigoMedioDePago,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).monedaMedioPago,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).montoMedioDePago,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).cantidadCuotas,
+
+                                                                                  modeloListaMediosDePagoAgregados.get(i).numeroBanco,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).codigoTarjetaCredito,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).numeroCheque,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).tipoCheque,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).fechaCheque,
+
+                                                                                  modeloListaMediosDePagoAgregados.get(i).codigoDoc,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).codigoTipoDoc,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).numeroLineaDocumento,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).numeroCuentaBancariaAgregado,
+                                                                                  modeloListaMediosDePagoAgregados.get(i).numeroBancoCuentaBancaria,
+                                                                                  txtSerieFacturacion.textoInputBox.trim()
+                                                                                  )){
+
+                                        if(modeloListaMediosDePagoAgregados.get(i).esDiferido){
+                                            if(!modeloLineasDePagoListaChequesDiferidosComboBox.actualizarLineaDePagoChequeDiferido(modeloListaMediosDePagoAgregados.get(i).codigoDoc, modeloListaMediosDePagoAgregados.get(i).codigoTipoDoc,  modeloListaMediosDePagoAgregados.get(i).numeroLineaDocumento,modeloListaMediosDePagoAgregados.get(i).montoMedioDePago,modeloListaMediosDePagoAgregados.get(i).serieDoc)){
+                                                estatusProcesoMedioDePago=false;
+                                                break;
+                                            }
+                                        }
+                                    }else{
+                                        estatusProcesoMedioDePago=false;
+                                        break;
+                                    }
+                                }
+                                if(estatusProcesoMedioDePago){
+                                    modeloDocumentos.actualizoSaldoClientePagoContadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,etiquetaTotalMedioDePago.retornaTotal(),txtSerieFacturacion.textoInputBox.trim());
+                                }
+
+                            }else{
+                                estatusProcesoMedioDePago=false;
+                            }
+                        }
+                        if(estatusProcesoMedioDePago){
+
+                            if(modeloDocumentos.actualizoSaldoClientePagoContadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,etiquetaTotalMedioDePago.retornaTotal(),txtSerieFacturacion.textoInputBox.trim())){
+                                txtMensajeInformacion.color="#2f71a0"
+                                txtMensajeInformacion.text="El documento "+txtNumeroDocumentoFacturacion.textoInputBox.trim()+" se actualizo correctamente."
+                                crearNuevaFactura()
+
+                                cuadroListaDocumentosNuevo.visible=modeloconfiguracion.retornaModoAvisoDocumentosNuevoVisible();
+
+
+                            }else{
+                                txtMensajeInformacion.color="#d93e3e"
+                                txtMensajeInformacion.text="ATENCION: Ocurrió un error al intentar actualizar la deuda en medios de pago, intentenlo nuevamente."
+                                funcionesmysql.mensajeAdvertenciaOk("ATENCION: Ocurrió un error al intentar actualizar la deuda en medios de pago, intentenlo nuevamente.")
+                            }
+                        }else{
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: Ocurrió un error al intentar actualizar los medios de pago."
+                        }
+                    }else{
+                        txtMensajeInformacion.color="#2f71a0"
+                        txtMensajeInformacion.text="El documento "+txtNumeroDocumentoFacturacion.textoInputBox.trim()+" no tenia datos para actualizar."
+                        crearNuevaFactura()
+                        cuadroListaDocumentosNuevo.visible=modeloconfiguracion.retornaModoAvisoDocumentosNuevoVisible();
+                    }
+
+
+
+                }else{
+
+
+
+                    if(!txtSerieFacturacion.visible && txtSerieFacturacion.textoInputBox==""){
+
+                        txtSerieFacturacion.textoInputBox=modeloListaTipoDocumentosComboBox.retornaSerieTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion)
+                    }
+
+                    if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCliente")){
+                        if(txtCodigoClienteFacturacion.textoInputBox.trim()=="" || lblRazonSocialCliente.text.trim()==""){
+                            resultadoInsertDocumento=-5;
+                        }else{
+                            if(!modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")){
+                                if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")){
+                                    if(listaDeMediosDePagoSeleccionados.count==0){
+                                        resultadoInsertDocumento=-5;
+                                    }
+                                }
+                            }
+                        }
+                    }else if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")){
+                        if(listaDeItemsFactura.count==0){
+                            resultadoInsertDocumento=-5;
+                        }
+                    }else if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")){
+                        if(listaDeMediosDePagoSeleccionados.count==0){
+                            resultadoInsertDocumento=-5;
+                        }
+                    }
+
+                    if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")){
+                        if(listaDeMediosDePagoSeleccionados.count==0){
+                            if(!funcionesmysql.mensajeAdvertencia("No se ingresaron medios de pago, desea guardar de todos modos el documento?\n\nPresione [ Sí ] para confirmar.")){
+                                resultadoInsertDocumento=-11
+                            }
+                        }
+                    }
+
+
+                    if(modeloconfiguracion.retornaValorConfiguracion("UTILIZA_CONTROL_CLIENTE_CREDITO")=="1"){
+                        if(txtCodigoClienteFacturacion.textoInputBox.trim()!="" && lblRazonSocialCliente.text.trim()!=""){
+                            if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
+                                if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
+                                    resultadoInsertDocumento=-12
+                                }
+                            }
+                        }
+                    }
+
+
+
+
+
+                    if(resultadoInsertDocumento==0){
+
+                        if(!txtNumeroDocumentoFacturacion.visible && txtNumeroDocumentoFacturacion.textoInputBox==""){
+
+                            txtNumeroDocumentoFacturacion.textoInputBox=modeloDocumentos.retornoCodigoUltimoDocumentoDisponible(cbListatipoDocumentos.codigoValorSeleccion)
+
+                        }
+
+
+                        if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago") &&
+                                modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")){
+
+                            if(etiquetaTotal.retornaTotal()==0.00 && modeloItemsFactura.count==0){
+
+                                resultadoInsertDocumento =modeloDocumentos.guardarDocumentos(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim().toUpperCase(),
+                                                                                             txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
+                                                                                             txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotalMedioDePago.retornaTotal(),etiquetaTotalMedioDePago.retornaSubTotal(),
+                                                                                             etiquetaTotalMedioDePago.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
+                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
+                                                                                             cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
+                                                                                             etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
+
+                            }else{
+                                resultadoInsertDocumento =modeloDocumentos.guardarDocumentos(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim().toUpperCase(),
+                                                                                             txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
+                                                                                             txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
+                                                                                             etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
+                                                                                             "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
+                                                                                             cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
+                                                                                             etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
+                            }
+
+
+
+
+                        }else if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago") &&
+                                 modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")==false){
+
+
+                            resultadoInsertDocumento =modeloDocumentos.guardarDocumentos(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim().toUpperCase(),
+                                                                                         txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
+                                                                                         txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotalMedioDePago.retornaTotal(),etiquetaTotalMedioDePago.retornaSubTotal(),
+                                                                                         etiquetaTotalMedioDePago.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
+                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotalMedioDePago.retornaIva1(),etiquetaTotalMedioDePago.retornaIva2(),etiquetaTotalMedioDePago.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
+                                                                                         cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
+                                                                                         etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
+
+                        }else if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")==false &&
+                                 modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaArticulos")){
+
+                            resultadoInsertDocumento =modeloDocumentos.guardarDocumentos(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim().toUpperCase(),
+                                                                                         txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,
+                                                                                         txtFechaDocumentoFacturacion.textoInputBox.trim(),etiquetaTotal.retornaTotal(),etiquetaTotal.retornaSubTotal(),
+                                                                                         etiquetaTotal.retornaIvaTotal(),cbListaLiquidacionesFacturacion.codigoValorSeleccion,txtVendedorDeFactura.codigoValorSeleccion,txtNombreDeUsuario.textoInputBox.trim(),
+                                                                                         "EMITIR",cbListaLiquidacionesFacturacion.codigoValorSeleccionExtra,etiquetaTotal.retornaIva1(),etiquetaTotal.retornaIva2(),etiquetaTotal.retornaIva3(),modeloListaMonedas.retornaCotizacionMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion),txtObservacionesFactura.textoInputBox.trim(),txtComentariosFactura.textoInputBox.trim(),
+                                                                                         cbxAfectaCuentaBancaria.codigoValorSeleccion,cbxAfectaCuentaBancaria.codigoValorSeleccion2,
+                                                                                         etiquetaTotal.retornaTotalDescuento(),etiquetaTotal.retornaSubTotalSinDescuento(),cbListaFormasDePago.textoComboBox.trim(),etiquetaTotal.retornaPorcentajeDescuento(),etiquetaTotalMedioDePago.retornaTotal());
+                        }
+
+
+
+                        txtMensajeInformacion.visible=true
+                        txtMensajeInformacionTimer.stop()
+                        txtMensajeInformacionTimer.start()
+
+                        if(resultadoInsertDocumento==1){
+
+                            if(modeloDocumentos.eliminarLineaDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion, txtSerieFacturacion.textoInputBox.trim()))
+                            {
+
+
+                                var cantidad=1;
+                                var estatusProcesoLineas=true;
+                                var costoPonderado=0.00;
+                                var esDocumentoValidoParaCalculoPonderado=modeloDocumentos.documentoValidoParaCalculoPonderado(cbListatipoDocumentos.codigoValorSeleccion);
+
+                                var _insertLineasDocumentos="insert INTO DocumentosLineas (codigoDocumento, codigoTipoDocumento, serieDocumento , numeroLinea, codigoArticulo, codigoArticuloBarras, cantidad, precioTotalVenta, precioArticuloUnitario, precioIvaArticulo,costoArticuloMonedaReferencia,costoArticuloPonderado,montoDescuento,codigoTipoGarantia)values"
+
+                                for(var i=0; i<modeloItemsFactura.count;i++){
+                                    cantidad=modeloItemsFactura.get(i).cantidadItems
+
+                                    if(modeloItemsFactura.get(i).asignarGarantiaAArticulo)
+                                        modeloArticulos.actualizarGarantia(modeloItemsFactura.get(i).codigoArticulo,modeloItemsFactura.get(i).codigoTipoGarantia);
+
+
+                                    if(esDocumentoValidoParaCalculoPonderado){
+                                        ///codigoArticulo, cantidad, costoTotal
+                                        costoPonderado = modeloDocumentos.retonaCostoPonderadoSegunStock(modeloItemsFactura.get(i).codigoArticulo,cantidad,modeloItemsFactura.get(i).costoArticuloMonedaReferencia)
+                                    }else{
+                                        costoPonderado=0.00
+                                    }
+
+
+
+
+                                    if(i==0){
+                                        _insertLineasDocumentos+="('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"' )"
+                                        modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
+                                    }else{
+                                        _insertLineasDocumentos+=",('"+txtNumeroDocumentoFacturacion.textoInputBox.trim()+"','"+cbListatipoDocumentos.codigoValorSeleccion+"','"+txtSerieFacturacion.textoInputBox.trim()+"','"+i.toString()+"','"+modeloItemsFactura.get(i).codigoArticulo+"','"+modeloItemsFactura.get(i).codigoBarrasArticulo+"','"+cantidad+"','"+(modeloItemsFactura.get(i).precioArticulo*cantidad)+"','"+modeloItemsFactura.get(i).precioArticulo+"','"+((modeloItemsFactura.get(i).precioArticulo*cantidad) - ((modeloItemsFactura.get(i).precioArticulo*cantidad)/modeloListaIvas.retornaFactorMultiplicador(modeloItemsFactura.get(i).codigoArticulo)))+"','"+modeloItemsFactura.get(i).costoArticuloMonedaReferencia+"','"+costoPonderado+"','"+modeloItemsFactura.get(i).descuentoLineaItem+"','"+modeloItemsFactura.get(i).codigoTipoGarantia+"')"
+                                        modeloDocumentos.marcoArticulosincronizarWeb(modeloItemsFactura.get(i).codigoArticulo)
+                                    }
+
+                                }
+
+
+                                if(modeloItemsFactura.count!=0)
+                                    if(!modeloDocumentos.guardarLineaDocumento(_insertLineasDocumentos))
+                                        estatusProcesoLineas=false;
+
+
+
+
+
+                                //Si guardo las lineas de venta correctamente proceso a actualizar el estado del documento a G - Guardado, sin imprimir
+                                if(estatusProcesoLineas){
+
+
+
+
+
+                                    if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"G",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
+
+                                        var continuarVenta = true;
+
+                                        ///Aca tengo que controlar si el documento se emite o no con CFE IMIX
+                                        ///Entro en IMIX
+                                        if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")==="1" && modelo_CFE_ParametrosGenerales.retornaValor("modoFuncionCFE")==="0"){
+                                            txtMensajeInformacion.text="";
+
+
+                                            if(modeloDocumentos.emitirDocumentoCFEImix(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,lblEstadoDocumento.text.trim(),txtSerieFacturacion.textoInputBox.trim())){
+
+                                                continuarVenta = true;
+
+                                            }else{
+                                                continuarVenta=false;
+                                            }
+
+                                        }else if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")==="1" && modelo_CFE_ParametrosGenerales.retornaValor("modoFuncionCFE")==="2"){
+                                            ///Entro en modo Imix en la nube
+
+                                            txtMensajeInformacion.text="";
+                                            if(modeloDocumentos.emitirDocumentoCFE_Imix_Nube(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,numeroDocumentoCFEADevolver,fechaDocumentoCFEADevolver,tipoDocumentoCFEADevolver,lblEstadoDocumento.text.trim(),txtSerieFacturacion.textoInputBox.trim())){
+
+                                                continuarVenta = true;
+
+                                            }else{
+                                                continuarVenta=false;
+
+                                            }
+
+
+                                        }else if(modeloconfiguracion.retornaValorConfiguracion("MODO_CFE")==="1" && modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteCFEImprime")==="1" && modelo_CFE_ParametrosGenerales.retornaValor("modoFuncionCFE")==="1"){
+                                            ///Entro en modo Dynamia
+
+                                            txtMensajeInformacion.text="";
+                                            if(modeloDocumentos.emitirDocumentoCFEDynamia(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,numeroDocumentoCFEADevolver,fechaDocumentoCFEADevolver,tipoDocumentoCFEADevolver,lblEstadoDocumento.text.trim(),txtSerieFacturacion.textoInputBox.trim())){
+
+                                                continuarVenta = true;
+
+                                            }else{
+                                                continuarVenta=false;
+
+                                            }
+
+
+                                        }
+
+
+
+                                        if(continuarVenta){
+
+                                            // Comienzo el guardado de los medios de pago seleccionados.
+                                            if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaMediosDePago")){
+                                                if(modeloListaMediosDePagoAgregados.count==0){
+                                                    estatusProcesoMedioDePago=true;
+                                                }else{
+
+                                                    if(modeloMediosDePago.eliminarLineaMedioDePagoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,txtSerieFacturacion.textoInputBox.trim())){
+                                                        for(var i=0; i<modeloListaMediosDePagoAgregados.count;i++){
+
+                                                            if(modeloMediosDePago.guardarLineaMedioDePago(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,
+                                                                                                          i.toString(),modeloListaMediosDePagoAgregados.get(i).codigoMedioDePago,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).monedaMedioPago,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).montoMedioDePago,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).cantidadCuotas,
+
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).numeroBanco,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).codigoTarjetaCredito,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).numeroCheque,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).tipoCheque,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).fechaCheque,
+
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).codigoDoc,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).codigoTipoDoc,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).numeroLineaDocumento,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).numeroCuentaBancariaAgregado,
+                                                                                                          modeloListaMediosDePagoAgregados.get(i).numeroBancoCuentaBancaria,
+                                                                                                          txtSerieFacturacion.textoInputBox.trim()
+                                                                                                          )){
+
+                                                                if(modeloListaMediosDePagoAgregados.get(i).esDiferido){
+                                                                    if(!modeloLineasDePagoListaChequesDiferidosComboBox.actualizarLineaDePagoChequeDiferido(modeloListaMediosDePagoAgregados.get(i).codigoDoc, modeloListaMediosDePagoAgregados.get(i).codigoTipoDoc,  modeloListaMediosDePagoAgregados.get(i).numeroLineaDocumento,modeloListaMediosDePagoAgregados.get(i).montoMedioDePago,modeloListaMediosDePagoAgregados.get(i).serieDoc)){
+                                                                        estatusProcesoMedioDePago=false;
+                                                                        break;
+                                                                    }
+
+                                                                }
+
+
+                                                            }else{
+                                                                estatusProcesoMedioDePago=false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }else{
+                                                        estatusProcesoMedioDePago=false;
+                                                    }
+                                                }
+
+                                            }
+
+                                            if(estatusProcesoMedioDePago){
+                                                modeloLineasDePagoListaChequesDiferidosComboBox.limpiarListaLineasDePago()
+                                                modeloLineasDePagoListaChequesDiferidosComboBox.buscarLineasDePagoChequesDiferidos("1=","1")
+                                                //Chequea si emite en impresora
+                                                if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteEnImpresora")){
+
+                                                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+
+                                                        if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"E",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
+
+
+                                                            for(var i=0; i<modeloItemsFactura.count;i++){
+
+                                                                var _stockReal=modeloArticulos.retornaStockTotalArticuloReal(modeloItemsFactura.get(i).codigoArticulo);
+                                                                var _cantidadMinimaStockDeArticulo=modeloArticulos.retornaCantidadMinimaAvisoArticulo(modeloItemsFactura.get(i).codigoArticulo);
+
+                                                                if(_stockReal<=_cantidadMinimaStockDeArticulo){
+
+                                                                    modeloArticulos.reemplazaCantidadArticulosSinStock(modeloItemsFactura.get(i).codigoArticulo,"1");
+                                                                }else{
+                                                                    modeloArticulos.reemplazaCantidadArticulosSinStock(modeloItemsFactura.get(i).codigoArticulo,"0");
+                                                                }
+                                                            }
+
+                                                            if(cbListaDocumentosCuentaCorrienteConDeuda.visible && cbListaDocumentosCuentaCorrienteConDeuda.retornaCantidadItemSeleccionados()!=0){
+
+                                                                var totalAPagar=0.00;
+
+                                                                if(etiquetaTotal.retornaTotal()==0.00){
+
+                                                                    if(etiquetaTotalMedioDePago.retornaTotal()==0.00){
+                                                                        totalAPagar=0.00
+                                                                    }else{
+                                                                        totalAPagar=etiquetaTotalMedioDePago.retornaTotal()
+                                                                    }
+
+                                                                }else{
+                                                                    totalAPagar=etiquetaTotal.retornaTotal()
+                                                                }
+
+
+
+
+                                                                if(totalAPagar!=0.00){
+                                                                    actualizarCuentaCorriente(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion, txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,totalAPagar,txtSerieFacturacion.textoInputBox.trim())
+                                                                }
+
+
+
+                                                            }
+
+                                                            txtMensajeInformacion.color="#2f71a0"
+                                                            txtMensajeInformacion.text="Documento "+txtNumeroDocumentoFacturacion.textoInputBox.trim()+" emitido correctamente"
+                                                            crearNuevaFactura()
+                                                            cuadroListaDocumentosNuevo.visible=modeloconfiguracion.retornaModoAvisoDocumentosNuevoVisible();
+                                                        }else{
+                                                            txtMensajeInformacion.color="#d93e3e"
+                                                            txtMensajeInformacion.text="ATENCION: El documento no se guardó como Emitido. Revise la comunicación con el servidor."
+                                                        }
+
+                                                    }else{
+
+                                                        txtMensajeInformacion.color="#d93e3e"
+                                                        txtMensajeInformacion.text="ATENCION: El documento se guardo correctamente, pero no se pudo emitir. Revise la impresora."
+                                                    }
+
+                                                }else{
+
+                                                    for(var i=0; i<modeloItemsFactura.count;i++){
+
+                                                        var _stockReal=modeloArticulos.retornaStockTotalArticuloReal(modeloItemsFactura.get(i).codigoArticulo);
+                                                        var _cantidadMinimaStockDeArticulo=modeloArticulos.retornaCantidadMinimaAvisoArticulo(modeloItemsFactura.get(i).codigoArticulo);
+
+                                                        if(_stockReal<=_cantidadMinimaStockDeArticulo){
+
+                                                            modeloArticulos.reemplazaCantidadArticulosSinStock(modeloItemsFactura.get(i).codigoArticulo,"1");
+                                                        }else{
+                                                            modeloArticulos.reemplazaCantidadArticulosSinStock(modeloItemsFactura.get(i).codigoArticulo,"0");
+                                                        }
+                                                    }
+
+
+                                                    if(cbListaDocumentosCuentaCorrienteConDeuda.visible && cbListaDocumentosCuentaCorrienteConDeuda.retornaCantidadItemSeleccionados()!=0){
+                                                        var totalAPagar=0.00;
+
+                                                        if(etiquetaTotal.retornaTotal()==0.00){
+
+                                                            if(etiquetaTotalMedioDePago.retornaTotal()==0.00){
+                                                                totalAPagar=0.00
+                                                            }else{
+                                                                totalAPagar=etiquetaTotalMedioDePago.retornaTotal()
+                                                            }
+
+                                                        }else{
+                                                            totalAPagar=etiquetaTotal.retornaTotal()
+                                                        }
+
+
+
+                                                        if(totalAPagar!=0.00){
+                                                            actualizarCuentaCorriente(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion, txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion,totalAPagar,txtSerieFacturacion.textoInputBox.trim())
+                                                        }
+
+
+                                                    }
+
+                                                    txtMensajeInformacion.color="#2f71a0"
+                                                    txtMensajeInformacion.text="El documento "+txtNumeroDocumentoFacturacion.textoInputBox.trim()+" se guardo correctamente"
+                                                    crearNuevaFactura()
+                                                    cuadroListaDocumentosNuevo.visible=modeloconfiguracion.retornaModoAvisoDocumentosNuevoVisible();
+
+                                                }
+                                            }else{
+                                                txtMensajeInformacion.color="#d93e3e"
+                                                txtMensajeInformacion.text="ATENCION: No se pudieron guardar los medios de pago. Intente nuevamente."
+                                            }
+
+                                        }else{
+                                            txtMensajeInformacion.color="#d93e3e"
+                                            txtMensajeInformacion.text="ATENCION: No se pudo emitir CFE."
+                                        }
+                                    }else{
+                                        txtMensajeInformacion.color="#d93e3e"
+                                        txtMensajeInformacion.text="ATENCION: No se pudo actualizar estado de documento a Guardado/Finalizado."
+                                    }
+                                }else{
+
+                                    txtMensajeInformacion.color="#d93e3e"
+                                    txtMensajeInformacion.text="ATENCION: No se pudieron grabar las lineas de factura. Intente nuevamente"
+                                }
+
+
+
+                            }else{
+                                txtMensajeInformacion.color="#d93e3e"
+                                txtMensajeInformacion.text="ATENCION: No se pudieron grabar las lineas de factura. Intente nuevamente"
+                                funcionesmysql.mensajeAdvertenciaOk("Cuidado, no se puedieron eliminar los articulo, ni guardar los nuevos, intente nuevamente.")
+                            }
+
+                        }else if(resultadoInsertDocumento==-1){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: No se pudo conectar a la base de datos"
+                            funcionesmysql.mensajeAdvertenciaOk("Cuidado, el sistema no se pudo conectar a la base de datos.")
+
+
+                        }else if(resultadoInsertDocumento==-2){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: Documento existente con estado invalido. Llame al soporte tecnico"
+
+
+                        }else if(resultadoInsertDocumento==-3){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: No se pudo guardar el documento"
+
+
+                        }else if(resultadoInsertDocumento==-4){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: No se pudo realizar la consulta a la base de datos"
+
+
+                        }else if(resultadoInsertDocumento==-5){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: Faltan datos para guardar el documento. Verifique antes de continuar"
+
+                        }
+                        else if(resultadoInsertDocumento==-6){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: El documento ya existe en estado cancelado. Verifique antes de continuar"
+                        }
+                        else if(resultadoInsertDocumento==-7){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: El documento ya existe como emitido/impreso/finalizado. Verifique antes de continuar"
+                        }
+                        else if(resultadoInsertDocumento==-8){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: El documento ya existe como guardado/finalizado. Verifique antes de continuar"
+                        }
+                        else if(resultadoInsertDocumento==-9){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: El documento ya existe en proceso de guardado en otra instancia de Khitomer"
+                        }
+                        else if(resultadoInsertDocumento==-10){
+                            txtMensajeInformacion.color="#d93e3e"
+                            txtMensajeInformacion.text="ATENCION: No se realizaron cambios en el documento existente como pendiente"
+                        }
+                    }else if(resultadoInsertDocumento==-11){
+                        /// Esta es la salida para cuando el medio de pago no fue ingresado
+                        if(!contenedorFlipable.flipped){
+                            btnAgregarMediosDePago.texto="medios de pago"
+                            contenedorFlipable.flipped = !contenedorFlipable.flipped
+                        }
+                    }
+                    else if(resultadoInsertDocumento==-12){
+                        setearEstadoActivoBotonesGuardar(false)
+                        funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni guardarlo.")
+                    }
+                    else{
+                        txtMensajeInformacion .visible=true
+                        txtMensajeInformacionTimer.stop()
+                        txtMensajeInformacionTimer.start()
+                        txtMensajeInformacion.color="#d93e3e"
+                        txtMensajeInformacion.text="ATENCION: Faltan datos para guardar el documento. Verifique antes de continuar"
+                    }
+
+
+
+                }
+
+                loadingIndicator.stop()
+            }
+
+        }
+
+
+
+
+
         BotonBarraDeHerramientas {
             id: separador2
             toolTip: ""
             source: ""
             enabled: false
+
         }
 
 
@@ -7292,7 +7901,7 @@ Rectangle {
             id: botonGuardarFacturaPendiente
             rectanguloSecundarioVisible: true
             opacidad: 0.200
-            toolTip: "Guardar factura pendiente"
+            toolTip: "Guardar documento pendiente"
             z: 6
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/GuardarCliente.png"
             onClic: {
