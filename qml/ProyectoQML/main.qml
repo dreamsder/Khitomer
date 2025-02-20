@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.52"
+    property string versionKhitomer: "1.17.53"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -328,6 +328,7 @@ Rectangle {
     ///         :Ademas se soporta en el archivo conf.xml la variable "primario" que indica si el pc es el primario o no. Por defecto es no.
     ///         :Se agrega soporte para email2 en el cliente.
     /// 1.17.52 :Se realiza una modificación sobre el formulario 2181
+    /// 1.17.53 :Se agrega boton en facturación para emitir el documento sin imprimir. Se agrega un nuevo parametro en la configuracion llamado PERMITE_BOTON_EMITIR_SIN_IMPRIMIR.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
@@ -347,9 +348,24 @@ Rectangle {
     }
     // setea los permisos de la barra de herramientas del mantenimiento de facturacion
     function permisosMantenimientoFacturacion(){
+        var botonEmitirVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas")
+
         mantenimientoFactura.botonNuevaFacturaVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
-        mantenimientoFactura.botonGuardarFacturaEmitirVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
+        mantenimientoFactura.botonGuardarFacturaEmitirVisible=botonEmitirVisible
         mantenimientoFactura.botonGuardarFacturaPendienteVisible=modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteCrearFacturas");
+
+        if(botonEmitirVisible){
+            if(modeloconfiguracion.retornaValorConfiguracionValorString("PERMITE_BOTON_EMITIR_SIN_IMPRIMIR")==="1"){
+                mantenimientoFactura.botonGuardarFacturaEmitir_SinImprimirVisible=botonEmitirVisible
+            }else{
+                mantenimientoFactura.botonGuardarFacturaEmitir_SinImprimirVisible=false
+            }
+
+
+        }else{
+            mantenimientoFactura.botonGuardarFacturaEmitir_SinImprimirVisible=botonEmitirVisible
+        }
+
 
 
         if(modeloconfiguracion.retornaValorConfiguracion("MODO_CLIENTE")=="1"){

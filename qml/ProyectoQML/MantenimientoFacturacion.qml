@@ -61,7 +61,7 @@ Rectangle {
     property alias botonNuevaFacturaVisible : botonNuevaFactura.visible
     property alias botonGuardarFacturaEmitirVisible : botonGuardarFacturaEmitir.visible
     property alias botonGuardarFacturaPendienteVisible : botonGuardarFacturaPendiente.visible
-
+    property alias botonGuardarFacturaEmitir_SinImprimirVisible :botonGuardarFacturaEmitir_SinImprimir.visible
 
     property alias codigoClienteInputMask: txtCodigoClienteFacturacion.inputMask
     property alias codigoClienteOpcionesExtrasInputMask: txtCodigoClienteFacturacionOpcionesExtras.inputMask
@@ -900,7 +900,6 @@ Rectangle {
 
     function setearEstadoActivoBotonesGuardar(activos){
         botonGuardarFacturaEmitir.visible=activos
-
         botonGuardarFacturaPendiente.visible=activos
     }
 
@@ -7073,7 +7072,7 @@ Rectangle {
                                                 //Chequea si emite en impresora
                                                 if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteEnImpresora")){
 
-                                                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                                                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim(),true)){
 
                                                         if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"E",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
@@ -7295,9 +7294,9 @@ Rectangle {
         BotonBarraDeHerramientas {
             id: botonGuardarFacturaEmitir_SinImprimir
             toolTip: "Guardar documento(No imprime)"
-            z: 7
             enabled: botonGuardarFacturaEmitir.enabled
-            visible: botonGuardarFacturaEmitir.visible
+            z: 7
+
             source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/guardarSinImprimir.png"
             onClic: {
 
@@ -7676,7 +7675,7 @@ Rectangle {
                                                 //Chequea si emite en impresora
                                                 if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"emiteEnImpresora")){
 
-                                                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                                                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim(),false)){
 
                                                         if(modeloDocumentos.actualizoEstadoDocumento(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,"E",txtNombreDeUsuario.textoInputBox.trim(),txtSerieFacturacion.textoInputBox.trim(),txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion,cbListaMonedasEnFacturacion.codigoValorSeleccion)){
 
@@ -8015,7 +8014,7 @@ Rectangle {
                     txtMensajeInformacionTimer.stop()
                     txtMensajeInformacionTimer.start()
 
-                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim())){
+                    if(modeloDocumentos.emitirDocumentoEnImpresora(txtNumeroDocumentoFacturacion.textoInputBox.trim(),cbListatipoDocumentos.codigoValorSeleccion,cbListaImpresoras.textoComboBox.trim(),txtSerieFacturacion.textoInputBox.trim(),true)){
                         txtMensajeInformacion.color="#2f71a0"
                         txtMensajeInformacion.text="Documento "+txtNumeroDocumentoFacturacion.textoInputBox.trim()+" emitido correctamente"
                     }else{

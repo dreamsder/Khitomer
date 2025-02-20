@@ -3532,9 +3532,11 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
 /// ##########################################################################################################################
 /// #        Realiza los calculos para posicionar los campos del modelo de impresion e imprime el documento ##################
 /// ##########################################################################################################################
-bool ModuloDocumentos::emitirDocumentoEnImpresora(QString _codigoDocumento,QString _codigoTipoDocumento,QString _impresora,QString _serieDocumento){
+bool ModuloDocumentos::emitirDocumentoEnImpresora(QString _codigoDocumento,QString _codigoTipoDocumento,QString _impresora,QString _serieDocumento,bool impresionActiva){
 
-
+    // Si la impresión no se necesita se retorna true.
+    if(!impresionActiva)
+        return true;
 
 
     // consulto si estoy en modo CFE y si es modo IMIX me voy de la funciona, ya que IMIX imprime él, no Khitomer.

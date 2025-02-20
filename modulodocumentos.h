@@ -264,7 +264,7 @@ public:
 
     Q_INVOKABLE qlonglong retornoCodigoUltimoDocumentoDisponible(QString);
 
-    Q_INVOKABLE bool emitirDocumentoEnImpresora(QString , QString, QString, QString _serieDocumento);
+    Q_INVOKABLE bool emitirDocumentoEnImpresora(QString , QString, QString, QString _serieDocumento, bool impresionActiva);
 
     Q_INVOKABLE bool emitirDocumentoEnImpresoraTicket(QString _codigoDocumento, QString _codigoTipoDocumento, QString _impresora, int cantidadDecimalesMonto, QString _serieDocumento);
 
