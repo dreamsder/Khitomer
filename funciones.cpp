@@ -2311,6 +2311,28 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 511:
             if(!impactoCambioEnBD("REPLACE into Configuracion values('PERMITE_BOTON_EMITIR_SIN_IMPRIMIR','0','Permite que se use un boton para guardar la factura sin que se imprima');","512")){
                 _iterador=false; return false; } break;
+        case 512:
+            if(!impactoCambioEnBD("ALTER TABLE `PerfilesUsuarios` ADD COLUMN `permiteVerCostosDeArticulos` CHAR(1) NOT NULL DEFAULT '0' AFTER `permiteUsarReporteDeConsultasEnArticulos`;","513")){
+                _iterador=false; return false; } break;
+        case 513:
+            if(!impactoCambioEnBD("UPDATE `PerfilesUsuarios` SET `permiteVerCostosDeArticulos` = '1' WHERE (`codigoPerfil` = '1');","514")){
+                _iterador=false; return false; } break;
+        case 514:
+            if(!impactoCambioEnBD("INSERT INTO `Reportes` (`codigoReporte`, `codigoMenuReporte`, `descripcionReporte`, `consultaSql`, `consultaSqlGraficas`, `consultaSqlCabezal`, `utilizaCantidadItemRanking`, `utilizaFechaDesde`, `utilizaFechaHasta`, `utilizaProcedenciaEnReporte`) VALUES ('89', '14', 'Ventas entre fecha por procedencia sin ventas web', 'SELECT sub.CLIENTE,sub.TotalPesos\\'Total PESOS\\',sub.TotalDolares\\'Total DOLARES\\' FROM   (SELECT  concat((case when CLI.razonSocial=\\'\\' then CLI.nombreCliente else CLI.razonSocial end),\\' (\\',DOC.codigoCliente,\\')\\')\\'CLIENTE\\', sum(case when MON.codigoMoneda=1 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'TotalPesos\\',   sum(case when MON.codigoMoneda=2 then  ROUND(DOC.precioTotalVenta*TDOC.afectaTotales,2)  else ROUND(0,2) end) \\'TotalDolares\\'  ,      TPC.descripcionTipoProcedenciaCliente\\'Procedencia\\'   ,count(DOC.codigoDocumento)\\'CantidadDocumentos\\'  FROM Documentos DOC    join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente       join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento    join TipoProcedenciaCliente TPC on TPC.codigoTipoProcedenciaCliente=CLI.codigoTipoProcedenciaCliente     where  DOC.codigoEstadoDocumento in (\\'G\\',\\'E\\')     and TDOC.esDocumentoDeVenta=\\'1\\'   and  DOC.tipoCliente=1      and DOC.esDocumentoWeb=\\'0\\'   and DOC.fechaEmisionDocumento  between \\'@_desde\\' and \\'@_hasta\\'    and TPC.codigoTipoProcedenciaCliente=\\'@_codigoProcedenciaClienteReporte\\'      and left(CLI.fechaAlta,10) between \\'@_desde\\' and \\'@_hasta\\'     group by DOC.codigoCliente   order by DOC.fechaEmisionDocumento desc) sub where sub.CantidadDocumentos=\\'@_cantidad\\';', '', '', '1', '1', '1', '1');","515")){
+                _iterador=false; return false; } break;
+        case 515:
+            if(!impactoCambioEnBD("ALTER TABLE `Mantenimientos` ADD COLUMN `clientesUsaControlDeSaldos` CHAR(1) NOT NULL DEFAULT '0' AFTER `clientesUsaDescuentoDeMantenimiento`;","516")){
+                _iterador=false; return false; } break;
+        case 516:
+            if(!impactoCambioEnBD("ALTER TABLE `PerfilesUsuarios` ADD COLUMN `permiteAutorizarModificacionSaldoCliente` CHAR(1) NOT NULL DEFAULT '0' AFTER `permiteVerCostosDeArticulos`;","517")){
+                _iterador=false; return false; } break;
+        case 517:
+            if(!impactoCambioEnBD("UPDATE `PerfilesUsuarios` SET `permiteAutorizarModificacionSaldoCliente` = '1' WHERE (`codigoPerfil` = '1');","518")){
+                _iterador=false; return false; } break;
+
+
+
+
 
 
 

@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
         viewer.setWindowIcon(QIcon("icono.png"));
     }
 
-    viewer.setMinimumWidth(1024);
+    viewer.setMinimumWidth(1190);
     viewer.setMinimumHeight(720);
 
 

@@ -1009,6 +1009,45 @@ Rectangle {
             }
         }
 
+
+        BotonPaletaSistema {
+            id: btnCargarSaldosPorMonedaCliente
+            text: "Configuración de saldos..."
+            anchors.right:
+            {
+                if(btnCargarClientesYProveedoresBatch.visible){
+                    btnCargarClientesYProveedoresBatch.left
+                }else{
+                    parent.right
+                }
+            }
+
+            anchors.rightMargin: 30
+            anchors.bottom: rectangle2.top
+            anchors.bottomMargin: 10
+            height: {
+                if(visible){
+                    btnFiltrarClientesProveedores.height
+                }else{
+                    0
+                }
+            }
+
+            visible: modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaControlDeSaldos")
+
+            onClicked: {
+
+                if(modeloconfiguracion.retornaValorConfiguracion("MODO_AUTORIZACION")=="1"){
+                    cuadroAutorizacionClienteSaldo.evaluarPermisos("permiteAutorizarModificacionSaldoCliente")
+                }else{
+                    cuadroAutorizacionClienteSaldo.noSeRequierenAutorizaciones("permiteAutorizarModificacionSaldoCliente")
+                }
+
+            }
+
+        }
+
+
         BotonPaletaSistema {
             id: btnCargarClientesYProveedoresBatch
             text: "Carga de "+txtTipoCliente.textoComboBox.trim().toLowerCase()+"..."
@@ -1534,6 +1573,24 @@ Rectangle {
         regExp: new RegExp( "([0-1, ][0-9, ][0-9, ]\.[0-9, ][0-9, ])\%" )
     }
 
+
+    CuadroAutorizaciones{
+        id:cuadroAutorizacionClienteSaldo
+        color: "#be231919"
+        z: 9
+        anchors.fill: parent
+        onConfirmacion: {
+
+            if(permisosAEvaluar=="permiteAutorizarModificacionSaldoCliente"){
+
+
+
+            }
+
+
+        }
+
+    }
 
 }
 

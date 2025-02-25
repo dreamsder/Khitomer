@@ -128,5 +128,6 @@
         <file>qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml</file>
         <file>qml/ProyectoQML/Controles/BusquedaReportes.qml</file>
         <file>qml/ProyectoQML/Controles/LoadingQML.qml</file>
+        <file>qml/ProyectoQML/Controles/CuadroSeteoSaldoCuentaCorrienteEnCliente.qml</file>
     </qresource>
 </RCC>

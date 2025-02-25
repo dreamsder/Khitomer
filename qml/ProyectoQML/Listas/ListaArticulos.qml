@@ -246,6 +246,14 @@ Rectangle{
             //
             font.pixelSize: 11
             opacity: 0.500
+            visible: {
+                if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteVerCostosDeArticulos")){
+                    true
+                }else{
+                    false
+                }
+            }
+
             color: txtCodigoArticuloEnLista.color
         }
         Text {
@@ -254,7 +262,7 @@ Rectangle{
             height: txtCostoEnMonedaReferencia.implicitHeight
             text: qsTr("Costo en moneda referencia:  "+modeloListaMonedas.retornaSimboloMoneda(modeloListaMonedas.retornaMonedaReferenciaSistema())+"   " +costoMonedaReferenciaArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
             font.family: "Arial"
-            //
+            visible: txtCostoEnMonedaExtrangera.visible
             font.pixelSize: 11
             opacity: 0.500
             color: txtCodigoArticuloEnLista.color
