@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -640,6 +640,17 @@ int ModuloMonedas::ultimoRegistroDeMoneda()const {
         }
     }
 }
+
+QString ModuloMonedas::retornaCodigoMonedaPorIndice(int indice) const{
+    return  QString::number( m_Monedas[indice].codigoMoneda());
+}
+QString ModuloMonedas::retornaDescripcionMonedaPorIndice(int indice) const{
+    return m_Monedas[indice].descripcionMoneda();
+}
+QString ModuloMonedas::retornaSimboloMonedaPorIndice(int indice) const{
+    return m_Monedas[indice].simboloMoneda();
+}
+
 
 
 

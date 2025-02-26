@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -2329,8 +2329,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 517:
             if(!impactoCambioEnBD("UPDATE `PerfilesUsuarios` SET `permiteAutorizarModificacionSaldoCliente` = '1' WHERE (`codigoPerfil` = '1');","518")){
                 _iterador=false; return false; } break;
-
-
+        case 518:
+            if(!impactoCambioEnBD("CREATE TABLE if not exists `LimiteSaldoCuentaCorriente` ( `codigoCliente` VARCHAR(10) NOT NULL,  `tipoCliente` INT(10) NOT NULL,  `codigoMoneda` INT(10) NOT NULL, `limiteSaldo` DECIMAL(45,8) NULL,  PRIMARY KEY (`codigoCliente`, `tipoCliente`, `codigoMoneda`));","519")){
+                _iterador=false; return false; } break;
 
 
 

@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -81,7 +81,7 @@ Rectangle {
             x: 0
             y: 138
             color: "#2b2a2a"
-            text: qsTr("Copyright (C) <2012-2024>  Dreamsder")
+            text: qsTr("Copyright (C) <2012-2025>  Dreamsder")
             wrapMode: Text.NoWrap
             font.family: "Arial"
             font.bold: false

@@ -20,43 +20,43 @@ junto a este programa.
 En caso contrario, consulte <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-#ifndef MODULOTIPODOCUMENTOCLIENTE_H
-#define MODULOTIPODOCUMENTOCLIENTE_H
+#ifndef MODULOLIMITESALDOCUENTACORRIENTE_H
+#define MODULOLIMITESALDOCUENTACORRIENTE_H
 
 #include <QAbstractListModel>
 
-
-class TipoDocumentoCliente
+class LimiteSaldoCuentaCorriente
 {
 public:
-   Q_INVOKABLE TipoDocumentoCliente(const int &codigoTipoDocumentoCliente,const QString &descripcionTipoDocumentoCliente);
+   Q_INVOKABLE LimiteSaldoCuentaCorriente(const QString &codigoCliente, const QString &tipoCliente,const QString &codigoMoneda,const double &limiteSaldo);
 
 
-    int codigoTipoDocumentoCliente() const;
-    QString descripcionTipoDocumentoCliente() const;
+    QString codigoCliente() const;
+    QString tipoCliente() const;
+    QString codigoMoneda() const;
+    double limiteSaldo() const;
 
 private:
-    int m_codigoTipoDocumentoCliente;
-    QString m_descripcionTipoDocumentoCliente;
-
+    QString m_codigoCliente;
+    QString m_tipoCliente;
+    QString m_codigoMoneda;
+    double m_limiteSaldo;
 };
 
-class ModuloTipoDocumentoCliente : public QAbstractListModel
+class ModuloLimiteSaldoCuentaCorriente : public QAbstractListModel
 {
     Q_OBJECT
-
-
 public:
-    enum TipoDocumentoClienteRoles {
-        codigoTipoDocumentoClienteRole = Qt::UserRole + 1,
-        descripcionTipoDocumentoClienteRole
-
-
+    enum ItemRoles {
+        codigoClienteRole = Qt::UserRole + 1,
+        tipoClienteRole,
+        codigoMonedaRole,
+        limiteSaldoRole
     };
 
-    ModuloTipoDocumentoCliente(QObject *parent = 0);
+    ModuloLimiteSaldoCuentaCorriente(QObject *parent = 0);
 
-    Q_INVOKABLE void add(const TipoDocumentoCliente &TipoDocumentoCliente);
+    Q_INVOKABLE void agregar(const LimiteSaldoCuentaCorriente &limiteSaldoCuentaCorriente);
 
     Q_INVOKABLE void limpiar();
 
@@ -64,19 +64,14 @@ public:
 
     Q_INVOKABLE QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
-    Q_INVOKABLE void buscar(QString , QString);
-    Q_INVOKABLE void buscar();
+    Q_INVOKABLE void buscar(QString _codigoCliente, QString _tipoCliente);
 
-    Q_INVOKABLE QString retornaDescripcionTipoDocumentoCliente(QString) const;
-
-
+    Q_INVOKABLE QVariantMap get(int row) const;
 
 
 private:
-    QList<TipoDocumentoCliente> m_lista;
-
+    QList<LimiteSaldoCuentaCorriente> m_LimiteSaldoCuentaCorriente;
 };
 
+#endif // MODULOLIMITESALDOCUENTACORRIENTE_H
 
-
-#endif // MODULOTIPODOCUMENTOCLIENTE_H

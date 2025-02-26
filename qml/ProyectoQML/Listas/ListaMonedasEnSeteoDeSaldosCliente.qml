@@ -27,50 +27,94 @@ import "../Controles"
 Rectangle{
     id: rectListaItem
     width: parent.width
- //   width: 1024
-    height: 45
+    height: 32
     color: "#e9e8e9"
     radius: 1
-    border.width: 1
     border.color: "#aaaaaa"
     //
     opacity: 1
 
+
     Text {
-        id:txtArticulo
-        width: 80
-        text: codigoArticulo+" - "+modeloArticulos.retornaDescripcionArticulo(codigoArticulo)
+        id:lblMonedas
+        text: codigoMoneda + " - "+descripcionMoneda + " ( "+simboloMoneda+" )"
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 100
+        anchors.verticalCenter: parent.verticalCenter
         font.family: "Arial"
         opacity: 0.900
         //
         font.pointSize: 10
         font.bold: false
         verticalAlignment: Text.AlignVCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 3
         color: "#212121"
+
     }
 
     MouseArea{
         id: mousearea1
-        anchors.rightMargin: 40
-        visible: false
         z: 1
         anchors.fill: parent
         hoverEnabled: true
 
+
+
         onEntered: {
-            txtArticulo.color="white"
             rectListaItemColorDeseleccionado.stop()
             rectListaItemColorSeleccionado.start()
         }
         onExited: {
-            txtArticulo.color="#212121"
-
             rectListaItemColorSeleccionado.stop()
             rectListaItemColorDeseleccionado.start()
+
+        }
+
+        onClicked: {
+            txtMontoSaldo.forceActiveFocus()
+            txtMontoSaldo.tomarElFoco()
+        }
+
+
+
+        TextInputSimple {
+            property double nuevoMonto:0.00
+            id: txtMontoSaldo
+            enFocoSeleccionarTodo: true
+            textoInputBox: limiteSaldo
+            botonBuscarTextoVisible: false
+            inputMask: "00000000"+modeloconfiguracion.retornaCantidadDecimalesString()+";"
+            largoMaximo: 45
+
+            textoTitulo: ""
+
+            colorDeTitulo: "#333333"
+            anchors.top: parent.top
+            anchors.topMargin: 7
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+
+            onEnter: {
+
+
+
+            }
+
+            onTextoInputBoxChanged: {
+
+                if(txtMontoSaldo.textoInputBox.trim()!="."){
+                   nuevoMonto=parseFloat(txtMontoSaldo.textoInputBox.trim())
+                   nuevoMonto=nuevoMonto+0.00;
+                    //modeloListasPreciosCuadroArticulosASetearPrecioGenerica.setProperty(index,"precioArticulo",precioNuevoArticulo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
+                   modeloListaMonedaSaldosDelegateVirtual.setProperty(index,"limiteSaldo",nuevoMonto.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
+                }
+
+
+            }
+
+
         }
     }
 
@@ -93,65 +137,22 @@ Rectangle{
 
     }
 
-    Text {
-        id: lblPrecioActual
-        height: 16
-        color: "#4c6bb5"
-        text: "Precio actual: "+modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaCodigoMoneda(codigoArticulo))+" "+precioActual+"  "
-        anchors.right: lblNuevoPrecio.left
-        anchors.rightMargin: 10
-        //
-        font.family: "Arial"
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
-        horizontalAlignment: Text.AlignRight
-        font.pointSize: 10
-        font.bold: true
-        verticalAlignment: Text.AlignVCenter
-    }
 
-    Text {
-        id: lblNuevoPrecio
-        y: -5
-        height: 16
-        color: "#ee7416"
-        text: nuevoPrecio +" "+modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaCodigoMoneda(codigoArticulo))+" :Nuevo precio"
-        anchors.left: parent.left
-        anchors.leftMargin: rectListaItem.width/2
-        //
-        anchors.right: parent.right
-        anchors.rightMargin: 40
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
-        font.family: "Arial"
-        font.bold: true
-        font.pointSize: 10
+
+    /*Text {
+        id: lblCotizacion
+        y: 6
+        color: "#212121"
+        text: "Cotización "+ modeloMonedas.retornaSimboloMoneda(modeloMonedas.retornaMonedaReferenciaSistema()) +":   "   +cotizacionMoneda
+        anchors.verticalCenter: parent.verticalCenter
         horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-    }
-
-    Text {
-        id: txtEliminarItem
-        x: -4
-        y: 5
-        text: qsTr("<x")
+        anchors.left: parent.left
+        anchors.leftMargin: rectListaItem.width-200
         //
-        font.pixelSize: 10
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
         font.family: "Arial"
-        font.bold: true
-        horizontalAlignment: Text.AlignHCenter
-        anchors.leftMargin: 5
+        font.bold: false
+        font.pointSize: 10
+        opacity: 0.900
         verticalAlignment: Text.AlignVCenter
-        anchors.left: mousearea1.right
-        MouseArea {
-            id: mouse_area1
-            anchors.fill: parent
-
-            onClicked:  modeloArticulosACambiarDePrecio.remove(index)
-        }
-    }
+    }*/
 }

@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -72,6 +72,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <QDebug>
 #include <iostream>
 #include <modulotipoprocedenciacliente.h>
+#include <modulolimitesaldocuentacorriente.h>
 
 #include <modulotipopromocion.h>
 #include <modulopromociones.h>
@@ -265,6 +266,8 @@ int main(int argc, char *argv[])
     ModuloPromociones moduloPromociones;
     ModuloTipoGarantia moduloTipoGarantia;
     ModuloTipoGarantia moduloTipoGarantiaMantenimiento;
+
+    ModuloLimiteSaldoCuentaCorriente moduloLimiteSaldoCuentaCorriente;
 
     DialogosWidget dialogoQT;
 
@@ -565,6 +568,11 @@ inicio:
 
 
     viewer.rootContext()->setContextProperty("modeloUsuarios", &moduloUsuarios );
+
+    viewer.rootContext()->setContextProperty("modeloLimiteSaldoCuentaCorriente", &moduloLimiteSaldoCuentaCorriente );
+
+
+
 
 
 

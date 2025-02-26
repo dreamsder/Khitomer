@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -1037,11 +1037,18 @@ Rectangle {
 
             onClicked: {
 
-                if(modeloconfiguracion.retornaValorConfiguracion("MODO_AUTORIZACION")=="1"){
-                    cuadroAutorizacionClienteSaldo.evaluarPermisos("permiteAutorizarModificacionSaldoCliente")
+                if(txtCodigoCliente.textoInputBox.trim()!=="0" && txtRazonSocial.textoInputBox.trim()!==""){
+                    if(modeloconfiguracion.retornaValorConfiguracion("MODO_AUTORIZACION")=="1"){
+                        cuadroAutorizacionClienteSaldo.evaluarPermisos("permiteAutorizarModificacionSaldoCliente")
+                    }else{
+                        cuadroAutorizacionClienteSaldo.noSeRequierenAutorizaciones("permiteAutorizarModificacionSaldoCliente")
+                    }
                 }else{
-                    cuadroAutorizacionClienteSaldo.noSeRequierenAutorizaciones("permiteAutorizarModificacionSaldoCliente")
+                    funcionesmysql.mensajeAdvertenciaOk("Debe seleccionar un cliente/proveedor para setear un limite de Saldo.")
                 }
+
+
+
 
             }
 
@@ -1583,12 +1590,64 @@ Rectangle {
 
             if(permisosAEvaluar=="permiteAutorizarModificacionSaldoCliente"){
 
+                modeloListaMonedaSaldosDelegateVirtual.clear()
+                // Reviso que las monedas del sistema existan
+                if(modeloListaMonedas.rowCount()!==0){
+
+                    modeloLimiteSaldoCuentaCorriente.limpiar()
+                    modeloLimiteSaldoCuentaCorriente.buscar(txtCodigoCliente.textoInputBox.trim(),txtTipoCliente.codigoValorSeleccion.trim())
+
+                    // Itero sobre las monedas del sistema y agrego las entradas para setear los saldos
+                    for(var i=0; i<modeloListaMonedas.rowCount() ;i++){
+                        var limiteSaldo=0.00;
+                        for(var j=0; j<modeloLimiteSaldoCuentaCorriente.rowCount() ;j++){
+                            var itemData = modeloLimiteSaldoCuentaCorriente.get(j)
+                            if(itemData.codigoMoneda===modeloListaMonedas.retornaCodigoMonedaPorIndice(i)){
+                                limiteSaldo=itemData.limiteSaldo;
+                            }
+                        }
+
+                        modeloListaMonedaSaldosDelegateVirtual.append({
+                                                                      codigoMoneda:modeloListaMonedas.retornaCodigoMonedaPorIndice(i),
+                                                                      descripcionMoneda:modeloListaMonedas.retornaDescripcionMonedaPorIndice(i) ,
+                                                                      simboloMoneda:modeloListaMonedas.retornaSimboloMonedaPorIndice(i),
+                                                                      limiteSaldo:limiteSaldo.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
+                                                                      })
+                    }
+
+                    cuadroSeteoSaldoCuentaCorrienteEnCliente.visible=true
+                }else{
+                    funcionesmysql.mensajeAdvertencia("ERROR: No se encontraron monedas definidas en el sistema.")
+                }
+
 
 
             }
-
-
         }
+
+    }
+
+    ListModel{
+        id: modeloListaMonedaSaldosDelegateVirtual
+    }
+
+
+    CuadroSeteoSaldoCuentaCorrienteEnCliente{
+        id:cuadroSeteoSaldoCuentaCorrienteEnCliente
+        anchors.fill: parent
+        z:9
+        visible: false
+        onClicCancelar: cuadroSeteoSaldoCuentaCorrienteEnCliente.visible=false
+        modeloItems: modeloListaMonedaSaldosDelegateVirtual
+        textoBotonCancelar:  "Cancelar"
+        textoBotonGuardar:  "Guardar Saldo"
+
+        onClicGuardar: {
+            for(var i=0; i<modeloListaMonedaSaldosDelegateVirtual.count ;i++){
+                    console.log(modeloListaMonedaSaldosDelegateVirtual.get(i).limiteSaldo)
+            }
+        }
+
 
     }
 

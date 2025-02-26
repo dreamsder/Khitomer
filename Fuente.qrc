@@ -129,5 +129,6 @@
         <file>qml/ProyectoQML/Controles/BusquedaReportes.qml</file>
         <file>qml/ProyectoQML/Controles/LoadingQML.qml</file>
         <file>qml/ProyectoQML/Controles/CuadroSeteoSaldoCuentaCorrienteEnCliente.qml</file>
+        <file>qml/ProyectoQML/Listas/ListaMonedasEnSeteoDeSaldosCliente.qml</file>
     </qresource>
 </RCC>

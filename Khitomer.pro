@@ -1,6 +1,6 @@
 #/*********************************************************************
 #Khitomer - Sistema de facturación
-#Copyright (C) <2012-2024>  <Cristian Montano>
+#Copyright (C) <2012-2025>  <Cristian Montano>
 #
 #Este archivo es parte de Khitomer.
 #
@@ -117,7 +117,8 @@ SOURCES += main.cpp \
     moduloreportesconfiguracion.cpp \
     csvreader.cpp \
     fileselector.cpp \
-    proxy/modulo_configuracionproxy.cpp
+    proxy/modulo_configuracionproxy.cpp \
+    modulolimitesaldocuentacorriente.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -204,7 +205,8 @@ HEADERS += \
     moduloreportesconfiguracion.h \
     csvreader.h \
     fileselector.h \
-    proxy/modulo_configuracionproxy.h
+    proxy/modulo_configuracionproxy.h \
+    modulolimitesaldocuentacorriente.h
 
 RESOURCES += \
     Imagenes.qrc \

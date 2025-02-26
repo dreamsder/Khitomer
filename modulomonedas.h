@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -116,7 +116,11 @@ public:
 
     Q_INVOKABLE QString retornaSimboloMonedaPorArticulo(QString _codigoArticulo) const;
 
+    Q_INVOKABLE QString retornaCodigoMonedaPorIndice(int indice) const;
 
+    Q_INVOKABLE QString retornaDescripcionMonedaPorIndice(int indice) const;
+
+    Q_INVOKABLE QString retornaSimboloMonedaPorIndice(int indice) const;
 
     static int getCodigoMoneda(){
         return m_codigoMoneda;

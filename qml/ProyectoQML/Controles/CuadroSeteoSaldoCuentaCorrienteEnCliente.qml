@@ -1,6 +1,6 @@
 /*********************************************************************
 Khitomer - Sistema de facturación
-Copyright (C) <2012-2024>  <Cristian Montano>
+Copyright (C) <2012-2025>  <Cristian Montano>
 
 Este archivo es parte de Khitomer.
 
@@ -35,12 +35,17 @@ Rectangle {
 
     signal clicCancelar
 
+    signal clicGuardar
+
     signal tipoDocumentoSeleccionado
 
 
-    property alias modeloItems: listaDeTipoDocumentosParaDevoluciones.model
+    property alias modeloItems: listaItems.model
 
-    property alias textoBoton: btnCancelarOperacion.text
+    property alias textoBotonCancelar: btnCancelarOperacion.text
+
+    property alias textoBotonGuardar: btnGuardarOperacion.text
+
 
 
     MouseArea {
@@ -67,6 +72,7 @@ Rectangle {
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
                 anchors.rightMargin: -15
                 z: 1
+                smooth: true
                 anchors.right: parent.right
                 onClic: {
 
@@ -78,7 +84,7 @@ Rectangle {
             Text {
                 id: lblListaDocumentos
                 color: "#ffffff"
-                text: qsTr("Lista de documentos, seleccione el indicado:")
+                text: qsTr("Lista de monedas para setear Saldo del Cliente:")
                 style: Text.Raised
                 font.underline: true
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -91,8 +97,9 @@ Rectangle {
 
 
             ListView {
-            id: listaDeTipoDocumentosParaDevoluciones
-            delegate: ListaTipoDocumentosDevolucion {
+            id: listaItems
+            delegate: ListaMonedasEnSeteoDeSaldosCliente{}
+            /*delegate: ListaTipoDocumentosDevolucion {
                 id:listaTipodocumentosParaDevolver
                 onClicDocumento: {
                         _codigoTipoDocumentoSeleccionado=listaTipodocumentosParaDevolver._codigoTipoDocumento
@@ -100,12 +107,12 @@ Rectangle {
 
                 }
 
-            }
+            }*/
             anchors.bottom: btnCancelarOperacion.top
             anchors.right: parent.right
             anchors.left: parent.left
             interactive: {
-                                if(listaDeTipoDocumentosParaDevoluciones.count>3){
+                                if(listaItems.count>3){
                                     true
                                 }else{
                                     false
@@ -129,31 +136,31 @@ Rectangle {
 
             Rectangle {
                 id: scrollbarlistaDeDocumentosEnLiquidaciones
-                y: listaDeTipoDocumentosParaDevoluciones.visibleArea.yPosition * listaDeTipoDocumentosParaDevoluciones.height+5
+                y: listaItems.visibleArea.yPosition * listaItems.height+5
                 width: 10
-                height: listaDeTipoDocumentosParaDevoluciones.visibleArea.heightRatio * listaDeTipoDocumentosParaDevoluciones.height+18
+                height: listaItems.visibleArea.heightRatio * listaItems.height+18
                 color: "#000000"
                 radius: 2
                 anchors.rightMargin: 4
                 opacity: 0.5
                 visible: {
-                                    if(listaDeTipoDocumentosParaDevoluciones.count>3){
+                                    if(listaItems.count>3){
                                         true
                                     }else{
                                         false
                                     }
                                 }
-                anchors.right: listaDeTipoDocumentosParaDevoluciones.right
+                anchors.right: listaItems.right
                 //
                 z: 1
             }
             }
 
             Text {
-                id: lblInformacionListaTipoDocumentos
+                id: lblInformacionlistaItems
                 y: 7
                 color: "#ffffff"
-                text: qsTr("Haga clic, para que se cree automaticamente el nuevo documento; si no esta seguro, puede cancelar la operación.")
+                text: qsTr("Haga clic en la moneda para setear el saldo del cliente.")
                 style: Text.Normal
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 anchors.left: parent.left
@@ -171,14 +178,24 @@ Rectangle {
 
             BotonPaletaSistema {
                 id: btnCancelarOperacion
-               // text: "Cancelar documento contrario"
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 10
+                anchors.right: btnGuardarOperacion.left
+                anchors.rightMargin: 20
+                border.color: "#787777"
+
+                onClicked: clicCancelar()
+            }
+
+            BotonPaletaSistema {
+                id: btnGuardarOperacion
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 10
                 anchors.right: parent.right
                 anchors.rightMargin: 20
                 border.color: "#787777"
 
-                onClicked: clicCancelar()
+                onClicked: clicGuardar()
             }
 
             Rectangle {
