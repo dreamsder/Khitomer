@@ -2332,6 +2332,20 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 518:
             if(!impactoCambioEnBD("CREATE TABLE if not exists `LimiteSaldoCuentaCorriente` ( `codigoCliente` VARCHAR(10) NOT NULL,  `tipoCliente` INT(10) NOT NULL,  `codigoMoneda` INT(10) NOT NULL, `limiteSaldo` DECIMAL(45,8) NULL,  PRIMARY KEY (`codigoCliente`, `tipoCliente`, `codigoMoneda`));","519")){
                 _iterador=false; return false; } break;
+        case 519:
+            if(!impactoCambioEnBD("ALTER TABLE `LimiteSaldoCuentaCorriente` CHANGE COLUMN `tipoCliente` `tipoCliente` INT(10) UNSIGNED NOT NULL ,CHANGE COLUMN `codigoMoneda` `codigoMoneda` INT(10) UNSIGNED NOT NULL ;","520")){
+                _iterador=false; return false; } break;
+        case 520:
+            if(!impactoCambioEnBD("ALTER TABLE LimiteSaldoCuentaCorriente ADD CONSTRAINT fk_LimiteSaldoCuentaCorriente_codigoMoneda FOREIGN KEY (codigoMoneda) REFERENCES Monedas(codigoMoneda);","521")){
+                _iterador=false; return false; } break;
+        case 521:
+            if(!impactoCambioEnBD("ALTER TABLE LimiteSaldoCuentaCorriente  CONVERT TO CHARACTER SET latin1  COLLATE latin1_swedish_ci;","522")){
+                _iterador=false; return false; } break;
+        case 522:
+            if(!impactoCambioEnBD("ALTER TABLE LimiteSaldoCuentaCorriente ADD CONSTRAINT fk_LimiteSaldoCuentaCorriente_codigoCliente_tipoCliente FOREIGN KEY (codigoCliente,tipoCliente) REFERENCES Clientes(codigoCliente,tipoCliente);","523")){
+                _iterador=false; return false; } break;
+
+
 
 
 

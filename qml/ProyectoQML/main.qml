@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.53"
+    property string versionKhitomer: "1.17.54"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -329,6 +329,7 @@ Rectangle {
     ///         :Se agrega soporte para email2 en el cliente.
     /// 1.17.52 :Se realiza una modificación sobre el formulario 2181
     /// 1.17.53 :Se agrega boton en facturación para emitir el documento sin imprimir. Se agrega un nuevo parametro en la configuracion llamado PERMITE_BOTON_EMITIR_SIN_IMPRIMIR.
+    /// 1.17.54 :Se agrega soporte para mantener un limite de saldo del cliente cuenta corriente. Esto se hace seteando el limite en el cliente a travez de un boton, y los datos se guardan en la tabla LimiteSaldoCuentaCorriente. Luego se chequea en la factura credito si este valor menos lo que debe es mayor a 0, para conceder un nuevo credito.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

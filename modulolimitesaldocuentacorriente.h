@@ -67,6 +67,8 @@ public:
     Q_INVOKABLE void buscar(QString _codigoCliente, QString _tipoCliente);
 
     Q_INVOKABLE QVariantMap get(int row) const;
+    Q_INVOKABLE int insertar(QString _codigoCliente, QString _tipoCliente, QString _codigoMoneda, QString _limiteSaldo) const;
+
 
 
 private:

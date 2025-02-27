@@ -24,6 +24,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <QtSql>
 #include <QSqlQuery>
 #include <Utilidades/database.h>
+#include <QDebug>
 
 
 
@@ -101,6 +102,40 @@ void ModuloLimiteSaldoCuentaCorriente::buscar(QString _codigoCliente, QString _t
     }
 }
 
+
+int ModuloLimiteSaldoCuentaCorriente::insertar(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda, QString _limiteSaldo) const {
+
+    // -1  Error de conexiòn a la base de datos.
+    // 1  Saldo actualizado
+    // -3  Error al acualizar el saldo
+
+
+
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("REPLACE INTO LimiteSaldoCuentaCorriente (codigoCliente,tipoCliente,codigoMoneda,limiteSaldo) values('"+_codigoCliente+"','"+_tipoCliente+"','"+_codigoMoneda+"','"+_limiteSaldo+"' )")){
+            return 1;
+        }else{
+            qDebug() << query.lastQuery();
+            return -3;
+        }
+    }else{
+        return -1;
+    }
+}
+
+
+
 int ModuloLimiteSaldoCuentaCorriente::rowCount(const QModelIndex & parent) const {
     return m_LimiteSaldoCuentaCorriente.count();
 }
@@ -129,6 +164,7 @@ QVariant ModuloLimiteSaldoCuentaCorriente::data(const QModelIndex & index, int r
 
     return QVariant();
 }
+
 
 QVariantMap ModuloLimiteSaldoCuentaCorriente::get(int row) const {
     QVariantMap result;

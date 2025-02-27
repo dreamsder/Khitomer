@@ -1643,8 +1643,19 @@ Rectangle {
         textoBotonGuardar:  "Guardar Saldo"
 
         onClicGuardar: {
-            for(var i=0; i<modeloListaMonedaSaldosDelegateVirtual.count ;i++){
-                    console.log(modeloListaMonedaSaldosDelegateVirtual.get(i).limiteSaldo)
+            var estadoActualizacion=true
+            for(var i=0; i<modeloListaMonedaSaldosDelegateVirtual.count ;i++){                    
+                    var nuevoSaldo=modeloListaMonedaSaldosDelegateVirtual.get(i).limiteSaldo
+                    if(modeloLimiteSaldoCuentaCorriente.insertar(txtCodigoCliente.textoInputBox.trim(),txtTipoCliente.codigoValorSeleccion.trim(),modeloListaMonedaSaldosDelegateVirtual.get(i).codigoMoneda,nuevoSaldo)!==1){
+                        estadoActualizacion=false
+                        break;
+
+                    }
+            }
+            if(estadoActualizacion){
+                funcionesmysql.mensajeAdvertenciaOk("Saldo actualizado correctamente")
+            }else{
+                funcionesmysql.mensajeAdvertencia("ERROR: Hubo un error al querer actualizar los saldos, verifique con su proveedor de software.")
             }
         }
 
