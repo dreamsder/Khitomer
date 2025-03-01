@@ -346,7 +346,7 @@ public:
 
     Q_INVOKABLE bool retornaPermiteModificacionMedioPagoPorDeudaContado(QString ,QString,QString ) const;
 
-
+    Q_INVOKABLE bool esUnTipoDeDocumentoCreditoVenta(QString _codigoTipoDocumento) const;
 
 
 

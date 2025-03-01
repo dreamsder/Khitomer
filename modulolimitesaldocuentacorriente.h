@@ -69,7 +69,7 @@ public:
     Q_INVOKABLE QVariantMap get(int row) const;
     Q_INVOKABLE int insertar(QString _codigoCliente, QString _tipoCliente, QString _codigoMoneda, QString _limiteSaldo) const;
 
-
+    Q_INVOKABLE QString retornarSaldo(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda) const ;
 
 private:
     QList<LimiteSaldoCuentaCorriente> m_LimiteSaldoCuentaCorriente;

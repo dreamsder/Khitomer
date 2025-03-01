@@ -207,6 +207,23 @@ Rectangle {
 
 
 
+    function cargarSaldoClienteCuentaCorrienta(){
+        if(modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaControlDeSaldos") && lblRazonSocialCliente.text.trim()!="" && modeloListaTipoDocumentosComboBox.esUnTipoDeDocumentoCreditoVenta(cbListatipoDocumentos.codigoValorSeleccion.trim())){
+            if(txtCodigoClienteFacturacion.textoInputBox.trim()!=="" && txtTipoClienteFacturacion.codigoValorSeleccion.trim()!=="-1" && lblRazonSocialCliente.text.trim()!==""){
+                var valorSaldoActual=parseFloat(modeloLimiteSaldoCuentaCorriente.retornarSaldo(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),cbListaMonedasEnFacturacion.codigoValorSeleccion.trim()))
+
+                lblSaldoClienteActual.text= valorSaldoActual.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
+
+                if(valorSaldoActual<=0){
+
+                    setearEstadoActivoBotonesGuardar(false)
+                    funcionesmysql.mensajeAdvertenciaOk("El saldo disponible para compras está agotado o supera el maximo configurado.\nNo se podrán realizar nuevas facturas credito al cliente/proveedor.")
+                }
+            }
+        }
+    }
+
+
     // funcion que calcula el descuento que tienen el cliente, para un articulo dado
     function calcularDescuentoPorCliente(valorArticuloACalcular){
         var nuevoValorArticulo=valorArticuloACalcular;
@@ -899,8 +916,14 @@ Rectangle {
 
 
     function setearEstadoActivoBotonesGuardar(activos){
+
         botonGuardarFacturaEmitir.visible=activos
         botonGuardarFacturaPendiente.visible=activos
+        if(modeloconfiguracion.retornaValorConfiguracionValorString("PERMITE_BOTON_EMITIR_SIN_IMPRIMIR")==="1"){
+            botonGuardarFacturaEmitir_SinImprimir.visible=activos
+        }
+
+
     }
 
 
@@ -1530,6 +1553,7 @@ Rectangle {
                     }
                 }
             }
+            cargarSaldoClienteCuentaCorrienta()
 
 
 
@@ -3329,7 +3353,8 @@ Rectangle {
             anchors.topMargin: 8
             anchors.rightMargin: 10
             z: 21
-            anchors.right: parent.right
+            anchors.right: rectBloqueSaldoClienteCuentacorriente.left
+
             anchors.leftMargin: 10
             anchors.left: parent.left
 
@@ -3390,6 +3415,7 @@ Rectangle {
                     modeloListaTipoDocumentosConDeudaVirtual.clear()
                     cbListaDocumentosCuentaCorrienteConDeuda.cerrarComboBox()
 
+
                 }
 
                 botonNuevoVisible: {
@@ -3442,6 +3468,7 @@ Rectangle {
                     }else{
                         lblRazonSocialCliente.text="Facturar a: "+datosDeCliente
                         cargarDocumentosConDeuda()
+                        cargarSaldoClienteCuentaCorrienta()
                         txtTipoClienteFacturacion.activo(false)
                     }
                 }
@@ -3469,6 +3496,7 @@ Rectangle {
                     }else{
                         lblRazonSocialCliente.text="Facturar a: "+datosDeCliente
                         cargarDocumentosConDeuda()
+
                         txtTipoClienteFacturacion.activo(false)
 
                         if(txtSerieFacturacion.visible){
@@ -3502,10 +3530,12 @@ Rectangle {
 
                                     }else{
                                         setearEstadoActivoBotonesGuardar(true)
+
                                     }
                                 }
                             }
                         }
+                        cargarSaldoClienteCuentaCorrienta()
                         if(modeloconfiguracion.retornaValorConfiguracionValorString("MODO_DESCUENTO_CLIENTE_DIRECTO")==="2"){
                             var  descuentoDelCliente=parseFloat(modeloClientes.retornaDatoGenericoCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),"porcentajeDescuento").replace("%","0"))
                             etiquetaTotal.setearPorcenjeDescuento(descuentoDelCliente)
@@ -3577,6 +3607,107 @@ Rectangle {
                     verticalAlignment: Text.AlignVCenter
                 }
             }
+
+
+        }
+
+        Rectangle{
+            id:rectBloqueSaldoClienteCuentacorriente
+            anchors.top: parent.top
+            anchors.topMargin: 8
+            width: {
+                if(visible){
+                    250
+                }else{
+                    0
+                }
+            }
+
+            height: {
+                if(visible){
+                    50
+                }else{
+                    0
+                }
+            }
+
+            color:{
+
+                if(parseFloat(lblSaldoClienteActual.text.trim())>0){
+                    "#316B83"
+                }else{
+                    "#D3504A"
+                }
+
+            }
+
+            radius: 5
+            smooth: true
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            visible: {
+                if(modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaControlDeSaldos") && lblRazonSocialCliente.text.trim()!="" && modeloListaTipoDocumentosComboBox.esUnTipoDeDocumentoCreditoVenta(cbListatipoDocumentos.codigoValorSeleccion.trim())){
+                    true
+                }else{
+                    false
+                }
+
+            }
+            Column{
+                anchors.fill: parent
+                Row{
+                    anchors.fill: parent
+                    spacing: 30
+                    anchors.margins: 10
+                    BotonBarraDeHerramientas{
+                        toolTip: "Recargar saldo"
+                        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Update.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        z:5
+                        onClic: {
+                            cargarSaldoClienteCuentaCorrienta()
+                        }
+                    }
+
+                    Text {
+                        id: lblSaldoClienteActual
+                        text: qsTr("0.00")
+                        color: "#FFFFFF"
+                        font.bold: true
+                        style: Text.Sunken
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: sizeTagsInferiores
+                    }
+                    BotonBarraDeHerramientas{
+                        toolTip: "Autorizar venta"
+                        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Acceso.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        z:5
+                        visible: {
+
+                            if(parseFloat(lblSaldoClienteActual.text.trim())>0){
+                                false
+                            }else{
+                                true
+                            }
+                        }
+
+                        toolTipIzquierda:true
+                        onClic: {
+                            if(modeloconfiguracion.retornaValorConfiguracion("MODO_AUTORIZACION")=="1"){
+                                cuadroAutorizacionCompraClienteSinSaldo.evaluarPermisos("permiteAutorizarModificacionSaldoCliente")
+                            }else{
+                                cuadroAutorizacionCompraClienteSinSaldo.noSeRequierenAutorizaciones("permiteAutorizarModificacionSaldoCliente")
+                            }
+
+
+                        }
+                    }
+                }
+
+            }
+
+
 
 
         }
@@ -6630,6 +6761,7 @@ Rectangle {
                     if(cbListaDocumentosCuentaCorrienteConDeuda.visible && txtCodigoClienteFacturacion.textoInputBox.trim()!="" && lblRazonSocialCliente.text.trim()!=""){
                         cargarDocumentosConDeuda()
                     }
+                    cargarSaldoClienteCuentaCorrienta()
 
 
 
@@ -9622,6 +9754,22 @@ Rectangle {
         }
     }
 
+    CuadroAutorizaciones{
+        id:cuadroAutorizacionCompraClienteSinSaldo
+        color: "#be231919"
+        z: 9
+        anchors.fill: parent
+        onConfirmacion: {
+
+            if(permisosAEvaluar=="permiteAutorizarModificacionSaldoCliente"){
+
+              setearEstadoActivoBotonesGuardar(true)
+
+
+            }
+        }
+
+    }
 
 
 }

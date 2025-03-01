@@ -37,6 +37,7 @@ Item {
 
     property alias source: imagenIcono.source
     property alias toolTip: toolTipText.text
+    property bool toolTipIzquierda: false
 
 
     Image {
@@ -160,7 +161,13 @@ Item {
            repeat: false;
            onTriggered: {
                if(toolTipText.text!=""){
-                   rectToolTipTextBarraHerramientas.x=itemBotonBarraHerramientas.width+10
+                   if(toolTipIzquierda){
+                       rectToolTipTextBarraHerramientas.x=itemBotonBarraHerramientas.width-100
+                   }else{
+                        rectToolTipTextBarraHerramientas.x=itemBotonBarraHerramientas.width+10
+                   }
+
+
                    rectToolTipTextBarraHerramientas.y=itemBotonBarraHerramientas.height/4
                    rectToolTipTextBarraHerramientas.visible=true
                }

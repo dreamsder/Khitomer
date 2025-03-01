@@ -135,6 +135,41 @@ int ModuloLimiteSaldoCuentaCorriente::insertar(QString _codigoCliente,QString _t
 }
 
 
+QString ModuloLimiteSaldoCuentaCorriente::retornarSaldo(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select case when LSCC.limiteSaldo is null then 0 else LSCC.limiteSaldo end - sum(case when TDOC.afectaCuentaCorriente=1 then ROUND(DOC.precioTotalVenta,2) else ROUND(DOC.precioTotalVenta*-1,2) end) from Documentos DOC  join TipoDocumento TDOC on TDOC.codigoTipoDocumento=DOC.codigoTipoDocumento  left join LimiteSaldoCuentaCorriente LSCC on LSCC.codigoCliente=DOC.codigoCliente and LSCC.tipoCliente=DOC.tipoCliente and LSCC.codigoMoneda=DOC.codigoMonedaDocumento                         where   DOC.tipoCliente='"+_tipoCliente+"' and  DOC.codigoEstadoDocumento in ('E','G') and  TDOC.afectaCuentaCorriente!=0 and   DOC.codigoCliente='"+_codigoCliente+"'   and DOC.codigoMonedaDocumento='"+_codigoMoneda+"' ;")) {
+
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+
+                    return query.value(0).toString();
+
+                }else{
+                    return "0";
+                }
+            }else{return "0";}
+
+
+        }else{
+            return "0";
+        }
+    }else{return "0";}
+
+
+}
+
+
+
 
 int ModuloLimiteSaldoCuentaCorriente::rowCount(const QModelIndex & parent) const {
     return m_LimiteSaldoCuentaCorriente.count();

@@ -82,6 +82,7 @@ Rectangle{
                     lblRazonSocialCliente.text="Facturar a: "+datosDeCliente
                     cargarDocumentosConDeuda()
 
+
                     txtTipoClienteFacturacion.codigoValorSeleccion=tipoCliente
                     txtTipoClienteFacturacion.textoComboBox=modeloTipoClientes.primerRegistroDeTipoClienteEnBase(tipoCliente)
                     txtTipoClienteFacturacion.activo(false)
@@ -101,10 +102,12 @@ Rectangle{
 
                                 }else{
                                     setearEstadoActivoBotonesGuardar(true)
+
                                 }
                             }
                         }
                     }
+                    cargarSaldoClienteCuentaCorrienta()
 
 
 
