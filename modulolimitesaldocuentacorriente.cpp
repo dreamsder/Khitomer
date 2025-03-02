@@ -167,6 +167,38 @@ QString ModuloLimiteSaldoCuentaCorriente::retornarSaldo(QString _codigoCliente,Q
 
 
 }
+bool ModuloLimiteSaldoCuentaCorriente::tieneSaldoConfigurado(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda) const {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("select LSCC.codigoCliente from LimiteSaldoCuentaCorriente LSCC  where LSCC.codigoCliente='"+_codigoCliente+"'   and LSCC.tipoCliente='"+_tipoCliente+"' and     LSCC.codigoMoneda='"+_codigoMoneda+"' ;")) {
+            if(query.first()){
+                if(query.value(0).toString()!=""){
+
+                    return true;
+
+                }else{
+                    return false;
+                }
+            }else{return false;}
+
+
+        }else{
+            return false;
+        }
+    }else{return false;}
+
+
+}
+
 
 
 

@@ -98,10 +98,12 @@ Rectangle{
                                 if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
 
                                     setearEstadoActivoBotonesGuardar(false)
+                                    _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                                     funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni guardarlo.")
 
                                 }else{
                                     setearEstadoActivoBotonesGuardar(true)
+                                    _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=true;
 
                                 }
                             }

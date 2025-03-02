@@ -71,6 +71,7 @@ public:
 
     Q_INVOKABLE QString retornarSaldo(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda) const ;
 
+    Q_INVOKABLE bool tieneSaldoConfigurado(QString _codigoCliente,QString _tipoCliente,QString _codigoMoneda) const;
 private:
     QList<LimiteSaldoCuentaCorriente> m_LimiteSaldoCuentaCorriente;
 };

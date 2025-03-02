@@ -85,6 +85,8 @@ Rectangle {
     property double montoArticuloCargado: 0.00
 
 
+    property bool _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado: true
+
 
     // Instancia para la carga de compras por medio de archivos CSV
     CsvReader {
@@ -208,16 +210,25 @@ Rectangle {
 
 
     function cargarSaldoClienteCuentaCorrienta(){
+        var valorDefault=0.00
+        lblSaldoClienteActual.text=valorDefault.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
         if(modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaControlDeSaldos") && lblRazonSocialCliente.text.trim()!="" && modeloListaTipoDocumentosComboBox.esUnTipoDeDocumentoCreditoVenta(cbListatipoDocumentos.codigoValorSeleccion.trim())){
             if(txtCodigoClienteFacturacion.textoInputBox.trim()!=="" && txtTipoClienteFacturacion.codigoValorSeleccion.trim()!=="-1" && lblRazonSocialCliente.text.trim()!==""){
-                var valorSaldoActual=parseFloat(modeloLimiteSaldoCuentaCorriente.retornarSaldo(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),cbListaMonedasEnFacturacion.codigoValorSeleccion.trim()))
+                if(modeloLimiteSaldoCuentaCorriente.tieneSaldoConfigurado(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),cbListaMonedasEnFacturacion.codigoValorSeleccion.trim())){
+                    var valorSaldoActual=parseFloat(modeloLimiteSaldoCuentaCorriente.retornarSaldo(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),cbListaMonedasEnFacturacion.codigoValorSeleccion.trim()))
+                    rectBloqueSaldoClienteCuentacorriente.enabled=true
+                    lblSaldoClienteActual.text= valorSaldoActual.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
 
-                lblSaldoClienteActual.text= valorSaldoActual.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
+                    if(valorSaldoActual<=0){
 
-                if(valorSaldoActual<=0){
-
-                    setearEstadoActivoBotonesGuardar(false)
-                    funcionesmysql.mensajeAdvertenciaOk("El saldo disponible para compras está agotado o supera el maximo configurado.\nNo se podrán realizar nuevas facturas credito al cliente/proveedor.")
+                        setearEstadoActivoBotonesGuardar(false)
+                        funcionesmysql.mensajeAdvertenciaOk("El saldo disponible para compras está agotado o supera el maximo configurado.\nNo se podrán realizar nuevas facturas credito al cliente/proveedor.")
+                    }
+                    if(!_UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado){
+                        rectBloqueSaldoClienteCuentacorriente.enabled=false
+                    }
+                }else{
+                    rectBloqueSaldoClienteCuentacorriente.enabled=false
                 }
             }
         }
@@ -298,6 +309,7 @@ Rectangle {
                 if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
                     if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
                         resultadoInsertDocumento=-12
+                        _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                     }
                 }
             }
@@ -923,7 +935,6 @@ Rectangle {
             botonGuardarFacturaEmitir_SinImprimir.visible=activos
         }
 
-
     }
 
 
@@ -933,6 +944,7 @@ Rectangle {
                 if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
                     if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
                         setearEstadoActivoBotonesGuardar(false)
+                        _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                     }
                 }
             }
@@ -946,7 +958,7 @@ Rectangle {
 
         setearEstadoActivoBotonesGuardar(true)
 
-
+        rectBloqueSaldoClienteCuentacorriente.enabled=true
         cbListaFormasDePago.textoComboBox=""
         cbListaFormasDePago.codigoValorSeleccion=""
 
@@ -1450,7 +1462,7 @@ Rectangle {
 
         if(estadoDocumento=="P"){
 
-
+            rectBloqueSaldoClienteCuentacorriente.enabled=true
             cbListatipoDocumentos.activo(false)
 
             if(indicadorDeNuevoDocumento==""){
@@ -1547,6 +1559,7 @@ Rectangle {
                         if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
 
                             setearEstadoActivoBotonesGuardar(false)
+                            _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                             funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni volver a guardarlo.")
 
                         }
@@ -1558,7 +1571,7 @@ Rectangle {
 
 
         }else  if(estadoDocumento=="E" || estadoDocumento=="G"){
-
+            rectBloqueSaldoClienteCuentacorriente.enabled=false
             var atributoDeudaContadoPermiteModificar=modeloListaTipoDocumentosComboBox.retornaPermiteModificacionMedioPagoPorDeudaContado(tipoDocumento,numeroFactura,serieDocumento)
 
             lblNumeroDocumentoyCFE.text="#"+numeroFactura+"("+serieDocumento+")";
@@ -1671,7 +1684,7 @@ Rectangle {
             cbListaDocumentosCuentaCorrienteConDeuda.cerrarComboBox()
             cbListaDocumentosCuentaCorrienteConDeuda.visible=false
 
-
+            rectBloqueSaldoClienteCuentacorriente.enabled=false
             btnAgregarNuevoMedioDePago.enabled=false
             txtMontoMedioDePago.enable=false
             txtCuotasMedioDePago.enable=false
@@ -3281,12 +3294,17 @@ Rectangle {
                             if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
 
                                 setearEstadoActivoBotonesGuardar(false)
+                                _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                                 funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni guardarlo.")
 
                             }
                         }
                     }
                 }
+
+                cargarSaldoClienteCuentaCorrienta()
+
+
 
 
 
@@ -3488,7 +3506,6 @@ Rectangle {
                 onEnter: {
                     lblRazonSocialCliente.text=""
 
-
                     var datosDeCliente=modeloClientes.retornaDescripcionDeCliente(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion);
                     if(datosDeCliente==""){
                         txtTipoClienteFacturacion.activo(true)
@@ -3526,11 +3543,12 @@ Rectangle {
                                     if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
 
                                         setearEstadoActivoBotonesGuardar(false)
+                                        _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                                         funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni guardarlo.")
 
                                     }else{
                                         setearEstadoActivoBotonesGuardar(true)
-
+                                        _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=true;
                                     }
                                 }
                             }
@@ -3664,6 +3682,7 @@ Rectangle {
                         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Update.png"
                         anchors.verticalCenter: parent.verticalCenter
                         z:5
+                        visible: rectBloqueSaldoClienteCuentacorriente.enabled
                         onClic: {
                             cargarSaldoClienteCuentaCorrienta()
                         }
@@ -3679,16 +3698,23 @@ Rectangle {
                         font.pixelSize: sizeTagsInferiores
                     }
                     BotonBarraDeHerramientas{
+
                         toolTip: "Autorizar venta"
                         source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Acceso.png"
                         anchors.verticalCenter: parent.verticalCenter
                         z:5
                         visible: {
 
-                            if(parseFloat(lblSaldoClienteActual.text.trim())>0){
+                            if(parseFloat(lblSaldoClienteActual.text.trim())>0 && rectBloqueSaldoClienteCuentacorriente.enabled){
                                 false
                             }else{
-                                true
+                                if(rectBloqueSaldoClienteCuentacorriente.enabled){
+                                    true
+                                }else{
+                                    false
+                                }
+
+
                             }
                         }
 
@@ -6966,6 +6992,7 @@ Rectangle {
                             if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
                                 if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
                                     resultadoInsertDocumento=-12
+                                    _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                                 }
                             }
                         }
@@ -7569,6 +7596,7 @@ Rectangle {
                             if(modeloListaTipoDocumentosComboBox.retornaValorCampoTipoDocumento(cbListatipoDocumentos.codigoValorSeleccion,"afectaCuentaCorriente")!="0"){
                                 if(modeloClientes.retornaSiPermiteFacturaCredito(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion)==false){
                                     resultadoInsertDocumento=-12
+                                    _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado=false;
                                 }
                             }
                         }
