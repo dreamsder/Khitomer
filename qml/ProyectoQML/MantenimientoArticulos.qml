@@ -76,7 +76,7 @@ Rectangle {
                 largoMaximo: 30
                 botonBuscarTextoVisible: true
                 botonBorrarTextoVisible: true
-                textoTitulo: "Código interno:"
+                textoTitulo: "SKU:"
                 textoInputBox: ""
                 onClicEnBusqueda: {
 

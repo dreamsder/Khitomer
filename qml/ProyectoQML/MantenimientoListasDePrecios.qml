@@ -1314,13 +1314,13 @@ Rectangle {
                     colorDeTitulo: "white"
                     botonBuscarTextoVisible: true
                     botonBorrarTextoVisible: true
-                    textoTitulo: "Codigo:"
+                    textoTitulo: "SKU:"
                     z: 1
                     visible: true
 
                     onClicEnBusqueda: {
                         modeloArticulosOpcionesExtra.clearArticulos()
-                        modeloArticulosOpcionesExtra.buscarArticulo(" AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtras.textoInputBox,0)
+                        modeloArticulosOpcionesExtra.buscarArticulo(" AR.codigoArticulo =",txtCodigoArticuloOpcionesExtras.textoInputBox,0)
                     }
                     onEnter: {
                         txtDescripcionArticuloOpcionesExtras.tomarElFoco()

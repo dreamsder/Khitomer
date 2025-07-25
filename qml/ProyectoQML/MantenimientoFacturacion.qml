@@ -1138,7 +1138,7 @@ Rectangle {
     ///// Carga la factura pendiente o en otro estado a la que se le da dobe clic en las liquidaciones/caja
     ///// Lista: ListaDocumentosEnLiquidaciones.qml
     function cargarFactura(numeroFactura, tipoDocumento, estadoDocumento,tipoCliente,codigoCliente,serieDocumento, codigoVendedorComision,codigoLiquidacion, codigoVendedorLiquidacion,fechaPrecio,fechaEmision,monedaDocumento,precioIvaVenta,precioSubTotalVenta,precioTotalVenta,totalIva1,totalIva2,totalIva3,observacion,numeroCuentaBancaria,codigoBanco,montoDescuentoTotal,formaDePago,porcentajeDescuentoAlTotal,indicadorDeNuevoDocumento,tipoDocumentoDevolucion,comentarios){
-
+        lblRazonSocialCliente.text=""
         cuadroListaDocumentosNuevo.visible=false;
         lblNumeroDocumentoyCFE.text=""
 
@@ -1802,7 +1802,7 @@ Rectangle {
     ///// Crea una nueva factura, borrando todos los datos, y restaurando los controles
     function crearNuevaFactura(){
 
-
+        lblRazonSocialCliente.text=""
         setearEstadoActivoBotonesGuardar(true)
 
 
@@ -1878,7 +1878,7 @@ Rectangle {
             txtTipoClienteFacturacion.codigoValorSeleccion=1
             txtTipoClienteFacturacion.textoComboBox=modeloTipoClientes.primerRegistroDeTipoClienteEnBase(txtTipoClienteFacturacion.codigoValorSeleccion)
         }
-        lblRazonSocialCliente.text=""
+
         txtNumeroDocumentoFacturacion.textoInputBox=""
         txtSerieFacturacion.textoInputBox=""
         txtVendedorDeFactura.cerrarComboBox()
@@ -2312,7 +2312,7 @@ Rectangle {
                         id: lbltemCodigoArticuloFacturacion
                         width: 70
                         color: "#ffffff"
-                        text: "Código"
+                        text: "SKU"
                         font.family: "Arial"
                         style: Text.Normal
                         horizontalAlignment: Text.AlignHCenter
@@ -8776,7 +8776,7 @@ Rectangle {
                     botonBuscarTextoVisible: true
                     largoMaximo: 30
                     botonBorrarTextoVisible: true
-                    textoTitulo: "Código:"
+                    textoTitulo: "SKU:"
                     z: 1
                     colorDeTitulo: "#ffffff"
                     onClicEnBusqueda: {
@@ -8787,7 +8787,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo =",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -8800,7 +8800,7 @@ Rectangle {
 
                             txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox=valorArticuloInterno
                             modeloArticulosOpcionesExtraFacturacion.clearArticulos()
-                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo rlike",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
+                            modeloArticulosOpcionesExtraFacturacion.buscarArticuloStockOnline("AR.codigoArticulo =",txtCodigoArticuloOpcionesExtrasFacturacion.textoInputBox,1)
 
                         }
 
@@ -9134,7 +9134,7 @@ Rectangle {
                     botonBuscarTextoVisible: false
                     largoMaximo: 6
                     botonBorrarTextoVisible: false
-                    textoTitulo: "Código artículo:"
+                    textoTitulo: "SKU:"
                     z: 1
                     colorDeTitulo: "#ffffff"
                 }

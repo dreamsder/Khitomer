@@ -408,6 +408,36 @@ Rectangle {
 
                     listaDeDocumentosFiltrados.currentIndex=0
                 }
+                onEnter:txtComentariosEnDocumento.tomarElFoco()
+                onTabulacion: txtComentariosEnDocumento.tomarElFoco()
+
+            }
+
+            TextInputSimple {
+                id: txtComentariosEnDocumento
+                // width: 370
+                enFocoSeleccionarTodo: true
+                textoInputBox: ""
+                botonBuscarTextoVisible: true
+                largoMaximo: 80
+                textoTitulo: "Comentarios:"
+
+                onClicEnBusqueda: {
+                    modeloDocumentosMantenimiento.limpiarListaDocumentos()
+
+
+                    if(mODO_DOCUMENTOS_VISIBLES){
+                        if(visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES){
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.comentarios rlike ",txtComentariosEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
+                        }else{
+                            modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.comentarios rlike ",txtComentariosEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"1")
+                        }
+                    }else{
+                        modeloDocumentosMantenimiento.buscarDocumentosEnMantenimiento("D.comentarios rlike ",txtComentariosEnDocumento.textoInputBox.trim(),modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"-1")
+                    }
+
+                    listaDeDocumentosFiltrados.currentIndex=0
+                }
                 onEnter:txtNumeroDocumento.tomarElFoco()
                 onTabulacion: txtNumeroDocumento.tomarElFoco()
 
@@ -963,6 +993,11 @@ Rectangle {
                 if(txtObservacionesEnDocumento.textoInputBox.trim()!=""){
                     consultaSql+="D.observaciones rlike '"+txtObservacionesEnDocumento.textoInputBox.trim()+"' and "
                 }
+                if(txtComentariosEnDocumento.textoInputBox.trim()!=""){
+                    consultaSql+="D.comentarios rlike '"+txtComentariosEnDocumento.textoInputBox.trim()+"' and "
+                }
+
+
                 if(txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()!="" && txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()!="-1"){
                     consultaSql+="D.codigoVendedorLiquidacion = '"+txtVendedorLiquidacionDelDocumento.codigoValorSeleccion.trim()+"' and "
                 }
