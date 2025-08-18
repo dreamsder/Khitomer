@@ -29,7 +29,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class Usuarios
 {
 public:
-   Q_INVOKABLE Usuarios(const QString &idUsuario,const QString &nombreUsuario,const QString &apellidoUsuario,const int &tipoUsuario, const QString &esVendedor,const int &codigoPerfil);
+   Q_INVOKABLE Usuarios(const QString &idUsuario, const QString &nombreUsuario, const QString &apellidoUsuario, const int &tipoUsuario, const QString &esVendedor, const int &codigoPerfil, const QString &email);
 
     QString idUsuario() const;
     QString nombreUsuario() const;
@@ -37,6 +37,7 @@ public:
     int tipoUsuario() const;
     QString esVendedor() const;
     int codigoPerfil() const;
+    QString email() const;
 
 private:
     QString m_idUsuario;
@@ -45,6 +46,7 @@ private:
     int m_tipoUsuario;
     QString m_esVendedor;
     int m_codigoPerfil;
+    QString m_email;
 
 };
 
@@ -61,7 +63,8 @@ public:
         ApellidoUsuarioRole,
         TipoUsuarioRole,
         EsVendedorRole,
-        CodigoPerfilRole
+        CodigoPerfilRole,
+        emailRole
 
     };
 
@@ -81,7 +84,7 @@ public:
 
     Q_INVOKABLE bool eliminarUsuario(QString) const;
 
-    Q_INVOKABLE int insertarUsuario(QString , QString,QString , QString,QString , QString) const;
+    Q_INVOKABLE int insertarUsuario(QString , QString, QString , QString, QString , QString, QString email) const;
 
     Q_INVOKABLE QString retornaVendedorSiEstaLogueado(QString) const;
 

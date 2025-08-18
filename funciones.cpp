@@ -2344,7 +2344,9 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 522:
             if(!impactoCambioEnBD("ALTER TABLE LimiteSaldoCuentaCorriente ADD CONSTRAINT fk_LimiteSaldoCuentaCorriente_codigoCliente_tipoCliente FOREIGN KEY (codigoCliente,tipoCliente) REFERENCES Clientes(codigoCliente,tipoCliente);","523")){
                 _iterador=false; return false; } break;
-
+        case 523:
+            if(!impactoCambioEnBD("ALTER TABLE `Usuarios` ADD COLUMN `email` varchar(100) NOT NULL DEFAULT '' AFTER `codigoEntorno`;","524")){
+                _iterador=false; return false; } break;
 
 
 

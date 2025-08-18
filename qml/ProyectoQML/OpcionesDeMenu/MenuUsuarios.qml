@@ -164,9 +164,28 @@ Rectangle {
             textoTitulo: "Reingresar contraseña:"
             colorDeTitulo: "#333333"
 
+            onEnter: txtEmail.tomarElFoco()
+
+            onTabulacion: txtEmail.tomarElFoco()
+        }
+
+
+
+        TextInputSimple {
+            id: txtEmail
+          //  width: 150
+            colorDeTitulo: "#333333"
+            enFocoSeleccionarTodo: true
+            textoInputBox: ""
+            botonBuscarTextoVisible: false
+            largoMaximo: 25
+            botonBorrarTextoVisible: true
+            textoTitulo: "Email:"
+
             onEnter: txtIdUsuario.tomarElFoco()
 
             onTabulacion: txtIdUsuario.tomarElFoco()
+
         }
 
         CheckBox {
@@ -206,8 +225,10 @@ Rectangle {
                 comboboxlistaperfiles1.codigoValorSeleccion=""
                 txtContraseniaDeUsuario.textoInputBox=""
                 txtReingresarContraseniaDeUsuario.textoInputBox=""
+                txtEmail.textoInputBox=""
                 cbEsVendedor.setActivo(true)
                 txtIdUsuario.tomarElFoco()
+
 
             }
         }
@@ -234,7 +255,7 @@ Rectangle {
                     if(cbEsVendedor.chekActivo)
                         esVendedor=1
 
-                    var resultadoConsulta = modeloListaUsuarios.insertarUsuario(txtIdUsuario.textoInputBox,txtNombreUsuario.textoInputBox,txtApellidoUsuario.textoInputBox,esVendedor,comboboxlistaperfiles1.codigoValorSeleccion,txtContraseniaDeUsuario.textoInputBox.trim())
+                    var resultadoConsulta = modeloListaUsuarios.insertarUsuario(txtIdUsuario.textoInputBox,txtNombreUsuario.textoInputBox,txtApellidoUsuario.textoInputBox,esVendedor,comboboxlistaperfiles1.codigoValorSeleccion,txtContraseniaDeUsuario.textoInputBox.trim(),txtEmail.textoInputBox.trim())
 
 
                     if(resultadoConsulta==1){
@@ -249,6 +270,7 @@ Rectangle {
                         comboboxlistaperfiles1.codigoValorSeleccion=""
                         txtContraseniaDeUsuario.textoInputBox=""
                         txtReingresarContraseniaDeUsuario.textoInputBox=""
+                        txtEmail.textoInputBox=""
                         cbEsVendedor.setActivo(true)
                         txtIdUsuario.tomarElFoco()
 
@@ -271,6 +293,7 @@ Rectangle {
                         comboboxlistaperfiles1.codigoValorSeleccion=""
                         txtContraseniaDeUsuario.textoInputBox=""
                         txtReingresarContraseniaDeUsuario.textoInputBox=""
+                        txtEmail.textoInputBox=""
                         cbEsVendedor.setActivo(true)
                         txtIdUsuario.tomarElFoco()
 
@@ -355,6 +378,7 @@ Rectangle {
                     comboboxlistaperfiles1.codigoValorSeleccion=""
                     txtContraseniaDeUsuario.textoInputBox=""
                     txtReingresarContraseniaDeUsuario.textoInputBox=""
+                    txtEmail.textoInputBox=""
                     cbEsVendedor.setActivo(true)
                     txtIdUsuario.tomarElFoco()
 

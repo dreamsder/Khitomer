@@ -82,6 +82,7 @@ Rectangle{
 
             txtContraseniaDeUsuario.textoInputBox=""
             txtReingresarContraseniaDeUsuario.textoInputBox=""
+            txtEmail.textoInputBox=email
 
             if(esVendedor==0){
                 cbEsVendedor.setActivo(false)

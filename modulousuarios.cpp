@@ -39,13 +39,14 @@ ModuloUsuarios::ModuloUsuarios(QObject *parent)
     roles[TipoUsuarioRole] = "tipoUsuario";
     roles[EsVendedorRole] = "esVendedor";
     roles[CodigoPerfilRole] = "codigoPerfil";
+    roles[emailRole] = "email";
     setRoleNames(roles);
 }
 
 
-Usuarios::Usuarios(const QString &idUsuario,const QString &nombreUsuario,const QString &apellidoUsuario,const int &tipoUsuario,const QString &esVendedor,const int &codigoPerfil)
+Usuarios::Usuarios(const QString &idUsuario,const QString &nombreUsuario,const QString &apellidoUsuario,const int &tipoUsuario,const QString &esVendedor,const int &codigoPerfil,const QString &email)
 
-    : m_idUsuario(idUsuario),m_nombreUsuario(nombreUsuario),m_apellidoUsuario(apellidoUsuario),m_tipoUsuario(tipoUsuario),m_esVendedor(esVendedor),m_codigoPerfil(codigoPerfil)
+    : m_idUsuario(idUsuario),m_nombreUsuario(nombreUsuario),m_apellidoUsuario(apellidoUsuario),m_tipoUsuario(tipoUsuario),m_esVendedor(esVendedor),m_codigoPerfil(codigoPerfil),m_email(email)
 {
 
 
@@ -78,7 +79,10 @@ int Usuarios::codigoPerfil() const
 {
     return m_codigoPerfil;
 }
-
+QString Usuarios::email() const
+{
+    return m_email;
+}
 /*void ModuloUsuarios::addUsuarios(const Usuarios &usuarios)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
@@ -111,7 +115,7 @@ void ModuloUsuarios::buscarUsuarios(QString campo, QString datoABuscar){
 
     if(conexion){
 
-        QSqlQuery q = Database::consultaSql("select idUsuario,nombreUsuario,apellidoUsuario,tipoUsuario,esVendedor,codigoPerfil from Usuarios where "+campo+"'"+datoABuscar+"'");
+        QSqlQuery q = Database::consultaSql("select idUsuario,nombreUsuario,apellidoUsuario,tipoUsuario,esVendedor,codigoPerfil,email from Usuarios where "+campo+"'"+datoABuscar+"'");
         QSqlRecord rec = q.record();
 
         ModuloUsuarios::reset();
@@ -122,7 +126,8 @@ void ModuloUsuarios::buscarUsuarios(QString campo, QString datoABuscar){
                                                      q.value(rec.indexOf("apellidoUsuario")).toString(),
                                                      q.value(rec.indexOf("tipoUsuario")).toInt(),
                                                      q.value(rec.indexOf("esVendedor")).toString(),
-                                                     q.value(rec.indexOf("codigoPerfil")).toInt()
+                                                     q.value(rec.indexOf("codigoPerfil")).toInt(),
+                                                     q.value(rec.indexOf("email")).toString()
                                                      ));
 
             }
@@ -164,6 +169,10 @@ QVariant ModuloUsuarios::data(const QModelIndex & index, int role) const {
 
     }else if (role == CodigoPerfilRole){
         return usuarios.codigoPerfil();
+
+    }
+    else if (role == emailRole){
+        return usuarios.email();
 
     }
 
@@ -222,7 +231,7 @@ bool ModuloUsuarios::conexionUsuario(QString usuario, QString password) const {
     }
 }
 
-int ModuloUsuarios::insertarUsuario(QString _idUsuario,QString _nombreUsuario, QString _apellidoUsuario, QString _esVendedor, QString _codigoPerfil, QString _claveUsuario ) const {
+int ModuloUsuarios::insertarUsuario(QString _idUsuario,QString _nombreUsuario, QString _apellidoUsuario, QString _esVendedor, QString _codigoPerfil, QString _claveUsuario,QString email ) const {
 
 
     // -1  No se pudo conectar a la base de datos
@@ -260,7 +269,7 @@ int ModuloUsuarios::insertarUsuario(QString _idUsuario,QString _nombreUsuario, Q
                 if(query.value(0).toString()!=""){
 
                     if(_claveUsuario.trimmed()==""){
-                        if(query.exec("update Usuarios set nombreUsuario='"+_nombreUsuario+"', apellidoUsuario='"+_apellidoUsuario+"',esVendedor='"+_esVendedor+"',codigoPerfil='"+_codigoPerfil+"'  where idUsuario='"+_idUsuario+"'")){
+                        if(query.exec("update Usuarios set nombreUsuario='"+_nombreUsuario+"', apellidoUsuario='"+_apellidoUsuario+"',esVendedor='"+_esVendedor+"',codigoPerfil='"+_codigoPerfil+"',email='"+email+"'  where idUsuario='"+_idUsuario+"'")){
 
 
                             return 2;
@@ -272,7 +281,7 @@ int ModuloUsuarios::insertarUsuario(QString _idUsuario,QString _nombreUsuario, Q
                         }
                     }else{
 
-                        if(query.exec("update Usuarios set nombreUsuario='"+_nombreUsuario+"', apellidoUsuario='"+_apellidoUsuario+"',esVendedor='"+_esVendedor+"',codigoPerfil='"+_codigoPerfil+"', claveUsuario='"+claveValida+"'  where idUsuario='"+_idUsuario+"'")){
+                        if(query.exec("update Usuarios set nombreUsuario='"+_nombreUsuario+"', apellidoUsuario='"+_apellidoUsuario+"',esVendedor='"+_esVendedor+"',codigoPerfil='"+_codigoPerfil+"', claveUsuario='"+claveValida+"', email='"+email+"'  where idUsuario='"+_idUsuario+"'")){
 
                             return 2;
 
@@ -294,7 +303,7 @@ int ModuloUsuarios::insertarUsuario(QString _idUsuario,QString _nombreUsuario, Q
                     return -5;
 
                 }else{
-                    if(query.exec("insert INTO Usuarios (idUsuario,nombreUsuario,apellidoUsuario,esVendedor,codigoPerfil,claveUsuario) values('"+_idUsuario+"','"+_nombreUsuario+"','"+_apellidoUsuario+"','"+_esVendedor+"','"+_codigoPerfil+"','"+claveValida+"')")){
+                    if(query.exec("insert INTO Usuarios (idUsuario,nombreUsuario,apellidoUsuario,esVendedor,codigoPerfil,claveUsuario,email) values('"+_idUsuario+"','"+_nombreUsuario+"','"+_apellidoUsuario+"','"+_esVendedor+"','"+_codigoPerfil+"','"+claveValida+"','"+email+"')")){
 
                         return 1;
                     }else{
