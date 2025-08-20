@@ -178,7 +178,7 @@ Rectangle {
             enFocoSeleccionarTodo: true
             textoInputBox: ""
             botonBuscarTextoVisible: false
-            largoMaximo: 25
+            largoMaximo: 100
             botonBorrarTextoVisible: true
             textoTitulo: "Email:"
 

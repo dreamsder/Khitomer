@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.57"
+    property string versionKhitomer: "1.17.58"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -333,6 +333,7 @@ Rectangle {
     /// 1.17.55 :Se cambian los textos de codigo de articulo a SKU. Se corrige un problema al cargar una factura desde la liquidación cuando el cliente no tiene saldo.
     /// 1.17.56 :Se agrega la posibilidad de buscar un documento por los comentarios.
     /// 1.17.57 :Soporte para agregar email en el usuario del sistema, para poder enviar documentos pendientes u otra funcionalidad a futuro.
+    /// 1.17.58 :Corrección en el largo del mail soportado.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
