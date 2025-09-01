@@ -42,6 +42,7 @@ Rectangle {
 
 
 
+
     property string codigobarrasademandaextendido: "0"
 
 
@@ -86,6 +87,60 @@ Rectangle {
 
 
     property bool _UTILIZA_CONTROL_CLIENTE_CREDITO_Cliente_Habilitado: true
+
+
+    signal articulosCambian()
+
+
+    onArticulosCambian:{
+        var saldoActual=0.00
+        var totalFactura=0.00
+        var totalDescuento=0.00
+        if(modeloControlesMantenimientos.retornaValorMantenimiento("clientesUsaControlDeSaldos")
+                && lblRazonSocialCliente.text.trim()!=""
+                && modeloListaTipoDocumentosComboBox.esUnTipoDeDocumentoCreditoVenta(cbListatipoDocumentos.codigoValorSeleccion.trim())
+                && nuevoDocumento==="NUEVO"
+                ){
+            if(txtCodigoClienteFacturacion.textoInputBox.trim()!=="" && txtTipoClienteFacturacion.codigoValorSeleccion.trim()!=="-1" && lblRazonSocialCliente.text.trim()!==""){
+                if(modeloLimiteSaldoCuentaCorriente.tieneSaldoConfigurado(txtCodigoClienteFacturacion.textoInputBox.trim(),txtTipoClienteFacturacion.codigoValorSeleccion.trim(),cbListaMonedasEnFacturacion.codigoValorSeleccion.trim())){
+                    saldoActual=parseFloat(lblSaldoClienteActual.text)
+
+                    for(var i=0; i<modeloItemsFactura.count;i++){
+                        totalFactura+=parseFloat(modeloItemsFactura.get(i).precioArticuloSubTotal)
+                    }
+                    totalDescuento=parseFloat(etiquetaTotal.retornaTotalDescuento())
+
+                    if(!calcularSiPuedoContinuarFacturandoConSaldo(saldoActual,totalFactura,totalDescuento)){
+                        setearEstadoActivoBotonesGuardar(false)
+                        txtMensajeInformacion.visible=true
+                        txtMensajeInformacionTimer.stop()
+                        txtMensajeInformacionTimer.start()
+                        txtMensajeInformacion.color="#d93e3e"
+                        txtMensajeInformacion.text="ATENCION: El total del documento supera el saldo disponible del cliente"
+                    }else{
+                        setearEstadoActivoBotonesGuardar(true)
+                        txtMensajeInformacion.visible=false
+                    }
+
+                  /*  console.log(saldoActual)
+                    console.log(totalFactura)
+                    console.log(etiquetaTotal.retornaTotalDescuento())
+                    console.log("Nuevo Documento:"+nuevoDocumento)
+*/
+                }
+            }
+        }
+
+    }
+
+    function calcularSiPuedoContinuarFacturandoConSaldo(saldoActual,totalVenta,totalDescuento){
+        if(saldoActual<(totalVenta-totalDescuento)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 
 
     // Instancia para la carga de compras por medio de archivos CSV
@@ -541,7 +596,7 @@ Rectangle {
             funcionesmysql.mensajeAdvertenciaOk("El cliente no esta habilitado para documentos CRÉDITO.\n\n No se podrá emitir el documento ni guardarlo.")
         }
         else{
-            txtMensajeInformacion .visible=true
+            txtMensajeInformacion.visible=true
             txtMensajeInformacionTimer.stop()
             txtMensajeInformacionTimer.start()
             txtMensajeInformacion.color="#d93e3e"
@@ -966,7 +1021,7 @@ Rectangle {
         cbListaDocumentosCuentaCorrienteConDeuda.textoComboBox=""
         modeloComboBoxDocumentosConSaldoCuentaCorriente.limpiarListaDocumentos()
         modeloListaTipoDocumentosConDeudaVirtual.clear()
-
+        txtMensajeInformacion.visible=false
 
         txtTipoClienteFacturacion.cerrarComboBox()
         txtVendedorDeFactura.cerrarComboBox()
@@ -1461,6 +1516,7 @@ Rectangle {
         //#####################################################################
 
         if(estadoDocumento=="P"){
+            nuevoDocumento="NUEVO"
 
             rectBloqueSaldoClienteCuentacorriente.enabled=true
             cbListatipoDocumentos.activo(false)
@@ -2296,6 +2352,13 @@ Rectangle {
                     id:modeloItemsFactura
 
                 }
+                Connections {
+                        target: modeloItemsFactura
+                        //onCountChanged: rectPrincipalMantenimiento.articulosCambian()
+                        onItemsChanged:rectPrincipalMantenimiento.articulosCambian()
+                        onItemsRemoved:rectPrincipalMantenimiento.articulosCambian()
+                }
+
 
                 Rectangle {
                     id: rectTituloListaItemFacturacion

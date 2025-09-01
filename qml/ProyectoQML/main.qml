@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.58"
+    property string versionKhitomer: "1.17.59"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -334,6 +334,7 @@ Rectangle {
     /// 1.17.56 :Se agrega la posibilidad de buscar un documento por los comentarios.
     /// 1.17.57 :Soporte para agregar email en el usuario del sistema, para poder enviar documentos pendientes u otra funcionalidad a futuro.
     /// 1.17.58 :Corrección en el largo del mail soportado.
+    /// 1.17.59 :Se controla el saldo cuando se agregan artículos a la factura.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
