@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.17.59"
+    property string versionKhitomer: "1.18.0"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -335,6 +335,10 @@ Rectangle {
     /// 1.17.57 :Soporte para agregar email en el usuario del sistema, para poder enviar documentos pendientes u otra funcionalidad a futuro.
     /// 1.17.58 :Corrección en el largo del mail soportado.
     /// 1.17.59 :Se controla el saldo cuando se agregan artículos a la factura.
+    /// 1.17.60 :Se modifica el reporta "Ventas entre fecha por procedencia sin ventas web" para que totalice a pedido de Cynthia de DW. Se agregó fecha de creación en DocumentosLineasPagos.
+    /// 1.18.0  :Se agrego soporte para descuentos y recargos a la linea del artículo.
+    ///         :Este cambio es MUY importante, agrega nuevos campos en la tabla DocumentosLineas y la nueva tabla DocumentosLineasAjustes.
+    ///         :Ademas las nueevas tablas de descuentos: Descuentos , DescuentosDiaSemana , DescuentosRangoFecha y DescuentosRangoHora.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
@@ -345,6 +349,13 @@ Rectangle {
     property bool visualizarDocumentosEnmODO_DOCUMENTOS_VISIBLES: false
 
     property int distanciaEntreBotonesBarraDeTareas: modeloconfiguracion.retornaValorConfiguracion("DISTANCIAENTREBOTONESMENU")
+
+
+
+
+
+
+
 
     // setea los permisos de la barra de herramientas del mantenimiento de liquidaciones
     function permisosMantenimientoLiquidaciones(){

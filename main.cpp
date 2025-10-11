@@ -79,9 +79,10 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <modulotipogarantia.h>
 #include <moduloreportesperfilesusuarios.h>
 #include <modulotipodocumentoperfilesusuarios.h>
-
+#include <modulolistadescuentosrecargos.h>
 #include <CFE/modulo_cfe_parametrosgenerales.h>
 
+#include <modulodocumentoslineasajustes.h>
 
 #include <QSqlQuery>
 #include <Utilidades/database.h>
@@ -269,6 +270,12 @@ int main(int argc, char *argv[])
 
     ModuloLimiteSaldoCuentaCorriente moduloLimiteSaldoCuentaCorriente;
 
+
+    ModuloListaDescuentosRecargos moduloListaDescuentosRecargos;
+
+    ModuloListaDescuentosRecargos moduloListaDescuentosRecargosEnReportes;
+
+
     DialogosWidget dialogoQT;
 
 
@@ -277,7 +284,7 @@ int main(int argc, char *argv[])
     Modulo_CFE_ParametrosGenerales modulo_CFE_ParametrosGenerales;
 
 
-
+    ModuloDocumentosLineasAjustes moduloDocumentosLineasAjustes;
 
 
 inicio:
@@ -559,6 +566,10 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloTipoGarantia", &moduloTipoGarantia);
     viewer.rootContext()->setContextProperty("modeloTipoGarantiaMantenimiento", &moduloTipoGarantiaMantenimiento);
 
+    viewer.rootContext()->setContextProperty("modeloListaDescuentosRecargos", &moduloListaDescuentosRecargos);
+
+    viewer.rootContext()->setContextProperty("modeloListaDescuentosRecargosEnReportes", &moduloListaDescuentosRecargosEnReportes);
+
 
 
 
@@ -572,6 +583,7 @@ inicio:
     viewer.rootContext()->setContextProperty("modeloLimiteSaldoCuentaCorriente", &moduloLimiteSaldoCuentaCorriente );
 
 
+    viewer.rootContext()->setContextProperty("modeloDocumentosLineasAjustes", &moduloDocumentosLineasAjustes );
 
 
 
@@ -626,6 +638,8 @@ inicio:
 
 
     //Carga de datos a ComboBox
+
+
 
     modulo_CFE_ParametrosGenerales.cargar();
     moduloTipoGarantia.buscarTipoGarantia("1=","1");

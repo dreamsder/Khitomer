@@ -45,6 +45,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 #include <QThread>
 #include <algorithm>
 #include <json/json.h>
+#include <QUuid>
 
 
 #if linux
@@ -1765,6 +1766,38 @@ QString ModuloDocumentos::retornoCodigoArticuloDeLineaDocumento(QString _codigoD
     }
 }
 
+
+QString ModuloDocumentos::retornoUuidDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
+    bool conexion=true;
+
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+
+    if(conexion){
+
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("SELECT uuid FROM DocumentosLineas where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and numeroLinea='"+_linea+"' and serieDocumento='"+_serieDocumento+"'")) {
+            if(query.first()){
+                if(query.value(0).toString()!=0){
+                    return query.value(0).toString();
+                }else{
+                    return "";
+                }
+            }else{return "";}
+        }else{
+            return "";
+        }
+    }else{
+        return "";
+    }
+}
+
 QString ModuloDocumentos::retornoCantidadDocumentosPorCliente(QString _codigoCliente,QString _codigoTipoCliente, QString _estadoDocumentos) {
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -1908,6 +1941,62 @@ double ModuloDocumentos::retornoDescuentoLineaArticuloDeLineaDocumento(QString _
         QSqlQuery query(Database::connect());
 
         if(query.exec("SELECT montoDescuento FROM DocumentosLineas where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and numeroLinea='"+_linea+"' and serieDocumento='"+_serieDocumento+"'")) {
+            if(query.first()){
+                if(query.value(0).toString()!=0){
+                    return query.value(0).toDouble();
+                }else{
+                    return 0.00;
+                }
+            }else{return 0.00;}
+        }else{
+            return 0.00;
+        }
+    }else{
+        return 0.00;
+    }
+}
+
+double ModuloDocumentos::retornoRecargoLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("SELECT montoRecargo FROM DocumentosLineas where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and numeroLinea='"+_linea+"' and serieDocumento='"+_serieDocumento+"'")) {
+            if(query.first()){
+                if(query.value(0).toString()!=0){
+                    return query.value(0).toDouble();
+                }else{
+                    return 0.00;
+                }
+            }else{return 0.00;}
+        }else{
+            return 0.00;
+        }
+    }else{
+        return 0.00;
+    }
+}
+
+double ModuloDocumentos::retornoDescuentoAlTotalLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) {
+    bool conexion=true;
+    Database::chequeaStatusAccesoMysql();
+    if(!Database::connect().isOpen()){
+        if(!Database::connect().open()){
+            qDebug() << "No conecto";
+            conexion=false;
+        }
+    }
+    if(conexion){
+        QSqlQuery query(Database::connect());
+
+        if(query.exec("SELECT montoDescuentoAlTotal FROM DocumentosLineas where codigoDocumento='"+_codigoDocumento+"' and codigoTipoDocumento='"+_codigoTipoDocumento+"' and numeroLinea='"+_linea+"' and serieDocumento='"+_serieDocumento+"'")) {
             if(query.first()){
                 if(query.value(0).toString()!=0){
                     return query.value(0).toDouble();
@@ -2674,7 +2763,11 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     consultaSql +=" left(trim(DOC.observaciones),30),";      // indice 53
     consultaSql +=" TD.descripcionTipoDocumento,";           // indice 54
     consultaSql +=" CLI.codigoCliente,";                      // indice 55
-    consultaSql +=" MO.simboloMoneda";                        // indice 56
+    consultaSql +=" MO.simboloMoneda,";                        // indice 56
+    consultaSql +=" DL.uuid,";                        // indice 57
+    consultaSql +=" CAST((DL.cantidad*DL.precioArticuloUnitario)   AS DECIMAL(20,3))'totalLineaSinDescuentos', "; // indice 58
+    consultaSql +=" DL.montoDescuentoAlTotal";                     // indice 59
+
 
 
 
@@ -2699,7 +2792,8 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
     consultaDesgloseIVA +="sum(case when sub.tipoDeIva=3 then sub.totalLinea else 0 end)-sub.exento'Exento',";
     consultaDesgloseIVA +="sum(case when sub.tipoDeIva=4 then sub.totalLinea else 0 end)-sub.otro'Otro',";
     consultaDesgloseIVA +="sub.basica, sub.minima, sub.exento, sub.otro ";
-    consultaDesgloseIVA +="from (SELECT CAST((DL.cantidad*DL.precioArticuloUnitario) -  (((DL.cantidad*DL.precioArticuloUnitario)*((DOC.porcentajeDescuentoAlTotal/100)+1))-(DL.cantidad*DL.precioArticuloUnitario))  AS DECIMAL(20,3))'totalLinea', ";
+    //consultaDesgloseIVA +="from (SELECT CAST((DL.cantidad*DL.precioArticuloUnitario) -  (((DL.cantidad*DL.precioArticuloUnitario)*((DOC.porcentajeDescuentoAlTotal/100)+1))-(DL.cantidad*DL.precioArticuloUnitario))  AS DECIMAL(20,3))'totalLinea', ";
+    consultaDesgloseIVA +="from (SELECT CAST((DL.cantidad*DL.precioArticuloUnitario) - (DL.montoDescuento) + (DL.montoRecargo) - (DL.montoDescuentoAlTotal) AS DECIMAL(20,3))'totalLinea', ";
     consultaDesgloseIVA +="CAST(DOC.totalIva3 AS DECIMAL(20,3))'exento',  CAST(DOC.totalIva2 AS DECIMAL(20,3))'minima',  CAST(DOC.totalIva1 AS DECIMAL(20,3))'basica',  case when IVA.indicadorFacturacionCFE=4 then CAST(DL.precioIvaArticulo AS DECIMAL(20,3)) else 'null' end 'otro',  ";
     consultaDesgloseIVA +="CAST(DOC.precioTotalVenta AS DECIMAL(20,3))'total',  TD.descripcionTipoDocumentoCFE'TipoDocumentoCFE',  case when DOC.codigoMonedaDocumento=1 then              case when DOC.precioTotalVenta > (SELECT 10000*valorParametro FROM CFE_ParametrosGenerales where nombreParametro='montoUI') then 'mayor' else 'menor' end  else            case when (DOC.precioTotalVenta*MO.cotizacionMoneda) > (SELECT 10000*valorParametro FROM CFE_ParametrosGenerales where nombreParametro='montoUI') then 'mayor' else 'menor' end  end 'UI',  case when IVA.indicadorFacturacionCFE=4 then CAST(IVA.porcentajeIva as DECIMAL(20,2)) else 'null' end 'ivaOtroPorcentaje',  CAST(DOC.precioTotalVenta AS DECIMAL(20,3))-(CAST(DOC.precioSubTotalVenta AS DECIMAL(20,3))+CAST(DOC.precioIvaVenta AS DECIMAL(20,3))) 'Redondeo',";
     consultaDesgloseIVA +="case when AR.codigoIva=IVA.codigoIva and IVA.indicadorFacturacionCFE=1 then CAST((DL.cantidad*DL.precioArticuloUnitario) -  (((DL.cantidad*DL.precioArticuloUnitario)*((DOC.porcentajeDescuentoAlTotal/100)+1))-(DL.cantidad*DL.precioArticuloUnitario))  AS DECIMAL(20,3)) else 0 end 'Exento2',  DOC.esDocumentoCFE, DOC.cae_numeroCae, DOC.cae_serie, DOC.cae_fechaVencimiento, DOC.cae_codigoSeguridad, DOC.cae_Cae, DOC.cae_rangoDesde, DOC.cae_rangoHasta, DOC.cae_urlCode, DOC.cae_QrCode, DOC.caeTipoDocumentoCFEDescripcion, DOC.serieDocumento, CFETDC.descripcionTipoDocumentoCliente, (CAST(DOC.precioSubTotalVenta AS DECIMAL(20,3))+CAST(DOC.precioIvaVenta AS DECIMAL(20,3))) 'totalSinRedondeo' ,";
@@ -2930,22 +3024,69 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
                     query.previous();
                     double desplazamientoArticulos=4.7;
                     QString codigoArticuloLinea="";
+
                     while (query.next()){
 
                         painter.drawText( cuadro(0.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),query.value(15).toString().replace("\n",""));
-                        painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,QString::number(query.value(22).toFloat(),'f',2)),QString::number(query.value(22).toFloat(),'f',2));
+                        //painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,QString::number(query.value(22).toFloat(),'f',2)),QString::number(query.value(22).toFloat(),'f',2));
+                        painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,QString::number(query.value(58).toFloat(),'f',2)),QString::number(query.value(58).toFloat(),'f',2));
 
                         desplazamientoArticulos+=0.3;
                         codigoArticuloLinea = "[ "+query.value(51).toString().toUpper().trimmed()+" ]  ";
 
 
-                        if(QString::number(query.value(18).toFloat(),'f',2)==QString::number(0.000000,'f',2)){
+                        //if(QString::number(query.value(18).toFloat(),'f',2)==QString::number(0.000000,'f',2)){
                             painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2));
-                        }else{
-                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2) +"  -  "+ QString::number(query.value(18).toFloat(),'f',2) + " % Dto.");
-                        }
+                        //}else{
+                        //    painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),codigoArticuloLinea+query.value(16).toString().replace("\n","") +"  UN  x  "+ QString::number(query.value(21).toFloat(),'f',2) +"  -  "+ QString::number(query.value(18).toFloat(),'f',2) + " % Dto.");
+                        //}
                         desplazamientoArticulos+=0.3;
+                        // Aca tengo que ejecutar la consulta para obtener los descuentos por linea de articulo
+                        QSqlQuery queryDescuentosLinea(Database::connect());
+                        // codigo de articulo
+                        // codigo documento
+                        // codigotipo documento
+                        // serie documento
+                        // uuid 57
+
+                        if(queryDescuentosLinea.exec("select descripcion,montoAplicado,tipo from DocumentosLineasAjustes where codigoDocumento="+_codigoDocumento+" and codigoTipoDocumento="+_codigoTipoDocumento+" and serieDocumento='"+_serieDocumento+"' and uuid='"+query.value(57).toString()+"';")) {
+                                if(queryDescuentosLinea.first()){
+                                    queryDescuentosLinea.previous();
+                                    while (queryDescuentosLinea.next()){
+                                        if(queryDescuentosLinea.value(2).toString()=="DESCUENTO"){
+                                            fuente.setPointSize(6);
+                                            painter.setFont(fuente);
+                                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),queryDescuentosLinea.value(0).toString().replace("\n","") +":");
+                                            fuente.setPointSize(8);
+                                            painter.setFont(fuente);
+                                            painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,"-"+QString::number(queryDescuentosLinea.value(1).toFloat(),'f',2)),"-"+QString::number(queryDescuentosLinea.value(1).toFloat(),'f',2));
+                                        }else{
+                                            fuente.setPointSize(6);
+                                            painter.setFont(fuente);
+                                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),queryDescuentosLinea.value(0).toString().replace("\n","") +":");
+                                            fuente.setPointSize(8);
+                                            painter.setFont(fuente);
+                                            painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,"+"+QString::number(queryDescuentosLinea.value(1).toFloat(),'f',2)),"+"+QString::number(queryDescuentosLinea.value(1).toFloat(),'f',2));
+                                        }
+
+                                        desplazamientoArticulos+=0.3;
+                                    }
+                                }
+                        }
+
+                        if(QString::number(query.value(18).toFloat(),'f',2)!=QString::number(0.000000,'f',2)){
+                            fuente.setPointSize(6);
+                            painter.setFont(fuente);
+                            painter.drawText( cuadro(0.3,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,false),"Descuento al total: "+ QString::number(query.value(18).toFloat(),'f',2) + "%");
+                            fuente.setPointSize(8);
+                            painter.setFont(fuente);
+                            painter.drawText(cuadroTicketRight(8.0,desplazamientoArticulos+desplazamientoLogo,8.0,0.5,"-"+QString::number(query.value(59).toFloat(),'f',2)),"-"+QString::number(query.value(59).toFloat(),'f',2));
+                            desplazamientoArticulos+=0.3;
+                        }
+
+                        //desplazamientoArticulos+=0.3;
                     }
+
 
                     double desplazamientoRestoTicket=desplazamientoArticulos;
 
@@ -4419,7 +4560,8 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
     consultaSql +=" DL.codigoArticulo'Articulo', ";
     consultaSql +=" left(trim(AR.descripcionArticulo),32)'Descripcion', ";
     consultaSql +=" DL.cantidad'Cantidad', ";
-    consultaSql +=" DL.precioArticuloUnitario'Precio', ";
+    //consultaSql +=" DL.precioArticuloUnitario'Precio', ";
+    consultaSql +=" DL.precioArticuloUnitario - (DL.montoDescuento/DL.cantidad) + (DL.montoRecargo/DL.cantidad) 'Precio', ";
     consultaSql +=" concat('N° ',DOC.codigoDocumento, ' - ',left(trim(DOC.observaciones),48))'Observaciones',  ";
     consultaSql +=" TD.TipoTrasladoRemito'TipoTrasladoRemito',  ";
     consultaSql +=" AR.codigoIva'codigoIva',  ";
@@ -4462,7 +4604,6 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
                 QString Cliente=query.value(4).toString().replace("\n","");
                 QString Proveedor=query.value(5).toString().replace("\n","");
                 QString RazonSocial=query.value(6).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
-
 
 
                 QString Direccion=query.value(7).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
@@ -4874,7 +5015,7 @@ QString crearJsonImix_Nube(QString _codigoDocumento, QString _codigoTipoDocument
     consultaSql +=" DL.codigoArticulo'Articulo', ";
     consultaSql +=" left(trim(AR.descripcionArticulo),32)'Descripcion', ";
     consultaSql +=" DL.cantidad'Cantidad', ";
-    consultaSql +=" DL.precioArticuloUnitario'Precio', ";
+    consultaSql +=" DL.precioArticuloUnitario - (DL.montoDescuento/DL.cantidad) + (DL.montoRecargo/DL.cantidad) 'Precio', ";
     consultaSql +=" concat('N° ',DOC.codigoDocumento, ' - ',left(trim(DOC.observaciones),48))'Observaciones',  ";
     consultaSql +=" TD.TipoTrasladoRemito'TipoTrasladoRemito',  ";
     consultaSql +=" AR.codigoIva'codigoIva',  ";
@@ -6034,3 +6175,11 @@ bool httpGet(const QString &url, QString &respuesta)
     respuesta = resultadoFinal;
     return true;
 }
+
+
+QString ModuloDocumentos::retornaUuid() const {
+    QString s = QUuid::createUuid().toString();
+    s.remove('{').remove('}').remove('-');     // "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    return s.toLower();                        // opcional: todo en minúsculas
+}
+

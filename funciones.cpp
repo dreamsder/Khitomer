@@ -2347,8 +2347,50 @@ bool Funciones::actualizacionBaseDeDatos(qlonglong _valor)const{
         case 523:
             if(!impactoCambioEnBD("ALTER TABLE `Usuarios` ADD COLUMN `email` varchar(100) NOT NULL DEFAULT '' AFTER `codigoEntorno`;","524")){
                 _iterador=false; return false; } break;
+        case 524:
+            if(!impactoCambioEnBD("insert into ReportesConfiguracion values(89,1,2,1,'','MONTO'),(89,2,2,1,'','MONTO')","525")){
+                _iterador=false; return false; } break;
 
-
+        case 525:
+            if(!impactoCambioEnBD("ALTER TABLE `DocumentosLineasPago`  ADD COLUMN `fechaHoraGuardadoLineaPagoSQL` timestamp NOT NULL DEFAULT current_timestamp() ;","526")){
+                _iterador=false; return false;
+            }
+            break;
+        case 526:
+            if(impactoCambioEnBD("CREATE TABLE IF NOT EXISTS Descuentos ( id INT UNSIGNED NOT NULL AUTO_INCREMENT, activo TINYINT(1) NOT NULL DEFAULT 1,   tipo VARCHAR(16) NOT NULL,                 tipoValor VARCHAR(16) NOT NULL,         descripcion VARCHAR(100) NOT NULL,   porcentaje DECIMAL(10,4) NULL,  monto DECIMAL(14,4) NULL,   moneda INT UNSIGNED NULL,            PRIMARY KEY (id), KEY idx_activo (activo),  KEY idx_desc (descripcion),  KEY idx_tipo (tipo),  KEY idx_tipovalor (tipoValor),  KEY idx_moneda (moneda),  CONSTRAINT fk_desc_moneda FOREIGN KEY (moneda) REFERENCES Monedas(codigoMoneda) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;","526")){
+                if(impactoCambioEnBD("CREATE TABLE IF NOT EXISTS DescuentosRangoFecha ( id INT UNSIGNED NOT NULL AUTO_INCREMENT,  descuento_id INT UNSIGNED NOT NULL, fecha_desde DATE NOT NULL, fecha_hasta DATE NOT NULL,  PRIMARY KEY (id),  KEY idx_descuento_fecha (descuento_id, fecha_desde, fecha_hasta),  CONSTRAINT fk_rangofecha_desc FOREIGN KEY (descuento_id)  REFERENCES Descuentos(id) ON DELETE CASCADE  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;","526")){
+                    if(impactoCambioEnBD("CREATE TABLE IF NOT EXISTS DescuentosDiaSemana ( id INT UNSIGNED NOT NULL AUTO_INCREMENT,  descuento_id INT UNSIGNED NOT NULL,   dia_semana TINYINT UNSIGNED NOT NULL,    PRIMARY KEY (id),  UNIQUE KEY uq_desc_dia (descuento_id, dia_semana),  KEY idx_descuento_dia (descuento_id, dia_semana),  CONSTRAINT fk_dias_desc FOREIGN KEY (descuento_id)   REFERENCES Descuentos(id) ON DELETE CASCADE ) ENGINE=InnoDB DEFAULT CHARSET=utf8;","526")){
+                        if(!impactoCambioEnBD("CREATE TABLE IF NOT EXISTS DescuentosRangoHora ( id  INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,         descuento_id  INT UNSIGNED NOT NULL,    hora_desde    TIME NOT NULL,    hora_hasta    TIME NOT NULL,    KEY idx_drh_desc (descuento_id),   UNIQUE KEY uniq_desc_rango (descuento_id, hora_desde, hora_hasta),            CONSTRAINT fk_drh_desc FOREIGN KEY (descuento_id)   REFERENCES Descuentos(id) ON DELETE CASCADE   ) ENGINE=InnoDB;","527")){
+                            _iterador=false; return false;
+                        }
+                    }else{_iterador=false; return false;}
+                }else{_iterador=false; return false;}
+            }else{_iterador=false; return false;}
+            break;
+        case 527:
+            if(!impactoCambioEnBD("update MenuSistema set nombreMenu='Descuento/Recargo' where codigoMenu=2;","528")){
+                _iterador=false; return false; } break;
+        case 528:
+            if(!impactoCambioEnBD("ALTER TABLE `DocumentosLineas`  ADD COLUMN `uuid` varchar(200) NOT NULL DEFAULT '' ;","529")){
+                _iterador=false; return false; } break;
+        case 529:
+            if(!impactoCambioEnBD("CREATE TABLE `DocumentosLineasAjustes` (       `idAjuste`            bigint(20) unsigned NOT NULL AUTO_INCREMENT,     `codigoDocumento`     bigint(20) unsigned NOT NULL,           `codigoTipoDocumento` int(10)   unsigned NOT NULL,      `serieDocumento`      varchar(45)        NOT NULL,          `numeroLinea`         int(10)   unsigned NOT NULL,      `codigoArticulo` varchar(10) NOT NULL DEFAULT '',          `descripcionArticulo` varchar(45) DEFAULT NULL,   `idDescuento`         int(10)   unsigned NOT NULL,        `descripcion` 	varchar(100) NOT NULL,         `tipo`                enum('DESCUENTO','RECARGO') NOT NULL,     `tipoValor`           enum('PORCENTAJE','MONTO') NOT NULL,          `porcentaje`          decimal(45,6) DEFAULT NULL,     `monto`               decimal(45,4) DEFAULT NULL,      `moneda`              int(10) unsigned DEFAULT NULL,            `cotizacionUsada`     decimal(45,8) DEFAULT NULL,      `montoAplicado`       decimal(45,4) NOT NULL DEFAULT 0.0000,      `precioUnitBase`      decimal(45,4) DEFAULT NULL,    `precioUnitResultante` decimal(45,4) DEFAULT NULL,        `usuario`             varchar(45) DEFAULT NULL,   `fechaHoraAplicacion` timestamp NOT NULL DEFAULT current_timestamp(),    `uuid` varchar(200) NOT NULL DEFAULT '',    PRIMARY KEY (`idAjuste`),   KEY `fk_linea` (`codigoDocumento`,`codigoTipoDocumento`,`serieDocumento`,`numeroLinea`,`uuid`),              KEY `idx_desc` (`idDescuento`),    UNIQUE KEY `uq_linea_orden` (`codigoDocumento`,`codigoTipoDocumento`,`serieDocumento`,`numeroLinea`,`uuid`)           ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;","530")){
+                _iterador=false; return false; } break;
+        case 530:
+            if(!impactoCambioEnBD("ALTER TABLE `DocumentosLineas`  ADD COLUMN montoRecargo decimal(45,4) NOT NULL DEFAULT 0.0000;","531")){
+                _iterador=false; return false; } break;
+        case 531:
+            if(!impactoCambioEnBD("ALTER TABLE `DocumentosLineas`  ADD COLUMN montoDescuentoAlTotal decimal(45,4) NOT NULL DEFAULT 0.0000;","532")){
+                _iterador=false; return false; } break;
+        case 532:
+            if(!impactoCambioEnBD("ALTER TABLE `TipoDocumento` ADD COLUMN `utilizaDescuentoRecargoLineaItem` CHAR(1) NOT NULL DEFAULT '0' AFTER `utilizaCargaDeArticulosPorCSV`;","533")){
+                _iterador=false; return false; } break;
+        case 533:
+            if(!impactoCambioEnBD("ALTER TABLE `Reportes` ADD COLUMN `utilizaDescuentosRecargos` CHAR(1) NOT NULL DEFAULT '0' ;","534")){
+                _iterador=false; return false; } break;
+        case 534:
+            if(!impactoCambioEnBD("REPLACE INTO `Reportes` (`codigoReporte`, `codigoMenuReporte`, `descripcionReporte`, `consultaSql`, `consultaSqlGraficas`, `consultaSqlCabezal`, `utilizaFechaDesde`, `utilizaFechaHasta`, `utilizaDescuentosRecargos`) VALUES ('90', '14', 'Ventas de artículos segun descuentos/recargos entre fechas', 'select  concat(TD.descripcionTipoDocumento,\\'(\\',DOC.codigoDocumento,\\'-\\',DOC.serieDocumento,\\')\\') as \\'DOC\\'  , concat(DOC.cae_numeroCae,\\'-\\',DOC.cae_serie) as \\'CFE\\', DOC.fechaEmisionDocumento as \\'Fecha\\', TDC.descripcionTipoDocumentoCliente as \\'Tipo Doc Cli\\',  case when CLI.codigoTipoDocumentoCliente!=2 then  CLI.documento else CLI.rut end as \\'Documento\\',  CLI.razonSocial, RU.descripcionRubro as \\'Rubro\\', SRU.descripcionSubRubro as \\'SubRubro\\', concat(DLA.descripcionArticulo,\\'(\\',DLA.codigoArticulo,\\')\\') as \\'Producto\\', MON.descripcionMoneda as \\'Moneda\\', DOCL.precioTotalVenta as \\'Monto sin des/rec\\', case when DLA.tipo=\\'DESCUENTO\\' then DLA.precioUnitResultante+DLA.montoAplicado else DLA.precioUnitResultante-DLA.montoAplicado end  as \\'Monto inicial\\',  DLA.tipo,   case when DLA.tipo=\\'DESCUENTO\\' then DLA.montoAplicado*-1 else DLA.montoAplicado end as \\'Desc/Rec aplicado\\', DLA.precioUnitResultante as \\'Monto resultante\\', DLA.descripcion as \\'Desc/Rec\\', case when DOC.codigoVendedorComisiona=\\'0\\' then \\'N/A\\' else DOC.codigoVendedorComisiona end  as \\'Vendedor\\'   from Documentos DOC join TipoDocumento TD on TD.codigoTipoDocumento=DOC.codigoTipoDocumento join Clientes CLI on CLI.codigoCliente=DOC.codigoCliente and CLI.tipoCliente=DOC.tipoCliente join CFE_TipoDocumentoCliente TDC on TDC.codigoTipoDocumentoCliente=CLI.codigoTipoDocumentoCliente join DocumentosLineas DOCL on DOCL.codigoDocumento=DOC.codigoDocumento and DOCL.codigoTipoDocumento=DOC.codigoTipoDocumento and DOCL.serieDocumento=DOC.serieDocumento join DocumentosLineasAjustes DLA on DLA.codigoDocumento=DOCL.codigoDocumento and DLA.codigoTipoDocumento=DOCL.codigoTipoDocumento and DLA.serieDocumento=DOCL.serieDocumento and DLA.uuid=DOCL.uuid join Monedas MON on MON.codigoMoneda=DOC.codigoMonedaDocumento  join Articulos AR on AR.codigoArticulo=DOCL.codigoArticulo  join SubRubros SRU on SRU.codigoSubRubro=AR.codigoSubRubro  join Rubros RU on RU.codigoRubro=SRU.codigoRubro where DOC.fechaEmisionDocumento between \\'@_desde\\' and \\'@_hasta\\' and DOC.codigoEstadoDocumento in (\\'E\\',\\'G\\')  and TD.esDocumentoDeVenta=\\'1\\' and TD.utilizaArticulos=\\'1\\' and TD.utilizaCliente=\\'1\\' and TD.afectaTotales!=0  and DLA.idDescuento in (@_codigosDescuentosRecargos)  order by DOC.fechaEmisionDocumento, DOC.codigoDocumento, DOC.codigoTipoDocumento, DOC.serieDocumento, DLA.idAjuste,DLA.numeroLinea;', '', '', '1', '1', '1');","535")){
+                _iterador=false; return false; } break;
 
 
 

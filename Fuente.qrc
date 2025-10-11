@@ -130,5 +130,7 @@
         <file>qml/ProyectoQML/Controles/LoadingQML.qml</file>
         <file>qml/ProyectoQML/Controles/CuadroSeteoSaldoCuentaCorrienteEnCliente.qml</file>
         <file>qml/ProyectoQML/Listas/ListaMonedasEnSeteoDeSaldosCliente.qml</file>
+        <file>qml/ProyectoQML/Controles/CuadroDescuentosRecargosArticulos.qml</file>
+        <file>qml/ProyectoQML/OpcionesDeMenu/ABMDescuentosRecargos.qml</file>
     </qresource>
 </RCC>

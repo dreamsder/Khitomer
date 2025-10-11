@@ -298,6 +298,7 @@ Rectangle {
             MouseArea {
                 id: mouse_area1
                 anchors.fill: parent
+                enabled: rectangle1.enable
                 onClicked: {txtTextInput.text=""
                     tomarElFoco()
                 }

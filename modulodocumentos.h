@@ -246,6 +246,7 @@ public:
     Q_INVOKABLE int retornaCantidadLineasDocumento(QString , QString, QString) const;
 
     Q_INVOKABLE QString retornoCodigoArticuloDeLineaDocumento(QString , QString, QString, QString _serieDocumento) ;
+    Q_INVOKABLE QString retornoUuidDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento);
 
     Q_INVOKABLE QString retornoCodigoArticuloBarrasDeLineaDocumento(QString , QString, QString, QString _serieDocumento) ;
 
@@ -261,7 +262,8 @@ public:
 
     Q_INVOKABLE double retornoDescuentoLineaArticuloDeLineaDocumento(QString ,QString , QString, QString _serieDocumento );
 
-
+    Q_INVOKABLE double retornoRecargoLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) ;
+    Q_INVOKABLE double retornoDescuentoAlTotalLineaArticuloDeLineaDocumento(QString _codigoDocumento,QString _codigoTipoDocumento, QString _linea, QString _serieDocumento) ;
     Q_INVOKABLE qlonglong retornoCodigoUltimoDocumentoDisponible(QString);
 
     Q_INVOKABLE bool emitirDocumentoEnImpresora(QString , QString, QString, QString _serieDocumento, bool impresionActiva);
@@ -270,7 +272,7 @@ public:
 
     Q_INVOKABLE bool emitirDocumentoEnModoRecibo(QString _codigoDocumento, QString _codigoTipoDocumento, QString _impresora, int cantidadDecimalesMonto, QString _serieDocumento);
 
-
+    Q_INVOKABLE QString retornaUuid() const;
 
     Q_INVOKABLE bool emitirEnvioEnImpresoraTicket(QString _codigoTipoImpresion, QString _impresora, QString _codigoCliente, QString _tipoCliente, QString _observacion);
 

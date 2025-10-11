@@ -81,6 +81,9 @@ Rectangle {
     property alias descuentosVisible: rectTotalDescuentos.visible
     property alias colorTotalDescuentos : rectTotalDescuentos.color
 
+    property bool descuentoEnable: true
+
+
     signal requieroPermisoParaDescuento
 
     function tomarElFocoCuadroDescuento(){
@@ -185,9 +188,11 @@ Rectangle {
                 _descuentoLinea = parseFloat(modeloItemsFactura.get(indice).descuentoLineaItem)
   //              funcionesmysql.mensajeAdvertenciaOk("Descuento linea: "+_descuentoLinea)
 
-                modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea+valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                //modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea+valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
 
-    //            funcionesmysql.mensajeAdvertenciaOk("El descuento de la linea es: "+modeloItemsFactura.get(indice).descuentoLineaItem)
+                modeloItemsFactura.set(indice,{"descuentoAlTotalItem": (valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+
+
             }
 
             if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(tipoDocumento,"noAfectaIva")){
@@ -355,7 +360,8 @@ Rectangle {
                 txtValorTotalDescuento.text=valorTotalDescuentoAcumulado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
 
                 _descuentoLinea = parseFloat(modeloItemsFactura.get(indice).descuentoLineaItem)
-                modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea+valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+               // modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea+valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                modeloItemsFactura.set(indice,{"descuentoAlTotalItem": (valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
             }
 
 
@@ -478,8 +484,8 @@ Rectangle {
 
 
                 _descuentoLinea = parseFloat(modeloItemsFactura.get(indice).descuentoLineaItem)
-                modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea-valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
-
+                //modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea-valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                modeloItemsFactura.set(indice,{"descuentoAlTotalItem": (valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
             }
 
             if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(tipoDocumento,"noAfectaIva")){
@@ -650,7 +656,8 @@ Rectangle {
                 txtValorTotalDescuento.text=valorTotalDescuentoAcumulado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))
 
                 _descuentoLinea = parseFloat(modeloItemsFactura.get(indice).descuentoLineaItem)
-                modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea-valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                //modeloItemsFactura.set(indice,{"descuentoLineaItem": (_descuentoLinea-valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                modeloItemsFactura.set(indice,{"descuentoAlTotalItem": (valorTotalDescuento).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
             }
 
             //Recalculo del subTotal
@@ -955,6 +962,7 @@ Rectangle {
                 textoInputBox: "000.00"
                 inputMask: "000.00%; "
                 largoMaximo: 6
+                enable: descuentoEnable
                 textoTitulo: ""
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 40

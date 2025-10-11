@@ -151,9 +151,6 @@ Rectangle{
                         costoArticuloOpcionesExtraFacturacion=txtCostoArticuloMonedaReferencia.textoInputBox.trim();
 
 
-                        funcionesmysql.loguear("QML::modeloItemsFactura.append: ")
-                        funcionesmysql.loguear("QML::codigoArticulo: "+codigoArticulo)
-                        funcionesmysql.loguear("QML::precioArticulo: "+precioArticuloDobleClic.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
 
                         if(txtArticuloParaFacturacion.visible){
 
@@ -178,9 +175,12 @@ Rectangle{
                                                           consideraDescuento:false,
                                                           indiceLinea:-1,
                                                           descuentoLineaItem:0,
+                                                          recargoLineaItem:0,
+                                                          descuentoAlTotalItem:0,
                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
                                                           descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo)),
                                                           asignarGarantiaAArticulo:false
+                                                          ,uuid: modeloDocumentos.retornaUuid()
 
                                                       })
 
@@ -232,11 +232,6 @@ Rectangle{
                         costoArticuloOpcionesExtraFacturacion=txtCostoArticuloMonedaReferencia.textoInputBox.trim();
 
 
-                        funcionesmysql.loguear("QML::modeloItemsFactura.append: ")
-                        funcionesmysql.loguear("QML::codigoArticulo: "+codigoArticulo)
-                        funcionesmysql.loguear("QML::precioArticulo: "+precioArticuloDobleClic.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
-
-
                         if(txtArticuloParaFacturacion.visible){
                             //Controlo si se peude vender sin stock previsto
                             if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo))){
@@ -254,9 +249,12 @@ Rectangle{
                                                           consideraDescuento:false,
                                                           indiceLinea:-1,
                                                           descuentoLineaItem:0,
+                                                          recargoLineaItem:0,
+                                                          descuentoAlTotalItem:0,
                                                           codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
                                                           descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo)),
                                                           asignarGarantiaAArticulo:false
+                                                          ,uuid: modeloDocumentos.retornaUuid()
                                                       })
 
                             listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)
@@ -312,9 +310,6 @@ Rectangle{
                         //Controlo si se peude vender sin stock previsto
                         if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo))){
 
-                        funcionesmysql.loguear("QML::modeloItemsFactura.append: ")
-                        funcionesmysql.loguear("QML::codigoArticulo: "+codigoArticulo)
-                        funcionesmysql.loguear("QML::precioArticulo: "+precioArticuloDobleClic.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")))
 
                         precioArticuloDobleClic=calcularDescuentoPorCliente(precioArticuloDobleClic)
                         modeloItemsFactura.append({
@@ -329,9 +324,13 @@ Rectangle{
                                                       activo:true,
                                                       consideraDescuento:false,
                                                       indiceLinea:-1,
+                                                      descuentoLineaItem:0,
+                                                      recargoLineaItem:0,
+                                                      descuentoAlTotalItem:0,
                                                       codigoTipoGarantia:modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo),
                                                       descripcionTipoGarantia:modeloTipoGarantia.retornaDescripcionTipoGarantia(modeloArticulos.retornaCodigoTipoGarantia(codigoArticulo)),
                                                       asignarGarantiaAArticulo:false
+                                                      ,uuid: modeloDocumentos.retornaUuid()
                                                   })
 
                         listaDeItemsFactura.positionViewAtIndex(listaDeItemsFactura.count-1,0)

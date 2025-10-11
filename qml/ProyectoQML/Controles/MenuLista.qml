@@ -55,6 +55,7 @@ Rectangle {
 
         if(codigoDelMenu==1){
             menusistema1.visible=true
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -74,6 +75,7 @@ Rectangle {
         }else if(codigoDelMenu==2){
 
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=true
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -91,6 +93,7 @@ Rectangle {
 
         }else if(codigoDelMenu==3){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=true
             menuPermisos.visible=false
@@ -109,6 +112,7 @@ Rectangle {
         }else if(codigoDelMenu==4){
 
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=true
@@ -126,6 +130,7 @@ Rectangle {
 
         }else if(codigoDelMenu==5){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -143,6 +148,7 @@ Rectangle {
         }
         else if(codigoDelMenu==6){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=true
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -159,6 +165,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==7){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -175,6 +182,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==8){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -191,6 +199,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==9){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -207,6 +216,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==10){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -223,6 +233,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==11){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -239,6 +250,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==12){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -255,6 +267,7 @@ Rectangle {
             menuGarantias.visible=false
         }else if(codigoDelMenu==13){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -272,6 +285,7 @@ Rectangle {
         }
         else if(codigoDelMenu==14){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -289,6 +303,7 @@ Rectangle {
         }
         else if(codigoDelMenu==15){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -306,6 +321,7 @@ Rectangle {
         }
         else if(codigoDelMenu==16){
             menusistema1.visible=false
+            abmDescuentosRecargos.visible=false
             menucotizaciones1.visible=false
             menuusuarios1.visible=false
             menuPermisos.visible=false
@@ -400,8 +416,8 @@ Rectangle {
         y: 30
         color: "#eceeee"
         radius: 6
-        width: 1160
-        height: 670
+        width: 1360
+        height: 700
         //
         border.color: "#a8a0a0"
 
@@ -428,6 +444,13 @@ Rectangle {
                     id: menusistema1
                     visible: true
                     anchors.fill: parent
+                }
+                ABMDescuentosRecargos {
+                    id: abmDescuentosRecargos
+                    anchors.fill: parent
+                    visible: false
+                    modeloDescuentos: modeloListaDescuentosRecargos   // tu modelo C++
+                    //modeloListaMonedas: modeloListaMonedas                 // tu modelo Monedas
                 }
                 MenuCotizaciones {
                     id: menucotizaciones1
@@ -689,6 +712,9 @@ Rectangle {
 
 
                                     if(codigoMenu==1){
+                                        mostrarMenu(codigoMenu)
+                                    }
+                                    if(codigoMenu==2){
                                         mostrarMenu(codigoMenu)
                                     }
 

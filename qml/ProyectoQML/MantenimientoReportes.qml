@@ -63,9 +63,45 @@ Rectangle {
 
 
 
+    function cargarDescuentosRecargos(){
+
+        modeloListaDescuentosRecargosEnReportes.limpiar();
+        modeloListaDescuentosRecargosEnReportes.buscarDescuentosRecargos("", "", false);
+        modeloDescuentosRecargosEnReportes.clear()
+
+        for(var i =0; i < modeloListaDescuentosRecargosEnReportes.rowCount();i++){
+            modeloDescuentosRecargosEnReportes.append({
+                                                  codigoItem: modeloListaDescuentosRecargosEnReportes.retornaIdPorIndice(i),
+                                                  descripcionItem: modeloListaDescuentosRecargosEnReportes.retornaDescripcionPorIndice(i),
+                                                  checkBoxActivo: false,
+                                                  codigoTipoItem:"0",
+                                                  descripcionItemSegundafila:"",
+                                                  valorItem:"0",
+                                                  serieDoc:""
+                                              })
+        }
+    }
 
 
 
+    function obtenerIdsActivosCSVDescuentosRecargos() {
+        var ids = [];
+        for (var i = 0; i < modeloDescuentosRecargosEnReportes.count; ++i) {
+            var fila = modeloDescuentosRecargosEnReportes.get(i);
+            if (!fila) continue;
+
+            // Asegura compatibilidad si el flag viene como bool, número o string
+            var activo = (fila.checkBoxActivo === true ||
+                          fila.checkBoxActivo === 1 ||
+                          fila.checkBoxActivo === "1" ||
+                          fila.checkBoxActivo === "true");
+
+            if (activo && fila.codigoItem !== undefined && fila.codigoItem !== null) {
+                ids.push(String(fila.codigoItem));
+            }
+        }
+        return ids.join(",");
+    }
 
 
 
@@ -119,7 +155,12 @@ Rectangle {
         cbxSeparadorCSV.visible=btnGenerarCSV.enabled
 
 
-       cbxUsaControlDeStockPrevisto.visible=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaControlStockPrevisto")
+        cbxUsaControlDeStockPrevisto.visible=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaControlStockPrevisto")
+
+        cbxDescuentosRecargos.visible=modeloReportes.retornaPermisosDelReporte(codigoReporte,"utilizaDescuentosRecargos")
+        if(cbxDescuentosRecargos.visible){
+            cargarDescuentosRecargos()
+        }
     }
 
 
@@ -326,6 +367,12 @@ Rectangle {
         }
 
 
+        var idsDescuentosRecargos =  obtenerIdsActivosCSVDescuentosRecargos();
+        while(consultaSqlPrevia.match("@_codigosDescuentosRecargos") || consultaSqlPreviaGrafica.match("@_codigosDescuentosRecargos") || consultaSqlPreviaCabezal.match("@_codigosDescuentosRecargos")){
+            consultaSqlPrevia=consultaSqlPrevia.replace("@_codigosDescuentosRecargos",idsDescuentosRecargos)
+            consultaSqlPreviaGrafica=consultaSqlPreviaGrafica.replace("@_codigosDescuentosRecargos",idsDescuentosRecargos)
+            consultaSqlPreviaCabezal=consultaSqlPreviaCabezal.replace("@_codigosDescuentosRecargos",idsDescuentosRecargos)
+        }
 
         modeloReportes.insertarReportesMasUsados(cbxListaReportes.codigoValorSeleccion.trim(),txtNombreDeUsuario.textoInputBox.trim());
 
@@ -1037,6 +1084,29 @@ Rectangle {
                     }
                 }
             }
+
+            ComboBoxCheckBoxGenerico{
+                id:cbxDescuentosRecargos
+                width: 250
+                visible: false
+                textoTitulo: "Descuentos/Recargos:"
+                //colorRectangulo: "#cac1bd"
+                modeloItems: modeloDescuentosRecargosEnReportes
+            }
+            ListModel{
+                id:modeloDescuentosRecargosEnReportes
+
+                Component.onCompleted: {
+
+                    cargarDescuentosRecargos()
+
+
+
+
+
+                }
+            }
+
 
 
         }

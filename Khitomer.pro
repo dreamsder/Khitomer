@@ -118,7 +118,9 @@ SOURCES += main.cpp \
     csvreader.cpp \
     fileselector.cpp \
     proxy/modulo_configuracionproxy.cpp \
-    modulolimitesaldocuentacorriente.cpp
+    modulolimitesaldocuentacorriente.cpp \
+    modulolistadescuentosrecargos.cpp \
+    modulodocumentoslineasajustes.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -206,7 +208,9 @@ HEADERS += \
     csvreader.h \
     fileselector.h \
     proxy/modulo_configuracionproxy.h \
-    modulolimitesaldocuentacorriente.h
+    modulolimitesaldocuentacorriente.h \
+    modulolistadescuentosrecargos.h \
+    modulodocumentoslineasajustes.h
 
 RESOURCES += \
     Imagenes.qrc \
@@ -284,7 +288,8 @@ DISTFILES += \
     qml/ProyectoQML/consultarest.js \
     qml/ProyectoQML/Listas/ListaPrecioArticulosNueva.qml \
     qml/ProyectoQML/Controles/BusquedaReportes.qml \
-    qml/ProyectoQML/Controles/LoadingQML.qml
+    qml/ProyectoQML/Controles/LoadingQML.qml \
+    qml/ProyectoQML/OpcionesDeMenu/ABMDescuentosRecargos.qml
 
 
 

@@ -25,18 +25,10 @@ import QtQuick 1.1
 import "../Controles"
 
 Rectangle{
-    id: rectListaItem
 
-
-    height: descripcionArticuloExtendido=="" ? 32 : 42
+    height: (descripcionArticuloExtendido=="" ? 32 : 42)+ (listaDescuentosRecargosAplicados.height)
     width: parent.width
-    // height: 400
-    // width: 2500
-    color: "#e9e8e9"
-
-    radius: 1
-    border.color: "#aaaaaa"
-    opacity: 1
+    color: "#00000000"
 
     property double suma : 0
     property double resta : 0
@@ -44,6 +36,7 @@ Rectangle{
     property double precioArticuloParseado : 0.00
 
     property double descuentoLineaItem: 0.00
+    property double recargoLineaItem: 0.00
 
 
     property string idGarantia: codigoTipoGarantia
@@ -54,657 +47,905 @@ Rectangle{
 
     signal abrirGarantias
 
-    Text {
-        id:txtDescuentoLineaItem
-        text: descuentoLineaItem
-        visible: false
-    }
+    signal abrirDescuentoRecargo
 
 
-
-    Text {
-        id:txtItemCodigoArticuloFacturacion
-        width: 70
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        //
-        font.pointSize: 10
-        font.bold: false
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        color: "#212121"
-        text: codigoArticulo
-        font.family: "Arial"
-        opacity: 1
-        horizontalAlignment: Text.AlignHCenter
-
-
-    }
-
-
-    MouseArea{
-        id: mousearea1
-        anchors.rightMargin: 50
-        z: 1
-        anchors.fill: parent
-        hoverEnabled: activo
-        // visible: activo
-
-        onEntered: {
-            if(activo){
-                rectListaItemColorDeseleccionado.stop()
-                rectListaItemColorSeleccionado.start()
-            }
+    function contarPorUuid(u) {
+        var c = 0
+        for (var i = 0; i < modeloItemsDescuentosRecargosEnFactura.count; ++i) {
+            var it = modeloItemsDescuentosRecargosEnFactura.get(i)
+            if (it.uuid === u) c++
         }
-        onExited: {
-            if(activo){
-                rectListaItemColorSeleccionado.stop()
-                rectListaItemColorDeseleccionado.start()
-            }
-
-        }
-
-        onDoubleClicked: {
-
-            if(txtItemCodigoArticuloBarrasFacturacion.width!=0){
-                if(lblEstadoDocumento.text.trim()=="Emitido" || lblEstadoDocumento.text.trim()=="Guardado" || lblEstadoDocumento.text.trim()=="Pendiente"){
-                    cuadroDatosACambiarLineaFacturacion.cargarDatoActual(txtItemCodigoArticuloBarrasFacturacion.text,indiceLinea)
-                    cuadroDatosACambiarLineaFacturacion.visible=true
-                }
-            }
-        }
-    }
-
-    PropertyAnimation{
-        id:rectListaItemColorSeleccionado
-        target: rectListaItem
-        property: "color"
-        from: "#e9e8e9"
-        to:"#9294C6"
-        duration: 100
-
-    }
-    PropertyAnimation{
-        id:rectListaItemColorDeseleccionado
-        target: rectListaItem
-        property: "color"
-        to: "#e9e8e9"
-        from:"#9294C6"
-        duration: 50
-
-    }
-
-    Text {
-        id: txtEliminarItem
-        text: qsTr("<x")
-        font.family: "Arial"
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.left: mousearea1.right
-        anchors.leftMargin: 5
-        //
-        font.bold: true
-        font.pixelSize: 10
-        visible: activo
-
-        MouseArea {
-            id: mouse_area1
-            anchors.fill: parent
-            enabled: activo
-
-            onClicked: {
-
-
-                ///Chequeo que modo de calculo de total esta seteado
-                var modoCalculoTotal=modeloconfiguracion.retornaValorConfiguracion("MODO_CALCULOTOTAL");
-
-                if(modoCalculoTotal=="1"){
-                    etiquetaTotal.setearTotalAnulacion((precioArticulo*cantidadItems).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
-                }else if(modoCalculoTotal=="2"){
-                    etiquetaTotal.setearTotalAnulacionModoArticuloSinIva((precioArticulo*cantidadItems).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
-                }
-
-
-                modeloItemsFactura.remove(index)
-
-
-
-
-            }
-        }
-    }
-
-    Rectangle {
-        id: rectLineaSeparacion
-        y: 0
-        width: 2
-        color: "#C4C4C6"
-        anchors.left: txtItemCodigoArticuloFacturacion.right
-        anchors.leftMargin: 10
-        //
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 0
-    }
-
-    Text {
-        id: txtItemDescripcionArticuloFacturacion
-        x: 4
-        y: 0
-        width: {
-            /// Chequeo si el item comodin esta activo o no, para saber si acorto o dejo como esta el largo de la descripcion
-            /// del item para que no interfiera con el monto referencia del sistema
-            if(txtItemCodigoArticuloBarrasFacturacion.width==0){
-
-                300
-
-            }else{
-
-                if(txtItemPrecioMonedaReferenciaFacturacion.visible){
-                    200
-                }else{
-                    300
-                }
-            }
-        }
-        color: "#212121"
-        text: descripcionArticulo
-        font.family: "Arial"
-        clip: true
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.bold: false
-        font.pointSize: 10
-        anchors.leftMargin: 10
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: rectLineaSeparacion2.right
-    }
-
-    Text {
-        id: txtItemDescripcionExtendidaArticuloFacturacion
-        width: txtItemDescripcionArticuloFacturacion.width
-        color: "#757575"
-        text: "<b><i>EXT:</i></b> "+descripcionArticuloExtendido
-        horizontalAlignment: Text.AlignRight
-        font.family: "Arial"
-        visible: descripcionArticuloExtendido=="" ? false : true
-        clip: true
-        //
-        //anchors.top: parent.bottom
-        // anchors.topMargin: 2
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.bold: false
-        font.pointSize: 9
-        anchors.leftMargin: 10
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: rectLineaSeparacion2.right
-    }
-
-
-    Rectangle {
-        id: rectLineaSeparacion2
-        x: -1
-        y: -4
-        width: {
-            if(txtItemCodigoArticuloBarrasFacturacion.width==0){
-                0
-            }else{
-                2
-            }
-        }
-        color: "#C4C4C6"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: {
-            if(txtItemCodigoArticuloBarrasFacturacion.width==0){
-                0
-            }else{
-                10
-            }
-        }
-        anchors.left: txtItemCodigoArticuloBarrasFacturacion.right
-    }
-
-
-    Rectangle {
-        id: rectLineaSeparacion3
-        x: 3
-        y: -7
-        width: 2
-        color: "#C4C4C6"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 10
-        anchors.left: txtItemDescripcionArticuloFacturacion.right
-    }
-
-    Text {
-        id: txtItemSubTotalTotalItemArticuloFacturacion
-        x: 16
-        y: 3
-        width: 120
-        color: "#212121"
-        text: precioArticuloSubTotal
-        font.family: "Arial"
-        anchors.right: parent.right
-        anchors.rightMargin: 74
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.bold: false
-        font.pointSize: 10
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        visible: etiquetaTotal.visible
-    }
-
-    Rectangle {
-        id: rectLineaSeparacion4
-        x: 7
-        y: -7
-        width: 2
-        color: "#C4C4C6"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 10
-        anchors.left: txtItemPrecioTotalItemArticuloFacturacion.right
-    }
-
-    Text {
-        id: txtItemCodigoArticuloBarrasFacturacion
-        x: -4
-        y: 7
-        width: {
-            if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCodigoBarrasADemanda")){
-                280
-            }else{
-                0
-            }
-        }
-        color: "#212121"
-        text: codigoBarrasArticulo
-        clip: true
-        font.family: "Arial"
-        horizontalAlignment: Text.AlignHCenter
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.bold: false
-        font.pointSize: 10
-        anchors.leftMargin: 10
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: rectLineaSeparacion.right
-        visible: {
-            if(txtItemCodigoArticuloBarrasFacturacion.width==0){
-                false
-            }else{
-                true
-            }
-        }
-
-        property string respaldoDescripcionTexto: ""
-        onVisibleChanged: {
-            if(txtItemCodigoArticuloBarrasFacturacion.width==0){
-                respaldoDescripcionTexto=txtItemCodigoArticuloBarrasFacturacion.text
-                modeloItemsFactura.set(index,{"codigoBarrasArticulo": ""})
-
-            }else{
-                respaldoDescripcionTexto=txtItemCodigoArticuloBarrasFacturacion.text
-                modeloItemsFactura.set(index,{"codigoBarrasArticulo": respaldoDescripcionTexto})
-            }
-        }
-    }
-
-    Text {
-        id: txtItemCantidadArticuloFacturacion
-        x: 13
-        y: 9
-        width: 45
-        color: "#212121"
-        text: cantidadItems
-        horizontalAlignment: Text.AlignRight
-        font.family: "Arial"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.bold: false
-        font.pointSize: 10
-        anchors.leftMargin: 37
-        verticalAlignment: Text.AlignVCenter
-        anchors.left: rectLineaSeparacion3.right
-    }
-
-    Rectangle {
-        id: rectLineaSeparacionGarantia
-        x: 8
-        y: 0
-        width: 2
-        color: "#C4C4C6"
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 10
-        anchors.left: txtItemCantidadArticuloFacturacion.right
-    }
-
-    Image {
-        id: imgGarantia
-        y: 4
-        width: 16
-        height: 16
-        clip: true
-        opacity: 0.900
-        smooth: true
-        asynchronous: true
-        z: 2
-        anchors.left: rectLineaSeparacionGarantia.right
-        anchors.leftMargin: 7
-        anchors.verticalCenter: parent.verticalCenter
-
-        source: {
-            if(idGarantia=="" || idGarantia=="0"){
-                "qrc:/imagenes/qml/ProyectoQML/Imagenes/SinGarantia.png"
-            }else{
-                "qrc:/imagenes/qml/ProyectoQML/Imagenes/Garantia.png"
-            }
-        }
-
-        MouseArea {
-            id: mouse_areaGarantia
-            clip: true
-            hoverEnabled: true
-            anchors.fill: parent
-            visible: activo
-            onDoubleClicked: {
-                abrirGarantias()
-            }
-
-            onEntered: {
-                timer1.start()
-            }
-
-            onExited: {
-                timer1.stop()
-                rectToolTipText.visible=false
-            }
-        }
+        return c
     }
 
     Rectangle{
-        id:rectToolTipText
-        visible: false
-        width: toolTipText.implicitWidth+20
-        height: toolTipText.implicitHeight
-        color: "#4d7dc0"
-        radius: 6
+        id: rectListaItem
+
+
+        height: descripcionArticuloExtendido=="" ? 32 : 42
+        width: parent.width
+        // height: 400
+        // width: 2500
+        color: "#e9e8e9"
+
+        radius: 1
+        border.color: "#aaaaaa"
         opacity: 1
-        z: 3
+
+
+
         Text {
-            id: toolTipText
-            color: "#fdfbfb"
-            font.family: "Arial"
-            font.bold: false
-            anchors.rightMargin: 10
-            anchors.leftMargin: 10
-            anchors.fill: parent
-            text: {
-              if(idGarantia=="" || idGarantia=="0"){
-               "Sin garantia establecida"
-              }else{
-                  nombreGarantia
-              }
-            }
-            visible: true
+            id:txtDescuentoLineaItem
+            text: descuentoLineaItem
+            visible: false
         }
-    }
-    Timer {
-           id:timer1
-           interval: 600;
-           running: false;
-           repeat: false;
-           onTriggered: {
-               if(toolTipText.text!=""){
-                   rectToolTipText.x=imgGarantia.x+20
-                   rectToolTipText.y=imgGarantia.y
-                   rectToolTipText.visible=true
-               }
-           }
-       }
+        Text {
+            id:txtRecargoLineaItem
+            text: recargoLineaItem
+            visible: false
+        }
 
 
 
-    Rectangle {
-        id: rectLineaSeparacion5
-        x: 8
-        y: 0
-        width: 2
-        color: "#C4C4C6"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 10
-        anchors.left: imgGarantia.right
-    }
-
-    Image {
-        id: imgIncrementarCantidad
-        y: 4
-        width: 16
-        height: 16
-        clip: true
-        opacity: 0.900
-        asynchronous: true
-        z: 2
-        anchors.left: rectLineaSeparacion3.right
-        anchors.leftMargin: 3
-        anchors.verticalCenter: parent.verticalCenter
-        smooth: true
-        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Mas.png"
-        visible: txtCantidadArticulosFacturacion.visible
-        MouseArea {
-            id: mouse_area2
-            clip: true
+        Text {
+            id:txtItemCodigoArticuloFacturacion
+            width: 70
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
             //
+            font.pointSize: 10
+            font.bold: false
+            verticalAlignment: Text.AlignVCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            color: "#212121"
+            text: codigoArticulo
+            font.family: "Arial"
+            opacity: 1
+            horizontalAlignment: Text.AlignHCenter
+
+
+        }
+
+
+        MouseArea{
+            id: mousearea1
+            anchors.rightMargin: 50
+            z: 1
             anchors.fill: parent
+            hoverEnabled: activo
+            // visible: activo
+
+            onEntered: {
+                if(activo){
+                    rectListaItemColorDeseleccionado.stop()
+                    rectListaItemColorSeleccionado.start()
+                }
+            }
+            onExited: {
+                if(activo){
+                    rectListaItemColorSeleccionado.stop()
+                    rectListaItemColorDeseleccionado.start()
+                }
+
+            }
+
+            onDoubleClicked: {
+
+                if(txtItemCodigoArticuloBarrasFacturacion.width!=0){
+                    if(lblEstadoDocumento.text.trim()=="Emitido" || lblEstadoDocumento.text.trim()=="Guardado" || lblEstadoDocumento.text.trim()=="Pendiente"){
+                        cuadroDatosACambiarLineaFacturacion.cargarDatoActual(txtItemCodigoArticuloBarrasFacturacion.text,indiceLinea)
+                        cuadroDatosACambiarLineaFacturacion.visible=true
+                    }
+                }
+            }
+        }
+
+        PropertyAnimation{
+            id:rectListaItemColorSeleccionado
+            target: rectListaItem
+            property: "color"
+            from: "#e9e8e9"
+            to:"#9294C6"
+            duration: 100
+
+        }
+        PropertyAnimation{
+            id:rectListaItemColorDeseleccionado
+            target: rectListaItem
+            property: "color"
+            to: "#e9e8e9"
+            from:"#9294C6"
+            duration: 50
+
+        }
+
+        Text {
+            id: txtEliminarItem
+            text: qsTr("<x")
+            font.family: "Arial"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.left: mousearea1.right
+            anchors.leftMargin: 5
+            //
+            font.bold: true
+            font.pixelSize: 10
             visible: activo
-            onClicked: {
 
+            MouseArea {
+                id: mouse_area1
+                anchors.fill: parent
+                enabled: activo
 
-                //Controlo si se peude vender sin stock previsto
-                if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo)   )){
+                onClicked: {
 
 
                     ///Chequeo que modo de calculo de total esta seteado
                     var modoCalculoTotal=modeloconfiguracion.retornaValorConfiguracion("MODO_CALCULOTOTAL");
 
-                    suma=0
-
-                    if(cantidadItems!=99999){
-                        suma=parseFloat(precioArticuloSubTotal)
-                        suma+=parseFloat(precioArticulo)
-
-                        precioArticuloParseado=precioArticulo
+                    if(modoCalculoTotal=="1"){
+                        etiquetaTotal.setearTotalAnulacion((precioArticulo*cantidadItems).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                    }else if(modoCalculoTotal=="2"){
+                        etiquetaTotal.setearTotalAnulacionModoArticuloSinIva((precioArticulo*cantidadItems).toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                    }
 
 
-                        if(modoCalculoTotal=="1"){
-                            etiquetaTotal.setearTotal(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
-                        }else if(modoCalculoTotal=="2"){
-                            etiquetaTotal.setearTotalModoArticuloSinIva(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                    for(var j=0; j<modeloItemsDescuentosRecargosEnFactura.count;j++){
+                        if(modeloItemsDescuentosRecargosEnFactura.get(j).uuid===modeloItemsFactura.get(index).uuid){
+                            modeloItemsDescuentosRecargosEnFactura.remove(j)
+                        }
+                    }
+
+                    modeloItemsFactura.remove(index)
+
+
+                    recalcularTotales()
+
+                }
+            }
+        }
+
+        Rectangle {
+            id: rectLineaSeparacion
+            y: 0
+            width: 2
+            color: "#C4C4C6"
+            anchors.left: txtItemCodigoArticuloFacturacion.right
+            anchors.leftMargin: 10
+            //
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 0
+        }
+
+        Text {
+            id: txtItemDescripcionArticuloFacturacion
+            x: 4
+            y: 0
+            width: {
+                /// Chequeo si el item comodin esta activo o no, para saber si acorto o dejo como esta el largo de la descripcion
+                /// del item para que no interfiera con el monto referencia del sistema
+                if(txtItemCodigoArticuloBarrasFacturacion.width==0){
+
+                    300
+
+                }else{
+
+                    if(txtItemPrecioMonedaReferenciaFacturacion.visible){
+                        200
+                    }else{
+                        300
+                    }
+                }
+            }
+            color: "#212121"
+            text: descripcionArticulo
+            font.family: "Arial"
+            clip: true
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.bold: false
+            font.pointSize: 10
+            anchors.leftMargin: 10
+            verticalAlignment: Text.AlignVCenter
+            anchors.left: rectLineaSeparacion2.right
+        }
+
+        Text {
+            id: txtItemDescripcionExtendidaArticuloFacturacion
+            width: txtItemDescripcionArticuloFacturacion.width
+            color: "#757575"
+            text: "<b><i>EXT:</i></b> "+descripcionArticuloExtendido
+            horizontalAlignment: Text.AlignRight
+            font.family: "Arial"
+            visible: descripcionArticuloExtendido=="" ? false : true
+            clip: true
+            //
+            //anchors.top: parent.bottom
+            // anchors.topMargin: 2
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.bold: false
+            font.pointSize: 9
+            anchors.leftMargin: 10
+            verticalAlignment: Text.AlignVCenter
+            anchors.left: rectLineaSeparacion2.right
+        }
+
+
+        Rectangle {
+            id: rectLineaSeparacion2
+            x: -1
+            y: -4
+            width: {
+                if(txtItemCodigoArticuloBarrasFacturacion.width==0){
+                    0
+                }else{
+                    2
+                }
+            }
+            color: "#C4C4C6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: {
+                if(txtItemCodigoArticuloBarrasFacturacion.width==0){
+                    0
+                }else{
+                    10
+                }
+            }
+            anchors.left: txtItemCodigoArticuloBarrasFacturacion.right
+        }
+
+
+        Rectangle {
+            id: rectLineaSeparacion3
+            x: 3
+            y: -7
+            width: 2
+            color: "#C4C4C6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: txtItemDescripcionArticuloFacturacion.right
+        }
+
+        Text {
+            id: txtItemSubTotalTotalItemArticuloFacturacion
+            x: 16
+            y: 3
+            width: 120
+            color: "#212121"
+            text: precioArticuloSubTotal
+            font.family: "Arial"
+            anchors.right: parent.right
+            anchors.rightMargin: 74
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.bold: false
+            font.pointSize: 10
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            visible: etiquetaTotal.visible
+        }
+
+        Rectangle {
+            id: rectLineaSeparacion4
+            x: 7
+            y: -7
+            width: 2
+            color: "#C4C4C6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: txtItemPrecioTotalItemArticuloFacturacion.right
+        }
+
+        Text {
+            id: txtItemCodigoArticuloBarrasFacturacion
+            x: -4
+            y: 7
+            width: {
+                if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaCodigoBarrasADemanda")){
+                    280
+                }else{
+                    0
+                }
+            }
+            color: "#212121"
+            text: codigoBarrasArticulo
+            clip: true
+            font.family: "Arial"
+            horizontalAlignment: Text.AlignHCenter
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.bold: false
+            font.pointSize: 10
+            anchors.leftMargin: 10
+            verticalAlignment: Text.AlignVCenter
+            anchors.left: rectLineaSeparacion.right
+            visible: {
+                if(txtItemCodigoArticuloBarrasFacturacion.width==0){
+                    false
+                }else{
+                    true
+                }
+            }
+
+            property string respaldoDescripcionTexto: ""
+            onVisibleChanged: {
+                if(txtItemCodigoArticuloBarrasFacturacion.width==0){
+                    respaldoDescripcionTexto=txtItemCodigoArticuloBarrasFacturacion.text
+                    modeloItemsFactura.set(index,{"codigoBarrasArticulo": ""})
+
+                }else{
+                    respaldoDescripcionTexto=txtItemCodigoArticuloBarrasFacturacion.text
+                    modeloItemsFactura.set(index,{"codigoBarrasArticulo": respaldoDescripcionTexto})
+                }
+            }
+        }
+
+        Text {
+            id: txtItemCantidadArticuloFacturacion
+            x: 13
+            y: 9
+            width: 45
+            color: "#212121"
+            text: cantidadItems
+            horizontalAlignment: Text.AlignRight
+            font.family: "Arial"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.bold: false
+            font.pointSize: 10
+            anchors.leftMargin: 37
+            verticalAlignment: Text.AlignVCenter
+            anchors.left: rectLineaSeparacion3.right
+        }
+
+        Rectangle {
+            id: rectLineaSeparacionGarantia
+            x: 8
+            y: 0
+            width: 2
+            color: "#C4C4C6"
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: txtItemCantidadArticuloFacturacion.right
+        }
+
+        Image {
+            id: imgGarantia
+            y: 4
+            width: 16
+            height: 16
+            clip: true
+            opacity: 0.900
+            smooth: true
+            asynchronous: true
+            z: 2
+            anchors.left: rectLineaSeparacionGarantia.right
+            anchors.leftMargin: 7
+            anchors.verticalCenter: parent.verticalCenter
+
+            source: {
+                if(idGarantia=="" || idGarantia=="0"){
+                    "qrc:/imagenes/qml/ProyectoQML/Imagenes/SinGarantia.png"
+                }else{
+                    "qrc:/imagenes/qml/ProyectoQML/Imagenes/Garantia.png"
+                }
+            }
+
+            MouseArea {
+                id: mouse_areaGarantia
+                clip: true
+                hoverEnabled: true
+                anchors.fill: parent
+                visible: activo
+                onDoubleClicked: {
+                    abrirGarantias()
+                }
+
+                onEntered: {
+                    timer1.start()
+                }
+
+                onExited: {
+                    timer1.stop()
+                    rectToolTipText.visible=false
+                }
+            }
+        }
+
+        Rectangle{
+            id:rectToolTipText
+            visible: false
+            width: toolTipText.implicitWidth+20
+            height: toolTipText.implicitHeight
+            color: "#4d7dc0"
+            radius: 6
+            opacity: 1
+            z: 3
+            Text {
+                id: toolTipText
+                color: "#fdfbfb"
+                font.family: "Arial"
+                font.bold: false
+                anchors.rightMargin: 10
+                anchors.leftMargin: 10
+                anchors.fill: parent
+                text: {
+                    if(idGarantia=="" || idGarantia=="0"){
+                        "Sin garantia establecida"
+                    }else{
+                        nombreGarantia
+                    }
+                }
+                visible: true
+            }
+        }
+        Timer {
+            id:timer1
+            interval: 600;
+            running: false;
+            repeat: false;
+            onTriggered: {
+                if(toolTipText.text!=""){
+                    rectToolTipText.x=imgGarantia.x+20
+                    rectToolTipText.y=imgGarantia.y
+                    rectToolTipText.visible=true
+                }
+            }
+        }
+
+
+
+        Rectangle {
+            id: rectLineaSeparacion5
+            x: 8
+            y: 0
+            width: 2
+            color: "#C4C4C6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: imgGarantia.right
+        }
+
+
+        Image {
+            id: imgDescuentos
+            y: 4
+            width: 16
+            height: 16
+            clip: true
+            opacity: 0.900
+            smooth: true
+            asynchronous: true
+            z: 2
+            visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaDescuentoRecargoLineaItem")
+            anchors.left: rectLineaSeparacion5.right
+            anchors.leftMargin: 7
+            anchors.verticalCenter: parent.verticalCenter
+
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/descuentoRecargo.png"
+
+            MouseArea {
+                id: mouse_areaDescuentos
+                clip: true
+                hoverEnabled: true
+                anchors.fill: parent
+                visible: activo
+                onDoubleClicked: {
+
+                    var n = contarPorUuid(uuid)
+                    if(n===5){
+                        funcionesmysql.mensajeAdvertenciaOk("Se alcanzó el limite de descuentos/recargos a aplicar")
+                    }else{
+                        if(parseFloat(etiquetaTotal.retornaTotal())===0){
+                            funcionesmysql.mensajeAdvertenciaOk("No es posible agregar nuevos descuentos o recargos, el total ya es 0")
+                        }else{
+                            abrirDescuentoRecargo()
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        Rectangle {
+            id: rectLineaSeparacionDescuentos
+            x: 8
+            y: 0
+            width: 2
+            color: "#C4C4C6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: imgDescuentos.right
+        }
+
+
+        Image {
+            id: imgIncrementarCantidad
+            y: 4
+            width: 16
+            height: 16
+            clip: true
+            opacity: 0.900
+            asynchronous: true
+            z: 2
+            anchors.left: rectLineaSeparacion3.right
+            anchors.leftMargin: 3
+            anchors.verticalCenter: parent.verticalCenter
+            smooth: true
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Mas.png"
+            visible: txtCantidadArticulosFacturacion.visible
+            MouseArea {
+                id: mouse_area2
+                clip: true
+                //
+                anchors.fill: parent
+                visible: activo
+                onClicked: {
+
+
+                    //Controlo si se peude vender sin stock previsto
+                    if(modeloArticulos.retornaSiPuedeVenderSinStock(1,cbListatipoDocumentos.codigoValorSeleccion,codigoArticulo,retornaCantidadDeUnArticuloEnFacturacion(codigoArticulo)   )){
+
+
+                        ///Chequeo que modo de calculo de total esta seteado
+                        var modoCalculoTotal=modeloconfiguracion.retornaValorConfiguracion("MODO_CALCULOTOTAL");
+
+                        suma=0
+
+                        if(cantidadItems!=99999){
+                            suma=parseFloat(precioArticuloSubTotal)
+                            suma+=parseFloat(precioArticulo)
+
+                            precioArticuloParseado=precioArticulo
+
+
+                            if(modoCalculoTotal=="1"){
+                                etiquetaTotal.setearTotal(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                            }else if(modoCalculoTotal=="2"){
+                                etiquetaTotal.setearTotalModoArticuloSinIva(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                            }
+
+
+                            modeloItemsFactura.set(index,{"cantidadItems": cantidadItems+1})
+
+                            modeloItemsFactura.set(index,{"precioArticuloSubTotal": suma.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                            recalcularTotales()
                         }
 
 
-                        modeloItemsFactura.set(index,{"cantidadItems": cantidadItems+1})
-                        modeloItemsFactura.set(index,{"precioArticuloSubTotal": suma.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
                     }
-
-
                 }
             }
         }
-    }
 
-    Image {
-        id: imgDecrementarCantidad
-        y: -5
-        width: 16
-        height: 16
-        clip: true
-        opacity: 0.900
-        z: 3
-        anchors.left: imgIncrementarCantidad.right
-        anchors.leftMargin: 2
-        asynchronous: true
-        anchors.verticalCenter: parent.verticalCenter
-        smooth: true
-        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Menos.png"
-        visible: txtCantidadArticulosFacturacion.visible
-
-        MouseArea {
-            id: mouse_area3
-            //
+        Image {
+            id: imgDecrementarCantidad
+            y: -5
+            width: 16
+            height: 16
             clip: true
-            visible: activo
-            anchors.fill: parent
-            onClicked: {
+            opacity: 0.900
+            z: 3
+            anchors.left: imgIncrementarCantidad.right
+            anchors.leftMargin: 2
+            asynchronous: true
+            anchors.verticalCenter: parent.verticalCenter
+            smooth: true
+            source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Menos.png"
+            visible: txtCantidadArticulosFacturacion.visible
 
-                ///Chequeo que modo de calculo de total esta seteado
-                var modoCalculoTotal=modeloconfiguracion.retornaValorConfiguracion("MODO_CALCULOTOTAL");
+            MouseArea {
+                id: mouse_area3
+                //
+                clip: true
+                visible: activo
+                anchors.fill: parent
+                onClicked: {
 
-                resta=0
-                if(cantidadItems!=1){
-                    resta=precioArticuloSubTotal
-                    resta-=precioArticulo
+                    ///Chequeo que modo de calculo de total esta seteado
+                    var modoCalculoTotal=modeloconfiguracion.retornaValorConfiguracion("MODO_CALCULOTOTAL");
 
-                    precioArticuloParseado=precioArticulo
+                    resta=0
+                    if(cantidadItems!=1){
+                        resta=precioArticuloSubTotal
+                        resta-=precioArticulo
 
-                    if(modoCalculoTotal=="1"){
-                        etiquetaTotal.setearTotalAnulacion(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
-                    }else if(modoCalculoTotal=="2"){
-                        etiquetaTotal.setearTotalAnulacionModoArticuloSinIva(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                        precioArticuloParseado=precioArticulo
+
+                        if(modoCalculoTotal=="1"){
+                            etiquetaTotal.setearTotalAnulacion(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                        }else if(modoCalculoTotal=="2"){
+                            etiquetaTotal.setearTotalAnulacionModoArticuloSinIva(precioArticuloParseado.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO")),codigoArticulo,cbListatipoDocumentos.codigoValorSeleccion,consideraDescuento,index)
+                        }
+
+                        modeloItemsFactura.set(index,{"cantidadItems": cantidadItems-1})
+
+                        modeloItemsFactura.set(index,{"precioArticuloSubTotal": resta.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
+                        recalcularTotales()
+
                     }
-
-                    modeloItemsFactura.set(index,{"cantidadItems": cantidadItems-1})
-                    modeloItemsFactura.set(index,{"precioArticuloSubTotal": resta.toFixed(modeloconfiguracion.retornaValorConfiguracion("CANTIDAD_DIGITOS_DECIMALES_MONTO"))})
-
-
                 }
             }
         }
-    }
 
-    Text {
-        //id:
-        id:txtItemPrecioTotalItemArticuloFacturacion
-        y: 3
-        width: 82
-        color: "#212121"
-        // text: precioArticuloSubTotal
-        text: precioArticulo
-        anchors.left: rectLineaSeparacion5.right
-        anchors.leftMargin: 10
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        font.family: "Arial"
-        font.bold: false
-        font.pointSize: 10
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        visible: etiquetaTotal.visible
-    }
+        Text {
+            //id:
+            id:txtItemPrecioTotalItemArticuloFacturacion
+            y: 3
+            width: 82
+            color: "#212121"
+            // text: precioArticuloSubTotal
+            text: precioArticulo
+            anchors.left: rectLineaSeparacionDescuentos.right
+            anchors.leftMargin: 10
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            font.family: "Arial"
+            font.bold: false
+            font.pointSize: 10
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            visible: etiquetaTotal.visible
+        }
 
-    Rectangle {
-        id: rectLineaSeparacion6
-        x: 17
-        y: -4
-        width: 2
-        color: "#c4c4c6"
-        //
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 10
-        anchors.left: txtItemSubTotalTotalItemArticuloFacturacion.right
-        visible: etiquetaTotal.visible
-    }
+        Rectangle {
+            id: rectLineaSeparacion6
+            x: 17
+            y: -4
+            width: 2
+            color: "#c4c4c6"
+            //
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 10
+            anchors.left: txtItemSubTotalTotalItemArticuloFacturacion.right
+            visible: etiquetaTotal.visible
+        }
 
-    Text {
-        id: txtItemPrecioMonedaReferenciaFacturacion
-        width: 82
-        color: "#212121"
-        text: costoArticuloMonedaReferencia
-        verticalAlignment: Text.AlignVCenter
-        //
-        font.pointSize: 10
-        horizontalAlignment: Text.AlignRight
-        font.bold: false
-        anchors.leftMargin: 10
-        anchors.topMargin: 0
-        font.family: "Arial"
-        visible: {
-            if(etiquetaTotal.visible){
-                if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaPrecioManualEnMonedaReferencia")){
-                    true
+        Text {
+            id: txtItemPrecioMonedaReferenciaFacturacion
+            width: 82
+            color: "#212121"
+            text: costoArticuloMonedaReferencia
+            verticalAlignment: Text.AlignVCenter
+            //
+            font.pointSize: 10
+            horizontalAlignment: Text.AlignRight
+            font.bold: false
+            anchors.leftMargin: 10
+            anchors.topMargin: 0
+            font.family: "Arial"
+            visible: {
+                if(etiquetaTotal.visible){
+                    if(modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaPrecioManualEnMonedaReferencia")){
+                        true
+                    }else{
+                        false
+                    }
                 }else{
                     false
                 }
-            }else{
-                false
             }
+            anchors.top: parent.top
+            anchors.bottomMargin: 0
+            anchors.left: rectLineaSeparacion4.right
+            anchors.bottom: parent.bottom
         }
-        anchors.top: parent.top
-        anchors.bottomMargin: 0
-        anchors.left: rectLineaSeparacion4.right
-        anchors.bottom: parent.bottom
+
+        Rectangle {
+            id: rectLineaSeparacion7
+            x: 13
+            y: 2
+            width: 2
+            color: "#c4c4c6"
+            anchors.leftMargin: 10
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.left: txtItemPrecioMonedaReferenciaFacturacion.right
+            //
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            visible: txtItemPrecioMonedaReferenciaFacturacion.visible
+        }
+
     }
 
-    Rectangle {
-        id: rectLineaSeparacion7
-        x: 13
-        y: 2
-        width: 2
-        color: "#c4c4c6"
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 0
-        anchors.topMargin: 0
-        anchors.left: txtItemPrecioMonedaReferenciaFacturacion.right
-        //
-        anchors.top: parent.top
+
+
+    ListView {
+        id: listaDescuentosRecargosAplicados
+        clip: true
+        highlightRangeMode: ListView.NoHighlightRange
+        boundsBehavior: Flickable.DragAndOvershootBounds
+        highlightFollowsCurrentItem: true
+        orientation: ListView.Horizontal
+        height: {
+            if(modeloListaDeDescuentosYRecargosAplicados.count===0){
+                0
+            }else{
+                30
+            }
+        }
+
+        delegate:
+            Rectangle {
+            height: 30
+            width: 220
+            radius: 30
+            color: colorFondo
+            clip: true
+            smooth: true
+            Text {
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                text: nombreDescuento
+                color: "#F5F5F0"
+                font.pixelSize: 10
+                clip: true
+                anchors.right: txtmontoAplicado.left
+                anchors.rightMargin: 10
+
+            }
+            Text {
+                id:txtmontoAplicado
+                anchors.right: botonEliminarDescuentoRecargoEnItem.left
+                anchors.rightMargin:  10
+                anchors.verticalCenter: parent.verticalCenter
+                text: montoAplicado
+                color: "#F5F5F0"
+                font.bold: true
+            }
+            BotonBarraDeHerramientas {
+                id: botonEliminarDescuentoRecargoEnItem
+                anchors.right: parent.right
+                anchors.rightMargin: visible?10:0
+                source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
+                anchors.verticalCenter: parent.verticalCenter
+                width: visible?15:0
+                height: 15
+                z: 100
+                visible: txtNumeroDocumentoFacturacion.enable
+                onClic: {
+
+                    for (var i = 0; i < modeloItemsDescuentosRecargosEnFactura.count; ++i) {
+                        if(uuid==modeloItemsDescuentosRecargosEnFactura.get(i).uuid && indiceDescuento==modeloItemsDescuentosRecargosEnFactura.get(i).indiceDescuento){
+                            console.log("borro",modeloItemsDescuentosRecargosEnFactura.get(i).nombreDescuento)
+                            modeloItemsDescuentosRecargosEnFactura.remove(i);
+                            recalcularTotales();
+
+                        }
+                    }
+
+
+
+                }
+            }
+
+        }
+
+        spacing: 20
+
+        flickableDirection: Flickable.HorizontalFlick
+        keyNavigationWraps: false
+        interactive: false
+        anchors.left: parent.left
         anchors.bottom: parent.bottom
-        visible: txtItemPrecioMonedaReferenciaFacturacion.visible
+        anchors.leftMargin: 20
+        anchors.bottomMargin: 10
+        anchors.right: parent.right
+
+        model: modeloListaDeDescuentosYRecargosAplicados
+
+
+
+
     }
+
+    ListModel{
+        id:modeloListaDeDescuentosYRecargosAplicados
+    }
+
+    Component.onCompleted:{
+        iterarModelo()
+    }
+
+    Connections {
+        target: modeloItemsDescuentosRecargosEnFactura
+
+
+        onItemsInserted: { iterarModelo() }
+        onItemsRemoved:  { iterarModelo() }
+        onItemsChanged:  { iterarModelo() }   // cambios de datos dentro de elementos
+    }
+
+    function iterarModelo() {
+        modeloListaDeDescuentosYRecargosAplicados.clear();
+        for (var i = 0; i < modeloItemsDescuentosRecargosEnFactura.count; ++i) {
+            if(uuid==modeloItemsDescuentosRecargosEnFactura.get(i).uuid){
+                modeloListaDeDescuentosYRecargosAplicados.append({
+                                                                     colorFondo: modeloItemsDescuentosRecargosEnFactura.get(i).esRecargo?"#FFA4A4":"#80A1BA",
+                                                                                                                                          nombreDescuento: modeloItemsDescuentosRecargosEnFactura.get(i).nombreDescuento,
+                                                                                                                                          montoAplicado: (modeloItemsDescuentosRecargosEnFactura.get(i).esPorMonto?modeloItemsDescuentosRecargosEnFactura.get(i).montoAplicado.toFixed(2):modeloItemsDescuentosRecargosEnFactura.get(i).porcentajeAplicado.toFixed(2)   +" "+modeloMonedas.retornaSimboloMoneda(cbListaMonedasEnFacturacion.codigoValorSeleccion)),
+                                                                                                                                          indiceDescuento: modeloItemsDescuentosRecargosEnFactura.get(i).indiceDescuento
+                                                                 })
+            }
+
+        }
+        /*
+    modeloItemsDescuentosRecargosEnFactura.append({
+
+                                                                  uuid: modeloDocumentosLineasAjustes.retornaUuid(h),
+                                                                  indiceDescuento: modeloDocumentosLineasAjustes.retornaNumeroLinea(h),
+                                                                  idDescuento: modeloDocumentosLineasAjustes.retornaIdDescuento(h),
+                                                                  nombreDescuento: modeloDocumentosLineasAjustes.retornaDescripcion(h),
+                                                                  valorADescontar: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?modeloDocumentosLineasAjustes.retornaPorcentaje(h):modeloDocumentosLineasAjustes.retornaMonto(h) ,
+                                                                  esRecargo: modeloDocumentosLineasAjustes.retornaTipo(h)=="DESCUENTO"?false:true,
+                                                                  esPorMonto: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?false:true,
+                                                                  moneda:modeloDocumentosLineasAjustes.retornaMoneda(h),
+                                                                  cotizacion:modeloDocumentosLineasAjustes.retornaCotizacionUsada(h),
+                                                                  montoAplicado: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?0:modeloDocumentosLineasAjustes.retornaMontoAplicado(h),
+                                                                  porcentajeAplicado:modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?modeloDocumentosLineasAjustes.retornaMontoAplicado(h):0,
+                                                                  precioUnitBase:modeloDocumentosLineasAjustes.retornaPrecioUnitBase(h),
+                                                                  precioUnitResultante:modeloDocumentosLineasAjustes.retornaPrecioUnitResultante(h),
+                                                                  usuario: modeloDocumentosLineasAjustes.retornaUsuario(h),
+                                                                  codigoArticulo:modeloDocumentosLineasAjustes.retornaCodigoArticulo(h),
+                                                                  descripcionArticulo:modeloDocumentosLineasAjustes.retornaDescripcionArticulo(h)
+
+                                                              });*/
+    }
+
 
 }

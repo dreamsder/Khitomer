@@ -85,5 +85,6 @@
         <file>qml/ProyectoQML/Imagenes/iconoOLD.png</file>
         <file>qml/ProyectoQML/Imagenes/LogoKhitomer-19-07-2016_128px.OLD.png</file>
         <file>qml/ProyectoQML/Imagenes/guardarSinImprimir.png</file>
+        <file>qml/ProyectoQML/Imagenes/descuentoRecargo.png</file>
     </qresource>
 </RCC>

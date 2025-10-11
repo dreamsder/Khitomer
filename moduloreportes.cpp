@@ -1977,7 +1977,7 @@ QString ModuloReportes::generarCSV(QString sqlConsulta,QString _codigoReporte, Q
 
 
 
-
+/*
 bool ModuloReportes::imprimirReporteEnPDF(QString _codigoReporte)const{
 
     QFile previewHTML(retornaDirectorioReporteWeb());
@@ -1985,23 +1985,17 @@ bool ModuloReportes::imprimirReporteEnPDF(QString _codigoReporte)const{
 
     QFile estiloCSS(retornaDirectorioEstiloCssPDF());
     estiloCSS.open(QIODevice::ReadOnly);
-
     QString const html = QString::fromAscii(previewHTML.readAll());
     QString const estilo = QString::fromAscii(estiloCSS.readAll());
-
     QTextDocument doc;
     QFont fuente;
-
     fuente.setPointSize(8);
     doc.setDefaultFont(fuente);
     doc.setDocumentMargin(10);
     doc.setDefaultStyleSheet(estilo);
     doc.setHtml(html);
-
     QPrinter printer;
     printer.setPageMargins(0,0,0,0,QPrinter::Millimeter);
-
-
     if(QDir::rootPath()=="/"){
     }else{
         if(!QDir(QDir::rootPath()+"/Khitomer/Reporte" ).exists()){
@@ -2011,18 +2005,116 @@ bool ModuloReportes::imprimirReporteEnPDF(QString _codigoReporte)const{
             }
         }
     }
-
     if(QDir::rootPath()=="/"){
         printer.setOutputFileName(QDir::homePath()+"/"+retornaDescripcionDelReporte(_codigoReporte)+funcion_reporte.fechaHoraDeHoyTrimeado()+".pdf");
     }else{
         printer.setOutputFileName(QDir::rootPath()+"/Khitomer/Reporte/"+retornaDescripcionDelReporte(_codigoReporte)+funcion_reporte.fechaHoraDeHoyTrimeado()+".pdf");
     }
+    try {
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        doc.print(&printer);
+        return true;
+    } catch (...) {
 
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    doc.print(&printer);
-    return true;
-
+        return false;
+    }
 }
+*/
+
+bool ModuloReportes::imprimirReporteEnPDF(QString codigoReporte) const
+{
+
+    // 1) Abrir fuentes (HTML/CSS) con manejo de error
+    QFile previewHTML(retornaDirectorioReporteWeb());
+    if (!previewHTML.open(QIODevice::ReadOnly)) {
+
+        qDebug() << QString("No se pudo abrir HTML '%1': %2").arg(previewHTML.fileName(), previewHTML.errorString());
+        return false;
+    }
+
+    QFile estiloCSS(retornaDirectorioEstiloCssPDF());
+    if (!estiloCSS.open(QIODevice::ReadOnly)) {
+
+        qDebug() << QString("No se pudo abrir CSS '%1': %2").arg(estiloCSS.fileName(), estiloCSS.errorString());
+        return false;
+    }
+
+    // Mejor UTF-8 para tildes/ñ
+    const QString html   = QString::fromUtf8(previewHTML.readAll());
+    const QString estilo = QString::fromUtf8(estiloCSS.readAll());
+
+    // 2) Preparar documento
+    QTextDocument doc;
+    QFont fuente;
+    fuente.setPointSize(8);
+    doc.setDefaultFont(fuente);
+    doc.setDocumentMargin(10);
+    doc.setDefaultStyleSheet(estilo);
+    doc.setHtml(html);
+
+    // 3) Directorio de salida y permisos
+    QString baseDir;
+    if (QDir::rootPath() == "/") { // Linux/Unix
+        baseDir = QDir::homePath();
+    } else { // Windows
+        baseDir = QDir::rootPath() + "/Khitomer/Reporte";
+    }
+
+    QDir dir;
+    if (!dir.exists(baseDir) && !dir.mkpath(baseDir)) {
+        qDebug() << QString("No se pudo crear el directorio destino: %1").arg(baseDir);
+        return false;
+    }
+
+    // Probar escritura en el directorio (permite obtener errorString de QFile si falla)
+    QString probePath = QDir(baseDir).filePath(".probe.tmp");
+    {
+        QFile probe(probePath);
+        if (!probe.open(QIODevice::WriteOnly)) {
+            qDebug()<< QString("Sin permisos de escritura en '%1': %2").arg(baseDir, probe.errorString());
+            return false;
+        }
+    }
+    QFile::remove(probePath);
+
+    // 4) Construir nombre de archivo seguro
+    QString fileName = retornaDescripcionDelReporte(codigoReporte)
+                       + funcion_reporte.fechaHoraDeHoyTrimeado()
+                       + ".pdf";
+    // Sanitizar caracteres inválidos (Windows)
+    fileName.replace(QRegExp("[\\\\/:*?\"<>|]"), "_");
+
+    const QString outPath = QDir(baseDir).filePath(fileName);
+
+    // 5) Configurar printer y generar PDF
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
+    printer.setOutputFileName(outPath);
+
+    // IMPORTANTE: print() no devuelve estado ni lanza excepciones
+    doc.print(&printer);
+
+    // 6) Validar resultado
+    QFile outFile(outPath);
+    if (!outFile.exists()) {
+        qDebug() << QString("El archivo PDF no se creó: %1").arg(outPath);
+        return false;
+    }
+    if (outFile.size() == 0) {
+        qDebug() << QString("El archivo PDF quedó vacío: %1").arg(outPath);
+        return false;
+    }
+
+    // Opcional: chequear estado del printer (no siempre es fiable para PDF)
+    if (printer.printerState() == QPrinter::Aborted || printer.printerState() == QPrinter::Error) {
+        qDebug() << "El subsistema de impresión reportó un error al generar el PDF.";
+        return false;
+    }
+
+    return true;
+}
+
 
 
 QString ModuloReportes::retornaDirectorioReporteCSV()const{

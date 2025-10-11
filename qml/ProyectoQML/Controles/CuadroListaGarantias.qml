@@ -64,6 +64,7 @@ Rectangle {
                 opacidadRectPrincipal: 0.800
                 anchors.top: parent.top
                 anchors.topMargin: -15
+                smooth: true
                 source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/CerrarLista.png"
                 anchors.rightMargin: -15
                 z: 1
