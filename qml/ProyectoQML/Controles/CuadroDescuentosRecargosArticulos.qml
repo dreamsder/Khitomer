@@ -10,7 +10,7 @@ Rectangle {
 
     signal clicCancelar
     // Emite: codigo, nombre, porcentaje (si es %; si es monto va 0), esRecargo
-    signal sendDescuentoRecargo(string codigo, string nombre, real valoraDescontar, bool esRecargo, bool esPorMonto, string moneda, string indiceArticulo)
+    signal sendDescuentoRecargo(string codigo, string nombre, real valoraDescontar, bool esRecargo, bool esPorMonto, string moneda, string indiceArticulo, string aplicaSobrePrecioUnitario)
 
     // API pública (como tu otro cuadro)
     property alias modeloItems: listaDescuentos.model
@@ -234,7 +234,7 @@ Rectangle {
                     function aplicar() {
 
                         var porc = esMonto ? montoVal.toFixed(2) : porcentajeVal.toFixed(2)
-                        sendDescuentoRecargo(String(codigoVal), String(nombreStr), porc, esRecargo, esMonto, moneda,indexItem)
+                        sendDescuentoRecargo(String(codigoVal), String(nombreStr), porc, esRecargo, esMonto, moneda,indexItem,aplicaSobrePrecioUnitario)
                     }
                 }
 

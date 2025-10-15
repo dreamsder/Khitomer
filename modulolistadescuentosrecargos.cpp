@@ -25,6 +25,7 @@ ModuloListaDescuentosRecargos::ModuloListaDescuentosRecargos(QObject *parent)
     m_roles[MontoRole]       = "monto";
     m_roles[MonedaRole]      = "moneda";
     m_roles[SimboloRole]     = "simbolo";
+    m_roles[AplicaSobrePrecioUnitarioRole]     = "aplicaSobrePrecioUnitario";
 
     setRoleNames(m_roles);
 
@@ -57,9 +58,11 @@ QVariant ModuloListaDescuentosRecargos::data(const QModelIndex &index, int role)
     case MontoRole:       return it.monto();
     case MonedaRole:      return it.moneda();
     case SimboloRole:     return it.simbolo();
+    case AplicaSobrePrecioUnitarioRole:      return it.aplicaSobrePrecioUnitario();
     default:              return QVariant();
     }
 }
+
 
 void ModuloListaDescuentosRecargos::limpiar()
 {
@@ -100,8 +103,10 @@ void ModuloListaDescuentosRecargos::recargarDesdeQuery(QSqlQuery &q)
         const double monto     = q.value(6).isNull() ? 0.0 : q.value(6).toDouble();
         const int moneda       = q.value(7).isNull() ? 0 : q.value(7).toInt();
         const QString simbolo  = q.value(8).toString();
+        const int aplicaSobrePrecioUnitario       = q.value(9).toInt();
 
-        m_items.append(DescuentoRecargo(id, activo, tipo, tipoVal, desc, porc, monto, moneda, simbolo));
+
+        m_items.append(DescuentoRecargo(id, activo, tipo, tipoVal, desc, porc, monto, moneda, simbolo,aplicaSobrePrecioUnitario));
     }
     //qDebug()<< q.lastQuery();
     endResetModel();
@@ -112,7 +117,7 @@ void ModuloListaDescuentosRecargos::cargarQueryBasica(QString &sql, bool incluir
     sql =
         "SELECT d.id, d.activo, d.tipo, d.tipoValor, d.descripcion, "
         "       d.porcentaje, d.monto, d.moneda, "
-        + QString(incluirMonedaSimbolo ? "IFNULL(m.simboloMoneda,'') AS simbolo " : "'' AS simbolo ") +
+        + QString(incluirMonedaSimbolo ? "IFNULL(m.simboloMoneda,'') AS simbolo " : "'' AS simbolo ") + " ,d.aplicaSobrePrecioUnitario " +
         "FROM Descuentos d "
         "LEFT JOIN Monedas m ON m.codigoMoneda = d.moneda "
         "WHERE 1=1 ";
@@ -310,19 +315,23 @@ int ModuloListaDescuentosRecargos::insertar(int activo,
                                             const QString &descripcion,
                                             const QVariant &porcentaje,
                                             const QVariant &monto,
-                                            const QVariant &moneda)
+                                            const QVariant &moneda,
+                                            const int &aplicaSobrePrecioUnitario
+                                            )
 {
 
 
-    //qDebug()<< "Monto: " <<monto ;
+
+
+    qDebug()<< "aplicaSobrePrecioUnitario: " <<aplicaSobrePrecioUnitario ;
 
 
     QSqlDatabase db = Database::connect(); if (!db.isOpen()) db.open();
     if (!db.isValid() || !db.isOpen()) return 0;
 
     QSqlQuery q(db);
-    q.prepare("INSERT INTO Descuentos (activo, tipo, tipoValor, descripcion, porcentaje, monto, moneda) "
-              "VALUES (:a, :t, :tv, :d, :p, :m, :mon)");
+    q.prepare("INSERT INTO Descuentos (activo, tipo, tipoValor, descripcion, porcentaje, monto, moneda, aplicaSobrePrecioUnitario) "
+              "VALUES (:a, :t, :tv, :d, :p, :m, :mon, :_aplicaSobrePrecioUnitario)");
     q.bindValue(":a",  activo);
     q.bindValue(":t",  tipo);
     q.bindValue(":tv", tipoValor);
@@ -330,6 +339,7 @@ int ModuloListaDescuentosRecargos::insertar(int activo,
     q.bindValue(":p",  (porcentaje.isValid()? porcentaje : QVariant(QVariant::Double)));
     q.bindValue(":m",  (monto.isValid()? monto : QVariant(QVariant::Double)));
     q.bindValue(":mon",(moneda.isValid() && moneda.toInt()>0 ? moneda : QVariant(QVariant::Int)));
+    q.bindValue(":_aplicaSobrePrecioUnitario",  aplicaSobrePrecioUnitario);
 
     if (!q.exec()) return 0;
     return q.lastInsertId().toInt();
@@ -342,14 +352,19 @@ bool ModuloListaDescuentosRecargos::modificar(int id,
                                               const QString &descripcion,
                                               const QVariant &porcentaje,
                                               const QVariant &monto,
-                                              const QVariant &moneda)
+                                              const QVariant &moneda,
+                                              const int &aplicaSobrePrecioUnitario
+                                              )
 {
     QSqlDatabase db = Database::connect(); if (!db.isOpen()) db.open();
     if (!db.isValid() || !db.isOpen()) return false;
 
+    qDebug() << "aplicaSobrePrecioUnitario: " << aplicaSobrePrecioUnitario;
+
     QSqlQuery q(db);
-    q.prepare("UPDATE Descuentos SET activo=:a, tipo=:t, tipoValor=:tv, descripcion=:d, "
+    q.prepare("UPDATE Descuentos SET aplicaSobrePrecioUnitario=:_aplicaSobrePrecioUnitario, activo=:a, tipo=:t, tipoValor=:tv, descripcion=:d, "
               "porcentaje=:p, monto=:m, moneda=:mon WHERE id=:id");
+    q.bindValue(":_aplicaSobrePrecioUnitario",  aplicaSobrePrecioUnitario);
     q.bindValue(":a",  activo);
     q.bindValue(":t",  tipo);
     q.bindValue(":tv", tipoValor);

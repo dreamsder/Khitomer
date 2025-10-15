@@ -924,27 +924,7 @@ Rectangle{
             }
 
         }
-        /*
-    modeloItemsDescuentosRecargosEnFactura.append({
 
-                                                                  uuid: modeloDocumentosLineasAjustes.retornaUuid(h),
-                                                                  indiceDescuento: modeloDocumentosLineasAjustes.retornaNumeroLinea(h),
-                                                                  idDescuento: modeloDocumentosLineasAjustes.retornaIdDescuento(h),
-                                                                  nombreDescuento: modeloDocumentosLineasAjustes.retornaDescripcion(h),
-                                                                  valorADescontar: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?modeloDocumentosLineasAjustes.retornaPorcentaje(h):modeloDocumentosLineasAjustes.retornaMonto(h) ,
-                                                                  esRecargo: modeloDocumentosLineasAjustes.retornaTipo(h)=="DESCUENTO"?false:true,
-                                                                  esPorMonto: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?false:true,
-                                                                  moneda:modeloDocumentosLineasAjustes.retornaMoneda(h),
-                                                                  cotizacion:modeloDocumentosLineasAjustes.retornaCotizacionUsada(h),
-                                                                  montoAplicado: modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?0:modeloDocumentosLineasAjustes.retornaMontoAplicado(h),
-                                                                  porcentajeAplicado:modeloDocumentosLineasAjustes.retornaTipoValor(h)=="PORCENTAJE"?modeloDocumentosLineasAjustes.retornaMontoAplicado(h):0,
-                                                                  precioUnitBase:modeloDocumentosLineasAjustes.retornaPrecioUnitBase(h),
-                                                                  precioUnitResultante:modeloDocumentosLineasAjustes.retornaPrecioUnitResultante(h),
-                                                                  usuario: modeloDocumentosLineasAjustes.retornaUsuario(h),
-                                                                  codigoArticulo:modeloDocumentosLineasAjustes.retornaCodigoArticulo(h),
-                                                                  descripcionArticulo:modeloDocumentosLineasAjustes.retornaDescripcionArticulo(h)
-
-                                                              });*/
     }
 
 

@@ -799,8 +799,10 @@ Rectangle {
                             }
                         }
                         if(modeloItemsDescuentosRecargosEnFactura.get(j).esRecargo){
-                            // Resulto un recargo por monto
-                            valorPrecioArticuloRecalculoTotal=valorPrecioArticuloRecalculoTotal+montoAAplicar
+                            // Resuelvo un recargo por monto
+
+                                valorPrecioArticuloRecalculoTotal=valorPrecioArticuloRecalculoTotal+montoAAplicar
+
                         }else{
 
                             // Verifico si el monto acumulado es diferente de 0, significa que ya tengo datos guardados
@@ -822,13 +824,19 @@ Rectangle {
                         resultado = (valorPrecioArticuloRecalculoTotal/100)*modeloItemsDescuentosRecargosEnFactura.get(j).valorADescontar
                         // Resuelvo el descuento/recargo por porcentaje
                         if(modeloItemsDescuentosRecargosEnFactura.get(j).esRecargo){
-                            // Resulto un recargo por porcentaje
+                            // Resuelvo un recargo por porcentaje
+                            // Si el recargo tiene seteado que aplica sobre el precio unitario, vuelvo a calcular el recargo a aplicar
+                            if(modeloItemsDescuentosRecargosEnFactura.get(j).aplicaSobrePrecioUnitario=="1"){
+                                resultado = (precioInitarioOriginal/100)*modeloItemsDescuentosRecargosEnFactura.get(j).valorADescontar
+                            }
                             valorPrecioArticuloRecalculoTotal=valorPrecioArticuloRecalculoTotal+resultado
+
                         }else{
                             // Resuelvo un descuento por porcentaje
                             valorPrecioArticuloRecalculoTotal=valorPrecioArticuloRecalculoTotal-resultado
                         }
                     }
+                    //aplicaSobrePrecioUnitario
                     console.log("Monto Calculado artículo con descuento linea: "+valorPrecioArticuloRecalculoTotal)
                     modeloItemsDescuentosRecargosEnFactura.set(j,{
                                                                    "cotizacion": cotizacionMoneda,
@@ -881,7 +889,7 @@ Rectangle {
     }
 
 
-    function cargarDescuentoRecargo(codigo,nombre,valoraDescontar,esRecargo,esPorMonto,moneda,indiceArticulo){
+    function cargarDescuentoRecargo(codigo,nombre,valoraDescontar,esRecargo,esPorMonto,moneda,indiceArticulo,aplicaSobrePrecioUnitario){
         var uuidEnModeloItemsFactura = "";
         if(modeloItemsFactura.count>0){
             uuidEnModeloItemsFactura = modeloItemsFactura.get(indiceArticulo).uuid;
@@ -907,7 +915,8 @@ Rectangle {
                                                           precioUnitResultante:0,
                                                           usuario: txtNombreDeUsuario.textoInputBox.trim(),
                                                           codigoArticulo:"",
-                                                          descripcionArticulo:""
+                                                          descripcionArticulo:"",
+                                                          aplicaSobrePrecioUnitario: aplicaSobrePrecioUnitario
 
                                                       });
 
@@ -1648,7 +1657,8 @@ Rectangle {
                                                                               precioUnitResultante:modeloDocumentosLineasAjustes.retornaPrecioUnitResultante(h),
                                                                               usuario: modeloDocumentosLineasAjustes.retornaUsuario(h),
                                                                               codigoArticulo:modeloDocumentosLineasAjustes.retornaCodigoArticulo(h),
-                                                                              descripcionArticulo:modeloDocumentosLineasAjustes.retornaDescripcionArticulo(h)
+                                                                              descripcionArticulo:modeloDocumentosLineasAjustes.retornaDescripcionArticulo(h),
+                                                                              aplicaSobrePrecioUnitario: modeloDocumentosLineasAjustes.retornaAplicaSobrePrecioUnitario(h)
 
                                                                           });
             }
@@ -9790,7 +9800,7 @@ Rectangle {
                         "Indice: ",indiceArticulo
                         )
 
-            cargarDescuentoRecargo(codigo,nombre,valoraDescontar,esRecargo,esPorMonto,moneda,indiceArticulo);
+            cargarDescuentoRecargo(codigo,nombre,valoraDescontar,esRecargo,esPorMonto,moneda,indiceArticulo,aplicaSobrePrecioUnitario);
 
         }
         onVisibleChanged: {

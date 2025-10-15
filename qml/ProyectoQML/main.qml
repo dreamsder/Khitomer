@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.18.1"
+    property string versionKhitomer: "1.18.2"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -341,6 +341,7 @@ Rectangle {
     ///         :Ademas las nueevas tablas de descuentos: Descuentos , DescuentosDiaSemana , DescuentosRangoFecha y DescuentosRangoHora.
     /// 1.18.1  :Se modifica el reporte de Articulos sin venta por rubro para que no tome en cuenta documentos que no sean de venta.
     ///         :Se modifica el reporte de descuentos para que incluya al usuario que agregó el descuento.
+    /// 1.18.2  :Se agrega la posibilidad de que un recargo aplique sobre el precio de lista y no sobre el monto neto del artìculo si recibio un descuento.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

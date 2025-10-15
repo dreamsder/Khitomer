@@ -28,10 +28,7 @@ En caso contrario, consulte <http://www.gnu.org/licenses/>.
 class AjusteLineaDTO
 {
 public:
-   Q_INVOKABLE AjusteLineaDTO(
-
-
-            const quint64 &idAjuste,
+   Q_INVOKABLE AjusteLineaDTO(const quint64 &idAjuste,
             const quint64 &codigoDocumento,
             const quint32 &codigoTipoDocumento,
             const QString &serieDocumento,
@@ -50,9 +47,8 @@ public:
             const QVariant &precioUnitBase,       // DECIMAL(45,4) nullable
             const QVariant &precioUnitResultante, // DECIMAL(45,4) nullable
             const QString &usuario,
-            const QString &uuid
-
-            );
+            const QString &uuid,
+            const int &aplicaSobrePrecioUnitario);
     quint64 idAjuste() const;
     quint64 codigoDocumento() const;
     quint32 codigoTipoDocumento() const;
@@ -73,6 +69,7 @@ public:
     QVariant precioUnitResultante() const;
     QString usuario() const;
     QString uuid() const;
+    int aplicaSobrePrecioUnitario() const;
 
 
 private:
@@ -96,6 +93,7 @@ private:
         QVariant m_precioUnitResultante; // DECIMAL(45,4) nullable
         QString m_usuario;
         QString m_uuid;
+        int m_aplicaSobrePrecioUnitario;
 };
 
 class ModuloDocumentosLineasAjustes : public QAbstractListModel
@@ -122,7 +120,8 @@ public:
         PrecioUnitBaseRole,
         PrecioUnitResultanteRole,
         UsuarioRole,
-        UuidRole
+        UuidRole,
+        AplicaSobrePrecioUnitarioRole
     };
 
     ModuloDocumentosLineasAjustes(QObject *parent = 0);
@@ -183,6 +182,9 @@ public:
     Q_INVOKABLE QString retornaUsuario(int index);
 
     Q_INVOKABLE QString retornaUuid(int index);
+
+    Q_INVOKABLE int retornaAplicaSobrePrecioUnitario(int index);
+
 
 
 

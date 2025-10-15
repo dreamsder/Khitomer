@@ -32,6 +32,7 @@ Rectangle {
     // === Estado edición ===
     property int    ed_id: -1
     property bool   ed_activo: true
+    property bool   ed_aplicaSobrePrecioUnitario: true
     property string ed_tipo: "DESCUENTO"        // "DESCUENTO" | "RECARGO"
     property string ed_tipoValor: "PORCENTAJE"  // "PORCENTAJE" | "MONTO"
     property string ed_descripcion: ""
@@ -55,7 +56,9 @@ Rectangle {
     function normalizarHora(h) { return h && h.length === 5 ? (h + ":00") : h }
 
     function limpiarFormulario() {
-        ed_id = -1; ed_activo = true;
+        ed_id = -1;
+        ed_activo = true;
+        ed_aplicaSobrePrecioUnitario = true;
         ed_tipo = "DESCUENTO";
         ed_tipoValor = "PORCENTAJE"
         colPct.visible=true;
@@ -85,6 +88,7 @@ Rectangle {
         if (modeloDescuentos.obtenerFila) {
             var row = modeloDescuentos.obtenerFila(idSel)
             ed_activo = !!row.activo
+            ed_aplicaSobrePrecioUnitario= !!row.aplicaSobrePrecioUnitario
             ed_tipo   = row.tipo
             ed_tipoValor = row.tipoValor || row.tipo_valor
             ed_descripcion = row.descripcion
@@ -135,7 +139,7 @@ Rectangle {
         var ok = false
         if (ed_id <= 0) {                            // INSERTAR
             var nuevoId = modeloDescuentos.insertar(ed_activo?1:0, ed_tipo, ed_tipoValor,
-                                                               ed_descripcion, p, m, mon)
+                                                               ed_descripcion, p, m, mon,ed_aplicaSobrePrecioUnitario?1:0)
             ok = (nuevoId && nuevoId > 0)
             if (ok) ed_id = nuevoId
         } else {
@@ -143,7 +147,7 @@ Rectangle {
             console.log(m)
             console.log(mon)
             ok = modeloDescuentos.modificar(ed_id, ed_activo?1:0, ed_tipo, ed_tipoValor,
-                                                              ed_descripcion, p, m, mon)
+                                                              ed_descripcion, p, m, mon,ed_aplicaSobrePrecioUnitario?1:0)
         }
 
         if (ok) modeloDescuentos.buscarDescuentosRecargos("", "", false)
@@ -227,7 +231,10 @@ Rectangle {
                             //// Text { text: (descripcion || ""); elide: Text.ElideRight; anchors.verticalCenter: parent.verticalCenter }
                             // //MouseArea { anchors.fill: parent; onClicked: { lista.currentIndex = index; cargarActual((typeof codigo !== "undefined") ? codigo : id) } }
                         }
-                        MouseArea { anchors.fill: parent; onClicked: { lista.currentIndex = index; cargarActual(model.codigo || model.id) } }
+                        MouseArea { anchors.fill: parent; onClicked: { lista.currentIndex = index;
+                                cargarActual(model.codigo || model.id)
+                            }
+                        }
 
 
 
@@ -282,7 +289,7 @@ Rectangle {
                         CheckBox {
                             id: chkActivo
                             textoValor: "Activo"
-                            chekActivo: true
+                            chekActivo: ed_activo
                             visible: true
                             colorTexto: "#333333"
                             onChekActivoChanged: {
@@ -404,8 +411,21 @@ Rectangle {
                                 }
 
                             }
+                            CheckBox {
+                                id: chkaplicaSobrePrecioUnitario
+                                textoValor: "Aplica sobre Precio Unitario"
+                                chekActivo: ed_aplicaSobrePrecioUnitario
+                                visible: {
+                                    ed_tipo==="RECARGO"?true:false
+                                }
 
-
+                                colorTexto: "#333333"
+                                onChekActivoChanged: {
+                                    ed_aplicaSobrePrecioUnitario = chekActivo;
+                                    //  nuevoEstadochkSistenaAdmiteVerDocumentosAnterioresA6meses=chekActivo
+                                    //  cuadroAutorizacionConfiguracion.evaluarPermisos("permiteAutorizarConfiguraciones")
+                                }
+                            }
                         }
 
 

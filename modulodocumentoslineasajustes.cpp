@@ -52,6 +52,9 @@ ModuloDocumentosLineasAjustes::ModuloDocumentosLineasAjustes(QObject *parent)
     roles[PrecioUnitResultanteRole]  = "precioUnitResultante"; // QVariant (nullable)
     roles[UsuarioRole]               = "usuario";
     roles[UuidRole]                  = "uuid";
+    roles[AplicaSobrePrecioUnitarioRole]                  = "aplicaSobrePrecioUnitario";
+
+
 
 
     setRoleNames(roles);
@@ -78,7 +81,8 @@ AjusteLineaDTO::AjusteLineaDTO(
         const QVariant &precioUnitBase,       // DECIMAL(45,4) nullable
         const QVariant &precioUnitResultante, // DECIMAL(45,4) nullable
         const QString &usuario,
-        const QString &uuid
+        const QString &uuid,
+        const int &aplicaSobrePrecioUnitario
         )
 
     : m_idAjuste(idAjuste),
@@ -100,7 +104,8 @@ AjusteLineaDTO::AjusteLineaDTO(
       m_precioUnitBase(precioUnitBase),
       m_precioUnitResultante(precioUnitResultante),
       m_usuario(usuario),
-      m_uuid(uuid)
+      m_uuid(uuid),
+      m_aplicaSobrePrecioUnitario(aplicaSobrePrecioUnitario)
 {
 }
 
@@ -132,6 +137,8 @@ QVariant   AjusteLineaDTO::precioUnitResultante() const   { return m_precioUnitR
 
 QString AjusteLineaDTO::usuario() const            { return m_usuario; }
 QString AjusteLineaDTO::uuid() const               { return m_uuid; }
+
+int AjusteLineaDTO::aplicaSobrePrecioUnitario()const {return m_aplicaSobrePrecioUnitario;}
 
 
 
@@ -241,7 +248,9 @@ void ModuloDocumentosLineasAjustes::buscar(QString codigoDocumento, QString codi
                                 q.value(rec.indexOf("precioUnitBase")),      // QVariant (nullable)
                                 q.value(rec.indexOf("precioUnitResultante")),// QVariant (nullable)
                                 q.value(rec.indexOf("usuario")).toString(),
-                                q.value(rec.indexOf("uuid")).toString()
+                                q.value(rec.indexOf("uuid")).toString(),
+                                q.value(rec.indexOf("aplicaSobrePrecioUnitario")).toInt()
+
                                 )
                             );
             }
@@ -324,6 +333,10 @@ QVariant ModuloDocumentosLineasAjustes::data(const QModelIndex & index, int role
     else if (role == UuidRole){
         return ajusteLineaDTO.uuid();
     }
+    else if (role == AplicaSobrePrecioUnitarioRole){
+        return ajusteLineaDTO.aplicaSobrePrecioUnitario();
+    }
+
 
 
 
@@ -411,7 +424,9 @@ QString ModuloDocumentosLineasAjustes::retornaUsuario(int index){
 QString ModuloDocumentosLineasAjustes::retornaUuid(int index){
     return m_AjusteLineaDTO[index].uuid();
 }
-
+int ModuloDocumentosLineasAjustes::retornaAplicaSobrePrecioUnitario(int index){
+    return m_AjusteLineaDTO[index].aplicaSobrePrecioUnitario();
+}
 
 
 

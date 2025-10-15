@@ -19,10 +19,12 @@ public:
                                  const double &porcentaje,
                                  const double &monto,
                                  const int &moneda,
-                                 const QString &simbolo)
+                                 const QString &simbolo,
+                                 const int &aplicaSobrePrecioUnitario
+                                 )
         : m_id(id), m_activo(activo), m_tipo(tipo), m_tipoValor(tipoValor),
           m_descripcion(descripcion), m_porcentaje(porcentaje),
-          m_monto(monto), m_moneda(moneda), m_simbolo(simbolo)
+          m_monto(monto), m_moneda(moneda), m_simbolo(simbolo), m_aplicaSobrePrecioUnitario(aplicaSobrePrecioUnitario)
     {}
 
     inline int id() const { return m_id; }
@@ -34,6 +36,7 @@ public:
     inline double monto() const { return m_monto; }
     inline int moneda() const { return m_moneda; }
     inline QString simbolo() const { return m_simbolo; }
+    inline int aplicaSobrePrecioUnitario() const {return m_aplicaSobrePrecioUnitario;}
 
 private:
     int m_id;
@@ -45,6 +48,7 @@ private:
     double m_monto;
     int m_moneda;
     QString m_simbolo;
+    int m_aplicaSobrePrecioUnitario;
 };
 
 class ModuloListaDescuentosRecargos : public QAbstractListModel
@@ -63,7 +67,8 @@ public:
         PorcentajeRole,
         MontoRole,
         MonedaRole,
-        SimboloRole
+        SimboloRole,
+        AplicaSobrePrecioUnitarioRole
     };
 
     Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -90,7 +95,7 @@ public:
                              const QString &descripcion,
                              const QVariant &porcentaje,   // null para MONTO
                              const QVariant &monto,        // null para PORCENTAJE
-                             const QVariant &moneda);      // null/0 si no aplica
+                             const QVariant &moneda, const int &aplicaSobrePrecioUnitario);      // null/0 si no aplica
 
     Q_INVOKABLE bool modificar(int id,
                                int activo,
@@ -99,7 +104,7 @@ public:
                                const QString &descripcion,
                                const QVariant &porcentaje,
                                const QVariant &monto,
-                               const QVariant &moneda);
+                               const QVariant &moneda, const int &aplicaSobrePrecioUnitario);
 
     Q_INVOKABLE bool eliminar(int id);
 
