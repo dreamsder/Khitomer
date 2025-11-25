@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.18.2"
+    property string versionKhitomer: "1.18.3"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -342,6 +342,10 @@ Rectangle {
     /// 1.18.1  :Se modifica el reporte de Articulos sin venta por rubro para que no tome en cuenta documentos que no sean de venta.
     ///         :Se modifica el reporte de descuentos para que incluya al usuario que agregó el descuento.
     /// 1.18.2  :Se agrega la posibilidad de que un recargo aplique sobre el precio de lista y no sobre el monto neto del artìculo si recibio un descuento.
+    /// 1.18.3  :Se agrega el mensaje de Garantia Extendida en las observaciones que se envian a imix local, cuando se hace un recargo, a pedido de DigitalWorld.
+    ///         :Se modifica el reporte "Información de clientes entre fechas" para agregarle el usuario que dio de alta el cliente.
+    ///         :Se modifica el reporte "Ventas de artículos segun descuentos y recargos entre fechas" para corregir error en documentos.
+    ///         :Se modifica el reporte "Ventas de artìculos sin venta por rubro entre fechas" para que incluya la ultima venta y la ultima compra del artìculo.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

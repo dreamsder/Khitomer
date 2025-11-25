@@ -4435,7 +4435,7 @@ bool procesarImix(QString _codigoDocumento,QString _codigoTipoDocumento, QString
     codigoTipoDocumentoV=_codigoTipoDocumento;
     serieDocumentoV=_serieDocumento;
 
-    //  qDebug()<<str1;
+      qDebug()<<str1;
 
     QByteArray baddddd = str1.toUtf8();
     const char *mensajeAEnviarPost = baddddd.data();
@@ -4567,7 +4567,8 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
     consultaSql +=" AR.codigoIva'codigoIva',  ";
     consultaSql +=" IV.codigoIvaCFE'codigoIvaCFE', ";
     consultaSql +=" DOC.formaDePago'formaDePago', ";
-    consultaSql +=" concat(DE.descripcionDepartamento,'-',LO.descripcionLocalidad)'Ciudad' ";
+    consultaSql +=" concat(DE.descripcionDepartamento,'-',LO.descripcionLocalidad)'Ciudad', ";
+    consultaSql +=" DL.montoRecargo  'tieneGarantiaExtendida' ";
 
     consultaSql +=" FROM DocumentosLineas DL      ";
     consultaSql +=" join Documentos DOC on DOC.codigoDocumento=DL.codigoDocumento and DOC.codigoTipoDocumento=DL.codigoTipoDocumento and DOC.serieDocumento=DL.serieDocumento ";
@@ -4581,6 +4582,7 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
     consultaSql +=" join Ivas IV on IV.codigoIva=AR.codigoIva ";
     consultaSql +=" where DOC.codigoDocumento="+_codigoDocumento+" and DOC.codigoTipoDocumento="+_codigoTipoDocumento+" and DOC.serieDocumento='"+_serieDocumento+"' and DOC.esDocumentoCFE='1' ";
 
+    qDebug() << "Consulta para Obtener los datos para evniar a Imix Local"  << consultaSql;
 
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -4593,6 +4595,17 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
     if(conexion){
         QSqlQuery query(Database::connect());
         if(query.exec(consultaSql)) {
+
+            QString GarantiaExtendida="";
+            while (query.next()){
+                if (query.value(25).toDouble()!=0) {
+                    GarantiaExtendida="Garantia Extendida";
+                }
+            }
+
+            query.previous();
+            query.first();
+
             if(query.first()){
                 //  QString j=  "{\"Cliente\":\"1\",\"Comprobante\":\"Venta Contado\",\"Direccion\":\"Direccion del cliente\",\"Emitir\":true,\"Fecha\":\"/Date(1504666800)/\",\"Lineas\":[{\"Articulo\":\"2\",\"Cantidad\":1,\"Descripcion\":\"pepe\",\"Precio\":150},{\"Articulo\":\"1\",\"Cantidad\":1,\"Descripcion\":\"pepe\",\"Precio\":150}],\"Moneda\":\"UYU\",\"Numero\":\"207\",\"Observaciones\":\"\",\"PaisDocumento\":\"UY\",\"PorcentajeDescuento\":0.0,\"Proveedor\":\"10\",\"RazonSocial\":\"Demostracion\",\"Rut\":\"222245432128\",\"Serie\":\"B\",\"TipoDeTraslado\":1,\"TipoDocumento\":0,\"Total\":300}";
 
@@ -4614,11 +4627,18 @@ QString crearJsonIMIX(QString _codigoDocumento,QString _codigoTipoDocumento, QSt
                 QString Moneda=query.value(12).toString().replace("\n","");
                 QString PorcentajeDescuento=query.value(13).toString();
                 QString Total=query.value(14).toString();
-                QString Observacion=query.value(19).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                QString Observacion="";
+                if(GarantiaExtendida==""){
+                Observacion=query.value(19).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+                }else{
+                    Observacion=GarantiaExtendida;
+                }
+
                 QString TipoTrasladoRemito=query.value(20).toString();
 
                 QString FormaDePago=query.value(23).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
                 QString Ciudad=query.value(24).toString().toUpper().replace("Á","A").replace("É","E").replace("Í","I").replace("Ó","O").replace("Ú","U").replace("\"","\\\"").replace("\n","");
+
 
                 QString ClienteOProveedor="Cliente";
                 QString DatoDocumento=",\"Documento\":\""+Documento+"\"";

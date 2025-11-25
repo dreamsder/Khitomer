@@ -1925,6 +1925,7 @@ QString ModuloReportes::generarCSV(QString sqlConsulta,QString _codigoReporte, Q
         if(listaConsultas.length()==1 && listaConsultas.at(0).trimmed()=="")
             return "0";
 
+
         if(query.exec(listaConsultas.at(0))) {
             QString nombreArchivoCSV=retornaDescripcionDelReporte(_codigoReporte)+funcion_reporte.fechaHoraDeHoyTrimeado()+".csv";
             if(_codigoReporte=="82"){
@@ -1941,11 +1942,11 @@ QString ModuloReportes::generarCSV(QString sqlConsulta,QString _codigoReporte, Q
             QString rutaArchivo=retornaDirectorioReporteCSV()+nombreArchivoCSV;
 
             QFile archivo(rutaArchivo);
-
             if(archivo.open(QIODevice::WriteOnly)) {
                 QTextStream salida(&archivo);
 
                 while(query.next()){
+
 
                     int totalquery=query.record().count();
 

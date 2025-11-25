@@ -463,6 +463,7 @@ Rectangle {
         }
 
 
+        console.log("voy a generar un CSV")
         var estadoGeneracionReporte=modeloReportes.generarCSV(consultaSqlPrevia,codigoReporteRealizado,cbxSeparadorCSV.codigoValorSeleccion,fechaReporte);
 
         txtMensajeInformacionReportes.visible=true
