@@ -346,6 +346,7 @@ Rectangle {
     ///         :Se modifica el reporte "Información de clientes entre fechas" para agregarle el usuario que dio de alta el cliente.
     ///         :Se modifica el reporte "Ventas de artículos segun descuentos y recargos entre fechas" para corregir error en documentos.
     ///         :Se modifica el reporte "Ventas de artìculos sin venta por rubro entre fechas" para que incluya la ultima venta y la ultima compra del artìculo.
+    ///         :Se agrega el boton de artículos "Consultados" en la busqueda inteligente.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15

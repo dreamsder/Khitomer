@@ -80,6 +80,30 @@ Rectangle{
 
         }
 
+
+        BotonPaletaSistema {
+            id: btnCargarArticulosConsultadoEnBusquedaInteligente
+            text: "Consultado"
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.right: txtInfoExtendida.left
+            anchors.rightMargin: 100
+            visible:{
+                    if(modeloListaPerfilesComboBox.retornaValorDePermiso(modeloUsuarios.retornaCodigoPerfil(txtNombreDeUsuario.textoInputBox.trim()),"permiteUsarReporteDeConsultasEnArticulos")){
+                        true
+                    }else{
+                        false
+                    }
+                }
+
+            onClicked: {
+                    if(funcionesmysql.mensajeAdvertencia("Desea reportar el artículo "+txtDescripcionItem.text.trim()+" como consultado?\n\nPresione [ Sí ] para confirmar.")){
+                        modeloArticulos.reportarConsultaDeArticulo(codigoItem,txtNombreDeUsuario.textoInputBox.trim());
+                    }
+            }
+        }
+
+
         Text {
             id: txtInfoExtendida
             width: 80
