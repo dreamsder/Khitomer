@@ -205,7 +205,15 @@ Rectangle{
             width: 210
             height: txtStockArticuloEnListaPrevisto.implicitHeight
             //text: qsTr("Stock previsto:  "+modeloArticulos.retornaStockTotalArticulo(codigoArticulo))
-            text: "Stock previsto:  "+stockPrevisto
+            text: {
+                if(stockPrevisto==0){
+                    "Stock previsto:  "+modeloArticulos.retornaStockTotalPrevistoArticuloOriginal(codigoArticulo)
+                }else{
+                    "Stock previsto:  "+stockPrevisto
+                }
+
+            }
+
             font.family: "Arial"
             //
             font.pixelSize: 11
@@ -219,7 +227,14 @@ Rectangle{
             width: 210
             height: txtStockArticuloEnListaReal.implicitHeight
             //text: qsTr("Stock real:  "+modeloArticulos.retornaStockTotalArticuloReal(codigoArticulo))
-            text:  "Stock real:  "+stockReal
+            text: {
+                if(stockReal==0){
+                    "Stock real:  "+modeloArticulos.retornaStockTotalArticuloRealOriginal(codigoArticulo)
+                }else{
+                    "Stock real:  "+stockReal
+                }
+            }
+
             font.family: "Arial"
             //
             font.pixelSize: 11

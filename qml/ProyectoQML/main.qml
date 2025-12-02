@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.18.3"
+    property string versionKhitomer: "1.18.4"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -347,6 +347,7 @@ Rectangle {
     ///         :Se modifica el reporte "Ventas de artículos segun descuentos y recargos entre fechas" para corregir error en documentos.
     ///         :Se modifica el reporte "Ventas de artìculos sin venta por rubro entre fechas" para que incluya la ultima venta y la ultima compra del artìculo.
     ///         :Se agrega el boton de artículos "Consultados" en la busqueda inteligente.
+    /// 1.18.4  :Se modifica el llamado a la carga de stock en los articulos. Si el valor viene en cero, se verifica nuevamente contabilizando todo el stock desde los documentos.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
