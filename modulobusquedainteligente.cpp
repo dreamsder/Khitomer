@@ -63,7 +63,125 @@ void ModuloBusquedaInteligente::agregarBusquedaInteligente(const BusquedaIntelig
 void ModuloBusquedaInteligente::limpiarBusquedaInteligente(){
     m_BusquedaInteligente.clear();
 }
+static QString foldAccents(const QString& s)
+{
+    QString n = s.normalized(QString::NormalizationForm_D);
+    QString out;
+    out.reserve(n.size());
+    for (int i = 0; i < n.size(); ++i) {
+        const QChar c = n.at(i);
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining &&
+            c.category() != QChar::Mark_Enclosing) {
+            out.append(c);
+        }
+    }
+    return out;
+}
 
+void ModuloBusquedaInteligente::buscarArticulosInteligente(QString datoABuscar, bool _incluyeInactivos)
+{
+    Database::chequeaStatusAccesoMysql();
+    if (!Database::connect().isOpen() && !Database::connect().open()) {
+        qDebug() << "No conecto";
+        return;
+    }
+
+    // 1) Normaliza: espacios + minúsculas + quitar acentos del INPUT
+    QString texto = foldAccents(datoABuscar).toLower().simplified();
+    if (texto.isEmpty()) return;
+
+    // 2) Tokeniza
+    QStringList tokens = texto.split(' ', QString::SkipEmptyParts);
+    if (tokens.isEmpty()) return;
+
+    // Helper: arma (expr RLIKE ? AND expr RLIKE ? AND ...)
+    auto buildAndForExpr = [&](const QString& expr) {
+        QStringList parts;
+        for (int i = 0; i < tokens.size(); ++i)
+            parts << QString("%1 RLIKE ?").arg(expr);
+        return "(" + parts.join(" AND ") + ")";
+    };
+
+    // Expresiones principales (texto)
+    QString artDescExt = buildAndForExpr("LOWER(Articulos.descripcionExtendida)");
+    QString artDescArt = buildAndForExpr("LOWER(Articulos.descripcionArticulo)");
+
+    // Subqueries “inteligentes” para IVA y Moneda (por descripción)
+    // (SELECT codigoIva FROM Ivas WHERE <tokens> LIMIT 1)
+    QString ivaSub =
+        "Articulos.codigoIva = ("
+        "SELECT codigoIva FROM Ivas WHERE "
+        + buildAndForExpr("LOWER(Ivas.descripcionIva)") +
+        " LIMIT 1)";
+
+    QString monedaSub =
+        "Articulos.codigoMoneda = ("
+        "SELECT codigoMoneda FROM Monedas WHERE "
+        + buildAndForExpr("LOWER(Monedas.descripcionMoneda)") +
+        " LIMIT 1)";
+
+    // WHERE base
+    QString where =
+        "Clientes.tipoCliente=2 AND ("
+        + ivaSub + " OR "
+        + monedaSub + " OR "
+        + artDescExt + " OR "
+        + artDescArt +
+        ")";
+
+    if (!_incluyeInactivos) {
+        where = "Articulos.activo='1' AND " + where;
+    }
+
+    QSqlQuery q(Database::connect());
+    q.prepare(
+        "SELECT Articulos.codigoArticulo AS codigoItem, 'ARTICULO' AS tipoItem "
+        "FROM Articulos "
+        "JOIN Clientes ON Articulos.codigoProveedor=Clientes.codigoCliente "
+        "           AND Articulos.tipoCliente=Clientes.tipoCliente "
+        "WHERE " + where + " "
+        "ORDER BY CAST(Articulos.codigoArticulo AS UNSIGNED)"
+    );
+
+    // 3) Bind de patrones:
+    // Orden IMPORTANTE: coincide con cómo construimos el WHERE:
+    // - Ivas.descripcionIva: tokens
+    // - Monedas.descripcionMoneda: tokens
+    // - Articulos.descripcionExtendida: tokens
+    // - Articulos.descripcionArticulo: tokens
+    auto bindTokens = [&]() {
+        for (int i = 0; i < tokens.size(); ++i) {
+            QString t = QRegExp::escape(tokens[i]);
+            q.addBindValue("([[:<:]]" + t + "[^[:space:]]*)");
+        }
+    };
+
+    bindTokens(); // IVA
+    bindTokens(); // Moneda
+    bindTokens(); // desc extendida
+    bindTokens(); // desc articulo
+
+    if (!q.exec()) {
+        qDebug() << "Error SQL:" << q.lastError().text();
+        return;
+    }
+
+    ModuloBusquedaInteligente::reset();
+    QSqlRecord rec = q.record();
+
+    while (q.next()) {
+        ModuloBusquedaInteligente::agregarBusquedaInteligente(
+            BusquedaInteligente(
+                q.value(rec.indexOf("codigoItem")).toString(),
+                q.value(rec.indexOf("tipoItem")).toString()
+            )
+        );
+    }
+}
+
+
+/*
 void ModuloBusquedaInteligente::buscarArticulosInteligente(QString datoABuscar,bool _incluyeInactivos){
 
 
@@ -96,8 +214,96 @@ void ModuloBusquedaInteligente::buscarArticulosInteligente(QString datoABuscar,b
             }
         }
     }
+}*/
+
+static QString foldAccentsArticulos(const QString& s)
+{
+    QString n = s.normalized(QString::NormalizationForm_D);
+    QString out;
+    out.reserve(n.size());
+    for (int i = 0; i < n.size(); ++i) {
+        const QChar c = n.at(i);
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining &&
+            c.category() != QChar::Mark_Enclosing) {
+            out.append(c);
+        }
+    }
+    return out;
 }
 
+
+void ModuloBusquedaInteligente::buscarClientesInteligente(QString datoABuscar)
+{
+    Database::chequeaStatusAccesoMysql();
+    if (!Database::connect().isOpen() && !Database::connect().open()) {
+        qDebug() << "No conecto";
+        return;
+    }
+
+    // 1) Normaliza: espacios + minúsculas + quitar acentos del INPUT
+    QString texto = foldAccentsArticulos(datoABuscar).toLower().simplified();
+    if (texto.isEmpty()) return;
+
+    // 2) Tokeniza
+    QStringList tokens = texto.split(' ', QString::SkipEmptyParts);
+    if (tokens.isEmpty()) return;
+
+    auto buildAndForColumn = [&](const QString& col) {
+        QStringList parts;
+        for (int i = 0; i < tokens.size(); ++i)
+            parts << QString("%1 RLIKE ?").arg(col);
+        return "(" + parts.join(" AND ") + ")";
+    };
+
+    // IMPORTANTE: si querés case-insensitive, podés forzar LOWER(col)
+    // (aunque esto puede empeorar performance). Mejor es collation apropiada.
+    QString where =
+        "Clientes.tipoCliente=1 AND ("
+        + buildAndForColumn("LOWER(razonSocial)") + " OR "
+        + buildAndForColumn("LOWER(direccion)")   + " OR "
+        + buildAndForColumn("LOWER(rut)")         + " OR "
+        + buildAndForColumn("LOWER(nombreCliente)")
+        + ")";
+
+    QSqlQuery q(Database::connect());
+    q.prepare(
+        "SELECT Clientes.codigoCliente AS codigoItem, 'CLIENTE' AS tipoItem "
+        "FROM Clientes "
+        "JOIN TipoCliente ON Clientes.tipoCliente=TipoCliente.codigoTipoCliente "
+        "JOIN TipoClasificacion ON Clientes.tipoClasificacion=TipoClasificacion.codigoTipoClasificacion "
+        "WHERE " + where
+    );
+
+    // 3) Bind: patrón por token (prefijo de palabra)
+    //    ([[:<:]]token[^[:space:]]*)  => token al inicio de una palabra, y permite continuar
+    for (int col = 0; col < 4; ++col) {
+        for (int i = 0; i < tokens.size(); ++i) {
+            QString t = QRegExp::escape(tokens[i]);
+            q.addBindValue("([[:<:]]" + t + "[^[:space:]]*)");
+        }
+    }
+
+    if (!q.exec()) {
+        qDebug() << "Error SQL:" << q.lastError().text();
+        return;
+    }
+
+    ModuloBusquedaInteligente::reset();
+    QSqlRecord rec = q.record();
+
+    while (q.next()) {
+        ModuloBusquedaInteligente::agregarBusquedaInteligente(
+            BusquedaInteligente(
+                q.value(rec.indexOf("codigoItem")).toString(),
+                q.value(rec.indexOf("tipoItem")).toString()
+            )
+        );
+    }
+}
+
+
+/*
 void ModuloBusquedaInteligente::buscarClientesInteligente(QString datoABuscar){
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
@@ -120,9 +326,79 @@ void ModuloBusquedaInteligente::buscarClientesInteligente(QString datoABuscar){
             }
         }
     }
+}*/
+
+
+void ModuloBusquedaInteligente::buscarProveedorInteligente(QString datoABuscar)
+{
+    Database::chequeaStatusAccesoMysql();
+    if (!Database::connect().isOpen() && !Database::connect().open()) {
+        qDebug() << "No conecto";
+        return;
+    }
+
+    // 1) Normaliza: espacios + minúsculas + quitar acentos del INPUT
+    QString texto = foldAccents(datoABuscar).toLower().simplified();
+    if (texto.isEmpty()) return;
+
+    // 2) Tokeniza
+    QStringList tokens = texto.split(' ', QString::SkipEmptyParts);
+    if (tokens.isEmpty()) return;
+
+    // Helper: arma (col RLIKE ? AND col RLIKE ? AND ...)
+    auto buildAndForColumn = [&](const QString& col) {
+        QStringList parts;
+        for (int i = 0; i < tokens.size(); ++i)
+            parts << QString("%1 RLIKE ?").arg(col);
+        return "(" + parts.join(" AND ") + ")";
+    };
+
+    // 3) Cada columna debe contener TODOS los tokens (y luego OR entre columnas)
+    QString where =
+        "Clientes.tipoCliente=2 AND ("
+        + buildAndForColumn("LOWER(razonSocial)") + " OR "
+        + buildAndForColumn("LOWER(direccion)")   + " OR "
+        + buildAndForColumn("LOWER(rut)")         + " OR "
+        + buildAndForColumn("LOWER(nombreCliente)")
+        + ")";
+
+    QSqlQuery q(Database::connect());
+    q.prepare(
+        "SELECT Clientes.codigoCliente AS codigoItem, 'PROVEEDOR' AS tipoItem "
+        "FROM Clientes "
+        "JOIN TipoCliente ON Clientes.tipoCliente=TipoCliente.codigoTipoCliente "
+        "JOIN TipoClasificacion ON Clientes.tipoClasificacion=TipoClasificacion.codigoTipoClasificacion "
+        "WHERE " + where
+    );
+
+    // 4) Bind: patrón por token (prefijo de palabra)
+    //    ([[:<:]]token[^[:space:]]*) => token al inicio de una palabra, permite continuar
+    for (int col = 0; col < 4; ++col) {
+        for (int i = 0; i < tokens.size(); ++i) {
+            QString t = QRegExp::escape(tokens[i]);
+            q.addBindValue("([[:<:]]" + t + "[^[:space:]]*)");
+        }
+    }
+
+    if (!q.exec()) {
+        qDebug() << "Error SQL:" << q.lastError().text();
+        return;
+    }
+
+    ModuloBusquedaInteligente::reset();
+    QSqlRecord rec = q.record();
+
+    while (q.next()) {
+        ModuloBusquedaInteligente::agregarBusquedaInteligente(
+            BusquedaInteligente(
+                q.value(rec.indexOf("codigoItem")).toString(),
+                q.value(rec.indexOf("tipoItem")).toString()
+            )
+        );
+    }
 }
 
-void ModuloBusquedaInteligente::buscarProveedorInteligente(QString datoABuscar){
+/*void ModuloBusquedaInteligente::buscarProveedorInteligente(QString datoABuscar){
     bool conexion=true;
     Database::chequeaStatusAccesoMysql();
     if(!Database::connect().isOpen()){
@@ -144,7 +420,7 @@ void ModuloBusquedaInteligente::buscarProveedorInteligente(QString datoABuscar){
             }
         }
     }
-}
+}*/
 
 int ModuloBusquedaInteligente::rowCount(const QModelIndex & parent) const {
     return m_BusquedaInteligente.count();

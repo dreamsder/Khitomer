@@ -1878,9 +1878,16 @@ Rectangle {
             }
             cargarSaldoClienteCuentaCorrienta()
 
-
+            if(modeloconfiguracion.retornaValorConfiguracionValorString("ACTIVA_CONTROL_CAMBIO_VENDEDORES_DOCUMENTO_PENDIENTE")==="1"){
+                txtVendedorDeFactura.botonAutorizarCambioVendorVisible=true;
+                txtVendedorDeFactura.controlActivoEnCambioVendedor=false
+            }else{
+                txtVendedorDeFactura.botonAutorizarCambioVendorVisible=false;
+            }
 
         }else  if(estadoDocumento=="E" || estadoDocumento=="G"){
+            txtVendedorDeFactura.botonAutorizarCambioVendorVisible=false;
+            txtVendedorDeFactura.controlActivoEnCambioVendedor=false
             etiquetaTotal.descuentoEnable=false
             rectBloqueSaldoClienteCuentacorriente.enabled=false
             var atributoDeudaContadoPermiteModificar=modeloListaTipoDocumentosComboBox.retornaPermiteModificacionMedioPagoPorDeudaContado(tipoDocumento,numeroFactura,serieDocumento)
@@ -2117,7 +2124,8 @@ Rectangle {
         lblRazonSocialCliente.text=""
         setearEstadoActivoBotonesGuardar(true)
         etiquetaTotal.descuentoEnable=true
-
+        txtVendedorDeFactura.botonAutorizarCambioVendorVisible=false
+         txtVendedorDeFactura.controlActivoEnCambioVendedor=true
         etiquetaTotal.setearPorcenjeDescuento(0.00)
         nuevoDocumento="NUEVO";
         cbListaDocumentosCuentaCorrienteConDeuda.cerrarComboBox()
@@ -2379,10 +2387,11 @@ Rectangle {
 
             ComboBoxListaVendedores {
                 id: txtVendedorDeFactura
-                width: 170
+                width: 180
                 z: 2
                 textoComboBox: ""
                 botonBuscarTextoVisible: false
+
                 textoTitulo: "Vendedor:"
                 visible: modeloListaTipoDocumentosComboBox.retornaPermisosDelDocumento(cbListatipoDocumentos.codigoValorSeleccion,"utilizaVendedor")
                 onEnter: {
@@ -2394,6 +2403,18 @@ Rectangle {
                     }else if(txtArticuloParaFacturacion.visible){
                         txtArticuloParaFacturacion.tomarElFocoP()
                     }
+                }
+                onBotonAutorizarCambioVendorVisibleChanged: {
+                        controlActivoEnCambioVendedor=!botonAutorizarCambioVendorVisible
+                }
+                onClicAutorizarCambioVendedor: {
+
+                    if(modeloconfiguracion.retornaValorConfiguracion("MODO_AUTORIZACION")=="1"){
+                        cuadroAutorizacionCompraClienteSinSaldo.evaluarPermisos("permiteAutorizarCambiosDeVendedorEnFactura")
+                    }else{
+                        cuadroAutorizacionCompraClienteSinSaldo.noSeRequierenAutorizaciones("permiteAutorizarCambiosDeVendedorEnFactura")
+                    }
+
                 }
             }
             ComboBoxListaLiquidaciones {
@@ -10119,7 +10140,7 @@ Rectangle {
             anchors.rightMargin: 5
             visible: true
 
-            color:"orange"
+            color:"#5D54A4"
             clip: true
             font.bold: true
             font.family: "Arial"
@@ -10185,7 +10206,10 @@ Rectangle {
                 setearEstadoActivoBotonesGuardar(true)
 
 
+            }else if(permisosAEvaluar=="permiteAutorizarCambiosDeVendedorEnFactura"){
+                txtVendedorDeFactura.controlActivoEnCambioVendedor=true
             }
+
         }
 
     }

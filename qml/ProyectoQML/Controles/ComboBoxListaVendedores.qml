@@ -39,6 +39,8 @@ Rectangle {
     property string codigoValorSeleccion
     property double opacidadPorDefecto: 0.8
     property alias colorTitulo: txtTitulo.color
+    property alias botonAutorizarCambioVendorVisible : imageAutorizar.visible
+    property bool  controlActivoEnCambioVendedor: true
 
     property alias colorRectangulo: rectPrincipalComboBox.color
 
@@ -46,6 +48,8 @@ Rectangle {
     signal tabulacion
     signal enter
     signal senialAlAceptarOClick
+
+    signal clicAutorizarCambioVendedor
 
     function tomarElFoco(){
         if(listview1.count>=10){
@@ -99,7 +103,7 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: -20
-        //
+
         height: listview1.contentHeight+40
 
         visible: false
@@ -360,12 +364,13 @@ Rectangle {
         color: "#ffffff"
         radius: 2
         border.color: "#686b71"
+        enabled: controlActivoEnCambioVendedor
         TextInput {
             id: txtTextoSeleccionado
             color: "#000000"
+
             text: qsTr("")
             font.family: "Arial"
-            //
             anchors.topMargin: 1
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -377,11 +382,15 @@ Rectangle {
             horizontalAlignment: TextInput.AlignHCenter
             anchors.left: parent.left
 
+            // visible: controlActivoEnCambioVendedor
+            readOnly: true
+            activeFocusOnPress: controlActivoEnCambioVendedor
             onActiveFocusChanged: {
 
                 if(txtTextoSeleccionado.activeFocus==true){
                     colorIn2.start()
                     opacityIn2.start()
+
 
 
                     if(rectPrincipalComboBox.visible==false){
@@ -533,10 +542,9 @@ Rectangle {
         y: 16
         height: 20
         anchors.left: rectTextComboBox2.right
-        anchors.right: parent.right
-        anchors.rightMargin: 0
+        //anchors.right: parent.right
+        //anchors.rightMargin: 0
         asynchronous: true
-        //
         MouseArea {
             id: mouse_area2
             hoverEnabled: true
@@ -570,10 +578,61 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         opacity: 0.500
+        width: {
+            if(!visible){
+                0
+            }
+        }
     }
+
+
+    Image {
+        id: imageAutorizar
+        y: 17
+        height: 20
+        anchors.left: imageBuscar.right
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        asynchronous: true
+        MouseArea {
+            id: mouse_areaimageAutorizar
+            hoverEnabled: true
+            anchors.fill: parent
+            anchors.leftMargin: 2
+
+            onPressed: {
+                imageBuscarScaleOff.stop()
+                imageBuscarScaleIn.start()
+            }
+            onReleased:  {
+                imageBuscarScaleIn.stop()
+                imageBuscarScaleOff.start()
+
+            }
+            onEntered: {
+                imageBuscarOpacidadOut.stop()
+                imageBuscarOpacidadIn.start()
+            }
+            onExited: {
+                imageBuscarOpacidadIn.stop()
+                imageBuscarOpacidadOut.start()
+
+            }
+            onClicked: clicAutorizarCambioVendedor()
+
+        }
+        source: "qrc:/imagenes/qml/ProyectoQML/Imagenes/Acceso.png"
+        anchors.bottom: parent.bottom
+        visible: false
+        anchors.bottomMargin: 0
+        anchors.leftMargin: 2
+        opacity:  0.500
+
+    }
+
     PropertyAnimation{
         id:imageBuscarScaleIn
-        target: imageBuscar
+        targets:  [imageBuscar,imageAutorizar]
         property: "scale"
         from:1
         to:0.93
@@ -582,7 +641,7 @@ Rectangle {
 
     PropertyAnimation{
         id:imageBuscarScaleOff
-        target: imageBuscar
+        targets: [imageBuscar,imageAutorizar]
         property: "scale"
         to:1
         from:0.93
@@ -593,7 +652,7 @@ Rectangle {
 
     PropertyAnimation{
         id:imageBuscarOpacidadIn
-        target: imageBuscar
+        targets: [imageBuscar,imageAutorizar]
         property: "opacity"
         from:0.5
         to:1
@@ -602,7 +661,7 @@ Rectangle {
 
     PropertyAnimation{
         id:imageBuscarOpacidadOut
-        target: imageBuscar
+        targets: [imageBuscar,imageAutorizar]
         property: "opacity"
         from:1
         to:0.5
