@@ -1978,7 +1978,7 @@ QString ModuloReportes::generarCSV(QString sqlConsulta,QString _codigoReporte, Q
 
 
 
-/*
+
 bool ModuloReportes::imprimirReporteEnPDF(QString _codigoReporte)const{
 
     QFile previewHTML(retornaDirectorioReporteWeb());
@@ -2020,9 +2020,9 @@ bool ModuloReportes::imprimirReporteEnPDF(QString _codigoReporte)const{
         return false;
     }
 }
-*/
 
-bool ModuloReportes::imprimirReporteEnPDF(QString codigoReporte) const
+
+/*bool ModuloReportes::imprimirReporteEnPDF(QString codigoReporte) const
 {
 
     // 1) Abrir fuentes (HTML/CSS) con manejo de error
@@ -2114,7 +2114,7 @@ bool ModuloReportes::imprimirReporteEnPDF(QString codigoReporte) const
     }
 
     return true;
-}
+}*/
 
 
 

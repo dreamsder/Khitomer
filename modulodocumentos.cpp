@@ -2821,7 +2821,7 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
 
         if(queryCantidadCopias.exec("SELECT cantidadCopias FROM TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
             if(queryCantidadCopias.first()){
-                if(queryCantidadCopias.value(0).toString()!=0){
+                if(queryCantidadCopias.value(0).toInt()!=0){
                     MaximoCopias = queryCantidadCopias.value(0).toInt();
                 }
             }else{return false;}
@@ -2848,6 +2848,90 @@ bool ModuloDocumentos::emitirDocumentoEnImpresoraTicket(QString _codigoDocumento
                     }else{
                         return false;
                     }
+
+
+
+
+
+                    // --- Ajuste nuevo de calculo para probar imprimir en impresora
+                    {
+                        int cantItems = 0;
+                        int cantAjustes = 0;
+
+                        QSqlQuery qCnt(Database::connect());
+                        qCnt.exec("SELECT COUNT(*) FROM DocumentosLineas "
+                                  "WHERE codigoDocumento="+_codigoDocumento+
+                                  " AND codigoTipoDocumento="+_codigoTipoDocumento+
+                                  " AND serieDocumento='"+_serieDocumento+"'");
+                        if (qCnt.first()) cantItems = qCnt.value(0).toInt();
+
+                        QSqlQuery qCntAj(Database::connect());
+                        qCntAj.exec("SELECT COUNT(*) FROM DocumentosLineasAjustes "
+                                    "WHERE codigoDocumento="+_codigoDocumento+
+                                    " AND codigoTipoDocumento="+_codigoTipoDocumento+
+                                    " AND serieDocumento='"+_serieDocumento+"'");
+                        if (qCntAj.first()) cantAjustes = qCntAj.value(0).toInt();
+
+                        QString logoImpresora = func_CFE_ParametrosGenerales.retornaValor("logoImpresoraTicket").trimmed();
+                        double desplLogoBaseCm = (logoImpresora.isEmpty() ? 0.0 : 2.0);
+
+                        QString tipoDocumento = query.value(12).toString().trimmed();
+                        QString numeroDocumento = query.value(13).toString().trimmed();
+                        if (tipoDocumento != "2" && numeroDocumento.isEmpty()) {
+                            desplLogoBaseCm -= 0.9;
+                        }
+
+                        bool hayDescAlTotal = (query.value(18).toFloat() != 0.0f);
+                        QString esDocumentoCFE = query.value(34).toString().trimmed();
+
+                        QString descModoPago = query.value(52).toString().trimmed();
+                        QString obs = query.value(53).toString().trimmed();
+
+                        double extraFinAdendaCm = 0.0;
+                        if (!descModoPago.isEmpty()) extraFinAdendaCm += 0.3;
+                        if (func_tipoDocumentos.retornaValorCampoTipoDocumento(_codigoTipoDocumento,
+                                "imprimeObservacionesEnTicket") == "1" && !obs.isEmpty())
+                            extraFinAdendaCm += 0.3;
+                        if (tipoDocumento != "2") extraFinAdendaCm += 0.3;
+
+                        double yFinArticulosCm =
+                                4.7
+                                + cantItems * (0.6 + (hayDescAlTotal ? 0.3 : 0.0))
+                                + cantAjustes * 0.3;
+
+                        double desplDespuesItemsCm = yFinArticulosCm + desplLogoBaseCm + extraFinAdendaCm;
+                        double yMaxCm = desplDespuesItemsCm + ((esDocumentoCFE != "0") ? 12.4 : 5.2);
+
+                        double margenSeguridadCm = 3.0;
+                        double altoMm = (yMaxCm + margenSeguridadCm) * 10.0;
+
+                        // ====== ACA VA EL CAMBIO ======
+                        // Capturo el ancho que el driver/cola ya tiene configurado
+                        double anchoMm = printer.paperRect(QPrinter::Millimeter).width();
+                        if (anchoMm <= 0.0) anchoMm = printer.pageRect(QPrinter::Millimeter).width();
+                        if (anchoMm <= 0.0) anchoMm = printer.widthMM(); // último fallback
+
+                        printer.setOutputFormat(QPrinter::NativeFormat);
+                        printer.setPageSize(QPrinter::Custom);
+                        printer.setOrientation(QPrinter::Portrait);
+
+                        // evita auto-rotación si el ticket es “corto”
+                        if (altoMm < (anchoMm + 10.0)) altoMm = anchoMm + 10.0;
+
+                        printer.setPaperSize(QSizeF(anchoMm, altoMm), QPrinter::Millimeter);
+
+                        // re-aplicar por si el driver resetea al cambiar PaperSize
+                        printer.setFullPage(true);
+                        printer.setPageMargins(0,0,0,0,QPrinter::Millimeter);
+
+                        // Recalcular centimetro DESPUÉS de setear el tamaño
+                        centimetro = printer.width() / (printer.widthMM() / 10.0);
+                        // ==============================
+                    }
+                    // --- Fin ajuste nuevo
+
+
+
 
 
                     if (!painter.begin(&printer)) {
@@ -3413,7 +3497,7 @@ bool ModuloDocumentos::emitirDocumentoEnModoRecibo(QString _codigoDocumento,QStr
 
         if(queryCantidadCopias.exec("SELECT cantidadCopias FROM TipoDocumento where codigoTipoDocumento='"+_codigoTipoDocumento+"'")) {
             if(queryCantidadCopias.first()){
-                if(queryCantidadCopias.value(0).toString()!=0){
+                if(queryCantidadCopias.value(0).toInt()!=0){
                     MaximoCopias = queryCantidadCopias.value(0).toInt();
                 }
             }else{

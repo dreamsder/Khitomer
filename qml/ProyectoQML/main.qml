@@ -36,7 +36,7 @@ Rectangle {
     property bool  estadoConexionMysql: true
     property bool  estadoConexionServidor: true
 
-    property string versionKhitomer: "1.18.5"
+    property string versionKhitomer: "1.18.7"
 
 
     /// 1.2.0: Se habilita el calculo de totales si el modo de configuración esta setado para
@@ -350,7 +350,9 @@ Rectangle {
     /// 1.18.4  :Se modifica el llamado a la carga de stock en los articulos. Si el valor viene en cero, se verifica nuevamente contabilizando todo el stock desde los documentos.
     /// 1.18.5  :Se agrega sooporte para pedir autorización al cambiar de vendedor en un documento pendiente.
     ///         :Se agrega la opcion de Configuración: ACTIVA_CONTROL_CAMBIO_VENDEDORES_DOCUMENTO_PENDIENTE
-    ///         :Se agrega el permiso en PerfilesUsuarios: permiteAutorizarCambiosDeVendedorEnFactura
+    ///         :Se agrega el permiso en PerfilesUsuarios: permiteAutorizarCambiosDeVendedorEnFactura.
+    /// 1.18.6  :Se corrige un problema con el largo de impresión de ticket.
+    /// 1.18.7  :Se corrige un problema con el ancho de impresión de ticket.
 
     ///property para tamaño de fuentes
     property int sizeTagsInferiores: 15
